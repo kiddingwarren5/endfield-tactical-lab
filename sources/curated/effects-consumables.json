@@ -22,7 +22,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -57,7 +57,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -92,7 +92,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -127,7 +127,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -162,7 +162,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -207,7 +207,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -252,7 +252,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -299,7 +299,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -344,7 +344,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -379,7 +379,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -424,7 +424,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -459,7 +459,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -494,7 +494,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -529,7 +529,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -564,7 +564,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -599,7 +599,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -634,7 +634,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -669,7 +669,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -704,7 +704,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -739,7 +739,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -775,7 +775,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -810,7 +810,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -845,7 +845,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -890,7 +890,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -935,7 +935,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -970,7 +970,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -1005,7 +1005,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -1040,7 +1040,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -1075,7 +1075,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -1110,7 +1110,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -1146,7 +1146,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,
@@ -1193,7 +1193,7 @@
       "mode": "auto"
     },
     "duration": 300,
-    "stacking": "none",
+    "stacking": "unknown",
     "exclusiveGroup": null,
     "teamUnique": false,
     "oncePerBattle": false,

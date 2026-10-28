@@ -1,9 +1,9 @@
 # 效果目录构建报告
 
-生成时间：2026-10-28T10:09:24.199Z
+生成时间：2026-10-28T10:14:26.221Z
 
 文件：effects-consumables.json, effects-operators-A.json, effects-operators-B.json, effects-sets.json, effects-weapons.json
 
-条数：569；uncertain：31；问题：0
+条数：578；uncertain：35；问题：0
 
 

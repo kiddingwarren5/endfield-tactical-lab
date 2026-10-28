@@ -201,7 +201,8 @@
         16.5,
         18,
         21
-      ]
+      ],
+      "maxStacks": 2
     },
     "unit": "%",
     "beneficiary": "self",
@@ -483,7 +484,8 @@
         16.5,
         18,
         21
-      ]
+      ],
+      "maxStacks": 2
     },
     "unit": "%",
     "beneficiary": "self",
@@ -573,7 +575,8 @@
         6.6,
         7.2,
         8.4
-      ]
+      ],
+      "maxStacks": 3
     },
     "unit": "%",
     "beneficiary": "team",
@@ -682,7 +685,8 @@
         26.4,
         28.8,
         33.6
-      ]
+      ],
+      "maxStacks": 3
     },
     "unit": "%",
     "beneficiary": "self",
@@ -700,7 +704,7 @@
       "trigger": "knockUpThenNextUlt",
       "mode": "user"
     },
-    "duration": 30,
+    "duration": null,
     "stacking": "independent",
     "exclusiveGroup": null,
     "teamUnique": false,
@@ -711,7 +715,9 @@
       "category": "official",
       "where": "dist/data/weapons.js wpn_sword_0015 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
     },
-    "notes": "同名效果最多叠加3层，每层单独计算持续时间，每0.5秒最多触发一次；value 为每层数值；duration 为等待下次终结技的窗口，在下次终结技结束后消耗。原文为“终结技期间造成的物理伤害”，严格说含该期间内的所有物理伤害，kinds 暂写 ultimate。"
+    "notes": "同名效果最多叠加3层，每层单独计算持续时间，每0.5秒最多触发一次；value 为每层数值；window=30 秒为等待窗口；duration=null 表示只在下一次该技能期间生效，结束后消耗。原文为“终结技期间造成的物理伤害”，严格说含该期间内的所有物理伤害，kinds 暂写 ultimate。",
+    "window": 30,
+    "uncertain": true
   },
   {
     "id": "wpn_sword_0021_ink.p1",
@@ -799,7 +805,7 @@
       "trigger": "crystalOrFreezeThenNextSkillOrUlt",
       "mode": "user"
     },
-    "duration": 20,
+    "duration": null,
     "stacking": "none",
     "exclusiveGroup": null,
     "teamUnique": false,
@@ -810,7 +816,9 @@
       "category": "official",
       "where": "dist/data/weapons.js wpn_sword_0021_ink skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
     },
-    "notes": "同名效果无法叠加。duration 为等待窗口，下次战技或终结技结束后消耗。原文为“期间造成的物理伤害”，kinds 暂写 skill/ultimate。"
+    "notes": "同名效果无法叠加。window=20 秒为等待窗口；duration=null 表示只在下一次该技能期间生效，结束后消耗。原文为“期间造成的物理伤害”，kinds 暂写 skill/ultimate。",
+    "window": 20,
+    "uncertain": true
   },
   {
     "id": "wpn_sword_0016.p1",
@@ -891,7 +899,8 @@
         11,
         12,
         14
-      ]
+      ],
+      "maxStacks": 5
     },
     "unit": "%",
     "beneficiary": "self",
@@ -948,7 +957,8 @@
         5.5,
         6,
         7
-      ]
+      ],
+      "maxStacks": 5
     },
     "unit": "%",
     "beneficiary": "others",
@@ -1158,7 +1168,8 @@
         17.6,
         19.2,
         22.4
-      ]
+      ],
+      "maxStacks": 2
     },
     "unit": "%",
     "beneficiary": "self",
@@ -1370,7 +1381,8 @@
         11,
         12,
         14
-      ]
+      ],
+      "maxStacks": 2
     },
     "unit": "%",
     "beneficiary": "team",
@@ -1975,7 +1987,8 @@
         13.2,
         14.4,
         16.8
-      ]
+      ],
+      "maxStacks": 3
     },
     "unit": "%",
     "beneficiary": "self",
@@ -2481,7 +2494,8 @@
         22,
         24,
         28
-      ]
+      ],
+      "maxStacks": 3
     },
     "unit": "%",
     "beneficiary": "self",
@@ -3010,7 +3024,8 @@
         22,
         24,
         28
-      ]
+      ],
+      "maxStacks": 3
     },
     "unit": "%",
     "beneficiary": "self",
@@ -3028,7 +3043,7 @@
       "trigger": "comboThenNextSkill",
       "mode": "user"
     },
-    "duration": 30,
+    "duration": null,
     "stacking": "independent",
     "exclusiveGroup": null,
     "teamUnique": false,
@@ -3039,7 +3054,9 @@
       "category": "official",
       "where": "dist/data/weapons.js wpn_lance_0006 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
     },
-    "notes": "同名效果最多叠加3层，每层单独计算持续时间；value 为每层数值；duration 为等待下次战技的窗口。原文为“战技期间造成的电磁伤害”，kinds 暂写 skill。"
+    "notes": "同名效果最多叠加3层，每层单独计算持续时间；value 为每层数值；window=30 秒为等待窗口；duration=null 表示只在下一次该技能期间生效，结束后消耗。原文为“战技期间造成的电磁伤害”，kinds 暂写 skill。",
+    "window": 30,
+    "uncertain": true
   },
   {
     "id": "wpn_lance_0012.p1",
@@ -3655,7 +3672,8 @@
         16.5,
         18,
         21
-      ]
+      ],
+      "maxStacks": 2
     },
     "unit": "%",
     "beneficiary": "self",
@@ -4000,7 +4018,8 @@
         30.8,
         33.6,
         39.2
-      ]
+      ],
+      "maxStacks": 3
     },
     "unit": "%",
     "beneficiary": "self",
@@ -4404,13 +4423,13 @@
     "notes": null
   },
   {
-    "id": "wpn_pistol_0009.p2",
+    "id": "wpn_pistol_0009.p2.heat",
     "owner": {
       "kind": "weapon",
       "id": "wpn_pistol_0009",
       "name": "同类相食"
     },
-    "name": "同类相食 · 消耗法术异常后对应属性受伤",
+    "name": "同类相食 · 消耗燃烧后受到的灼热伤害",
     "literal": "使目标敌人受到对应属性的伤害+{v}%",
     "zone": "vulnerable",
     "stat": null,
@@ -4431,10 +4450,7 @@
     "beneficiary": "target",
     "applies": {
       "elements": [
-        "heat",
-        "electric",
-        "cold",
-        "nature"
+        "heat"
       ],
       "kinds": [
         "normal",
@@ -4446,8 +4462,8 @@
       "damageClass": "any"
     },
     "condition": {
-      "text": "装备者消耗法术异常后（属性 = 被消耗异常的属性）",
-      "trigger": "consumeArtsAnomaly",
+      "text": "装备者消耗燃烧（灼热法术异常）后",
+      "trigger": "consume_燃烧",
       "mode": "user"
     },
     "duration": 15,
@@ -4461,7 +4477,178 @@
       "category": "official",
       "where": "dist/data/weapons.js wpn_pistol_0009 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
     },
-    "notes": "每种效果（按属性）独立生效，且均无法叠加，每25秒最多触发一次。elements 列出全部法术属性，实际只对被消耗异常的对应属性生效，引擎需按所选异常过滤。原文未写“脆弱”，按措辞归 vulnerable。"
+    "notes": "按属性拆条：每种属性独立生效、各自无法叠加，各自每25秒最多触发一次。原文未写“脆弱”，按措辞归 vulnerable。"
+  },
+  {
+    "id": "wpn_pistol_0009.p2.electric",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0009",
+      "name": "同类相食"
+    },
+    "name": "同类相食 · 消耗导电后受到的电磁伤害",
+    "literal": "使目标敌人受到对应属性的伤害+{v}%",
+    "zone": "vulnerable",
+    "stat": null,
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "target",
+    "applies": {
+      "elements": [
+        "electric"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者消耗导电（电磁法术异常）后",
+      "trigger": "consume_导电",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 25,
+    "evidence": {
+      "text": "装备者消耗法术异常后，使目标敌人受到对应属性的伤害+10.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0009 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "按属性拆条：每种属性独立生效、各自无法叠加，各自每25秒最多触发一次。原文未写“脆弱”，按措辞归 vulnerable。"
+  },
+  {
+    "id": "wpn_pistol_0009.p2.cold",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0009",
+      "name": "同类相食"
+    },
+    "name": "同类相食 · 消耗冻结后受到的寒冷伤害",
+    "literal": "使目标敌人受到对应属性的伤害+{v}%",
+    "zone": "vulnerable",
+    "stat": null,
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "target",
+    "applies": {
+      "elements": [
+        "cold"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者消耗冻结（寒冷法术异常）后",
+      "trigger": "consume_冻结",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 25,
+    "evidence": {
+      "text": "装备者消耗法术异常后，使目标敌人受到对应属性的伤害+10.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0009 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "按属性拆条：每种属性独立生效、各自无法叠加，各自每25秒最多触发一次。原文未写“脆弱”，按措辞归 vulnerable。"
+  },
+  {
+    "id": "wpn_pistol_0009.p2.nature",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0009",
+      "name": "同类相食"
+    },
+    "name": "同类相食 · 消耗腐蚀后受到的自然伤害",
+    "literal": "使目标敌人受到对应属性的伤害+{v}%",
+    "zone": "vulnerable",
+    "stat": null,
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "target",
+    "applies": {
+      "elements": [
+        "nature"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者消耗腐蚀（自然法术异常）后",
+      "trigger": "consume_腐蚀",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 25,
+    "evidence": {
+      "text": "装备者消耗法术异常后，使目标敌人受到对应属性的伤害+10.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0009 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "按属性拆条：每种属性独立生效、各自无法叠加，各自每25秒最多触发一次。原文未写“脆弱”，按措辞归 vulnerable。"
   },
   {
     "id": "wpn_funnel_0002.p1",
@@ -5910,7 +6097,8 @@
         26.4,
         28.8,
         33.6
-      ]
+      ],
+      "maxStacks": 3
     },
     "unit": "%",
     "beneficiary": "self",
@@ -5926,7 +6114,7 @@
       "trigger": "applyBreachThenNextUlt",
       "mode": "user"
     },
-    "duration": 30,
+    "duration": null,
     "stacking": "independent",
     "exclusiveGroup": null,
     "teamUnique": false,
@@ -5937,7 +6125,9 @@
       "category": "official",
       "where": "dist/data/weapons.js wpn_sword_0017 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
     },
-    "notes": "同名效果最多叠加3层，每层单独计算持续时间，每0.5秒最多触发一次；value 为每层数值；duration 为等待窗口。原文为“终结技期间造成的伤害”，kinds 暂写 ultimate。"
+    "notes": "同名效果最多叠加3层，每层单独计算持续时间，每0.5秒最多触发一次；value 为每层数值；window=30 秒为等待窗口；duration=null 表示只在下一次该技能期间生效，结束后消耗。原文为“终结技期间造成的伤害”，kinds 暂写 ultimate。",
+    "window": 30,
+    "uncertain": true
   },
   {
     "id": "wpn_pistol_0007.p1",
@@ -6006,7 +6196,8 @@
         17.6,
         19.2,
         22.4
-      ]
+      ],
+      "maxStacks": 2
     },
     "unit": "%",
     "beneficiary": "self",
@@ -6274,7 +6465,8 @@
         2.2,
         2.4,
         2.8
-      ]
+      ],
+      "maxStacks": 16
     },
     "unit": "%",
     "beneficiary": "self",
@@ -6447,7 +6639,8 @@
         44,
         48,
         56
-      ]
+      ],
+      "maxStacks": 2
     },
     "unit": "%",
     "beneficiary": "self",
@@ -6598,7 +6791,8 @@
         12.1,
         13.2,
         15.4
-      ]
+      ],
+      "maxStacks": 3
     },
     "unit": "%",
     "beneficiary": "self",
@@ -7063,7 +7257,8 @@
         12.1,
         13.2,
         15.4
-      ]
+      ],
+      "maxStacks": 3
     },
     "unit": "%",
     "beneficiary": "self",
@@ -7607,7 +7802,8 @@
         13.2,
         14.4,
         16.8
-      ]
+      ],
+      "maxStacks": 2
     },
     "unit": "%",
     "beneficiary": "self",
@@ -7652,7 +7848,8 @@
         3.3,
         3.6,
         4.2
-      ]
+      ],
+      "maxStacks": 2
     },
     "unit": "%",
     "beneficiary": "others",
@@ -7742,7 +7939,8 @@
         7.7,
         8.4,
         9.8
-      ]
+      ],
+      "maxStacks": 4
     },
     "unit": "%",
     "beneficiary": "others",
@@ -8099,7 +8297,8 @@
         8.8,
         9.6,
         11.2
-      ]
+      ],
+      "maxStacks": 4
     },
     "unit": "%",
     "beneficiary": "self",
@@ -8199,7 +8398,8 @@
         4.4,
         4.8,
         5.6
-      ]
+      ],
+      "maxStacks": 4
     },
     "unit": "%",
     "beneficiary": "self",
@@ -8577,7 +8777,7 @@
       "trigger": "rootOrUltThenNextCombo",
       "mode": "user"
     },
-    "duration": 20,
+    "duration": null,
     "stacking": "none",
     "exclusiveGroup": null,
     "teamUnique": false,
@@ -8588,7 +8788,8 @@
       "category": "official",
       "where": "dist/data/weapons.js wpn_claym_0018 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
     },
-    "notes": "两种效果独立生效，且均无法叠加。duration 为等待窗口，下个连携技后消耗。"
+    "notes": "两种效果独立生效，且均无法叠加。window=20 秒为等待窗口；duration=null 表示只在下一次该技能期间生效，结束后消耗。",
+    "window": 20
   },
   {
     "id": "wpn_claym_0019.p1",

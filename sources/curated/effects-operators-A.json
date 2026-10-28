@@ -466,7 +466,7 @@
     "value": {
       "fixed": 1.5
     },
-    "unit": "%",
+    "unit": "x",
     "beneficiary": "self",
     "applies": {
       "elements": null,
@@ -491,10 +491,10 @@
     "cooldown": null,
     "evidence": {
       "text": "终结技临终别礼造成伤害时如果敌人处于寒冷脆弱状态，\n将其寒冷脆弱的效果视为原本的1.5倍。",
-      "category": "official",
+      "category": "official+user",
       "where": "operators.js chr_0026_lastrite talents[1].stages[1]"
     },
-    "notes": "只作用于终结技临终别礼的伤害；乘在目标身上的寒冷脆弱值上（不限来源）。用户实测：法术脆弱也按此倍率计算（category: user）。",
+    "notes": "官方原文只写寒冷脆弱（evidence.text）。用户实测扩展：法术脆弱在终结技中同样×1.5（category: user，见 rules.md H4；构建时由 build_effects 写入 fragileMultiplier）。只作用于终结技临终别礼的伤害。",
     "stages": [
       {
         "stage": "·一",
@@ -1167,7 +1167,7 @@
     "value": {
       "fixed": 1.33
     },
-    "unit": "%",
+    "unit": "x",
     "beneficiary": "target",
     "applies": {
       "elements": null,
@@ -2036,7 +2036,7 @@
       "damageClass": "any"
     },
     "condition": {
-      "text": "洛茜对处于爪印斫痕状态的敌人施放技能造成暴击伤害时；目标同时处于燃烧时伤害提升至1.5倍",
+      "text": "洛茜对处于爪印斫痕状态的敌人施放技能造成暴击伤害时",
       "trigger": "critOnScarredTarget",
       "mode": "user"
     },
@@ -2051,7 +2051,7 @@
       "category": "official",
       "where": "operators.js chr_0028_wulfa talents[1].stages[1]"
     },
-    "notes": "额外伤害源（独立伤害段，倍率 24%）。燃烧时×1.5。治疗部分未录入。潜能3 再+8% 基础倍率。",
+    "notes": "额外伤害源（独立伤害段，倍率 24%）。目标同时燃烧时×1.5 见 chr_0028_wulfa.talent.boilingBurn。治疗部分未录入。潜能3 再+8% 基础倍率。",
     "stages": [
       {
         "stage": "·一",
@@ -2061,6 +2061,62 @@
         "stage": "·二",
         "value": 24
       }
+    ]
+  },
+  {
+    "id": "chr_0028_wulfa.talent.boilingBurn",
+    "owner": {
+      "kind": "operator",
+      "id": "chr_0028_wulfa",
+      "name": "洛茜",
+      "source": "talent",
+      "ref": "沸血"
+    },
+    "name": "洛茜 · 沸血（天赋）· 目标燃烧时",
+    "literal": "若目标同时处于燃烧状态，则上述伤害和治疗效果提升至1.5倍",
+    "zone": "other",
+    "stat": null,
+    "duration": null,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "value": {
+      "fixed": 1.5
+    },
+    "unit": "x",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "heat"
+      ],
+      "kinds": null,
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "沸血触发时目标同时处于燃烧状态",
+      "trigger": "boilingBloodTargetBurning",
+      "mode": "user"
+    },
+    "evidence": {
+      "text": "洛茜对处于爪印斫痕状态的敌人施放技能造成暴击伤害时，会额外触发一次攻击力24%的灼热伤害，并且为自身回复[智识×0.08]点生命值。\n若目标同时处于燃烧状态，则上述伤害和治疗效果提升至1.5倍。",
+      "category": "official",
+      "where": "operators.js chr_0028_wulfa talents[1].stages[1]"
+    },
+    "notes": "乘在沸血追加伤害倍率上（含潜能3 的 +8%）：满阶 24%→36%，潜能3 后 32%→48%。治疗部分未录入。",
+    "stages": [
+      {
+        "stage": "·一",
+        "value": 1.5
+      },
+      {
+        "stage": "·二",
+        "value": 1.5
+      }
+    ],
+    "modifies": [
+      "chr_0028_wulfa.talent.boilingBlood"
     ]
   },
   {
@@ -2540,6 +2596,52 @@
     },
     "notes": "",
     "rankType": "skill12"
+  },
+  {
+    "id": "chr_0025_ardelia.talent.mountainSurf",
+    "owner": {
+      "kind": "operator",
+      "id": "chr_0025_ardelia",
+      "name": "艾尔黛拉",
+      "source": "talent",
+      "ref": "山顶冲浪"
+    },
+    "name": "艾尔黛拉 · 山顶冲浪（天赋）",
+    "literal": "会立即再对其发动一次战技",
+    "zone": "other",
+    "stat": null,
+    "duration": null,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "value": {
+      "fixed": 1
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "skill"
+      ],
+      "damageClass": "any",
+      "skills": [
+        "skill"
+      ]
+    },
+    "condition": {
+      "text": "战技奔腾的多利成功触发额外效果（消耗腐蚀）后，附近存在其他处于腐蚀状态的敌人；每次主动施放只触发一次",
+      "trigger": "skillConsumeCorrosionOtherCorroded",
+      "mode": "user"
+    },
+    "evidence": {
+      "text": "当艾尔黛拉的战技奔腾的多利成功触发额外效果后，\n若附近存在其他处于腐蚀状态的敌人，会立即再对其发动一次战技。\n每次主动施放战技只会触发一次该效果。",
+      "category": "official",
+      "where": "operators.js chr_0025_ardelia talents[1].stages[0]"
+    },
+    "notes": "追加施放：对另一名腐蚀敌人再发动一次战技（含伤害与消耗腐蚀后的物理/法术脆弱）。value=追加次数。单体计算不受影响，排轴/多目标使用。"
   },
   {
     "id": "chr_0025_ardelia.pot1.physFragile",
@@ -4147,7 +4249,7 @@
     "value": {
       "fixed": 1.3
     },
-    "unit": "%",
+    "unit": "x",
     "beneficiary": "team",
     "applies": {
       "elements": null,
@@ -5780,7 +5882,7 @@
     "value": {
       "fixed": 1.1
     },
-    "unit": "%",
+    "unit": "x",
     "beneficiary": "team",
     "applies": {
       "elements": null,

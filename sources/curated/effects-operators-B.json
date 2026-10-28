@@ -1593,7 +1593,7 @@
   "value": {
    "fixed": 1.2
   },
-  "unit": "flat",
+  "unit": "x",
   "beneficiary": "self",
   "applies": {
    "elements": null,
@@ -2041,6 +2041,53 @@
   "notes": "资源效果，不进伤害"
  },
  {
+  "id": "chr_0011_seraph.pot3.bounce",
+  "owner": {
+   "kind": "operator",
+   "id": "chr_0011_seraph",
+   "name": "赛希",
+   "source": "potential",
+   "ref": "映射节点",
+   "potential": 3
+  },
+  "name": "赛希 · 潜能3「映射节点」连携技弹射",
+  "literal": "对周围1个其他目标弹射1次",
+  "zone": "other",
+  "stat": null,
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "value": {
+   "fixed": 1
+  },
+  "unit": "flat",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "combo"
+   ],
+   "damageClass": "any",
+   "skills": [
+    "combo"
+   ]
+  },
+  "condition": {
+   "text": "连携技压力测试命中目标后，周围存在其他目标",
+   "trigger": "comboHitOtherTargetNearby",
+   "mode": "user"
+  },
+  "evidence": {
+   "text": "连携技压力测试命中目标后，对周围1个其他目标弹射1次。",
+   "category": "official",
+   "where": "dist/data/operators.js chr_0011_seraph.potentials[2]"
+  },
+  "notes": "额外一次连携技命中（弹射至另一目标）；弹射伤害倍率是否等于 combo1 原文未写明。与佩丽卡“循环协议”同样作说明条目。"
+ },
+ {
   "id": "chr_0011_seraph.pot4.int",
   "owner": {
    "kind": "operator",
@@ -2095,7 +2142,7 @@
   "value": {
    "fixed": 1.1
   },
-  "unit": "flat",
+  "unit": "x",
   "beneficiary": "team",
   "applies": {
    "elements": [
@@ -2529,7 +2576,7 @@
    "trigger": "ultimateMaxStacks",
    "mode": "user"
   },
-  "duration": 7,
+  "duration": null,
   "stacking": "none",
   "exclusiveGroup": null,
   "teamUnique": false,
@@ -2540,7 +2587,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0017_yvonne.skills.ultimate.description + params"
   },
-  "notes": "",
+  "notes": "满层后生效，至本次终结技结束（终结技持续 7 秒）时失效，不从满层时重新计时。",
   "rankType": "skill12"
  },
  {
@@ -4332,7 +4379,7 @@
   "value": {
    "fixed": 4
   },
-  "unit": "flat",
+  "unit": "x",
   "beneficiary": "self",
   "applies": {
    "elements": null,
@@ -4684,7 +4731,54 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0030_zhuangfy.potentials[2]"
   },
-  "notes": "资源效果。青霆剑存在时间+10秒未录入"
+  "notes": "资源效果。青霆剑存在时间+10秒见 pot3.swordDuration。"
+ },
+ {
+  "id": "chr_0030_zhuangfy.pot3.swordDuration",
+  "owner": {
+   "kind": "operator",
+   "id": "chr_0030_zhuangfy",
+   "name": "庄方宜",
+   "source": "potential",
+   "ref": "一感一应",
+   "potential": 3
+  },
+  "name": "庄方宜 · 潜能3「一感一应」青霆剑存在时间",
+  "literal": "青霆剑的存在时间+{v}秒",
+  "zone": "other",
+  "stat": null,
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "value": {
+   "fixed": 10
+  },
+  "unit": "flat",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "skill"
+   ],
+   "damageClass": "any",
+   "skills": [
+    "skill"
+   ]
+  },
+  "condition": {
+   "text": "配装即生效",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "evidence": {
+   "text": "战技惊霆诀消耗导电后返还10点技力。青霆剑的存在时间+10秒。",
+   "category": "official",
+   "where": "dist/data/operators.js chr_0030_zhuangfy.potentials[2]"
+  },
+  "notes": "青霆剑存在时间 36→46 秒（战技 params「青霆剑存在时间」），仅排轴使用。"
  },
  {
   "id": "chr_0030_zhuangfy.pot4.energyCost",
@@ -5242,7 +5336,7 @@
   "value": {
    "fixed": 1.15
   },
-  "unit": "flat",
+  "unit": "x",
   "beneficiary": "self",
   "applies": {
    "elements": null,
@@ -6591,7 +6685,7 @@
   "value": {
    "fixed": 1.1
   },
-  "unit": "flat",
+  "unit": "x",
   "beneficiary": "target",
   "applies": null,
   "condition": {
@@ -7882,7 +7976,7 @@
   "value": {
    "fixed": 1.2
   },
-  "unit": "flat",
+  "unit": "x",
   "beneficiary": "team",
   "applies": {
    "elements": [
@@ -8747,7 +8841,7 @@
   "value": {
    "fixed": 1.5
   },
-  "unit": "flat",
+  "unit": "x",
   "beneficiary": "self",
   "applies": null,
   "condition": {
@@ -9005,7 +9099,7 @@
   "value": {
    "fixed": 1.2
   },
-  "unit": "flat",
+  "unit": "x",
   "beneficiary": "target",
   "applies": {
    "elements": null,
@@ -9088,8 +9182,102 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0036_jsspsi.skills.skill.description + params"
   },
-  "notes": "笔意结束时爆发，造成“所记录伤害值”的固定伤害（不吃乘区）。value 为记录比例（%）。潜能1再+7%（另条）。起墨消耗15技力为文本资源（params 未列）。",
+  "notes": "笔意结束时爆发，造成“所记录伤害值”的固定伤害（不吃乘区）。value 为记录比例（%）。潜能1再+7%（另条）。替换阶段费用见 skill.qimoCost / skill.shoubiCost。",
   "rankType": "skill12"
+ },
+ {
+  "id": "chr_0036_jsspsi.skill.qimoCost",
+  "owner": {
+   "kind": "operator",
+   "id": "chr_0036_jsspsi",
+   "name": "祀",
+   "source": "skill",
+   "ref": "河山共影",
+   "skill": "skill"
+  },
+  "name": "祀 · 战技河山共影 · 起墨费用",
+  "literal": "起墨：消耗15技力",
+  "zone": "other",
+  "stat": null,
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "value": {
+   "fixed": 15
+  },
+  "unit": "flat",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "skill"
+   ],
+   "damageClass": "any",
+   "skills": [
+    "skill"
+   ]
+  },
+  "condition": {
+   "text": "施放河山共影后战技替换为起墨",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "evidence": {
+   "text": "对目标施加笔意和定身并造成寒冷伤害。同时对目标施加寒冷附着，若小队内01号位是灼热属性的干员则变为施加灼热附着。被施加笔意的目标受到伤害后，记录一部分伤害值。笔意持续时间结束将会爆发，对范围内敌人造成所记录伤害值的固定伤害。施放后战技在一段时间内替换为起墨。\n起墨：消耗15技力，从被施加笔意的目标体内拉出墨魂，墨魂受到的所有伤害和效果将传递给本体，墨魂持续时间等同于笔意剩余时间。施放后战技在一段时间内替换为收笔。\n收笔：不消耗技力，使墨魂提前消失。墨魂消失时朝原目标移动并触发和笔意效果相同的爆发。\n对墨魂和处于笔意状态的目标同时造成伤害或效果时，只会视作造成一次伤害或效果。墨魂存在期间若原目标被击败则连接另一名战斗中的敌人，并对其施加笔意，持续时间不会重新计算。未拉出墨魂且处于笔意状态的目标被击败时，会在其位置生成墨魂。\n[参数] 笔意时长（秒）：20/20/20/20/20/20/20/20/20/20/20/20；伤害记录比例：8%/8%/8%/9%/9%/9%/10%/10%/10%/11%/12%/13%",
+   "category": "official",
+   "where": "dist/data/operators.js chr_0036_jsspsi.skills.skill.description + params"
+  },
+  "notes": "说明条目：战技替换阶段的技力消耗（params 未列，取自描述原文）；不沿用基础战技 100 技力。仅资源/排轴使用。"
+ },
+ {
+  "id": "chr_0036_jsspsi.skill.shoubiCost",
+  "owner": {
+   "kind": "operator",
+   "id": "chr_0036_jsspsi",
+   "name": "祀",
+   "source": "skill",
+   "ref": "河山共影",
+   "skill": "skill"
+  },
+  "name": "祀 · 战技河山共影 · 收笔费用",
+  "literal": "收笔：不消耗技力",
+  "zone": "other",
+  "stat": null,
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "value": {
+   "fixed": 0
+  },
+  "unit": "flat",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "skill"
+   ],
+   "damageClass": "any",
+   "skills": [
+    "skill"
+   ]
+  },
+  "condition": {
+   "text": "施放起墨后战技替换为收笔",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "evidence": {
+   "text": "对目标施加笔意和定身并造成寒冷伤害。同时对目标施加寒冷附着，若小队内01号位是灼热属性的干员则变为施加灼热附着。被施加笔意的目标受到伤害后，记录一部分伤害值。笔意持续时间结束将会爆发，对范围内敌人造成所记录伤害值的固定伤害。施放后战技在一段时间内替换为起墨。\n起墨：消耗15技力，从被施加笔意的目标体内拉出墨魂，墨魂受到的所有伤害和效果将传递给本体，墨魂持续时间等同于笔意剩余时间。施放后战技在一段时间内替换为收笔。\n收笔：不消耗技力，使墨魂提前消失。墨魂消失时朝原目标移动并触发和笔意效果相同的爆发。\n对墨魂和处于笔意状态的目标同时造成伤害或效果时，只会视作造成一次伤害或效果。墨魂存在期间若原目标被击败则连接另一名战斗中的敌人，并对其施加笔意，持续时间不会重新计算。未拉出墨魂且处于笔意状态的目标被击败时，会在其位置生成墨魂。\n[参数] 笔意时长（秒）：20/20/20/20/20/20/20/20/20/20/20/20；伤害记录比例：8%/8%/8%/9%/9%/9%/10%/10%/10%/11%/12%/13%",
+   "category": "official",
+   "where": "dist/data/operators.js chr_0036_jsspsi.skills.skill.description + params"
+  },
+  "notes": "说明条目：战技替换阶段的技力消耗（params 未列，取自描述原文）；不沿用基础战技 100 技力。仅资源/排轴使用。"
  },
  {
   "id": "chr_0036_jsspsi.combo.perLayer",
@@ -9544,7 +9732,7 @@
   "value": {
    "fixed": 1.2
   },
-  "unit": "flat",
+  "unit": "x",
   "beneficiary": "team",
   "applies": {
    "elements": [

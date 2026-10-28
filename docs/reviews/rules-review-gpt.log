@@ -3315,3 +3315,310 @@ if(process.argv[1].endsWith('item2md.mjs')){ const item=JSON.parse(fs.readFileSy
 
 web search: 
 web search: 
+context compacted
+exec
+/bin/zsh -lc "sed -n '1,180p' docs/rules.md" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+# 基础规则（docs/rules.md）
+
+> 版本：v0.3（2026-10-28）。每条规则标注来源类别：**官方**（官方 wiki / 游戏教学原文）、**解包**（华法琳游戏表）、**研究**（玩家机制研究，附链接）、**实测**（用户游戏实测）、**推导**（程序/逻辑推导）、**假设**（暂定，待验证）。证据来源汇总见 docs/research/claude-mechanics.md 与 docs/research/gpt-mechanics.md；数据来源见 docs/data-sources.md。
+> 状态：待独立 subagent 校正（见 docs/reviews/rules-review-*.md）。引擎实现位置：dist/engine/*.js。
+
+## A. 伤害公式与乘区
+
+### A1 单段伤害（引擎 damage.js calcSegment）
+```
+D = ATK × M × Crit × (1+Σ增伤) × (1+Σ增幅) × (1+Σ脆弱) × (1+Σ易伤) × 连击 × 失衡 × Q_def × Q_res × Q_reduction × 等级系数 × 技艺系数
+```
+- 乘区之间相乘；同一乘区内加算，但先执行效果自身规则（无法叠加/取最高/层数上限）。【研究：灰机 Wiki《伤害》、NagiYume《终末地数据导论》】
+- 增伤区包含：装备“X伤害加成”属性、武器“X伤害提升”、“所有技能伤害+”、“战技/连携技/终结技/普通攻击伤害+”、“造成的伤害+”、“对失衡目标伤害+”等；按 applies 条件过滤（属性、技能种类）。【研究】
+- 增幅区：原文明确写“增幅”的效果（祀、赛希、梨诺、安塔尔终结技等）。【官方原文 + 研究】
+- 脆弱区：原文写“脆弱”的目标减益（寒冷脆弱/法术脆弱/物理脆弱…）；寒冷伤害同时满足寒冷脆弱与法术脆弱的类型条件，是否同时生效取决于各效果自身的叠加限制（当前按同时计入）。【研究；叠加细节待实测】
+- 易伤区：原文写“使目标受到的伤害+N%”且未写脆弱/增幅的效果，以及导电（法术易伤）、碎甲（物理易伤）。【研究】
+- 等级系数与技艺系数只作用于机制伤害（A5/A6），不作用于普通元素技能直伤。【研究】
+- “所有技能伤害”不含普通攻击（解包中 AllSkillDamageIncrease 与 NormalAttackDamageIncrease 为独立字段）。【解包 + 推导】
+
+### A2 暴击
+- 基础暴击率 5%，基础暴击伤害 +50%（暴击 ×1.5）。存在暴击伤害属性。【研究：gamekee 机制研究、BWIKI 数值范围；解包 attr 9 = 0.05】
+- 界面口径：不暴击 ×1；必暴击 ×(1+暴伤)；暴击期望 ×(1+暴击率×暴伤)。【推导】
+
+### A3 防御、抗性
+- Q_def = 100 / (100 + DEF)，DEF≥0。默认对照靶 DEF 100（罗丹、碾骨劫掠者基础值 100）。【研究 + 解包敌人表】
+- Q_res = 1 − 抗性%/100；负抗性按同式（−20 → ×1.2），未见“负抗性减半”依据。【研究】
+- 评级映射：D=0，C=20（也有 30 仍显示 C 的记录），B=50；A/S **未确认**。界面提供评级与自定义数值并存。【研究；待补敌人原始表】
+
+### A4 增幅/脆弱/易伤/增伤归属表
+| 名称 | 典型来源 | 乘区 |
+|---|---|---|
+| 脆弱 | 寒冷脆弱、法术脆弱、物理脆弱（干员天赋/技能/武器） | 脆弱 |
+| 易伤 | 导电法术承伤、碎甲物理承伤、“受到的伤害+” | 易伤 |
+| 增幅 | 寒冷增幅/灼热增幅/法术增幅（祀、赛希、梨诺…） | 增幅 |
+| 增伤 | 全伤害、元素伤害、技能种类伤害、对失衡目标伤害 | 增伤 |
+
+### A5 机制伤害（引擎 skills.js mechSegments）
+n = 触发时消耗的附着/破防层数（1–4）。90 级等级系数：法术 1+(90−1)/196 = 1.45408；物理 1+(90−1)/392 = 1.22704（与解包 attr 49 / 25 的 90 级值一致）。【研究 + 解包】
+| 机制 | 基础倍率 | 备注 |
+|---|---|---|
+| 法术爆发（同属性） | 160% | 不随层数线性增加 |
+| 燃烧初始 / 每秒 | 80%(1+n) / 12%(1+n) | 持续伤害不暴击（研究） |
+| 导电 / 腐蚀 / 冻结 初始 | 80%(1+n) | 导电附带法术易伤 12/16/20/24% |
+| 碎冰 | 120%(1+n) | 研究用法术等级系数 |
+| 击飞 / 倒地 | 120% | 物理等级系数 |
+| 猛击 | 150%(1+n) | 物理 |
+| 碎甲 | 50%(1+n) | 物理易伤 12/16/20/24% |
+- 机制伤害按**触发者**攻击力/等级/技艺结算；碎冰归属打碎冻结者。【研究】
+- 当前实现沿用上表（与交接 Demo 一致）；v1.6 逐项复测与多人归属顺序**未确认**。
+
+### A6 源石技艺强度
+- 乘在法术爆发、法术/物理异常伤害上：×(1+s/100)；不是通用法伤加成。【研究】
+- 导电/碎甲/腐蚀的易伤效果：×(1+2s/(s+300))（研究系数；引擎未实现，列为缺口）。
+
+### A7 取整
+- 干员属性面板显示 = 内部值向下取整（1224 个样本全部吻合）。【解包 vs 官方，docs/data-sources.md】
+- 装备百分比属性显示 = 四舍五入到 1 位小数；源石技艺强度显示向下取整；全伤害减免内部存 1/(1+d)。【解包 vs 官方】
+- 伤害跳字取整方式**未确认**；引擎不取整，界面显示四舍五入到整数，并在拆解中注明。
+
+## B. 属性与攻击力（引擎 stats.js）
+
+### B8 面板攻击力
+```
+ATK = [ (角色基础 + 武器基础) × (1 + Σ攻击力%) + 装备固定攻击 ] × (1 + 0.005×主能力 + 0.002×副能力) + 食药固定攻击
+```
+- 主能力每点 +0.5%、副能力每点 +0.2% 攻击：【研究（NagiYume）】；交接 Demo 的截图回归（6368 / 6519）与此式一致【实测】。
+- 装备固定攻击的位置（攻击%之后、能力乘算之前）来自研究简化式；底层存在多级修饰阶段，**未完全确认**。
+- 食药固定攻击：主副能力乘算完成后再加。【实测（用户）】
+- 面板攻击显示向下取整。【实测回归】
+
+### B9 四能力
+- 各能力 = 向下取整[(90 级基础 + 能力值天赋 + 潜能/武器/装备固定值) × (1 + Σ该能力%)]。主能力%、全能力% 先改变能力值再进攻击换算。【研究 + 实测回归（772/798）】
+- 力量 +5 生命/点；敏捷 → 物理抗性，智识 → 法术抗性（100−100/(1+0.001x)）；意志 +0.1% 受治疗/点。【研究】
+
+### B10 终结技充能效率
+- 可加成能量来源：ΔU = ΔU基础 × (1 + Σ充能效率)。【研究】
+- 不是所有来源都吃效率（管理员特定潜能结晶回能“无法被加成”）；硬上限**未确认**。【官方原文 + 研究】
+- 当前引擎：充能效率 = 装备（含逐条精锻）+ 武器 + 套装 + 食药 加算（stats.chargeEff）；按来源区分在批次 7 实现。
+
+## C. 资源与技能系统（批次 5–7 使用）
+
+### C11 技力
+- 队伍共享技力**上限 300**，脱战稳定值 200（界面默认初始 200）。【研究】
+- 自然恢复约 8 点/秒；主控重击回技力按干员区分（样本：管理员 20、狼卫 18、佩丽卡 15、黎风 21、别礼 30）；精准闪避约 7.5。【研究，v1.6 全干员表未确认】
+
+### C12 返还技力（毒技力）
+- 返还部分优先消耗；消耗返还部分不产生“消耗技力→全队终结技能量”收益。【研究（巴哈测试）】
+- 已核返还来源：别礼战技 30（潜能1 +5）、管理员潜能1 50、昼雪潜能5 10、卡契尔潜能5 10、汤汤/诀部分技能。【官方原文】
+
+### C13 终结技能量
+- 施放战技：全队获得能量（基准：消耗 100 真实技力 → 全队各 6.5 基础）；施放连携技：施放者获得（多数 10，弧光 5、梨诺 20、别礼 40+15n…）；施放终结技消耗全部能量；部分强化状态期间不能获得能量。【官方教学 + 研究】
+- 别礼只从自身战技、连携技获得能量。【官方原文】
+- 各干员所需能量见 dist/data/operators.js skills.ultimate.params.energyCost。
+- 溢出储存**未确认**；模拟器不提供隐藏溢出。
+
+### C14 连携技
+- 触发条件按干员定义；冷却、触发窗口（早期资料约 5 秒）、状态持续三者独立计时。【官方原文 + 研究】
+- “01 号位”与“主控”不同（祀的部分效果读取 01 号位）。【官方原文】
+
+### C15 战技
+- 普通战技消耗 100 技力；替换型战技逐段读取消耗（祀：100 → 起墨 15 → 收笔 0）。【官方原文】
+
+### C16 法术附着与异常
+- 常规附着上限 4 层；同属性再施加 → 法术爆发（不需 4 层）；不同属性 → 由后施加属性决定异常（灼热→燃烧、电磁→导电、寒冷→冻结、自然→腐蚀），消耗原附着；异常等级 = 消耗层数（≤4）。【官方教学】
+- 附着自然消退时间**未确认**。
+
+### C17 主控与非主控
+- 非主控干员会自动普攻（官方更新说明可证）；是否衰减、比例、频率、是否完整攻击串**未确认**。排轴模拟必须把非主控普攻的伤害与资源贡献作为带区间的估计量，不能默认 100%。【官方 + 研究缺口】
+- 非主控仍获得战技全队回能与自身连携回能；别礼限制仍适用。
+
+### C18 普攻串
+- 段数由干员决定（3–5 段）；重击通常是攻击串末段；空中普攻 = 下落攻击；失衡目标附近普攻 = 处决。【官方原文】
+- 逐命中拆分（多弹、多斩）需要解包 blackboard（atk_scale1/2…）或实测，当前按官方段倍率。
+
+### C19 失衡
+- 失衡承伤倍率研究常用 1.3；“对失衡目标伤害+”为角色条件增伤，分开处理。【研究】
+- 失衡阈值、窗口为敌人参数；默认对照靶永不失衡。【继承要求】
+
+## D. 装备与武器
+
+### D20 精锻
+- 每条可精锻属性独立 0–3 级，值 = floor/精确(原始 × 1, 1.1, 1.2, 1.3)；整数属性向下取整；百分比保留内部小数。【解包（1581 值全部吻合）】
+- 两条属性装备只有两条精锻项。【官方 + 解包】
+
+### D21 套装
+- 3 件激活（无“2 件小效果”）。【官方原文】
+- 长息“使其他队友造成的伤害+16%，该效果无法叠加”：同队多人携带不相加；是否取最高/刷新**未确认**（引擎按只计一次、取最高）。【官方原文 + 假设】
+- 拓荒“全队造成的伤害+16%，无法叠加”同理。
+
+### D22 武器潜能与基质
+- 第三技能等级 = 1 + 潜能(0–5) + 匹配基质加级(0–3)；前两条 = 培养 3 + 匹配基质加级(0–6)。继承规则“0 潜 = Rank4，满潜 = Rank9”对应基质 +3 的默认；界面保留潜能↔Rank 联动，基质默认满（9/9/4）。【研究（gamersky 基质详解、BWIKI 联结点表）】
+
+### D23 配件重复
+- 两个配件槽可装备同名配件的两个实例（实战记录：汤汤双碾骨面具·贰型）。【研究/实战记录】→ 界面允许同名配件重复。
+
+## E. 食药
+- 300 秒增益；清单见 dist/data/consumables.js（25 项与输出相关）。固定攻击食物（清炖兽排参须汤 +180 攻击 +11% 暴击）采用官方 wiki 当前值（旧 BWIKI 为 +200/+13%，已过时）。【官方】
+- 同类互斥/覆盖**未确认**；界面按勾选全部计入并标注。
+
+## F. 排轴相关（批次 5 详述）
+- 真实技力与返还技力分别记账；避免技力溢出；把主伤害放进增幅/脆弱/易伤/失衡重叠窗口；连携窗口与冷却；01 号位/主控/伤害归属分别记录。【研究】
+- 终结技演出会暂停部分效果计时（莱万汀官方说明）；技力自然恢复在演出期间暂停（研究）；视频计时需区分录像时间/关卡计时/日志时间/效果计时。
+
+## H. 继承规则（任务书）
+- H3 武器潜能联动、H4 别礼二天赋（终结技中寒冷脆弱与法术脆弱 ×1.5，不作用于普攻/战技/连携）、H5 食药固定加攻顺序、H6 默认不暴击/防御 100/抗性 0。
+
+## 缺口清单
+1. 抗性 A/S 映射；2. 非主控自动普攻衰减与频率；3. 附着消退时间；4. 伤害跳字取整；5. 充能效率各来源适用性与上限；6. 食药同类叠加；7. 长息/拓荒多人取值；8. 异常易伤的技艺加成 ×(1+2s/(s+300)) 未实现；9. 逐命中拆分。
+
+codex
+对照现有报告后，发现几处结论在汇总时变得更确定了：食药加攻位置仍有争议，6368／6519 的回归用例没有食药，无法验证其顺序；别礼返还加成误写为潜能1；梨诺25技力的例外也被遗漏。我会在报告中区分明确错误、研究结论和仍待验证的假设。
+
+web search: 
+exec
+/bin/zsh -lc 'rg --files sources/skland sources/raw/skland | head -35' in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+sources/raw/skland/index.json
+sources/skland/substrate.json
+sources/skland/consumables.json
+sources/skland/operators.json
+sources/skland/items.json
+sources/skland/weapons.json
+sources/skland/gear.json
+sources/raw/skland/gear/881.json
+sources/raw/skland/gear/1949.json
+sources/raw/skland/gear/839.json
+sources/raw/skland/gear/993.json
+sources/raw/skland/gear/706.json
+sources/raw/skland/gear/710.json
+sources/raw/skland/gear/878.json
+sources/raw/skland/gear/2762.json
+sources/raw/skland/gear/2332.json
+sources/raw/skland/gear/2719.json
+sources/raw/skland/gear/946.json
+sources/raw/skland/gear/415.json
+sources/raw/skland/gear/854.json
+sources/raw/skland/gear/784.json
+sources/raw/skland/gear/842.json
+sources/raw/skland/gear/2758.json
+sources/raw/skland/gear/1932.json
+sources/raw/skland/gear/1436.json
+sources/raw/skland/gear/950.json
+sources/raw/skland/gear/1441.json
+sources/raw/skland/gear/970.json
+sources/raw/skland/gear/835.json
+sources/raw/skland/gear/1953.json
+sources/raw/skland/gear/966.json
+sources/raw/skland/gear/823.json
+sources/raw/skland/gear/989.json
+sources/raw/skland/gear/874.json
+sources/raw/skland/gear/1210.json
+
+web search: https://warfarin.wiki/cn/enemies
+web search: 
+exec
+/bin/zsh -lc "node --input-type=module -e 'import fs from \"node:fs\"; for(const name of [\"items\",\"operators\"]){const a=JSON.parse(fs.readFileSync("'`sources/skland/${name}.json`)); console.log(name,Array.isArray(a),Object.keys(a).slice(0,8)); if(Array.isArray(a))for(const x of a.filter(x=>["别礼","梨诺","清炖兽排参须汤"].includes(x.name)))console.log(JSON.stringify(x).slice(0,2400));} const g=JSON.parse(fs.readFileSync("sources/warfarin/gear.json"));for(const x of g){const m=x.equip?.displayAttrModifiers?.find(m=>m.packAttrType==="AllDamageTakenScalar");if(m){console.log("damageReduction",x.name,JSON.stringify(m));break;}}'"'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+items true [
+  '0', '1', '2',
+  '3', '4', '5',
+  '6', '7'
+]
+{"itemId":"894","name":"清炖兽排参须汤","cover":"https://bbs.hycdn.cn/image/2025/12/24/203953/ae07caff21bce629835adff4a4b3e4c5.png","tags":{"星级":["5星"],"品质":["金色品质"],"物品分类":["可用道具"]},"info":{},"texts":[{"chapter":"物品来源","widgets":[{"title":"相关来源","tabs":[{"title":"","intro":null,"text":"完成简制手册内容获取配方。\n- 累计获得[entry]后可以在简制手册中领取清炖兽排参须汤的配方。获取配方后即可通过简易制作合成清炖兽排参须汤。\n特定NPC商店中购买。\n- 武陵城-方兴衢 田阿仔（岳研香茶铺） 处购买，每份售价[entry]，存量 1 份。"}]}]},{"chapter":"物品用途","widgets":[{"title":"相关用途","tabs":[{"title":"","intro":null,"text":"干员直接使用时：\n- 使用后，增加180点攻击力，增加11%暴击率，持续300秒。\n- 不可作为战术物品为干员装备。\n用于仓储节点货物装箱。\n- 每装箱[entry]需要800点货箱容量。"}]}]},{"chapter":"相关配方","widgets":[{"title":"简易制作-精制食药","tabs":[{"title":"","intro":null,"text":"原料需求 | 制作产物\n[entry][entry] | [entry]"}]}]}],"publishedAtTs":"1767283650"}
+operators true [
+  '0', '1', '2',
+  '3', '4', '5',
+  '6', '7'
+]
+{"itemId":"4","name":"别礼","cover":"https://bbs.hycdn.cn/image/common/20260203/101423/6981a44d9fd9f8e1d8fd5d22_56331367.png","tags":{"干员职业":["突击"],"星级":["6星"],"属性":["寒冷"],"主能力":["力量"],"武器":["双手剑"],"副能力":["意志"]},"info":{"代号":"别礼","性别":"女","身份认证":"塞什卡","生日":"11月12日","种族":"萨卡兹","词缀":"大量伤害；寒冷附着","主要获取方式":"干员寻访·特许寻访与基础寻访","上线时间":"2026年1月22日"},"attributes":{"header":["干员等级","1级","20级","40级","60级","80级","90级"],"生命值":["500","1566","2689","3811","4934","5495"],"攻击力":["30","95","162","230","298","332"],"力量":["21","50","80","110","140","155"],"敏捷":["8","29","50","72","93","104"],"智识":["9","27","46","65","84","93"],"意志":["15","35","56","77","98","109"]},"skills":[{"name":"严霜之舞","type":"普通攻击","description":"普通攻击：\n对敌人进行至多4段攻击，造成寒冷伤害。作为主控干员时，重击会造成25点失衡。\n下落攻击：\n处于空中时使用普通攻击，会下落并攻击附近敌人造成寒冷伤害。\n处决攻击：\n附近有敌人处于失衡状态时使用普通攻击，将处决该敌人，造成大量寒冷伤害并恢复一定技力。","table":{"header":["技能等级","RANK 1","RANK 2","RANK 3","RANK 4","RANK 5","RANK 6","RANK 7","RANK 8","RANK 9","专精1","专精2","专精3"],"普攻第一段倍率":["30%","33%","36%","39%","42%","45%","48%","51%","54%","58%","62%","68%"],"普攻第二段倍率":["55%","61%","66%","72%","77%","83%","88%","94%","99%","106%","114%","124%"],"普攻第三段倍率":["68%","75%","82%","88%","95%","102%","109%","116%","122%","131%","141%","153%"],"普攻第四段倍率":["90%","99%","108%","117%","126%","135%","144%","153%","162%","173%","187%","203%"],"处决攻击倍率":["400%","440%","480%","520%","560%","600%","640%","680%","720%","770%","830%","900%"],"下落攻击倍率":["80%","88%","96%","104%","112%","120%","128%","136%","144%","154%","166%","180%"]}},{"name":"塞什卡的秘传","type":"战技","description":"对主控干员的武器进行低温灌注，并返还一定技力。\n一段时间内，当前主控干员接下来的1次重击会生成别礼的幻影，对目标进行追击，造成寒冷伤害，施加寒冷附着。\n主控干员为别礼时，施放该战技不会中断普通攻击。","table":{"header":["技能等级","RANK 1","RANK 2","RANK 3","RANK 4","RANK 5","RANK 6","RANK 7","RANK 8","RANK 9","专精1","专精2","专精3"],"技力消耗":["100","100","100","100","100","100","100","100","100","100","100","100"],"幻影追击伤害倍率":["142%","156%","171%","185%","199%","213%","228%","242%","256%","274%","295%","320%"],"返还技力":["30","30","30","30","30","30","30","30","30","30","30","30"],"持续时间（秒）":["15","15","15","15","15","15","15","15","15","15","15","15"],"获得终结技能量":["16","16","16","16","16","16","16","16","16","16","16","16"]}},{"name":"噬冬","type":"连携技","description":"当有敌人进入3层及以上寒冷附着状态时可以发动。\n在目标敌人身上凝结冰锥，随后将其斩碎，消耗敌人身上的所有寒冷附着，对其造成基于其寒冷附着层数的寒冷伤害，并且根据消耗的层数获得终结技能量。","table":{"header":["技能等级","RANK 1","RANK 2","RANK 3","RANK 4","RANK 5","RANK 6","RANK 7
+{"itemId":"1683","name":"梨诺","cover":"https://bbs.hycdn.cn/image/common/20260809/4826366/6a77c4b6a87c0071fa15da57_3eac6ad0.png","tags":{"干员职业":["辅助"],"星级":["6星"],"属性":["电磁"],"主能力":["意志"],"武器":["长柄武器"],"副能力":["敏捷"]},"info":{"代号":"梨诺","性别":"女","身份认证":"环塔商会","生日":"7月27日","种族":"萨卡兹","词缀":"治疗；增幅","主要获取方式":"干员寻访·特许寻访","上线时间":"2026年8月9日"},"attributes":{"header":["干员等级","1级","20级","40级","60级","80级","90级"],"生命值":["500","1566","2689","3811","4934","5495"],"攻击力":["30","90","152","215","277","309"],"力量":["9","26","44","62","80","89"],"敏捷":["14","37","61","85","109","121"],"智识":["9","26","45","64","82","91"],"意志":["21","55","90","125","160","177"]},"skills":[{"name":"怦然星动","type":"普通攻击","description":"普通攻击：\n对敌人进行至多5段攻击，造成电磁伤害。作为主控干员时，重击会造成19点失衡。\n下落攻击：\n处于空中时使用普通攻击，会下落并攻击附近敌人，造成电磁伤害。\n处决攻击：\n附近有敌人处于失衡状态时使用普通攻击，将处决该敌人，造成大量电磁伤害并恢复一定技力。","table":{"header":["技能等级","RANK 1","RANK 2","RANK 3","RANK 4","RANK 5","RANK 6","RANK 7","RANK 8","RANK 9","专精1","专精2","专精3"],"普攻第一段倍率":["19%","21%","22%","24%","26%","28%","30%","32%","34%","36%","39%","42%"],"普攻第二段倍率":["27%","29%","32%","35%","37%","40%","43%","45%","48%","51%","56%","60%"],"普攻第三段倍率":["27%","29%","32%","35%","37%","40%","43%","45%","48%","51%","56%","60%"],"普攻第四段倍率":["36%","40%","43%","47%","50%","54%","58%","61%","65%","69%","75%","81%"],"普攻第五段倍率":["45%","49%","53%","58%","62%","67%","71%","76%","80%","86%","92%","100%"],"处决攻击倍率":["400%","440%","480%","520%","560%","600%","640%","680%","720%","770%","830%","900%"],"下落攻击倍率":["80%","88%","96%","104%","112%","120%","128%","136%","144%","154%","166%","180%"]}},{"name":"闪耀焦点","type":"战技","description":"对敌人造成电磁伤害，随后进入演唱姿态，期间若附近有敌人，则每隔一段时间追加攻击，对敌人造成电磁伤害。\n演唱姿态：持续期间提升全队攻击力，并在进入战斗后持续治疗范围内干员。\n持续期间战技替换为姿态中止，施放将提前结束演唱姿态且不消耗技力，战技进入短暂冷却。","table":{"header":["技能等级","RANK 1","RANK 2","RANK 3","RANK 4","RANK 5","RANK 6","RANK 7","RANK 8","RANK 9","专精1","专精2","专精3"],"技力消耗":["25","25","25","25","25","25","25","25","25","25","25","25"],"初次伤害倍率":["107%","117%","128%","139%","149%","160%","170%","181%","192%","205%","221%","240%"],"追加攻击伤害倍率":["53%","59%","64%","69%","75%","80%","85%","91%","96%","103%","111%","120%"],"追加攻击间隔时间\n（秒）":["10","10","10","10","10","10","10","10","10","10","10","10"],"歌声间隔时间\n（秒）":["3","3","3","3","3","3","3","3","3","3","3","3"],"演唱姿态持续时间\n（秒）":["60","60","60","60","60","60","60","60","60","60","60","60"],"攻击力提升":["6%","6%","6%","7%","7%","7%","8%","8%","8%","9%"
+damageReduction 集成化重甲 {"attrIndex":3,"attrType":0,"attrValue":0.9610764055742431,"compositeAttr":"AllDamageTakenScalar","enhanceGuaranteeTimesRuleId":"","enhancedAttrIndex":3,"enhancedAttrValues":[],"modifierType":8,"packAttrType":"AllDamageTakenScalar"}
+
+web search: 
+exec
+/bin/zsh -lc "node --input-type=module -e 'import fs from \"node:fs\";const a=JSON.parse(fs.readFileSync(\"sources/warfarin/enemies.json\"));console.log(Array.isArray(a),JSON.stringify(a[0]).slice(0,3000));const g=JSON.parse(fs.readFileSync(\"sources/warfarin/gear.json\"));for(const x of g){const m=x.equip?.displayAttrModifiers?.find(m=>m.packAttrType===\"AllDamageTakenScalar\"&&m.enhancedAttrValues.length);if(m){console.log(x.name,x.slug,JSON.stringify(m));break;}}const ops=JSON.parse(fs.readFileSync(\"sources/skland/operators.json\"));const o=ops.find(x=>x.name===\"别礼\");console.log(Object.keys(o));console.log(JSON.stringify({talents:o.talents,potentials:o.potentials}));'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ exited 1 in 0ms:
+node:fs:556
+  return binding.open(
+                 ^
+
+Error: ENOENT: no such file or directory, open 'sources/warfarin/enemies.json'
+    at Object.openSync (node:fs:556:18)
+    at Object.readFileSync (node:fs:440:35)
+    at file:///Users/serika/Developer/temp/endfield-demo-handoff-v3/[eval1]:1:48
+    at ModuleJob.run (node:internal/modules/esm/module_job:437:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:246:26)
+    at async ModuleLoader.executeModuleJob (node:internal/modules/esm/loader:243:20)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'sources/warfarin/enemies.json'
+}
+
+Node.js v25.9.0
+
+web search: 
+web search: https://warfarin.wiki/cn/tutorials
+web search: 
+exec
+/bin/zsh -lc "rg --files sources | rg 'enemies|enemy|eny_' | head -12" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+exec
+/bin/zsh -lc "node --input-type=module -e 'import fs from \"node:fs\";const g=JSON.parse(fs.readFileSync(\"sources/warfarin/gear.json\"));for(const x of g){const m=x.equip?.displayAttrModifiers?.find(m=>m.packAttrType===\"AllDamageTakenScalar\"&&m.enhancedAttrValues.length);if(m){console.log(x.name,x.slug,JSON.stringify(m));break;}}const ops=JSON.parse(fs.readFileSync(\"sources/skland/operators.json\"));const o=ops.find(x=>x.name===\"别礼\");console.log(Object.keys(o));console.log(JSON.stringify({talents:o.talents,potentials:o.potentials}));'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+纾难识别牌 item_equip_t4_parts_wuling01_edc_01 {"attrIndex":3,"attrType":0,"attrValue":0.8223684210526316,"compositeAttr":"AllDamageTakenScalar","enhanceGuaranteeTimesRuleId":"ExtraAttrPity","enhancedAttrIndex":2,"enhancedAttrValues":[0.8080155,0.794155,0.780762],"modifierType":8,"packAttrType":"AllDamageTakenScalar"}
+[
+  'itemId',
+  'name',
+  'cover',
+  'tags',
+  'info',
+  'attributes',
+  'skills',
+  'talents',
+  'potentials',
+  'publishedAtTs'
+]
+{"talents":[{"name":"锤炼","category":"能力值提升","stages":[{"stage":"锤炼·一","description":"干员力量能力值提升10","unlock":"干员信赖度达到20%\n晋升至精英化阶段1"},{"stage":"锤炼·二","description":"干员力量能力值提升15","unlock":"干员信赖度达到50%\n晋升至精英化阶段2"},{"stage":"锤炼·三","description":"干员力量能力值提升15","unlock":"干员信赖度达到100%\n晋升至精英化阶段3"},{"stage":"锤炼·四","description":"干员力量能力值提升20","unlock":"干员信赖度达到100%\n晋升至精英化阶段4"}]},{"name":"低温症","category":"干员天赋","stages":[{"stage":"低温症·一","description":"当别礼消耗任何法术附着时对该目标施加寒冷脆弱，\n效果为被消耗的法术附着层数x2%，持续15秒，该效果无法叠加。","unlock":"晋升至精英化阶段1"},{"stage":"低温症·二","description":"当别礼消耗任何法术附着时对该目标施加寒冷脆弱，\n效果为被消耗的法术附着层数x4%，持续15秒，该效果无法叠加。","unlock":"晋升至精英化阶段2"}]},{"name":"低温脆性","category":"干员天赋","stages":[{"stage":"低温脆性·一","description":"终结技临终别礼造成伤害时如果敌人处于寒冷脆弱状态，\n将其寒冷脆弱的效果视为原本的1.2倍。","unlock":"晋升至精英化阶段2"},{"stage":"低温脆性·二","description":"终结技临终别礼造成伤害时如果敌人处于寒冷脆弱状态，\n将其寒冷脆弱的效果视为原本的1.5倍。","unlock":"晋升至精英化阶段3"}]},{"name":"墓地园艺","category":"后勤技能","stages":[{"stage":"墓地园艺·β","description":"进驻培养舱时，晶植质料的培养速度提升20%。","unlock":"晋升至精英化阶段1"},{"stage":"墓地园艺·γ","description":"进驻培养舱时，晶植质料的培养速度提升30%。","unlock":"晋升至精英化阶段3"}]},{"name":"王庭盛名","category":"后勤技能","stages":[{"stage":"王庭盛名·α","description":"进驻会客室时，干员收集到线索7——塞什卡的概率小幅提升\n（进驻即生效，同类不可叠加）","unlock":"晋升至精英化阶段2"},{"stage":"王庭盛名·β","description":"进驻会客室时，干员收集到线索7——塞什卡的概率提升\n（进驻即生效，同类不可叠加）","unlock":"晋升至精英化阶段4"}]},{"name":"装备适配","stages":[{"stage":"装备适配·一","description":"激活后，允许干员穿戴蓝色品质装备。","unlock":"晋升至精英化阶段1"},{"stage":"装备适配·二","description":"激活后，允许干员穿戴紫色品质装备。","unlock":"晋升至精英化阶段2"},{"stage":"装备适配·三","description":"激活后，允许干员穿戴金色品质装备。","unlock":"晋升至精英化阶段3"}]}],"potentials":[{"level":1,"name":"守墓人之赠","description":"受到低温灌注的主控干员，重击命中敌人时额外造成20%伤害和5点失衡。"},{"level":2,"name":"零度武装","description":"力量+20，寒冷伤害+10%。"},{"level":3,"name":"统御严冬","description":"连携技噬冬和终结技临终别礼的伤害倍率提高至原本的1.15倍。"},{"level":4,"name":"诚挚告别","description":"终结技临终别礼所需的终结技能量-15%。"},{"level":5,"name":"寒风再起","description":"战技塞什卡的秘传返还的技力额外提高5点，并额外提高生成的幻影追击伤害倍率至原本的1.2倍。"}]}
+
+web search: 
+web search: 
+web search: site:warfarin.wiki/cn/enemies/ "B 65%" ...
+exec
+/bin/zsh -lc "sed -n '1,140p' tests/stats.test.mjs" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+import assert from 'node:assert/strict';
+import operators from '../dist/data/operators.js'; import weapons from '../dist/data/weapons.js'; import gear from '../dist/data/gear.js'; import sets from '../dist/data/sets.js';
+import {getStats} from '../dist/engine/stats.js';
+const data={operators,weapons,gear,sets,effects:[
+ {id:'chr_0026_lastrite.pot2.str',owner:{kind:'operator',id:'chr_0026_lastrite',potential:2},name:'别礼潜能2 · 力量+20',zone:'ability',stat:'str',unit:'flat',value:{fixed:20},condition:{mode:'auto'}}
+]};
+const bieli=operators.find(o=>o.name==='别礼'); const khr=weapons.find(w=>w.name==='赫拉芬格'); const G=n=>gear.find(g=>g.name===n).id;
+const member={operatorId:bieli.id,potential:0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},weapon:{id:khr.id,potential:0,ranks:[9,9,4]},gear:{armor:{id:G('涌浪重装甲'),refine:[3,3,3]},gloves:{id:G('潮涌手甲'),refine:[3,3,3]},kit1:{id:G('悬河供氧栓'),refine:[3,3,3]},kit2:{id:G('生物辅助护板'),refine:[3,3,3]}}};
+const s=getStats(member,data);
+// Regression sample from the handoff demo (user screenshots): main 772, sub 307, panel attack 6368
+assert.equal(s.main,772); assert.equal(s.sub,307); assert.equal(s.atk.panel,6368);
+assert.equal(s.sets['suit_burst01'],3);
+// exact internal cold/elec bonus sums to 69.7667 (game displays 69.8) — replaces old 0.1 calibration
+assert.ok(Math.abs(s.bonuses.coldElecDmg-69.766667)<1e-4, 'cold '+s.bonuses.coldElecDmg);
+// potential 2: +20 str → main 798, panel 6519 (user's full-potential screenshot had 6519 at 5潜)
+const m2={...member,potential:5}; const s2=getStats(m2,data); assert.equal(s2.main,798); assert.equal(s2.atk.panel,6519);
+// refinement independence: lowering armor strength refine lowers attack but not cold bonus
+const m3=JSON.parse(JSON.stringify(member)); m3.gear.armor.refine=[0,3,3]; const s3=getStats(m3,data); assert.ok(s3.atk.panel<s.atk.panel); assert.ok(Math.abs(s3.bonuses.coldElecDmg-s.bonuses.coldElecDmg)<1e-9);
+// weapon potential → slot3 rank only; slot1/2 ranks independent
+const m4=JSON.parse(JSON.stringify(member)); m4.weapon.ranks=[1,9,4]; const s4=getStats(m4,data); assert.equal(s4.flatAbilities.str, s.flatAbilities.str-156+20);
+// two-attribute gear & other operator smoke: every operator computes with its default weapon-less loadout
+for(const o of operators){ const st=getStats({operatorId:o.id,potential:0},data); assert.ok(st.atk.panel>0,o.name); }
+console.log('stats tests passed; 别礼 sample:',{main:s.main,sub:s.sub,panel:s.atk.panel,cold:s.bonuses.coldElecDmg});
+
+codex
+已找到两个可直接核对的反例：蚀影应龙尖兵的电磁抗性评级为 B，但承伤倍率是65%，对应抗性35%，所以 B 不能固定映射为50；纾难识别牌的减伤精锻也不是显示值直接乘1.1。报告会将这些可证伪问题与尚无充分证据的问题分开列出。
+
+exec
+/bin/zsh -lc "node --input-type=module -e 'import fs from \"node:fs\";const gs=JSON.parse(fs.readFileSync(\"sources/warfarin/gear.json\"));let total=0,bad=0;for(const g of gs)for(const m of g.equip?.displayAttrModifiers||[])for(const [i,v]of m.enhancedAttrValues.entries()){const k=1+.1*(i+1);const exp=m.packAttrType===\"AllDamageTakenScalar\"?1/(1+(1/m.attrValue-1)*k):Number.isInteger(m.attrValue)?Math.floor(Number((m.attrValue*k).toPrecision(12))):m.attrValue*k;total++;if(Math.abs(v-exp)>1e-4*Math.max(1,Math.abs(exp)))bad++;}console.log({total,bad});for(const g of gs){if(g.slug===\"item_equip_t4_suit_usp02_body_01\")console.log(g.name,JSON.stringify(g.equip.displayAttrModifiers));}'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+{ total: 1581, bad: 0 }
+长息装甲 [{"attrIndex":1,"attrType":42,"attrValue":87,"compositeAttr":"","enhanceGuaranteeTimesRuleId":"DoubleAttrPity","enhancedAttrIndex":1,"enhancedAttrValues":[95,104,113],"modifierType":5,"packAttrType":"Will"},{"attrIndex":2,"attrType":41,"attrValue":58,"compositeAttr":"","enhanceGuaranteeTimesRuleId":"DoubleAttrPity","enhancedAttrIndex":2,"enhancedAttrValues":[63,69,75],"modifierType":5,"packAttrType":"Wisd"},{"attrIndex":3,"attrType":87,"attrValue":20.7,"compositeAttr":"","enhanceGuaranteeTimesRuleId":"ExtraAttrPity","enhancedAttrIndex":3,"enhancedAttrValues":[22.77,24.84,26.91],"modifierType":5,"packAttrType":"PhysicalAndSpellInflictionEnhance"}]
+
+web search: 
+web search: '不减少' in https://warfarin.wiki/cn/operators/laevatain
+web search: 
+web search: '黄昏'
