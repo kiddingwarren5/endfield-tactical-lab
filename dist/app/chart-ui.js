@@ -67,7 +67,7 @@ function teamPanel(state,update,presetsOk,source,scenario){
   const chips=[h('button',{type:'button',class:'preset-tab'+(source==='auto'?' active':''),onclick:()=>update(s=>{s.rot.source='auto';})},'自动排轴（任意编队）'),...(presetsOk?rotations.map(p=>h('button',{type:'button',class:'preset-tab'+(source===p.id?' active':''),onclick:()=>update(s=>{s.rot.source=p.id;})},p.name)):[])];
   const scTabs=scenarios.map(x=>h('button',{type:'button',class:'preset-tab scenario'+(x.id===scenario.id?' active':''),onclick:()=>update(s=>{s.rot.scenario=x.id;})},x.name));
   const enemy=rot.enemy; const resRows=h('div',{class:'resistance-list'},...Object.entries(ELEMENT_CN).map(([k,l])=>{ const g=enemy.resistances[k]; const v=g==='custom'?(enemy.custom[k]??0):(GRADE[g]??0); return h('div',{class:'resistance-row'},h('span',{style:`color:${colorOf(k)}`},l),select([['D','D 级 0%'],['C','C 级 20%'],['B','B 级 50%'],['custom','自定义']],g,val=>update(s=>{s.rot.enemy.resistances[k]=val;})),h('output',{},pct(v)),g==='custom'?h('input',{class:'custom-res',type:'number',min:-100,max:100,step:1,value:v,onchange:ev=>update(s=>{s.rot.enemy.custom[k]=Number(ev.target.value);})}):''); }));
-  return h('section',{class:'panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'01'),h('h2',{},'编队与目标'),h('span',{class:'muted small chart-hint'},'配装在“伤害计算”页设置')),
+  return h('section',{class:'panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'01'),h('h2',{},'编队与目标')),
     h('div',{class:'slots'},...[0,1,2,3].map(slot)),
     h('div',{class:'row-wrap'},members.length?field('主控（全程普攻）',select(members,state.mainControl,v=>update(s=>{s.mainControl=Number(v);}))):'',h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{ s.team=buildTeam(rotations[0],data); s.mainControl=1; s.active=0; s.rot.source=rotations[0].id; })},'载入示例编队')),
     h('div',{class:'subheading'},'排轴来源'),h('div',{class:'preset-tabs'},...chips),
@@ -108,7 +108,7 @@ function chartSvg(res,source){
   mem.forEach((m,k)=>{ const max=M.summary.energyMax[k]; const first=M.events.find(e=>e.energy&&e.energy[k]>=max-1e-6); if(first&&first.t<=T){ const y=rowY(1+k); svg.append(el('path',{d:`M${x(first.t)},${y+34} l4,7 l-8,0 z`,fill:'#d9573d'})); } });
   const legend=h('div',{class:'chart-legend'},...Object.entries(KIND_LABEL).map(([k,l])=>h('span',{},h('i',{style:`background:${KIND_COLOR[k]}`}),l)),h('span',{},h('i',{style:'background:#dfe5dd'}),'主控普攻'),h('span',{},h('i',{class:'dash'}),'连携触发链'),h('span',{},h('i',{class:'tri'}),'终结技能量充满'),h('span',{},'★ 主控'));
   const title=source==='auto'?'自动排轴 · 一图流':`${rotations.find(p=>p.id===source)?.name} · 一图流`;
-  return h('section',{class:'panel chart-panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'02'),h('h2',{},title),h('span',{class:'muted small chart-hint'},'鼠标放到色块上看说明')),h('div',{class:'chart-scroll'},svg),legend);
+  return h('section',{class:'panel chart-panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'02'),h('h2',{},title)),h('div',{class:'chart-scroll'},svg),legend);
 }
 
 function narrative(res,source,state,update){
