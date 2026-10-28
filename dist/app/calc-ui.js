@@ -41,14 +41,14 @@ export function renderCalc(root,state,update){
 function teamTabs(state,update){
   const tabs=h('div',{class:'team-tabs'});
   state.team.forEach((m,i)=>{ if(!m) return; const op=operators.find(o=>o.id===m.operatorId); tabs.append(h('button',{type:'button',class:'team-tab'+(i===state.active?' active':''),onclick:()=>update(s=>{s.active=i;})},h('img',{class:'tab-thumb',src:op.icon,alt:''}),h('span',{},op.name),state.mainControl===i?h('small',{class:'mc-tag'},'主控'):'',state.team.filter(Boolean).length>1?h('span',{class:'tab-x',title:'移出编队',onclick:e=>{e.stopPropagation();update(s=>{s.team[i]=null;const idx=s.team.findIndex(Boolean);s.active=idx<0?0:idx;if(s.mainControl===i)s.mainControl=s.active;});}},'×'):'')); });
-  const count=state.team.filter(Boolean).length; if(count<4){ const taken=new Set(state.team.filter(Boolean).map(m=>m.operatorId)); const opts=operators.filter(o=>!taken.has(o.id)).map(o=>({id:o.id,name:o.name,icon:o.icon,sub:`${PROF_CN[o.profession]} · ${ELEMENT_CN[o.element]} · ${WT_CN[o.weaponType]}`})); tabs.append(h('div',{class:'team-add'},picker({options:opts,value:null,placeholder:`+ 添加干员（${count}/4）`,empty:false,onChange:id=>update(s=>{const slot=s.team.findIndex(x=>!x);s.team[slot]=newMember(id);s.active=slot;})}))); }
+  const count=state.team.filter(Boolean).length; if(count<4){ const taken=new Set(state.team.filter(Boolean).map(m=>m.operatorId)); const opts=operators.filter(o=>!taken.has(o.id)).map(o=>({id:o.id,name:o.name,icon:o.icon,disabled:Boolean(o.preview),sub:`${PROF_CN[o.profession]} · ${ELEMENT_CN[o.element]} · ${WT_CN[o.weaponType]}${o.preview?' · 官方数据未公开，暂不可选':''}`})); tabs.append(h('div',{class:'team-add'},picker({options:opts,value:null,placeholder:`+ 添加干员（${count}/4）`,empty:false,onChange:id=>update(s=>{const slot=s.team.findIndex(x=>!x);s.team[slot]=newMember(id);s.active=slot;})}))); }
   tabs.append(h('label',{class:'mc-select'},'主控干员 ',select(state.team.map((m,i)=>m?[i,operators.find(o=>o.id===m.operatorId).name]:null).filter(Boolean),state.mainControl,v=>update(s=>{s.mainControl=Number(v);}))));
   return tabs;
 }
 
 function operatorPanel(state,update,member,res,fold){
   const op=res.op; const taken=new Set(state.team.filter(Boolean).map(m=>m.operatorId));
-  const opOpts=operators.map(o=>({id:o.id,name:o.name,icon:o.icon,sub:`${PROF_CN[o.profession]} · ${ELEMENT_CN[o.element]} · ${WT_CN[o.weaponType]}`,disabled:taken.has(o.id)&&o.id!==op.id}));
+  const opOpts=operators.map(o=>({id:o.id,name:o.name,icon:o.icon,sub:`${PROF_CN[o.profession]} · ${ELEMENT_CN[o.element]} · ${WT_CN[o.weaponType]}${o.preview?' · 官方数据未公开，暂不可选':''}`,disabled:(taken.has(o.id)&&o.id!==op.id)||Boolean(o.preview)}));
   const wOpts=weapons.filter(w=>w.type===op.weaponType).sort((a,b)=>b.rarity-a.rarity).map(w=>({id:w.id,name:w.name,icon:w.icon,sub:`${w.rarity}★ · ${WT_CN[w.type]} · 基础攻击 ${w.baseAtk90}`}));
   const weapon=res.stats.weapon; const ranks=member.weapon.ranks;
   const rankLabel=n=>n<=9?`Rank ${n}`:`专精 ${n-9}`;

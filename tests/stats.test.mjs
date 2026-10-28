@@ -19,5 +19,5 @@ const m3=JSON.parse(JSON.stringify(member)); m3.gear.armor.refine=[0,3,3]; const
 // weapon potential → slot3 rank only; slot1/2 ranks independent
 const m4=JSON.parse(JSON.stringify(member)); m4.weapon.ranks=[1,9,4]; const s4=getStats(m4,data); assert.equal(s4.flatAbilities.str, s.flatAbilities.str-156+20);
 // two-attribute gear & other operator smoke: every operator computes with its default weapon-less loadout
-for(const o of operators){ const st=getStats({operatorId:o.id,potential:0},data); assert.ok(st.atk.panel>0,o.name); }
+for(const o of operators){ if(o.preview) continue; const st=getStats({operatorId:o.id,potential:0},data); assert.ok(st.atk.panel>0,o.name); }
 console.log('stats tests passed; 别礼 sample:',{main:s.main,sub:s.sub,panel:s.atk.panel,cold:s.bonuses.coldElecDmg});

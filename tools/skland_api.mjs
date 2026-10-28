@@ -23,7 +23,7 @@ async function refresh(){
   if(r.json.code===0&&r.json.data?.token){token=r.json.data.token;return true}
   throw new Error('refresh failed '+JSON.stringify(r).slice(0,200));
 }
-if(process.argv[1].endsWith('skland_api.mjs')){
+if(process.argv[1]&&process.argv[1].endsWith('skland_api.mjs')){
   const r=await get(process.argv[2]||'/web/v1/wiki/item/info?id=4');
   console.log(r.status, JSON.stringify(r.json).slice(0,parseInt(process.argv[3]||'1500')));
 }

@@ -6,7 +6,7 @@ const ABIL=['str','agi','int','will'];
 export const MAIN_PER_POINT=0.005, SUB_PER_POINT=0.002; // 主能力每点 +0.5% 攻击，副能力每点 +0.2%（规则 B8，待校正）
 
 export function getStats(member,data,opts={}){
-  const trace=[]; const op=data.operators.find(o=>o.id===member.operatorId); if(!op) throw new Error('unknown operator '+member.operatorId);
+  const trace=[]; const op=data.operators.find(o=>o.id===member.operatorId); if(!op) throw new Error('unknown operator '+member.operatorId); if(op.preview) throw new Error(op.name+'：官方数据未公开');
   const weapon=member.weapon?.id?data.weapons.find(w=>w.id===member.weapon.id):null;
   const wr=weaponRanks(member.weapon);
   // --- ability flat sources
