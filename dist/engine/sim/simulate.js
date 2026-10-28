@@ -164,7 +164,7 @@ export function simulate(input){
   const horizon=P.duration; let lastT=0;
   while(true){
     // next event: planned/queued events or next normal attack
-    let nextT=Infinity; for(const e of evq) nextT=Math.min(nextT,e.t); for(const mb of alive){ if(mb.busyUntil>S.t+EPS) nextT=Math.min(nextT,mb.busyUntil); else nextT=Math.min(nextT,Math.max(mb.nextNormalAt,S.t)); } if(SEQ&&seqIdx<SEQ.length) nextT=Math.min(nextT,S.t+0.5); // 顺序轴：至少每 0.5 s 尝试一次下一步
+    let nextT=Infinity; for(const e of evq) nextT=Math.min(nextT,e.t); for(const mb of alive){ if(mb.busyUntil>S.t+EPS) nextT=Math.min(nextT,mb.busyUntil); else nextT=Math.min(nextT,Math.max(mb.nextNormalAt,S.t)); } if(SEQ&&seqIdx<SEQ.length) nextT=Math.min(nextT,S.t+(P.seqTick??0.1)); /* 顺序轴：按 0.1 s 网格尝试下一步 */
     if(nextT>horizon||!isFinite(nextT)) break;
     // advance time: SP regen (paused during ultimate animation)
     const dt=Math.max(0,nextT-S.t); if(dt>0){ const pausedFrom=Math.min(S.pausedUntil,nextT); const activeDt=Math.max(0,nextT-Math.max(S.t,pausedFrom)); const regenDt=S.t>=S.pausedUntil?dt:Math.max(0,nextT-S.pausedUntil); if(regenDt>0){ gainSp(T.spRegenPerSecond*regenDt,'自然回复','real'); } S.t=nextT; }
