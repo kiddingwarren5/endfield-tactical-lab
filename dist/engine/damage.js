@@ -41,7 +41,7 @@ export function calcSegment({stats,seg,rank=12,enemy,critMode='never',applied=[]
   const def=clamp(enemy?.defence??100,0,99999); const grade=enemy?.resistances?.[seg.element]??'D';
   const resistance=grade==='custom'?clamp(enemy?.custom?.[seg.element]??0,-100,100):(GRADE_RESISTANCE[grade]??0);
   const mech=seg.kind==='mech'; // 机制伤害：等级系数与技艺强度，沿用 demo（rules A5/A6 待核）
-  const levelFactor=mech?(isArts(seg.element)?1+89/196:1+89/392):1;
+  const lf=stats.operator?.exact90; const levelFactor=mech?(isArts(seg.element)?(lf?.artsLevelFactor??1+89/196):(lf?.physicalLevelFactor??1+89/392)):1; // rules A5：法术 1+(l-1)/196，物理 1+(l-1)/392（解包 attr 49/25 一致）
   const artsFactor=mech?1+clamp(stats.artsStrength,0,9999)/100:1;
   const factors={attack:stats.atk.panel,ratio:ratio/100,crit,bonus:1+sum(buckets.bonus.map(x=>x.value))/100,amp:1+sum(buckets.amp.map(x=>x.value))/100,fragile:1+sum(buckets.fragile.map(x=>x.value))/100,vulnerable:1+sum(buckets.vulnerable.map(x=>x.value))/100,combo:1+clamp(options.combo??0,0,999)/100,stagger:1+clamp(options.stagger??0,0,999)/100,defence:100/(100+def),resistance:1-resistance/100,reduction:1-clamp(options.reduction??0,0,100)/100,level:levelFactor,artsStrength:artsFactor};
   const damage=Object.values(factors).reduce((a,b)=>a*b,1);
