@@ -249,5 +249,11 @@ check('D12 chargeThreshold bisection: −1% fails, result and +1% pass (checked 
   assert.ok(b>=53.846-1e-9&&b<=53.846+0.6,`b=${b}`);
 });
 
+check('D13 chargeThreshold counts energy gained between the last sample and the deadline', ()=>{
+  // 汤汤 starts at 40; skills at 0.5/3/6 s → by 6.3 s energy = 40 + 3×6.5×(1+x) ≥ 90 ⇒ x ≥ 50/19.5 − 1 = 156.41%
+  const input={...duo(),initial:{sp:300,energy:[0,40]},timeline:[{t:0.5,member:1,kind:'skill'},{t:3,member:1,kind:'skill'},{t:6,member:1,kind:'skill'}]};
+  const th=chargeThreshold(input,[{member:1,t:6.3}])[0]; const exact=(50/19.5-1)*100;
+  assert.ok(th.requiredExtra>=exact-1e-9&&th.requiredExtra<=exact+0.6,`requiredExtra ${th.requiredExtra} vs ${exact}`);
+});
 console.log(`review-engine: ${cases-failed}/${cases} cases passed`);
 if(failed) process.exit(1);
