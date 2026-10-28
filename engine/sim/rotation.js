@@ -70,13 +70,13 @@ function finish(input,ctx,timeline,scenario,plan,modeNote){
   const tl=timeline.map((a,i)=>({t:a.t,member:a.member,kind:a.kind,step:i})); const states=tl.map(a=>stateAfter(main,a,names[a.member]));
   return {input,names,steps,timeline:tl,notes:[],skipped:[],main,lo,hi,cycle,end,duration,states,scenario,auto:true,plan,modeNote};
 }
-export function autoRotation(team,mainControl,ctx,scenario,{beam=6,step=1,horizon=60}={}){
+export function autoRotation(team,mainControl,ctx,scenario,{beam=6,step=1,horizon=60,onProgress}={}){
   const {data}=ctx; const base={team,data,mechanics:ctx.mechanics,timing:ctx.timing,enemy:{...ctx.enemy,...(scenario?.enemy||{})},mainControl,initial:scenario?.initial||{sp:200,energy:[0,0,0,0]},params:{}};
   base.names=team.map(m=>m?data.operators.find(o=>o.id===m.operatorId)?.name:null);
   // 形态枚举：有 modeVariants 的干员（诀）在“自动”时分别按形态 0/1 搜索，取保底每秒伤害更高者
   const modeSlots=team.map((m,i)=>m&&data.operators.find(o=>o.id===m.operatorId)?.skills?.skill?.modeVariants&&typeof m.mode!=='number'?i:null).filter(i=>i!=null);
   const combos=modeSlots.length?modeSlots.reduce((acc,i)=>acc.flatMap(c=>[0,1].map(v=>({...c,[i]:v}))),[{}]):[{}];
-  const results=combos.map(modes=>{ const t2=team.map((m,i)=>m&&modes[i]!=null?{...m,mode:modes[i]}:m); const input={...base,team:t2}; const plan=autoPlan(input,{beam,step,horizon}); const imp=improvePlan(input,plan.best.timeline,{horizon:Math.max(horizon,Math.ceil((plan.best.score.until||horizon)+10))}); plan.improved={evals:imp.evals,before:plan.best.score.dps,after:imp.score.dps}; const sched=imp.timeline; const r=finish(input,ctx,sched,scenario,plan,null); const sure=sumHits(r.main,{until:r.end,mainControl,guaranteed:true})/Math.max(1,r.end); return {modes,r,sure}; });
+  const results=combos.map((modes,ci)=>{ const t2=team.map((m,i)=>m&&modes[i]!=null?{...m,mode:modes[i]}:m); const input={...base,team:t2}; const plan=autoPlan(input,{beam,step,horizon,onProgress:onProgress?f=>onProgress((ci+f)/combos.length):undefined}); const imp=improvePlan(input,plan.best.timeline,{horizon:Math.max(horizon,Math.ceil((plan.best.score.until||horizon)+10))}); plan.improved={evals:imp.evals,before:plan.best.score.dps,after:imp.score.dps}; const sched=imp.timeline; const r=finish(input,ctx,sched,scenario,plan,null); const sure=sumHits(r.main,{until:r.end,mainControl,guaranteed:true})/Math.max(1,r.end); return {modes,r,sure}; });
   results.sort((a,b)=>b.sure-a.sure); const best=results[0];
   if(results.length>1){ best.r.modeNote=results.map(x=>`${modeSlots.map(i=>`${base.names[i]} ${['阵诀·智','阵诀·意'][x.modes[i]]}`).join('，')}：保底每秒 ${Math.round(x.sure).toLocaleString('zh-CN')}`).join('；'); best.r.modeChoice=best.modes; }
   return best.r;

@@ -1,6 +1,7 @@
 // 排轴页签：选阵容 → 自动排轴（或命中重点编队时的推荐轴）→ 一图流 + 分节叙述；高级编辑折叠在最下方。
 import operators from '../data/operators.js'; import weapons from '../data/weapons.js'; import gear from '../data/gear.js'; import sets from '../data/sets.js'; import effects from '../data/effects.js'; import timing from '../data/timing.js'; import mechanics from '../data/mechanics.js'; import rotations,{scenarios} from '../data/rotations.js';
-import {resolveRotation,rotationText,sumHits,autoRotation,buildTeam,teamMatchesPreset} from '../engine/sim/rotation.js';
+import {rotationText,sumHits,buildTeam,teamMatchesPreset} from '../engine/sim/rotation.js';
+import {runJob} from './plan-jobs.js';
 import {effectiveMode,MODE_LABEL} from '../engine/skills.js';
 import {getStats} from '../engine/stats.js';
 import {h,fmt,select,field,picker,ELEMENT_CN,PROF_CN,WT_CN,colorOf,pct} from './ui.js';
@@ -12,8 +13,14 @@ const GRADE={D:0,C:20,B:50};
 const KIND_LABEL={skill:'战技',combo:'连携技',ultimate:'终结技'};
 const KIND_COLOR={skill:'#bd9b43',combo:'#3288c4',ultimate:'#d9573d'};
 const CIRCLED='①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿';
-const cache=new Map(); const clone=x=>JSON.parse(JSON.stringify(x));
-function cached(key,make){ if(!cache.has(key)){ if(cache.size>40) cache.delete(cache.keys().next().value); cache.set(key,make()); } return cache.get(key); }
+const clone=x=>JSON.parse(JSON.stringify(x));
+// ---- 后台计算：Worker 可用时在 Worker 里跑（页面不冻结，显示进度），否则退回主线程同步计算 ----
+const results=new Map(), pending=new Map(), progress=new Map(), startedAt=new Map(); let worker=null, rerender=null, progressEl=null, ticker=null;
+function paintProgress(){ if(!progressEl) return; const key=progressEl.dataset.key; const f=progress.get(key); const bar=progressEl.querySelector('.progress'); const i=bar?.querySelector('i'); if(f!=null&&i){ bar.classList.remove('indeterminate'); i.style.width=`${Math.max(2,Math.round(f*100))}%`; progressEl.querySelector('.pct').textContent=`${Math.round(f*100)}%`; } const st=startedAt.get(key); const el=progressEl.querySelector('.elapsed'); if(st&&el) el.textContent=`已用 ${Math.round((Date.now()-st)/1000)} 秒`; }
+function getWorker(){ if(worker===false) return null; if(worker) return worker; try{ worker=new Worker(new URL('./plan-worker.js',import.meta.url),{type:'module'}); worker.onmessage=e=>{ const {id,type,value}=e.data; if(type==='progress'){ progress.set(id,value); paintProgress(); } else if(type==='done'){ remember(id,value); pending.delete(id); if(rerender) rerender(); } else if(type==='error'){ pending.set(id,{error:value}); if(rerender) rerender(); } }; worker.onerror=ev=>{ console.error('plan-worker 失败，退回主线程',ev.message); worker=false; for(const [id,p] of pending){ if(p?.job){ try{ remember(id,runJob(p.job)); }catch(e){ pending.set(id,{error:e.message}); } } } pending.clear(); if(rerender) rerender(); }; }catch(e){ worker=false; } return worker||null; }
+function remember(key,value){ if(results.size>40) results.delete(results.keys().next().value); results.set(key,value); }
+// 返回 {ready} / {error} / {pending}
+function request(key,job){ if(results.has(key)) return {ready:results.get(key)}; const p=pending.get(key); if(p?.error) return {error:p.error}; if(p) return {pending:true}; const w=getWorker(); if(w){ pending.set(key,{job}); startedAt.set(key,Date.now()); w.postMessage({id:key,job}); return {pending:true}; } try{ const v=runJob(job); remember(key,v); return {ready:v}; }catch(e){ pending.set(key,{error:e.message}); return {error:e.message}; } }
 function defaultRot(){ return {source:'auto',scenario:scenarios[0].id,enemy:clone(ENEMY),auto:{beam:6,horizon:60},advanced:false}; }
 
 export function renderRotation(root,state,update){
@@ -29,14 +36,18 @@ export function renderRotation(root,state,update){
   det.addEventListener('toggle',()=>{ rot.advanced=det.open; if(det.open) renderTimeline(adv,state,update); });
   left.append(det); root.append(h('div',{class:'workspace single chart'},left));
   if(det.open) renderTimeline(adv,state,update);
-  if(!filled.length){ host.append(h('section',{class:'panel'},h('p',{class:'muted'},'请先在上方选择至少一名干员，或点“载入示例编队”。'))); return; }
-  host.append(h('section',{class:'panel'},h('p',{class:'muted'},source==='auto'?`正在为当前编队自动排轴（束搜索，时限 ${rot.auto.horizon} s，可能需要十几秒）…`:'正在把推荐轴放到模拟器里排出最早可行时刻…')));
-  setTimeout(()=>{ let res; try{ res=compute(state,source,scenario,ctx); }catch(e){ host.innerHTML=''; host.append(h('section',{class:'panel'},h('div',{class:'sim-errors'},'排轴失败：'+e.message))); console.error(e); return; }
-    host.innerHTML=''; host.append(chartSvg(res,source),narrative(res,source,state,update)); if(presetsOk) host.append(comparison(state,source,scenario,ctx)); },20);
+  rerender=()=>{ if(document.body.contains(root)) renderRotation(root,state,update); };
+  if(!filled.length){ host.append(h('section',{class:'panel'},h('p',{class:'muted'},'请先在上方选择至少一名干员（1–4 人都可以排轴），或点“载入示例编队”。'))); return; }
+  const r=compute(state,source,scenario);
+  if(r.error){ host.append(h('section',{class:'panel'},h('div',{class:'sim-errors'},'排轴失败：'+r.error))); return; }
+  if(r.pending){ const key=jobKey(state,source,scenario); const known=progress.get(key); progressEl=h('div',{class:'calc-wait',dataset:{key}},h('div',{class:'calc-wait-head'},h('b',{},'正在计算中'),h('span',{class:'pct'},known!=null?`${Math.round(known*100)}%`:''),h('span',{class:'elapsed muted'},'已用 0 秒')),h('div',{class:'progress'+(known==null?' indeterminate':'')},h('i',{style:`width:${known!=null?Math.max(2,Math.round(known*100)):30}%`})),h('small',{class:'muted'},source==='auto'?'程序正在从开局起逐秒试每个能放的技能，比较哪条路线伤害最高。一般要几秒到几十秒，页面可以继续操作，算完会自动显示。':'正在把推荐轴放进模拟器安排每一步的时刻，几秒钟就好。')); host.append(h('section',{class:'panel'},progressEl)); clearInterval(ticker); ticker=setInterval(()=>{ if(!document.body.contains(progressEl)){ clearInterval(ticker); return; } paintProgress(); },500); paintProgress(); return; }
+  const res=r.ready; host.append(chartSvg(res,source),narrative(res,source,state,update)); if(presetsOk) host.append(comparison(state,source,scenario));
 }
-function compute(state,source,scenario,ctx){
-  const rot=state.rot; const key=JSON.stringify([source,scenario.id,rot.enemy,rot.auto,state.team,state.mainControl]);
-  return cached(key,()=>{ if(source==='auto') return autoRotation(state.team,state.mainControl,ctx,scenario,{beam:rot.auto.beam,step:1,horizon:rot.auto.horizon}); const preset=rotations.find(p=>p.id===source); return resolveRotation(preset,ctx,scenario,preset===rotations[0],{team:state.team,mainControl:state.mainControl}); });
+function jobKey(state,source,scenario){ const rot=state.rot; return JSON.stringify([source,scenario.id,rot.enemy,source==='auto'?rot.auto:null,state.team,state.mainControl]); }
+function compute(state,source,scenario){
+  const rot=state.rot; const key=jobKey(state,source,scenario);
+  const job=source==='auto'?{kind:'auto',team:clone(state.team),mainControl:state.mainControl,enemy:clone(rot.enemy),scenarioId:scenario.id,opts:{beam:rot.auto.beam,step:1,horizon:rot.auto.horizon}}:{kind:'preset',presetId:source,team:clone(state.team),mainControl:state.mainControl,enemy:clone(rot.enemy),scenarioId:scenario.id};
+  return request(key,job);
 }
 
 function teamPanel(state,update,presetsOk,source,scenario){
@@ -52,8 +63,8 @@ function teamPanel(state,update,presetsOk,source,scenario){
     h('div',{class:'slots'},...[0,1,2,3].map(slot)),
     h('div',{class:'row-wrap'},members.length?field('主控（全程普攻）',select(members,state.mainControl,v=>update(s=>{s.mainControl=Number(v);}))):'',h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{ s.team=buildTeam(rotations[0],data); s.mainControl=1; s.active=0; s.rot.source=rotations[0].id; })},'载入示例编队（别礼 / 汤汤 / 祀 / 诀 + 配装）'),h('a',{href:'#calculator',class:'mini-btn link'},'去伤害计算页改配装')),
     h('div',{class:'subheading'},'排轴来源'),h('div',{class:'preset-tabs'},...chips),
-    presetsOk?h('p',{class:'muted small'},'当前编队命中重点编队：推荐轴来自社区共识（案例 06/07）并经视频关键帧核对，作为自动排轴的“标答”对照；自动排轴对任何编队都走同一流程。'):h('p',{class:'muted small'},'自动排轴：束搜索逐秒展开可行动作（战技/连携/终结技），目标是“全员各放一次终结技的周期内保底每秒伤害”；有形态切换的干员（诀智/意）按形态分别搜索取优。不声称全局最优。'),
-    source==='auto'?h('div',{class:'two-col'},field('搜索时限（秒）',h('input',{type:'number',min:20,max:120,step:5,value:rot.auto.horizon,onchange:ev=>update(s=>{s.rot.auto.horizon=Number(ev.target.value);})})),field('束宽（越大越慢、越优）',h('input',{type:'number',min:2,max:16,value:rot.auto.beam,onchange:ev=>update(s=>{s.rot.auto.beam=Number(ev.target.value);})}))):'',
+    presetsOk?h('p',{class:'muted small'},'这套就是重点编队：推荐轴来自玩家社区的打法（月咒、唐傀的视频），并用视频画面核对过；自动排轴的结果会和它对比，看程序排得好不好。'):h('p',{class:'muted small'},'自动排轴：程序从开局起逐秒试每个能放的战技、连携、终结技，留下伤害最高的几条路线再微调时刻。目标是“每个人都放过一次终结技”的一轮里，保底伤害每秒最高。有形态切换的干员（诀的智/意）会两种都试，取高的。结果不保证是最优，只保证每一步都能放出来。'),
+    source==='auto'?h('div',{class:'two-col'},field('最多排多少秒',h('input',{type:'number',min:20,max:120,step:5,value:rot.auto.horizon,onchange:ev=>update(s=>{s.rot.auto.horizon=Number(ev.target.value);})})),field('搜索宽度（越大越慢，可能更好）',h('input',{type:'number',min:2,max:16,value:rot.auto.beam,onchange:ev=>update(s=>{s.rot.auto.beam=Number(ev.target.value);})}))):'',
     h('div',{class:'subheading'},'Boss / 场景'),h('div',{class:'preset-tabs'},...scTabs),h('p',{class:'chart-summary'},scenario.desc),h('ul',{class:'tips'},...scenario.tips.map(t=>h('li',{},t))),
     h('details',{class:'enemy-box'},h('summary',{},`敌人：防御 ${enemy.defence} · 抗性 ${Object.entries(ELEMENT_CN).map(([k,l])=>`${l}${enemy.resistances[k]==='custom'?(enemy.custom[k]??0)+'%':enemy.resistances[k]}`).join(' / ')}（点开修改）`),h('div',{class:'two-col'},field('防御力',h('input',{type:'number',min:0,max:99999,value:enemy.defence,onchange:ev=>update(s=>{s.rot.enemy.defence=Number(ev.target.value);})})),h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{s.rot.enemy=clone(ENEMY);})},'恢复对照靶')),resRows,h('p',{class:'muted small'},'抗性档位：D 0% / C 20% / B 50%（B 档实际 35–60% 不固定，请用自定义填具体值）。Boss 官方防御/抗性未公开，默认对照靶。')));
 }
@@ -90,7 +101,7 @@ function chartSvg(res,source){
   mem.forEach((m,k)=>{ const max=M.summary.energyMax[k]; const first=M.events.find(e=>e.energy&&e.energy[k]>=max-1e-6); if(first&&first.t<=T){ const y=rowY(1+k); svg.append(el('path',{d:`M${x(first.t)},${y+34} l4,7 l-8,0 z`,fill:'#d9573d'})); } });
   const legend=h('div',{class:'chart-legend'},...Object.entries(KIND_LABEL).map(([k,l])=>h('span',{},h('i',{style:`background:${KIND_COLOR[k]}`}),l)),h('span',{},h('i',{style:'background:#dfe5dd'}),'主控普攻'),h('span',{},h('i',{class:'dash'}),'连携触发链'),h('span',{},h('i',{class:'tri'}),'终结技能量充满'),h('span',{},'★ 主控'));
   const title=source==='auto'?'自动排轴 · 一图流':`${rotations.find(p=>p.id===source)?.name} · 一图流`;
-  return h('section',{class:'panel chart-panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'02'),h('h2',{},title),h('span',{class:'muted small chart-hint'},'横轴为游戏内秒数；悬停色块看说明；截图即可分享')),h('div',{class:'chart-scroll'},svg),legend);
+  return h('section',{class:'panel chart-panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'02'),h('h2',{},title),h('span',{class:'muted small chart-hint'},'横轴是游戏里的秒数；把鼠标放到色块上看说明；直接截图就能分享')),h('div',{class:'chart-scroll'},svg),legend);
 }
 
 function narrative(res,source,state,update){
@@ -117,11 +128,12 @@ function narrative(res,source,state,update){
 function stat(label,value,sub){ return h('div',{class:'result-mini stat'},h('span',{},label),h('strong',{},value),sub?h('small',{class:'muted'},sub):''); }
 
 // 重点编队：推荐轴（标答）与自动排轴同条件对照
-function comparison(state,current,scenario,ctx){
-  const rows=[]; for(const p of rotations){ let r; try{ r=compute(state,p.id,scenario,ctx); }catch{ continue; } rows.push({id:p.id,name:p.name,r}); }
-  try{ rows.push({id:'auto',name:'自动排轴（同一编队、同一场景）',r:compute(state,'auto',scenario,ctx)}); }catch{}
+function comparison(state,current,scenario){
+  const rows=[]; let waiting=0; for(const p of rotations){ const r=compute(state,p.id,scenario); if(r.ready) rows.push({id:p.id,name:p.name,r:r.ready}); else if(r.pending) waiting++; }
+  { const r=compute(state,'auto',scenario); if(r.ready) rows.push({id:'auto',name:'自动排轴（同一编队、同一场景）',r:r.ready}); else if(r.pending) waiting++; }
+  if(!rows.length) return h('section',{class:'panel'},h('p',{class:'muted'},'标答对照计算中…'));
   const mc=state.mainControl; const cells=rows.map(x=>{ const end=x.r.end; const sure=sumHits(x.r.main,{until:end,mainControl:mc,guaranteed:true}); return {...x,end,sure,sps:sure/end,tot:sumHits(x.r.main,{until:end})/end,errs:(x.r.main.errors||[]).length+(x.r.notes||[]).length}; });
   const ref=cells[0]; return h('section',{class:'panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'04'),h('h2',{},`标答对照 · ${scenario.name}`)),
     h('table',{class:'seg-table'},h('thead',{},h('tr',{},h('th',{},'轴'),h('th',{},scenario.timeLimit?'限时':'周期'),h('th',{},'保底总伤'),h('th',{},'保底每秒'),h('th',{},'相对主轴'),h('th',{},'含副控普攻每秒'),h('th',{},'未能安排 / 不可执行'))),h('tbody',{},...cells.map(c=>h('tr',{class:c.id===current?'current':''},h('td',{},c.name),h('td',{},`${c.end.toFixed(1)} s`),h('td',{},fmt(c.sure)),h('td',{},fmt(c.sps)),h('td',{},ref?`${(c.sps/ref.sps*100-100).toFixed(1)}%`:''),h('td',{},fmt(c.tot)),h('td',{},c.errs?String(c.errs):'无'))))),
-    h('p',{class:'muted small'},'用途：自动排轴若明显低于推荐主轴，说明搜索或机制建模有缺口（见“相对主轴”列）。模型未计入：汤汤战技吃涡流的技力返还、祀笔意爆发与墨魂伤害、处决回技力；差距在 5% 以内不应据此判定优劣。'));
+    waiting?h('p',{class:'muted small'},`还有 ${waiting} 条轴在后台计算，完成后自动补入。`):'',h('p',{class:'muted small'},'用途：自动排轴若明显低于推荐主轴，说明搜索或机制建模有缺口（见“相对主轴”列）。模型未计入：汤汤战技吃涡流的技力返还、祀笔意爆发与墨魂伤害、处决回技力；差距在 5% 以内不应据此判定优劣。'));
 }
