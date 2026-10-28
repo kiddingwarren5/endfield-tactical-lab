@@ -38,3 +38,7 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 ## 排轴一图流（2026-10-28 晚）
 - 预设轴在 `dist/data/rotations.js`（只写动作顺序与目的，不写死时刻）；`dist/engine/sim/rotation.js` 用 greedySchedule 排出最早可行时刻；页面 `dist/app/chart-ui.js`（页签“排轴一图流”）。
 - 改动预设后运行 `node --test tests/rotations.test.mjs`：断言每步可执行、周期完整、别礼连携吃到指定层数，并重新生成 `docs/rotations.md`。
+
+## 公开网址（2026-10-28 晚）
+- GitHub Pages：https://kiddingwarren5.github.io/endfield-tactical-lab/ （每次改 dist/ 后运行 `sh tools/deploy_pages.sh endfield-tactical-lab` 重新发布；需 `gh auth login`）
+- claude.ai artifact：https://claude.ai/artifact/MA9QgAZesaHBqEia9BdCwg
