@@ -2,6 +2,7 @@
 import {defaultState,STATE_VERSION} from './state.js';
 import {renderCalc,snapshotDialog} from './calc-ui.js';
 import {renderTimeline} from './timeline-ui.js';
+import {renderChart} from './chart-ui.js';
 import {$,h} from './ui.js';
 import meta from '../data/meta.js';
 
@@ -9,7 +10,7 @@ let state=load()||defaultState();
 function load(){ try{ const raw=localStorage.getItem('endfield-lab-state'); if(!raw) return null; const s=JSON.parse(raw); if(s.version!==STATE_VERSION) return null; delete s.pendingSnapshot; return s; }catch{ return null; } }
 function save(){ try{ localStorage.setItem('endfield-lab-state',JSON.stringify(state)); }catch{} }
 
-const tabs={calculator:'伤害计算',timeline:'排轴模拟',team:'排轴联算'};
+const tabs={calculator:'伤害计算',chart:'排轴一图流',timeline:'排轴模拟',team:'排轴联算'};
 let currentTab=location.hash.replace('#','')||'calculator'; if(!tabs[currentTab]) currentTab='calculator';
 
 export function update(mutator,{silent=false}={}){ mutator(state); save(); if(silent){ renderLight(); } else render(); }
@@ -22,6 +23,7 @@ function render(){
   for(const [id,label] of Object.entries(tabs)){ const a=$('tab-'+id); if(a) a.classList.toggle('active',id===currentTab); const sec=$(id); if(sec) sec.hidden=id!==currentTab; }
   const h1=document.querySelector('.hero h1'); if(h1){ h1.childNodes[0].textContent=tabs[currentTab]; }
   if(currentTab==='calculator'){ renderCalc($('calculator'),state,update); }
+  else if(currentTab==='chart'){ renderChart($('chart'),state,update); }
   else if(currentTab==='timeline'||currentTab==='team'){ renderTimeline($(currentTab),state,update); }
   const dlgHost=$('dialog-host'); dlgHost.innerHTML=''; const dlg=snapshotDialog(state,update); if(dlg) dlgHost.append(dlg);
   $('meta-line').textContent=`数据版本 ${meta.dataVersion} · 游戏版本 ${meta.gameVersion} · 官方抓取 ${meta.officialFetchedAt.slice(0,10)} · 干员 ${meta.counts.operators} / 武器 ${meta.counts.weapons} / 装备 ${meta.counts.gear} / 食药 ${meta.counts.consumables}`;

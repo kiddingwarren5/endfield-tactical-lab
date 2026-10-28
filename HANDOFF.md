@@ -33,3 +33,8 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 
 ## 实机测量回填
 把游戏内测得的数值填入 sources/curated/measurements.json（每项附录屏/截图与日期），运行 `node tools/build_measurements.mjs`，再重新发布 dist/。空值不会覆盖默认假设；docs/verification-needed.md 列出每项的测试方法。明河/唤月数据公开后：`node tools/scrape_skland.mjs && node tools/parse_skland.mjs sources/raw/skland sources/skland && node tools/build_data.mjs` 即可接入（明河占位项会自动替换为正式数据）。
+
+
+## 排轴一图流（2026-10-28 晚）
+- 预设轴在 `dist/data/rotations.js`（只写动作顺序与目的，不写死时刻）；`dist/engine/sim/rotation.js` 用 greedySchedule 排出最早可行时刻；页面 `dist/app/chart-ui.js`（页签“排轴一图流”）。
+- 改动预设后运行 `node --test tests/rotations.test.mjs`：断言每步可执行、周期完整、别礼连携吃到指定层数，并重新生成 `docs/rotations.md`。

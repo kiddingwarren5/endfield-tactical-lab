@@ -23,6 +23,7 @@
 | 6 | 事件模拟器与可编辑时间轴 | 已做（v0.1） | dist/engine/sim/simulate.js：真实/返还技力、能量（充能效率、别礼来源限制）、附着/爆发/异常、连携触发窗口、触发式增益、终结技演出暂停；时间轴拖动编辑、不可执行提示、时刻检查、事件流水；tests/sim.*.mjs |
 | 7 | 自动排轴与充能阈值 | 已做（v0.1） | dist/engine/sim/plan.js：束搜索 + 候选对照 + 理由；充能截止条件二分阈值（前提/舍入列出）；UI 已接入 |
 | 8 | 逐击全队伤害、可视化、完整回归 | 已做（v0.1） | 全队总伤/占比/逐击表/区间；重点编队回归 docs/cases/regression-cold-team.md（可复现）；独立审核两份；报告 docs/final-report.md |
+| 9 | 排轴一图流（主轴 + 备选，分节叙述，可载入模拟） | 已做 | dist/app/chart-ui.js、dist/data/rotations.js、dist/engine/sim/rotation.js；tests/rotations.test.mjs 生成 docs/rotations.md；顺序轴来自案例 06/07 共识，时刻由 greedySchedule 给出；模拟器修正：诀连携“2 层及以上其他法术附着”触发（原按 otherArts 字面匹配永不触发） |
 | 发布 | 当前账号副本公开发布 | 已做 | https://claude.ai/artifact/MA9QgAZesaHBqEia9BdCwg（版本 7）；分享权限已在页面 Share 菜单设为“知道链接的任何人”（无需 Claude 账号即可打开）。备选：`gh auth login` 后 `sh tools/deploy_pages.sh` 发布到 GitHub Pages |
 
 ## 2. 需求覆盖矩阵（NEXT_STEPS.md 逐条对账）
@@ -57,6 +58,7 @@
 - 明河、唤月：官方无数据。
 
 ## 4. 下一步（下一会话）
+0. 一图流主轴的视频逐帧核对（案例 06/07 仅 AI 字幕；主轴顺序与“每节 4 层”待对视频画面确认）。
 1. 实机验证清单 docs/verification-needed.md 前三项（非主控衰减、演出暂停、食药位置），回填 timing.js / rules.md。
 2. 模拟器未修项：条件伤害段与替换战技阶段的技能状态机；处决/失衡状态机；燃烧跳伤/碎冰流程。
 3. 用 docs/cases 的日志（逐击时间）校准普攻段时长与技能前后摇。
