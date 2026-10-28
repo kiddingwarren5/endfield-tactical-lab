@@ -26,10 +26,19 @@ export function resolveValue(c,{data,overrides={},stacks={},vars={}}){
   return {value:valueOf(e,ctx)};
 }
 // Build the applied list for a segment given user toggles. toggles: {effectId:bool}; auto effects always on.
+const isOn=(e,toggles)=>((e.condition?.mode||'auto')==='auto')||Boolean(toggles[e.id]);
+// Modifier effects (`modifies:[ids]`): zone 'other' with a multiplier (“视为/提升至原本的N倍”) multiplies the target value;
+// same-zone modifiers (“脆弱效果+8%”) add to it. Duration/stack-only modifiers are informational.
+function applyModifiers(applied,candidates,toggles,ctx){
+  for(const c of candidates){ const m=c.effect; if(!Array.isArray(m.modifies)||!m.modifies.length) continue; if(!isOn(m,toggles)) continue; if(m.fragileMultiplier) continue;
+    for(const target of applied){ if(!m.modifies.includes(target.effect.id)) continue; const {value:mv}=resolveValue(c,ctx);
+      if(m.zone==='other'&&(m.unit==='x'||/倍/.test(m.literal||''))&&mv>0){ target.value=target.value*mv; target.label=`${target.label} ×${mv}（${m.owner?.ref||m.name}）`; target.modifiedBy=[...(target.modifiedBy||[]),m.id]; }
+      else if(m.zone===target.effect.zone&&typeof mv==='number'){ target.value=target.value+mv; target.label=`${target.label} +${mv}（${m.owner?.ref||m.name}）`; target.modifiedBy=[...(target.modifiedBy||[]),m.id]; } } }
+}
 export function appliedFor({candidates,seg,toggles={},data,overrides,stacks,vars,memberModes={}}){
-  const applied=[];
-  for(const c of candidates){ const e=c.effect; if(!effectApplies(e,seg)) continue; const mode=e.condition?.mode||'auto';
-    const on=mode==='auto'?true:Boolean(toggles[e.id]); if(!on) continue;
-    const {value,dependency}=resolveValue(c,{data,overrides,stacks,vars}); applied.push({effect:e,value,label:e.name,ownerIdx:c.ownerIdx,dependency,mode}); }
+  const applied=[]; const ctx={data,overrides,stacks,vars};
+  for(const c of candidates){ const e=c.effect; if(!effectApplies(e,seg)) continue; if(Array.isArray(e.modifies)&&e.modifies.length&&!e.fragileMultiplier) continue; // modifiers are folded into their targets
+    if(!isOn(e,toggles)) continue; const {value,dependency}=resolveValue(c,ctx); applied.push({effect:e,value,label:e.name,ownerIdx:c.ownerIdx,dependency,mode:e.condition?.mode||'auto'}); }
+  applyModifiers(applied,candidates,toggles,ctx);
   return applied;
 }
