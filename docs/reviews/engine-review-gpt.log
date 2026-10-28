@@ -2712,3 +2712,67 @@ shatter {
   scale: 1
 }
 
+exec
+/bin/zsh -lc "node --input-type=module -e '
+import operators from '\\''./dist/data/operators.js'\\''; import weapons from '\\''./dist/data/weapons.js'\\'';import gear from '\\''./dist/data/gear.js'\\'';import sets from '\\''./dist/data/sets.js'\\'';import effects from '\\''./dist/data/effects.js'\\'';import mechanics from '\\''./dist/data/mechanics.js'\\'';import timing from '\\''./dist/data/timing.js'\\'';
+import {getStats,weaponRanks} from '\\''./dist/engine/stats.js'\\'';import {calcSegment} from '\\''./dist/engine/damage.js'\\'';import {skillSegments,mechSegments,calcSkill} from '\\''./dist/engine/skills.js'\\'';import {candidateEffects,appliedFor,resolveValue} from '\\''./dist/engine/resolve.js'\\'';import {simulate} from '\\''./dist/engine/sim/simulate.js'\\'';import {autoPlan,chargeThreshold,cycleOf} from '\\''./dist/engine/sim/plan.js'\\'';
+const data={operators,weapons,gear,sets,effects}; const op=n=>operators.find(o=>o.name===n);const mk=n=>({operatorId:op(n).id,potential:0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},gear:{},consumables:[]}); const enemy={defence:100,resistances:{},custom:{}};
+const input={data,mechanics,timing,enemy,params:{duration:5,mainAutoNormal:false}};
+const pickEvents=(r,types)=>r.events.filter(e=>types.includes(e.type));
+
+const pp=mk('\\''佩丽卡'\\'');pp.consumables=['\\''item_44'\\''];
+const rr=simulate({...input,team:[pp],initial:{sp:70,poisonSp:30,energy:[79]},timeline:[{t:0,member:0,kind:'\\''skill'\\''}],params:{duration:1,mainAutoNormal:false}});
+console.log('\\''resource'\\'',JSON.stringify({events:pickEvents(rr,['\\''spSpend'\\'','\\''spGain'\\'','\\''energyGain'\\'','\\''energyOverflow'\\'']),final:rr.final}));
+const rr2=simulate({...input,team:[mk('\\''佩丽卡'\\'')],initial:{sp:0,poisonSp:100},timeline:[{t:0,member:0,kind:'\\''skill'\\''}],params:{duration:1,mainAutoNormal:false}});console.log('\\''poisonOnly'\\'',pickEvents(rr2,['\\''energyGain'\\'','\\''spSpend'\\'']));
+const pk={...mk('\\''佩丽卡'\\''),potential:3};const stack=simulate({...input,team:[mk('\\''狼卫'\\''),pk],timeline:[{t:0,member:0,kind:'\\''skill'\\''},{t:1,member:1,kind:'\\''skill'\\''}],params:{duration:3}});console.log('\\''stack'\\'',pickEvents(stack,['\\''buffStart'\\'']).map(e=>({id:e.id,value:e.value})));
+const tang=mk('\\''汤汤'\\'');const seg={id:'\\''ultimate1'\\'',kind:'\\''ultimate'\\'',skillKey:'\\''ultimate'\\'',element:'\\''cold'\\'',ratio:[100]};
+const cs=candidateEffects({team:[tang],bIdx:0,data});const toggles=Object.fromEntries(effects.filter(e=>e.exclusiveGroup==='\\''tangtang_tornado_fragile'\\'').map(e=>[e.id,true]));
+console.log('\\''exclusive'\\'',appliedFor({candidates:cs,seg,data,toggles}).filter(a=>a.effect.exclusiveGroup).map(a=>({id:a.effect.id,value:a.value})));
+console.log('\\''brokenGear'\\'',gear.filter(g=>g.attrs.some(a=>a.stat==='\\''brokenDmg'\\'')).map(g=>({name:g.name,attrs:g.attrs})));
+const bare=getStats(mk('\\''佩丽卡'\\''),data);const zones=(zone,value,id,applies)=>({effect:{id,name:id,zone,applies},value});
+const ap=[zones('\\''bonus'\\'',20,'\\''b1'\\''),zones('\\''bonus'\\'',30,'\\''b2'\\''),zones('\\''amp'\\'',40,'\\''a'\\''),zones('\\''fragile'\\'',10,'\\''f'\\''),zones('\\''vulnerable'\\'',15,'\\''v'\\'')];
+console.log('\\''zones'\\'',calcSegment({stats:{...bare,atk:{panel:1000}},seg:{...seg,ratio:[200]},enemy,applied:ap}).damage,'\\''expected'\\'',1000*2*1.5*1.4*1.1*1.15*.5);
+const bl=mk('\\''别礼'\\'');const cbl=candidateEffects({team:[bl],bIdx:0,data});const brittle=cbl.find(c=>c.effect.fragileMultiplier);for(const kind of ['\\''skill'\\'','\\''combo'\\'','\\''ultimate'\\'']){const s={...seg,kind,skillKey:kind};const ap=[zones('\\''fragile'\\'',10,'\\''cold'\\'',{elements:['\\''cold'\\'']}),zones('\\''fragile'\\'',20,'\\''arts'\\'',{damageClass:'\\''arts'\\''}),{effect:brittle.effect,value:1.5}];console.log('\\''fragile'\\'',kind,calcSegment({stats:bare,seg:s,enemy,applied:ap}).factors.fragile);}
+'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+resource {"events":[{"t":0,"type":"spSpend","who":"佩丽卡","cost":100,"real":70,"poison":30,"sp":{"real":0,"poison":0},"energy":[79],"control":0},{"t":0,"type":"energyOverflow","who":"佩丽卡","wasted":4.642,"sp":{"real":0,"poison":0},"energy":[80],"control":0},{"t":0,"type":"energyGain","who":"佩丽卡","why":"佩丽卡 战技（真实技力 70）","amount":1,"sp":{"real":0,"poison":0},"energy":[80],"control":0},{"t":0,"type":"spGain","why":"自然回复","amount":3.84,"kind":"real","sp":{"real":3.84,"poison":0},"energy":[80],"control":0},{"t":0.48,"type":"spGain","why":"自然回复","amount":2.56,"kind":"real","sp":{"real":6.4,"poison":0},"energy":[80],"control":0}],"final":{"t":0.8,"sp":{"real":6.4,"poison":0},"energy":[80],"control":0,"cooldowns":[{"name":"佩丽卡","combo":0,"ultimate":0}]}}
+poisonOnly [
+  {
+    t: 0,
+    type: 'spSpend',
+    who: '佩丽卡',
+    cost: 100,
+    real: 0,
+    poison: 100,
+    sp: { real: 0, poison: 0 },
+    energy: [ 0 ],
+    control: 0
+  },
+  {
+    t: 0,
+    type: 'energyGain',
+    who: '佩丽卡',
+    why: '佩丽卡 战技（真实技力 0）',
+    amount: 0,
+    sp: { real: 0, poison: 0 },
+    energy: [ 0 ],
+    control: 0
+  }
+]
+stack [ { id: 'chr_0004_pelica.pot3.atk', value: 40 } ]
+exclusive [
+  { id: 'chr_0027_tangtang.skill.fragile2', value: 5 },
+  { id: 'chr_0027_tangtang.skill.fragile3', value: 10 }
+]
+brokenGear [
+  { name: '碾骨面具', attrs: [ [Object], [Object], [Object] ] },
+  { name: '轻超域护板', attrs: [ [Object], [Object], [Object] ] }
+]
+zones 2656.5 expected 2656.5
+fragile skill 1.3
+fragile combo 1.3
+fragile ultimate 1.45
+
+codex
+三个独立手算例已核对完成，基础面板、常规伤害乘区和零值属性覆盖均得到预期结果。搜索层则有独立问题：周期会把尚未命中的终结技判为已结算；充能阈值依赖稀疏采样，且没有处理终结技清空能量对二分判定的影响。正在复核端点和最终定位。
+
