@@ -23,7 +23,7 @@
 | 6 | 事件模拟器与可编辑时间轴 | 已做（v0.1） | dist/engine/sim/simulate.js：真实/返还技力、能量（充能效率、别礼来源限制）、附着/爆发/异常、连携触发窗口、触发式增益、终结技演出暂停；时间轴拖动编辑、不可执行提示、时刻检查、事件流水；tests/sim.*.mjs |
 | 7 | 自动排轴与充能阈值 | 已做（v0.1） | dist/engine/sim/plan.js：束搜索 + 候选对照 + 理由；充能截止条件二分阈值（前提/舍入列出）；UI 已接入 |
 | 8 | 逐击全队伤害、可视化、完整回归 | 已做（v0.1） | 全队总伤/占比/逐击表/区间；重点编队回归 docs/cases/regression-cold-team.md（可复现）；独立审核两份；报告 docs/final-report.md |
-| 发布 | 当前账号副本发布 | 已做（公开需用户操作） | https://claude.ai/artifact/MA9QgAZesaHBqEia9BdCwg（版本 5）。Artifact 的公开分享只能由账号持有人在页面 Share 菜单设置；备选：`gh auth login` 后运行 `sh tools/deploy_pages.sh` 发布到 GitHub Pages |
+| 发布 | 当前账号副本公开发布 | 已做 | https://claude.ai/artifact/MA9QgAZesaHBqEia9BdCwg（版本 7）；分享权限已在页面 Share 菜单设为“知道链接的任何人”（无需 Claude 账号即可打开）。备选：`gh auth login` 后 `sh tools/deploy_pages.sh` 发布到 GitHub Pages |
 
 ## 2. 需求覆盖矩阵（NEXT_STEPS.md 逐条对账）
 状态：☐ 未做 / ◐ 进行中 / ☑ 已做并验证 / ✗ 阻塞
@@ -87,7 +87,7 @@
 | 回能只读初始个人效率（队友条件效率） | 已修（按接收者计入队友提供的充能效率，含职业限定） |
 | 终结技演出暂停只部分实现 | 已修（增益/附着/异常/冷却/连携窗口随演出顺延；仍为假设，timing.js 可关闭） |
 | 处决/失衡状态机 | 已做（可选：设置 enemy.staggerThreshold 后累计失衡值→失衡窗口 ×1.3→主控处决并按敌人档回技力；默认关闭，对照靶永不失衡） |
-| 燃烧跳伤、冻结打碎等异常流程 | 部分（燃烧每秒跳伤 10 s 已做，不暴击；碎冰需主动触发，未做） |
+| 燃烧跳伤、冻结打碎等异常流程 | 已做（燃烧每秒跳伤 10 s 不暴击；对冻结目标的物理伤害触发碎冰，归属打碎者） |
 
 ### 规则（docs/reviews/rules-review-gpt.md）→ rules v0.4 已并入；Claude 审核待并入。
 ### 效果目录（docs/reviews/effects-review-*.md）→ 578 条，31 修正，9 未决（见报告）。
