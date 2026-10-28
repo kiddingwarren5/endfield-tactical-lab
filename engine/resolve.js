@@ -20,8 +20,10 @@ export function candidateEffects({team,bIdx,data,consumablesOf=()=>[],mainContro
 export function resolveValue(c,{data,overrides={},stacks={},vars={}}){
   const e=c.effect; const ctx={rank:c.rank,stacks:stacks[e.id],vars};
   if(e.value?.dependsOn){ const d=e.value.dependsOn; const ov=overrides[e.id]; let attrVal, origin;
-    if(ov!=null&&ov!==''){ attrVal=Number(ov); origin='manual'; } else { const st=getStats(c.ownerMember,data); attrVal=st.abilities?.[d.attr]??0; origin='auto'; }
-    ctx.ownerAttrs={[d.attr]:attrVal}; const autoStats=getStats(c.ownerMember,data); const autoVal=autoStats.abilities?.[d.attr];
+    // attr may be a list (黎风: 智识+意志) → the summed value; owner food counts toward the owner's attributes
+    const autoStats=getStats(c.ownerMember,data,{consumables:c.ownerMember?.consumables}); const autoVal=[].concat(d.attr).reduce((a,k)=>a+(autoStats.abilities?.[k]??0),0);
+    if(ov!=null&&ov!==''){ attrVal=Number(ov); origin='manual'; } else { attrVal=autoVal; origin='auto'; }
+    ctx.attrValue=attrVal;
     return {value:valueOf(e,ctx),dependency:{attr:d.attr,used:attrVal,auto:autoVal,origin}}; }
   return {value:valueOf(e,ctx)};
 }

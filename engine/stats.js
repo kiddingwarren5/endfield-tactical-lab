@@ -1,9 +1,8 @@
 // Panel stats from a member loadout. Pure; returns values + trace lines. Formula references: docs/rules.md §B.
-import {ownedEffects,valueOf,setCounts,STAT_ZONES} from './effects.js';
+import {ownedEffects,valueOf,setCounts,STAT_ZONES,weaponRanks} from './effects.js';
+export {weaponRanks};
 const floor=x=>Math.floor(x+1e-9);
 const ABIL=['str','agi','int','will'];
-// Weapon skill ranks: slot1/2 = 3(培养满) + 基质加级(0–6)；slot3 = 1 + 潜能(0–5) + 匹配基质加级(0–3)。默认基质满（9/9/4），与“0潜=Rank4”继承规则一致（rules D22）。
-export function weaponRanks(w){ if(!w) return [9,9,4]; if(w.substrate){ const s=w.substrate; return [Math.min(9,3+(s[0]??6)),Math.min(9,3+(s[1]??6)),Math.min(9,1+(w.potential??0)+(s[2]??3))]; } return w.ranks||[9,9,4]; }
 export const MAIN_PER_POINT=0.005, SUB_PER_POINT=0.002; // 主能力每点 +0.5% 攻击，副能力每点 +0.2%（规则 B8，待校正）
 
 export function getStats(member,data,opts={}){
@@ -24,12 +23,15 @@ export function getStats(member,data,opts={}){
       if(['str','agi','int','will'].includes(a.stat)) addFlat(a.stat,v,why); else if(a.stat==='main'||a.stat==='sub'||a.stat==='all'){ a.pct?addPct(a.stat,v,why):addFlat(a.stat,v,why); } else if(a.stat==='atkFlat'){ atkFlatBefore+=v; trace.push({part:'atkFlat',value:v,why}); } else if(a.stat==='critRate'){ critRate+=v; trace.push({part:'critRate',value:v,why}); } else if(a.stat==='chargeEff'){ chargeEff+=v; trace.push({part:'chargeEff',value:v,why}); } else if(a.stat==='artsStrength'){ artsStrength+=v; trace.push({part:'artsStrength',value:v,why}); } else if(a.stat) addBonus(a.stat,v,why); }); }
   // --- auto stat effects from catalog (potentials, set auto stats, consumables)
   const catalog=data.effects||[]; const owned=ownedEffects(catalog,member,data,opts);
-  for(const {effect:e,rank} of owned){ if(e.condition?.mode&&e.condition.mode!=='auto') continue; if(!STAT_ZONES.has(e.zone)) continue; const v=valueOf(e,{rank}); const why=e.name;
-    if(e.zone==='ability'){ if(e.stat==='hpPct'||e.stat==='hp'){ trace.push({part:'ignored',stat:e.stat,value:v,why}); } else e.unit==='%'?addPct(e.stat,v,why):addFlat(e.stat,v,why); } else if(e.zone==='atkPct'){ atkPct+=v; trace.push({part:'atkPct',value:v,why}); } else if(e.zone==='atkFlat'){ if(e.owner?.kind==='consumable'){ atkFlatAfter+=v; trace.push({part:'atkFlatAfter',value:v,why}); } else { atkFlatBefore+=v; trace.push({part:'atkFlat',value:v,why}); } } else if(e.zone==='critRate'){ critRate+=v; trace.push({part:'critRate',value:v,why}); } else if(e.zone==='critDmg'){ critDmg+=v; trace.push({part:'critDmg',value:v,why}); } else if(e.zone==='chargeEff'){ chargeEff+=v; trace.push({part:'chargeEff',value:v,why}); } else if(e.zone==='artsStrength'){ artsStrength+=v; trace.push({part:'artsStrength',value:v,why}); } }
+  const deferred=[]; // dependsOn stat effects read the owner's final abilities (e.g. 黎风「顿悟」智识+意志→攻击%), so they are applied after abilities are floored
+  const applyOwned=(e,v)=>{ const why=e.name;
+    if(e.zone==='ability'){ if(e.stat==='hpPct'||e.stat==='hp'){ trace.push({part:'ignored',stat:e.stat,value:v,why}); } else e.unit==='%'?addPct(e.stat,v,why):addFlat(e.stat,v,why); } else if(e.zone==='atkPct'){ atkPct+=v; trace.push({part:'atkPct',value:v,why}); } else if(e.zone==='atkFlat'){ if(e.owner?.kind==='consumable'){ atkFlatAfter+=v; trace.push({part:'atkFlatAfter',value:v,why}); } else { atkFlatBefore+=v; trace.push({part:'atkFlat',value:v,why}); } } else if(e.zone==='critRate'){ critRate+=v; trace.push({part:'critRate',value:v,why}); } else if(e.zone==='critDmg'){ critDmg+=v; trace.push({part:'critDmg',value:v,why}); } else if(e.zone==='chargeEff'){ chargeEff+=v; trace.push({part:'chargeEff',value:v,why}); } else if(e.zone==='artsStrength'){ artsStrength+=v; trace.push({part:'artsStrength',value:v,why}); } };
+  for(const {effect:e,rank} of owned){ if(e.condition?.mode&&e.condition.mode!=='auto') continue; if(!STAT_ZONES.has(e.zone)) continue; if(e.value?.dependsOn&&e.zone!=='ability'){ deferred.push({e,rank}); continue; } applyOwned(e,valueOf(e,{rank})); }
   // --- conditional / teammate-provided stat effects already resolved by the caller (per segment or per hit)
   for(const x of opts.extraStats||[]){ const v=x.value, why=x.why||x.label||x.id; if(x.zone==='ability'){ if(x.stat==='hpPct'||x.stat==='hp') continue; x.unit==='%'?addPct(x.stat,v,why):addFlat(x.stat,v,why); } else if(x.zone==='atkPct'){ atkPct+=v; trace.push({part:'atkPct',value:v,why}); } else if(x.zone==='atkFlat'){ atkFlatBefore+=v; trace.push({part:'atkFlat',value:v,why}); } else if(x.zone==='critRate'){ critRate+=v; trace.push({part:'critRate',value:v,why}); } else if(x.zone==='critDmg'){ critDmg+=v; trace.push({part:'critDmg',value:v,why}); } else if(x.zone==='chargeEff'){ chargeEff+=v; trace.push({part:'chargeEff',value:v,why}); } else if(x.zone==='artsStrength'){ artsStrength+=v; trace.push({part:'artsStrength',value:v,why}); } }
   // --- finalize abilities: floor((flat)*(1+pct%)) per ability (面板取整，见 rules B9)
   const abilities={}; for(const k of ABIL) abilities[k]=floor(flat[k]*(1+pct[k]/100));
+  for(const {e,rank} of deferred) applyOwned(e,valueOf(e,{rank,ownerAttrs:abilities}));
   const main=abilities[op.mainAttr], sub=abilities[op.subAttr];
   const charBase=op.base90.atk, weaponBase=weapon?.baseAtk90??0;
   const abilityMul=1+main*MAIN_PER_POINT+sub*SUB_PER_POINT;
