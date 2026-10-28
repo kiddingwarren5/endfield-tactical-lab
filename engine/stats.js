@@ -2,12 +2,14 @@
 import {ownedEffects,valueOf,setCounts,STAT_ZONES} from './effects.js';
 const floor=x=>Math.floor(x+1e-9);
 const ABIL=['str','agi','int','will'];
+// Weapon skill ranks: slot1/2 = 3(培养满) + 基质加级(0–6)；slot3 = 1 + 潜能(0–5) + 匹配基质加级(0–3)。默认基质满（9/9/4），与“0潜=Rank4”继承规则一致（rules D22）。
+export function weaponRanks(w){ if(!w) return [9,9,4]; if(w.substrate){ const s=w.substrate; return [Math.min(9,3+(s[0]??6)),Math.min(9,3+(s[1]??6)),Math.min(9,1+(w.potential??0)+(s[2]??3))]; } return w.ranks||[9,9,4]; }
 export const MAIN_PER_POINT=0.005, SUB_PER_POINT=0.002; // 主能力每点 +0.5% 攻击，副能力每点 +0.2%（规则 B8，待校正）
 
 export function getStats(member,data,opts={}){
   const trace=[]; const op=data.operators.find(o=>o.id===member.operatorId); if(!op) throw new Error('unknown operator '+member.operatorId);
   const weapon=member.weapon?.id?data.weapons.find(w=>w.id===member.weapon.id):null;
-  const wr=member.weapon?.ranks||[9,9,4];
+  const wr=weaponRanks(member.weapon);
   // --- ability flat sources
   const flat={str:0,agi:0,int:0,will:0}; const pct={str:0,agi:0,int:0,will:0};
   const addFlat=(stat,v,why)=>{ const keys=stat==='main'?[op.mainAttr]:stat==='sub'?[op.subAttr]:stat==='all'?ABIL:[stat]; for(const k of keys){ flat[k]+=v; trace.push({part:'ability',stat:k,value:v,why}); } };
@@ -29,7 +31,8 @@ export function getStats(member,data,opts={}){
   const main=abilities[op.mainAttr], sub=abilities[op.subAttr];
   const charBase=op.base90.atk, weaponBase=weapon?.baseAtk90??0;
   const abilityMul=1+main*MAIN_PER_POINT+sub*SUB_PER_POINT;
-  const atkRaw=(charBase+weaponBase+atkFlatBefore)*(1+atkPct/100)*abilityMul+atkFlatAfter; // 固定加攻位置：装备=乘算前；食药=乘算后（用户实测），待规则确认
+  // rules B8: [(角色基础+武器基础)×(1+攻击%)+装备固定攻击]×(1+0.005主+0.002副) + 食药固定攻击（用户实测：主副能力乘算后再加）
+  const atkRaw=((charBase+weaponBase)*(1+atkPct/100)+atkFlatBefore)*abilityMul+atkFlatAfter;
   const sets=setCounts(member,data);
   return {operator:op,weapon,abilities,main,sub,flatAbilities:flat,pctAbilities:pct,atk:{charBase,weaponBase,atkPct,abilityMul,atkFlatBefore,atkFlatAfter,raw:atkRaw,panel:floor(atkRaw)},critRate,critDmg,chargeEff,artsStrength,bonuses,sets,trace};
 }
