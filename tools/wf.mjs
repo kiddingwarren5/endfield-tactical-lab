@@ -1,0 +1,3 @@
+import fs from 'node:fs'; import {decodeTurbo} from './turbo.mjs';
+export function loadWf(file){ const d=decodeTurbo(fs.readFileSync(file,"utf8")); const ld=d.loaderData||d; const k=Object.keys(ld).find(x=>x.includes("$slug")); const n=ld[k]; return n.response||n.data?.response; }
+if(process.argv[1]&&process.argv[1].endsWith('wf.mjs')){ const r=loadWf(process.argv[2]); const mode=process.argv[3]||'keys'; console.log(JSON.stringify(r.meta)); if(mode==='keys'){ for(const [k,v] of Object.entries(r.data)){ const s=JSON.stringify(v); console.log('KEY',k,s.length, s.slice(0,parseInt(process.argv[4]||'500'))); } } else { console.log(JSON.stringify(r.data[mode],null,1).slice(0,parseInt(process.argv[4]||'4000'))); } }
