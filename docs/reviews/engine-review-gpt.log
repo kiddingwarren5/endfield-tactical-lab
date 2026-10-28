@@ -3182,3 +3182,123 @@ abnormalWindow [ '弧光 连携未触发（条件未满足或窗口已过）', '
   }
 ]
 
+exec
+/bin/zsh -lc "node --input-type=module -e '
+import operators from '\\''./dist/data/operators.js'\\''; import weapons from '\\''./dist/data/weapons.js'\\'';import gear from '\\''./dist/data/gear.js'\\'';import sets from '\\''./dist/data/sets.js'\\'';import effects from '\\''./dist/data/effects.js'\\'';import mechanics from '\\''./dist/data/mechanics.js'\\'';import timing from '\\''./dist/data/timing.js'\\'';
+import {getStats,weaponRanks} from '\\''./dist/engine/stats.js'\\'';import {calcSegment} from '\\''./dist/engine/damage.js'\\'';import {skillSegments,mechSegments,calcSkill} from '\\''./dist/engine/skills.js'\\'';import {candidateEffects,appliedFor,resolveValue} from '\\''./dist/engine/resolve.js'\\'';import {simulate} from '\\''./dist/engine/sim/simulate.js'\\'';import {autoPlan,chargeThreshold,cycleOf} from '\\''./dist/engine/sim/plan.js'\\'';
+const data={operators,weapons,gear,sets,effects}; const op=n=>operators.find(o=>o.name===n);const mk=n=>({operatorId:op(n).id,potential:0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},gear:{},consumables:[]}); const enemy={defence:100,resistances:{},custom:{}};
+const input={data,mechanics,timing,enemy,params:{duration:5,mainAutoNormal:false}};
+const pickEvents=(r,types)=>r.events.filter(e=>types.includes(e.type));
+
+const mem={...mk('\\''佩丽卡'\\''),gear:{kit1:{id:gear.find(g=>g.name==='\\''碾骨面具'\\'').id,refine:[3,3,3]}}};const st=getStats(mem,data);console.log('\\''brokenBonus'\\'',st.bonuses,calcSegment({stats:st,seg:skillSegments(op('\\''佩丽卡'\\''),'\\''skill'\\'')[0],rank:12,enemy,options:{stagger:30}}).factors);
+const mb=mk('\\''别礼'\\'');mb.weapon={id:weapons.find(w=>w.name==='\\''赫拉芬格'\\'').id,ranks:[9,9,4]};const cand=candidateEffects({team:[mb],bIdx:0,data});const segs=skillSegments(op('\\''别礼'\\''),'\\''combo'\\'');
+console.log('\\''static-segment'\\'',segs.map((seg,i)=>({i,buff:appliedFor({candidates:cand,seg,segIndex:i,bIdx:0,data,vars:{layers:0}}).filter(a=>a.effect.id==='\\''wpn_claym_0013.p3'\\'').map(a=>a.value)})));
+console.log('\\''wolf-skill'\\'',op('\\''狼卫'\\'').skills.skill.description);
+'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+brokenBonus { brokenDmg: 53.82 } {
+  attack: 706,
+  ratio: 4,
+  crit: 1,
+  bonus: 1,
+  amp: 1,
+  fragile: 1,
+  vulnerable: 1,
+  combo: 1,
+  stagger: 1.3,
+  defence: 0.5,
+  resistance: 1,
+  reduction: 1,
+  level: 1,
+  artsStrength: 1
+}
+static-segment [ { i: 0, buff: [] }, { i: 1, buff: [ 32 ] }, { i: 2, buff: [ 32 ] } ]
+wolf-skill 对目标进行连射，造成少量灼热伤害，最后一次射击施加灼热附着。如果目标处于燃烧或导电状态，则不再施加灼热附着，而是消耗该状态并追加一次射击，造成大量灼热伤害。
+
+exec
+/bin/zsh -lc "nl -ba dist/engine/sim/simulate.js | sed -n '118,151p' && git rev-parse HEAD && git status --short && shasum -a 256 dist/engine/*.js dist/engine/sim/*.js" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+   118	  permanentBuffs();
+   119	  const plan=[...timeline].sort((a,b)=>a.t-b.t); for(const a of plan) push(a.t,'planned',{action:a});
+   120	  const horizon=P.duration; let lastT=0;
+   121	  while(true){
+   122	    // next event: planned/queued events or next normal attack
+   123	    let nextT=Infinity; for(const e of evq) nextT=Math.min(nextT,e.t); for(const mb of alive){ if(mb.busyUntil>S.t+EPS) nextT=Math.min(nextT,mb.busyUntil); else nextT=Math.min(nextT,Math.max(mb.nextNormalAt,S.t)); }
+   124	    if(nextT>horizon||!isFinite(nextT)) break;
+   125	    // advance time: SP regen (paused during ultimate animation)
+   126	    const dt=Math.max(0,nextT-S.t); if(dt>0){ const pausedFrom=Math.min(S.pausedUntil,nextT); const activeDt=Math.max(0,nextT-Math.max(S.t,pausedFrom)); const regenDt=S.t>=S.pausedUntil?dt:Math.max(0,nextT-S.pausedUntil); if(regenDt>0){ gainSp(T.spRegenPerSecond*regenDt,'自然回复','real'); } S.t=nextT; }
+   127	    // expire
+   128	    for(const k of Object.keys(S.attach)) if(S.attach[k].until<S.t-EPS){ delete S.attach[k]; addLog('attachExpire',{element:k}); }
+   129	    S.buffs=S.buffs.filter(b=>{ if(b.until<S.t-EPS){ addLog('buffEnd',{id:b.cand.effect.id}); return false; } return true; });
+   130	    for(const k of Object.keys(S.abnormal)) if(S.abnormal[k].until<S.t-EPS) delete S.abnormal[k];
+   131	    // process queued events at this time
+   132	    const due=evq.filter(e=>e.t<=S.t+EPS).sort((a,b)=>a.t-b.t); for(const e of due) evq.splice(evq.indexOf(e),1);
+   133	    for(const e of due){ const mb=members[e.who??e.action?.member]; switch(e.type){
+   134	      case 'planned': { const a=e.action; const m=members[a.member]; if(!m){ fail(a,'未知干员'); break; } if(a.kind==='skill') castSkill(m,a); else if(a.kind==='combo') castCombo(m,a); else if(a.kind==='ultimate') castUlt(m,a); else if(a.kind==='switch'){ S.control=a.member; members[a.member].busyUntil=Math.max(members[a.member].busyUntil,S.t+T.castSeconds.switch); addLog('switch',{to:m.op.name}); } else fail(a,'未知动作 '+a.kind); break; }
+   135	      case 'skillHit': { for(const seg of e.segs){ const vars={layers:e.layers??0}; doHit(mb,{...seg,skillKey:e.kind},rankOf(mb,e.kind),vars,e.kind); if(seg.kind==='combo') fireTrigger({on:'hit',kind:'combo',who:mb.idx}); } break; }
+   136	      case 'attach': applyAttach(e.element,e.layers,e.who,e.via); break;
+   137	      case 'burst': mechHit(e.by,'artsBurst',1,e.element); fireTrigger({on:'burst',who:e.by}); checkCombos({type:'burst'}); break;
+   138	    } }
+   139	    // normal attacks
+   140	    for(const mb of alive){ if(mb.busyUntil>S.t+EPS) continue; if(mb.nextNormalAt>S.t+EPS) continue; const isControl=mb.idx===S.control; if(isControl&&!P.mainAutoNormal){ mb.nextNormalAt=S.t+0.5; continue; } if(S.pausedUntil>S.t+EPS&&!isControl){ mb.nextNormalAt=S.pausedUntil; continue; } normalHit(mb,isControl); }
+   141	    if(S.t-lastT>=0.5){ samples.push({t:round(S.t),sp:round(S.sp.real+S.sp.poison),poison:round(S.sp.poison),energy:alive.map(m=>round(m.energy)),attach:Object.fromEntries(Object.entries(S.attach).map(([k,v])=>[k,v.layers]))}); lastT=S.t; }
+   142	  }
+   143	  const total=hits.reduce((a,h)=>a+h.damage,0); const duration=hits.length?Math.max(...hits.map(h=>h.t)):0;
+   144	  const perMember={}, perSkill={}; for(const h of hits){ perMember[h.name]=(perMember[h.name]||0)+h.damage; const k=`${h.name}·${h.skill}`; perSkill[k]=(perSkill[k]||0)+h.damage; }
+   145	  return {simVersion:SIM_VERSION,events:log,hits,errors,samples,summary:{total,duration,dps:duration>0?total/duration:0,perMember,perSkill,ultsCast:log.filter(e=>e.type==='cast'&&e.kind==='ultimate').length,params:P,energyMax:alive.map(m=>m.energyMax),chargeEff:alive.map(m=>round((m.stats.chargeEff||0)+(P.extraChargeEff?.[m.idx]||0)))},final:{t:round(S.t),sp:S.sp,energy:alive.map(m=>round(m.energy)),control:S.control,cooldowns:alive.map(m=>({name:m.op.name,combo:round(m.cd.combo),ultimate:round(m.cd.ultimate)}))}};
+   146	  function ultCost(op,m,data){ const base=op.skills.ultimate?.params?.energyCost?.[0]?.values?.[(m.skillRanks?.ultimate??12)-1]??100; const red=(data.effects||[]).filter(e=>e.owner?.id===op.id&&e.zone==='energyCost'&&(e.owner.potential==null||e.owner.potential<=(m.potential||0))).reduce((a,e)=>a+(valueOf(e,{})||0),0); return Math.round(base*(1+red/100)); }
+   147	}
+   148	const round=x=>Math.round(x*1000)/1000;
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-EJL8pXTG' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-cHtH2y1c' (errno=Operation not permitted)
+84a788f5e9cf5218ad2c88fdd2970b02b4906696
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-efUFW2N0' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-H7f3IGBA' (errno=Operation not permitted)
+ M docs/reviews/engine-review-gpt.log
+a182fd0e2caace8d536fac980c3f1867d8e6b7bb13253fe43dcda2b518ac210e  dist/engine/damage.js
+08fe5a017f9fb67c803d58d0df44b5e51af0ab63c236bebc8b845baa44feeda0  dist/engine/effects.js
+210577766a00a3d87ecbb61dfcab4ca0105b7db1d56aa2c865cd3ba8aacfe766  dist/engine/resolve.js
+c73028652e926afe07948d9ba898f42704739bbe2c8f8b891beab317b0f4c16a  dist/engine/skills.js
+384a3e98fc0b96aa7c224d0f72883963f26ea1a93f9914b8a641efe680fa76f6  dist/engine/stats.js
+2ec91ea44af56531a375b77cabf811677a8f5a022eed1eee4baa91bbdd203166  dist/engine/sim/plan.js
+f6dc03f34df0e3894f75593481e05882f1ce54630e75b49fae7ca3173694c38b  dist/engine/sim/simulate.js
+
+exec
+/bin/zsh -lc 'node tests/stats.test.mjs && node tests/damage.test.mjs && node tests/resolve.test.mjs' in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 6ms:
+stats tests passed; 别礼 sample: { main: 772, sub: 307, panel: 6368, cold: 69.766667 }
+damage tests passed
+resolve tests passed { siAmp: 43.199999999999996, xaihiAuto: 27.81, xaihiInt: 127 }
+
+codex
+主要问题已完成复现。报告会把“基础公式核对通过”与“模拟器尚不足以支撑可信排轴”分开说明，附上最小输入、预期数值和实际结果。新增的案例脚本会写入 Markdown 文件，因此本次只读审核未运行它。
+
+exec
+/bin/zsh -lc "node --input-type=module -e '
+import {spawnSync} from '\\''node:child_process'\\'';
+for(const f of ['\\''stats.test.mjs'\\'','\\''damage.test.mjs'\\'','\\''resolve.test.mjs'\\'','\\''sim.smoke.mjs'\\'','\\''sim.four.mjs'\\'','\\''plan.smoke.mjs'\\'']){const r=spawnSync(process.execPath,['\\''tests/'\\''+f],{encoding:'\\''utf8'\\''});const s=r.stdout;console.log(JSON.stringify({file:f,exit:r.status,excerpt:s.slice(0,f.includes('\\''smoke'\\'')?600:350),stderr:r.stderr.slice(0,300)}));}
+'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 2288ms:
+{"file":"stats.test.mjs","exit":0,"excerpt":"stats tests passed; 别礼 sample: { main: 772, sub: 307, panel: 6368, cold: 69.766667 }\n","stderr":""}
+{"file":"damage.test.mjs","exit":0,"excerpt":"damage tests passed\n","stderr":""}
+{"file":"resolve.test.mjs","exit":0,"excerpt":"resolve tests passed { siAmp: 43.199999999999996, xaihiAuto: 27.81, xaihiInt: 127 }\n","stderr":""}
+{"file":"sim.smoke.mjs","exit":0,"excerpt":"errors [\n  {\n    t: 9,\n    action: { t: 9, member: 0, kind: 'ultimate' },\n    message: '别礼 终结技能量不足：133.55/240'\n  }\n]\nsummary {\"total\":376820.48704544496,\"duration\":19.925,\"dps\":18911.944142807777,\"perMember\":{\"别礼\":363438.797326057,\"汤汤\":13381.689719387754},\"perSkill\":{\"别礼·normal\":213323.1606689663,\"汤汤·normal\":6862.01625,\"汤汤·skill\":3758.4,\"汤汤·combo\":939.5999999999999,\"汤汤·mech\":1821.6734693877538,\"别礼·skill\":22595.362167296,\"别礼·mech\":16353.6738206106,\"别礼·combo\":111166.60066918399},\"ultsCast\":0,\"params\":{\"damageFactor\":0.75,\"rhythmFactor\":0.8,\"mainAutoNormal\":true,\"duration\":20,\"defaultHeavySpRefun","stderr":""}
+{"file":"sim.four.mjs","exit":0,"excerpt":"errors [ '别礼 连携未触发（条件未满足或窗口已过）', '祀 连携未触发（条件未满足或窗口已过）' ]\nsummary 237894 15993\n0.5s cast {\"who\":\"汤汤\",\"kind\":\"skill\",\"cost\":100}\n0.5s note {\"message\":\"汤汤 战技按 vortexConsumed 返还 20/次：未建模（按 0 计）\"}\n0.98s attach {\"element\":\"cold\",\"layers\":1,\"by\":\"汤汤\",\"via\":\"skill\"}\n0.98s buffStart {\"id\":\"wpn_pistol_0011.p2\",\"name\":\"落草 · 战技/终结技施加寒冷附着后寒冷伤害\",\"value\":32,\"unti","stderr":""}
+{"file":"plan.smoke.mjs","exit":0,"excerpt":"plan: 300.457ms\nbest score {\"dps\":13903.62447592942,\"total\":1251326.2028336478,\"until\":45,\"complete\":false,\"cycle\":{\"complete\":false,\"end\":null,\"castByMember\":{\"0\":35}}}\ntimeline 0s m1 skill | 1s m0 skill | 3s m1 combo | 4s m0 combo | 6s m0 skill | 12s m0 skill | 15s m0 skill | 16s m1 combo | 17s m0 combo | 20s m0 skill | 22s m0 skill | 26s m0 combo | 27s m1 skill | 34s m0 skill | 35s m0 ultimate | 39s m1 combo | 40s m0 skill | 41s m0 combo | 45s m0 skill\nrationale [\n  '终结技时刻：别礼 35s',\n  '无技力溢出',\n  '终结技能量溢出 9 次',\n  '在时限内未能让全员各放一次终结技（周期不完整，按 0.5 折算）'\n]\ncandidates [\n  '13904 {\"removed\":[\"45:0:ski","stderr":""}
+
+exec
+/bin/zsh -lc 'git rev-parse HEAD && shasum -a 256 dist/engine/resolve.js dist/engine/sim/simulate.js dist/engine/sim/plan.js' in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-6W7i8TnA' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-v3VpZ4NR' (errno=Operation not permitted)
+84a788f5e9cf5218ad2c88fdd2970b02b4906696
+210577766a00a3d87ecbb61dfcab4ca0105b7db1d56aa2c865cd3ba8aacfe766  dist/engine/resolve.js
+f6dc03f34df0e3894f75593481e05882f1ce54630e75b49fae7ca3173694c38b  dist/engine/sim/simulate.js
+2ec91ea44af56531a375b77cabf811677a8f5a022eed1eee4baa91bbdd203166  dist/engine/sim/plan.js
+
