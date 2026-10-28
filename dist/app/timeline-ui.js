@@ -1,12 +1,14 @@
 // 排轴模拟工作区（批次 6/8）：可编辑时间轴 + 事件模拟 + 资源流水 + 全队逐击汇总。
 import operators from '../data/operators.js'; import weapons from '../data/weapons.js'; import gear from '../data/gear.js'; import sets from '../data/sets.js'; import consumables from '../data/consumables.js'; import effects from '../data/effects.js'; import timing from '../data/timing.js'; import mechanics from '../data/mechanics.js'; import meta from '../data/meta.js';
 import {simulate,SIM_VERSION} from '../engine/sim/simulate.js';
+import {autoPlan,chargeThreshold} from '../engine/sim/plan.js';
 import {h,fmt,fmt1,pct,ELEMENT_CN,KIND_CN,colorOf,select,panel,field,download} from './ui.js';
 const data={operators,weapons,gear,sets,consumables,effects};
+const clone=x=>JSON.parse(JSON.stringify(x));
 const KIND_LABEL={skill:'战技',combo:'连携技',ultimate:'终结技',switch:'切主控'};
 const KIND_COLOR={skill:'#bd9b43',combo:'#3288c4',ultimate:'#d9573d',switch:'#68716c',normal:'#c9cfc8'};
 
-export function defaultSim(){ return {timeline:[],duration:40,initialSp:200,initialEnergy:[0,0,0,0],damageFactor:0.75,rhythmFactor:0.8,inspectT:0,showNormals:true}; }
+export function defaultSim(){ return {timeline:[],duration:40,initialSp:200,initialEnergy:[0,0,0,0],damageFactor:0.75,rhythmFactor:0.8,inspectT:0,showNormals:true,plan:{beam:8,step:1,horizon:45,result:null},deadlines:[],thresholds:null}; }
 
 export function runSim(state){ const sim=state.sim||(state.sim=defaultSim()); const team=state.team; if(!team.some(Boolean)) return null;
   const base={team,data,mechanics,timeline:sim.timeline,timing,enemy:state.enemy,critMode:state.critMode,options:state.options,mainControl:state.mainControl,initial:{sp:sim.initialSp,energy:sim.initialEnergy}};
@@ -35,6 +37,25 @@ export function renderTimeline(root,state,update){
   const errs=res?.main.errors||[];
   left.append(panel({id:'simplan',index:'06b',title:`动作序列（${sim.timeline.length}）`,folds:state.ui.folds,onFold:fold},addRow,addBtn,h('div',{class:'tl-list'},rows.length?rows:h('div',{class:'muted'},'暂无动作；主控会持续普攻。')),errs.length?h('div',{class:'sim-errors'},h('b',{},`不可执行 ${errs.length} 项`),...errs.map(e=>h('div',{},`${e.t}s ${KIND_LABEL[e.action?.kind]||''}：${e.message}`))):h('div',{class:'ok-note'},'所有动作均可执行。'),
     h('div',{class:'result-actions'},h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{s.sim.timeline=[];})},'清空'),h('button',{type:'button',class:'mini-btn',onclick:()=>res&&download(`sim-${Date.now()}.json`,JSON.stringify(exportReport(state,res),null,1))},'导出模拟报告 JSON'))));
+  // --- auto plan (批次 7)
+  const planCfg=sim.plan||(sim.plan={beam:8,step:1,horizon:45,result:null});
+  const simInput=()=>({team:state.team,data,mechanics,timing,enemy:state.enemy,critMode:state.critMode,options:state.options,mainControl:state.mainControl,initial:{sp:sim.initialSp,energy:sim.initialEnergy},params:{damageFactor:sim.damageFactor,rhythmFactor:sim.rhythmFactor}});
+  const planBtn=h('button',{type:'button',class:'mini-btn',onclick:()=>{ planBtn.disabled=true; planBtn.textContent='搜索中…'; setTimeout(()=>{ const r=autoPlan(simInput(),{beam:planCfg.beam,step:planCfg.step,horizon:planCfg.horizon}); update(s=>{ s.sim.plan.result={best:r.best,candidates:r.candidates,rationale:r.rationale,objective:r.objective,searchSpace:r.searchSpace}; }); },30); }},'自动生成较高伤轴');
+  const pr=planCfg.result;
+  left.append(panel({id:'simplanauto',index:'07',title:'自动排轴',folds:state.ui.folds,onFold:fold},
+    h('div',{class:'three-col'},field('束宽',h('input',{type:'number',min:2,max:30,value:planCfg.beam,onchange:ev=>update(s=>{s.sim.plan.beam=Number(ev.target.value);})})),field('决策步长（秒）',h('input',{type:'number',min:0.5,max:3,step:0.5,value:planCfg.step,onchange:ev=>update(s=>{s.sim.plan.step=Number(ev.target.value);})})),field('搜索时限（秒）',h('input',{type:'number',min:10,max:120,value:planCfg.horizon,onchange:ev=>update(s=>{s.sim.plan.horizon=Number(ev.target.value);})}))),
+    planBtn,h('div',{class:'muted small'},'目标：所有入队干员至少各放一次终结技的周期内平均每秒伤害；束搜索逐决策点展开可行动作并保留前 N 条。不声称全局最优；候选轴可对照。'),
+    pr?[h('div',{class:'ok-note'},`最佳：周期 ${pr.best.score.complete?pr.best.score.until.toFixed(1)+'s':'未完成'} · 周期内 DPS ${fmt(pr.best.score.dps)} · 总伤 ${fmt(pr.best.score.total)}`),h('div',{class:'small'},pr.best.timeline.map(a=>`${a.t}s ${members.find(m=>m.i===a.member)?.name||'?'}${KIND_LABEL[a.kind]}`).join(' → ')),h('ul',{class:'small'},...pr.rationale.map(x=>h('li',{},x))),h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{s.sim.timeline=clone(pr.best.timeline);})},'采用此轴（可继续手动编辑）'),h('div',{class:'subheading'},'对照候选'),...pr.candidates.map((c,i)=>h('div',{class:'small cand'},`#${i+2} DPS ${fmt(c.score.dps)}：`,c.diff.added.length?`新增 ${c.diff.added.join('、')} `:'',c.diff.removed.length?`去掉 ${c.diff.removed.join('、')}`:'',h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{s.sim.timeline=clone(c.timeline);})},'采用')))]:''));
+  // --- charge deadlines (批次 7.4)
+  const dls=sim.deadlines||(sim.deadlines=[]);
+  const dlRows=dls.map((d,i)=>h('div',{class:'tl-row'},h('span',{}),h('input',{type:'number',step:0.5,min:0,value:d.t,class:'tl-t',onchange:ev=>update(s=>{s.sim.deadlines[i].t=Number(ev.target.value);})}),h('span',{},`${members.find(m=>m.i===d.member)?.name||'?'} 终结技须充满`),h('button',{type:'button',class:'mini-btn danger',onclick:()=>update(s=>{s.sim.deadlines.splice(i,1);s.sim.thresholds=null;})},'删除')));
+  const th=sim.thresholds;
+  left.append(panel({id:'simdl',index:'07b',title:'充能截止条件与阈值',folds:state.ui.folds,onFold:fold},
+    h('div',{class:'three-col'},field('干员',select(members.map(m=>[m.i,m.name]),members[0].i,()=>{},{id:'dl-member'})),field('截止时刻（秒）',h('input',{id:'dl-t',type:'number',min:0,step:0.5,value:20})),h('button',{type:'button',class:'mini-btn',onclick:()=>{ const m=Number(document.getElementById('dl-member').value), t=Number(document.getElementById('dl-t').value); update(s=>{ s.sim.deadlines.push({member:m,t}); s.sim.thresholds=null; }); }},'+ 添加条件')),
+    h('div',{class:'tl-list'},dlRows.length?dlRows:h('div',{class:'muted'},'未设置截止条件。')),
+    dls.length?h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{ s.sim.thresholds=chargeThreshold({...simInput(),timeline:s.sim.timeline,params:{duration:s.sim.duration,damageFactor:s.sim.damageFactor,rhythmFactor:s.sim.rhythmFactor}},s.sim.deadlines); })},'按当前轴计算最低充能效率'):'',
+    th?h('table',{class:'seg-table'},h('thead',{},h('tr',{},h('th',{},'干员'),h('th',{},'截止'),h('th',{},'截止时能量'),h('th',{},'现有效率'),h('th',{},'所需效率'),h('th',{},'差额'))),h('tbody',{},...th.map(r=>h('tr',{},h('td',{},r.name),h('td',{},`${r.deadline}s`),h('td',{},`${r.currentEnergyAtDeadline}/${r.energyMax}`),h('td',{},`+${r.currentChargeEff}%`),h('td',{},r.feasible?`+${r.requiredTotal}%`:'无解'),h('td',{},r.feasible?(r.requiredExtra>0?h('b',{class:'warn'},`还差 ${r.requiredExtra}%，请重新配装`):'已满足'):r.note))))):'',
+    th?h('ul',{class:'small muted'},...th[0].premises.map(p=>h('li',{},p))):''));
   if(!res){ root.append(h('div',{class:'workspace'},left,right)); return; }
   const M=res.main;
   // --- timeline visualization (SVG)

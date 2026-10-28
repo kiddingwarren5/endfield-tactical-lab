@@ -1,0 +1,11 @@
+import operators from '../dist/data/operators.js'; import weapons from '../dist/data/weapons.js'; import gear from '../dist/data/gear.js'; import sets from '../dist/data/sets.js'; import effects from '../dist/data/effects.js'; import timing from '../dist/data/timing.js'; import mechanics from '../dist/data/mechanics.js';
+import {simulate} from '../dist/engine/sim/simulate.js'; import {autoPlan} from '../dist/engine/sim/plan.js';
+const data={operators,weapons,gear,sets,effects}; const op=n=>operators.find(o=>o.name===n); const G=n=>gear.find(g=>g.name===n).id;
+const mk=(name,wname)=>({operatorId:op(name).id,potential:0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},weapon:{id:wname?weapons.find(w=>w.name===wname).id:null,potential:0,substrate:[6,6,3],ranks:[9,9,4]},gear:{},consumables:[]});
+const bieli=mk('别礼','赫拉芬格'); bieli.gear={armor:{id:G('涌浪重装甲'),refine:[3,3,3]},gloves:{id:G('潮涌手甲'),refine:[3,3,3]},kit1:{id:G('悬河供氧栓'),refine:[3,3,3]},kit2:{id:G('生物辅助护板'),refine:[3,3,3]}};
+const team=[bieli,mk('汤汤','落草'),mk('祀','玉中身'),mk('诀','四二式·肃阵')];
+const enemy={defence:100,resistances:{physical:'D',cold:'D',heat:'D',electric:'D',nature:'D'},custom:{}};
+const input={team,data,mechanics,timing,enemy,mainControl:0,initial:{sp:200,energy:[0,0,0,0]}};
+const r=simulate({...input,timeline:[{t:0.5,member:1,kind:'skill'},{t:2.5,member:1,kind:'combo'},{t:4,member:2,kind:'skill'},{t:6,member:0,kind:'combo'},{t:8,member:2,kind:'combo'}],params:{duration:15}});
+console.log('errors',r.errors.map(e=>e.message)); console.log('summary',r.summary.total.toFixed(0),r.summary.dps.toFixed(0)); console.log(r.events.filter(e=>['cast','attach','comboReady','consume','buffStart','error','note'].includes(e.type)).map(e=>`${e.t}s ${e.type} ${JSON.stringify(Object.fromEntries(Object.entries(e).filter(([k])=>!['t','type','sp','energy','control'].includes(k))))}`).join('\n'));
+console.time('plan4'); const plan=autoPlan(input,{beam:6,step:1,horizon:50}); console.timeEnd('plan4'); console.log('plan',JSON.stringify(plan.best.score),plan.best.timeline.map(a=>`${a.t}s m${a.member} ${a.kind}`).join(' | ')); console.log(plan.rationale);
