@@ -30,8 +30,8 @@ export function autoPlan(input,{beam=8,step=1.0,horizon=40,onProgress}={}){
     uniq.sort((a,b)=>heuristic(b,t,horizon)-heuristic(a,t,horizon)); beams=uniq.slice(0,beam); if(onProgress) onProgress(t/horizon); if(beams[0]?.score.complete&&t>beams[0].score.until+2) break; }
   const ranked=[...beams].sort((a,b)=>b.score.dps-a.score.dps); const best=ranked[0];
   return {planVersion:PLAN_VERSION,best:{timeline:best.tl,score:best.score,summary:best.sim.summary,errors:best.sim.errors},candidates:ranked.slice(1,5).map(c=>({timeline:c.tl,score:c.score,diff:diffTimelines(best.tl,c.tl)})),objective:'所有干员至少一次终结技的周期内平均每秒伤害（不完整周期按 0.5 折算）',searchSpace:{beam,step,horizon,evaluated:'束搜索：每个决策点展开可行动作（战技/连携/终结技），保留分值前 '+beam+' 条'},rationale:rationaleOf(best)}; }
-function heuristic(b,t,horizon){ // damage so far per second + progress bonus for ults cast
-  const dmg=b.sim.hits.filter(h=>h.t<=t+1e-6).reduce((a,h)=>a+h.damage,0); const ults=b.sim.events.filter(e=>e.type==='cast'&&e.kind==='ultimate'&&e.t<=t+1e-6).length; return dmg/Math.max(1,t+1)+ults*2000+(b.score.complete?b.score.dps:0); }
+function heuristic(b,t,horizon){ // damage so far per second + progress toward every member's ultimate (energy fraction) + completion
+  const dmg=b.sim.hits.filter(h=>h.t<=t+1e-6).reduce((a,h)=>a+h.damage,0); const ults=b.sim.events.filter(e=>e.type==='cast'&&e.kind==='ultimate'&&e.t<=t+1e-6).length; const smp=[...b.sim.samples].reverse().find(x=>x.t<=t+1e-6); const maxes=b.sim.summary.energyMax||[]; const prog=smp?smp.energy.reduce((a,v,i)=>a+Math.min(1,v/Math.max(1,maxes[i]||1)),0):0; const base=dmg/Math.max(1,t+1); return base*(1+0.15*prog)+ults*0.1*base+(b.score.complete?b.score.dps:0); }
 function diffTimelines(a,b){ const sa=new Set(a.map(x=>`${x.t}:${x.member}:${x.kind}`)), sb=new Set(b.map(x=>`${x.t}:${x.member}:${x.kind}`)); return {removed:[...sa].filter(x=>!sb.has(x)),added:[...sb].filter(x=>!sa.has(x))}; }
 function rationaleOf(b){ const r=[]; const casts=b.sim.events.filter(e=>e.type==='cast'); const ults=casts.filter(e=>e.kind==='ultimate'); if(ults.length) r.push(`终结技时刻：${ults.map(u=>`${u.who} ${u.t}s`).join('、')}`); const over=b.sim.events.filter(e=>e.type==='spOverflow').length; r.push(over?`技力溢出事件 ${over} 次（可考虑提前战技）`:'无技力溢出'); const eo=b.sim.events.filter(e=>e.type==='energyOverflow').length; if(eo) r.push(`终结技能量溢出 ${eo} 次`); r.push(b.score.complete?`周期 ${b.score.until.toFixed(1)}s 内全员终结技各≥1 次`:'在时限内未能让全员各放一次终结技（周期不完整，按 0.5 折算）'); return r; }
 
@@ -44,3 +44,11 @@ export function chargeThreshold(input,deadlines,{lo=-100,hi=400,tol=0.5}={}){
     let res; if(ok(lo)){ res={feasible:true,requiredExtra:lo,note:'即使效率降至下界也满足'}; } else if(!ok(hi)){ res={feasible:false,note:`充能效率增至 +${hi}% 仍无法在 ${d.t}s 前充满（可能需要改变轴或能量来源）`}; } else { let a=lo,b=hi; while(b-a>tol){ const m=(a+b)/2; if(ok(m)) b=m; else a=m; } res={feasible:true,requiredExtra:Math.round(b*10)/10}; }
     results.push({member:idx,name:names[idx],deadline:d.t,energyMax:max,currentEnergyAtDeadline:Math.round(cur*10)/10,currentChargeEff:curEff,...res,requiredTotal:res.requiredExtra!=null?Math.round((curEff+res.requiredExtra)*10)/10:null,premises:['阈值基于当前这条轴；改变动作后需重算','能量来源：战技（真实技力）与连携回能均乘充能效率（规则 B10）；特殊回能按目录标记','舍入：二分精度 '+tol+'%，边界值请在界面两侧各试 1%','非主控普攻不产生能量；毒技力消耗不回能']}); }
   return results; }
+
+// 顺序轴 → 最早可行时刻：按给定动作顺序，逐个向后寻找不报错的最早时刻（步长 step）。用于把“文字轴”变成可执行轴。
+export function greedySchedule(input,ordered,{step=0.5,maxGap=20,horizon=120}={}){
+  const tl=[]; let cursor=0; const notes=[];
+  for(const a of ordered){ let placed=false; const gap=a.maxGap??maxGap; for(let t=cursor;t<=Math.min(horizon,cursor+gap)+1e-9;t=Math.round((t+step)*10)/10){ const trial=[...tl,{t,member:a.member,kind:a.kind}]; const sim=simulate({...input,timeline:trial,params:{...(input.params||{}),duration:t+3}}); if(a.waitFor?.attachLayers){ const w=a.waitFor.attachLayers; const smp=[...sim.samples].reverse().find(x=>x.t<=t+1e-6); const layers=smp?.attach?.[w.element]||0; const lastAttach=[...sim.events].reverse().find(e=>e.type==='attach'&&e.element===w.element&&e.t<=t+1e-6); if((lastAttach?.layers||layers)<w.min) continue; } const err=sim.errors.find(e=>Math.abs(e.t-t)<1e-6&&e.action?.member===a.member&&e.action?.kind===a.kind); if(!err){ tl.push({t,member:a.member,kind:a.kind}); cursor=t; placed=true; break; } }
+    if(!placed) notes.push(`无法在 ${cursor}s 后 ${maxGap}s 内安排 ${a.kind}（干员 ${a.member}）`); }
+  return {timeline:tl,notes};
+}
