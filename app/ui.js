@@ -26,4 +26,11 @@ export function panel({id,index,title,folds,onFold,defaultCollapsed=false,extra}
   const btn=h('button',{type:'button',class:'fold-btn','aria-expanded':String(!collapsed),onclick:()=>{ const c=!body.hidden; body.hidden=c; btn.textContent=c?'展开':'折叠'; btn.setAttribute('aria-expanded',String(!c)); onFold(id,c); }},collapsed?'展开':'折叠');
   return h('section',{class:'panel',id:'panel-'+id},h('div',{class:'panel-heading'},h('span',{class:'index'},index),h('h2',{},title),extra||'',btn),body); }
 export function field(label,control,note){ return h('label',{class:'field'},h('span',{},label,note?h('em',{},' '+note):''),control); }
-export function download(name,text,type='application/json'){ const a=h('a',{href:URL.createObjectURL(new Blob([text],{type})),download:name}); document.body.append(a); a.click(); a.remove(); }
+export function download(name,text,type='application/json'){
+  // 浏览器直接下载；在不允许下载的宿主（如 claude.ai 预览）中退化为可复制的文本框。
+  try{ const a=h('a',{href:URL.createObjectURL(new Blob([text],{type})),download:name}); document.body.append(a); a.click(); a.remove(); }catch{}
+  const back=h('div',{class:'modal-back'}); const ta=h('textarea',{class:'export-box',readonly:true},text); const status=h('span',{class:'muted small'},'');
+  const copy=h('button',{type:'button',class:'mini-btn',onclick:()=>{ const done=()=>{status.textContent='已复制';}; const fallback=()=>{ ta.select(); try{ document.execCommand('copy'); done(); }catch{ status.textContent='请手动全选复制'; } }; if(navigator.clipboard?.writeText){ navigator.clipboard.writeText(text).then(done).catch(fallback); } else fallback(); }},'复制到剪贴板');
+  back.append(h('div',{class:'modal'},h('h3',{},`导出 ${name}`),h('p',{class:'muted small'},'若浏览器未自动下载，请复制下方内容另存为 JSON。'),ta,h('div',{class:'modal-actions'},copy,status,h('button',{type:'button',class:'mini-btn',onclick:()=>back.remove()},'关闭'))));
+  document.body.append(back);
+}
