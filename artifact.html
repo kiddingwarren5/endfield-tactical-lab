@@ -2,12 +2,13 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="./style.css">
 <div class="shell">
-    <header class="topbar"><div class="brand"><div class="brand-mark">◇</div><strong>终末地<br>战术实验室</strong></div><nav class="top-tabs" aria-label="功能模块"><a href="#calculator" id="tab-calculator" class="nav-item active">伤害计算</a><a href="#rotation" id="tab-rotation" class="nav-item">排轴</a></nav></header>
+    <header class="topbar"><div class="brand"><div class="brand-mark">◇</div><strong>终末地<br>战术实验室</strong></div><nav class="top-tabs" aria-label="功能模块"><a href="#setup" id="tab-setup" class="nav-item active">配置</a><a href="#rotation" id="tab-rotation" class="nav-item">排轴</a><a href="#calculator" id="tab-calculator" class="nav-item">伤害计算</a></nav></header>
     <section class="hero">
-      <h1>伤害计算<span class="title-rule"></span></h1>
+      <h1>配置<span class="title-rule"></span></h1>
       <button type="button" id="reset" class="reset-button">↺　恢复默认</button>
     </section>
-    <main id="calculator"></main>
+    <main id="setup"></main>
+    <main id="calculator" hidden></main>
     <main id="rotation" hidden></main>
     <div id="dialog-host"></div>
   </div>

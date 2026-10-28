@@ -1,15 +1,11 @@
 // 排轴页签：选阵容 → 自动排轴（或命中重点编队时的推荐轴）→ 一图流 + 分节叙述；高级编辑折叠在最下方。
-import operators from '../data/operators.js'; import weapons from '../data/weapons.js'; import gear from '../data/gear.js'; import sets from '../data/sets.js'; import effects from '../data/effects.js'; import timing from '../data/timing.js'; import mechanics from '../data/mechanics.js'; import rotations,{scenarios} from '../data/rotations.js';
-import {rotationText,sumHits,buildTeam} from '../engine/sim/rotation.js';
+import operators from '../data/operators.js'; import weapons from '../data/weapons.js'; import gear from '../data/gear.js'; import sets from '../data/sets.js'; import effects from '../data/effects.js'; import timing from '../data/timing.js'; import mechanics from '../data/mechanics.js'; import {scenarios} from '../data/rotations.js';
+import {rotationText,sumHits} from '../engine/sim/rotation.js';
 import {runJob} from './plan-jobs.js';
-import {effectiveMode,MODE_LABEL} from '../engine/skills.js';
-import {getStats} from '../engine/stats.js';
-import {h,fmt,select,field,picker,ELEMENT_CN,PROF_CN,WT_CN,colorOf,pct} from './ui.js';
+import {h,fmt,select,ELEMENT_CN,colorOf,pct} from './ui.js';
 import {defaultSim,renderTimeline} from './timeline-ui.js';
-import {newMember} from './state.js';
+import {ensureRot} from './state.js';
 const data={operators,weapons,gear,sets,effects};
-const ENEMY={defence:100,resistances:{physical:'D',cold:'D',heat:'D',electric:'D',nature:'D'},custom:{}}; // 对照靶默认值；页面可改
-const GRADE={D:0,C:20,B:50};
 const KIND_LABEL={skill:'战技',combo:'连携技',ultimate:'终结技',plunge:'下落攻击',switch:'切主控'};
 const KIND_COLOR={skill:'#bd9b43',combo:'#3288c4',ultimate:'#d9573d',plunge:'#68716c',switch:'#68716c'};
 const CIRCLED='①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿';
@@ -25,15 +21,14 @@ function getWorker(){ if(worker===false) return null; if(worker) return worker; 
 function remember(key,value){ if(results.size>40) results.delete(results.keys().next().value); results.set(key,value); }
 // 返回 {ready} / {error} / {pending}
 function request(key,job){ if(results.has(key)) return {ready:results.get(key)}; const p=pending.get(key); if(p?.error) return {error:p.error}; if(p) return {pending:true}; const w=getWorker(); if(w){ pending.set(key,{job}); startedAt.set(key,Date.now()); w.postMessage({id:key,job}); return {pending:true}; } try{ const v=runJob(job); remember(key,v); return {ready:v}; }catch(e){ pending.set(key,{error:e.message}); return {error:e.message}; } }
-function defaultRot(){ return {source:'auto',scenario:scenarios[0].id,enemy:clone(ENEMY),auto:{beam:6,horizon:60},advanced:false}; }
 
 export function renderRotation(root,state,update){
-  root.innerHTML=''; const rot=state.rot||(state.rot=defaultRot()); if(!rot.enemy) rot.enemy=clone(ENEMY); if(!rot.auto) rot.auto={beam:6,horizon:60};
+  root.innerHTML=''; const rot=ensureRot(state);
   const team=state.team; const filled=team.map((m,i)=>m?i:null).filter(i=>i!=null); const ctx={data,mechanics,timing,enemy:rot.enemy};
   const scenario=scenarios.find(x=>x.id===rot.scenario)||scenarios[0];
   /* 页面只展示自动排轴；手写预设只在测试里当标答用 */
   const left=h('div',{class:'rot-stack'});
-  left.append(teamPanel(state,update,scenario));
+  left.append(h('a',{href:'#setup',class:'back-link'},'← 改配置'));
   const host=h('div',{class:'chart-host'}); left.append(host);
   // 高级编辑（原“排轴模拟”）折叠在最后
   const adv=h('div',{id:'rotation-advanced'}); const det=h('details',{class:'advanced',open:rot.advanced||false},h('summary',{},'高级：手动编辑动作、模拟参数、时刻检查、逐击明细'),adv);
@@ -41,7 +36,7 @@ export function renderRotation(root,state,update){
   left.append(det); root.append(h('div',{class:'workspace single chart'},left));
   if(det.open) renderTimeline(adv,state,update);
   rerender=()=>{ if(document.body.contains(root)) renderRotation(root,state,update); };
-  if(!filled.length){ host.append(h('section',{class:'panel'},h('p',{class:'muted'},'请先在上方选择至少一名干员（1–4 人都可以排轴），或点“载入示例编队”。'))); return; }
+  if(!filled.length){ host.append(h('section',{class:'panel'},h('p',{class:'muted'},'还没有编队。',h('a',{href:'#setup',class:'link'},'去配置页选人')))); return; }
   const key=jobKey(state,scenario); const r=compute(state,scenario);
   if(r.error){ host.append(h('section',{class:'panel'},h('div',{class:'sim-errors'},'排轴失败：'+r.error))); return; }
   if(r.pending){ const key=jobKey(state,scenario); const known=progress.get(key); const names=filled.map(i=>operators.find(o=>o.id===team[i].operatorId));
@@ -63,21 +58,6 @@ function compute(state,scenario){
   return request(key,job);
 }
 
-function teamPanel(state,update,scenario){
-  const rot=state.rot; const team=state.team; const taken=new Set(team.filter(Boolean).map(m=>m.operatorId));
-  const slot=i=>{ const m=team[i]; const opts=operators.filter(o=>!taken.has(o.id)||o.id===m?.operatorId).map(o=>({id:o.id,name:o.name,icon:o.icon,disabled:Boolean(o.preview),sub:`${PROF_CN[o.profession]} · ${ELEMENT_CN[o.element]} · ${WT_CN[o.weaponType]}${o.preview?' · 官方数据未公开':''}`}));
-    const op=m&&operators.find(o=>o.id===m.operatorId); const w=m&&weapons.find(x=>x.id===m.weapon?.id); let modeTxt=''; if(op?.skills?.skill?.modeVariants){ const st=getStats(m,data,{consumables:m.consumables}); const md=effectiveMode(op,m,st); modeTxt=`${MODE_LABEL[md]}${typeof m.mode==='number'?'（手动）':'（按面板自动）'}`; }
-    return h('div',{class:'slot'},h('div',{class:'slot-head'},h('b',{},`${String(i+1).padStart(2,'0')} 号位${i===state.mainControl&&m?' ★主控':''}`)),picker({options:opts,value:m?.operatorId||null,placeholder:'空位',emptyLabel:'清空此位',onChange:id=>update(s=>{ s.team[i]=id?newMember(id):null; if(!s.team[s.mainControl]) s.mainControl=Math.max(0,s.team.findIndex(Boolean)); if(!s.team[s.active]) s.active=Math.max(0,s.team.findIndex(Boolean)); })}),m?h('small',{class:'muted'},`${w?w.name:'未配武器'} · 潜 ${m.potential}${modeTxt?' · '+modeTxt:''}`):''); };
-  const members=team.map((m,i)=>m?[i,operators.find(o=>o.id===m.operatorId)?.name]:null).filter(Boolean);
-  const scTabs=scenarios.map(x=>h('button',{type:'button',class:'preset-tab scenario'+(x.id===scenario.id?' active':''),onclick:()=>update(s=>{s.rot.scenario=x.id;})},x.name));
-  const enemy=rot.enemy; const resRows=h('div',{class:'resistance-list'},...Object.entries(ELEMENT_CN).map(([k,l])=>{ const g=enemy.resistances[k]; const v=g==='custom'?(enemy.custom[k]??0):(GRADE[g]??0); return h('div',{class:'resistance-row'},h('span',{style:`color:${colorOf(k)}`},l),select([['D','D 级 0%'],['C','C 级 20%'],['B','B 级 50%'],['custom','自定义']],g,val=>update(s=>{s.rot.enemy.resistances[k]=val;})),h('output',{},pct(v)),g==='custom'?h('input',{class:'custom-res',type:'number',min:-100,max:100,step:1,value:v,onchange:ev=>update(s=>{s.rot.enemy.custom[k]=Number(ev.target.value);})}):''); }));
-  return h('section',{class:'panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'01'),h('h2',{},'编队与目标')),
-    h('div',{class:'slots'},...[0,1,2,3].map(slot)),
-    h('div',{class:'row-wrap'},members.length?field('主控（全程普攻）',select(members,state.mainControl,v=>update(s=>{s.mainControl=Number(v);}))):'',h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{ s.team=buildTeam(rotations[0],data); s.mainControl=1; s.active=0; })},'载入示例编队')),
-    h('div',{class:'two-col'},field('排多少秒',h('input',{type:'number',min:20,max:120,step:5,value:rot.auto.horizon,onchange:ev=>update(s=>{s.rot.auto.horizon=Number(ev.target.value);})}))),
-    h('div',{class:'subheading'},'Boss / 场景'),h('div',{class:'preset-tabs'},...scTabs),h('ul',{class:'tips'},...scenario.tips.map(t=>h('li',{},t))),
-    h('details',{class:'enemy-box'},h('summary',{},`敌人：防御 ${enemy.defence} · 抗性 ${Object.entries(ELEMENT_CN).map(([k,l])=>`${l}${enemy.resistances[k]==='custom'?(enemy.custom[k]??0)+'%':enemy.resistances[k]}`).join(' / ')}（点开修改）`),h('div',{class:'two-col'},field('防御力',h('input',{type:'number',min:0,max:99999,value:enemy.defence,onchange:ev=>update(s=>{s.rot.enemy.defence=Number(ev.target.value);})})),h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{s.rot.enemy=clone(ENEMY);})},'恢复默认')),resRows));
-}
 
 function members(res){ return res.names.map((name,i)=>name?{i,name,op:operators.find(o=>o.name===name)}:null).filter(Boolean); }
 function skillName(op,kind,stage){ return stage||op?.skills?.[kind]?.name||KIND_LABEL[kind]; }
