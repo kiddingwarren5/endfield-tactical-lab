@@ -69,23 +69,31 @@ function finish(input,ctx,timeline,scenario,plan,modeNote){
   const cycle=cycleOf(main,input.team.map((_,i)=>i).filter(i=>input.team[i])); const end=scenario?.timeLimit??(cycle.complete?cycle.end:duration);
   const segs=segmentize(timeline); const steps=timeline.map((a,i)=>({m:names[a.member],k:a.kind,seg:segs[i],why:explainStep(main,a,names[a.member]),stage:main.events.find(e=>e.type==='cast'&&Math.abs(e.t-a.t)<2e-3&&e.who===names[a.member])?.stage}));
   const tl=timeline.map((a,i)=>({t:a.t,member:a.member,kind:a.kind,step:i})); const states=tl.map(a=>stateAfter(main,a,names[a.member]));
-  return {input,names,steps,timeline:tl,notes:[],skipped:[],main,lo,hi,cycle,end,duration,states,scenario,auto:true,plan,modeNote};
+  const slim={team:input.team,mainControl:input.mainControl,enemy:input.enemy,initial:input.initial,names:input.names}; // 结果里不带数据表引用，便于跨线程传递
+  return {input:slim,names,steps,timeline:tl,notes:[],skipped:[],main,lo,hi,cycle,end,duration,states,scenario,auto:true,plan,modeNote};
 }
-export function autoRotation(team,mainControl,ctx,scenario,{beam=6,step=1,horizon=60,onProgress,annealMs=6000,annealEvals=1200,mctsMs=6000,mctsIters=800,objective='guaranteed'}={}){
+export function autoRotation(team,mainControl,ctx,scenario,{beam=6,step=1,horizon=60,onProgress,annealMs=4500,annealEvals=900,mctsMs=4500,mctsIters=600}={}){
   const {data}=ctx; const base={team,data,mechanics:ctx.mechanics,timing:ctx.timing,enemy:{...ctx.enemy,...(scenario?.enemy||{})},mainControl,initial:scenario?.initial||{sp:200,energy:[0,0,0,0]},params:{}};
   base.names=team.map(m=>m?data.operators.find(o=>o.id===m.operatorId)?.name:null);
-  // 形态枚举：有 modeVariants 的干员（诀）在“自动”时分别按形态 0/1 搜索，取保底每秒伤害更高者
+  // 形态枚举：有 modeVariants 的干员（诀）在“自动”时分别按形态 0/1 搜索
   const modeSlots=team.map((m,i)=>m&&data.operators.find(o=>o.id===m.operatorId)?.skills?.skill?.modeVariants&&typeof m.mode!=='number'?i:null).filter(i=>i!=null);
   const combos=modeSlots.length?modeSlots.reduce((acc,i)=>acc.flatMap(c=>[0,1].map(v=>({...c,[i]:v}))),[{}]):[{}];
-  const results=combos.map((modes,ci)=>{ const t2=team.map((m,i)=>m&&modes[i]!=null?{...m,mode:modes[i]}:m); const input={...base,team:t2}; const prog=f=>onProgress&&onProgress((ci+f)/combos.length);
-    // 流水线：束搜索（热启动）→ 两条独立路线：A = 模拟退火(束解)；B = MCTS → 模拟退火(MCTS 最优)；取保底每秒更高者
-    const plan=autoPlan(input,{beam,step,horizon,objective,onProgress:f=>prog(f*0.2)}); const seq0=[...plan.best.timeline].sort((a,b)=>a.t-b.t); const H=Math.max(horizon,Math.ceil((plan.best.score.until||horizon)+10));
-    const sa=annealSequence(input,seq0,{horizon:H,objective,budgetMs:annealMs,maxEvals:annealEvals,onProgress:f=>prog(0.2+f*0.3),seed:1});
-    const mc=mctsSequence(input,{horizon:H,objective,budgetMs:mctsMs,maxIters:mctsIters,seedSeq:seq0,onProgress:f=>prog(0.5+f*0.3),seed:7});
-    const sa2=annealSequence(input,mc.sequence.length?mc.sequence:seq0,{horizon:H,objective,budgetMs:Math.round(annealMs*0.6),maxEvals:Math.round(annealEvals*0.6),onProgress:f=>prog(0.8+f*0.2),seed:3});
-    const routes=[{name:'束搜索→退火',r:sa},{name:'MCTS',r:mc},{name:'MCTS→退火',r:sa2}].filter(x=>x.r.score); routes.sort((a,b)=>b.r.score.dps-a.r.score.dps); const win=routes[0];
-    plan.improved={method:win.name,routes:routes.map(x=>({name:x.name,dps:Math.round(x.r.score.dps),evals:x.r.evals||x.r.iters,ms:x.r.ms,skipped:x.r.skipped})),before:plan.best.score.dps,after:win.r.score.dps}; const sched=win.r.timeline; const r=finish(input,ctx,sched,scenario,plan,null); const sure=sumHits(r.main,{until:r.end,mainControl,guaranteed:true})/Math.max(1,r.end); return {modes,r,sure}; });
-  results.sort((a,b)=>b.sure-a.sure); const best=results[0];
-  if(results.length>1){ best.r.modeNote=results.map(x=>`${modeSlots.map(i=>`${base.names[i]} ${['阵诀·智','阵诀·意'][x.modes[i]]}`).join('，')}：保底每秒 ${Math.round(x.sure).toLocaleString('zh-CN')}`).join('；'); best.r.modeChoice=best.modes; }
-  return best.r;
+  const MODE_CN=['阵诀·智','阵诀·意']; const cands=[]; const sig=tl=>tl.map(a=>`${a.member}${a.kind[0]}`).join('');
+  combos.forEach((modes,ci)=>{ const t2=team.map((m,i)=>m&&modes[i]!=null?{...m,mode:modes[i]}:m); const input={...base,team:t2}; const prog=f=>onProgress&&onProgress((ci+f)/combos.length);
+    const modeTag=modeSlots.map(i=>`${base.names[i]} ${MODE_CN[modes[i]]}`).join('，');
+    // 多条独立路线，各自给出一条候选轴：束搜索热启动 → 退火；MCTS；MCTS → 退火；以及“集中爆发”目标下的退火与 MCTS
+    const plan=autoPlan(input,{beam,step,horizon,objective:'guaranteed',onProgress:f=>prog(f*0.15)}); const seq0=[...plan.best.timeline].sort((a,b)=>a.t-b.t); const H=Math.max(horizon,Math.ceil((plan.best.score.until||horizon)+10));
+    const routes=[];
+    routes.push({name:'均衡 · 退火',objective:'guaranteed',r:annealSequence(input,seq0,{horizon:H,objective:'guaranteed',budgetMs:annealMs,maxEvals:annealEvals,onProgress:f=>prog(0.15+f*0.2),seed:1})});
+    const mc=mctsSequence(input,{horizon:H,objective:'guaranteed',budgetMs:mctsMs,maxIters:mctsIters,seedSeq:seq0,onProgress:f=>prog(0.35+f*0.2),seed:7}); routes.push({name:'均衡 · 树搜索',objective:'guaranteed',r:mc});
+    routes.push({name:'均衡 · 树搜索+退火',objective:'guaranteed',r:annealSequence(input,mc.sequence.length?mc.sequence:seq0,{horizon:H,objective:'guaranteed',budgetMs:Math.round(annealMs*0.6),maxEvals:Math.round(annealEvals*0.6),onProgress:f=>prog(0.55+f*0.15),seed:3})});
+    routes.push({name:'集中爆发 · 退火',objective:'burst',r:annealSequence(input,seq0,{horizon:H,objective:'burst',budgetMs:annealMs,maxEvals:annealEvals,onProgress:f=>prog(0.7+f*0.15),seed:5})});
+    routes.push({name:'集中爆发 · 树搜索',objective:'burst',r:mctsSequence(input,{horizon:H,objective:'burst',budgetMs:Math.round(mctsMs*0.8),maxIters:Math.round(mctsIters*0.8),seedSeq:seq0,onProgress:f=>prog(0.85+f*0.15),seed:11})});
+    for(const x of routes){ if(!x.r.score||!x.r.timeline.length) continue; const res=finish(input,ctx,x.r.timeline,scenario,{...plan,improved:{method:x.name,evals:x.r.evals||x.r.iters,ms:x.r.ms}},null); const sure=sumHits(res.main,{until:res.end,mainControl,guaranteed:true})/Math.max(1,res.end); cands.push({name:x.name,objective:x.objective,modes,modeTag,res,sure,sig:sig(x.r.timeline)}); } });
+  // 去重（动作顺序相同只留一个），按保底每秒排序，最多 4 条候选
+  const uniq=[]; for(const c of cands.sort((a,b)=>b.sure-a.sure)){ if(uniq.some(u=>u.sig===c.sig)) continue; uniq.push(c); if(uniq.length>=4) break; }
+  const best=uniq[0]; if(!best) throw new Error('没有找到可执行的轴');
+  best.res.candidates=uniq.map((c,i)=>({name:`方案 ${i+1} · ${c.name}${c.modeTag?' · '+c.modeTag:''}`,sure:Math.round(c.sure),objective:c.objective,res:i===0?null:c.res}));
+  if(modeSlots.length){ best.res.modeNote=uniq.map(c=>`${c.modeTag}：保底每秒 ${Math.round(c.sure).toLocaleString('zh-CN')}`).join('；'); best.res.modeChoice=best.modes; }
+  return best.res;
 }
