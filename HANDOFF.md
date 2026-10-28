@@ -60,3 +60,10 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 - 搜索预算：`autoRotation` 默认 10 s/路线（4.5 s 时四人队的别礼终结技常被排到第二个，未收敛；10 s 与 20 s 结构一致）。四人队含诀两形态约 100 s。
 - 来源：docs/cases/case-14（GameKee 别礼文字轴）、case-15（吃我无痕 别汤赛诀：别礼终结技两种放法、充能阈值）、case-16（GameKee 祀、毛巾欧尼酱、TapTap）。浏览器插件断开，未能逐帧看视频；B 站只拿到简介与评论文字。
 - 待办（docs/verification-needed.md 29–31）：固定伤害是否吃增益；周期定义改为玩家式稳态循环（诀每个别礼周期两次终结技）；两种别礼终结技放法在模型里只差 2–5%，需实测裁定。
+
+## 2026-10-29 晚：配置页、本体与知识图谱
+- 三页结构：配置（setup-ui.js，所有输入）→ 排轴（chart-ui.js，只读结果）→ 伤害计算（calc-ui.js，待改成伤害归因）。内置默认配装在 data/builds.js（目前四人），state.js 的 applyDefaultBuild / buildStatus。
+- 本体：docs/ontology.md；词表 data/vocab.js；图 engine/graph.js（buildGraph / validateGraph / comboRequirements / teamDependencies / itemSensitivity / teamUniqueConflicts / effectEnablers）；校验 `node tools/validate_graph.mjs` 写 docs/graph-report.md；tests/graph.test.mjs 要求零错误。
+- 原则：硬依赖（连携发动条件）由模拟器强制；软条件（效果触发）只作搜索先验，绝不当约束。图不算伤害。
+- 修正：解包里没有的装备（拓荒护甲·叄型、集成实训突袭刺刀）词条属性按官方名称映射（build_data.mjs ATTR_NAME_STAT）。
+- 待裁定：docs/verification-needed.md 32–33。

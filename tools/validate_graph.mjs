@@ -1,0 +1,19 @@
+// 图谱校验：node tools/validate_graph.mjs —— 构图、按词表与引用关系校验、写出 docs/graph-report.md。errors 非空时退出码 1。
+import fs from 'node:fs';
+import operators from '../dist/data/operators.js'; import weapons from '../dist/data/weapons.js'; import gear from '../dist/data/gear.js'; import sets from '../dist/data/sets.js'; import consumables from '../dist/data/consumables.js'; import effects from '../dist/data/effects.js'; import mechanics from '../dist/data/mechanics.js';
+import {buildGraph} from '../dist/engine/graph.js';
+export const DATA={operators,weapons,gear,sets,consumables,effects,mechanics};
+const flat=x=>x==null?[]:(Array.isArray(x)?x:[x]);
+export function graphReport(g,res){
+  const L=[]; L.push('# 图谱报告（由 tools/validate_graph.mjs 生成）',`\n生成：${new Date().toISOString()}`,'\n## 规模\n','| 节点类型 | 数量 |','|---|---|',...Object.entries(res.stats.nodes).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`| ${k} | ${v} |`),'','| 关系 | 数量 |','|---|---|',...Object.entries(res.stats.edges).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`| ${k} | ${v} |`));
+  L.push('\n## 校验\n',`错误 ${res.errors.length} 条，待裁定 ${res.warnings.length} 条。`,...res.errors.map(e=>`- 错误：${e}`),...res.warnings.map(w=>`- 待裁定：${w}`));
+  const byKind={}; for(const n of g.nodes.values()) if(n.type==='effect'){ const k=n.ref.owner?.kind; byKind[k]=byKind[k]||{act:{},st:{}}; byKind[k].act[n.activation]=(byKind[k].act[n.activation]||0)+1; byKind[k].st[n.status]=(byKind[k].st[n.status]||0)+1; }
+  L.push('\n## 效果：生效方式 × 实现状态\n','| 来源 | static | event | state | segment | modeled | handled | unmodeled | informational |','|---|---|---|---|---|---|---|---|---|',...Object.entries(byKind).map(([k,c])=>`| ${k} | ${c.act.static||0} | ${c.act.event||0} | ${c.act.state||0} | ${c.act.segment||0} | ${c.st.modeled||0} | ${c.st.handled||0} | ${c.st.unmodeled||0} | ${c.st.informational||0} |`));
+  L.push('\n## 套装与武器：换它要不要重排\n','| 物品 | 全队唯一 | 动态已建模 | 常驻资源类 | 未建模 | 结论 |','|---|---|---|---|---|---|');
+  for(const n of [...g.nodes.values()].filter(x=>x.type==='gearSet'||x.type==='weapon').sort((a,b)=>a.type.localeCompare(b.type)||a.label.localeCompare(b.label))){ const s=g.itemSensitivity(n.id); if(!s.effects.length) continue; L.push(`| ${n.label} | ${n.teamUnique?'是':''} | ${s.dynamicModeled} | ${s.resourceStatic} | ${s.unknown} | ${s.needsReplan?'要重排':(s.certain?'固定轴可算':'未知')} |`); }
+  L.push('\n## 连携技发动条件（硬依赖）与候选提供者\n','说明：explicit 显式事件；derived 规则派生（带守卫条件，要看目标当时状态）；actor 主控 / 敌人；self 自身状态。同一行多个条件是“同时”，不同行（或）是“任一”。\n','| 干员 | 形态 | 候选 | 条件 | 前提 | 候选提供者 |','|---|---|---|---|---|---|');
+  for(const n of [...g.nodes.values()].filter(x=>x.type==='operator'&&!x.preview).sort((a,b)=>a.label.localeCompare(b.label))){ for(const alt of g.comboRequirements(n.ref.id)){ const conds=alt.all.map(c=>[c.type,c.element?flat(c.element).join('/'):'',c.min?`≥${c.min}`:'',c.anomalies?c.anomalies.join('/'):'',c.event&&c.type==='custom'?c.event:'',c.state||''].filter(Boolean).join(' ')).join(' + '); const who=[...new Set(alt.all.flatMap(c=>c.providers.map(p=>`${p.label}${p.provider==='derived'?'（派生）':''}`)))]; L.push(`| ${n.label} | ${alt.mode||''} | ${alt.alt?'或':''} | ${conds} | ${alt.prerequisites.map(p=>p.text||p.kind+(p.value!=null?' '+p.value:'')).join('；')} | ${who.length?who.slice(0,14).join('、')+(who.length>14?' …':''):'无'} |`); } }
+  const tu=[...g.nodes.values()].filter(x=>x.type==='effect'&&x.teamUnique).map(x=>x.label); L.push('\n## 全队唯一（同名不叠加）的效果\n',...tu.map(x=>`- ${x}`));
+  return L.join('\n');
+}
+if(import.meta.url===`file://${process.argv[1]}`){ const g=buildGraph(DATA); const res=g.validate(); fs.writeFileSync('docs/graph-report.md',graphReport(g,res)); console.log(`节点 ${g.nodes.size}，边 ${g.edges.length}；错误 ${res.errors.length}，待裁定 ${res.warnings.length}`); for(const e of res.errors) console.log('错误：'+e); for(const w of res.warnings) console.log('待裁定：'+w); if(res.errors.length) process.exit(1); }
