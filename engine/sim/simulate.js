@@ -6,7 +6,7 @@ import {skillSegments,mechSegments} from '../skills.js';
 import {candidateEffects,resolveValue,triggerKindOf} from '../resolve.js';
 import {effectApplies} from '../damage.js';
 import {valueOf} from '../effects.js';
-import {splitApplied} from '../resolve.js';
+import {splitApplied,applyModifiers} from '../resolve.js';
 
 export const SIM_VERSION='0.1.0';
 const EPS=1e-6;
@@ -50,7 +50,8 @@ export function simulate(input){
   function chargeEff(mb){ return 1+((mb.stats.chargeEff||0)+(P.extraChargeEff?.[mb.idx]||0))/100; }
   function gainEnergy(mb,base,why,{affectedByEff=true,source}={}){ if(mb.energySources&&source&&!mb.energySources.includes(source)){ addLog('energyBlocked',{who:mb.op.name,why,base}); return; } const g=base*(affectedByEff?chargeEff(mb):1); const before=mb.energy; mb.energy=Math.min(mb.energyMax,mb.energy+g); if(before+g>mb.energyMax+EPS) addLog('energyOverflow',{who:mb.op.name,wasted:round(before+g-mb.energyMax)}); addLog('energyGain',{who:mb.op.name,why,amount:round(mb.energy-before)}); }
   // ---------- buffs ----------
-  function activeBuffsFor(mb,seg){ const out=[]; for(const b of S.buffs){ if(b.until<S.t-EPS) continue; const c=b.cand; if(b.beneficiaryIdx!=null&&b.beneficiaryIdx!==mb.idx) continue; if(c.effect.beneficiary==='others'&&b.ownerIdx===mb.idx) continue; if(!effectApplies(c.effect,seg)) continue; out.push({effect:c.effect,value:b.value,label:c.effect.name,ownerIdx:b.ownerIdx,mode:'sim'}); } return out; }
+  function activeBuffsFor(mb,seg){ const out=[]; const activeIds={}; for(const b of S.buffs){ if(b.until<S.t-EPS) continue; const c=b.cand; activeIds[c.effect.id]=true; if(b.beneficiaryIdx!=null&&b.beneficiaryIdx!==mb.idx) continue; if(c.effect.beneficiary==='others'&&b.ownerIdx===mb.idx) continue; if(!effectApplies(c.effect,seg)) continue; if(Array.isArray(c.effect.modifies)&&c.effect.modifies.length&&!c.effect.fragileMultiplier) continue; out.push({effect:c.effect,value:b.value,label:c.effect.name,ownerIdx:b.ownerIdx,mode:'sim'}); }
+    const k=alive.indexOf(mb); applyModifiers(out,cands[k].concat(...alive.map((o,j)=>j===k?[]:cands[j])),activeIds,{data,overrides:{},stacks:{},vars:{}}); return out; }
   function fireTrigger(ev){ // ev: {on, kind, by, element, who(idx), targetHas...}
     alive.forEach((mb,k)=>{ for(const c of cands[k]){ const e=c.effect; const spec=triggerSpec(e); if(spec.on!==ev.on) continue; if(spec.kind&&spec.kind!==ev.kind) continue; if(spec.element&&spec.element!==ev.element) continue; if(spec.which&&spec.which!==ev.which) continue; if(spec.min&&!(ev.layers>=spec.min)) continue; if(spec.targetHas?.attach&&!(S.attach[spec.targetHas.attach]?.layers>0)) continue;
         const anyone=/小队内任意干员|任意干员|队友施放|其他队员/.test(e.condition?.text||''); if(!anyone&&c.ownerIdx!==ev.who) continue; // 触发条件属于“装备者/自身”的动作；只有原文写“小队内任意干员”才接受他人动作
@@ -92,7 +93,7 @@ export function simulate(input){
     const atts=Array.isArray(mech.attach)?mech.attach:(mech.attach?[mech.attach]:[]); const primary=atts.find(a=>!/01号位|改为/.test(a.when||''))||atts[0]; if(primary){ if(/重击/.test(primary.when||'')||primary.when==='heavy') mb.pendingHeavyAttach=primary; else if(!stage||mb.skillStage===1) push(S.t+T.castSeconds.skill*0.6,'attach',{who:mb.idx,element:primary.element,layers:primary.layers||1,via:'skill'}); }
     return true; }
   function castCombo(mb,planned){ const mech=mb.mech.combo||{}; const ready=S.comboReady[mb.idx]; if(!ready||ready.until<S.t-EPS) return fail(planned,`${mb.op.name} 连携未触发（条件未满足或窗口已过）`); if(mb.cd.combo>S.t+EPS) return fail(planned,`${mb.op.name} 连携冷却中（至 ${round(mb.cd.combo)}s）`); if(S.t<mb.busyUntil-EPS) return fail(planned,`${mb.op.name} 正在执行其他动作`);
-    delete S.comboReady[mb.idx]; const cd=num(mech.cooldown,rankOf(mb,'combo'))??mb.op.skills.combo?.params?.cooldown?.[0]?.values?.[rankOf(mb,'combo')-1]??15; mb.cd.combo=S.t+cd; mb.busyUntil=S.t+T.castSeconds.combo; addLog('cast',{who:mb.op.name,kind:'combo',cooldownUntil:round(mb.cd.combo)});
+    delete S.comboReady[mb.idx]; let cd=num(mech.cooldown,rankOf(mb,'combo'))??mb.op.skills.combo?.params?.cooldown?.[0]?.values?.[rankOf(mb,'combo')-1]??15; const k=alive.indexOf(mb); for(const c of cands[k]){ const e=c.effect; if(e.zone!=='cdr'||c.ownerIdx!==mb.idx||(e.condition?.mode||'auto')!=='auto') continue; const v=valueOf(e,{rank:c.rank}); if(e.unit==='%') cd=cd*(1-v/100); else if(e.unit==='x') cd=cd/v; else cd=Math.max(0,cd-v); addLog('cdr',{who:mb.op.name,effect:e.id,value:v,unit:e.unit}); } mb.cd.combo=S.t+cd; mb.busyUntil=S.t+T.castSeconds.combo; addLog('cast',{who:mb.op.name,kind:'combo',cooldownUntil:round(mb.cd.combo)});
     fireTrigger({on:'cast',kind:'combo',who:mb.idx});
     let layers=0; const cons=Array.isArray(mech.consumes)?mech.consumes:(mech.consumes?[mech.consumes]:[]); for(const c of cons){ if(!c.element) continue; layers+=consumeAttach(c.element,c.all!==false,c.layers||0); }
     const segs=skillSegments(mb.op,'combo',mb.member.mode); push(S.t+T.castSeconds.combo*0.6,'skillHit',{who:mb.idx,kind:'combo',segs,mech,layers});
@@ -103,6 +104,7 @@ export function simulate(input){
   function castUlt(mb,planned){ const mech=mb.mech.ultimate||{}; if(mb.energy+EPS<mb.energyMax) return fail(planned,`${mb.op.name} 终结技能量不足：${round(mb.energy)}/${mb.energyMax}`); if(mb.cd.ultimate>S.t+EPS) return fail(planned,`${mb.op.name} 终结技冷却中（至 ${round(mb.cd.ultimate)}s）`); if(S.t<mb.busyUntil-EPS) return fail(planned,`${mb.op.name} 正在执行其他动作`);
     mb.energy=0; const cd=num(mech.cooldown,rankOf(mb,'ultimate'))??20; mb.cd.ultimate=S.t+cd; mb.busyUntil=S.t+T.castSeconds.ultimate; if(T.ultimatePausesTimers){ S.pausedUntil=Math.max(S.pausedUntil,S.t+T.castSeconds.ultimate); } addLog('cast',{who:mb.op.name,kind:'ultimate',cooldownUntil:round(mb.cd.ultimate)});
     fireTrigger({on:'cast',kind:'ultimate',who:mb.idx});
+    { const k=alive.indexOf(mb); for(const c of cands[k]){ const e=c.effect; if(e.zone!=='cdr'||c.ownerIdx!==mb.idx) continue; const t=e.condition?.text||''; if(!/施放终结技|终结技.*后/.test(t)) continue; const v=valueOf(e,{rank:c.rank}); let targets=[]; if(/01号位/.test(t)) targets=[members[0]].filter(Boolean); else if(e.beneficiary==='self') targets=[mb]; else targets=alive; for(const tg of targets){ if(!tg) continue; const before=tg.cd.combo; if(e.unit==='%') tg.cd.combo=S.t+Math.max(0,(tg.cd.combo-S.t)*(1-v/100)); else tg.cd.combo=Math.max(S.t,tg.cd.combo-v); addLog('cdr',{who:tg.op.name,by:mb.op.name,effect:e.id,before:round(before),after:round(tg.cd.combo)}); } } }
     const segs=skillSegments(mb.op,'ultimate',mb.member.mode); push(S.t+T.castSeconds.ultimate*0.8,'skillHit',{who:mb.idx,kind:'ultimate',segs,mech});
     const uatt=Array.isArray(mech.attach)?mech.attach[0]:mech.attach; if(uatt&&uatt.element) push(S.t+T.castSeconds.ultimate*0.8,'attach',{who:mb.idx,element:uatt.element,layers:uatt.layers||1,via:'ultimate'});
     if(mech.switchesControl) S.control=mb.idx; return true; }
