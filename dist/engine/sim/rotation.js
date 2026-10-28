@@ -93,7 +93,7 @@ export function autoRotation(team,mainControl,ctx,scenario,{beam=6,step=1,horizo
   // 去重（动作顺序相同只留一个），按保底每秒排序，最多 4 条候选
   const uniq=[]; for(const c of cands.sort((a,b)=>b.sure-a.sure)){ if(uniq.some(u=>u.sig===c.sig)) continue; uniq.push(c); if(uniq.length>=4) break; }
   const best=uniq[0]; if(!best) throw new Error('没有找到可执行的轴');
-  best.res.candidates=uniq.map((c,i)=>({name:`方案 ${i+1} · ${c.name}${c.modeTag?' · '+c.modeTag:''}`,sure:Math.round(c.sure),objective:c.objective,res:i===0?null:c.res}));
+  best.res.candidates=uniq.map((c,i)=>({name:`方案 ${i+1} · ${c.objective==='burst'?'集中爆发':'均衡'}${c.modeTag?' · '+c.modeTag:''}`,method:c.name,sure:Math.round(c.sure),objective:c.objective,res:i===0?null:c.res}));
   if(modeSlots.length){ best.res.modeNote=uniq.map(c=>`${c.modeTag}：保底每秒 ${Math.round(c.sure).toLocaleString('zh-CN')}`).join('；'); best.res.modeChoice=best.modes; }
   return best.res;
 }

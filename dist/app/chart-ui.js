@@ -1,6 +1,6 @@
 // 排轴页签：选阵容 → 自动排轴（或命中重点编队时的推荐轴）→ 一图流 + 分节叙述；高级编辑折叠在最下方。
 import operators from '../data/operators.js'; import weapons from '../data/weapons.js'; import gear from '../data/gear.js'; import sets from '../data/sets.js'; import effects from '../data/effects.js'; import timing from '../data/timing.js'; import mechanics from '../data/mechanics.js'; import rotations,{scenarios} from '../data/rotations.js';
-import {rotationText,sumHits,buildTeam,teamMatchesPreset} from '../engine/sim/rotation.js';
+import {rotationText,sumHits,buildTeam} from '../engine/sim/rotation.js';
 import {runJob} from './plan-jobs.js';
 import {effectiveMode,MODE_LABEL} from '../engine/skills.js';
 import {getStats} from '../engine/stats.js';
@@ -28,9 +28,9 @@ export function renderRotation(root,state,update){
   root.innerHTML=''; const rot=state.rot||(state.rot=defaultRot()); if(!rot.enemy) rot.enemy=clone(ENEMY); if(!rot.auto) rot.auto={beam:6,horizon:60};
   const team=state.team; const filled=team.map((m,i)=>m?i:null).filter(i=>i!=null); const ctx={data,mechanics,timing,enemy:rot.enemy};
   const scenario=scenarios.find(x=>x.id===rot.scenario)||scenarios[0];
-  const presetsOk=filled.length===4&&teamMatchesPreset(rotations[0],team,data); const source=presetsOk&&rotations.some(p=>p.id===rot.source)?rot.source:'auto';
+  /* 页面只展示自动排轴；手写预设只在测试里当标答用 */
   const left=h('div',{class:'rot-stack'});
-  left.append(teamPanel(state,update,presetsOk,source,scenario));
+  left.append(teamPanel(state,update,scenario));
   const host=h('div',{class:'chart-host'}); left.append(host);
   // 高级编辑（原“排轴模拟”）折叠在最后
   const adv=h('div',{id:'rotation-advanced'}); const det=h('details',{class:'advanced',open:rot.advanced||false},h('summary',{},'高级：手动编辑动作、模拟参数、时刻检查、逐击明细'),adv);
@@ -39,41 +39,39 @@ export function renderRotation(root,state,update){
   if(det.open) renderTimeline(adv,state,update);
   rerender=()=>{ if(document.body.contains(root)) renderRotation(root,state,update); };
   if(!filled.length){ host.append(h('section',{class:'panel'},h('p',{class:'muted'},'请先在上方选择至少一名干员（1–4 人都可以排轴），或点“载入示例编队”。'))); return; }
-  const r=compute(state,source,scenario);
+  const r=compute(state,scenario);
   if(r.error){ host.append(h('section',{class:'panel'},h('div',{class:'sim-errors'},'排轴失败：'+r.error))); return; }
-  if(r.pending){ const key=jobKey(state,source,scenario); const known=progress.get(key); const names=filled.map(i=>operators.find(o=>o.id===team[i].operatorId));
+  if(r.pending){ const key=jobKey(state,scenario); const known=progress.get(key); const names=filled.map(i=>operators.find(o=>o.id===team[i].operatorId));
     progressEl=h('div',{class:'calc-wait',dataset:{key}},
-      h('div',{class:'calc-wait-top'},h('div',{class:'calc-wait-title'},h('span',{class:'calc-dot'}),h('b',{},'正在计算中'),h('span',{class:'elapsed'},'已用 0 秒')),h('div',{class:'pct'},known!=null?`${Math.round(known*100)}%`:(source==='auto'?'0%':''))),
+      h('div',{class:'calc-wait-top'},h('div',{class:'calc-wait-title'},h('span',{class:'calc-dot'}),h('b',{},'正在计算中'),h('span',{class:'elapsed'},'已用 0 秒')),h('div',{class:'pct'},known!=null?`${Math.round(known*100)}%`:'0%')),
       h('div',{class:'progress'+(known==null?' indeterminate':'')},h('i',{style:`width:${known!=null?Math.max(2,Math.round(known*100)):30}%`})),
       h('div',{class:'calc-wait-foot'},h('div',{class:'calc-avatars'},...names.map(o=>h('img',{src:o.icon,alt:'',class:'calc-avatar'}))),h('div',{class:'calc-steps'},h('span',{class:'calc-step on'},'生成候选'),h('span',{class:'calc-step'},'比较伤害'),h('span',{class:'calc-step'},'出图'))),
       h('small',{class:'muted'},'算完会自动显示，页面可以继续操作。'));
     host.append(h('section',{class:'panel'},progressEl)); clearInterval(ticker); ticker=setInterval(()=>{ if(!document.body.contains(progressEl)){ clearInterval(ticker); return; } paintProgress(); },500); paintProgress(); return; }
-  let res=r.ready; const cands=res.candidates||[]; let picked=0; if(source==='auto'&&cands.length>1){ picked=Math.min(rot.candidate||0,cands.length-1); if(picked>0&&cands[picked].res) res=cands[picked].res; }
+  let res=r.ready; const cands=res.candidates||[]; let picked=0; if(cands.length>1){ picked=Math.min(rot.candidate||0,cands.length-1); if(picked>0&&cands[picked].res) res=cands[picked].res; }
   lastRes=res; if(rot.advanced&&!(state.sim?.timeline?.length)){ loadIntoSim(state,res); renderTimeline(adv,state,update); }
-  if(source==='auto'&&cands.length>1) host.append(h('section',{class:'panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'▣'),h('h2',{},'自动排轴给出的几条轴')),h('div',{class:'preset-tabs'},...cands.map((c,i)=>h('button',{type:'button',class:'preset-tab'+(i===picked?' active':''),onclick:()=>update(s=>{s.rot.candidate=i;})},`${c.name} · 每秒 ${fmt(c.sure)}`)))));
-  host.append(chartSvg(res,source),narrative(res,source,state,update)); if(presetsOk) host.append(comparison(state,source,scenario));
+  if(cands.length>1) host.append(h('section',{class:'panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'▣'),h('h2',{},'自动排轴给出的几条轴')),h('div',{class:'preset-tabs'},...cands.map((c,i)=>h('button',{type:'button',class:'preset-tab'+(i===picked?' active':''),onclick:()=>update(s=>{s.rot.candidate=i;})},`${c.name} · 每秒 ${fmt(c.sure)}`)))));
+  host.append(chartSvg(res),narrative(res,state,update));
 }
-function jobKey(state,source,scenario){ const rot=state.rot; return JSON.stringify([source,scenario.id,rot.enemy,source==='auto'?rot.auto:null,state.team,state.mainControl]); }
-function compute(state,source,scenario){
-  const rot=state.rot; const key=jobKey(state,source,scenario);
-  const job=source==='auto'?{kind:'auto',team:clone(state.team),mainControl:state.mainControl,enemy:clone(rot.enemy),scenarioId:scenario.id,opts:{beam:rot.auto.beam,step:1,horizon:rot.auto.horizon}}:{kind:'preset',presetId:source,team:clone(state.team),mainControl:state.mainControl,enemy:clone(rot.enemy),scenarioId:scenario.id};
+function jobKey(state,scenario){ const rot=state.rot; return JSON.stringify(['auto',scenario.id,rot.enemy,rot.auto,state.team,state.mainControl]); }
+function compute(state,scenario){
+  const rot=state.rot; const key=jobKey(state,scenario);
+  const job={kind:'auto',team:clone(state.team),mainControl:state.mainControl,enemy:clone(rot.enemy),scenarioId:scenario.id,opts:{beam:rot.auto.beam,step:1,horizon:rot.auto.horizon}};
   return request(key,job);
 }
 
-function teamPanel(state,update,presetsOk,source,scenario){
+function teamPanel(state,update,scenario){
   const rot=state.rot; const team=state.team; const taken=new Set(team.filter(Boolean).map(m=>m.operatorId));
   const slot=i=>{ const m=team[i]; const opts=operators.filter(o=>!taken.has(o.id)||o.id===m?.operatorId).map(o=>({id:o.id,name:o.name,icon:o.icon,disabled:Boolean(o.preview),sub:`${PROF_CN[o.profession]} · ${ELEMENT_CN[o.element]} · ${WT_CN[o.weaponType]}${o.preview?' · 官方数据未公开':''}`}));
     const op=m&&operators.find(o=>o.id===m.operatorId); const w=m&&weapons.find(x=>x.id===m.weapon?.id); let modeTxt=''; if(op?.skills?.skill?.modeVariants){ const st=getStats(m,data,{consumables:m.consumables}); const md=effectiveMode(op,m,st); modeTxt=`${MODE_LABEL[md]}${typeof m.mode==='number'?'（手动）':'（按面板自动）'}`; }
     return h('div',{class:'slot'},h('div',{class:'slot-head'},h('b',{},`${String(i+1).padStart(2,'0')} 号位${i===state.mainControl&&m?' ★主控':''}`)),picker({options:opts,value:m?.operatorId||null,placeholder:'空位',emptyLabel:'清空此位',onChange:id=>update(s=>{ s.team[i]=id?newMember(id):null; if(!s.team[s.mainControl]) s.mainControl=Math.max(0,s.team.findIndex(Boolean)); if(!s.team[s.active]) s.active=Math.max(0,s.team.findIndex(Boolean)); })}),m?h('small',{class:'muted'},`${w?w.name:'未配武器'} · 潜 ${m.potential}${modeTxt?' · '+modeTxt:''}`):''); };
   const members=team.map((m,i)=>m?[i,operators.find(o=>o.id===m.operatorId)?.name]:null).filter(Boolean);
-  const chips=[h('button',{type:'button',class:'preset-tab'+(source==='auto'?' active':''),onclick:()=>update(s=>{s.rot.source='auto';})},'自动排轴（任意编队）'),...(presetsOk?rotations.map(p=>h('button',{type:'button',class:'preset-tab'+(source===p.id?' active':''),onclick:()=>update(s=>{s.rot.source=p.id;})},p.name)):[])];
   const scTabs=scenarios.map(x=>h('button',{type:'button',class:'preset-tab scenario'+(x.id===scenario.id?' active':''),onclick:()=>update(s=>{s.rot.scenario=x.id;})},x.name));
   const enemy=rot.enemy; const resRows=h('div',{class:'resistance-list'},...Object.entries(ELEMENT_CN).map(([k,l])=>{ const g=enemy.resistances[k]; const v=g==='custom'?(enemy.custom[k]??0):(GRADE[g]??0); return h('div',{class:'resistance-row'},h('span',{style:`color:${colorOf(k)}`},l),select([['D','D 级 0%'],['C','C 级 20%'],['B','B 级 50%'],['custom','自定义']],g,val=>update(s=>{s.rot.enemy.resistances[k]=val;})),h('output',{},pct(v)),g==='custom'?h('input',{class:'custom-res',type:'number',min:-100,max:100,step:1,value:v,onchange:ev=>update(s=>{s.rot.enemy.custom[k]=Number(ev.target.value);})}):''); }));
   return h('section',{class:'panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'01'),h('h2',{},'编队与目标')),
     h('div',{class:'slots'},...[0,1,2,3].map(slot)),
-    h('div',{class:'row-wrap'},members.length?field('主控（全程普攻）',select(members,state.mainControl,v=>update(s=>{s.mainControl=Number(v);}))):'',h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{ s.team=buildTeam(rotations[0],data); s.mainControl=1; s.active=0; s.rot.source=rotations[0].id; })},'载入示例编队')),
-    h('div',{class:'subheading'},'排轴来源'),h('div',{class:'preset-tabs'},...chips),
-    source==='auto'?h('div',{class:'two-col'},field('排多少秒',h('input',{type:'number',min:20,max:120,step:5,value:rot.auto.horizon,onchange:ev=>update(s=>{s.rot.auto.horizon=Number(ev.target.value);})}))):'',
+    h('div',{class:'row-wrap'},members.length?field('主控（全程普攻）',select(members,state.mainControl,v=>update(s=>{s.mainControl=Number(v);}))):'',h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{ s.team=buildTeam(rotations[0],data); s.mainControl=1; s.active=0; })},'载入示例编队')),
+    h('div',{class:'two-col'},field('排多少秒',h('input',{type:'number',min:20,max:120,step:5,value:rot.auto.horizon,onchange:ev=>update(s=>{s.rot.auto.horizon=Number(ev.target.value);})}))),
     h('div',{class:'subheading'},'Boss / 场景'),h('div',{class:'preset-tabs'},...scTabs),h('ul',{class:'tips'},...scenario.tips.map(t=>h('li',{},t))),
     h('details',{class:'enemy-box'},h('summary',{},`敌人：防御 ${enemy.defence} · 抗性 ${Object.entries(ELEMENT_CN).map(([k,l])=>`${l}${enemy.resistances[k]==='custom'?(enemy.custom[k]??0)+'%':enemy.resistances[k]}`).join(' / ')}（点开修改）`),h('div',{class:'two-col'},field('防御力',h('input',{type:'number',min:0,max:99999,value:enemy.defence,onchange:ev=>update(s=>{s.rot.enemy.defence=Number(ev.target.value);})})),h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{s.rot.enemy=clone(ENEMY);})},'恢复默认')),resRows));
 }
@@ -82,7 +80,7 @@ function members(res){ return res.names.map((name,i)=>name?{i,name,op:operators.
 function skillName(op,kind,stage){ return stage||op?.skills?.[kind]?.name||KIND_LABEL[kind]; }
 function castSeconds(kind){ return timing.castSeconds[kind]||1; }
 
-function chartSvg(res,source){
+function chartSvg(res){
   const M=res.main, mem=members(res), main=res.input.mainControl; const T=Math.ceil(res.end+1);
   const W=1180,L=92,R=14,rowH=44,top=46; const rows=[{kind:'normal'},...mem.map(m=>({kind:'member',m})),{kind:'attach'},{kind:'sp'}]; const H=top+rows.length*rowH+28;
   const x=t=>L+(Math.min(t,T)/T)*(W-L-R); const rowY=k=>top+k*rowH;
@@ -109,11 +107,11 @@ function chartSvg(res,source){
   { const k=rows.findIndex(r=>r.kind==='sp'), y=rowY(k); const yy=v=>y+rowH-6-v*(rowH-14)/300; svg.append(el('line',{x1:L,y1:yy(100),x2:W-R,y2:yy(100),stroke:'#e8dcc0','stroke-dasharray':'2 3'})); svg.append(el('text',{x:W-R-2,y:yy(100)-2,'font-size':8.5,fill:'#9a7424','text-anchor':'end'},'100 = 一次战技')); let d=''; M.samples.filter(s=>s.t<=T).forEach((s,i)=>{ d+=(i?' L':'M')+`${x(s.t)},${yy(s.sp)}`; }); svg.append(el('path',{d,fill:'none',stroke:'#9a7424','stroke-width':1.4})); }
   mem.forEach((m,k)=>{ const max=M.summary.energyMax[k]; const first=M.events.find(e=>e.energy&&e.energy[k]>=max-1e-6); if(first&&first.t<=T){ const y=rowY(1+k); svg.append(el('path',{d:`M${x(first.t)},${y+34} l4,7 l-8,0 z`,fill:'#d9573d'})); } });
   const legend=h('div',{class:'chart-legend'},...Object.entries(KIND_LABEL).map(([k,l])=>h('span',{},h('i',{style:`background:${KIND_COLOR[k]}`}),l)),h('span',{},h('i',{style:'background:#dfe5dd'}),'主控普攻'),h('span',{},h('i',{class:'dash'}),'连携触发链'),h('span',{},h('i',{class:'tri'}),'终结技能量充满'),h('span',{},'★ 主控'));
-  const title=source==='auto'?'自动排轴 · 一图流':`${rotations.find(p=>p.id===source)?.name} · 一图流`;
+  const title='自动排轴 · 一图流';
   return h('section',{class:'panel chart-panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'02'),h('h2',{},title)),h('div',{class:'chart-scroll'},svg),legend);
 }
 
-function narrative(res,source,state,update){
+function narrative(res,state,update){
   const M=res.main, mem=members(res); const end=res.end; const mc=res.input.mainControl;
   const total=sumHits(M,{until:end}), lo=sumHits(res.lo,{until:end}), hi=sumHits(res.hi,{until:end}); const sure=sumHits(M,{until:end,mainControl:mc,guaranteed:true});
   const ults=M.events.filter(e=>e.type==='cast'&&e.kind==='ultimate').map(e=>`${e.who} ${e.t.toFixed(1)}s`).join('、')||'无';
@@ -123,7 +121,6 @@ function narrative(res,source,state,update){
   const copyBtn=h('button',{type:'button',class:'mini-btn',onclick:()=>{ const done=()=>{copyStatus.textContent='已复制文字轴';}; const fb=()=>{ const ta=h('textarea',{class:'export-box',readonly:true},text); document.body.append(ta); ta.select(); try{ document.execCommand('copy'); done(); }catch{ copyStatus.textContent='请从下方文字手动复制'; } ta.remove(); }; if(navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(done).catch(fb); else fb(); }},'复制文字轴');
   const applyBtn=h('button',{type:'button',class:'mini-btn primary',onclick:()=>{ update(s=>{ loadIntoSim(s,res); s.rot.advanced=true; }); }},'到高级里手动调整');
   const warn=[...(res.notes||[]).map(n=>n),...(res.main.errors||[]).map(e=>`${e.t.toFixed(1)}s ${e.message}`)];
-  const preset=rotations.find(p=>p.id===source);
   return h('section',{class:'panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'03'),h('h2',{},'结果与分节叙述')),
     h('div',{class:'chart-stats'},stat(res.scenario?.timeLimit?'限时':'一轮用时',`${end.toFixed(1)} 秒`,''),stat('保底伤害',fmt(sure),`每秒 ${fmt(sure/end)}`),stat('含队友普攻',fmt(total),`每秒 ${fmt(total/end)}`),stat('终结技时刻',ults,'')),
 
@@ -131,18 +128,6 @@ function narrative(res,source,state,update){
     h('div',{class:'chart-team'},...res.input.team.map((m,i)=>{ if(!m) return ''; const op=operators.find(o=>o.id===m.operatorId), w=weapons.find(x=>x.id===m.weapon?.id); return h('div',{class:'team-card'},h('img',{src:op.icon,alt:'',class:'item-thumb'}),h('div',{},h('b',{},`${String(i+1).padStart(2,'0')} ${op.name}${i===mc?' ★主控':''}`),h('small',{},`${w?.name||'未配武器'} · 潜 ${m.potential} · ${[m.gear?.armor,m.gear?.gloves,m.gear?.kit1,m.gear?.kit2].map(g=>gear.find(x=>x.id===g?.id)?.name||'—').join('/')}`))); })),
     ...groups.map(g=>[h('h3',{class:'seg-title'},`第 ${g.seg} 节 · ${g.ult?'爆发':'充能'}`),h('ol',{class:'steps'},...g.items.map(stepRow))]),
     h('div',{class:'result-actions'},applyBtn,copyBtn,copyStatus),
-    h('details',{class:'chart-details'},h('summary',{},'文字轴（可全选复制）'),h('pre',{class:'rotation-text'},text)),
-    source==='auto'?'':h('p',{class:'muted small'},'推荐轴来自玩家社区的打法，并用视频画面核对过。'));
+    h('details',{class:'chart-details'},h('summary',{},'文字轴（可全选复制）'),h('pre',{class:'rotation-text'},text)));
 }
 function stat(label,value,sub){ return h('div',{class:'result-mini stat'},h('span',{},label),h('strong',{},value),sub?h('small',{class:'muted'},sub):''); }
-
-// 重点编队：推荐轴（标答）与自动排轴同条件对照
-function comparison(state,current,scenario){
-  const rows=[]; let waiting=0; for(const p of rotations){ const r=compute(state,p.id,scenario); if(r.ready) rows.push({id:p.id,name:p.name,r:r.ready}); else if(r.pending) waiting++; }
-  { const r=compute(state,'auto',scenario); if(r.ready){ const cs=r.ready.candidates||[]; if(cs.length) cs.forEach((c,i)=>rows.push({id:'auto'+i,name:c.name,r:i===0?r.ready:c.res})); else rows.push({id:'auto',name:'自动排轴',r:r.ready}); } else if(r.pending) waiting++; }
-  if(!rows.length) return h('section',{class:'panel'},h('p',{class:'muted'},'标答对照计算中…'));
-  const mc=state.mainControl; const cells=rows.map(x=>{ const end=x.r.end; const sure=sumHits(x.r.main,{until:end,mainControl:mc,guaranteed:true}); return {...x,end,sure,sps:sure/end,tot:sumHits(x.r.main,{until:end})/end,errs:(x.r.main.errors||[]).length+(x.r.notes||[]).length}; });
-  const ref=cells[0]; return h('section',{class:'panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'04'),h('h2',{},'推荐轴与自动排轴对照')),
-    h('table',{class:'seg-table'},h('thead',{},h('tr',{},h('th',{},'轴'),h('th',{},scenario.timeLimit?'限时':'一轮用时'),h('th',{},'保底伤害'),h('th',{},'每秒'),h('th',{},'相对主轴'))),h('tbody',{},...cells.map(c=>h('tr',{class:c.id===current?'current':''},h('td',{},c.name),h('td',{},`${c.end.toFixed(1)} 秒`),h('td',{},fmt(c.sure)),h('td',{},fmt(c.sps)),h('td',{},ref?`${(c.sps/ref.sps*100-100).toFixed(1)}%`:''))))),
-    waiting?h('p',{class:'muted small'},'还有轴在计算中，算完自动补上。'):'');
-}
