@@ -32,7 +32,8 @@ export function getStats(member,data,opts={}){
   const charBase=op.base90.atk, weaponBase=weapon?.baseAtk90??0;
   const abilityMul=1+main*MAIN_PER_POINT+sub*SUB_PER_POINT;
   // rules B8: [(角色基础+武器基础)×(1+攻击%)+装备固定攻击]×(1+0.005主+0.002副) + 食药固定攻击（用户实测：主副能力乘算后再加）
-  const atkRaw=((charBase+weaponBase)*(1+atkPct/100)+atkFlatBefore)*abilityMul+atkFlatAfter;
+  const foodInside=opts.foodFlatMode==='inside'; // 研究（封测实测）认为食药固定攻击也在括号内；用户实测为乘算后相加（默认）
+  const atkRaw=((charBase+weaponBase)*(1+atkPct/100)+atkFlatBefore+(foodInside?atkFlatAfter:0))*abilityMul+(foodInside?0:atkFlatAfter);
   const sets=setCounts(member,data);
-  return {operator:op,weapon,abilities,main,sub,flatAbilities:flat,pctAbilities:pct,atk:{charBase,weaponBase,atkPct,abilityMul,atkFlatBefore,atkFlatAfter,raw:atkRaw,panel:floor(atkRaw)},critRate,critDmg,chargeEff,artsStrength,bonuses,sets,trace};
+  return {operator:op,weapon,abilities,main,sub,flatAbilities:flat,pctAbilities:pct,atk:{charBase,weaponBase,atkPct,abilityMul,atkFlatBefore,atkFlatAfter,foodFlatMode:foodInside?'inside':'after',raw:atkRaw,panel:floor(atkRaw)},critRate,critDmg,chargeEff,artsStrength,bonuses,sets,trace};
 }
