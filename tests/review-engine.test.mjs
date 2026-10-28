@@ -221,9 +221,9 @@ check('D7 sim modifier folding equals static: 祀 潜能3 amp 36×1.2 in a 4-mem
 });
 check('D8 teamUnique in sim: two 长息 owners → beneficiary gets +16 once', ()=>{
   const CX=['长息改装护甲','长息导能护手','长息测距仪','长息重护板'];
-  const r=simulate({team:[mk('别礼'),mk('祀',{gearNames:CX}),mk('赛希',{gearNames:CX})],data,mechanics,timing,enemy,initial:{sp:300,energy:[0,200,200]},timeline:[{t:0.5,member:1,kind:'ultimate'},{t:0.6,member:2,kind:'ultimate'}],params:{duration:8}});
+  const r=simulate({team:[mk('别礼'),mk('祀',{gearNames:CX}),mk('赛希',{gearNames:CX})],data,mechanics,timing,enemy,initial:{sp:300,energy:[0,200,200]},timeline:[{t:0.5,member:1,kind:'ultimate'},{t:3.6,member:2,kind:'ultimate'}],params:{duration:10}}); // 终结技演出全队独占：第二个终结技在 3 s 演出后
   assert.equal(r.events.filter(e=>e.type==='buffStart'&&e.id==='suit_usp02.p1').length,2,'both owners triggered');
-  const h=r.hits.find(x=>x.name==='别礼'&&x.t>5); assert.equal(h.applied.filter(a=>a.id==='suit_usp02.p1').length,1);
+  const h=r.hits.find(x=>x.name==='别礼'&&x.t>7); assert.equal(h.applied.filter(a=>a.id==='suit_usp02.p1').length,1);
 });
 check('D9 管理员 combo does not re-arm itself (“其他干员的连携技”)', ()=>{
   const r=simulate({team:[mk('管理员 (女)'),tangMember()],data,mechanics,timing,enemy,timeline:[{t:0.5,member:1,kind:'skill'},{t:2,member:1,kind:'combo'},{t:4,member:0,kind:'combo'}],params:{duration:8}});

@@ -42,8 +42,13 @@ function teamTabs(state,update){
   const tabs=h('div',{class:'team-tabs'});
   state.team.forEach((m,i)=>{ if(!m) return; const op=operators.find(o=>o.id===m.operatorId); tabs.append(h('button',{type:'button',class:'team-tab'+(i===state.active?' active':''),onclick:()=>update(s=>{s.active=i;})},h('img',{class:'tab-thumb',src:op.icon,alt:''}),h('span',{},op.name),state.mainControl===i?h('small',{class:'mc-tag'},'主控'):'',state.team.filter(Boolean).length>1?h('span',{class:'tab-x',title:'移出编队',onclick:e=>{e.stopPropagation();update(s=>{s.team[i]=null;const idx=s.team.findIndex(Boolean);s.active=idx<0?0:idx;if(s.mainControl===i)s.mainControl=s.active;});}},'×'):'')); });
   const count=state.team.filter(Boolean).length; if(count<4){ const taken=new Set(state.team.filter(Boolean).map(m=>m.operatorId)); const opts=operators.filter(o=>!taken.has(o.id)).map(o=>({id:o.id,name:o.name,icon:o.icon,disabled:Boolean(o.preview),sub:`${PROF_CN[o.profession]} · ${ELEMENT_CN[o.element]} · ${WT_CN[o.weaponType]}${o.preview?' · 官方数据未公开，暂不可选':''}`})); tabs.append(h('div',{class:'team-add'},picker({options:opts,value:null,placeholder:`+ 添加干员（${count}/4）`,empty:false,onChange:id=>update(s=>{const slot=s.team.findIndex(x=>!x);s.team[slot]=newMember(id);s.active=slot;})}))); }
-  tabs.append(h('label',{class:'mc-select'},'主控干员 ',select(state.team.map((m,i)=>m?[i,operators.find(o=>o.id===m.operatorId).name]:null).filter(Boolean),state.mainControl,v=>update(s=>{s.mainControl=Number(v);}))));
-  tabs.append(h('a',{href:'#rotation',class:'mini-btn primary done-btn',title:'编队、配装选好后点这里去排轴；少于 4 人也可以'},'完成'));
+  const done=state.ui.teamDone;
+  if(done){ // 紧凑模式：只留头像、主控与“编辑编队”，伤害结果一直可见
+    tabs.innerHTML=''; tabs.classList.add('compact');
+    state.team.forEach((m,i)=>{ if(!m) return; const op=operators.find(o=>o.id===m.operatorId); tabs.append(h('button',{type:'button',class:'team-tab mini'+(i===state.active?' active':''),title:op.name,onclick:()=>update(s=>{s.active=i;})},h('img',{class:'tab-thumb',src:op.icon,alt:op.name}),state.mainControl===i?h('small',{class:'mc-tag'},'主控'):'')); });
+    tabs.append(h('div',{class:'bar-right'},h('label',{class:'mc-select'},'主控 ',select(state.team.map((m,i)=>m?[i,operators.find(o=>o.id===m.operatorId).name]:null).filter(Boolean),state.mainControl,v=>update(s=>{s.mainControl=Number(v);}))),h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{s.ui.teamDone=false;})},'编辑编队'),h('a',{href:'#rotation',class:'mini-btn'},'去排轴 →')));
+    return tabs; }
+  tabs.append(h('div',{class:'bar-right'},h('label',{class:'mc-select'},'主控 ',select(state.team.map((m,i)=>m?[i,operators.find(o=>o.id===m.operatorId).name]:null).filter(Boolean),state.mainControl,v=>update(s=>{s.mainControl=Number(v);}))),h('button',{type:'button',class:'done-btn',title:'确认编队，留在伤害计算页；要排轴请点顶部“排轴”',onclick:()=>update(s=>{s.ui.teamDone=true;})},'完成')));
   return tabs;
 }
 

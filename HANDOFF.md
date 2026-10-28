@@ -47,3 +47,9 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 - 入口 `dist/app/chart-ui.js` → `renderRotation`：编队槽位（与伤害计算页共用 state.team）→ 排轴来源（自动 / 命中重点编队时的预设）→ Boss 场景 + 敌人防御抗性 → 一图流 → 分节叙述 → 标答对照 → 折叠的高级编辑（原 timeline-ui）。
 - 自动排轴 `autoRotation`（rotation.js）：形态枚举（诀智/意，member.mode='auto' 时）× autoPlan 束搜索（目标 guaranteed）→ improvePlan 局部优化 → 每步说明由事件日志生成（explainStep）。
 - 回归：`node --test tests/rotations.test.mjs` 会跑预设 × 场景与“自动 vs 标答”，并重写 docs/rotations.md。
+
+## 自动排轴算法（2026-10-29 凌晨）
+- 表示：动作顺序（不含时刻）；解码：`simulate({sequence})` 按顺序在最早可行时刻执行（支持 waitFor / minT / optional，等待超过 seqMaxWait 跳过）。
+- 搜索：`autoPlan`（束搜索，热启动）→ `annealSequence`（模拟退火：交换/移动/增删/改类型，Metropolis，温度 5%→0.2%）与 `mctsSequence`（UCT，随机 rollout，均值回传）→ 再对 MCTS 最优退火 → 三条路线取保底每秒最高。
+- 评价全部由模拟器给出；不可执行的轴直接拒绝；跳过的步骤按 0.9^n 折算。
+- 回归：tests/rotations.test.mjs “自动排轴 vs 标答”（门槛 ≥85%）。

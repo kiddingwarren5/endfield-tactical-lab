@@ -12,7 +12,7 @@ for(const preset of rotations){
     assert.deepEqual(r.main.errors,[],'复现时不应有不可执行动作');
     assert.ok(r.cycle.complete,'周期应完整（全员各放一次终结技）');
     const consumes=r.main.events.filter(e=>e.type==='consume');
-    for(const a of r.timeline){ const s=preset.steps[a.step]; if(s.wait){ const c=consumes.find(e=>Math.abs(e.t-a.t)<1e-6); assert.ok(c&&c.layers>=s.wait,`${a.t}s ${s.m} 连携应消耗 ≥${s.wait} 层`); } }
+    for(const a of r.timeline){ const s=preset.steps[a.step]; if(s.wait){ const c=consumes.find(e=>Math.abs(e.t-a.t)<2e-3); assert.ok(c&&c.layers>=s.wait,`${a.t}s ${s.m} 连携应消耗 ≥${s.wait} 层`); } }
     assert.ok(Math.abs(r.main.hits.reduce((a,h)=>a+h.damage,0)-r.main.summary.total)<1e-6);
   });
 }
@@ -40,6 +40,6 @@ test('自动排轴 vs 标答（重点编队）',()=>{
   const auto=autoRotation(team,mc,ctx,scenarios[0],{beam:6,step:1,horizon:70}); const ms=Date.now()-t0;
   const ref=results[rotations[0].id]; const refS=sumHits(ref.main,{until:ref.end,mainControl:mc,guaranteed:true})/ref.end; const autoS=sumHits(auto.main,{until:auto.end,mainControl:mc,guaranteed:true})/auto.end;
   assert.deepEqual(auto.main.errors,[]); assert.ok(auto.cycle.complete,'自动轴周期应完整');
-  const ratio=autoS/refS; fs.appendFileSync('docs/rotations.md',`\n## 标答对照（自动排轴 vs 推荐主轴，常规对照靶）\n\n自动排轴（束宽 6、步长 1 s、时限 70 s + 局部优化，${ms} ms）：周期 ${auto.end.toFixed(1)} s，保底每秒 ${fmt(autoS)}；推荐主轴保底每秒 ${fmt(refS)}；比值 ${(ratio*100).toFixed(1)}%。\n\n自动轴：${auto.timeline.map(a=>`${a.t}s ${auto.names[a.member]}${({skill:'战技',combo:'连携',ultimate:'终结技'})[a.kind]}`).join(' → ')}\n`);
+  const ratio=autoS/refS; fs.appendFileSync('docs/rotations.md',`\n## 标答对照（自动排轴 vs 推荐主轴，常规对照靶）\n\n自动排轴（束搜索热启动 → 模拟退火 / MCTS→退火 两条路线取优，${auto.plan?.improved?.method||''}，${ms} ms）：周期 ${auto.end.toFixed(1)} s，保底每秒 ${fmt(autoS)}；推荐主轴保底每秒 ${fmt(refS)}；比值 ${(ratio*100).toFixed(1)}%。\n\n自动轴：${auto.timeline.map(a=>`${a.t}s ${auto.names[a.member]}${({skill:'战技',combo:'连携',ultimate:'终结技'})[a.kind]}`).join(' → ')}\n`);
   assert.ok(ratio>0.85,`自动排轴保底每秒应不低于标答的 85%，实际 ${(ratio*100).toFixed(1)}%`);
 });

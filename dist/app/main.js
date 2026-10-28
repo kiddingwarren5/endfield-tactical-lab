@@ -3,7 +3,6 @@ import {defaultState,STATE_VERSION} from './state.js';
 import {renderCalc,snapshotDialog} from './calc-ui.js';
 import {renderRotation} from './chart-ui.js';
 import {$,h} from './ui.js';
-import meta from '../data/meta.js';
 
 let state=load()||defaultState();
 function load(){ try{ const raw=localStorage.getItem('endfield-lab-state'); if(!raw) return null; const s=JSON.parse(raw); if(s.version!==STATE_VERSION) return null; delete s.pendingSnapshot; return s; }catch{ return null; } }
@@ -26,7 +25,6 @@ function render(){
   if(currentTab==='calculator'){ renderCalc($('calculator'),state,update); }
   else if(currentTab==='rotation'){ renderRotation($('rotation'),state,update); }
   const dlgHost=$('dialog-host'); dlgHost.innerHTML=''; const dlg=snapshotDialog(state,update); if(dlg) dlgHost.append(dlg);
-  $('meta-line').textContent=`数据版本 ${meta.dataVersion} · 游戏版本 ${meta.gameVersion} · 官方抓取 ${meta.officialFetchedAt.slice(0,10)} · 干员 ${meta.counts.operators} / 武器 ${meta.counts.weapons} / 装备 ${meta.counts.gear} / 食药 ${meta.counts.consumables}`;
 }
 window.addEventListener('hashchange',()=>{ const t=tabOf(location.hash); if(t){ currentTab=t; render(); } });
 $('reset').addEventListener('click',()=>{ const keep=state.snapshots; state=defaultState(); state.snapshots=keep; save(); render(); });
