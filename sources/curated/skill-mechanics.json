@@ -3433,7 +3433,14 @@
    },
    "attach": null,
    "abnormal": null,
-   "notes": "生成1处涡流（存在 30s，场上最多2处）"
+   "notes": "生成1处涡流（存在 30s，场上最多2处）",
+   "creates": {
+    "resource": "涡流",
+    "max": 2,
+    "duration": 30,
+    "origin": "official",
+    "note": "河水，助我！：迸射出一处涡流，场上最多 2 处（存在时长按研究值 30 s）"
+   }
   },
   "ultimate": {
    "energyCost": 90,
@@ -3456,7 +3463,11 @@
     "earlyWaveSegment": "ultimate3",
     "origin": "official",
     "note": "天赋呼风唤浪·二：主控在古老图形中下落攻击，提前结束演化形成水龙卷（效果同战技，伤害+60%）并降下巨浪（ultimate3）"
-   }
+   },
+   "applies": [
+    "root"
+   ],
+   "appliesNote": "大当家盯着呢！：对范围内敌人施加一段时间的定身（官方文本）"
   },
   "modes": null
  },
@@ -4829,7 +4840,11 @@
     "chr_0036_jsspsi.skill.qimoCost",
     "chr_0036_jsspsi.skill.shoubiCost"
    ],
-   "notes": "笔意 20s 记录伤害，结束时爆发为固定伤害；定身 1s"
+   "notes": "笔意 20s 记录伤害，结束时爆发为固定伤害；定身 1s",
+   "applies": [
+    "root"
+   ],
+   "appliesNote": "河山共影：对目标施加笔意和定身（官方文本）"
   },
   "combo": {
    "trigger": {
