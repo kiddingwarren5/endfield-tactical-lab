@@ -486,7 +486,12 @@
     "note": "官方更新说明：部分技能演出暂停终结技强化状态计时；其他计时是否暂停未确认（rules F，gpt-mechanics §26）"
    },
    "buffs": [],
-   "notes": "召唤烈焰魔剑并切换为主控，强化普攻持续 15s"
+   "notes": "召唤烈焰魔剑并切换为主控，强化普攻持续 15s",
+   "duration": {
+    "value": 15,
+    "origin": "official",
+    "note": "参数表「持续时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -745,7 +750,12 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "持续施法 3s，每敌人每0.3s最多受击一次"
+   "notes": "持续施法 3s，每敌人每0.3s最多受击一次",
+   "duration": {
+    "value": 3,
+    "origin": "official",
+    "note": "参数表「持续时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -1089,7 +1099,12 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "全队护盾 10s"
+   "notes": "全队护盾 10s",
+   "duration": {
+    "value": 10,
+    "origin": "official",
+    "note": "参数表「护盾持续时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -1611,7 +1626,12 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "投下1支强雷枪（存在 30s），由战技召回时施加电磁附着"
+   "notes": "投下1支强雷枪（存在 30s），由战技召回时施加电磁附着",
+   "duration": {
+    "value": 30,
+    "origin": "official",
+    "note": "参数表「强雷枪存在时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -1844,7 +1864,12 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "冰雪地带持续 5s"
+   "notes": "冰雪地带持续 5s",
+   "duration": {
+    "value": 5,
+    "origin": "official",
+    "note": "参数表「持续时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -1973,7 +1998,12 @@
     "chr_0023_antal.ult.electricAmp",
     "chr_0023_antal.ult.heatAmp"
    ],
-   "notes": "全队电磁增幅+灼热增幅 12s；无伤害段"
+   "notes": "全队电磁增幅+灼热增幅 12s；无伤害段",
+   "duration": {
+    "value": 12,
+    "origin": "official",
+    "note": "参数表「持续时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -2349,7 +2379,12 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "前两斩施加虚弱 8s（effects 未录入）"
+   "notes": "前两斩施加虚弱 8s（effects 未录入）",
+   "duration": {
+    "value": 8,
+    "origin": "official",
+    "note": "参数表「虚弱持续时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -2825,7 +2860,12 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "生成5点铁誓（持续 30s）"
+   "notes": "生成5点铁誓（持续 30s）",
+   "duration": {
+    "value": 30,
+    "origin": "official",
+    "note": "参数表「铁誓持续时间」"
+   }
   },
   "modes": null
  },
@@ -2940,7 +2980,12 @@
     "chr_0011_seraph.ult.amp.cold",
     "chr_0011_seraph.ult.amp.nature"
    ],
-   "notes": "全队寒冷增幅+自然增幅 12s；无伤害段"
+   "notes": "全队寒冷增幅+自然增幅 12s；无伤害段",
+   "duration": {
+    "value": 12,
+    "origin": "official",
+    "note": "参数表「持续时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -3194,7 +3239,12 @@
     "chr_0017_yvonne.ult.critRate",
     "chr_0017_yvonne.ult.critDmg"
    ],
-   "notes": "部署小嘀嗒并切换为主控；7s 内普攻强化、叠暴击率，结束前最后一次普攻变为重击"
+   "notes": "部署小嘀嗒并切换为主控；7s 内普攻强化、叠暴击率，结束前最后一次普攻变为重击",
+   "duration": {
+    "value": 7,
+    "origin": "official",
+    "note": "参数表「持续时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -3318,7 +3368,12 @@
     "chr_0013_aglina.ult.fragile.base",
     "chr_0013_aglina.ult.fragile.breach"
    ],
-   "notes": "区域 5s：缓速+法术脆弱（随破防层数提升）；区域内击飞状态保持到结束"
+   "notes": "区域 5s：缓速+法术脆弱（随破防层数提升）；区域内击飞状态保持到结束",
+   "duration": {
+    "value": 5,
+    "origin": "official",
+    "note": "参数表「力场持续时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -3396,7 +3451,8 @@
     "chr_0027_tangtang.skill.fragile2",
     "chr_0027_tangtang.skill.fragile3"
    ],
-   "notes": "形成≥2个水龙卷时施加法术脆弱 15s；水龙卷伤害视为战技伤害"
+   "notes": "形成≥2个水龙卷时施加法术脆弱 15s；水龙卷伤害视为战技伤害",
+   "extraSegmentPerConsumed": "skill2"
   },
   "combo": {
    "trigger": {
@@ -3457,17 +3513,22 @@
      "element": "cold",
      "layers": 1
     },
-    "tornadoBonus": 0.6,
+    "tornadoBonus": 0,
     "tornadoSegment": "skill2",
     "delayedSegment": "ultimate2",
     "earlyWaveSegment": "ultimate3",
     "origin": "official",
-    "note": "天赋呼风唤浪·二：主控在古老图形中下落攻击，提前结束演化形成水龙卷（效果同战技，伤害+60%）并降下巨浪（ultimate3）"
+    "note": "天赋呼风唤浪·二：主控在古老图形中下落攻击，提前结束演化形成水龙卷（效果同战技，伤害+60%）并降下巨浪（ultimate3）；伤害加成由效果目录 ultimateEarlyTornado 触发，此处不再重复"
    },
    "applies": [
     "root"
    ],
-   "appliesNote": "大当家盯着呢！：对范围内敌人施加一段时间的定身（官方文本）"
+   "appliesNote": "大当家盯着呢！：对范围内敌人施加一段时间的定身（官方文本）",
+   "duration": {
+    "value": 4,
+    "origin": "official",
+    "note": "古老图形持续时间 4 s（参数表）"
+   }
   },
   "modes": null
  },
@@ -3603,7 +3664,12 @@
     "chr_0030_zhuangfy.ult.comboCdSpeed",
     "chr_0030_zhuangfy.ult.freeSkill"
    ],
-   "notes": "天理合真 25s：强化普攻/战技/连携；首次战技不消耗技力与导电，必定生成3柄青霆剑。原文未写切换主控"
+   "notes": "天理合真 25s：强化普攻/战技/连携；首次战技不消耗技力与导电，必定生成3柄青霆剑。原文未写切换主控",
+   "duration": {
+    "value": 25,
+    "origin": "official",
+    "note": "参数表「持续时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -3788,7 +3854,12 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "施放后下一次战技替换为追猎（视为连携技，不消耗技力）；追猎是否给连携能量未知"
+   "notes": "施放后下一次战技替换为追猎（视为连携技，不消耗技力）；追猎是否给连携能量未知",
+   "duration": {
+    "value": 15,
+    "origin": "official",
+    "note": "参数表「追猎状态持续时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -4110,7 +4181,12 @@
     "ultimate": "破晦诀明",
     "condition": "集束打击发动2次后（主控重击或处决阵中敌人触发，最多2次）"
    },
-   "notes": "破晦阵 20s"
+   "notes": "破晦阵 20s",
+   "duration": {
+    "value": 20,
+    "origin": "official",
+    "note": "参数表「破晦阵持续时间（秒）」"
+   }
   },
   "modes": [
    {
@@ -4465,7 +4541,12 @@
     "chr_0035_liino.ult.amp.electric",
     "chr_0035_liino.ult.amp.nature"
    ],
-   "notes": "高歌姿态 15s（代替演唱姿态）：全队攻击力+电磁/自然增幅"
+   "notes": "高歌姿态 15s（代替演唱姿态）：全队攻击力+电磁/自然增幅",
+   "duration": {
+    "value": 15,
+    "origin": "official",
+    "note": "参数表「高歌姿态持续时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -4734,7 +4815,12 @@
    "buffs": [
     "chr_0038_purrche.ult.artsFragile"
    ],
-   "notes": "3个礼盒随机炸弹/手工作业；概率开出特殊赠礼施加法术脆弱"
+   "notes": "3个礼盒随机炸弹/手工作业；概率开出特殊赠礼施加法术脆弱",
+   "duration": {
+    "value": 5,
+    "origin": "official",
+    "note": "参数表「脆弱持续时间（秒）」"
+   }
   },
   "modes": null
  },
@@ -4896,7 +4982,12 @@
     "chr_0036_jsspsi.ult.amp.cold",
     "chr_0036_jsspsi.ult.amp.heat"
    ],
-   "notes": "全队寒冷增幅+灼热增幅 12s"
+   "notes": "全队寒冷增幅+灼热增幅 12s",
+   "duration": {
+    "value": 12,
+    "origin": "official",
+    "note": "参数表「增幅时长（秒）」"
+   }
   },
   "modes": null
  }

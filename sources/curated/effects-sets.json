@@ -1,1469 +1,1469 @@
 [
-  {
-    "id": "suit_usp01.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_usp01",
-      "name": "天灾防护装备组"
-    },
-    "name": "天灾防护装备组 · 终结技充能效率",
-    "literal": "终结技充能效率+{v}%",
-    "zone": "chargeEff",
-    "stat": "chargeEff",
-    "value": {
-      "fixed": 20
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者终结技充能效率+20%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_usp01.description"
-    },
-    "notes": ""
+ {
+  "id": "suit_usp01.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_usp01",
+   "name": "天灾防护装备组"
   },
-  {
-    "id": "suit_usp01.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_usp01",
-      "name": "天灾防护装备组"
-    },
-    "name": "天灾防护装备组 · 释放战技返还技力",
-    "literal": "返还{v}点技力",
-    "zone": "spRefund",
-    "stat": null,
-    "value": {
-      "fixed": 50
-    },
-    "unit": "flat",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活；装备者释放战技时",
-      "trigger": "onSkillCast",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": true,
-    "cooldown": null,
-    "evidence": {
-      "text": "装备者释放战技时返还50点技力，此效果每场战斗最多触发一次。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_usp01.description"
-    },
-    "notes": "资源效果，不进伤害；每场战斗最多一次"
+  "name": "天灾防护装备组 · 终结技充能效率",
+  "literal": "终结技充能效率+{v}%",
+  "zone": "chargeEff",
+  "stat": "chargeEff",
+  "value": {
+   "fixed": 20
   },
-  {
-    "id": "suit_phy01.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_phy01",
-      "name": "点剑装备组"
-    },
-    "name": "点剑装备组 · 失衡效率",
-    "literal": "失衡效率加成+{v}%",
-    "zone": "poise",
-    "stat": null,
-    "value": {
-      "fixed": 20
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者失衡效率加成+20%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_phy01.description"
-    },
-    "notes": "失衡相关，只记录，不进伤害"
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
   },
-  {
-    "id": "suit_phy01.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_phy01",
-      "name": "点剑装备组"
-    },
-    "name": "点剑装备组 · 物理异常后追加伤害",
-    "literal": "额外造成一次{v}%攻击力的物理伤害[10点失衡值]",
-    "zone": "other",
-    "stat": null,
-    "value": {
-      "fixed": 250
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": [
-        "physical"
-      ],
-      "kinds": null,
-      "damageClass": "physical"
-    },
-    "condition": {
-      "text": "3件套激活；当装备者造成物理异常后",
-      "trigger": "afterPhysicalAnomaly",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": 15,
-    "evidence": {
-      "text": "当装备者造成物理异常后，额外造成一次250%攻击力的物理伤害[10点失衡值]。该效果每15秒最多触发一次。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_phy01.description"
-    },
-    "notes": "不是增益而是一次独立的追加伤害（250%攻击力物理伤害，附带10点失衡值），无对应乘区，归 other。可能做法：①作为独立伤害段（倍率250%）进入伤害计算；②仅记录不计算。该段吃哪些乘区、算哪类伤害(kinds)待规则确认",
-    "uncertain": true
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者终结技充能效率+20%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_usp01.description"
   },
-  {
-    "id": "suit_attri01.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_attri01",
-      "name": "碾骨装备组"
-    },
-    "name": "碾骨装备组 · 攻击力",
-    "literal": "攻击力+{v}%",
-    "zone": "atkPct",
-    "stat": "atkPct",
-    "value": {
-      "fixed": 15
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者攻击力+15%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_attri01.description"
-    },
-    "notes": ""
+  "notes": ""
+ },
+ {
+  "id": "suit_usp01.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_usp01",
+   "name": "天灾防护装备组"
   },
-  {
-    "id": "suit_attri01.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_attri01",
-      "name": "碾骨装备组"
-    },
-    "name": "碾骨装备组 · 碾骨重压",
-    "literal": "下一次的战技伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "perStack": 30,
-      "maxStacks": 2
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "skill"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活；当装备者施放连携技时（获得一层碾骨重压）",
-      "trigger": "onComboCast",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "stack",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "当装备者施放连携技时，获得一层碾骨重压，下一次的战技伤害+30%，碾骨重压最多可叠加2层。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_attri01.description"
-    },
-    "notes": "原文只说“下一次的战技伤害+30%”，最多2层。两种读法：①2层时下一次战技一次性+60%并清空；②每次战技消耗1层、各+30%。当前 perStack 按读法①表达，待规则确认",
-    "uncertain": true
+  "name": "天灾防护装备组 · 释放战技返还技力",
+  "literal": "返还{v}点技力",
+  "zone": "spRefund",
+  "stat": null,
+  "value": {
+   "fixed": 50
   },
-  {
-    "id": "suit_pulse_cryst01.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_pulse_cryst01",
-      "name": "脉冲式装备组"
-    },
-    "name": "脉冲式装备组 · 源石技艺强度",
-    "literal": "源石技艺强度+{v}",
-    "zone": "artsStrength",
-    "stat": "artsStrength",
-    "value": {
-      "fixed": 30
-    },
-    "unit": "flat",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者源石技艺强度+30。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_pulse_cryst01.description"
-    },
-    "notes": ""
+  "unit": "flat",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活；装备者释放战技时",
+   "trigger": "firstSkillInBattle",
+   "mode": "user",
+   "pieces": 3
   },
-  {
-    "id": "suit_pulse_cryst01.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_pulse_cryst01",
-      "name": "脉冲式装备组"
-    },
-    "name": "脉冲式装备组 · 施加导电后",
-    "literal": "电磁伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 50
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": [
-        "electric"
-      ],
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活；当装备者施加导电后",
-      "trigger": "afterApplyElectrify",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 10,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "当装备者施加导电后，电磁伤害+50%，持续10秒，该效果无法叠加；当装备者施加冻结后，寒冷伤害+50%，持续10秒，该效果无法叠加。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_pulse_cryst01.description"
-    },
-    "notes": "与施加冻结后的寒冷伤害加成相互独立"
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": true,
+  "cooldown": null,
+  "evidence": {
+   "text": "装备者释放战技时返还50点技力，此效果每场战斗最多触发一次。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_usp01.description"
   },
-  {
-    "id": "suit_pulse_cryst01.p3",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_pulse_cryst01",
-      "name": "脉冲式装备组"
-    },
-    "name": "脉冲式装备组 · 施加冻结后",
-    "literal": "寒冷伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 50
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": [
-        "cold"
-      ],
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活；当装备者施加冻结后",
-      "trigger": "afterApplyFreeze",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 10,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "当装备者施加导电后，电磁伤害+50%，持续10秒，该效果无法叠加；当装备者施加冻结后，寒冷伤害+50%，持续10秒，该效果无法叠加。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_pulse_cryst01.description"
-    },
-    "notes": "与施加导电后的电磁伤害加成相互独立"
+  "notes": "资源效果，不进伤害；每场战斗最多一次"
+ },
+ {
+  "id": "suit_phy01.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_phy01",
+   "name": "点剑装备组"
   },
-  {
-    "id": "suit_atb01.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_atb01",
-      "name": "拓荒装备组"
-    },
-    "name": "拓荒装备组 · 连携技冷却缩减",
-    "literal": "连携技冷却缩减+{v}%",
-    "zone": "cdr",
-    "stat": null,
-    "value": {
-      "fixed": 15
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "combo"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者连携技冷却缩减+15%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_atb01.description"
-    },
-    "notes": ""
+  "name": "点剑装备组 · 失衡效率",
+  "literal": "失衡效率加成+{v}%",
+  "zone": "poise",
+  "stat": null,
+  "value": {
+   "fixed": 20
   },
-  {
-    "id": "suit_atb01.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_atb01",
-      "name": "拓荒装备组"
-    },
-    "name": "拓荒装备组 · 恢复技力后全队增伤",
-    "literal": "全队造成的伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 16
-    },
-    "unit": "%",
-    "beneficiary": "team",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活；装备者通过技能恢复技力后",
-      "trigger": "afterSkillSpRecover",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 15,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": true,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "装备者通过技能恢复技力后，全队造成的伤害+16%，持续15秒，该效果无法叠加。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_atb01.description"
-    },
-    "notes": "原文“全队…该效果无法叠加”，按规范与长息同样处理为 teamUnique。同队多人携带是否取最高/只计一次：待规则确认"
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
   },
-  {
-    "id": "suit_poise01.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_poise01",
-      "name": "轻超域装备组"
-    },
-    "name": "轻超域装备组 · 攻击力",
-    "literal": "攻击力+{v}%",
-    "zone": "atkPct",
-    "stat": "atkPct",
-    "value": {
-      "fixed": 8
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者攻击力+8%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_poise01.description"
-    },
-    "notes": ""
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者失衡效率加成+20%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_phy01.description"
   },
-  {
-    "id": "suit_poise01.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_poise01",
-      "name": "轻超域装备组"
-    },
-    "name": "轻超域装备组 · 施加破防后",
-    "literal": "物理伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "perStack": 8,
-      "maxStacks": 4
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": [
-        "physical"
-      ],
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "physical"
-    },
-    "condition": {
-      "text": "3件套激活；装备者施加破防后",
-      "trigger": "afterApplyBreach",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 15,
-    "stacking": "stack",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "装备者施加破防后，物理伤害+8%，持续15秒，最多可叠加4层。若使目标达到4层破防，物理伤害额外+16%，持续10秒，该效果无法叠加。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_poise01.description"
-    },
-    "notes": "原文未写各层是否单独计时"
+  "notes": "失衡相关，只记录，不进伤害"
+ },
+ {
+  "id": "suit_phy01.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_phy01",
+   "name": "点剑装备组"
   },
-  {
-    "id": "suit_poise01.p3",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_poise01",
-      "name": "轻超域装备组"
-    },
-    "name": "轻超域装备组 · 目标4层破防",
-    "literal": "物理伤害额外+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 16
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": [
-        "physical"
-      ],
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "physical"
-    },
-    "condition": {
-      "text": "3件套激活；装备者使目标达到4层破防",
-      "trigger": "targetBreach4",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 10,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "装备者施加破防后，物理伤害+8%，持续15秒，最多可叠加4层。若使目标达到4层破防，物理伤害额外+16%，持续10秒，该效果无法叠加。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_poise01.description"
-    },
-    "notes": "与施加破防后的叠层加成同时生效"
+  "name": "点剑装备组 · 物理异常后追加伤害",
+  "literal": "额外造成一次{v}%攻击力的物理伤害[10点失衡值]",
+  "zone": "other",
+  "stat": null,
+  "value": {
+   "fixed": 250
   },
-  {
-    "id": "suit_fire_natr01.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_fire_natr01",
-      "name": "动火用装备组"
-    },
-    "name": "动火用装备组 · 源石技艺强度",
-    "literal": "源石技艺强度+{v}",
-    "zone": "artsStrength",
-    "stat": "artsStrength",
-    "value": {
-      "fixed": 30
-    },
-    "unit": "flat",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者源石技艺强度+30。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_fire_natr01.description"
-    },
-    "notes": ""
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": [
+    "physical"
+   ],
+   "kinds": null,
+   "damageClass": "physical"
   },
-  {
-    "id": "suit_fire_natr01.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_fire_natr01",
-      "name": "动火用装备组"
-    },
-    "name": "动火用装备组 · 施加燃烧后",
-    "literal": "灼热伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 50
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": [
-        "heat"
-      ],
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活；当装备者施加燃烧后",
-      "trigger": "afterApplyBurn",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 10,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "当装备者施加燃烧后，灼热伤害+50%，持续10秒，该效果无法叠加；当装备者施加腐蚀后，自然伤害+50%，持续10秒，该效果无法叠加。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_fire_natr01.description"
-    },
-    "notes": "与施加腐蚀后的自然伤害加成相互独立"
+  "condition": {
+   "text": "3件套激活；当装备者造成物理异常后",
+   "trigger": "afterPhysicalAnomaly",
+   "mode": "user",
+   "pieces": 3
   },
-  {
-    "id": "suit_fire_natr01.p3",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_fire_natr01",
-      "name": "动火用装备组"
-    },
-    "name": "动火用装备组 · 施加腐蚀后",
-    "literal": "自然伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 50
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": [
-        "nature"
-      ],
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活；当装备者施加腐蚀后",
-      "trigger": "afterApplyCorrosion",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 10,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "当装备者施加燃烧后，灼热伤害+50%，持续10秒，该效果无法叠加；当装备者施加腐蚀后，自然伤害+50%，持续10秒，该效果无法叠加。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_fire_natr01.description"
-    },
-    "notes": "与施加燃烧后的灼热伤害加成相互独立"
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": 15,
+  "evidence": {
+   "text": "当装备者造成物理异常后，额外造成一次250%攻击力的物理伤害[10点失衡值]。该效果每15秒最多触发一次。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_phy01.description"
   },
-  {
-    "id": "suit_criti01.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_criti01",
-      "name": "M.I.警用装备组"
-    },
-    "name": "M.I.警用装备组 · 暴击率",
-    "literal": "暴击率+{v}%",
-    "zone": "critRate",
-    "stat": "critRate",
-    "value": {
-      "fixed": 5
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者暴击率+5%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_criti01.description"
-    },
-    "notes": ""
+  "notes": "不是增益而是一次独立的追加伤害（250%攻击力物理伤害，附带10点失衡值），无对应乘区，归 other。可能做法：①作为独立伤害段（倍率250%）进入伤害计算；②仅记录不计算。该段吃哪些乘区、算哪类伤害(kinds)待规则确认",
+  "uncertain": true
+ },
+ {
+  "id": "suit_attri01.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_attri01",
+   "name": "碾骨装备组"
   },
-  {
-    "id": "suit_criti01.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_criti01",
-      "name": "M.I.警用装备组"
-    },
-    "name": "M.I.警用装备组 · 暴击后攻击力",
-    "literal": "+{v}%攻击力",
-    "zone": "atkPct",
-    "stat": "atkPct",
-    "value": {
-      "perStack": 5,
-      "maxStacks": 5
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活；当装备者触发暴击后",
-      "trigger": "afterCrit",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 5,
-    "stacking": "stack",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "当装备者触发暴击后，5秒内+5%攻击力，该效果最多叠加5层。层数叠满后，额外+5%暴击率，该效果无法叠加。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_criti01.description"
-    },
-    "notes": "原文未写各层是否单独计时"
+  "name": "碾骨装备组 · 攻击力",
+  "literal": "攻击力+{v}%",
+  "zone": "atkPct",
+  "stat": "atkPct",
+  "value": {
+   "fixed": 15
   },
-  {
-    "id": "suit_criti01.p3",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_criti01",
-      "name": "M.I.警用装备组"
-    },
-    "name": "M.I.警用装备组 · 层数叠满额外暴击率",
-    "literal": "额外+{v}%暴击率",
-    "zone": "critRate",
-    "stat": "critRate",
-    "value": {
-      "fixed": 5
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活；暴击后攻击力层数叠满（5层）",
-      "trigger": "critAtkStacksFull",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "当装备者触发暴击后，5秒内+5%攻击力，该效果最多叠加5层。层数叠满后，额外+5%暴击率，该效果无法叠加。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_criti01.description"
-    },
-    "notes": "原文未写持续时间（未填 duration，不推测）"
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
   },
-  {
-    "id": "suit_atk02.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_atk02",
-      "name": "50式应龙装备组"
-    },
-    "name": "50式应龙装备组 · 攻击力",
-    "literal": "攻击力+{v}%",
-    "zone": "atkPct",
-    "stat": "atkPct",
-    "value": {
-      "fixed": 15
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者攻击力+15%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_atk02.description"
-    },
-    "notes": ""
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者攻击力+15%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_attri01.description"
   },
-  {
-    "id": "suit_atk02.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_atk02",
-      "name": "50式应龙装备组"
-    },
-    "name": "50式应龙装备组 · 应龙之锐",
-    "literal": "下一次连携技伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "perStack": 20,
-      "maxStacks": 3
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "combo"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活；当小队内任意干员施放战技时（装备者获得一层应龙之锐）",
-      "trigger": "teamSkillCast",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "stack",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "当小队内任意干员施放战技时，装备者获得一层应龙之锐，使得该干员下一次连携技伤害+20%，应龙之锐最多叠加3层。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_atk02.description"
-    },
-    "notes": "“使得该干员下一次连携技伤害+20%”中“该干员”指代不明：①装备者本人（层数挂在装备者身上，当前按此填 beneficiary=self）；②施放战技的那名干员（则应为 team）。另：多层时下一次连携技一次性吃满层还是每次消耗1层，原文未写。均待规则确认",
-    "uncertain": true
+  "notes": ""
+ },
+ {
+  "id": "suit_attri01.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_attri01",
+   "name": "碾骨装备组"
   },
-  {
-    "id": "suit_burst01.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_burst01",
-      "name": "潮涌装备组"
-    },
-    "name": "潮涌装备组 · 所有技能伤害",
-    "literal": "所有技能伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 20
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "skill",
-        "combo",
-        "ultimate"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者所有技能伤害+20%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_burst01.description"
-    },
-    "notes": "“所有技能”按战技/连携技/终结技录入，不含普通攻击（解包里 AllSkillDamageIncrease 与 NormalAttackDamageIncrease 分列）"
+  "name": "碾骨装备组 · 碾骨重压",
+  "literal": "下一次的战技伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "perStack": 30,
+   "maxStacks": 2
   },
-  {
-    "id": "suit_burst01.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_burst01",
-      "name": "潮涌装备组"
-    },
-    "name": "潮涌装备组 · 2层法术附着后",
-    "literal": "造成的法术伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 35
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "arts"
-    },
-    "condition": {
-      "text": "3件套激活；装备者使敌人达到2层及以上法术附着后",
-      "trigger": "targetArtsAttach2Plus",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 15,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "装备者使敌人达到2层及以上法术附着后，造成的法术伤害+35%，持续15秒，该效果无法叠加。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_burst01.description"
-    },
-    "notes": ""
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "skill"
+   ],
+   "damageClass": "any"
   },
-  {
-    "id": "suit_usp02.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_usp02",
-      "name": "长息装备组"
-    },
-    "name": "长息装备组 · 施加增幅/庇护/脆弱/虚弱后",
-    "literal": "使其他队友造成的伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 16
-    },
-    "unit": "%",
-    "beneficiary": "others",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活；装备者施加增幅、庇护、脆弱、虚弱后",
-      "trigger": "afterApplyAmpProtectFragileWeaken",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 15,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": true,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "装备者施加增幅、庇护、脆弱、虚弱后，使其他队友造成的伤害+16%，持续15秒。该效果无法叠加。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_usp02.description"
-    },
-    "notes": "不含装备者本人。同队多人携带是否取最高/只计一次：待规则确认。未录入：生命值+1000（生存属性）"
+  "condition": {
+   "text": "3件套激活；当装备者施放连携技时（获得一层碾骨重压）",
+   "trigger": "comboCastNextSkill",
+   "mode": "user",
+   "pieces": 3
   },
-  {
-    "id": "suit_expend_spell01.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_expend_spell01",
-      "name": "壤流装备组"
-    },
-    "name": "壤流装备组 · 攻击力",
-    "literal": "攻击力+{v}%",
-    "zone": "atkPct",
-    "stat": "atkPct",
-    "value": {
-      "fixed": 10
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者攻击力+10.0%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_expend_spell01.description"
-    },
-    "notes": ""
+  "duration": null,
+  "stacking": "stack",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "当装备者施放连携技时，获得一层碾骨重压，下一次的战技伤害+30%，碾骨重压最多可叠加2层。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_attri01.description"
   },
-  {
-    "id": "suit_expend_spell01.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_expend_spell01",
-      "name": "壤流装备组"
-    },
-    "name": "壤流装备组 · 消耗导电/腐蚀后强化",
-    "literal": "每层使电磁伤害和自然伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "perStack": 15,
-      "maxStacks": 3
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": [
-        "electric",
-        "nature"
-      ],
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活；装备者每次消耗导电或腐蚀后",
-      "trigger": "afterConsumeElectrifyOrCorrosion",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 25,
-    "stacking": "independent",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "装备者每次消耗导电或腐蚀后，根据异常等级获得相同层数的强化状态，每层使电磁伤害和自然伤害+15.0%，持续25秒。强化状态最多存在3层，每层单独计算持续时间。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_expend_spell01.description"
-    },
-    "notes": "每次获得的层数=被消耗异常的等级；每层单独计时"
+  "notes": "原文只说“下一次的战技伤害+30%”，最多2层。两种读法：①2层时下一次战技一次性+60%并清空；②每次战技消耗1层、各+30%。当前 perStack 按读法①表达，待规则确认",
+  "uncertain": true
+ },
+ {
+  "id": "suit_pulse_cryst01.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_pulse_cryst01",
+   "name": "脉冲式装备组"
   },
-  {
-    "id": "suit_combo_cd01.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_combo_cd01",
-      "name": "清波装备组"
-    },
-    "name": "清波装备组 · 连携技冷却缩减",
-    "literal": "连携技冷却缩减+{v}%",
-    "zone": "cdr",
-    "stat": null,
-    "value": {
-      "fixed": 15
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "combo"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者连携技冷却缩减+15.0%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_combo_cd01.description"
-    },
-    "notes": ""
+  "name": "脉冲式装备组 · 源石技艺强度",
+  "literal": "源石技艺强度+{v}",
+  "zone": "artsStrength",
+  "stat": "artsStrength",
+  "value": {
+   "fixed": 30
   },
-  {
-    "id": "suit_combo_cd01.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_combo_cd01",
-      "name": "清波装备组"
-    },
-    "name": "清波装备组 · 施放连携技后",
-    "literal": "所有技能伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "perStack": 20,
-      "maxStacks": 2
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "skill",
-        "combo",
-        "ultimate"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活；当装备者施放连携技时",
-      "trigger": "onComboCast",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 15,
-    "stacking": "independent",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "当装备者施放连携技时，所有技能伤害+20.0%，持续15秒。该效果最多叠加2层，每层单独计算持续时间。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_combo_cd01.description"
-    },
-    "notes": "“所有技能”按战技/连携技/终结技录入，不含普通攻击"
+  "unit": "flat",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
   },
-  {
-    "id": "suit_crush_fracture.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_crush_fracture",
-      "name": "旧锋装备组"
-    },
-    "name": "旧锋装备组 · 攻击力",
-    "literal": "攻击力+{v}%",
-    "zone": "atkPct",
-    "stat": "atkPct",
-    "value": {
-      "fixed": 8
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者攻击力+8%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_crush_fracture.description"
-    },
-    "notes": ""
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者源石技艺强度+30。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_pulse_cryst01.description"
   },
-  {
-    "id": "suit_crush_fracture.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_crush_fracture",
-      "name": "旧锋装备组"
-    },
-    "name": "旧锋装备组 · 猛击/碎甲后",
-    "literal": "使自身物理伤害+[6%x消耗层数]",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "formula": "6*layers*(enhanced?1.5:1)",
-      "vars": [
-        "layers",
-        "enhanced"
-      ]
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": [
-        "physical"
-      ],
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "physical"
-    },
-    "condition": {
-      "text": "3件套激活；装备者造成猛击、碎甲时（按消耗的最大破防层数）",
-      "trigger": "onSmashOrArmorBreak",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 20,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "装备者造成猛击、碎甲时，根据消耗的最大破防层数，使自身物理伤害+[6%x消耗层数]，持续20秒。若目标已处于物理脆弱、失衡状态或被附着源石结晶，上述增益效果变为1.5倍。增益效果无法叠加。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_crush_fracture.description"
-    },
-    "notes": "layers=消耗的破防层数；enhanced=目标已处于物理脆弱、失衡或被附着源石结晶（是则×1.5）。1.5倍是触发时判定一次还是持续期间随目标状态变化，原文未写，待规则确认"
+  "notes": ""
+ },
+ {
+  "id": "suit_pulse_cryst01.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_pulse_cryst01",
+   "name": "脉冲式装备组"
   },
-  {
-    "id": "suit_generaltype.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_generaltype",
-      "name": "集成实训装备组"
-    },
-    "name": "集成实训装备组 · 所有类型伤害",
-    "literal": "造成的所有类型伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 20
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者造成的所有类型伤害+20%，受到的所有类型伤害-10%，终结技充能效率+10%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_generaltype.description"
-    },
-    "notes": "未录入：受到的所有类型伤害-10%（减伤）"
+  "name": "脉冲式装备组 · 施加导电后",
+  "literal": "电磁伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 50
   },
-  {
-    "id": "suit_generaltype.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_generaltype",
-      "name": "集成实训装备组"
-    },
-    "name": "集成实训装备组 · 终结技充能效率",
-    "literal": "终结技充能效率+{v}%",
-    "zone": "chargeEff",
-    "stat": "chargeEff",
-    "value": {
-      "fixed": 10
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者造成的所有类型伤害+20%，受到的所有类型伤害-10%，终结技充能效率+10%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_generaltype.description"
-    },
-    "notes": ""
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": [
+    "electric"
+   ],
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
   },
-  {
-    "id": "suit_spellburst.p1",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_spellburst",
-      "name": "险关装备组"
-    },
-    "name": "险关装备组 · 法术伤害",
-    "literal": "法术伤害+{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 16
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "arts"
-    },
-    "condition": {
-      "text": "3件套激活",
-      "trigger": null,
-      "mode": "auto",
-      "pieces": 3
-    },
-    "duration": null,
-    "stacking": "none",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "3件套组效果：装备者法术伤害+16%。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_spellburst.description"
-    },
-    "notes": ""
+  "condition": {
+   "text": "3件套激活；当装备者施加导电后",
+   "trigger": "afterApplyElectrify",
+   "mode": "user",
+   "pieces": 3
   },
-  {
-    "id": "suit_spellburst.p2",
-    "owner": {
-      "kind": "gearSet",
-      "id": "suit_spellburst",
-      "name": "险关装备组"
-    },
-    "name": "险关装备组 · 自然/寒冷爆发后",
-    "literal": "源石技艺强度+{v}",
-    "zone": "artsStrength",
-    "stat": "artsStrength",
-    "value": {
-      "perStack": 16,
-      "maxStacks": 3
-    },
-    "unit": "flat",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "3件套激活；当装备者造成施放自然爆发、寒冷爆发时",
-      "trigger": "onNatureOrColdBurst",
-      "mode": "user",
-      "pieces": 3
-    },
-    "duration": 20,
-    "stacking": "independent",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": 0.1,
-    "evidence": {
-      "text": "当装备者造成施放自然爆发、寒冷爆发时，源石技艺强度+16，持续20秒。该效果最多叠加3层，每层单独计算持续时间，每0.1秒最多触发一次。",
-      "category": "official",
-      "where": "dist/data/sets.js suit_spellburst.description"
-    },
-    "notes": "每层单独计时；每0.1秒最多触发一次"
-  }
+  "duration": 10,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "当装备者施加导电后，电磁伤害+50%，持续10秒，该效果无法叠加；当装备者施加冻结后，寒冷伤害+50%，持续10秒，该效果无法叠加。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_pulse_cryst01.description"
+  },
+  "notes": "与施加冻结后的寒冷伤害加成相互独立"
+ },
+ {
+  "id": "suit_pulse_cryst01.p3",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_pulse_cryst01",
+   "name": "脉冲式装备组"
+  },
+  "name": "脉冲式装备组 · 施加冻结后",
+  "literal": "寒冷伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 50
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": [
+    "cold"
+   ],
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "3件套激活；当装备者施加冻结后",
+   "trigger": "afterApplyFreeze",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": 10,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "当装备者施加导电后，电磁伤害+50%，持续10秒，该效果无法叠加；当装备者施加冻结后，寒冷伤害+50%，持续10秒，该效果无法叠加。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_pulse_cryst01.description"
+  },
+  "notes": "与施加导电后的电磁伤害加成相互独立"
+ },
+ {
+  "id": "suit_atb01.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_atb01",
+   "name": "拓荒装备组"
+  },
+  "name": "拓荒装备组 · 连携技冷却缩减",
+  "literal": "连携技冷却缩减+{v}%",
+  "zone": "cdr",
+  "stat": null,
+  "value": {
+   "fixed": 15
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "combo"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者连携技冷却缩减+15%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_atb01.description"
+  },
+  "notes": ""
+ },
+ {
+  "id": "suit_atb01.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_atb01",
+   "name": "拓荒装备组"
+  },
+  "name": "拓荒装备组 · 恢复技力后全队增伤",
+  "literal": "全队造成的伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 16
+  },
+  "unit": "%",
+  "beneficiary": "team",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "3件套激活；装备者通过技能恢复技力后",
+   "trigger": "afterSkillSpRecover",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": 15,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": true,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "装备者通过技能恢复技力后，全队造成的伤害+16%，持续15秒，该效果无法叠加。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_atb01.description"
+  },
+  "notes": "原文“全队…该效果无法叠加”，按规范与长息同样处理为 teamUnique。同队多人携带是否取最高/只计一次：待规则确认"
+ },
+ {
+  "id": "suit_poise01.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_poise01",
+   "name": "轻超域装备组"
+  },
+  "name": "轻超域装备组 · 攻击力",
+  "literal": "攻击力+{v}%",
+  "zone": "atkPct",
+  "stat": "atkPct",
+  "value": {
+   "fixed": 8
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者攻击力+8%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_poise01.description"
+  },
+  "notes": ""
+ },
+ {
+  "id": "suit_poise01.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_poise01",
+   "name": "轻超域装备组"
+  },
+  "name": "轻超域装备组 · 施加破防后",
+  "literal": "物理伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "perStack": 8,
+   "maxStacks": 4
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": [
+    "physical"
+   ],
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "physical"
+  },
+  "condition": {
+   "text": "3件套激活；装备者施加破防后",
+   "trigger": "afterApplyBreach",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": 15,
+  "stacking": "stack",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "装备者施加破防后，物理伤害+8%，持续15秒，最多可叠加4层。若使目标达到4层破防，物理伤害额外+16%，持续10秒，该效果无法叠加。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_poise01.description"
+  },
+  "notes": "原文未写各层是否单独计时"
+ },
+ {
+  "id": "suit_poise01.p3",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_poise01",
+   "name": "轻超域装备组"
+  },
+  "name": "轻超域装备组 · 目标4层破防",
+  "literal": "物理伤害额外+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 16
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": [
+    "physical"
+   ],
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "physical"
+  },
+  "condition": {
+   "text": "3件套激活；装备者使目标达到4层破防",
+   "trigger": "targetBreach4",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": 10,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "装备者施加破防后，物理伤害+8%，持续15秒，最多可叠加4层。若使目标达到4层破防，物理伤害额外+16%，持续10秒，该效果无法叠加。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_poise01.description"
+  },
+  "notes": "与施加破防后的叠层加成同时生效"
+ },
+ {
+  "id": "suit_fire_natr01.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_fire_natr01",
+   "name": "动火用装备组"
+  },
+  "name": "动火用装备组 · 源石技艺强度",
+  "literal": "源石技艺强度+{v}",
+  "zone": "artsStrength",
+  "stat": "artsStrength",
+  "value": {
+   "fixed": 30
+  },
+  "unit": "flat",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者源石技艺强度+30。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_fire_natr01.description"
+  },
+  "notes": ""
+ },
+ {
+  "id": "suit_fire_natr01.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_fire_natr01",
+   "name": "动火用装备组"
+  },
+  "name": "动火用装备组 · 施加燃烧后",
+  "literal": "灼热伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 50
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": [
+    "heat"
+   ],
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "3件套激活；当装备者施加燃烧后",
+   "trigger": "afterApplyBurn",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": 10,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "当装备者施加燃烧后，灼热伤害+50%，持续10秒，该效果无法叠加；当装备者施加腐蚀后，自然伤害+50%，持续10秒，该效果无法叠加。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_fire_natr01.description"
+  },
+  "notes": "与施加腐蚀后的自然伤害加成相互独立"
+ },
+ {
+  "id": "suit_fire_natr01.p3",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_fire_natr01",
+   "name": "动火用装备组"
+  },
+  "name": "动火用装备组 · 施加腐蚀后",
+  "literal": "自然伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 50
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": [
+    "nature"
+   ],
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "3件套激活；当装备者施加腐蚀后",
+   "trigger": "afterApplyCorrosion",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": 10,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "当装备者施加燃烧后，灼热伤害+50%，持续10秒，该效果无法叠加；当装备者施加腐蚀后，自然伤害+50%，持续10秒，该效果无法叠加。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_fire_natr01.description"
+  },
+  "notes": "与施加燃烧后的灼热伤害加成相互独立"
+ },
+ {
+  "id": "suit_criti01.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_criti01",
+   "name": "M.I.警用装备组"
+  },
+  "name": "M.I.警用装备组 · 暴击率",
+  "literal": "暴击率+{v}%",
+  "zone": "critRate",
+  "stat": "critRate",
+  "value": {
+   "fixed": 5
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者暴击率+5%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_criti01.description"
+  },
+  "notes": ""
+ },
+ {
+  "id": "suit_criti01.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_criti01",
+   "name": "M.I.警用装备组"
+  },
+  "name": "M.I.警用装备组 · 暴击后攻击力",
+  "literal": "+{v}%攻击力",
+  "zone": "atkPct",
+  "stat": "atkPct",
+  "value": {
+   "perStack": 5,
+   "maxStacks": 5
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活；当装备者触发暴击后",
+   "trigger": "afterCrit",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": 5,
+  "stacking": "stack",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "当装备者触发暴击后，5秒内+5%攻击力，该效果最多叠加5层。层数叠满后，额外+5%暴击率，该效果无法叠加。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_criti01.description"
+  },
+  "notes": "原文未写各层是否单独计时"
+ },
+ {
+  "id": "suit_criti01.p3",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_criti01",
+   "name": "M.I.警用装备组"
+  },
+  "name": "M.I.警用装备组 · 层数叠满额外暴击率",
+  "literal": "额外+{v}%暴击率",
+  "zone": "critRate",
+  "stat": "critRate",
+  "value": {
+   "fixed": 5
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活；暴击后攻击力层数叠满（5层）",
+   "trigger": "critAtkStacksFull",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "当装备者触发暴击后，5秒内+5%攻击力，该效果最多叠加5层。层数叠满后，额外+5%暴击率，该效果无法叠加。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_criti01.description"
+  },
+  "notes": "原文未写持续时间（未填 duration，不推测）"
+ },
+ {
+  "id": "suit_atk02.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_atk02",
+   "name": "50式应龙装备组"
+  },
+  "name": "50式应龙装备组 · 攻击力",
+  "literal": "攻击力+{v}%",
+  "zone": "atkPct",
+  "stat": "atkPct",
+  "value": {
+   "fixed": 15
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者攻击力+15%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_atk02.description"
+  },
+  "notes": ""
+ },
+ {
+  "id": "suit_atk02.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_atk02",
+   "name": "50式应龙装备组"
+  },
+  "name": "50式应龙装备组 · 应龙之锐",
+  "literal": "下一次连携技伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "perStack": 20,
+   "maxStacks": 3
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "combo"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "3件套激活；当小队内任意干员施放战技时（装备者获得一层应龙之锐）",
+   "trigger": "teamSkillCast",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "stack",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "当小队内任意干员施放战技时，装备者获得一层应龙之锐，使得该干员下一次连携技伤害+20%，应龙之锐最多叠加3层。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_atk02.description"
+  },
+  "notes": "“使得该干员下一次连携技伤害+20%”中“该干员”指代不明：①装备者本人（层数挂在装备者身上，当前按此填 beneficiary=self）；②施放战技的那名干员（则应为 team）。另：多层时下一次连携技一次性吃满层还是每次消耗1层，原文未写。均待规则确认",
+  "uncertain": true
+ },
+ {
+  "id": "suit_burst01.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_burst01",
+   "name": "潮涌装备组"
+  },
+  "name": "潮涌装备组 · 所有技能伤害",
+  "literal": "所有技能伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 20
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "skill",
+    "combo",
+    "ultimate"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者所有技能伤害+20%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_burst01.description"
+  },
+  "notes": "“所有技能”按战技/连携技/终结技录入，不含普通攻击（解包里 AllSkillDamageIncrease 与 NormalAttackDamageIncrease 分列）"
+ },
+ {
+  "id": "suit_burst01.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_burst01",
+   "name": "潮涌装备组"
+  },
+  "name": "潮涌装备组 · 2层法术附着后",
+  "literal": "造成的法术伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 35
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "arts"
+  },
+  "condition": {
+   "text": "3件套激活；装备者使敌人达到2层及以上法术附着后",
+   "trigger": "targetArtsAttach2Plus",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": 15,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "装备者使敌人达到2层及以上法术附着后，造成的法术伤害+35%，持续15秒，该效果无法叠加。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_burst01.description"
+  },
+  "notes": ""
+ },
+ {
+  "id": "suit_usp02.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_usp02",
+   "name": "长息装备组"
+  },
+  "name": "长息装备组 · 施加增幅/庇护/脆弱/虚弱后",
+  "literal": "使其他队友造成的伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 16
+  },
+  "unit": "%",
+  "beneficiary": "others",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "3件套激活；装备者施加增幅、庇护、脆弱、虚弱后",
+   "trigger": "afterApplyAmpProtectFragileWeaken",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": 15,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": true,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "装备者施加增幅、庇护、脆弱、虚弱后，使其他队友造成的伤害+16%，持续15秒。该效果无法叠加。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_usp02.description"
+  },
+  "notes": "不含装备者本人。同队多人携带是否取最高/只计一次：待规则确认。未录入：生命值+1000（生存属性）"
+ },
+ {
+  "id": "suit_expend_spell01.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_expend_spell01",
+   "name": "壤流装备组"
+  },
+  "name": "壤流装备组 · 攻击力",
+  "literal": "攻击力+{v}%",
+  "zone": "atkPct",
+  "stat": "atkPct",
+  "value": {
+   "fixed": 10
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者攻击力+10.0%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_expend_spell01.description"
+  },
+  "notes": ""
+ },
+ {
+  "id": "suit_expend_spell01.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_expend_spell01",
+   "name": "壤流装备组"
+  },
+  "name": "壤流装备组 · 消耗导电/腐蚀后强化",
+  "literal": "每层使电磁伤害和自然伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "perStack": 15,
+   "maxStacks": 3
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": [
+    "electric",
+    "nature"
+   ],
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "3件套激活；装备者每次消耗导电或腐蚀后",
+   "trigger": "afterConsumeElectrifyOrCorrosion",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": 25,
+  "stacking": "independent",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "装备者每次消耗导电或腐蚀后，根据异常等级获得相同层数的强化状态，每层使电磁伤害和自然伤害+15.0%，持续25秒。强化状态最多存在3层，每层单独计算持续时间。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_expend_spell01.description"
+  },
+  "notes": "每次获得的层数=被消耗异常的等级；每层单独计时"
+ },
+ {
+  "id": "suit_combo_cd01.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_combo_cd01",
+   "name": "清波装备组"
+  },
+  "name": "清波装备组 · 连携技冷却缩减",
+  "literal": "连携技冷却缩减+{v}%",
+  "zone": "cdr",
+  "stat": null,
+  "value": {
+   "fixed": 15
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "combo"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者连携技冷却缩减+15.0%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_combo_cd01.description"
+  },
+  "notes": ""
+ },
+ {
+  "id": "suit_combo_cd01.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_combo_cd01",
+   "name": "清波装备组"
+  },
+  "name": "清波装备组 · 施放连携技后",
+  "literal": "所有技能伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "perStack": 20,
+   "maxStacks": 2
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "skill",
+    "combo",
+    "ultimate"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "3件套激活；当装备者施放连携技时",
+   "trigger": "onComboCast",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": 15,
+  "stacking": "independent",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "当装备者施放连携技时，所有技能伤害+20.0%，持续15秒。该效果最多叠加2层，每层单独计算持续时间。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_combo_cd01.description"
+  },
+  "notes": "“所有技能”按战技/连携技/终结技录入，不含普通攻击"
+ },
+ {
+  "id": "suit_crush_fracture.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_crush_fracture",
+   "name": "旧锋装备组"
+  },
+  "name": "旧锋装备组 · 攻击力",
+  "literal": "攻击力+{v}%",
+  "zone": "atkPct",
+  "stat": "atkPct",
+  "value": {
+   "fixed": 8
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者攻击力+8%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_crush_fracture.description"
+  },
+  "notes": ""
+ },
+ {
+  "id": "suit_crush_fracture.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_crush_fracture",
+   "name": "旧锋装备组"
+  },
+  "name": "旧锋装备组 · 猛击/碎甲后",
+  "literal": "使自身物理伤害+[6%x消耗层数]",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "formula": "6*layers*(enhanced?1.5:1)",
+   "vars": [
+    "layers",
+    "enhanced"
+   ]
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": [
+    "physical"
+   ],
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "physical"
+  },
+  "condition": {
+   "text": "3件套激活；装备者造成猛击、碎甲时（按消耗的最大破防层数）",
+   "trigger": "onSmashOrArmorBreak",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": 20,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "装备者造成猛击、碎甲时，根据消耗的最大破防层数，使自身物理伤害+[6%x消耗层数]，持续20秒。若目标已处于物理脆弱、失衡状态或被附着源石结晶，上述增益效果变为1.5倍。增益效果无法叠加。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_crush_fracture.description"
+  },
+  "notes": "layers=消耗的破防层数；enhanced=目标已处于物理脆弱、失衡或被附着源石结晶（是则×1.5）。1.5倍是触发时判定一次还是持续期间随目标状态变化，原文未写，待规则确认"
+ },
+ {
+  "id": "suit_generaltype.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_generaltype",
+   "name": "集成实训装备组"
+  },
+  "name": "集成实训装备组 · 所有类型伤害",
+  "literal": "造成的所有类型伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 20
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者造成的所有类型伤害+20%，受到的所有类型伤害-10%，终结技充能效率+10%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_generaltype.description"
+  },
+  "notes": "未录入：受到的所有类型伤害-10%（减伤）"
+ },
+ {
+  "id": "suit_generaltype.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_generaltype",
+   "name": "集成实训装备组"
+  },
+  "name": "集成实训装备组 · 终结技充能效率",
+  "literal": "终结技充能效率+{v}%",
+  "zone": "chargeEff",
+  "stat": "chargeEff",
+  "value": {
+   "fixed": 10
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者造成的所有类型伤害+20%，受到的所有类型伤害-10%，终结技充能效率+10%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_generaltype.description"
+  },
+  "notes": ""
+ },
+ {
+  "id": "suit_spellburst.p1",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_spellburst",
+   "name": "险关装备组"
+  },
+  "name": "险关装备组 · 法术伤害",
+  "literal": "法术伤害+{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 16
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "arts"
+  },
+  "condition": {
+   "text": "3件套激活",
+   "trigger": null,
+   "mode": "auto",
+   "pieces": 3
+  },
+  "duration": null,
+  "stacking": "none",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "3件套组效果：装备者法术伤害+16%。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_spellburst.description"
+  },
+  "notes": ""
+ },
+ {
+  "id": "suit_spellburst.p2",
+  "owner": {
+   "kind": "gearSet",
+   "id": "suit_spellburst",
+   "name": "险关装备组"
+  },
+  "name": "险关装备组 · 自然/寒冷爆发后",
+  "literal": "源石技艺强度+{v}",
+  "zone": "artsStrength",
+  "stat": "artsStrength",
+  "value": {
+   "perStack": 16,
+   "maxStacks": 3
+  },
+  "unit": "flat",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "3件套激活；当装备者造成施放自然爆发、寒冷爆发时",
+   "trigger": "onNatureOrColdBurst",
+   "mode": "user",
+   "pieces": 3
+  },
+  "duration": 20,
+  "stacking": "independent",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": 0.1,
+  "evidence": {
+   "text": "当装备者造成施放自然爆发、寒冷爆发时，源石技艺强度+16，持续20秒。该效果最多叠加3层，每层单独计算持续时间，每0.1秒最多触发一次。",
+   "category": "official",
+   "where": "dist/data/sets.js suit_spellburst.description"
+  },
+  "notes": "每层单独计时；每0.1秒最多触发一次"
+ }
 ]

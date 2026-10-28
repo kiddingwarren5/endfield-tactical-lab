@@ -29,6 +29,7 @@
 | 9c | 页面合并为“伤害计算 / 排轴”两块；排轴 = 选阵容 → 自动排轴（任意编队）或推荐轴（重点编队）→ 一图流 + 分节叙述 → 标答对照；高级编辑折叠在最后 | 已做 | dist/app/chart-ui.js（renderRotation）；dist/engine/sim/rotation.js autoRotation（形态枚举 + 束搜索 + 局部优化 improvePlan，目标=保底每秒）；tests/rotations.test.mjs “自动排轴 vs 标答”（当前 103.9%，门槛 ≥85%） |
 | 9d | 形态切换修正：诀智/意按面板自动判定（可手动），意形态连携/终结技“再次施加该法术附着”（+1 层）接入模拟器；形态专属效果按形态门控 | 已做 | dist/engine/skills.js effectiveMode；simulate.js modeOk/applyAttach('same')；预设轴改为视频核对顺序（祀战技→汤汤连携→别礼战技重击→诀连携→汤汤战技→别礼 4 层连携→祀连携→起墨/收笔，三充一爆） |
 | 10 | 自动排轴算法升级：顺序表示 + 最早可行解码（simulate 的 sequence 模式）；束搜索热启动 → 模拟退火 与 MCTS（UCT）两条路线取优；模拟器修正：终结技演出全队独占、同一时刻先结算状态事件/普攻再执行计划动作 | 已做 | dist/engine/sim/plan.js（evalSequence / annealSequence / mctsSequence）、rotation.js autoRotation；预设轴也改为顺序解码（一次模拟）。标答对照：自动 123.8% vs 主轴（模型口径），见 docs/rotations.md |
+| 11 | 触发系统重写并经两份独立审核修正：触发表 `dist/engine/sim/triggers.js`（196 代码：事件 / 状态 / 已处理 / 未建模）、模拟器按代码触发（战技/终结技/普攻按段命中、附着/消耗/异常/爆发/重击/定身/水龙卷/提前引爆/终结技结束/碎冰/战斗开始/增益施加/技力恢复），互斥组取最大、叠层首层起算与独立计时、演出暂停计时、终结技时长取官方参数、形态门槛按面板、资源区效果即时结算、“下一次 X”消耗、冷却与每场一次 | 已做 | 审核：docs/reviews/triggers-review-claude.md（58 条）、engine-trigger-review-claude.md（24 条），全部采纳；tests/triggers.test.mjs（覆盖）、tests/triggers-behavior.test.mjs（11 条行为算例）；覆盖表 docs/trigger-coverage.md |
 | 发布 | 当前账号副本公开发布 | 已做 | https://claude.ai/artifact/MA9QgAZesaHBqEia9BdCwg（版本 7）；分享权限已在页面 Share 菜单设为“知道链接的任何人”（无需 Claude 账号即可打开）。备选：`gh auth login` 后 `sh tools/deploy_pages.sh` 发布到 GitHub Pages |
 
 ## 2. 需求覆盖矩阵（NEXT_STEPS.md 逐条对账）

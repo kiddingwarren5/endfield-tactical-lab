@@ -4434,7 +4434,7 @@
   },
   "condition": {
    "text": "天理合真状态下首次施放战技",
-   "trigger": "duringUltimate",
+   "trigger": "firstSkillDuringUltimate",
    "mode": "user"
   },
   "duration": null,
@@ -5936,7 +5936,7 @@
   "applies": null,
   "condition": {
    "text": "天赋怒意留心触发时（施放连携技后，潜能3起每45秒最多一次）",
-   "trigger": "afterComboCast",
+   "trigger": "afterComboCastCd45",
    "mode": "user"
   },
   "duration": 20,
@@ -7670,7 +7670,7 @@
   },
   "condition": {
    "text": "施放连携技悦心音调后30秒内，队伍中电磁或自然属性干员的下次战技（触发后结束，无法叠加）",
-   "trigger": "afterComboCast",
+   "trigger": "afterComboNextSkill",
    "mode": "user",
    "elements": [
     "electric",
@@ -9652,7 +9652,7 @@
   "applies": null,
   "condition": {
    "text": "施放连携技成竹在胸时",
-   "trigger": "onComboCast",
+   "trigger": "comboHitLayers",
    "mode": "user"
   },
   "duration": 10,
