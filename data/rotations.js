@@ -18,7 +18,7 @@ const chargeSegment=seg=>[
   {m:'汤汤',k:'combo',seg,why:'“被施加寒冷附着”后 5 s 内可发动；生成涡流，自身 +10 能量'},
   {m:'别礼',k:'skill',seg,why:'低温灌注：主控别礼下一次重击触发幻影追击 → 第 2 层；返还 30 技力'},
   {m:'诀',k:'combo',seg,why:'意形态：被施加法术附着后 5 s 内可发动（冷却 18 s，所以放在重击之后），战术分身再次施加该附着 → 第 3 层；寒冷脆弱 + 自然脆弱'},
-  {m:'汤汤',k:'skill',seg,why:'水龙卷 → 第 4 层（吃掉涡流可返还技力，模拟按 0 计）'},
+  {m:'汤汤',k:'skill',seg,why:'水龙卷 → 第 4 层'},
   {m:'别礼',k:'combo',wait:4,seg,why:'消耗 4 层：斩击 160%+240%×4；别礼 +100 能量；低温症寒冷脆弱 16%'},
   {m:'祀',k:'combo',seg,why:'“附着被消耗”后可发动；按消耗的 4 层加成'},
   {m:'祀',k:'skill',stage:'起墨',seg,why:'15 技力拉出墨魂'},
@@ -35,7 +35,7 @@ const burstSegment=seg=>[
   {m:'诀',k:'ultimate',seg,why:'破晦阵 20 s；意形态再次施加附着（已满 4 层则溢出）；终结技脆弱'},
   {m:'汤汤',k:'ultimate',seg,why:'巨浪定身 + 持续伤害；法术脆弱'},
   {m:'别礼',k:'combo',wait:4,seg,why:'在增幅与脆弱覆盖内消耗 4 层斩击'},
-  {m:'别礼',k:'ultimate',seg,why:'临终别礼三段 400/400/800%；二天赋：终结技享受的脆弱 ×1.5（月咒把别礼终结技放在吃层之前，列为待验证）'},
+  {m:'别礼',k:'ultimate',seg,why:'临终别礼三段 400/400/800%；二天赋：终结技享受的脆弱 ×1.5'},
   {m:'祀',k:'combo',seg,why:'吃层后的成竹在胸'},
   {m:'祀',k:'skill',stage:'起墨',seg,why:'墨魂'},
   {m:'祀',k:'skill',stage:'收笔',seg,why:'结算笔意（记录了整个爆发节）'}
@@ -43,7 +43,7 @@ const burstSegment=seg=>[
 export default [
   {
     id:'cold-3charge-1burst', name:'主轴 · 三充一爆', team:COLD_TEAM,
-    summary:'主控别礼全程普攻，重击回技力并触发幻影追击。每节：祀战技 1 层 → 汤汤连携 → 别礼战技重击第 2 层 → 诀连携（意形态再次施加附着）第 3 层 → 汤汤战技第 4 层 → 别礼连携吃层 → 祀连携 → 起墨/收笔。前三节只充能（别礼每节 +116 能量，第三节后到 240）；第四节照常凑层后依次开祀、诀、汤汤终结技，再让别礼 4 层连携 + 终结技收尾。顺序与月咒视频（案例 06 关键帧）一致。',
+    summary:'主控别礼全程普攻，重击回技力并触发幻影追击。每节：祀战技 1 层 → 汤汤连携 → 别礼战技重击第 2 层 → 诀连携（意形态再次施加附着）第 3 层 → 汤汤战技第 4 层 → 别礼连携吃层 → 祀连携 → 起墨/收笔。前三节充能；第四节凑满层后依次开祀、诀、汤汤终结技，再让别礼 4 层连携 + 终结技收尾。',
     steps:[...chargeSegment(1),...chargeSegment(2),...chargeSegment(3),...burstSegment(4)],
     sources:['docs/cases/case-06-bili-yuezhou-lazy.md（YZ-月咒：三充一爆、每轮凑 4 层后别礼连携）','docs/cases/case-07-bili-tanggui-94.md（唐傀：每节附着预算≈4 层）','docs/cases/case-01…04（zmdlogs 榜单日志：诀 01 号位、祀增幅后别礼终结技）','docs/rules.md v0.5 §C 资源规则'],
     verify:['非主控（诀/汤汤/祀）自动普攻的伤害衰减 δ 未实测，总伤给区间','别礼重击回技力 30（单一来源）决定每节时长','汤汤战技吃涡流返还技力未建模（实战每节可快 1–3 s）','祀笔意爆发、墨魂伤害未建模（实战总伤更高）','终结技演出期间增益计时暂停为假设（timing.js 可关闭）']
@@ -76,20 +76,20 @@ export default [
 const FULL_ENERGY=[100,240,90,80]; // 诀/别礼/汤汤/祀 终结技能量上限（祀潜 3；汤汤潜 4 可 −15%）
 export const scenarios=[
   {id:'target',name:'常规 · 对照靶',desc:'无限血木桩，无开局终结技能量（常规关卡 / 战争回响）。防御 100、抗性 0 为假设值。',enemy:{},initial:{sp:200,energy:[0,0,0,0]},
-   tips:['这是主轴的默认场景：先两节充能，第三节爆发。','战争回响开局技力与常规不同（案例 07 说“7 格”），本页按 200 计，可在“排轴模拟”页改初始技力。']},
+   tips:['无限血木桩，开局没有终结技能量。','先充能，再集中爆发。']},
   {id:'dusk-short',name:'危境再现 · 短战 Boss（罗丹 / 阿莱克琉斯）',desc:'榜单日志（案例 01、03）显示终结技在 3–10 s 内出现，按“开局四人终结技能量已满”处理；目标是 25 s 内打完，不做充能节。',enemy:{},initial:{sp:200,energy:FULL_ENERGY},timeLimit:25,
    steps:[
      {m:'汤汤',k:'skill',seg:1,why:'寒冷第 1 层'},{m:'祀',k:'skill',stage:'河山共影',seg:1,why:'寒冷第 2 层；笔意记录整场爆发'},{m:'汤汤',k:'combo',seg:1,why:'涡流 + 回能'},{m:'诀',k:'combo',seg:1,why:'寒冷脆弱 + 自然脆弱'},
      {m:'别礼',k:'skill',seg:1,why:'灌注 → 重击幻影追击：第 3 层'},{m:'祀',k:'ultimate',seg:1,why:'增幅 43.2% 先上；01 号位诀连携冷却 −20 s'},{m:'诀',k:'ultimate',seg:1,why:'破晦阵 + 终结技脆弱'},{m:'汤汤',k:'ultimate',seg:1,why:'定身 + 持续伤害'},
      {m:'别礼',k:'combo',wait:3,seg:1,why:'增幅/脆弱覆盖内吃 3 层（短战不等第 4 层）'},{m:'别礼',k:'ultimate',seg:1,why:'临终别礼收尾（脆弱 ×1.5）'},{m:'祀',k:'combo',seg:1,why:'成竹在胸'},{m:'祀',k:'skill',stage:'起墨',seg:1,why:'墨魂'},
-     {m:'汤汤',k:'skill',seg:2,why:'第二轮：寒冷第 1 层'},{m:'祀',k:'skill',stage:'收笔',seg:2,why:'结算第一轮笔意（0 技力）'},{m:'汤汤',k:'combo',seg:2,why:'涡流 + 回能'},{m:'祀',k:'skill',stage:'河山共影',seg:2,why:'第 2 层；新一轮笔意'},{m:'诀',k:'combo',seg:2,why:'祀终结技刷新后的诀连携（案例 02：祀终结技同刻诀连携、2.9 s 后再连携）'},{m:'别礼',k:'skill',seg:2,why:'第 3 层'},{m:'别礼',k:'combo',wait:3,seg:2,why:'第二次斩击（通常已超出 25 s，Boss 没死再打）'},{m:'祀',k:'combo',seg:2,why:'成竹在胸'}],
-   tips:['短战不等 4 层：第 4 层要多花 100 技力和约 5 s，25 s 内打不回来。','祀终结技先于别礼终结技（案例 01：别礼终结技在祀增幅 14.79 s 覆盖内）。','别礼终结技免疫伤害，可用来躲 Boss 大招（案例 08 经验）。']},
-  {id:'dusk-phase',name:'危境再现 · 阶段转换 Boss（案例 02）',desc:'日志显示 12.0–31.4 s 几乎无伤害（推测为转阶段 / 无敌段）。第一段用掉祀、诀、汤汤终结技与一次别礼 4 层连携；别礼终结技留到第二段收尾（不等增幅）。',enemy:{invulnerable:[[12,31.4]]},initial:{sp:200,energy:FULL_ENERGY},
+     {m:'汤汤',k:'skill',seg:2,why:'第二轮：寒冷第 1 层'},{m:'祀',k:'skill',stage:'收笔',seg:2,why:'结算第一轮笔意（0 技力）'},{m:'汤汤',k:'combo',seg:2,why:'涡流 + 回能'},{m:'祀',k:'skill',stage:'河山共影',seg:2,why:'第 2 层；新一轮笔意'},{m:'诀',k:'combo',seg:2,why:'祀终结技刷新后的诀连携'},{m:'别礼',k:'skill',seg:2,why:'第 3 层'},{m:'别礼',k:'combo',wait:3,seg:2,why:'第二次斩击（通常已超出 25 s，Boss 没死再打）'},{m:'祀',k:'combo',seg:2,why:'成竹在胸'}],
+   tips:['开局四人终结技都是满的，25 秒内打完。','别礼连携不等第 4 层。','祀终结技先开，别礼终结技在增幅里放。']},
+  {id:'dusk-phase',name:'危境再现 · 阶段转换 Boss',desc:'日志显示 12.0–31.4 s 几乎无伤害（推测为转阶段 / 无敌段）。第一段用掉祀、诀、汤汤终结技与一次别礼 4 层连携；别礼终结技留到第二段收尾（不等增幅）。',enemy:{invulnerable:[[12,31.4]]},initial:{sp:200,energy:FULL_ENERGY},
    steps:[
      {m:'汤汤',k:'skill',seg:1,why:'寒冷第 1 层'},{m:'祀',k:'skill',stage:'河山共影',seg:1,why:'寒冷第 2 层；笔意'},{m:'汤汤',k:'combo',seg:1,why:'涡流 + 回能'},{m:'诀',k:'combo',seg:1,why:'脆弱'},{m:'别礼',k:'skill',seg:1,why:'第 3 层'},
      {m:'祀',k:'ultimate',seg:1,why:'第一段用掉祀增幅'},{m:'诀',k:'ultimate',seg:1,why:'破晦阵'},{m:'汤汤',k:'ultimate',seg:1,why:'定身'},{m:'别礼',k:'combo',wait:3,seg:1,why:'第一段的斩击'},{m:'祀',k:'combo',seg:1,why:'成竹在胸'},{m:'祀',k:'skill',stage:'收笔',seg:1,why:'在无敌段前结算笔意'},
-     {m:'祀',k:'skill',stage:'河山共影',seg:2,minT:31.5,why:'第二段开始：重新标记（案例 02 日志 31.71 s 祀战技）'},{m:'汤汤',k:'skill',seg:2,why:'第 2 层'},{m:'汤汤',k:'combo',seg:2,why:'涡流'},{m:'诀',k:'combo',seg:2,why:'脆弱'},{m:'别礼',k:'skill',seg:2,why:'第 3 层'},{m:'别礼',k:'combo',wait:3,seg:2,why:'第二段斩击（案例 02：38.09 s）'},{m:'别礼',k:'ultimate',seg:2,why:'别礼终结技收尾，不等祀增幅（案例 02：38.15 s）'},{m:'祀',k:'combo',seg:2,why:'成竹在胸'},{m:'祀',k:'skill',stage:'收笔',seg:2,why:'结算笔意'}],
-   tips:['转阶段前把笔意收掉：墨魂/笔意在无敌段内记录不到伤害。','第二段别礼终结技没有祀增幅也照放（榜一日志如此），因为等第二次祀终结技来不及。','无敌段起止时间为日志推测，实际以 Boss 机制为准。']},
-  {id:'stagger',name:'危境再现 · 可失衡 Boss（白垩界卫，案例 04）',desc:'日志：失衡后承伤 +30%、持续 11.19 s。失衡值上限官方未公开（此处假设 400，可在排轴模拟页的敌人设置里改）；模拟器会把主控处决与回技力算进去。',enemy:{staggerThreshold:400,staggerWindow:11.19,tier:'eliteOrBoss'},initial:{sp:200,energy:FULL_ENERGY},
-   tips:['主轴顺序不变；目标是让别礼 4 层连携与终结技落在失衡窗口内，看图上“失衡”标记调整连携时机。','案例 04 的榜一路线优先对齐祀增幅而不是失衡（单样本）。','失衡值上限、各技能失衡值的实机数值在 docs/verification-needed.md。']}
+     {m:'祀',k:'skill',stage:'河山共影',seg:2,minT:31.5,why:'第二段开始：重新标记'},{m:'汤汤',k:'skill',seg:2,why:'第 2 层'},{m:'汤汤',k:'combo',seg:2,why:'涡流'},{m:'诀',k:'combo',seg:2,why:'脆弱'},{m:'别礼',k:'skill',seg:2,why:'第 3 层'},{m:'别礼',k:'combo',wait:3,seg:2,why:'第二段斩击'},{m:'别礼',k:'ultimate',seg:2,why:'别礼终结技收尾，不等祀增幅'},{m:'祀',k:'combo',seg:2,why:'成竹在胸'},{m:'祀',k:'skill',stage:'收笔',seg:2,why:'结算笔意'}],
+   tips:['Boss 在 12 到 31 秒无敌。','第一段用掉祀、诀、汤汤终结技；别礼终结技留到第二段收尾。','转阶段前先收笔。']},
+  {id:'stagger',name:'危境再现 · 可失衡 Boss（白垩界卫）',desc:'日志：失衡后承伤 +30%、持续 11.19 s。失衡值上限官方未公开（此处假设 400，可在排轴模拟页的敌人设置里改）；模拟器会把主控处决与回技力算进去。',enemy:{staggerThreshold:400,staggerWindow:11.19,tier:'eliteOrBoss'},initial:{sp:200,energy:FULL_ENERGY},
+   tips:['Boss 失衡后 11 秒内多受 30% 伤害。','把别礼的 4 层连携和终结技放进失衡窗口。']}
 ];
