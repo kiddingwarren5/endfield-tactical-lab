@@ -38,10 +38,11 @@ function rationaleOf(b){ const r=[]; const casts=b.sim.events.filter(e=>e.type==
 // 充能阈值：对固定轴，求使干员 i 在 T 前能量满所需的最低充能效率增量（二分，前提：能量随效率单调不减）。
 export function chargeThreshold(input,deadlines,{lo=-100,hi=400,tol=0.5}={}){
   const {team,data}=input; const names=team.map(m=>m?data.operators.find(o=>o.id===m.operatorId)?.name:null);
-  const energyAt=(sim,idx,T)=>{ const k=team.slice(0,idx).filter(Boolean).length; const s=[...sim.samples].reverse().find(x=>x.t<=T+1e-6); return s?.energy[k]??0; };
+  // read the event log, not samples: samples are ≥0.5 s apart and miss energy gained between the last sample and T
+  const energyAt=(sim,idx,T)=>{ const k=team.slice(0,idx).filter(Boolean).length; const ev=[...sim.events].reverse().find(x=>x.t<=T+1e-6); return ev?ev.energy[k]:(input.initial?.energy?.[idx]??0); };
   const results=[]; for(const d of deadlines){ const idx=d.member; const base=simulate({...input,params:{...(input.params||{}),duration:Math.max(d.t+1,input.params?.duration||40)}}); const k=team.slice(0,idx).filter(Boolean).length; const max=base.summary.energyMax?.[k]??0; const cur=energyAt(base,idx,d.t); const curEff=base.summary.chargeEff?.[k]??0;
     const ok=e=>{ const extra=[]; extra[idx]=e; const sim=simulate({...input,params:{...(input.params||{}),duration:Math.max(d.t+1,input.params?.duration||40),extraChargeEff:extra}}); return energyAt(sim,idx,d.t)>=max-1e-6; };
-    let res; if(ok(lo)){ res={feasible:true,requiredExtra:lo,note:'即使效率降至下界也满足'}; } else if(!ok(hi)){ res={feasible:false,note:`充能效率增至 +${hi}% 仍无法在 ${d.t}s 前充满（可能需要改变轴或能量来源）`}; } else { let a=lo,b=hi; while(b-a>tol){ const m=(a+b)/2; if(ok(m)) b=m; else a=m; } res={feasible:true,requiredExtra:Math.round(b*10)/10}; }
+    let res; if(ok(lo)){ res={feasible:true,requiredExtra:lo,note:'即使效率降至下界也满足'}; } else if(!ok(hi)){ res={feasible:false,note:`充能效率增至 +${hi}% 仍无法在 ${d.t}s 前充满（可能需要改变轴或能量来源）`}; } else { let a=lo,b=hi; while(b-a>tol){ const m=(a+b)/2; if(ok(m)) b=m; else a=m; } res={feasible:true,requiredExtra:Math.ceil(b*10)/10}; } // round up: rounding down could land below the threshold
     results.push({member:idx,name:names[idx],deadline:d.t,energyMax:max,currentEnergyAtDeadline:Math.round(cur*10)/10,currentChargeEff:curEff,...res,requiredTotal:res.requiredExtra!=null?Math.round((curEff+res.requiredExtra)*10)/10:null,premises:['阈值基于当前这条轴；改变动作后需重算','能量来源：战技（真实技力）与连携回能均乘充能效率（规则 B10）；特殊回能按目录标记','舍入：二分精度 '+tol+'%，边界值请在界面两侧各试 1%','非主控普攻不产生能量；毒技力消耗不回能']}); }
   return results; }
 
