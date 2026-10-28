@@ -45,3 +45,6 @@ export function appliedFor({candidates,seg,segIndex=null,bIdx=0,toggles={},data,
   applyModifiers(applied,candidates,toggles,ctx);
   return applied;
 }
+
+export const STAT_ZONE_SET=new Set(['ability','atkPct','atkFlat','critRate','critDmg','chargeEff','artsStrength']);
+export function splitApplied(applied){ const stat=[],dmg=[]; for(const a of applied){ const e=a.effect; if(STAT_ZONE_SET.has(e.zone)){ if((e.condition?.mode||'auto')==='auto'&&a.ownerIdx===a.beneficiaryIdx) continue; stat.push({zone:e.zone,stat:e.stat,unit:e.unit,value:a.value,why:a.label,id:e.id}); } else dmg.push(a); } return {stat,dmg}; }

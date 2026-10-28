@@ -23,6 +23,8 @@ export function effectApplies(e,seg){
   if(a.kinds?.length&&!a.kinds.includes(seg.kind)) return false;
   if(a.damageClass==='arts'&&!isArts(seg.element)) return false; if(a.damageClass==='physical'&&seg.element!=='physical') return false;
   if(a.skills?.length&&seg.skillKey&&!a.skills.includes(seg.skillKey)) return false;
+  if(a.segments?.length&&seg.id&&!a.segments.includes(seg.id)) return false;
+  if(a.anomaly?.length&&seg.kind!=='mech') return false;
   return true;
 }
 // applied: [{effect, value, label, zone}] already resolved by the caller (effects.js / skills.js)
