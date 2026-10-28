@@ -93,7 +93,7 @@ function consumablePanel(state,update,member,fold){
 
 function hitPanel(state,update,member,res,fold){
   const op=res.op; const sel=state.selection; const groups=[];
-  for(const k of ['normal','skill','combo','ultimate']){ const sk=op.skills[k]; if(!sk) continue; const segs=skillSegments(op,k,member.mode); const items=segs.map(s=>[`segment:${k}:${s.id}`,`${s.label}${s.per?'（按层）':''}`]); if(k!=='normal'&&segs.length>1) items.push([`total:${k}:`,`${sk.name} · 总伤`]); groups.push([`${KIND_CN[k]} · ${sk.name}`,items]); }
+  for(const k of ['normal','skill','combo','ultimate']){ const sk=op.skills[k]; if(!sk) continue; const segs=skillSegments(op,k,effectiveMode(op,member,res.stats)); const items=segs.map(s=>[`segment:${k}:${s.id}`,`${s.label}${s.per?'（按层）':''}`]); if(k!=='normal'&&segs.length>1) items.push([`total:${k}:`,`${sk.name} · 总伤`]); groups.push([`${KIND_CN[k]} · ${sk.name}`,items]); }
   groups.push(['机制伤害',mechSegments(state.vars.mechElement).map(m=>[`mech:mech:${m.id}`,m.label])]);
   const value=`${sel.kind}:${sel.kind==='mech'?'mech':sel.skillKey}:${sel.kind==='total'?'':sel.segmentId}`;
   const s=h('select',{onchange:e=>{const [kind,skillKey,segId]=e.target.value.split(':');update(st=>{st.selection={kind,skillKey:kind==='mech'?'mech':skillKey,segmentId:segId||null};});}});
