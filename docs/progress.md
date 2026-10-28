@@ -24,6 +24,7 @@
 | 7 | 自动排轴与充能阈值 | 已做（v0.1） | dist/engine/sim/plan.js：束搜索 + 候选对照 + 理由；充能截止条件二分阈值（前提/舍入列出）；UI 已接入 |
 | 8 | 逐击全队伤害、可视化、完整回归 | 已做（v0.1） | 全队总伤/占比/逐击表/区间；重点编队回归 docs/cases/regression-cold-team.md（可复现）；独立审核两份；报告 docs/final-report.md |
 | 9 | 排轴一图流（主轴 + 备选，分节叙述，可载入模拟） | 已做 | dist/app/chart-ui.js、dist/data/rotations.js、dist/engine/sim/rotation.js；tests/rotations.test.mjs 生成 docs/rotations.md；顺序轴来自案例 06/07 共识，时刻由 greedySchedule 给出；模拟器修正：诀连携“2 层及以上其他法术附着”触发（原按 otherArts 字面匹配永不触发） |
+| 9b | Boss/场景调轴、保底口径、可自选抗性 | 已做 | 场景（对照靶 / 短战 / 阶段转换 / 可失衡）在 rotations.js `scenarios`；保底 = 主控普攻 + 全员技能（不计副控自动普攻）；敌人防御/抗性页面可选；模拟器新增 enemy.invulnerable 窗口；greedySchedule 支持 minT。视频关键帧核对见 docs/cases/case-06（新增 verification 17–20） |
 | 发布 | 当前账号副本公开发布 | 已做 | https://claude.ai/artifact/MA9QgAZesaHBqEia9BdCwg（版本 7）；分享权限已在页面 Share 菜单设为“知道链接的任何人”（无需 Claude 账号即可打开）。备选：`gh auth login` 后 `sh tools/deploy_pages.sh` 发布到 GitHub Pages |
 
 ## 2. 需求覆盖矩阵（NEXT_STEPS.md 逐条对账）
