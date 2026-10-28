@@ -1,0 +1,13 @@
+import operators from '../dist/data/operators.js'; import weapons from '../dist/data/weapons.js'; import gear from '../dist/data/gear.js'; import sets from '../dist/data/sets.js'; import effects from '../dist/data/effects.js'; import timing from '../dist/data/timing.js';
+import {simulate} from '../dist/engine/sim/simulate.js';
+const data={operators,weapons,gear,sets,effects}; const op=n=>operators.find(o=>o.name===n); const G=n=>gear.find(g=>g.name===n).id;
+const bieli={operatorId:op('别礼').id,potential:0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},weapon:{id:weapons.find(w=>w.name==='赫拉芬格').id,potential:0,substrate:[6,6,3],ranks:[9,9,4]},gear:{armor:{id:G('涌浪重装甲'),refine:[3,3,3]},gloves:{id:G('潮涌手甲'),refine:[3,3,3]},kit1:{id:G('悬河供氧栓'),refine:[3,3,3]},kit2:{id:G('生物辅助护板'),refine:[3,3,3]}},consumables:[]};
+const tang={operatorId:op('汤汤').id,potential:0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},weapon:{id:null},gear:{},consumables:[]};
+const mechanics=[{operatorId:op('别礼').id,normal:{heavySpRefund:{value:30,origin:'research'}},skill:{spCost:100,spRefund:{value:30,kind:'return'},energyGain:{self:16},attach:{element:'cold',layers:1,when:'heavy'}},combo:{trigger:{type:'attachLayers',element:'cold',min:3},cooldown:8,consumes:{element:'cold',all:true},energyGain:{self:{formula:'40+15*layers'}}},ultimate:{cooldown:20},energySources:['ownSkill','ownCombo']},
+ {operatorId:op('汤汤').id,normal:{heavySpRefund:{value:20,origin:'assumed'}},skill:{spCost:100,attach:{element:'cold',layers:1}},combo:{trigger:{type:'attachApplied',element:'cold'},cooldown:12,attach:{element:'cold',layers:1},energyGain:{self:10}},ultimate:{cooldown:20}}];
+const enemy={defence:100,resistances:{physical:'D',cold:'D',heat:'D',electric:'D',nature:'D'},custom:{}};
+const timeline=[{t:0.5,member:1,kind:'skill'},{t:2.5,member:1,kind:'combo'},{t:4,member:0,kind:'skill'},{t:6,member:1,kind:'skill'},{t:8,member:0,kind:'combo'},{t:9,member:0,kind:'ultimate'}];
+const r=simulate({team:[bieli,tang],data,mechanics,timeline,timing,enemy,params:{duration:20},mainControl:0});
+console.log('errors',r.errors); console.log('summary',JSON.stringify(r.summary)); console.log('final',JSON.stringify(r.final));
+console.log(r.events.filter(e=>['cast','attach','comboReady','consume','energyGain','spSpend','buffStart','burst','abnormal','error'].includes(e.type)).map(e=>`${e.t}s ${e.type} ${JSON.stringify(Object.fromEntries(Object.entries(e).filter(([k])=>!['t','type','sp','energy','control'].includes(k))))} sp=${e.sp.real}+${e.sp.poison} en=${e.energy}`).join('\n'));
+console.log('hits',r.hits.length, r.hits.slice(0,6).map(h=>`${h.t}s ${h.name} ${h.label} ${Math.round(h.damage)}`).join(' | '));

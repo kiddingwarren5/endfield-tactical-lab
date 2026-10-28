@@ -2323,10 +2323,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0003_endminf.potentials[1]"
   },
-  "notes": "15 = 天赋本质瓦解满阶30%的一半（推算，一阶时为7.5）。",
-  "modifies": [
-   "chr_0003_endminf.talent1.atk"
-  ]
+  "notes": "15 = 天赋本质瓦解满阶30%的一半（推算，一阶时为7.5）。 受益者为其他干员，不能折叠进自身天赋条目（与 official_89.pot2.othersAtk 写法一致）。"
  },
  {
   "id": "chr_0003_endminf.pot3.energy",
@@ -2469,22 +2466,7 @@
   "zone": "critRate",
   "stat": "critRate",
   "value": {
-   "perStack": {
-    "byRank": [
-     3,
-     3,
-     3,
-     3,
-     3,
-     3,
-     3,
-     3,
-     3,
-     3,
-     3,
-     3
-    ]
-   },
+   "perStack": 3,
    "maxStacks": 10
   },
   "unit": "%",
@@ -2734,6 +2716,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "combo"
+   ],
+   "segments": [
     "combo1"
    ]
   },
@@ -2915,10 +2900,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0017_yvonne.potentials[2]"
   },
-  "notes": "",
-  "modifies": [
-   "chr_0017_yvonne.talent2.critDmg.cold"
-  ]
+  "notes": "原文为“天赋冰点效果加强”，但加成是独立的“造成的伤害+”（增伤区），不是对冰点暴击伤害数值的修改，故不设 modifies。"
  },
  {
   "id": "chr_0017_yvonne.pot3.bonus.frozen",
@@ -2966,10 +2948,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0017_yvonne.potentials[2]"
   },
-  "notes": "20 = 10×2（原文“同样加倍”）",
-  "modifies": [
-   "chr_0017_yvonne.talent2.critDmg.frozen"
-  ]
+  "notes": "20 = 10×2（原文“同样加倍”） 原文为“天赋冰点效果加强”，但加成是独立的“造成的伤害+”（增伤区），不是对冰点暴击伤害数值的修改，故不设 modifies。"
  },
  {
   "id": "chr_0017_yvonne.pot4.spRefund",
@@ -3168,23 +3147,80 @@
   "zone": "fragile",
   "stat": null,
   "value": {
-   "perStack": {
-    "byRank": [
-     1.8,
-     1.8,
-     1.8,
-     2.2,
-     2.2,
-     2.2,
-     2.6,
-     2.6,
-     2.6,
-     3,
-     3,
-     3
-    ]
-   },
-   "maxStacks": 4
+   "byRank": [
+    {
+     "formula": "1.8*Math.min(layers,4)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "1.8*Math.min(layers,4)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "1.8*Math.min(layers,4)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "2.2*Math.min(layers,4)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "2.2*Math.min(layers,4)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "2.2*Math.min(layers,4)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "2.6*Math.min(layers,4)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "2.6*Math.min(layers,4)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "2.6*Math.min(layers,4)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "3*Math.min(layers,4)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "3*Math.min(layers,4)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "3*Math.min(layers,4)",
+     "vars": [
+      "layers"
+     ]
+    }
+   ]
   },
   "unit": "%",
   "beneficiary": "target",
@@ -3215,7 +3251,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0013_aglina.skills.ultimate.description + params"
   },
-  "notes": "与基础法术脆弱同属一个效果（总值=基础+每层×破防层数）；maxStacks=4 为破防层数上限（潜能2原文“不超过4层”）。",
+  "notes": "与基础法术脆弱同属一个效果（总值=基础+每层×破防层数）；layers=目标破防层数，上限4（潜能2原文“不超过4层”）。",
   "rankType": "skill12"
  },
  {
@@ -3285,26 +3321,80 @@
   "zone": "fragile",
   "stat": null,
   "value": {
-   "formula": "per*(2*min(layers+1,4)-layers)",
-   "vars": [
-    "layers"
-   ],
-   "per": {
-    "byRank": [
-     1.8,
-     1.8,
-     1.8,
-     2.2,
-     2.2,
-     2.2,
-     2.6,
-     2.6,
-     2.6,
-     3,
-     3,
-     3
-    ]
-   }
+   "byRank": [
+    {
+     "formula": "1.8*(2*Math.min(layers+1,4)-layers)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "1.8*(2*Math.min(layers+1,4)-layers)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "1.8*(2*Math.min(layers+1,4)-layers)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "2.2*(2*Math.min(layers+1,4)-layers)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "2.2*(2*Math.min(layers+1,4)-layers)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "2.2*(2*Math.min(layers+1,4)-layers)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "2.6*(2*Math.min(layers+1,4)-layers)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "2.6*(2*Math.min(layers+1,4)-layers)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "2.6*(2*Math.min(layers+1,4)-layers)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "3*(2*Math.min(layers+1,4)-layers)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "3*(2*Math.min(layers+1,4)-layers)",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "3*(2*Math.min(layers+1,4)-layers)",
+     "vars": [
+      "layers"
+     ]
+    }
+   ]
   },
   "unit": "%",
   "beneficiary": "target",
@@ -3672,6 +3762,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "skill"
+   ],
+   "segments": [
     "skill2"
    ]
   },
@@ -4143,6 +4236,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "skill"
+   ],
+   "segments": [
     "skill2"
    ]
   },
@@ -4193,6 +4289,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "skill"
+   ],
+   "segments": [
     "skill1",
     "skill3"
    ]
@@ -4200,7 +4299,7 @@
   "condition": {
    "text": "每次战技的最后一次雷击",
    "trigger": "skillLastStrike",
-   "mode": "segment"
+   "mode": "user"
   },
   "duration": null,
   "stacking": "none",
@@ -5101,6 +5200,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "combo"
+   ],
+   "segments": [
     "combo1",
     "combo2"
    ]
@@ -5346,6 +5448,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "skill"
+   ],
+   "segments": [
     "skill1"
    ]
   },
@@ -5395,6 +5500,9 @@
    ],
    "damageClass": "physical",
    "skills": [
+    "skill"
+   ],
+   "segments": [
     "skill3"
    ]
   },
@@ -5505,6 +5613,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "skill"
+   ],
+   "segments": [
     "skill3"
    ]
   },
@@ -5817,6 +5928,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "skill"
+   ],
+   "segments": [
     "skill1",
     "skill2",
     "skill3"
@@ -6981,13 +7095,16 @@
    ],
    "damageClass": "any",
    "skills": [
+    "ultimate"
+   ],
+   "segments": [
     "ultimate3"
    ]
   },
   "condition": {
-   "text": "配装即生效",
-   "trigger": null,
-   "mode": "auto"
+   "text": "阵诀·智生效（智识≥意志）",
+   "trigger": "intMode",
+   "mode": "user"
   },
   "duration": null,
   "stacking": "none",
@@ -7893,6 +8010,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "mech"
+   ],
+   "segments": [
     "artsBurst"
    ]
   },
@@ -7956,6 +8076,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "mech"
+   ],
+   "segments": [
     "artsBurst"
    ]
   },
@@ -8003,6 +8126,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "skill"
+   ],
+   "segments": [
     "skill2",
     "skill3"
    ]
@@ -8104,6 +8230,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "skill"
+   ],
+   "segments": [
     "skill2",
     "skill3"
    ]
@@ -8274,6 +8403,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "mech"
+   ],
+   "segments": [
     "artsBurst"
    ]
   },
@@ -8417,6 +8549,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "mech"
+   ],
+   "segments": [
     "artsBurst"
    ]
   },
@@ -8436,10 +8571,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0034_typhoea.potentials[4]"
   },
-  "notes": "value 为乘数。猎矢数量+1属节奏资源，未单独录入。",
-  "modifies": [
-   "chr_0034_typhoea.skill.burstMul"
-  ]
+  "notes": "value 为乘数。猎矢数量+1属节奏资源，未单独录入。 独立 ratioMul 条目，与战技“消耗自然附着时提升”相乘而非相加。"
  },
  {
   "id": "chr_0038_purrche.ult.artsFragile",
@@ -8738,6 +8870,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "combo"
+   ],
+   "segments": [
     "combo1"
    ]
   },
@@ -8829,6 +8964,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "ultimate"
+   ],
+   "segments": [
     "ultimate3"
    ]
   },
@@ -8968,23 +9106,80 @@
   "zone": "ratioAdd",
   "stat": null,
   "value": {
-   "perStack": {
-    "byRank": [
-     44,
-     49,
-     53,
-     58,
-     62,
-     67,
-     71,
-     76,
-     80,
-     86,
-     92,
-     100
-    ]
-   },
-   "maxStacks": null
+   "byRank": [
+    {
+     "formula": "44*layers",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "49*layers",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "53*layers",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "58*layers",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "62*layers",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "67*layers",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "71*layers",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "76*layers",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "80*layers",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "86*layers",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "92*layers",
+     "vars": [
+      "layers"
+     ]
+    },
+    {
+     "formula": "100*layers",
+     "vars": [
+      "layers"
+     ]
+    }
+   ]
   },
   "unit": "%",
   "beneficiary": "self",
@@ -8995,6 +9190,9 @@
    ],
    "damageClass": "any",
    "skills": [
+    "combo"
+   ],
+   "segments": [
     "combo1"
    ]
   },
@@ -9014,7 +9212,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0036_jsspsi.skills.combo.description + params"
   },
-  "notes": "不确定：①直接加倍率（ratioAdd，满级 750%+100%×层数，按此填）；②相对提升（倍率×(1+100%×层数)，则应为 ratioMul）。层数上限原文未写（附着通常最多4层）。",
+  "notes": "layers=被消耗或吸收的附着最高层数（与潜能2同一变量）。不确定：①直接加倍率（ratioAdd，满级 +100%×层数，按此填）；②相对提升（倍率×(1+100%×层数)，则应为 ratioMul）。层数上限原文未写（附着通常最多4层）。",
   "rankType": "skill12",
   "uncertain": true
  },

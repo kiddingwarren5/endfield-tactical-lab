@@ -5157,55 +5157,55 @@
     "value": {
       "byRank": [
         {
-          "formula": "min(3.5*enemies,10.5)",
+          "formula": "Math.min(3.5*enemies,10.5)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(4.2*enemies,12.6)",
+          "formula": "Math.min(4.2*enemies,12.6)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(4.9*enemies,14.7)",
+          "formula": "Math.min(4.9*enemies,14.7)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(5.6*enemies,16.8)",
+          "formula": "Math.min(5.6*enemies,16.8)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(6.3*enemies,18.9)",
+          "formula": "Math.min(6.3*enemies,18.9)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(7.0*enemies,21.0)",
+          "formula": "Math.min(7.0*enemies,21.0)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(7.7*enemies,23.1)",
+          "formula": "Math.min(7.7*enemies,23.1)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(8.4*enemies,25.2)",
+          "formula": "Math.min(8.4*enemies,25.2)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(9.8*enemies,29.4)",
+          "formula": "Math.min(9.8*enemies,29.4)",
           "vars": [
             "enemies"
           ]
@@ -5457,55 +5457,55 @@
     "value": {
       "byRank": [
         {
-          "formula": "min(2.0*enemies,6.0)",
+          "formula": "Math.min(2.0*enemies,6.0)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(2.4*enemies,7.2)",
+          "formula": "Math.min(2.4*enemies,7.2)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(2.8*enemies,8.4)",
+          "formula": "Math.min(2.8*enemies,8.4)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(3.2*enemies,9.6)",
+          "formula": "Math.min(3.2*enemies,9.6)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(3.6*enemies,10.8)",
+          "formula": "Math.min(3.6*enemies,10.8)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(4.0*enemies,12.0)",
+          "formula": "Math.min(4.0*enemies,12.0)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(4.4*enemies,13.2)",
+          "formula": "Math.min(4.4*enemies,13.2)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(4.8*enemies,14.4)",
+          "formula": "Math.min(4.8*enemies,14.4)",
           "vars": [
             "enemies"
           ]
         },
         {
-          "formula": "min(5.6*enemies,16.8)",
+          "formula": "Math.min(5.6*enemies,16.8)",
           "vars": [
             "enemies"
           ]

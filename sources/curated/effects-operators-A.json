@@ -1547,10 +1547,19 @@
       "elements": [
         "heat"
       ],
-      "kinds": null,
+      "kinds": [
+        "mech"
+      ],
       "damageClass": "arts",
       "anomaly": [
         "burn"
+      ],
+      "skills": [
+        "mech"
+      ],
+      "segments": [
+        "burn",
+        "burnTick"
       ]
     },
     "condition": {
@@ -3269,10 +3278,18 @@
       "elements": [
         "physical"
       ],
-      "kinds": null,
+      "kinds": [
+        "mech"
+      ],
       "damageClass": "physical",
       "anomaly": [
         "slam"
+      ],
+      "skills": [
+        "mech"
+      ],
+      "segments": [
+        "crush"
       ]
     },
     "condition": {
