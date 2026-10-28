@@ -11,7 +11,8 @@ export default {
   skillEnergyPer100RealSp:6.5,    // research（战技：每 100 真实技力全队各 +6.5）
   comboWindowSeconds:5,           // research（单一来源）
   attachDurationSeconds:20,       // research（单一来源）
-  nonControl:{damageFactor:[0.5,1.0],rhythmFactor:[0.6,1.0],default:{damageFactor:0.75,rhythmFactor:0.8}}, // 未知：非主控自动普攻衰减与频率，输出区间
+  nonControl:{damageFactor:[0.5,1.0],rhythmFactor:[0.6,1.0],default:{damageFactor:0.75,rhythmFactor:0.8},
+    measured:{origin:'zmdlogs 白刃穿水 74.8s（docs/cases/README.md 末节）',rhythm:{'诀(非主控)':'24 次重击/67.8s，攻击串周期≈2.8s，与主控祀(25/71.8s)相当 → φ≈0.98','别礼(非主控)':'38s 内 1 次重击，长时间不普攻（施法/AI 停顿）','汤汤(非主控)':'仅记录第3/4段，节奏不可判'},damage:'日志跨账号/跨副本的绝对校准不一致（含未知副本加成），衰减 δ 未能测得，保持区间'}}, // 节奏已有一例日志测量；衰减未知
   staggerMultiplier:1.3,          // research（默认对照靶不失衡，不启用）
   burstDelaySeconds:0.3           // 法术爆发短暂延迟（研究：“短暂延迟后造成伤害”）
 };
