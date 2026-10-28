@@ -1,13 +1,32 @@
-# 现有源码交接说明
+# 交接说明（v4，2026-10-28）
 
-本包包含公开 Demo 第2版源码，以及新的分批开发任务书。任务书中的全角色、全武器、更换装备、食药、快照及排轴等是后续任务，当前源码尚未实现，不能视为已经完成。
+本包是《明日方舟：终末地》伤害计算器与排轴工具的完整源码、数据与文档。接续开发请先读 docs/progress.md（批次状态、覆盖矩阵、缺口），再读 docs/rules.md 与 docs/architecture.md。
 
-- 静态入口：dist/index.html；无需构建或额外依赖。
-- 现有检查：node test.mjs
-- 本地预览：python -m http.server 8765 --directory dist
-- 当前接入别礼、赫拉芬格及四件装备，已有潜能双向联动、逐属性精锻及别礼终结技二天赋处理。
-- 计算器中的部分精锻数值来自公开的四舍五入表，默认装备汇总另有0.1个百分点截图校准，需按新任务书审计精度。
-- 二天赋适用于法术脆弱的部分来自用户游戏实测，应保留来源类别。
-- 请完整读取 NEXT_STEPS.md，START_HERE.md 是可直接粘贴的启动提示词。
-- 原站点身份、Git历史、凭据和其他账号资料均已排除；当前账号应建立自己的站点副本。
-- 新批次代码、规则及审核记录由后续开发过程生成；本包不声称这些新增审核已经执行。
+## 运行
+- 本地预览：`python3 -m http.server 8765 --directory dist`，打开 http://127.0.0.1:8765/
+- 数值检查：`node tests/stats.test.mjs && node tests/damage.test.mjs && node tests/resolve.test.mjs && node tests/review-engine.test.mjs`（若存在）；模拟器：`node tests/sim.four.mjs`、`node tests/plan.smoke.mjs`；回归案例生成：`node tests/case-cold-team.mjs`
+- 交接基线（旧 Demo 引擎，仍保留）：`node test.mjs`
+- 公开副本：claude.ai Artifact（见 docs/progress.md“发布”），入口文件 dist/artifact.html（与 dist/index.html 同内容，去掉文档骨架）
+
+## 目录
+- dist/app：界面（state / ui / calc-ui / timeline-ui / main）
+- dist/engine：纯函数计算核心（stats / damage / skills / effects / resolve / sim/simulate / sim/plan）
+- dist/data：生成数据（operators / weapons / gear / sets / consumables / effects / mechanics / timing / meta），**不要手改**
+- sources/raw：官方（skland）与华法琳原始抓取；sources/skland、sources/warfarin：解析结果；sources/curated：人工/subagent 整理（效果目录、技能机制、官方笔误修正）
+- tools：抓取、解析、交叉核对、构建脚本（可重放）
+- docs：rules / data-sources / architecture / effect-schema / sim-design / progress / research / reviews / cases
+
+## 数据重放
+```
+node tools/scrape_skland.mjs            # 官方接口（匿名 token + 签名，与网页客户端一致）
+node tools/scrape_warfarin.mjs          # 华法琳 .data（turbo-stream）
+node tools/parse_skland.mjs sources/raw/skland sources/skland
+node tools/parse_warfarin.mjs sources/raw/warfarin sources/warfarin
+node tools/crosscheck.mjs               # docs/data-crosscheck.json
+node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_mechanics.mjs
+```
+
+## 工作约定（必须延续）
+- 官方数据为准；两源交叉核对；官方笔误采用解包值并记录在 sources/curated/official-corrections.json。
+- 规则与计算代码的变更需独立 subagent / GPT 审核，记录在 docs/reviews/。
+- 未实际执行的验证不得声称完成；假设用 origin/evidence.category 标注。
