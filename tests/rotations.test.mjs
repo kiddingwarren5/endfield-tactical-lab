@@ -29,7 +29,7 @@ test('写出 docs/rotations.md',()=>{
     L.push(`\n来源：${preset.sources.join('；')}\n\n待实机验证：${preset.verify.join('；')}\n`);
   }
   L.push('## Boss / 场景调轴（主轴）\n\n| 场景 | 口径 | 保底总伤 | 保底每秒 | 含副控普攻每秒 | 顺序 |\n|---|---|---|---|---|---|');
-  for(const sc of scenarios){ const r=scen[sc.id]; if(!r) continue; const end=r.end; const sure=sumHits(r.main,{until:end,mainControl:r.input.mainControl,guaranteed:true}), tot=sumHits(r.main,{until:end}); L.push(`| ${sc.name} | ${sc.timeLimit?`限时 ${end} s`:`周期 ${end.toFixed(1)} s`} | ${fmt(sure)} | ${fmt(sure/end)} | ${fmt(tot/end)} | ${r.timeline.map(a=>`${a.t}s ${r.names[a.member]}${({skill:'战技',combo:'连携',ultimate:'终结技',plunge:'下落攻击'})[a.kind]}`).join(' → ')} |`); L.push(`\n${sc.desc} 要点：${sc.tips.join('；')}\n`); }
+  for(const sc of scenarios){ const r=scen[sc.id]; if(!r) continue; const end=r.end; const sure=sumHits(r.main,{until:end,mainControl:r.input.mainControl,guaranteed:true}), tot=sumHits(r.main,{until:end}); L.push(`| ${sc.name} | ${sc.timeLimit?`限时 ${end} s`:`周期 ${end.toFixed(1)} s`} | ${fmt(sure)} | ${fmt(sure/end)} | ${fmt(tot/end)} | ${r.timeline.map(a=>`${a.t.toFixed(1)}s ${r.names[a.member]}${({skill:'战技',combo:'连携',ultimate:'终结技',plunge:'下落攻击'})[a.kind]}`).join(' → ')} |`); L.push(`\n${sc.desc} 要点：${sc.tips.join('；')}\n`); }
   fs.writeFileSync('docs/rotations.md',L.join('\n'));
 });
 
@@ -40,6 +40,6 @@ test('自动排轴 vs 标答（重点编队）',()=>{
   const auto=autoRotation(team,mc,ctx,scenarios[0],{beam:6,step:1,horizon:80}); const ms=Date.now()-t0;
   const ref=results[rotations[0].id]; const refS=sumHits(ref.main,{until:ref.end,mainControl:mc,guaranteed:true})/ref.end; const autoS=sumHits(auto.main,{until:auto.end,mainControl:mc,guaranteed:true})/auto.end;
   assert.deepEqual(auto.main.errors,[]); assert.ok(auto.cycle.complete,'自动轴周期应完整');
-  const ratio=autoS/refS; fs.appendFileSync('docs/rotations.md',`\n## 标答对照（自动排轴 vs 推荐主轴，常规对照靶）\n\n自动排轴（束搜索热启动 → 模拟退火 / MCTS→退火 两条路线取优，${auto.plan?.improved?.method||''}，${ms} ms）：周期 ${auto.end.toFixed(1)} s，保底每秒 ${fmt(autoS)}；推荐主轴保底每秒 ${fmt(refS)}；比值 ${(ratio*100).toFixed(1)}%。\n\n自动轴：${auto.timeline.map(a=>`${a.t}s ${auto.names[a.member]}${({skill:'战技',combo:'连携',ultimate:'终结技',plunge:'下落攻击'})[a.kind]}`).join(' → ')}\n`);
+  const ratio=autoS/refS; fs.appendFileSync('docs/rotations.md',`\n## 标答对照（自动排轴 vs 推荐主轴，常规对照靶）\n\n自动排轴（束搜索热启动 → 模拟退火 / MCTS→退火 两条路线取优，${auto.plan?.improved?.method||''}，${ms} ms）：周期 ${auto.end.toFixed(1)} s，保底每秒 ${fmt(autoS)}；推荐主轴保底每秒 ${fmt(refS)}；比值 ${(ratio*100).toFixed(1)}%。\n\n自动轴：${auto.timeline.map(a=>`${a.t.toFixed(1)}s ${auto.names[a.member]}${({skill:'战技',combo:'连携',ultimate:'终结技',plunge:'下落攻击'})[a.kind]}`).join(' → ')}\n`);
   assert.ok(ratio>0.85,`自动排轴保底每秒应不低于标答的 85%，实际 ${(ratio*100).toFixed(1)}%`);
 });
