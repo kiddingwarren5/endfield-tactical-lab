@@ -185,7 +185,7 @@ check('D2 infeasible timelines report the specific reason and change no resource
     [{initial:{sp:50}},[{t:0.2,member:1,kind:'skill'}],/^技力不足：需要 100，当前 51\.6$/],
     [{},[{t:1,member:0,kind:'ultimate'}],/^别礼 终结技能量不足：0\/240$/],
     [{},[{t:1,member:0,kind:'combo'}],/^别礼 连携未触发/],
-    [{},[{t:0.5,member:1,kind:'skill'},{t:2,member:1,kind:'combo'},{t:4,member:1,kind:'combo'}],/^汤汤 连携冷却中（至 14s）$/],
+    [{},[{t:0.5,member:1,kind:'skill'},{t:2,member:1,kind:'combo'},{t:3.5,member:1,kind:'skill'},{t:4.5,member:1,kind:'combo'}],/^汤汤 连携冷却中（至 14s）$/],
     [{},[{t:0.5,member:1,kind:'skill'},{t:1,member:1,kind:'combo'}],/^汤汤 正在执行其他动作/]];
   for(const [extra,tl,re] of cases){ const r=simulate({...duo(extra),timeline:tl,params:{duration:6}});
     assert.equal(r.errors.length,1,JSON.stringify(errs(r))); assert.match(r.errors[0].message,re);
