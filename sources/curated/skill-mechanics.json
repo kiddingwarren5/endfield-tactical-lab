@@ -4926,6 +4926,12 @@
     "chr_0036_jsspsi.skill.qimoCost",
     "chr_0036_jsspsi.skill.shoubiCost"
    ],
+   "ink": {
+    "duration": {"value": 20, "origin": "official", "note": "参数表「笔意时长（秒）」"},
+    "recordRatio": {"byRank": [8, 8, 8, 9, 9, 9, 10, 10, 10, 11, 12, 13], "origin": "official", "note": "参数表「伤害记录比例」（%）"},
+    "burstStage": "收笔",
+    "note": "河山共影命中后开始记录目标所受伤害的比例；笔意时长结束或收笔（墨魂提前消失）时以固定伤害爆发。固定伤害按记录值原样结算，不吃增益/防御/抗性（假设，见 verification-needed）"
+   },
    "notes": "笔意 20s 记录伤害，结束时爆发为固定伤害；定身 1s",
    "applies": [
     "root"

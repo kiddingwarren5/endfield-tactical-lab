@@ -1,12 +1,12 @@
 # 触发覆盖（由 tests/triggers.test.mjs 生成）
 
-生成：2026-10-28T19:26:23.194Z
+生成：2026-10-28T20:24:50.929Z
 
 | 归属 | 效果数 |
 |---|---|
 | event | 169 |
-| unmodeled | 94 |
-| handled | 5 |
+| unmodeled | 92 |
+| handled | 7 |
 | state | 26 |
 | event-noop | 8 |
 
@@ -25,7 +25,6 @@
 - 对照靶只有一个目标：多目标条件不成立（2）：chr_0029_pograni.pot1.spRefund、chr_0011_seraph.pot3.bounce
 - 箭阵持续时间官方未给出（2）：chr_0034_typhoea.combo.burstVuln、chr_0034_typhoea.pot3.burstVuln
 - 格挡未建模（对照靶不攻击）（2）：chr_0038_purrche.talent1.energy、chr_0038_purrche.talent1.giftChance
-- 笔意伤害记录与爆发未建模（2）：chr_0036_jsspsi.skill.inkRecord、chr_0036_jsspsi.pot1.inkRecord
 - 灼热獠牙状态叠加未建模（1）：chr_0006_wolfgd.pot3.teamFang
 - 导电来源区分未建模（1）：chr_0004_pelica.pot4.conductMul
 - 熔火层数未建模（1）：chr_0016_laevat.talent.resIgnore
@@ -228,12 +227,12 @@
 | chr_0038_purrche.ult.artsFragile | specialGiftHit | unmodeled：代言人特殊赠礼概率未建模 |
 | chr_0038_purrche.talent1.energy | skillFirstBlock | unmodeled：格挡未建模（对照靶不攻击） |
 | chr_0038_purrche.talent1.giftChance | skillFirstBlock | unmodeled：格挡未建模（对照靶不攻击） |
-| chr_0036_jsspsi.skill.inkRecord | inkMarked | unmodeled：笔意伤害记录与爆发未建模 |
+| chr_0036_jsspsi.skill.inkRecord | inkMarked | handled |
 | chr_0036_jsspsi.combo.perLayer | comboAttachLayers | state |
 | chr_0036_jsspsi.ult.amp.cold | afterUltimateCast | event |
 | chr_0036_jsspsi.ult.amp.heat | afterUltimateCast | event |
 | chr_0036_jsspsi.talent1.comboCd | afterUltimateCast | event |
-| chr_0036_jsspsi.pot1.inkRecord | inkMarked | unmodeled：笔意伤害记录与爆发未建模 |
+| chr_0036_jsspsi.pot1.inkRecord | inkMarked | handled |
 | chr_0036_jsspsi.pot2.atk | comboHitLayers | event |
 | suit_usp01.p2 | firstSkillInBattle | event |
 | suit_phy01.p2 | afterPhysicalAnomaly | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |

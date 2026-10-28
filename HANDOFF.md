@@ -53,3 +53,10 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 - 搜索：`autoPlan`（束搜索，热启动）→ `annealSequence`（模拟退火：交换/移动/增删/改类型，Metropolis，温度 5%→0.2%）与 `mctsSequence`（UCT，随机 rollout，均值回传）→ 再对 MCTS 最优退火 → 三条路线取保底每秒最高。
 - 评价全部由模拟器给出；不可执行的轴直接拒绝；跳过的步骤按 0.9^n 折算。
 - 回归：tests/rotations.test.mjs “自动排轴 vs 标答”（门槛 ≥85%）。
+
+## 2026-10-29 下午：祀笔意、巨浪守卫、搜索预算、视频来源
+- 引擎：祀笔意（`mechanics.skill.ink`：参数表 20 s、记录比例 8–13%）在 `simulate.js` 的 `skillHit`（河山共影命中开始记录）/ `doHit`（按比例记录）/ `inkBurst`（笔意结束或收笔时以固定伤害爆发，段 id `ink`，元素 `fixed`）结算；笔意结束后战技链回到河山共影；定身只来自链式战技第一段。
+- 修复：开局 0 s 主控下落攻击曾在汤汤没放终结技时“提前引爆巨浪”白拿一段终结技伤害（`castPlunge` 现在要求古老图形确实在场）；连携的“消耗 N 层”标签只认本人（consume 事件带 `by`）。
+- 搜索预算：`autoRotation` 默认 10 s/路线（4.5 s 时四人队的别礼终结技常被排到第二个，未收敛；10 s 与 20 s 结构一致）。四人队含诀两形态约 100 s。
+- 来源：docs/cases/case-14（GameKee 别礼文字轴）、case-15（吃我无痕 别汤赛诀：别礼终结技两种放法、充能阈值）、case-16（GameKee 祀、毛巾欧尼酱、TapTap）。浏览器插件断开，未能逐帧看视频；B 站只拿到简介与评论文字。
+- 待办（docs/verification-needed.md 29–31）：固定伤害是否吃增益；周期定义改为玩家式稳态循环（诀每个别礼周期两次终结技）；两种别礼终结技放法在模型里只差 2–5%，需实测裁定。

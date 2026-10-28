@@ -103,7 +103,7 @@ export const TRIGGERS={
   inGravityField:cast('ultimate'), inGravityFieldBreach:BREACH,
   wingHovering:hit('skill'), comboHitWingTarget:U('“连击”乘区未建模'),
   inArrowField:U('箭阵持续时间官方未给出'), enhancedShot:U('猎矢强化射击未建模'), enhancedShotConsumeAttach:U('猎矢强化射击未建模'), airborne:cast('skill',{duration:1.5}),
-  specialGiftHit:U('代言人特殊赠礼概率未建模'), inkMarked:U('笔意伤害记录与爆发未建模'),
+  specialGiftHit:U('代言人特殊赠礼概率未建模'), inkMarked:{handled:'笔意：河山共影命中后按参数表比例记录目标所受伤害，笔意时长结束或收笔时以固定伤害爆发（simulate inkBurst）'},
   ultimateDetonateBomb:U('自制炸弹未建模'), targetSlowed:U('缓速持续时间官方未给出'), skillLastStrike:U('雷击逐次命中未建模'), skillFirstTarget:{state:'always'},
   targetColdFragile:{handled:'别礼二天赋：终结技享受的脆弱 ×1.5，由 fragileMultiplier 结算'},
 };
