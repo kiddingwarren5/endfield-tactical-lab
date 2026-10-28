@@ -25,7 +25,9 @@
 | 8 | 逐击全队伤害、可视化、完整回归 | 已做（v0.1） | 全队总伤/占比/逐击表/区间；重点编队回归 docs/cases/regression-cold-team.md（可复现）；独立审核两份；报告 docs/final-report.md |
 | 9 | 排轴一图流（主轴 + 备选，分节叙述，可载入模拟） | 已做 | dist/app/chart-ui.js、dist/data/rotations.js、dist/engine/sim/rotation.js；tests/rotations.test.mjs 生成 docs/rotations.md；顺序轴来自案例 06/07 共识，时刻由 greedySchedule 给出；模拟器修正：诀连携“2 层及以上其他法术附着”触发（原按 otherArts 字面匹配永不触发） |
 | 9b | Boss/场景调轴、保底口径、可自选抗性 | 已做 | 场景（对照靶 / 短战 / 阶段转换 / 可失衡）在 rotations.js `scenarios`；保底 = 主控普攻 + 全员技能（不计副控自动普攻）；敌人防御/抗性页面可选；模拟器新增 enemy.invulnerable 窗口；greedySchedule 支持 minT。视频关键帧核对见 docs/cases/case-06（新增 verification 17–20） |
-| 发布 2 | GitHub Pages 独立网址 | 已做 | https://kiddingwarren5.github.io/endfield-tactical-lab/ （仓库 https://github.com/kiddingwarren5/endfield-tactical-lab ，gh-pages 分支 = dist/）。更新：`sh tools/deploy_pages.sh endfield-tactical-lab` |
+| 发布 2 | GitHub Pages 独立网址（随 9c/9d 重新发布） | 已做 | https://kiddingwarren5.github.io/endfield-tactical-lab/ （仓库 https://github.com/kiddingwarren5/endfield-tactical-lab ，gh-pages 分支 = dist/）。更新：`sh tools/deploy_pages.sh endfield-tactical-lab` |
+| 9c | 页面合并为“伤害计算 / 排轴”两块；排轴 = 选阵容 → 自动排轴（任意编队）或推荐轴（重点编队）→ 一图流 + 分节叙述 → 标答对照；高级编辑折叠在最后 | 已做 | dist/app/chart-ui.js（renderRotation）；dist/engine/sim/rotation.js autoRotation（形态枚举 + 束搜索 + 局部优化 improvePlan，目标=保底每秒）；tests/rotations.test.mjs “自动排轴 vs 标答”（当前 103.9%，门槛 ≥85%） |
+| 9d | 形态切换修正：诀智/意按面板自动判定（可手动），意形态连携/终结技“再次施加该法术附着”（+1 层）接入模拟器；形态专属效果按形态门控 | 已做 | dist/engine/skills.js effectiveMode；simulate.js modeOk/applyAttach('same')；预设轴改为视频核对顺序（祀战技→汤汤连携→别礼战技重击→诀连携→汤汤战技→别礼 4 层连携→祀连携→起墨/收笔，三充一爆） |
 | 发布 | 当前账号副本公开发布 | 已做 | https://claude.ai/artifact/MA9QgAZesaHBqEia9BdCwg（版本 7）；分享权限已在页面 Share 菜单设为“知道链接的任何人”（无需 Claude 账号即可打开）。备选：`gh auth login` 后 `sh tools/deploy_pages.sh` 发布到 GitHub Pages |
 
 ## 2. 需求覆盖矩阵（NEXT_STEPS.md 逐条对账）

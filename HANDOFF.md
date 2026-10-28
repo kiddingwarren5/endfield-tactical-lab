@@ -42,3 +42,8 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 ## 公开网址（2026-10-28 晚）
 - GitHub Pages：https://kiddingwarren5.github.io/endfield-tactical-lab/ （每次改 dist/ 后运行 `sh tools/deploy_pages.sh endfield-tactical-lab` 重新发布；需 `gh auth login`）
 - claude.ai artifact：https://claude.ai/artifact/MA9QgAZesaHBqEia9BdCwg
+
+## 排轴页（2026-10-28 深夜合并后）
+- 入口 `dist/app/chart-ui.js` → `renderRotation`：编队槽位（与伤害计算页共用 state.team）→ 排轴来源（自动 / 命中重点编队时的预设）→ Boss 场景 + 敌人防御抗性 → 一图流 → 分节叙述 → 标答对照 → 折叠的高级编辑（原 timeline-ui）。
+- 自动排轴 `autoRotation`（rotation.js）：形态枚举（诀智/意，member.mode='auto' 时）× autoPlan 束搜索（目标 guaranteed）→ improvePlan 局部优化 → 每步说明由事件日志生成（explainStep）。
+- 回归：`node --test tests/rotations.test.mjs` 会跑预设 × 场景与“自动 vs 标答”，并重写 docs/rotations.md。
