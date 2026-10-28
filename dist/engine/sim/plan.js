@@ -4,24 +4,26 @@ const clone=x=>JSON.parse(JSON.stringify(x));
 export const PLAN_VERSION='0.1.0';
 
 // 周期口径：所有入队干员至少各放一次终结技；周期结束 = 最后一个用于满足条件的终结技伤害全部结算完。
-export function cycleOf(sim,memberIdxs){ const ultHits=sim.hits.filter(h=>h.kind==='ultimate');
-  const castByMember={}; for(const e of sim.events) if(e.type==='cast'&&e.kind==='ultimate'){ const m=sim.hits.find(h=>h.name===e.who)?.member; if(m!=null&&castByMember[m]==null) castByMember[m]=e.t; }
+export function cycleOf(sim,memberIdxs){ const names=sim.summary.names||[], idxs=sim.summary.memberIdx||[]; const idxOfName=n=>idxs[names.indexOf(n)];
+  const castByMember={}; for(const e of sim.events) if(e.type==='cast'&&e.kind==='ultimate'){ const m=idxOfName(e.who); if(m!=null&&castByMember[m]==null) castByMember[m]=e.t; }
   const complete=memberIdxs.every(i=>castByMember[i]!=null); if(!complete) return {complete:false,end:null,castByMember};
-  const lastCast=Math.max(...memberIdxs.map(i=>castByMember[i])); const settle=ultHits.filter(h=>h.t>=lastCast).reduce((a,h)=>Math.max(a,h.t),lastCast); return {complete:true,end:settle+0.05,castByMember}; }
+  // 周期末 = 最后一个“用于满足条件”的终结技（各成员首次）伤害全部结算完；无伤害终结技按施放时刻；时限内尚未结算 → 不完整
+  let end=0; for(const i of memberIdxs){ const t0=castByMember[i]; const name=names[idxs.indexOf(i)]; const laterUlt=sim.events.find(e=>e.type==='cast'&&e.kind==='ultimate'&&e.who===name&&e.t>t0+1e-6); const hitsOf=sim.hits.filter(h=>h.member===i&&h.kind==='ultimate'&&h.t>=t0-1e-6&&(!laterUlt||h.t<laterUlt.t)); if(!hitsOf.length&&(sim.summary.params?.duration??Infinity)<t0+2.5) return {complete:false,end:null,castByMember,note:'终结技伤害未在时限内结算'}; const settle=hitsOf.length?Math.max(...hitsOf.map(h=>h.t)):t0; end=Math.max(end,settle); }
+  return {complete:true,end:end+0.05,castByMember}; }
 export function scoreOf(sim,memberIdxs,horizon){ const cyc=cycleOf(sim,memberIdxs); const until=cyc.complete?cyc.end:horizon; const dmg=sim.hits.filter(h=>h.t<=until).reduce((a,h)=>a+h.damage,0); const dps=dmg/Math.max(1,until); return {dps:cyc.complete?dps:dps*0.5,total:dmg,until,complete:cyc.complete,cycle:cyc}; }
 
 function feasibleActions(sim,members,t,mechanicsById){ // from the simulation state near t (samples + events)
   const s=[...sim.samples].reverse().find(x=>x.t<=t+1e-6)||sim.samples[0]; if(!s) return []; const acts=[]; const spAvail=s.sp;
   const comboReady={}; for(const e of sim.events){ if(e.t>t+1e-6) break; if(e.type==='comboReady') comboReady[e.who]=e.until; if(e.type==='cast'&&e.kind==='combo') comboReady[e.who]=0; }
   const ultCd={},comboCd={}; for(const e of sim.events){ if(e.t>t+1e-6) break; if(e.type==='cast'&&e.kind==='ultimate') ultCd[e.who]=e.cooldownUntil; if(e.type==='cast'&&e.kind==='combo') comboCd[e.who]=e.cooldownUntil; }
-  members.forEach((m,k)=>{ if(spAvail>=100-1e-6) acts.push({member:m.idx,kind:'skill'}); if(comboReady[m.name]>t&&!(comboCd[m.name]>t)) acts.push({member:m.idx,kind:'combo'}); if((s.energy[k]||0)>=m.energyMax-1e-6&&!(ultCd[m.name]>t)) acts.push({member:m.idx,kind:'ultimate'}); });
+  members.forEach((m,k)=>{ const cost=m.skillCost??100; if(spAvail>=cost-1e-6) acts.push({member:m.idx,kind:'skill'}); if(comboReady[m.name]>=t-1e-6&&!(comboCd[m.name]>t+1e-6)) acts.push({member:m.idx,kind:'combo'}); if((s.energy[k]||0)>=m.energyMax-1e-6&&!(ultCd[m.name]>t+1e-6)) acts.push({member:m.idx,kind:'ultimate'}); });
   return acts; }
 
 export function autoPlan(input,{beam=8,step=1.0,horizon=40,onProgress}={}){
   const {team,data}=input; const members=team.map((m,i)=>m?{idx:i,name:data.operators.find(o=>o.id===m.operatorId)?.name}:null).filter(Boolean);
   const memberIdxs=members.map(m=>m.idx);
   const evalTl=tl=>simulate({...input,timeline:tl,params:{...(input.params||{}),duration:horizon}});
-  const dry=evalTl([]); members.forEach((m,k)=>{ m.energyMax=dry.summary.energyMax?.[k]??100; });
+  const dry=evalTl([]); members.forEach((m,k)=>{ m.energyMax=dry.summary.energyMax?.[k]??100; const mech=(input.mechanics||[]).find(x=>x.operatorId===team[m.idx].operatorId); const c=mech?.skill?.spCost; m.skillCost=typeof c==='number'?c:(c?.value??c?.byRank?.[11]??100); });
   let beams=[{tl:[],sim:dry,score:scoreOf(dry,memberIdxs,horizon)}]; const explored=[];
   for(let t=0;t<=horizon;t+=step){ const next=[]; for(const b of beams){ next.push(b); // wait
       const acts=feasibleActions(b.sim,members,t); for(const a of acts){ if(b.tl.some(x=>Math.abs(x.t-t)<step-1e-6&&x.member===a.member)) continue; const tl=[...b.tl,{t:Math.round(t*10)/10,...a}].sort((p,q)=>p.t-q.t); const sim=evalTl(tl); if(sim.errors.some(e=>Math.abs(e.t-t)<1e-6)) continue; next.push({tl,sim,score:scoreOf(sim,memberIdxs,horizon)}); } }
@@ -41,8 +43,10 @@ export function chargeThreshold(input,deadlines,{lo=-100,hi=400,tol=0.5}={}){
   // read the event log, not samples: samples are ≥0.5 s apart and miss energy gained between the last sample and T
   const energyAt=(sim,idx,T)=>{ const k=team.slice(0,idx).filter(Boolean).length; const ev=[...sim.events].reverse().find(x=>x.t<=T+1e-6); return ev?ev.energy[k]:(input.initial?.energy?.[idx]??0); };
   const results=[]; for(const d of deadlines){ const idx=d.member; const base=simulate({...input,params:{...(input.params||{}),duration:Math.max(d.t+1,input.params?.duration||40)}}); const k=team.slice(0,idx).filter(Boolean).length; const max=base.summary.energyMax?.[k]??0; const cur=energyAt(base,idx,d.t); const curEff=base.summary.chargeEff?.[k]??0;
-    const ok=e=>{ const extra=[]; extra[idx]=e; const sim=simulate({...input,params:{...(input.params||{}),duration:Math.max(d.t+1,input.params?.duration||40),extraChargeEff:extra}}); return energyAt(sim,idx,d.t)>=max-1e-6; };
-    let res; if(ok(lo)){ res={feasible:true,requiredExtra:lo,note:'即使效率降至下界也满足'}; } else if(!ok(hi)){ res={feasible:false,note:`充能效率增至 +${hi}% 仍无法在 ${d.t}s 前充满（可能需要改变轴或能量来源）`}; } else { let a=lo,b=hi; while(b-a>tol){ const m=(a+b)/2; if(ok(m)) b=m; else a=m; } res={feasible:true,requiredExtra:Math.ceil(b*10)/10}; } // round up: rounding down could land below the threshold
+    // 口径：截止前“到达过满能”（含随后已施放终结技）即满足；能量随效率单调不减，二分有效
+    const reached=(sim,T)=>{ const k=team.slice(0,idx).filter(Boolean).length; const name=sim.summary.names?.[k]; return sim.events.some(e=>e.t<=T+1e-6&&((e.energy&&e.energy[k]>=max-1e-6)||(e.type==='cast'&&e.kind==='ultimate'&&e.who===name))); };
+    const ok=e=>{ const extra=[]; extra[idx]=e; const sim=simulate({...input,params:{...(input.params||{}),duration:Math.max(d.t+1,input.params?.duration||40),extraChargeEff:extra}}); return reached(sim,d.t); };
+    let res; if(reached(base,d.t)){ res={feasible:true,requiredExtra:0,note:'当前配装已在截止前满能'}; } else if(ok(lo)){ res={feasible:true,requiredExtra:lo,note:'即使效率降至下界也满足'}; } else if(!ok(hi)){ res={feasible:false,note:`充能效率增至 +${hi}% 仍无法在 ${d.t}s 前充满（可能需要改变轴或能量来源）`}; } else { let a=lo,b=hi; while(b-a>tol){ const m=(a+b)/2; if(ok(m)) b=m; else a=m; } let r=Math.ceil(b*10)/10; while(!ok(r)) r=Math.round((r+tol)*10)/10; res={feasible:true,requiredExtra:r,replayVerified:true}; } // round up: rounding down could land below the threshold
     results.push({member:idx,name:names[idx],deadline:d.t,energyMax:max,currentEnergyAtDeadline:Math.round(cur*10)/10,currentChargeEff:curEff,...res,requiredTotal:res.requiredExtra!=null?Math.round((curEff+res.requiredExtra)*10)/10:null,premises:['阈值基于当前这条轴；改变动作后需重算','能量来源：战技（真实技力）与连携回能均乘充能效率（规则 B10）；特殊回能按目录标记','舍入：二分精度 '+tol+'%，边界值请在界面两侧各试 1%','非主控普攻不产生能量；毒技力消耗不回能']}); }
   return results; }
 
