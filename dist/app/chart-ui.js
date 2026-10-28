@@ -16,7 +16,7 @@ const CIRCLED='①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑�
 const clone=x=>JSON.parse(JSON.stringify(x));
 // ---- 后台计算：Worker 可用时在 Worker 里跑（页面不冻结，显示进度），否则退回主线程同步计算 ----
 const results=new Map(), pending=new Map(), progress=new Map(), startedAt=new Map(); let worker=null, rerender=null, progressEl=null, ticker=null, lastRes=null;
-function loadIntoSim(state,res){ const sim=state.sim||(state.sim=defaultSim()); sim.timeline=res.timeline.map(({t,member,kind})=>({t,member,kind})); sim.duration=Math.ceil(res.end+4); sim.initialSp=res.input.initial.sp; sim.initialEnergy=[...res.input.initial.energy]; sim.scheduleNotes=[]; state.enemy=clone(res.input.enemy); }
+function loadIntoSim(state,res,key){ const sim=state.sim||(state.sim=defaultSim()); sim.fromKey=key||null; sim.timeline=res.timeline.map(({t,member,kind})=>({t,member,kind})); sim.duration=Math.ceil(res.end+4); sim.initialSp=res.input.initial.sp; sim.initialEnergy=[...res.input.initial.energy]; sim.scheduleNotes=[]; state.enemy=clone(res.input.enemy); }
 function paintProgress(){ if(!progressEl) return; const key=progressEl.dataset.key; const f=progress.get(key); const bar=progressEl.querySelector('.progress'); const i=bar?.querySelector('i'); if(f!=null&&i){ bar.classList.remove('indeterminate'); i.style.width=`${Math.max(2,Math.round(f*100))}%`; progressEl.querySelector('.pct').textContent=`${Math.round(f*100)}%`; const steps=progressEl.querySelectorAll('.calc-step'); steps.forEach((el,k)=>el.classList.toggle('on',f<0.5?k===0:f<1?k===1:k===2)); } const st=startedAt.get(key); const el=progressEl.querySelector('.elapsed'); if(st&&el) el.textContent=`已用 ${Math.round((Date.now()-st)/1000)} 秒`; }
 function getWorker(){ if(worker===false) return null; if(worker) return worker; try{ worker=new Worker(new URL('./plan-worker.js',import.meta.url),{type:'module'}); worker.onmessage=e=>{ const {id,type,value}=e.data; if(type==='progress'){ progress.set(id,value); paintProgress(); } else if(type==='done'){ remember(id,value); pending.delete(id); if(rerender) rerender(); } else if(type==='error'){ pending.set(id,{error:value}); if(rerender) rerender(); } }; worker.onerror=ev=>{ console.error('plan-worker 失败，退回主线程',ev.message); worker=false; for(const [id,p] of pending){ if(p?.job){ try{ remember(id,runJob(p.job)); }catch(e){ pending.set(id,{error:e.message}); } } } pending.clear(); if(rerender) rerender(); }; }catch(e){ worker=false; } return worker||null; }
 function remember(key,value){ if(results.size>40) results.delete(results.keys().next().value); results.set(key,value); }
@@ -34,12 +34,12 @@ export function renderRotation(root,state,update){
   const host=h('div',{class:'chart-host'}); left.append(host);
   // 高级编辑（原“排轴模拟”）折叠在最后
   const adv=h('div',{id:'rotation-advanced'}); const det=h('details',{class:'advanced',open:rot.advanced||false},h('summary',{},'高级：手动编辑动作、模拟参数、时刻检查、逐击明细'),adv);
-  det.addEventListener('toggle',()=>{ rot.advanced=det.open; if(det.open){ if(lastRes&&!(state.sim?.timeline?.length)) loadIntoSim(state,lastRes); renderTimeline(adv,state,update); } });
+  det.addEventListener('toggle',()=>{ rot.advanced=det.open; if(det.open){ if(lastRes&&needsLoad(state,lastKey)) loadIntoSim(state,lastRes,lastKey); renderTimeline(adv,state,update); } });
   left.append(det); root.append(h('div',{class:'workspace single chart'},left));
   if(det.open) renderTimeline(adv,state,update);
   rerender=()=>{ if(document.body.contains(root)) renderRotation(root,state,update); };
   if(!filled.length){ host.append(h('section',{class:'panel'},h('p',{class:'muted'},'请先在上方选择至少一名干员（1–4 人都可以排轴），或点“载入示例编队”。'))); return; }
-  const r=compute(state,scenario);
+  const key=jobKey(state,scenario); const r=compute(state,scenario);
   if(r.error){ host.append(h('section',{class:'panel'},h('div',{class:'sim-errors'},'排轴失败：'+r.error))); return; }
   if(r.pending){ const key=jobKey(state,scenario); const known=progress.get(key); const names=filled.map(i=>operators.find(o=>o.id===team[i].operatorId));
     progressEl=h('div',{class:'calc-wait',dataset:{key}},
@@ -48,9 +48,9 @@ export function renderRotation(root,state,update){
       h('div',{class:'calc-wait-foot'},h('div',{class:'calc-avatars'},...names.map(o=>h('img',{src:o.icon,alt:'',class:'calc-avatar'}))),h('div',{class:'calc-steps'},h('span',{class:'calc-step on'},'生成候选'),h('span',{class:'calc-step'},'比较伤害'),h('span',{class:'calc-step'},'出图'))),
       h('small',{class:'muted'},'算完会自动显示，页面可以继续操作。'));
     host.append(h('section',{class:'panel'},progressEl)); clearInterval(ticker); ticker=setInterval(()=>{ if(!document.body.contains(progressEl)){ clearInterval(ticker); return; } paintProgress(); },500); paintProgress(); return; }
-  let res=r.ready; const cands=res.candidates||[]; let picked=0; if(cands.length>1){ picked=Math.min(rot.candidate||0,cands.length-1); if(picked>0&&cands[picked].res) res=cands[picked].res; }
-  lastRes=res; if(rot.advanced&&!(state.sim?.timeline?.length)){ loadIntoSim(state,res); renderTimeline(adv,state,update); }
-  if(cands.length>1) host.append(h('section',{class:'panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'▣'),h('h2',{},'自动排轴给出的几条轴')),h('div',{class:'preset-tabs'},...cands.map((c,i)=>h('button',{type:'button',class:'preset-tab'+(i===picked?' active':''),onclick:()=>update(s=>{s.rot.candidate=i;})},`${c.name} · 每秒 ${fmt(c.sure)}`)))));
+  let res=r.ready; const cands=res.candidates||[]; let picked=0; if(cands.length>1){ picked=rot.candidateKey===key?Math.min(rot.candidate||0,cands.length-1):0; if(picked>0&&cands[picked].res) res=cands[picked].res; }
+  lastRes=res; lastKey=key; if(rot.advanced&&needsLoad(state,key)){ loadIntoSim(state,res,key); renderTimeline(adv,state,update); }
+  if(cands.length>1) host.append(h('section',{class:'panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'▣'),h('h2',{},'自动排轴给出的几条轴')),h('div',{class:'preset-tabs'},...cands.map((c,i)=>h('button',{type:'button',class:'preset-tab'+(i===picked?' active':''),onclick:()=>update(s=>{s.rot.candidate=i; s.rot.candidateKey=key;})},`${c.name} · 每秒 ${fmt(c.sure)}`)))));
   host.append(chartSvg(res),narrative(res,state,update));
 }
 function jobKey(state,scenario){ const rot=state.rot; return JSON.stringify(['auto',scenario.id,rot.enemy,rot.auto,state.team,state.mainControl]); }
@@ -119,7 +119,7 @@ function narrative(res,state,update){
   const stepRow=({a,i,s,st})=>{ const op=mem.find(m=>m.i===a.member)?.op; return h('li',{class:'step'},h('span',{class:'step-no',style:`background:${KIND_COLOR[a.kind]}`},CIRCLED[i]||i+1),h('span',{class:'step-t'},`${a.t.toFixed(1)}s`),h('span',{class:'step-body'},h('b',{},`${res.names[a.member]} · ${KIND_LABEL[a.kind]}「${skillName(op,a.kind,s.stage)}」${s.wait?`（附着 ${s.wait} 层后）`:''}`),h('span',{class:'step-why'},s.why,st.consumed&&!/消耗/.test(s.why)?`（实际消耗 ${st.consumed} 层）`:''),h('span',{class:'step-state muted'},st.sp==null?'':`技力 ${Math.round(st.sp)} · 寒冷 ${st.cold} 层 · 能量 ${st.energy.map(Math.round).join(' / ')}`),st.error?h('span',{class:'warn'},st.error):'')); };
   const text=rotationText({steps:res.steps},res); const copyStatus=h('span',{class:'muted small'},'');
   const copyBtn=h('button',{type:'button',class:'mini-btn',onclick:()=>{ const done=()=>{copyStatus.textContent='已复制文字轴';}; const fb=()=>{ const ta=h('textarea',{class:'export-box',readonly:true},text); document.body.append(ta); ta.select(); try{ document.execCommand('copy'); done(); }catch{ copyStatus.textContent='请从下方文字手动复制'; } ta.remove(); }; if(navigator.clipboard?.writeText) navigator.clipboard.writeText(text).then(done).catch(fb); else fb(); }},'复制文字轴');
-  const applyBtn=h('button',{type:'button',class:'mini-btn primary',onclick:()=>{ update(s=>{ loadIntoSim(s,res); s.rot.advanced=true; }); }},'到高级里手动调整');
+  const applyBtn=h('button',{type:'button',class:'mini-btn primary',onclick:()=>{ update(s=>{ loadIntoSim(s,res,lastKey); s.rot.advanced=true; }); }},'到高级里手动调整');
   const warn=[...(res.notes||[]).map(n=>n),...(res.main.errors||[]).map(e=>`${e.t.toFixed(1)}s ${e.message}`)];
   return h('section',{class:'panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'03'),h('h2',{},'结果与分节叙述')),
     h('div',{class:'chart-stats'},stat(res.scenario?.timeLimit?'限时':'一轮用时',`${end.toFixed(1)} 秒`,''),stat('保底伤害',fmt(sure),`每秒 ${fmt(sure/end)}`),stat('含队友普攻',fmt(total),`每秒 ${fmt(total/end)}`),stat('终结技时刻',ults,'')),
