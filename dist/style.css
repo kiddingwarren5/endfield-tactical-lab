@@ -42,3 +42,7 @@ footer{padding:0 3.1vw 24px;display:flex;flex-wrap:wrap;gap:5px 16px;font-size:1
 .ledger{font-size:10px;max-height:260px;overflow:auto;border:1px solid var(--line)}.ledger-row{display:grid;grid-template-columns:44px 80px 1fr auto;gap:6px;padding:3px 6px;border-bottom:1px solid #edf0eb}
 @media(max-width:1210px){.workspace.sim{grid-template-columns:1fr}}
 .cand{padding:4px 0;border-bottom:1px solid #edf0eb}.cand .mini-btn{margin:0 0 0 6px;padding:2px 6px}
+
+/* gutters for narrow/safe-area */
+.topbar{padding-left:max(16px,env(safe-area-inset-left,0px),3.1vw);padding-right:max(16px,env(safe-area-inset-right,0px),3.1vw)}.hero{padding-left:max(16px,env(safe-area-inset-left,0px),3.1vw);padding-right:max(16px,env(safe-area-inset-right,0px),3.1vw)}.workspace{padding-left:max(16px,env(safe-area-inset-left,0px),3.1vw);padding-right:max(16px,env(safe-area-inset-right,0px),3.1vw)}footer{padding-left:max(16px,env(safe-area-inset-left,0px),3.1vw);padding-right:max(16px,env(safe-area-inset-right,0px),3.1vw)}.team-tabs{padding-left:max(16px,env(safe-area-inset-left,0px),3.1vw);padding-right:max(16px,env(safe-area-inset-right,0px),3.1vw)}.reset-button{right:max(16px,env(safe-area-inset-right,0px),3.1vw)}
+.export-box{width:100%;height:220px;font:11px ui-monospace,monospace;border:1px solid #bfc8c0;padding:8px}

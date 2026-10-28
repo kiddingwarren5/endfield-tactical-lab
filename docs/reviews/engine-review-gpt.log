@@ -2776,3 +2776,409 @@ fragile ultimate 1.45
 codex
 三个独立手算例已核对完成，基础面板、常规伤害乘区和零值属性覆盖均得到预期结果。搜索层则有独立问题：周期会把尚未命中的终结技判为已结算；充能阈值依赖稀疏采样，且没有处理终结技清空能量对二分判定的影响。正在复核端点和最终定位。
 
+exec
+/bin/zsh -lc "node --input-type=module -e '
+import operators from '\\''./dist/data/operators.js'\\''; import weapons from '\\''./dist/data/weapons.js'\\'';import gear from '\\''./dist/data/gear.js'\\'';import sets from '\\''./dist/data/sets.js'\\'';import effects from '\\''./dist/data/effects.js'\\'';import mechanics from '\\''./dist/data/mechanics.js'\\'';import timing from '\\''./dist/data/timing.js'\\'';
+import {getStats,weaponRanks} from '\\''./dist/engine/stats.js'\\'';import {calcSegment} from '\\''./dist/engine/damage.js'\\'';import {skillSegments,mechSegments,calcSkill} from '\\''./dist/engine/skills.js'\\'';import {candidateEffects,appliedFor,resolveValue} from '\\''./dist/engine/resolve.js'\\'';import {simulate} from '\\''./dist/engine/sim/simulate.js'\\'';import {autoPlan,chargeThreshold,cycleOf} from '\\''./dist/engine/sim/plan.js'\\'';
+const data={operators,weapons,gear,sets,effects}; const op=n=>operators.find(o=>o.name===n);const mk=n=>({operatorId:op(n).id,potential:0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},gear:{},consumables:[]}); const enemy={defence:100,resistances:{},custom:{}};
+const input={data,mechanics,timing,enemy,params:{duration:5,mainAutoNormal:false}};
+const pickEvents=(r,types)=>r.events.filter(e=>types.includes(e.type));
+
+console.log('\\''triggers'\\'',mechanics.map(m=>({name:m.name,tr:m.combo?.trigger})));
+const p=mk('\\''佩丽卡'\\'');
+const synMech=[{operatorId:p.operatorId,skill:{spCost:100,attach:{element:'\\''electric'\\'',layers:1}},combo:{trigger:{type:'\\''attachApplied'\\'',element:'\\''electric'\\''},cooldown:0,energyGain:{self:10}}}];
+const common={...input,team:[p],mechanics:synMech,timing:{...timing,spRegenPerSecond:0},initial:{sp:300},params:{duration:8,mainAutoNormal:false}};
+for(const t of [5.48,5.480002]){const r=simulate({...common,timeline:[{t:0,member:0,kind:'\\''skill'\\''},{t,member:0,kind:'\\''combo'\\''}]});console.log('\\''windowEdge'\\'',t,r.errors.map(e=>e.message));}
+const refresh=simulate({...common,timeline:[{t:0,member:0,kind:'\\''skill'\\''},{t:4,member:0,kind:'\\''skill'\\''},{t:7,member:0,kind:'\\''combo'\\''}]});console.log('\\''windowRefresh'\\'',refresh.errors, pickEvents(refresh,['\\''comboReady'\\'','\\''cast'\\'']).map(e=>({t:e.t,type:e.type,kind:e.kind,until:e.until})));
+const abnTeam=[mk('\\''狼卫'\\''),mk('\\''佩丽卡'\\''),mk('\\''梨诺'\\''),mk('\\''祀'\\'')];const r=simulate({...input,team:abnTeam,timeline:[{t:0,member:0,kind:'\\''skill'\\''},{t:1,member:1,kind:'\\''skill'\\''},{t:2,member:3,kind:'\\''combo'\\''}],params:{duration:3}});
+console.log('\\''abnormal-combo-events'\\'',JSON.stringify(pickEvents(r,['\\''abnormal'\\'','\\''comboReady'\\'','\\''error'\\'']).map(e=>({t:e.t,type:e.type,who:e.who,which:e.which,message:e.message}))));
+const paused=simulate({...input,team:[mk('\\''佩丽卡'\\''),mk('\\''祀'\\'')],initial:{energy:[0,80]},timeline:[{t:0,member:1,kind:'\\''ultimate'\\''}],params:{duration:3,mainAutoNormal:true}});
+console.log('\\''pause-mainNormals'\\'',paused.hits.filter(h=>h.kind==='\\''normal'\\'').map(h=>({t:h.t,member:h.member})),pickEvents(paused,['\\''spGain'\\'']).map(e=>({t:e.t,why:e.why,amount:e.amount})));
+'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+triggers [
+  {
+    name: '狼卫',
+    tr: { type: 'anyAttachApplied', text: '当有敌人被施加法术附着时可以发动' }
+  },
+  {
+    name: '别礼',
+    tr: {
+      type: 'attachLayers',
+      element: 'cold',
+      min: 3,
+      text: '当有敌人进入3层及以上寒冷附着状态时可以发动'
+    }
+  },
+  { name: '佩丽卡', tr: { type: 'heavyHit', text: '当主控干员对敌人造成重击后可以发动' } },
+  {
+    name: '莱万汀',
+    tr: {
+      type: 'abnormal',
+      anomalies: [Array],
+      text: '当有敌人进入燃烧或腐蚀状态时可以发动'
+    }
+  },
+  {
+    name: '洛茜',
+    tr: {
+      type: 'custom',
+      requires: [Array],
+      text: '当有敌人同时处于破防和法术附着状态时可以发动'
+    }
+  },
+  {
+    name: '艾尔黛拉',
+    tr: {
+      type: 'heavyHit',
+      targetCondition: '目标不处于破防且不处于法术附着',
+      text: '当主控干员对不处于破防或法术附着状态的敌人造成重击后可以发动'
+    }
+  },
+  {
+    name: '陈千语',
+    tr: {
+      type: 'attachLayers',
+      element: 'breach',
+      min: 1,
+      text: '当有敌人进入破防状态时可以发动'
+    }
+  },
+  {
+    name: '大潘',
+    tr: {
+      type: 'attachLayers',
+      element: 'breach',
+      min: 4,
+      text: '当有敌人达到4层破防时可以发动'
+    }
+  },
+  {
+    name: '余烬',
+    tr: { type: 'custom', event: 'controlledHit', text: '主控干员受到攻击后可以发动' }
+  },
+  {
+    name: '弧光',
+    tr: {
+      type: 'abnormal',
+      anomalies: [Array],
+      or: [Array],
+      text: '当有敌人进入导电状态或导电状态被消耗后可以发动'
+    }
+  },
+  {
+    name: '阿列什',
+    tr: {
+      type: 'custom',
+      event: 'abnormalConsumed',
+      anomalies: [Array],
+      or: [Array],
+      text: '当附近目标的法术异常或源石结晶被消耗时可以发动'
+    }
+  },
+  {
+    name: '艾维文娜',
+    tr: {
+      type: 'heavyHit',
+      targetCondition: '目标处于电磁附着或导电',
+      text: '主控干员对处于电磁附着或导电状态的目标进行重击后可以发动'
+    }
+  },
+  {
+    name: '管理员 (男)',
+    tr: { type: 'allyCombo', text: '当小队内其他干员的连携技造成伤害时可以发动' }
+  },
+  {
+    name: '昼雪',
+    tr: {
+      type: 'custom',
+      event: 'controlledHit',
+      hpBelow: 0.6,
+      text: '当主控干员受到攻击后，如果生命值低于60%可以发动'
+    }
+  },
+  {
+    name: '安塔尔',
+    tr: {
+      type: 'anyAttachApplied',
+      targetCondition: '目标被聚焦',
+      or: [Array],
+      text: '当被聚焦的敌人进入物理异常或法术附着状态时可以发动'
+    }
+  },
+  {
+    name: '萤石',
+    tr: {
+      type: 'attachLayers',
+      element: [Array],
+      min: 2,
+      text: '当敌人进入2层及以上寒冷附着或自然附着时可以发动'
+    }
+  },
+  {
+    name: '埃特拉',
+    tr: { type: 'abnormal', anomalies: [Array], text: '当有敌人进入冻结状态时可以发动' }
+  },
+  {
+    name: '卡契尔',
+    tr: {
+      type: 'custom',
+      event: 'enemyCharging',
+      or: [Array],
+      text: '当敌人开始蓄力，或主控干员受到攻击后生命值低于40%可以发动'
+    }
+  },
+  {
+    name: '秋栗',
+    tr: { type: 'custom', event: 'stagger', text: '当有敌人失衡，或触发失衡节点时可以发动' }
+  },
+  {
+    name: '黎风',
+    tr: {
+      type: 'heavyHit',
+      targetCondition: '目标处于物理脆弱或碎甲',
+      text: '当处于物理脆弱或碎甲状态的敌人受到主控干员重击后可以发动'
+    }
+  },
+  {
+    name: '骏卫',
+    tr: {
+      type: 'attachConsumed',
+      element: 'breach',
+      by: [Array],
+      text: '当有敌人被猛击或者碎甲消耗破防层数后可以发动'
+    }
+  },
+  {
+    name: '赛希',
+    tr: {
+      type: 'skillState',
+      state: '支援晶体生命回复次数耗尽',
+      count: 2,
+      text: '当支援晶体的生命回复次数耗尽后可以发动'
+    }
+  },
+  {
+    name: '管理员 (女)',
+    tr: { type: 'allyCombo', text: '当小队内其他干员的连携技造成伤害时可以发动' }
+  },
+  {
+    name: '伊冯',
+    tr: {
+      type: 'heavyHit',
+      targetCondition: '目标处于冻结',
+      text: '当主控干员对处于冻结状态的敌人造成重击时可以发动'
+    }
+  },
+  {
+    name: '洁尔佩塔',
+    tr: { type: 'abnormal', anomalies: [Array], text: '当有敌人被施加法术异常时可以发动' }
+  },
+  {
+    name: '汤汤',
+    tr: {
+      type: 'attachApplied',
+      element: 'cold',
+      or: [Array],
+      text: '当有敌人被施加寒冷附着或受到法术爆发伤害时可以发动'
+    }
+  },
+  {
+    name: '庄方宜',
+    tr: {
+      type: 'heavyHit',
+      targetCondition: '目标处于电磁附着',
+      or: [Array],
+      text: '主控干员的重击或处决，命中处于电磁附着状态的敌人后可以发动'
+    }
+  },
+  {
+    name: '卡缪',
+    tr: {
+      type: 'attachConsumed',
+      element: 'heat',
+      includesAbsorbed: true,
+      text: '当有敌人的灼热附着被消耗或吸收后可以发动'
+    }
+  },
+  {
+    name: '弭弗',
+    tr: {
+      type: 'attachLayers',
+      element: 'breach',
+      min: 3,
+      text: '当有敌人达到3层及以上破防时可以发动'
+    }
+  },
+  {
+    name: '诀',
+    tr: {
+      type: 'attachApplied',
+      element: 'nature',
+      or: [Array],
+      text: '当有敌人被施加自然附着或进入2层及以上其他法术附着时可以发动'
+    }
+  },
+  {
+    name: '梨诺',
+    tr: {
+      type: 'abnormal',
+      anomalies: [Array],
+      or: [Array],
+      requires: [Array],
+      text: '演唱姿态期间，当有敌人被施加法术异常或法术异常被消耗时可以发动'
+    }
+  },
+  {
+    name: '提弗洛斯',
+    tr: { type: 'skillState', state: '自身启示已满', text: '当自身启示已满时可以发动' }
+  },
+  {
+    name: '噗切娜',
+    tr: { type: 'custom', event: 'controlledHit', text: '主控干员受到攻击后可以发动' }
+  },
+  {
+    name: '祀',
+    tr: {
+      type: 'attachConsumed',
+      element: [Array],
+      includesAbsorbed: true,
+      text: '当有敌人的寒冷附着或灼热附着被消耗或吸收后可以发动'
+    }
+  }
+]
+windowEdge 5.48 []
+windowEdge 5.480002 [ '佩丽卡 连携未触发（条件未满足或窗口已过）' ]
+windowRefresh [] [
+  { t: 0, type: 'cast', kind: 'skill', until: undefined },
+  { t: 0.48, type: 'comboReady', kind: undefined, until: 5.48 },
+  { t: 4, type: 'cast', kind: 'skill', until: undefined },
+  { t: 7, type: 'cast', kind: 'combo', until: undefined }
+]
+abnormal-combo-events [{"t":0.48,"type":"comboReady","who":"狼卫"},{"t":1.48,"type":"abnormal","which":"conduct"},{"t":2,"type":"error","message":"祀 连携未触发（条件未满足或窗口已过）"},{"t":2.05,"type":"comboReady","who":"佩丽卡"}]
+pause-mainNormals [
+  { t: 0, member: 0 },
+  { t: 0.5, member: 0 },
+  { t: 1, member: 0 },
+  { t: 1.55, member: 0 },
+  { t: 2.15, member: 0 },
+  { t: 2.65, member: 0 },
+  { t: 3, member: 1 }
+] [ { t: 1.55, why: '佩丽卡 重击回技力', amount: 15 } ]
+
+exec
+/bin/zsh -lc "rg -n 'appliedFor|candidateEffects|chargeThreshold|autoPlan|exclusiveGroup|brokenDmg|weaponRanks' dist --glob '*.js' --glob '"'!data/*'"' --glob '"'!dist/data/*'"'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+dist/app.js:1:import {gear,events,elements,buffDefs,gradeResistance,weaponRanks} from './data.js';
+dist/app.js:42:    const value=def.id==='weaponQ'?weaponRanks.afterQ[weaponRank]:def.id==='weaponE'?weaponRanks.afterE[weaponRank]:def.id==='tide2'?35:def.value;
+dist/app.js:101:  for(const [id,value] of Object.entries({characterPotential:state.characterPotential,weaponPotential:state.weaponPotential,weaponStrengthRank:state.weaponRanks.strength,weaponAttackRank:state.weaponRanks.attack,weaponSkillRank:state.weaponRanks.skill,normalRank:state.skillRanks.normal,qRank:state.skillRanks.q,eRank:state.skillRanks.e,rRank:state.skillRanks.r,event:state.event,defence:state.enemy.defence,critMode:state.critMode,artsStrength:state.artsStrength,combo:state.combo,stagger:state.stagger,reduction:state.reduction}))$(id).value=String(value);
+dist/app.js:106:  else if(id==='weaponPotential'){state.weaponPotential=Number(val);state.weaponRanks.skill=weaponSkillRankFromPotential(val);$('weaponSkillRank').value=String(state.weaponRanks.skill)}
+dist/app.js:107:  else if(id==='weaponStrengthRank')state.weaponRanks.strength=Number(val);
+dist/app.js:108:  else if(id==='weaponAttackRank')state.weaponRanks.attack=Number(val);
+dist/app.js:109:  else if(id==='weaponSkillRank'){state.weaponRanks.skill=Number(val);state.weaponPotential=Number(val)-4;$('weaponPotential').value=String(state.weaponPotential)}
+dist/calc.js:1:import {gear, weaponRanks, skills, events, gradeResistance, buffDefs} from './data.js';
+dist/calc.js:5:  weaponRanks:{strength:9,attack:9,skill:4},
+dist/calc.js:32:  const wr=state.weaponRanks;
+dist/calc.js:33:  const mainRaw=155+60+(state.characterPotential>=2?20:0)+gearValue(state,'strength')+weaponRanks.strength[rank(wr.strength,9)];
+dist/calc.js:36:  const atkPercent=weaponRanks.attack[rank(wr.attack,9)];
+dist/calc.js:74:    add('bonus','赫拉芬格 · 所有技能伤害',weaponRanks.skill[rank(weaponSkillRankFromPotential(state.weaponPotential),9)]);
+dist/calc.js:85:    const value=def.id==='weaponQ'?weaponRanks.afterQ[weaponRank]:def.id==='weaponE'?weaponRanks.afterE[weaponRank]:def.id==='tide2'?35:def.value;
+dist/engine/stats.js:6:export function weaponRanks(w){ if(!w) return [9,9,4]; if(w.substrate){ const s=w.substrate; return [Math.min(9,3+(s[0]??6)),Math.min(9,3+(s[1]??6)),Math.min(9,1+(w.potential??0)+(s[2]??3))]; } return w.ranks||[9,9,4]; }
+dist/engine/stats.js:12:  const wr=weaponRanks(member.weapon);
+dist/engine/sim/plan.js:20:export function autoPlan(input,{beam=8,step=1.0,horizon=40,onProgress}={}){
+dist/engine/sim/plan.js:39:export function chargeThreshold(input,deadlines,{lo=-100,hi=400,tol=0.5}={}){
+dist/engine/sim/simulate.js:6:import {candidateEffects,resolveValue,triggerKindOf} from '../resolve.js';
+dist/engine/sim/simulate.js:44:  const cands=alive.map(mb=>candidateEffects({team,bIdx:mb.idx,data,consumablesOf:i=>team[i]?.consumables||[],mainControlIdx:mainControl}));
+dist/engine/resolve.js:7:export function candidateEffects({team,bIdx,data,consumablesOf=()=>[],mainControlIdx=0}){
+dist/engine/resolve.js:41:export function appliedFor({candidates,seg,segIndex=null,bIdx=0,toggles={},data,overrides,stacks,vars,memberModes={}}){
+dist/engine/skills.js:8:export function calcSkill({stats,segments,rank,enemy,critMode,appliedFor,vars,options}){
+dist/engine/skills.js:9:  const results=segments.map(seg=>{ const applied=typeof appliedFor==='function'?appliedFor(seg):(appliedFor||[]); let s=seg; if(seg.kind==='mech'){ const ab=Math.max(1,Math.min(4,vars?.abnormal??1)); s={...seg,ratio:[seg.base*(seg.scale?1+ab:1)]}; } return calcSegment({stats,seg:s,rank,enemy,critMode,applied,vars,options}); });
+dist/data.js:10:export const weaponRanks = {
+dist/app/calc-ui.js:3:import {getStats} from '../engine/stats.js'; import {ENGINE_VERSION,GRADE_RESISTANCE,calcSegment} from '../engine/damage.js'; import {skillSegments,mechSegments} from '../engine/skills.js'; import {candidateEffects,appliedFor,resolveValue,segmentStatus,splitApplied} from '../engine/resolve.js'; import {effectApplies} from '../engine/damage.js';
+dist/app/calc-ui.js:19:  const candidates=candidateEffects({team:state.team,bIdx:state.active,data,consumablesOf:i=>state.team[i]?.consumables||[],mainControlIdx:state.mainControl});
+dist/app/calc-ui.js:21:  const allSegs=sel.kind==='mech'?[]:skillSegments(op,sel.skillKey,member.mode); const results=segments.map(seg=>{ const settings=state.buffs.perSegment[seg.id]||state.buffs.unified; const segIndex=allSegs.findIndex(x=>x.id===seg.id); const applied=appliedFor({candidates,seg,segIndex:segIndex<0?null:segIndex,bIdx:state.active,toggles:settings.toggles,data,overrides:settings.overrides,stacks:settings.stacks,vars:state.vars}); const {stat:extraStats,dmg:dmgApplied}=splitApplied(applied.map(a=>({...a,beneficiaryIdx:state.active}))); const selfAuto=new Set(stats.trace.map(t=>t.why)); const extras=extraStats.filter(x=>!selfAuto.has(x.why)); const segStats=extras.length?getStats(member,data,{consumables:member.consumables,foodFlatMode:state.options.foodFlatMode,extraStats:extras}):stats; const r=calcSegment({stats:segStats,seg,rank,enemy:state.enemy,critMode:state.critMode,applied:dmgApplied,vars:state.vars,options:state.options}); return {...r,applied,segIndex,extraStats:extras,panelAtk:segStats.atk.panel,inherited:!state.buffs.perSegment[seg.id]}; });
+dist/app/calc-ui.js:125:  const cb=disabled?h('span',{class:'auto-badge off',title:'此段为该技能首段，触发条件在本段之后才满足'},'不可'):auto?h('span',{class:'auto-badge',title:segSt==='auto'?'按段必然触发':'配装即生效'},segSt==='auto'?'必触':'自动'):h('input',{type:'checkbox',checked:on,disabled:inheriting,onchange:ev=>setSetting(st=>{ st.toggles[e.id]=ev.target.checked; if(ev.target.checked&&e.exclusiveGroup){ for(const other of data.effects) if(other.id!==e.id&&other.exclusiveGroup===e.exclusiveGroup) st.toggles[other.id]=false; } })});
+dist/app/calc-ui.js:130:  const badges=[c.teamUniqueCollapsed||e.teamUnique?h('i',{class:'badge'},'全队不叠加'):'',e.condition?.mode==='segment'?h('i',{class:'badge'},segSt==='auto'?'按段触发 · 本段必然生效':segSt==='disabled'?'按段触发 · 本段不可':'按段触发（单段计算需勾选）'):'',e.exclusiveGroup?h('i',{class:'badge'},'互斥'):'',e.uncertain?h('i',{class:'badge warn',title:e.notes||''},'待确认'):''];
+dist/app/timeline-ui.js:4:import {autoPlan,chargeThreshold} from '../engine/sim/plan.js';
+dist/app/timeline-ui.js:43:  const planBtn=h('button',{type:'button',class:'mini-btn',onclick:()=>{ planBtn.disabled=true; planBtn.textContent='搜索中…'; setTimeout(()=>{ const r=autoPlan(simInput(),{beam:planCfg.beam,step:planCfg.step,horizon:planCfg.horizon}); update(s=>{ s.sim.plan.result={best:r.best,candidates:r.candidates,rationale:r.rationale,objective:r.objective,searchSpace:r.searchSpace}; }); },30); }},'自动生成较高伤轴');
+dist/app/timeline-ui.js:56:    dls.length?h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{ s.sim.thresholds=chargeThreshold({...simInput(),timeline:s.sim.timeline,params:{duration:s.sim.duration,damageFactor:s.sim.damageFactor,rhythmFactor:s.sim.rhythmFactor}},s.sim.deadlines); })},'按当前轴计算最低充能效率'):'',
+
+exec
+/bin/zsh -lc "node --input-type=module -e '
+import operators from '\\''./dist/data/operators.js'\\''; import weapons from '\\''./dist/data/weapons.js'\\'';import gear from '\\''./dist/data/gear.js'\\'';import sets from '\\''./dist/data/sets.js'\\'';import effects from '\\''./dist/data/effects.js'\\'';import mechanics from '\\''./dist/data/mechanics.js'\\'';import timing from '\\''./dist/data/timing.js'\\'';
+import {getStats,weaponRanks} from '\\''./dist/engine/stats.js'\\'';import {calcSegment} from '\\''./dist/engine/damage.js'\\'';import {skillSegments,mechSegments,calcSkill} from '\\''./dist/engine/skills.js'\\'';import {candidateEffects,appliedFor,resolveValue} from '\\''./dist/engine/resolve.js'\\'';import {simulate} from '\\''./dist/engine/sim/simulate.js'\\'';import {autoPlan,chargeThreshold,cycleOf} from '\\''./dist/engine/sim/plan.js'\\'';
+const data={operators,weapons,gear,sets,effects}; const op=n=>operators.find(o=>o.name===n);const mk=n=>({operatorId:op(n).id,potential:0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},gear:{},consumables:[]}); const enemy={defence:100,resistances:{},custom:{}};
+const input={data,mechanics,timing,enemy,params:{duration:5,mainAutoNormal:false}};
+const pickEvents=(r,types)=>r.events.filter(e=>types.includes(e.type));
+
+const si={...mk('\\''祀'\\''),consumables:['\\''item_894'\\'']};const st=getStats(si,data,{consumables:si.consumables});const sg=skillSegments(op('\\''祀'\\''),'\\''skill'\\'')[0];console.log('\\''third-si'\\'',st.abilities,st.atk,calcSegment({stats:st,seg:sg,rank:12,enemy:{defence:100,resistances:{cold:'\\''custom'\\''},custom:{cold:-20}},critMode:'\\''expected'\\''}).damage);
+const r=simulate({...input,team:[{...mk('\\''别礼'\\''),potential:5}],timeline:[{t:0,member:0,kind:'\\''skill'\\''}],params:{duration:1,mainAutoNormal:false}});console.log('\\''pot5refund'\\'',pickEvents(r,['\\''spGain'\\'']).filter(e=>e.kind==='\\''poison'\\''));
+console.log('\\''bielipot5'\\'',effects.filter(e=>e.owner.id===op('\\''别礼'\\'').id&&e.owner.potential===5).map(e=>({id:e.id,value:e.value,zone:e.zone})));
+for(const g of gear.filter(g=>g.attrs.some(a=>a.stat==='\\''brokenDmg'\\'')))console.log('\\''broken'\\'',JSON.stringify({name:g.name,attrs:g.attrs.filter(a=>a.stat==='\\''brokenDmg'\\'')}));
+const iv=simulate({...input,team:[mk('\\''伊冯'\\'')],params:{duration:4}});console.log('\\''yvonne-emptyTarget'\\'',pickEvents(iv,['\\''comboReady'\\'']));
+const cc=simulate({...input,team:[mk('\\''狼卫'\\''),mk('\\''佩丽卡'\\''),mk('\\''弧光'\\''),mk('\\''祀'\\'')],timeline:[{t:0,member:0,kind:'\\''skill'\\''},{t:1,member:1,kind:'\\''skill'\\''},{t:2,member:2,kind:'\\''combo'\\''},{t:2,member:3,kind:'\\''combo'\\''}],params:{duration:3}});
+console.log('\\''abnormalWindow'\\'',cc.errors.map(e=>e.message),pickEvents(cc,['\\''abnormal'\\'']));
+'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+third-si { str: 117, agi: 100, int: 239, will: 100 } {
+  charBase: 309,
+  weaponBase: 0,
+  atkPct: 0,
+  abilityMul: 2.4290000000000003,
+  atkFlatBefore: 0,
+  atkFlatAfter: 180,
+  foodFlatMode: 'after',
+  raw: 930.561,
+  panel: 930
+} 602.64
+pot5refund [
+  {
+    t: 0,
+    type: 'spGain',
+    why: '别礼 战技返还',
+    amount: 30,
+    kind: 'poison',
+    sp: { real: 100, poison: 30 },
+    energy: [ 0 ],
+    control: 0
+  }
+]
+bielipot5 [
+  {
+    id: 'chr_0026_lastrite.pot5.spRefund',
+    value: { fixed: 5 },
+    zone: 'spRefund'
+  },
+  {
+    id: 'chr_0026_lastrite.pot5.phantomRatio',
+    value: { fixed: 1.2 },
+    zone: 'ratioMul'
+  }
+]
+broken {"name":"碾骨面具","attrs":[{"name":"对失衡目标伤害加成","stat":"brokenDmg","pct":true,"values":[41.4,45.540000000000006,49.68,53.82],"display":[41.4,45.5,49.7,53.8],"origin":"mined"}]}
+broken {"name":"轻超域护板","attrs":[{"name":"对失衡目标伤害加成","stat":"brokenDmg","pct":true,"values":[20.7,22.770000000000003,24.84,26.91],"display":[20.7,22.8,24.8,26.9],"origin":"mined"}]}
+yvonne-emptyTarget [
+  {
+    t: 1.75,
+    type: 'comboReady',
+    who: '伊冯',
+    until: 6.75,
+    sp: { real: 234, poison: 0 },
+    energy: [ 0 ],
+    control: 0
+  }
+]
+abnormalWindow [ '弧光 连携未触发（条件未满足或窗口已过）', '祀 连携未触发（条件未满足或窗口已过）' ] [
+  {
+    t: 1.48,
+    type: 'abnormal',
+    which: 'conduct',
+    level: 1,
+    by: '佩丽卡',
+    consumed: 1,
+    sp: { real: 11.84, poison: 0 },
+    energy: [ 13, 13, 13, 13 ],
+    control: 0
+  }
+]
+
