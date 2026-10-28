@@ -2324,3 +2324,391 @@ dist/engine/sim/simulate.js Oct 28 06:21:37 2026
 codex
 审核期间检测到其他进程修改了 `resolve.js` 和 `simulate.js`，我没有写入任何文件。我会按最新内容复核：新加入的修正折叠路径在双人队中把祀的潜能增幅乘了两次，算出 51.84%，而应为 43.2%。报告会注明版本边界。
 
+exec
+/bin/zsh -lc 'git diff -- dist/engine/resolve.js dist/engine/sim/simulate.js && cat tests/case-cold-team.mjs' in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-UplUqQt0' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-jMrCHmO0' (errno=Operation not permitted)
+// 重点编队回归案例（批次 8.4）：别礼 / 汤汤 / 祀 / 诀。输出 docs/cases/regression-cold-team.md。不把任何一条当作预设最优。
+import fs from 'node:fs';
+import operators from '../dist/data/operators.js'; import weapons from '../dist/data/weapons.js'; import gear from '../dist/data/gear.js'; import sets from '../dist/data/sets.js'; import effects from '../dist/data/effects.js'; import timing from '../dist/data/timing.js'; import mechanics from '../dist/data/mechanics.js'; import meta from '../dist/data/meta.js';
+import {simulate} from '../dist/engine/sim/simulate.js'; import {autoPlan,cycleOf} from '../dist/engine/sim/plan.js';
+const data={operators,weapons,gear,sets,effects}; const op=n=>operators.find(o=>o.name===n); const G=n=>gear.find(g=>g.name===n).id; const W=n=>weapons.find(w=>w.name===n).id;
+const mk=(name,w,gearNames,pot=0)=>({operatorId:op(name).id,potential:pot,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},weapon:{id:W(w),potential:0,substrate:[6,6,3],ranks:[9,9,4]},gear:{armor:{id:G(gearNames[0]),refine:[3,3,3]},gloves:{id:G(gearNames[1]),refine:[3,3,3]},kit1:{id:G(gearNames[2]),refine:[3,3,3]},kit2:{id:G(gearNames[3]),refine:[3,3,3]}},consumables:[]});
+const bieli=mk('别礼','赫拉芬格',['涌浪重装甲','潮涌手甲','悬河供氧栓','生物辅助护板']);
+const tang=mk('汤汤','落草',['涌浪重装甲','潮涌手甲','悬河供氧栓','悬河供氧栓']);
+const si=mk('祀','玉中身',['长息改装护甲','长息导能护手','长息测距仪','长息重护板'],3);
+const jue=mk('诀','四二式·肃阵',['长息改装护甲','长息导能护手','长息测距仪','长息重护板']);
+const enemy={defence:100,resistances:{physical:'D',cold:'D',heat:'D',electric:'D',nature:'D'},custom:{}};
+const base=(team,mainControl=0)=>({team,data,mechanics,timing,enemy,mainControl,initial:{sp:200,energy:[0,0,0,0]}});
+const run=(input,timeline,duration)=>{ const r=simulate({...input,timeline,params:{duration}}); const lo=simulate({...input,timeline,params:{duration,damageFactor:0.5,rhythmFactor:0.6}}); const hi=simulate({...input,timeline,params:{duration,damageFactor:1,rhythmFactor:1}}); return {r,lo,hi}; };
+const fmt=n=>Math.round(n).toLocaleString('zh-CN');
+const lines=[]; const L=x=>lines.push(x);
+L(`# 回归案例：别礼 / 汤汤 / 祀 / 诀（寒冷队）\n\n生成：${new Date().toISOString()} · 数据 ${meta.dataVersion} · 由 tests/case-cold-team.mjs 生成（可复现）。\n\n配置：全员 90 级，技能专精 3，别礼/汤汤/诀 0 潜，祀 3 潜；武器 0 潜（第三技能 Rank4）；装备见脚本；对照靶防御 100、抗性 0、不暴击、永不失衡。\n\n**本案例证明的是模型行为（简化时序假设下），不是实战结果。** 误差来源：非主控普攻衰减 δ∈[0.5,1] 与节奏 φ∈[0.6,1]（无实测）、普攻段时长/技能前后摇为假设表、连携窗口 5s 与附着 20s 为单一来源、汤汤涡流返还与祀墨魂未建模。\n`);
+// Scenario 1: 别礼 combo immediately at 3 layers vs wait for 4 layers. Layers: 汤汤 skill(1) → 祀 skill(1) → 别礼 skill→heavy phantom(1) → 汤汤 skill again(1)
+const teamA=[jue,bieli,tang,si]; // 诀 01号位（GK 祀攻略推荐），主控别礼
+const inputA=base(teamA,1);
+const tlImmediate=[{t:0.3,member:2,kind:'skill'},{t:2,member:3,kind:'skill'},{t:4,member:1,kind:'skill'},{t:7,member:1,kind:'combo'},{t:8.5,member:3,kind:'combo'},{t:12,member:2,kind:'skill'},{t:16,member:0,kind:'skill'},{t:18,member:0,kind:'combo'}];
+const tlWait4=[{t:0.3,member:2,kind:'skill'},{t:2,member:3,kind:'skill'},{t:4,member:1,kind:'skill'},{t:8,member:2,kind:'skill'},{t:10,member:1,kind:'combo'},{t:11.5,member:3,kind:'combo'},{t:16,member:0,kind:'skill'},{t:18,member:0,kind:'combo'}];
+const s1a=run(inputA,tlImmediate,30), s1b=run(inputA,tlWait4,30);
+const layersAt=(sim,t)=>{ const ev=sim.events.filter(e=>e.type==='consume'&&Math.abs(e.t-t)<2); return ev.map(e=>e.layers).join('/')||'—'; };
+L(`## 场景 1：别礼连携立即放（3 层）vs 等 4 层\n\n| 轴 | 30s 总伤（δ=0.75,φ=0.8） | 区间 | 别礼连携消耗层数 | 不可执行 |\n|---|---|---|---|---|\n| 立即（7s） | ${fmt(s1a.r.summary.total)} | ${fmt(s1a.lo.summary.total)}–${fmt(s1a.hi.summary.total)} | ${layersAt(s1a.r,7)} | ${s1a.r.errors.map(e=>e.message).join('；')||'无'} |\n| 等 4 层（10s） | ${fmt(s1b.r.summary.total)} | ${fmt(s1b.lo.summary.total)}–${fmt(s1b.hi.summary.total)} | ${layersAt(s1b.r,10)} | ${s1b.r.errors.map(e=>e.message).join('；')||'无'} |\n\n别礼连携能量：40+15×层数（官方）；斩击倍率 160%+240%×层数（专精3，官方）。等第 4 层需要额外一次施加附着的动作（本例为汤汤第二次战技，多花 100 技力）。\n`);
+// Scenario 2: 祀 ult refresh target: 诀 at slot1 vs 别礼 at slot1
+const teamB=[bieli,tang,si,jue]; const inputB=base(teamB,0);
+const tl2=[{t:0.3,member:1,kind:'skill'},{t:2,member:2,kind:'skill'},{t:4,member:0,kind:'skill'},{t:8,member:1,kind:'skill'},{t:10,member:0,kind:'combo'},{t:11.5,member:2,kind:'combo'},{t:14,member:3,kind:'skill'},{t:16,member:3,kind:'combo'},{t:20,member:2,kind:'ultimate'},{t:24,member:0,kind:'combo'}];
+const tl2A=[{t:0.3,member:2,kind:'skill'},{t:2,member:3,kind:'skill'},{t:4,member:1,kind:'skill'},{t:8,member:2,kind:'skill'},{t:10,member:1,kind:'combo'},{t:11.5,member:3,kind:'combo'},{t:14,member:0,kind:'skill'},{t:16,member:0,kind:'combo'},{t:20,member:3,kind:'ultimate'},{t:24,member:1,kind:'combo'}];
+const s2a=run(inputB,tl2,30), s2b=run(inputA,tl2A,30);
+const cdrEv=sim=>sim.events.filter(e=>e.type==='cdr'&&e.by).map(e=>`${e.t}s ${e.who} 连携冷却 ${e.before}→${e.after}`).join('；')||'无';
+L(`## 场景 2：祀终结技“01 号位连携冷却 −20s”作用对象\n\n| 编队顺序（01 号位） | 30s 总伤 | 区间 | 冷却刷新事件 | 不可执行 |\n|---|---|---|---|---|\n| 别礼在 01 | ${fmt(s2a.r.summary.total)} | ${fmt(s2a.lo.summary.total)}–${fmt(s2a.hi.summary.total)} | ${cdrEv(s2a.r)} | ${s2a.r.errors.map(e=>e.message).join('；')||'无'} |\n| 诀在 01 | ${fmt(s2b.r.summary.total)} | ${fmt(s2b.lo.summary.total)}–${fmt(s2b.hi.summary.total)} | ${cdrEv(s2b.r)} | ${s2b.r.errors.map(e=>e.message).join('；')||'无'} |\n\n祀终结技能量 80（潜能 4 可 −15%）；祀 3 潜使增幅 36%→43.2%（修正折叠）。\n`);
+// Scenario 3: auto plan
+const t0=Date.now(); const plan=autoPlan(inputA,{beam:8,step:1,horizon:60}); const dt=Date.now()-t0;
+const pr=run(inputA,plan.best.timeline,60);
+L(`## 场景 3：自动排轴（束搜索，束宽 8，步长 1s，时限 60s，耗时 ${dt}ms）\n\n目标：${plan.objective}\n\n最佳轴：${plan.best.timeline.map(a=>`${a.t}s ${operators.find(o=>o.id===teamA[a.member].operatorId).name}${({skill:'战技',combo:'连携',ultimate:'终结技',switch:'切主控'})[a.kind]}`).join(' → ')}\n\n周期：${plan.best.score.complete?plan.best.score.until.toFixed(1)+'s':'未完成'}；周期内 DPS ${fmt(plan.best.score.dps)}；总伤 ${fmt(plan.best.score.total)}；复现区间 ${fmt(pr.lo.summary.total)}–${fmt(pr.hi.summary.total)}；复现错误：${pr.r.errors.length}\n\n理由：${plan.rationale.join('；')}\n\n对照候选：\n${plan.candidates.map((c,i)=>`- #${i+2} DPS ${fmt(c.score.dps)}：新增 ${c.diff.added.join('、')||'无'}；去掉 ${c.diff.removed.join('、')||'无'}`).join('\n')}\n`);
+L(`## 守恒检查\n\n- 总伤 = 逐击之和：${[s1a,s1b,s2a,s2b,pr].every(x=>Math.abs(x.r.hits.reduce((a,h)=>a+h.damage,0)-x.r.summary.total)<1e-6)?'通过':'失败'}\n- 占比和 = 100%：${[s1a,s2a,pr].every(x=>Math.abs(Object.values(x.r.summary.perMember).reduce((a,b)=>a+b,0)-x.r.summary.total)<1e-6)?'通过':'失败'}\n- 技力不超过 300、能量不超过上限：${[s1a,s1b,s2a,s2b,pr].every(x=>x.r.samples.every(s=>s.sp<=300+1e-6)&&x.r.events.every(e=>!e.energy||e.energy.every((v,i)=>v<=x.r.summary.energyMax[i]+1e-6)))?'通过':'失败'}\n`);
+fs.mkdirSync('docs/cases',{recursive:true}); fs.writeFileSync('docs/cases/regression-cold-team.md',lines.join('\n')); console.log(lines.join('\n').slice(0,3500));
+
+exec
+/bin/zsh -lc "node --input-type=module -e '
+import operators from '\\''./dist/data/operators.js'\\''; import weapons from '\\''./dist/data/weapons.js'\\'';import gear from '\\''./dist/data/gear.js'\\'';import sets from '\\''./dist/data/sets.js'\\'';import effects from '\\''./dist/data/effects.js'\\'';import mechanics from '\\''./dist/data/mechanics.js'\\'';import timing from '\\''./dist/data/timing.js'\\'';
+import {getStats,weaponRanks} from '\\''./dist/engine/stats.js'\\'';import {calcSegment} from '\\''./dist/engine/damage.js'\\'';import {skillSegments,mechSegments,calcSkill} from '\\''./dist/engine/skills.js'\\'';import {candidateEffects,appliedFor,resolveValue} from '\\''./dist/engine/resolve.js'\\'';import {simulate} from '\\''./dist/engine/sim/simulate.js'\\'';import {autoPlan,chargeThreshold,cycleOf} from '\\''./dist/engine/sim/plan.js'\\'';
+const data={operators,weapons,gear,sets,effects}; const op=n=>operators.find(o=>o.name===n);const mk=n=>({operatorId:op(n).id,potential:0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},gear:{},consumables:[]}); const enemy={defence:100,resistances:{},custom:{}};
+const input={data,mechanics,timing,enemy,params:{duration:5,mainAutoNormal:false}};
+const pickEvents=(r,types)=>r.events.filter(e=>types.includes(e.type));
+
+const cases=[
+{n:'\\''佩丽卡'\\'',member:mk('\\''佩丽卡'\\''),skill:'\\''skill'\\'',crit:'\\''never'\\'',expectedAtk:706,expectedDamage:1412},
+{n:'\\''别礼'\\'',member:{...mk('\\''别礼'\\''),weapon:{id:weapons.find(w=>w.name==='\\''赫拉芬格'\\'').id,ranks:[9,9,4]}},skill:'\\''skill'\\'',crit:'\\''never'\\'',expectedAtk:3575,expectedDamage:7550.4},
+{n:'\\''佩丽卡+汤'\\'',member:{...mk('\\''佩丽卡'\\''),consumables:['\\''item_894'\\'']},skill:'\\''skill'\\'',crit:'\\''expected'\\'',enemy:{defence:100,resistances:{electric:'\\''custom'\\''},custom:{electric:-20}},expectedAtk:886,expectedDamage:2296.512}];
+for(const c of cases){const st=getStats(c.member,data,{consumables:c.member.consumables});const seg=skillSegments(op(c.n.startsWith('\\''佩丽卡'\\'')?'\\''佩丽卡'\\'':c.n),c.skill)[0];const cand=candidateEffects({team:[c.member],bIdx:0,data,consumablesOf:()=>c.member.consumables});const ap=appliedFor({candidates:cand,seg,data});const rr=calcSegment({stats:st,seg,rank:12,enemy:c.enemy||enemy,critMode:c.crit,applied:ap});console.log('\\''CASE'\\'',c.n,JSON.stringify({abilities:st.abilities,atk:st.atk,damage:rr.damage,factors:rr.factors,expectedAtk:c.expectedAtk,expectedDamage:c.expectedDamage}));}
+const w=weapons.find(w=>w.name==='\\''赫拉芬格'\\'');const mb={...mk('\\''别礼'\\''),weapon:{id:w.id,potential:5,substrate:[6,6,3]}};console.log('\\''RANK'\\'',weaponRanks(mb.weapon),candidateEffects({team:[mb],bIdx:0,data}).filter(c=>c.effect.owner.id===w.id).map(c=>({id:c.effect.id,rank:c.rank,value:resolveValue(c,{data}).value})));
+const xa={...mk('\\''赛希'\\''),consumables:['\\''item_2748'\\'']};const cc=candidateEffects({team:[mk('\\''别礼'\\''),xa],bIdx:0,data,consumablesOf:i=>[mk('\\''别礼'\\''),xa][i].consumables});const c=cc.find(c=>c.effect.id==='\\''chr_0011_seraph.ult.amp.cold'\\'');console.log('\\''DEPENDENCY'\\'',getStats(xa,data,{consumables:xa.consumables}).abilities.int,resolveValue(c,{data}),resolveValue(c,{data,overrides:{[c.effect.id]:0}}));
+'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+CASE 佩丽卡 {"abilities":{"str":91,"agi":93,"int":221,"will":113},"atk":{"charBase":303,"weaponBase":0,"atkPct":0,"abilityMul":2.331,"atkFlatBefore":0,"atkFlatAfter":0,"foodFlatMode":"after","raw":706.293,"panel":706},"damage":1412,"factors":{"attack":706,"ratio":4,"crit":1,"bonus":1,"amp":1,"fragile":1,"vulnerable":1,"combo":1,"stagger":1,"defence":0.5,"resistance":1,"reduction":1,"level":1,"artsStrength":1},"expectedAtk":706,"expectedDamage":1412}
+CASE 别礼 {"abilities":{"str":371,"agi":104,"int":93,"will":109},"atk":{"charBase":332,"weaponBase":505,"atkPct":39,"abilityMul":3.073,"atkFlatBefore":0,"atkFlatAfter":0,"foodFlatMode":"after","raw":3575.22039,"panel":3575},"damage":7550.400000000001,"factors":{"attack":3575,"ratio":3.2,"crit":1,"bonus":1.32,"amp":1,"fragile":1,"vulnerable":1,"combo":1,"stagger":1,"defence":0.5,"resistance":1,"reduction":1,"level":1,"artsStrength":1},"expectedAtk":3575,"expectedDamage":7550.4}
+CASE 佩丽卡+汤 {"abilities":{"str":91,"agi":93,"int":221,"will":113},"atk":{"charBase":303,"weaponBase":0,"atkPct":0,"abilityMul":2.331,"atkFlatBefore":0,"atkFlatAfter":180,"foodFlatMode":"after","raw":886.293,"panel":886},"damage":2296.512,"factors":{"attack":886,"ratio":4,"crit":1.08,"bonus":1,"amp":1,"fragile":1,"vulnerable":1,"combo":1,"stagger":1,"defence":0.5,"resistance":1.2,"reduction":1,"level":1,"artsStrength":1},"expectedAtk":886,"expectedDamage":2296.512}
+RANK [ 9, 9, 9 ] [
+  { id: 'wpn_claym_0013.p1', rank: 4, value: 32 },
+  { id: 'wpn_claym_0013.p2', rank: 4, value: 16 },
+  { id: 'wpn_claym_0013.p3', rank: 4, value: 32 }
+]
+DEPENDENCY 154 {
+  value: 27.81,
+  dependency: { attr: 'int', used: 127, auto: 127, origin: 'auto' }
+} {
+  value: 24,
+  dependency: { attr: 'int', used: 0, auto: 127, origin: 'manual' }
+}
+
+exec
+/bin/zsh -lc "git rev-parse HEAD && nl -ba dist/engine/sim/simulate.js | sed -n '53,115p' && nl -ba dist/engine/resolve.js | sed -n '30,52p'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-6tOQZAjw' (errno=Operation not permitted)
+git: warning: confstr() failed with code 5: couldn't get path of DARWIN_USER_TEMP_DIR; using /tmp instead
+git: error: couldn't create cache file '/tmp/xcrun_db-JYI2nW0m' (errno=Operation not permitted)
+04d8537169a7a06c2139cd2fe9175142fe6f318e
+    53	  function activeBuffsFor(mb,seg){ const out=[]; const activeIds={}; for(const b of S.buffs){ if(b.until<S.t-EPS) continue; const c=b.cand; activeIds[c.effect.id]=true; if(b.beneficiaryIdx!=null&&b.beneficiaryIdx!==mb.idx) continue; if(c.effect.beneficiary==='others'&&b.ownerIdx===mb.idx) continue; if(!effectApplies(c.effect,seg)) continue; if(Array.isArray(c.effect.modifies)&&c.effect.modifies.length&&!c.effect.fragileMultiplier) continue; out.push({effect:c.effect,value:b.value,label:c.effect.name,ownerIdx:b.ownerIdx,mode:'sim'}); }
+    54	    const k=alive.indexOf(mb); applyModifiers(out,cands[k].concat(...alive.map((o,j)=>j===k?[]:cands[j])),activeIds,{data,overrides:{},stacks:{},vars:{}}); return out; }
+    55	  function fireTrigger(ev){ // ev: {on, kind, by, element, who(idx), targetHas...}
+    56	    alive.forEach((mb,k)=>{ for(const c of cands[k]){ const e=c.effect; const spec=triggerSpec(e); if(spec.on!==ev.on) continue; if(spec.kind&&spec.kind!==ev.kind) continue; if(spec.element&&spec.element!==ev.element) continue; if(spec.which&&spec.which!==ev.which) continue; if(spec.min&&!(ev.layers>=spec.min)) continue; if(spec.targetHas?.attach&&!(S.attach[spec.targetHas.attach]?.layers>0)) continue;
+    57	        const anyone=/小队内任意干员|任意干员|队友施放|其他队员/.test(e.condition?.text||''); if(!anyone&&c.ownerIdx!==ev.who) continue; // 触发条件属于“装备者/自身”的动作；只有原文写“小队内任意干员”才接受他人动作
+    58	        if(e.condition?.mode==='auto'||spec.on==='always') continue; // already permanent
+    59	        startBuff(c,mb.idx,ev); } });
+    60	  }
+    61	  function startBuff(c,beneficiaryIdx,ev){ const e=c.effect; const {value}=resolveValue(c,{data,overrides:{},stacks:{},vars:{layers:ev.layers??0}}); const dur=e.duration??e.window??15; const ben=e.beneficiary==='self'?c.ownerIdx:e.beneficiary==='target'||e.beneficiary==='team'||e.beneficiary==='others'?null:e.beneficiary==='mainControl'?S.control:c.ownerIdx;
+    62	    const existing=S.buffs.find(b=>b.cand.effect.id===e.id&&b.ownerIdx===c.ownerIdx&&(b.beneficiaryIdx===ben)); if(existing){ if(e.stacking==='stack'||e.value?.perStack!=null){ existing.stacks=Math.min((e.value?.maxStacks||99),existing.stacks+1); existing.value=valueOf(e,{rank:c.rank,stacks:existing.stacks}); } existing.until=S.t+dur; addLog('buffRefresh',{id:e.id,until:round(existing.until)}); return; }
+    63	    S.buffs.push({cand:c,ownerIdx:c.ownerIdx,beneficiaryIdx:ben,value,stacks:1,until:S.t+dur,since:S.t}); addLog('buffStart',{id:e.id,name:e.name,value:round(value),until:round(S.t+dur),owner:c.ownerMember&&data.operators.find(o=>o.id===c.ownerMember.operatorId)?.name}); if(e.zone==='amp'||e.zone==='fragile'||e.zone==='vulnerable') fireTrigger({on:'applyDebuffCategory',who:c.ownerIdx}); }
+    64	  function permanentBuffs(){ alive.forEach((mb,k)=>{ for(const c of cands[k]){ const e=c.effect; if((e.condition?.mode||'auto')!=='auto') continue; if(Array.isArray(e.modifies)&&e.modifies.length&&!e.fragileMultiplier) continue; const {value}=resolveValue(c,{data,overrides:{},stacks:{},vars:{}}); S.buffs.push({cand:c,ownerIdx:c.ownerIdx,beneficiaryIdx:e.beneficiary==='self'?c.ownerIdx:null,value,stacks:1,until:Infinity,since:0}); } }); }
+    65	  // ---------- attachments / abnormal ----------
+    66	  function applyAttach(element,layers,byIdx,viaKind){ const mb=members[byIdx]; const cur=S.attach[element]; const others=Object.keys(S.attach).filter(k=>k!==element&&S.attach[k].layers>0);
+    67	    if(others.length){ const consumed=others.reduce((a,k)=>a+S.attach[k].layers,0); for(const k of others) delete S.attach[k]; const level=Math.min(4,consumed); const abn=ABN[element]; S.abnormal[abn]={level,until:S.t+(abn==='burn'?10:abn==='corrosion'?15:abn==='conduct'?[12,18,24,30][level-1]:[5.75,6.75,7.75,8.75][level-1])}; addLog('abnormal',{which:abn,level,by:mb.op.name,consumed}); mechHit(byIdx,ABN_MECH[abn],level,element); fireTrigger({on:'abnormal',which:abn,who:byIdx}); fireTrigger({on:'consume',who:byIdx,layers:consumed}); }
+    68	    const before=cur?.layers||0; const after=Math.min(4,before+layers); S.attach[element]={layers:after,until:S.t+T.attachDurationSeconds}; addLog('attach',{element,layers:after,by:mb.op.name,via:viaKind});
+    69	    if(before>0){ push(S.t+T.burstDelaySeconds,'burst',{element,by:byIdx}); }
+    70	    fireTrigger({on:'attach',by:viaKind,element,who:byIdx}); fireTrigger({on:'attachLayers',layers:after,who:byIdx,element});
+    71	    checkCombos({type:'attachApplied',element,layers:after}); }
+    72	  function consumeAttach(element,all=true,n=0){ const cur=S.attach[element]; if(!cur||cur.layers<=0) return 0; const c=all?cur.layers:Math.min(n,cur.layers); cur.layers-=c; if(cur.layers<=0) delete S.attach[element]; addLog('consume',{element,layers:c}); checkCombos({type:'attachConsumed',element,layers:c}); return c; }
+    73	  function mechHit(byIdx,mechId,level,element){ const mb=members[byIdx]; const m=mechSegments(element).find(x=>x.id===mechId); if(!m) return; const seg={...m,element:mechId==='artsBurst'?element:m.element,ratio:[m.base*(m.scale?1+level:1)],skillKey:'mech'}; doHit(mb,seg,12,{abnormal:level},'mech'); }
+    74	  // ---------- hits ----------
+    75	  const statCache=new Map();
+    76	  function doHit(mb,seg,rank,vars,kindLabel,extraFactor=1){ const all=activeBuffsFor(mb,seg); const {stat,dmg:applied}=splitApplied(all.map(a=>({...a,beneficiaryIdx:mb.idx}))); const selfAuto=new Set(mb.stats.trace.map(t=>t.why)); const extras=stat.filter(x=>!selfAuto.has(x.why)); let st=mb.stats; if(extras.length){ const key=mb.idx+'|'+extras.map(x=>x.id+':'+x.value).sort().join(','); st=statCache.get(key); if(!st){ st=getStats(mb.member,data,{consumables:mb.member.consumables,foodFlatMode:options.foodFlatMode,extraStats:extras}); statCache.set(key,st); } } const en={...enemy}; const r=calcSegment({stats:st,seg,rank,enemy:en,critMode,applied,vars,options}); const dmg=r.damage*extraFactor; hits.push({t:round(S.t),member:mb.idx,name:mb.op.name,skill:seg.skillKey,segment:seg.id,label:seg.label,element:seg.element,kind:seg.kind,damage:dmg,factor:extraFactor,applied:applied.map(a=>({id:a.effect.id,name:a.label,value:round(a.value),zone:a.effect.zone,owner:a.ownerIdx})),factors:r.factors,buckets:r.buckets,attach:JSON.parse(JSON.stringify(S.attach)),sp:{real:round(S.sp.real),poison:round(S.sp.poison)},energy:alive.map(m=>round(m.energy))}); return dmg; }
+    77	  // ---------- combos ----------
+    78	  function trMet(tr,ev){ if(!tr) return false; const elOk=el=>!tr.element||tr.element==='any'||(Array.isArray(tr.element)?tr.element.includes(el):tr.element===el); switch(tr.type){ case 'attachLayers': return (S.attach[tr.element]?.layers||0)>=(tr.min||1); case 'attachApplied': return ev?.type==='attachApplied'&&elOk(ev.element); case 'anyAttachApplied': return ev?.type==='attachApplied'; case 'attachConsumed': return ev?.type==='attachConsumed'&&elOk(ev.element); case 'burst': return ev?.type==='burst'; case 'abnormal': return ev?.type==='abnormal'; case 'heavyHit': return ev?.type==='heavyHit'; case 'allyCombo': return ev?.type==='allyCombo'; default: return false; } }
+    79	  function comboTriggerMet(mb,ev){ const tr=mb.mech?.combo?.trigger; if(!tr) return false; if(trMet(tr,ev)) return true; for(const o of tr.or||[]) if(trMet(o,ev)) return true; return false; } function _unused(tr){ switch(tr.type){ case 'attachLayers': return (S.attach[tr.element]?.layers||0)>=(tr.min||1); case 'attachApplied': return ev?.type==='attachApplied'&&(!tr.element||ev.element===tr.element); case 'anyAttachApplied': return ev?.type==='attachApplied'; case 'attachConsumed': return ev?.type==='attachConsumed'&&(!tr.element||tr.elements?.includes(ev.element)||ev.element===tr.element); case 'burst': return ev?.type==='burst'; case 'abnormal': return ev?.type==='abnormal'; case 'heavyHit': return ev?.type==='heavyHit'; case 'allyCombo': return ev?.type==='allyCombo'&&ev.who!==mb.idx; default: return false; } }
+    80	  function checkCombos(ev){ for(const mb of alive){ if(comboTriggerMet(mb,ev)){ const prev=S.comboReady[mb.idx]; S.comboReady[mb.idx]={until:S.t+T.comboWindowSeconds}; if(!prev||prev.until<S.t) addLog('comboReady',{who:mb.op.name,until:round(S.t+T.comboWindowSeconds)}); } } }
+    81	  // ---------- actions ----------
+    82	  function rankOf(mb,k){ return mb.member.skillRanks?.[k]??12; }
+    83	  function castSkill(mb,planned){ const mech=mb.mech.skill||{}; const chain=mech.replaces?.chain; if(chain&&S.t>mb.skillStageUntil) mb.skillStage=0; const stage=chain?chain[mb.skillStage%chain.length]:null; const cost=stage?(num(stage.spCost,rankOf(mb,'skill'))??100):(num(mech.spCost,rankOf(mb,'skill'))??mb.op.skills.skill?.params?.spCost?.[0]?.values?.[rankOf(mb,'skill')-1]??100); if(S.t<mb.busyUntil-EPS){ return fail(planned,`${mb.op.name} 正在执行其他动作（至 ${round(mb.busyUntil)}s）`); }
+    84	    const paid=spendSp(cost,mb); if(!paid) return fail(planned,`技力不足：需要 ${cost}，当前 ${round(S.sp.real+S.sp.poison)}`);
+    85	    mb.busyUntil=S.t+T.castSeconds.skill; addLog('cast',{who:mb.op.name,kind:'skill',cost,stage:stage?.name}); if(chain){ mb.skillStage=stage?.next?mb.skillStage+1:0; mb.skillStageUntil=S.t+(num(mech.replaces?.window)||20); }
+    86	    // 返还技力（毒技力）
+    87	    const refund=mech.spRefund?.per?0:(num(mech.spRefund?.value??mech.spRefund,rankOf(mb,'skill'))||0); if(refund&&!stage||refund&&stage&&mb.skillStage===1) gainSp(refund,`${mb.op.name} 战技返还`,/恢复|recover/.test(mech.spRefund?.kind||'')?'real':'poison'); if(mech.spRefund?.per) addLog('note',{message:`${mb.op.name} 战技按 ${mech.spRefund.per} 返还 ${mech.spRefund.value}/次：未建模（按 0 计）`});
+    88	    // 全队终结技能量：按真实消耗
+    89	    const base=T.skillEnergyPer100RealSp*paid.real/100; for(const o of alive) gainEnergy(o,base,`${mb.op.name} 战技（真实技力 ${round(paid.real)}）`,{source:'anySkill'}); const selfGain=num(mech.energyGain?.self?.value??mech.energyGain?.self,rankOf(mb,'skill')); if(selfGain) gainEnergy(mb,selfGain,`${mb.op.name} 战技自身回能`,{source:'ownSkill'});
+    90	    fireTrigger({on:'cast',kind:'skill',who:mb.idx}); if(mech.recoverSp) gainSp(num(mech.recoverSp,rankOf(mb,'skill')),`${mb.op.name} 战技恢复技力`,'real');
+    91	    // hits at cast end
+    92	    const segs=skillSegments(mb.op,'skill',mb.member.mode).filter(s=>!s.per); push(S.t+T.castSeconds.skill*0.6,'skillHit',{who:mb.idx,kind:'skill',segs,mech});
+    93	    const atts=Array.isArray(mech.attach)?mech.attach:(mech.attach?[mech.attach]:[]); const primary=atts.find(a=>!/01号位|改为/.test(a.when||''))||atts[0]; if(primary){ if(/重击/.test(primary.when||'')||primary.when==='heavy') mb.pendingHeavyAttach=primary; else if(!stage||mb.skillStage===1) push(S.t+T.castSeconds.skill*0.6,'attach',{who:mb.idx,element:primary.element,layers:primary.layers||1,via:'skill'}); }
+    94	    return true; }
+    95	  function castCombo(mb,planned){ const mech=mb.mech.combo||{}; const ready=S.comboReady[mb.idx]; if(!ready||ready.until<S.t-EPS) return fail(planned,`${mb.op.name} 连携未触发（条件未满足或窗口已过）`); if(mb.cd.combo>S.t+EPS) return fail(planned,`${mb.op.name} 连携冷却中（至 ${round(mb.cd.combo)}s）`); if(S.t<mb.busyUntil-EPS) return fail(planned,`${mb.op.name} 正在执行其他动作`);
+    96	    delete S.comboReady[mb.idx]; let cd=num(mech.cooldown,rankOf(mb,'combo'))??mb.op.skills.combo?.params?.cooldown?.[0]?.values?.[rankOf(mb,'combo')-1]??15; const k=alive.indexOf(mb); for(const c of cands[k]){ const e=c.effect; if(e.zone!=='cdr'||c.ownerIdx!==mb.idx||(e.condition?.mode||'auto')!=='auto') continue; const v=valueOf(e,{rank:c.rank}); if(e.unit==='%') cd=cd*(1-v/100); else if(e.unit==='x') cd=cd/v; else cd=Math.max(0,cd-v); addLog('cdr',{who:mb.op.name,effect:e.id,value:v,unit:e.unit}); } mb.cd.combo=S.t+cd; mb.busyUntil=S.t+T.castSeconds.combo; addLog('cast',{who:mb.op.name,kind:'combo',cooldownUntil:round(mb.cd.combo)});
+    97	    fireTrigger({on:'cast',kind:'combo',who:mb.idx});
+    98	    let layers=0; const cons=Array.isArray(mech.consumes)?mech.consumes:(mech.consumes?[mech.consumes]:[]); for(const c of cons){ if(!c.element) continue; layers+=consumeAttach(c.element,c.all!==false,c.layers||0); }
+    99	    const segs=skillSegments(mb.op,'combo',mb.member.mode); push(S.t+T.castSeconds.combo*0.6,'skillHit',{who:mb.idx,kind:'combo',segs,mech,layers});
+   100	    const gain=mech.energyGain?.self; const g=gain?.formula?fml(gain,{layers}):num(gain?.value??gain,rankOf(mb,'combo')); if(g) gainEnergy(mb,g,`${mb.op.name} 连携回能`,{source:'ownCombo'});
+   101	    const catt=Array.isArray(mech.attach)?mech.attach[0]:mech.attach; if(catt&&catt.element) push(S.t+T.castSeconds.combo*0.6,'attach',{who:mb.idx,element:catt.element,layers:catt.layers||1,via:'combo'});
+   102	    for(const o of alive) if(o.idx!==mb.idx) checkCombos({type:'allyCombo',who:mb.idx});
+   103	    return true; }
+   104	  function castUlt(mb,planned){ const mech=mb.mech.ultimate||{}; if(mb.energy+EPS<mb.energyMax) return fail(planned,`${mb.op.name} 终结技能量不足：${round(mb.energy)}/${mb.energyMax}`); if(mb.cd.ultimate>S.t+EPS) return fail(planned,`${mb.op.name} 终结技冷却中（至 ${round(mb.cd.ultimate)}s）`); if(S.t<mb.busyUntil-EPS) return fail(planned,`${mb.op.name} 正在执行其他动作`);
+   105	    mb.energy=0; const cd=num(mech.cooldown,rankOf(mb,'ultimate'))??20; mb.cd.ultimate=S.t+cd; mb.busyUntil=S.t+T.castSeconds.ultimate; if(T.ultimatePausesTimers){ S.pausedUntil=Math.max(S.pausedUntil,S.t+T.castSeconds.ultimate); } addLog('cast',{who:mb.op.name,kind:'ultimate',cooldownUntil:round(mb.cd.ultimate)});
+   106	    fireTrigger({on:'cast',kind:'ultimate',who:mb.idx});
+   107	    { const k=alive.indexOf(mb); for(const c of cands[k]){ const e=c.effect; if(e.zone!=='cdr'||c.ownerIdx!==mb.idx) continue; const t=e.condition?.text||''; if(!/施放终结技|终结技.*后/.test(t)) continue; const v=valueOf(e,{rank:c.rank}); let targets=[]; if(/01号位/.test(t)) targets=[members[0]].filter(Boolean); else if(e.beneficiary==='self') targets=[mb]; else targets=alive; for(const tg of targets){ if(!tg) continue; const before=tg.cd.combo; if(e.unit==='%') tg.cd.combo=S.t+Math.max(0,(tg.cd.combo-S.t)*(1-v/100)); else tg.cd.combo=Math.max(S.t,tg.cd.combo-v); addLog('cdr',{who:tg.op.name,by:mb.op.name,effect:e.id,before:round(before),after:round(tg.cd.combo)}); } } }
+   108	    const segs=skillSegments(mb.op,'ultimate',mb.member.mode); push(S.t+T.castSeconds.ultimate*0.8,'skillHit',{who:mb.idx,kind:'ultimate',segs,mech});
+   109	    const uatt=Array.isArray(mech.attach)?mech.attach[0]:mech.attach; if(uatt&&uatt.element) push(S.t+T.castSeconds.ultimate*0.8,'attach',{who:mb.idx,element:uatt.element,layers:uatt.layers||1,via:'ultimate'});
+   110	    if(mech.switchesControl) S.control=mb.idx; return true; }
+   111	  function fail(planned,msg){ errors.push({t:round(S.t),action:planned,message:msg}); addLog('error',{message:msg}); return false; }
+   112	  // ---------- normal attacks ----------
+   113	  function normalSegs(mb){ return skillSegments(mb.op,'normal').filter(s=>!/处决|下落/.test(s.label)); }
+   114	  function normalHit(mb,isControl){ const segs=normalSegs(mb); if(!segs.length) return; const i=mb.normalIdx%segs.length; const seg=segs[i]; const heavy=i===segs.length-1; const factor=isControl?1:P.damageFactor; doHit(mb,seg,rankOf(mb,'normal'),{},'normal',factor); addLog('normalHit',{who:mb.op.name,segment:seg.label,heavy,control:isControl});
+   115	    if(heavy&&isControl){ const hr=mb.mech?.normal?.heavySpRefund; const refund=hr?.value??P.defaultHeavySpRefund; if(refund) gainSp(refund,`${mb.op.name} 重击回技力${hr?.value==null?'（未知，按假设值）':''}`,'real'); fireTrigger({on:'heavy',who:mb.idx}); checkCombos({type:'heavyHit',who:mb.idx}); if(mb.pendingHeavyAttach){ const a=mb.pendingHeavyAttach; mb.pendingHeavyAttach=null; applyAttach(a.element,a.layers||1,mb.idx,'skill'); } }
+    30	// Segment-triggered effects (mode 'segment'): "造成连携技伤害后 …" cannot apply to the first hit of that skill, and necessarily applies to later hits.
+    31	export function triggerKindOf(e){ const t=(e.condition?.text||'')+(e.condition?.trigger||''); if(/连携技|combo/i.test(t)) return 'combo'; if(/终结技|ultimate/i.test(t)) return 'ultimate'; if(/战技|skill/i.test(t)) return 'skill'; if(/重击|普通攻击|normal/i.test(t)) return 'normal'; return null; }
+    32	export function segmentStatus(c,seg,segIndex,bIdx){ const e=c.effect; if((e.condition?.mode||'auto')!=='segment') return 'user'; if(c.ownerIdx!==bIdx) return 'user'; const k=triggerKindOf(e); if(!k||seg.skillKey!==k||segIndex==null) return 'user'; return segIndex===0?'disabled':'auto'; }
+    33	// Modifier effects (`modifies:[ids]`): zone 'other' with a multiplier (“视为/提升至原本的N倍”) multiplies the target value;
+    34	// same-zone modifiers (“脆弱效果+8%”) add to it. Duration/stack-only modifiers are informational.
+    35	export function applyModifiers(applied,candidates,toggles,ctx){
+    36	  for(const c of candidates){ const m=c.effect; if(!Array.isArray(m.modifies)||!m.modifies.length) continue; if(!isOn(m,toggles)) continue; if(m.fragileMultiplier) continue;
+    37	    for(const target of applied){ if(!m.modifies.includes(target.effect.id)) continue; const {value:mv}=resolveValue(c,ctx);
+    38	      if(m.zone==='other'&&(m.unit==='x'||/倍/.test(m.literal||''))&&mv>0){ target.value=target.value*mv; target.label=`${target.label} ×${mv}（${m.owner?.ref||m.name}）`; target.modifiedBy=[...(target.modifiedBy||[]),m.id]; }
+    39	      else if(m.zone===target.effect.zone&&typeof mv==='number'){ target.value=target.value+mv; target.label=`${target.label} +${mv}（${m.owner?.ref||m.name}）`; target.modifiedBy=[...(target.modifiedBy||[]),m.id]; } } }
+    40	}
+    41	export function appliedFor({candidates,seg,segIndex=null,bIdx=0,toggles={},data,overrides,stacks,vars,memberModes={}}){
+    42	  const applied=[]; const ctx={data,overrides,stacks,vars};
+    43	  for(const c of candidates){ const e=c.effect; if(!effectApplies(e,seg)) continue; if(Array.isArray(e.modifies)&&e.modifies.length&&!e.fragileMultiplier) continue; // modifiers are folded into their targets
+    44	    const st=segmentStatus(c,seg,segIndex,bIdx); if(st==='disabled') continue; if(st!=='auto'&&!isOn(e,toggles)) continue; const {value,dependency}=resolveValue(c,ctx); applied.push({effect:e,value,label:e.name,ownerIdx:c.ownerIdx,dependency,mode:st==='auto'?'segment-auto':(e.condition?.mode||'auto')}); }
+    45	  applyModifiers(applied,candidates,toggles,ctx);
+    46	  return applied;
+    47	}
+    48	
+    49	export const STAT_ZONE_SET=new Set(['ability','atkPct','atkFlat','critRate','critDmg','chargeEff','artsStrength']);
+    50	export function splitApplied(applied){ const stat=[],dmg=[]; for(const a of applied){ const e=a.effect; if(STAT_ZONE_SET.has(e.zone)){ if((e.condition?.mode||'auto')==='auto'&&a.ownerIdx===a.beneficiaryIdx) continue; stat.push({zone:e.zone,stat:e.stat,unit:e.unit,value:a.value,why:a.label,id:e.id}); } else dmg.push(a); } return {stat,dmg}; }
+
+exec
+/bin/zsh -lc "node --input-type=module -e '
+import operators from '\\''./dist/data/operators.js'\\''; import weapons from '\\''./dist/data/weapons.js'\\'';import gear from '\\''./dist/data/gear.js'\\'';import sets from '\\''./dist/data/sets.js'\\'';import effects from '\\''./dist/data/effects.js'\\'';import mechanics from '\\''./dist/data/mechanics.js'\\'';import timing from '\\''./dist/data/timing.js'\\'';
+import {getStats,weaponRanks} from '\\''./dist/engine/stats.js'\\'';import {calcSegment} from '\\''./dist/engine/damage.js'\\'';import {skillSegments,mechSegments,calcSkill} from '\\''./dist/engine/skills.js'\\'';import {candidateEffects,appliedFor,resolveValue} from '\\''./dist/engine/resolve.js'\\'';import {simulate} from '\\''./dist/engine/sim/simulate.js'\\'';import {autoPlan,chargeThreshold,cycleOf} from '\\''./dist/engine/sim/plan.js'\\'';
+const data={operators,weapons,gear,sets,effects}; const op=n=>operators.find(o=>o.name===n);const mk=n=>({operatorId:op(n).id,potential:0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},gear:{},consumables:[]}); const enemy={defence:100,resistances:{},custom:{}};
+const input={data,mechanics,timing,enemy,params:{duration:5,mainAutoNormal:false}};
+const pickEvents=(r,types)=>r.events.filter(e=>types.includes(e.type));
+
+const p=mk('\\''佩丽卡'\\'');
+for(const [label,x,T] of [
+['\\''sampling'\\'',{...input,team:[p],initial:{energy:[74]},timeline:[{t:0,member:0,kind:'\\''skill'\\''}]},0.49],
+['\\''ult-deadline'\\'',{...input,team:[p],initial:{energy:[70]},timeline:[{t:0,member:0,kind:'\\''skill'\\''},{t:1,member:0,kind:'\\''ultimate'\\''}]},1],
+['\\''existing-extra'\\'',{...input,team:[mk('\\''别礼'\\'')],initial:{energy:[200]},timeline:[{t:0,member:0,kind:'\\''skill'\\''}],params:{duration:3,mainAutoNormal:false,extraChargeEff:[50]}},1]]) {
+console.log(label,JSON.stringify(chargeThreshold(x,[{member:0,t:T}],{tol:0.001})));
+const r=simulate(x);console.log(label+'\\''-events'\\'',JSON.stringify({samples:r.samples.slice(0,4),energy:pickEvents(r,['\\''energyGain'\\'','\\''cast'\\'','\\''error'\\'']).map(e=>({t:e.t,type:e.type,energy:e.energy,message:e.message}))}));}
+const synthetic={events:[{type:'\\''cast'\\'',kind:'\\''ultimate'\\'',who:'\\''a'\\'',t:1},{type:'\\''cast'\\'',kind:'\\''ultimate'\\'',who:'\\''b'\\'',t:2},{type:'\\''cast'\\'',kind:'\\''ultimate'\\'',who:'\\''a'\\'',t:20}],hits:[{member:0,name:'\\''a'\\'',kind:'\\''ultimate'\\'',t:3.4},{member:1,name:'\\''b'\\'',kind:'\\''ultimate'\\'',t:4.4},{member:0,name:'\\''a'\\'',kind:'\\''ultimate'\\'',t:22.4}]};
+console.log('\\''cycle-extra-ult'\\'',cycleOf(synthetic,[0,1]));
+const r=simulate({...input,team:[p],initial:{energy:[80]},timeline:[{t:4,member:0,kind:'\\''ultimate'\\''}],params:{duration:5}});console.log('\\''cycle-truncated'\\'',cycleOf(r,[0]),'\\''ultHits'\\'',r.hits.filter(h=>h.kind==='\\''ultimate'\\''));
+const support=simulate({...input,team:[mk('\\''赛希'\\'')],initial:{energy:[80]},timeline:[{t:0,member:0,kind:'\\''ultimate'\\''}],params:{duration:5,mainAutoNormal:false}});console.log('\\''cycle-support'\\'',cycleOf(support,[0]));
+const l={...input,team:[mk('\\''梨诺'\\'')],initial:{sp:25},params:{duration:0.9,mainAutoNormal:false}};console.log('\\''plan25'\\'',autoPlan(l,{beam:2,step:1,horizon:0.9}).best.timeline);
+'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+sampling [{"member":0,"name":"佩丽卡","deadline":0.49,"energyMax":80,"currentEnergyAtDeadline":0,"currentChargeEff":0,"feasible":false,"note":"充能效率增至 +400% 仍无法在 0.49s 前充满（可能需要改变轴或能量来源）","requiredTotal":null,"premises":["阈值基于当前这条轴；改变动作后需重算","能量来源：战技（真实技力）与连携回能均乘充能效率（规则 B10）；特殊回能按目录标记","舍入：二分精度 0.001%，边界值请在界面两侧各试 1%","非主控普攻不产生能量；毒技力消耗不回能"]}]
+sampling-events {"samples":[{"t":0.8,"sp":106.4,"poison":0,"energy":[80],"attach":{"electric":1}},{"t":1.3,"sp":110.4,"poison":0,"energy":[80],"attach":{"electric":1}},{"t":1.8,"sp":114.4,"poison":0,"energy":[80],"attach":{"electric":1}},{"t":2.8,"sp":122.4,"poison":0,"energy":[80],"attach":{"electric":1}}],"energy":[{"t":0,"type":"cast","energy":[74]},{"t":0,"type":"energyGain","energy":[80]}]}
+ult-deadline [{"member":0,"name":"佩丽卡","deadline":1,"energyMax":80,"currentEnergyAtDeadline":76.5,"currentChargeEff":0,"feasible":true,"requiredExtra":53.8,"requiredTotal":53.8,"premises":["阈值基于当前这条轴；改变动作后需重算","能量来源：战技（真实技力）与连携回能均乘充能效率（规则 B10）；特殊回能按目录标记","舍入：二分精度 0.001%，边界值请在界面两侧各试 1%","非主控普攻不产生能量；毒技力消耗不回能"]}]
+ult-deadline-events {"samples":[{"t":0.8,"sp":106.4,"poison":0,"energy":[76.5],"attach":{"electric":1}},{"t":1.3,"sp":110.4,"poison":0,"energy":[76.5],"attach":{"electric":1}},{"t":1.8,"sp":114.4,"poison":0,"energy":[76.5],"attach":{"electric":1}},{"t":2.8,"sp":122.4,"poison":0,"energy":[76.5],"attach":{"electric":1}}],"energy":[{"t":0,"type":"cast","energy":[70]},{"t":0,"type":"energyGain","energy":[76.5]},{"t":1,"type":"error","energy":[76.5],"message":"佩丽卡 终结技能量不足：76.5/80"}]}
+existing-extra [{"member":0,"name":"别礼","deadline":1,"energyMax":240,"currentEnergyAtDeadline":224,"currentChargeEff":50,"feasible":true,"requiredExtra":150,"requiredTotal":200,"premises":["阈值基于当前这条轴；改变动作后需重算","能量来源：战技（真实技力）与连携回能均乘充能效率（规则 B10）；特殊回能按目录标记","舍入：二分精度 0.001%，边界值请在界面两侧各试 1%","非主控普攻不产生能量；毒技力消耗不回能"]}]
+existing-extra-events {"samples":[{"t":0.8,"sp":136.4,"poison":30,"energy":[224],"attach":{}},{"t":1.3,"sp":140.4,"poison":30,"energy":[224],"attach":{}},{"t":1.8,"sp":144.4,"poison":30,"energy":[224],"attach":{}},{"t":2.8,"sp":152.4,"poison":30,"energy":[224],"attach":{}}],"energy":[{"t":0,"type":"cast","energy":[200]},{"t":0,"type":"energyGain","energy":[224]}]}
+cycle-extra-ult { complete: true, end: 22.45, castByMember: { '0': 1, '1': 2 } }
+cycle-truncated { complete: true, end: 4.05, castByMember: { '0': 4 } } ultHits []
+cycle-support { complete: false, end: null, castByMember: {} }
+plan25 []
+
+exec
+/bin/zsh -lc "node --input-type=module -e '
+import operators from '\\''./dist/data/operators.js'\\''; import weapons from '\\''./dist/data/weapons.js'\\'';import gear from '\\''./dist/data/gear.js'\\'';import sets from '\\''./dist/data/sets.js'\\'';import effects from '\\''./dist/data/effects.js'\\'';import mechanics from '\\''./dist/data/mechanics.js'\\'';import timing from '\\''./dist/data/timing.js'\\'';
+import {getStats,weaponRanks} from '\\''./dist/engine/stats.js'\\'';import {calcSegment} from '\\''./dist/engine/damage.js'\\'';import {skillSegments,mechSegments,calcSkill} from '\\''./dist/engine/skills.js'\\'';import {candidateEffects,appliedFor,resolveValue} from '\\''./dist/engine/resolve.js'\\'';import {simulate} from '\\''./dist/engine/sim/simulate.js'\\'';import {autoPlan,chargeThreshold,cycleOf} from '\\''./dist/engine/sim/plan.js'\\'';
+const data={operators,weapons,gear,sets,effects}; const op=n=>operators.find(o=>o.name===n);const mk=n=>({operatorId:op(n).id,potential:0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},gear:{},consumables:[]}); const enemy={defence:100,resistances:{},custom:{}};
+const input={data,mechanics,timing,enemy,params:{duration:5,mainAutoNormal:false}};
+const pickEvents=(r,types)=>r.events.filter(e=>types.includes(e.type));
+
+console.log('\\''gearStats'\\'',Object.fromEntries([...new Set(gear.flatMap(g=>g.attrs.map(a=>a.stat)))].map(k=>[k,gear.filter(g=>g.attrs.some(a=>a.stat===k)).length])));
+console.log('\\''stackExamples'\\'',effects.filter(e=>e.value?.perStack||e.value?.maxStacks).slice(0,12).map(e=>({id:e.id,value:e.value,ben:e.beneficiary,cond:e.condition})));
+console.log('\\''normalConditional'\\'',operators.filter(o=>o.skills.normal.segments.some(s=>s.label.includes('\\''重击'\\'')||s.label.includes('\\''强化'\\''))).map(o=>({n:o.name,normal:o.skills.normal.segments.map(s=>({id:s.id,label:s.label,kind:s.kind}))})).slice(0,6));
+const p=mk('\\''佩丽卡'\\'');const base={...input,team:[p],initial:{energy:[70]},timeline:[{t:0,member:0,kind:'\\''skill'\\''},{t:1,member:0,kind:'\\''ultimate'\\''}]};
+for(const e of [0,53.8,54,400]){const r=simulate({...base,params:{duration:4.5,mainAutoNormal:false,extraChargeEff:[e]}});console.log('\\''MONO'\\'',e,r.final.energy,r.errors.map(x=>x.message));}
+console.log('\\''threshold-postult'\\'',chargeThreshold(base,[{member:0,t:4.5}]));
+const dd=simulate({...input,team:[p],timeline:[{t:0,member:0,kind:'\\''skill'\\''}],params:{duration:10,mainAutoNormal:false}});console.log('\\''duration'\\'',dd.summary.total,dd.summary.duration,dd.summary.dps,dd.final.t);
+const burn=mechSegments('\\''heat'\\'').find(s=>s.id==='\\''burnTick'\\''), st=getStats(p,data);
+for(const critMode of ['\\''never'\\'','\\''always'\\''])console.log('\\''burnTick'\\'',critMode,calcSkill({stats:st,segments:[burn],rank:12,enemy,critMode,vars:{abnormal:1}}).total);
+console.log('\\''shatter'\\'',mechSegments('\\''cold'\\'').find(s=>s.id==='\\''iceShatter'\\''));
+'" in /Users/serika/Developer/temp/endfield-demo-handoff-v3
+ succeeded in 0ms:
+gearStats {
+  will: 82,
+  critRate: 6,
+  int: 67,
+  chargeEff: 32,
+  agi: 71,
+  comboDmg: 17,
+  str: 84,
+  dmgTaken: 2,
+  artsStrength: 24,
+  physicalDmg: 17,
+  ultDmg: 8,
+  healEff: 9,
+  hp: 2,
+  main: 18,
+  brokenDmg: 2,
+  skillDmg: 15,
+  coldElecDmg: 14,
+  null: 2,
+  sub: 22,
+  heatNatureDmg: 10,
+  normalDmg: 5,
+  allSkillDmg: 8,
+  artsDmg: 3
+}
+stackExamples [
+  {
+    id: 'chr_0004_pelica.pot3.atk',
+    value: { perStack: 20, maxStacks: 2 },
+    ben: 'self',
+    cond: { text: '佩丽卡对敌人施加导电后', trigger: 'afterApplyConduct', mode: 'user' }
+  },
+  {
+    id: 'chr_0016_laevat.pot5.ultExtend',
+    value: { perStack: 1, maxStacks: 7 },
+    ben: 'self',
+    cond: {
+      text: '终结技期间莱万汀击败敌人',
+      trigger: 'killDuringUltimate',
+      mode: 'user'
+    }
+  },
+  {
+    id: 'chr_0005_chen.talent.edge',
+    value: { perStack: 8, maxStacks: 5 },
+    ben: 'self',
+    cond: { text: '技能每次命中敌人时获得一层', trigger: 'skillHit', mode: 'user' }
+  },
+  {
+    id: 'chr_0018_dapan.talent.thicken',
+    value: { perStack: 6, maxStacks: 4 },
+    ben: 'self',
+    cond: { text: '每消耗1层破防后获得一层', trigger: 'consumeBreak', mode: 'user' }
+  },
+  {
+    id: 'chr_0009_azrila.talent.ironForIron',
+    value: { perStack: 9, maxStacks: 3 },
+    ben: 'self',
+    cond: { text: '受到来自敌人的伤害后获得一层', trigger: 'takeDamage', mode: 'user' }
+  },
+  {
+    id: 'chr_0019_karin.pot1.atk',
+    value: { perStack: 10, maxStacks: 5 },
+    ben: 'self',
+    cond: { text: '通过技能恢复技力时', trigger: 'afterSkillSpRecover', mode: 'user' }
+  },
+  {
+    id: 'chr_0029_pograni.talent1.atk',
+    value: { perStack: 8, maxStacks: 3 },
+    ben: 'self',
+    cond: {
+      text: '通过自身技能每恢复80点技力后获得一层士气激昂（潜能3起60点）',
+      trigger: 'afterSelfSkillSpRecover80',
+      mode: 'user'
+    }
+  },
+  {
+    id: 'chr_0029_pograni.talent1.arts',
+    value: { perStack: 8, maxStacks: 3 },
+    ben: 'self',
+    cond: {
+      text: '通过自身技能每恢复80点技力后获得一层士气激昂（潜能3起60点）',
+      trigger: 'afterSelfSkillSpRecover80',
+      mode: 'user'
+    }
+  },
+  {
+    id: 'chr_0029_pograni.talent2.atk',
+    value: { perStack: 8, maxStacks: 3 },
+    ben: 'team',
+    cond: {
+      text: '任意干员触发终结技盾卫旗队，上前的后续效果（袭扰/决胜）后，该干员获得士气激昂；需激活天赋活着的旗帜',
+      trigger: 'afterUltimateFollowup',
+      mode: 'user'
+    }
+  },
+  {
+    id: 'chr_0029_pograni.talent2.arts',
+    value: { perStack: 8, maxStacks: 3 },
+    ben: 'team',
+    cond: {
+      text: '任意干员触发终结技盾卫旗队，上前的后续效果（袭扰/决胜）后，该干员获得士气激昂；需激活天赋活着的旗帜',
+      trigger: 'afterUltimateFollowup',
+      mode: 'user'
+    }
+  },
+  {
+    id: 'chr_0017_yvonne.ult.critRate',
+    value: { perStack: 3, maxStacks: 10 },
+    ben: 'self',
+    cond: {
+      text: '终结技冷冻射手持续期间，每次普通攻击叠加一层',
+      trigger: 'duringUltimateNormalHit',
+      mode: 'user'
+    }
+  },
+  {
+    id: 'chr_0027_tangtang.pot1.spRefund',
+    value: { perStack: 5, maxStacks: 2 },
+    ben: 'self',
+    cond: {
+      text: '战技踏潮卷浪！每消耗一处涡流（场上最多2处）',
+      trigger: 'skillConsumeVortex',
+      mode: 'user'
+    }
+  }
+]
+normalConditional []
+MONO 0 [ 76.5 ] [ '佩丽卡 终结技能量不足：76.5/80' ]
+MONO 53.8 [ 79.997 ] [ '佩丽卡 终结技能量不足：79.997/80' ]
+MONO 54 [ 0 ] []
+MONO 400 [ 0 ] []
+threshold-postult [
+  {
+    member: 0,
+    name: '佩丽卡',
+    deadline: 4.5,
+    energyMax: 80,
+    currentEnergyAtDeadline: 76.5,
+    currentChargeEff: 0,
+    feasible: false,
+    note: '充能效率增至 +400% 仍无法在 4.5s 前充满（可能需要改变轴或能量来源）',
+    requiredTotal: null,
+    premises: [
+      '阈值基于当前这条轴；改变动作后需重算',
+      '能量来源：战技（真实技力）与连携回能均乘充能效率（规则 B10）；特殊回能按目录标记',
+      '舍入：二分精度 0.5%，边界值请在界面两侧各试 1%',
+      '非主控普攻不产生能量；毒技力消耗不回能'
+    ]
+  }
+]
+duration 1412 0.48 2941.666666666667 9.8
+burnTick never 123.18979591836724
+burnTick always 184.78469387755084
+shatter {
+  id: 'iceShatter',
+  label: '碎冰',
+  element: 'cold',
+  kind: 'mech',
+  ratio: [ 120 ],
+  base: 120,
+  scale: 1
+}
+
