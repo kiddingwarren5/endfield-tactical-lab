@@ -4,7 +4,7 @@ export const DAMAGE_ZONES=new Set(['bonus','amp','fragile','vulnerable','ratioMu
 
 // Weapon skill ranks: slot1/2 = 3(培养满) + 基质加级(0–6)；slot3 = 1 + 潜能(0–5) + 匹配基质加级(0–3)。默认基质满（9/9/4），与“0潜=Rank4”继承规则一致（rules D22）。
 // Lives here so panel attrs (stats.js) and slot-3 catalog effects (ownedEffects) read the same rank.
-export function weaponRanks(w){ if(!w) return [9,9,4]; if(w.substrate){ const s=w.substrate; return [Math.min(9,3+(s[0]??6)),Math.min(9,3+(s[1]??6)),Math.min(9,1+(w.potential??0)+(s[2]??3))]; } return w.ranks||[9,9,4]; }
+export function weaponRanks(w){ if(!w) return [9,9,4]; if(w.substrate){ const s=w.substrate; const r=w.ranks||[]; return [Math.max(1,Math.min(9,r[0]??(3+(s[0]??6)))),Math.max(1,Math.min(9,r[1]??(3+(s[1]??6)))),Math.min(9,1+(w.potential??0)+(s[2]??3))]; } return w.ranks||[9,9,4]; } // 前两词条以界面选择的 Rank 为准（可低于 3）；第三词条 = 1+潜能+匹配基质
 
 export function valueOf(effect,ctx={}){
   const v=effect.value||{}; const r=ctx.rank; // rank: 1-based index into byRank
