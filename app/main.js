@@ -18,6 +18,7 @@ function renderLight(){ // numeric inputs: re-render result/breakdown only to ke
 }
 function render(){
   for(const [id,label] of Object.entries(tabs)){ const a=$('tab-'+id); if(a) a.classList.toggle('active',id===currentTab); const sec=$(id); if(sec) sec.hidden=id!==currentTab; }
+  const h1=document.querySelector('.hero h1'); if(h1){ h1.childNodes[0].textContent=tabs[currentTab]; }
   if(currentTab==='calculator'){ renderCalc($('calculator'),state,update); }
   const dlgHost=$('dialog-host'); dlgHost.innerHTML=''; const dlg=snapshotDialog(state,update); if(dlg) dlgHost.append(dlg);
   $('meta-line').textContent=`数据版本 ${meta.dataVersion} · 游戏版本 ${meta.gameVersion} · 官方抓取 ${meta.officialFetchedAt.slice(0,10)} · 干员 ${meta.counts.operators} / 武器 ${meta.counts.weapons} / 装备 ${meta.counts.gear} / 食药 ${meta.counts.consumables}`;
