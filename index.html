@@ -4,93 +4,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f8f8f5">
-  <meta name="description" content="终末地伤害计算器 Demo：选择别礼练度、技能命中、增益与敌人状态，查看单次伤害。">
-  <title>伤害计算｜终末地战术实验室 Demo</title>
+  <meta name="description" content="终末地伤害计算器与排轴工具：全干员、全武器、指定装备与食药的单次/技能总伤计算，带可追溯计算记录。">
+  <title>终末地战术实验室</title>
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <div class="shell">
-    <main id="calculator">
-      <header class="topbar"><div class="brand"><div class="brand-mark">◇</div><strong>终末地<br>战术实验室</strong></div><nav class="top-tabs" aria-label="功能模块"><a href="#calculator" class="nav-item active" aria-current="page">伤害计算</a><span class="nav-item locked" aria-disabled="true">技能排轴 <small>后续</small></span><span class="nav-item locked" aria-disabled="true">排轴联算 <small>后续</small></span></nav></header>
-      <section class="hero">
-        <h1>单次伤害计算<span class="title-rule"></span></h1>
-        <button type="button" id="reset" class="reset-button">↺　恢复默认</button>
-      </section>
-      <div class="workspace">
-        <div class="left-column">
-          <section class="panel" aria-labelledby="actor-title">
-            <div class="panel-heading"><span class="index">01</span><h2 id="actor-title">干员与练度</h2></div>
-            <div class="operator-card"><div class="operator-icon">❄</div><div><span class="eyebrow">突击 · 寒冷</span><strong>别礼</strong><small>主能力 力量 / 副能力 意志</small></div><div class="active-tag">已接入</div></div>
-            <div class="two-col">
-              <label class="field"><span>干员等级 <em>暂锁定</em></span><select disabled aria-label="干员等级"><option>90 级</option></select></label>
-              <label class="field"><span>干员潜能</span><select id="characterPotential" aria-label="干员潜能"></select></label>
-              <label class="field"><span>武器等级 <em>暂锁定</em></span><select disabled aria-label="武器等级"><option>90 级</option></select></label>
-              <label class="field"><span>武器潜能</span><select id="weaponPotential" aria-label="武器潜能"></select></label>
-            </div>
-            <div class="weapon-line"><img class="item-thumb" src="./assets/weapon.webp" alt=""><div><span class="eyebrow">当前武器</span><strong>赫拉芬格</strong><small>双手剑</small></div></div>
-            <div class="subheading">武器词条等级</div>
-            <div class="three-col">
-              <label class="field"><span>力量提升</span><select id="weaponStrengthRank" aria-label="力量提升等级"></select></label>
-              <label class="field"><span>攻击提升</span><select id="weaponAttackRank" aria-label="攻击提升等级"></select></label>
-              <label class="field"><span>迸发</span><select id="weaponSkillRank" aria-label="迸发等级"></select></label>
-            </div>
-            <div class="subheading">技能等级</div>
-            <div class="two-col">
-              <label class="field"><span>普通攻击</span><select id="normalRank" aria-label="普通攻击等级"></select></label>
-              <label class="field"><span>战技</span><select id="qRank" aria-label="战技等级"></select></label>
-              <label class="field"><span>连携技</span><select id="eRank" aria-label="连携技等级"></select></label>
-              <label class="field"><span>终结技</span><select id="rRank" aria-label="终结技等级"></select></label>
-            </div>
-            <div class="locked-note">天赋树：已点满</div>
-          </section>
-          <section class="panel" aria-labelledby="gear-title">
-            <div class="panel-heading"><span class="index">02</span><h2 id="gear-title">装备与精锻</h2></div>
-            <div id="gear-list"></div>
-            <div id="gear-set-status" class="set-status"></div>
-          </section>
-        </div>
-        <div class="center-column">
-          <section class="panel" aria-labelledby="hit-title">
-            <div class="panel-heading"><span class="index">03</span><h2 id="hit-title">选择一次命中</h2></div>
-            <label class="field"><span>伤害段 / 机制伤害</span><select id="event" aria-label="伤害段"></select></label>
-            <div id="event-controls" class="event-controls"></div>
-            <div class="event-readout"><span>当前倍率</span><strong id="ratio">—</strong><small id="event-detail">—</small></div>
-          </section>
-          <section class="panel" aria-labelledby="buff-title">
-            <div class="panel-heading"><span class="index">04</span><h2 id="buff-title">增益与减益</h2></div>
-            <label class="master-toggle"><input id="buffAll" type="checkbox"> 全选</label>
-            <div id="buff-list"></div>
-          </section>
-          <section class="panel" aria-labelledby="enemy-title">
-            <div class="panel-heading"><span class="index">05</span><h2 id="enemy-title">敌人状态</h2></div>
-            <div class="two-col"><label class="field"><span>防御力</span><input id="defence" type="number" min="0" max="99999" step="1" inputmode="numeric"></label><label class="field"><span>暴击口径</span><select id="critMode"><option value="never">不暴击</option><option value="always">必暴击</option><option value="expected">暴击期望</option></select></label></div>
-            <div class="subheading">属性抗性 <small>评级 → 数值</small></div>
-            <div id="resistance-list" class="resistance-list"></div>
-            <details class="advanced"><summary>进阶参数：源石技艺 / 连击 / 失衡 / 减免</summary><div class="two-col advanced-grid">
-              <label class="field"><span>源石技艺强度</span><div class="unit-input"><input id="artsStrength" type="number" min="0" step="0.1" value="0"><b>%</b></div></label>
-              <label class="field"><span>连击增伤</span><div class="unit-input"><input id="combo" type="number" min="0" step="0.1" value="0"><b>%</b></div></label>
-              <label class="field"><span>失衡易伤</span><div class="unit-input"><input id="stagger" type="number" min="0" step="0.1" value="0"><b>%</b></div></label>
-              <label class="field"><span>额外伤害减免</span><div class="unit-input"><input id="reduction" type="number" min="0" max="100" step="0.1" value="0"><b>%</b></div></label>
-            </div></details>
-          </section>
-        </div>
-        <div class="right-column">
-          <section class="result-panel" aria-live="polite">
-            <div class="result-top"><span>计算结果</span><span class="live-pill"><i></i> 实时</span></div>
-            <div id="result-element" class="result-element">寒冷伤害</div>
-            <div id="result-number" class="result-number">—</div>
-            <div class="result-sub">单次命中 · <span id="crit-caption">不暴击</span></div>
-            <div class="result-divider"></div>
-            <div class="result-mini"><span>面板攻击力</span><strong id="panel-attack">—</strong></div>
-            <div class="result-mini"><span>主 / 副能力</span><strong id="abilities">—</strong></div>
-            <div class="result-mini"><span>目标有效抗性</span><strong id="active-resistance">—</strong></div>
-          </section>
-          <section class="panel breakdown" aria-labelledby="breakdown-title"><div class="panel-heading"><span class="index">∑</span><h2 id="breakdown-title">计算拆解</h2></div><div id="factors"></div><div id="active-buffs"></div></section>
-        </div>
-      </div>
-      <footer><span>数据来源</span><a href="https://wiki.skland.com/endfield/detail?mainTypeId=1&amp;subTypeId=1&amp;gameEntryId=4&amp;header=0" target="_blank" rel="noopener noreferrer">别礼官方档案</a><a href="https://wiki.skland.com/endfield/catalog?mainTypeId=2&amp;subTypeId=1&amp;header=0" target="_blank" rel="noopener noreferrer">官方武器图鉴</a><a href="https://warfarin.wiki/cn/weapons" target="_blank" rel="noopener noreferrer">武器图鉴</a><a href="https://warfarin.wiki/cn/gear" target="_blank" rel="noopener noreferrer">装备图鉴</a></footer>
-    </main>
+    <header class="topbar"><div class="brand"><div class="brand-mark">◇</div><strong>终末地<br>战术实验室</strong></div><nav class="top-tabs" aria-label="功能模块"><a href="#calculator" id="tab-calculator" class="nav-item active">伤害计算</a><a href="#timeline" id="tab-timeline" class="nav-item">排轴模拟</a><a href="#team" id="tab-team" class="nav-item">排轴联算</a></nav></header>
+    <section class="hero">
+      <h1>伤害计算<span class="title-rule"></span></h1>
+      <button type="button" id="reset" class="reset-button">↺　恢复默认</button>
+    </section>
+    <main id="calculator"></main>
+    <main id="timeline" hidden><div class="workspace single"><section class="panel"><div class="panel-heading"><span class="index">06</span><h2>排轴模拟</h2></div><p class="muted">事件模拟器与可编辑时间轴（批次 6）建设中。</p></section></div></main>
+    <main id="team" hidden><div class="workspace single"><section class="panel"><div class="panel-heading"><span class="index">08</span><h2>排轴联算</h2></div><p class="muted">全队逐击伤害与可视化（批次 7–8）建设中。</p></section></div></main>
+    <div id="dialog-host"></div>
+    <footer><span>数据来源</span><a href="https://wiki.skland.com/endfield/catalog?mainTypeId=1&amp;subTypeId=1&amp;header=0" target="_blank" rel="noopener noreferrer">官方干员图鉴（森空岛）</a><a href="https://wiki.skland.com/endfield/catalog?mainTypeId=1&amp;subTypeId=2&amp;header=0" target="_blank" rel="noopener noreferrer">官方武器图鉴</a><a href="https://wiki.skland.com/endfield/catalog?mainTypeId=1&amp;subTypeId=4&amp;header=0" target="_blank" rel="noopener noreferrer">官方装备图鉴</a><a href="https://warfarin.wiki/cn/weapons" target="_blank" rel="noopener noreferrer">华法琳 Wiki（交叉核对）</a><span id="meta-line" class="meta-line"></span></footer>
   </div>
-  <script type="module" src="./app.js"></script>
+  <script type="module" src="./app/main.js"></script>
 </body>
 </html>
