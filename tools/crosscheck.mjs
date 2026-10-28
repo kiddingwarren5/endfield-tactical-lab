@@ -90,20 +90,22 @@ function checkOperatorAttrs(o,w){
 function checkOperatorSkill(o,s,w){
   const groups=Object.values(w.skillGroupMap);
   const g=groups.find(x=>norm(x.name)===norm(s.name))??groups.find(x=>x.skillGroupType===GROUP_TYPE[s.type]);
-  if(!g) return [{skill:s.name,row:'*',status:'no-mined-group'}];
+  if(!g) return {rows:[{skill:s.name,row:'*',status:'no-mined-group'}],minedOnly:[]};
   const nameNote=norm(g.name)===norm(s.name)?undefined:`官方技能名“${norm(s.name)}”/解包“${g.name}”`;
   const stance=Object.entries(STANCE).find(([k])=>s.description.includes(k))?.[1]??null;
   const condOk=c=>!c||!stance||c.endsWith(stance);
   const ids=g.skillIdList.filter(id=>w.skills[id]); const lead=w.skills[ids[0]];
   const labels=[...new Set(ids.flatMap(id=>w.skills[id].flatMap(l=>l.subDesc.filter(d=>condOk(d.cond)).map(d=>norm(d.name)))))];
   const used=new Set(); const out=[];
-  for(const [row,vals] of Object.entries(s.table)){ if(row==='header') continue;
-    const base={skill:norm(s.name),type:s.type,stance,row:norm(row),nameNote};
+  for(const [key,vals] of Object.entries(s.table)){ if(key==='header') continue;
+    // parse_skland stores a repeated row label as "label#2"; such rows may reuse a label already matched.
+    const row=key.replace(/#\d+$/,''), repeated=row!==key;
+    const base={skill:norm(s.name),type:s.type,stance,row:norm(key),nameNote};
     const scalar=(kind,pick)=>{ const cmp=vals.map((v,i)=>{ const m=lead[i]?pick(lead[i]):null; return {official:num(v),mined:m,ok:m!=null&&m===num(v)}; }); return {...base,kind,minedSkill:ids[0],ok:cmp.every(c=>c.ok),cmp}; };
     if(SP_ROWS.includes(norm(row))){ out.push(scalar('sp-cost',l=>l.cost.value)); continue; }
     if(ENERGY_ROWS.includes(norm(row))){ out.push(scalar('ult-energy',l=>l.cost.value)); continue; }
     if(CD_ROWS.includes(norm(row))){ const delta=stanceCooldownDelta(w,ids[0],stance); out.push({...scalar('cooldown',l=>l.coolDown+delta),stanceDelta:delta||undefined}); continue; }
-    const m=matchLabel(row,labels.filter(l=>!used.has(l)));
+    const m=matchLabel(row,repeated?labels:labels.filter(l=>!used.has(l)));
     if(!m){ out.push({...base,kind:'subDesc',status:'no-mined-row'}); continue; }
     used.add(m.label);
     const cmp=vals.map((v,i)=>{
@@ -115,11 +117,13 @@ function checkOperatorSkill(o,s,w){
       return {official:v,mined:null,ok:false}; });
     out.push({...base,kind:'subDesc',minedLabel:m.how==='exact'?undefined:m.label,ok:cmp.every(c=>c.ok),bbOk:g.skillGroupType===0?cmp.every(c=>c.bb?.ok):undefined,cmp});
   }
-  return out;
+  return {rows:out,minedOnly:labels.filter(l=>!used.has(l))};
 }
 
 for(const o of sk.ops){ const w=findMined(wf.ops,o.name); if(!w){ unmatched('operators',o.name); continue; }
-  report.operators.push({name:o.name,minedId:w.id,attrs:checkOperatorAttrs(o,w),skills:o.skills.flatMap(s=>checkOperatorSkill(o,s,w))}); }
+  const checked=o.skills.map(s=>({s,...checkOperatorSkill(o,s,w)}));
+  report.operators.push({name:o.name,minedId:w.id,attrs:checkOperatorAttrs(o,w),skills:checked.flatMap(c=>c.rows),
+    minedOnlyRows:checked.filter(c=>c.minedOnly.length).map(c=>({skill:norm(c.s.name),labels:c.minedOnly}))}); }
 
 // ---------------- weapons ----------------
 for(const o of sk.wps){ const w=findMined(wf.wps,o.name); if(!w){ unmatched('weapons',o.name); continue; }
@@ -143,20 +147,33 @@ const RULES={
   floor1:(m,o)=>Math.floor(Number((m*10).toPrecision(12)))/10===o,
   round0:(m,o)=>roundHalfUp(m,0)===o,
   floor0:(m,o)=>Math.floor(Number(m.toPrecision(12)))===o,
+  // Internal value within 0.001 of an x.x5 tie: either neighbour is accepted as a rounding exception, never as the display rule.
+  halfTie:(m,o)=>{ const t=m*10-Math.floor(m*10); return Math.abs(t-0.5)<0.01&&(Math.floor(m*10)/10===o||Math.ceil(m*10)/10===o); },
 };
 // AllDamageTakenScalar is stored as the damage multiplier taken (1−reduction).
 const toDisplayUnits=(pack,v,isPct)=>!isPct?v:pack==='AllDamageTakenScalar'?(1-v)*100:v*100;
-const rulesFor=(pack,mined,official,isPct)=>{ const m=toDisplayUnits(pack,mined,isPct); return Object.entries(RULES).filter(([,f])=>f(m,official)).map(([k])=>k); };
+const rulesFor=(pack,mined,official,isPct)=>{ const m=Number(toDisplayUnits(pack,mined,isPct).toPrecision(12)); return Object.entries(RULES).filter(([,f])=>f(m,official)).map(([k])=>k); };
+
+// Official attribute label -> game packAttrType. Non-gold gear lists attributes in a different order than the game table, so pair by type, not position.
+const ATTR_PACK={力量:'Str',敏捷:'Agi',智识:'Wisd',意志:'Will',主能力:'Main',副能力:'Sub',生命值:'MaxHp',攻击力:'Atk',暴击率:'CriticalRate',全伤害减免:'AllDamageTakenScalar',
+  源石技艺强度:'PhysicalAndSpellInflictionEnhance',终结技充能效率:'UltimateSpGainScalar',终结技充能加成:'UltimateSpGainScalar',连携技伤害加成:'ComboSkillDamageIncrease',
+  治疗效率加成:'HealOutputIncrease',战技伤害加成:'NormalSkillDamageIncrease',物理伤害加成:'PhysicalDamageIncrease',终结技伤害加成:'UltimateSkillDamageIncrease',
+  法术伤害加成:'SpellDamageIncrease',寒冷和电磁伤害加成:'CrystAndPulseDamageIncrease',普通攻击伤害加成:'NormalAttackDamageIncrease',所有技能伤害加成:'AllSkillDamageIncrease',
+  对失衡目标伤害加成:'DamageToBrokenUnitIncrease',灼热和自然伤害加成:'FireAndNaturalDamageIncrease'};
 
 const setSeen=new Map();
 for(const o of sk.gear){ const w=findMined(wf.gear,o.name); if(!w){ unmatched('gear',o.name); continue; }
   const mods=w.equip.displayAttrModifiers||[]; const r={name:o.name,minedId:w.id,attrCount:mods.length,base:null,attrs:[]};
   const def=o.attrs.find(a=>a.name==='防御力'); const baseMod=w.equip.displayBaseAttrModifier;
   if(def&&baseMod){ const rules=rulesFor('',baseMod.attrValue,num(def.value),false); r.base={official:num(def.value),mined:baseMod.attrValue,rules,ok:rules.length>0}; }
-  o.refine.forEach((ref,i)=>{ const m=mods[i]; if(!m){ r.attrs.push({name:ref.name,status:'no-mined-attr'}); return; }
+  // Gear below gold has no refine table; its initial values are only in the attribute list.
+  const rows=o.refine.length?o.refine:o.attrs.filter(a=>a.name!=='防御力').map(a=>({name:a.name,values:[a.value]}));
+  const free=[...mods];
+  rows.forEach(ref=>{ const j=free.findIndex(x=>x.packAttrType===ATTR_PACK[norm(ref.name)]); const m=j>=0?free.splice(j,1)[0]:null;
+    if(!m){ r.attrs.push({name:ref.name,status:ATTR_PACK[norm(ref.name)]?'no-mined-attr':'unknown-attr-name'}); return; }
     const isPct=ref.values[0].includes('%'); const mined=[m.attrValue,...m.enhancedAttrValues];
     const cmp=ref.values.map((v,j)=>{ const rules=rulesFor(m.packAttrType,mined[j],num(v),isPct); return {official:num(v),mined:mined[j],display:Number(toDisplayUnits(m.packAttrType,mined[j],isPct).toPrecision(12)),rules,ok:rules.length>0}; });
-    r.attrs.push({name:ref.name,pack:m.packAttrType,isPct,ok:cmp.every(c=>c.ok),cmp}); });
+    r.attrs.push({name:ref.name,pack:m.packAttrType+(isPct?'%':''),initialOnly:!o.refine.length||undefined,ok:cmp.every(c=>c.ok),cmp}); });
   report.gear.push(r);
   if(o.set){ const sid=w.suit?.skillID; const L=sid&&w.suitSkill[sid]?.[0];
     const rendered=L?renderTemplate(L.description,L.blackboard):null; const key=norm(o.set.name)+'|'+norm(o.set.description);
@@ -166,6 +183,13 @@ for(const o of sk.gear){ const w=findMined(wf.gear,o.name); if(!w){ unmatched('g
       if(e.ok){ delete e.official; delete e.mined; } setSeen.set(key,e); report.sets.push(e); }
     setSeen.get(key).items.push(o.name); }
 }
+
+// Mined-only invariant: refine level k = base×(1+0.1k), integer stats floored; damage reduction is stored as 1/(1+d) with d scaled the same way.
+function refineInvariant(){ const bad=[]; let total=0;
+  for(const g of wf.gear) for(const m of g.equip.displayAttrModifiers||[]) m.enhancedAttrValues.forEach((v,i)=>{ total++; const k=1+0.1*(i+1);
+    const exp=m.packAttrType==='AllDamageTakenScalar'?1/(1+(1/m.attrValue-1)*k):Number.isInteger(m.attrValue)?Math.floor(Number((m.attrValue*k).toPrecision(12))):m.attrValue*k;
+    if(Math.abs(v-exp)>1e-4*Math.max(1,Math.abs(exp))) bad.push(`${g.name}:${m.packAttrType}:${v}≠${exp}`); });
+  return {ok:total-bad.length,total,bad}; }
 
 // ---------------- summary ----------------
 const tally=(list)=>({ok:list.filter(x=>x.ok).length,total:list.length});
@@ -190,6 +214,7 @@ report.summary={
   gearBaseDef:tally(report.gear.filter(r=>r.base).map(r=>r.base)),
   gearAttrValues:{...tally(gearVals),exact:gearVals.filter(c=>c.rules?.includes('exact')).length},
   gearTwoAttr:report.gear.filter(r=>r.attrCount===2).map(r=>r.name),
+  gearRefineInvariantMined:refineInvariant(),
   gearRulesByPack:Object.fromEntries(Object.entries(packRules).map(([k,p])=>[k,{names:[...p.names],values:p.n,dominant:p.dominant,ruleHits:p.counts,roundingExceptions:p.exceptions||[],conflicts:p.conflicts||[]}])),
   setEffects:{...tally(report.sets),numbersOnlyOk:report.sets.filter(s=>!s.ok&&s.numbersOk).length},
   unmatched:report.unmatched,
@@ -204,11 +229,13 @@ console.log('operator skill cells',fr(S.operatorSkillCells),'| normal-attack row
 for(const r of report.operators) for(const s of r.skills) if(!s.ok) console.log('  ',r.name,s.skill+(s.stance?`[${s.stance}]`:''),s.row,s.status||'',s.cmp?s.cmp.map(c=>c.ok?'·':`${c.official}≠${c.mined}`).join(' '):'');
 for(const r of report.operators) for(const s of r.skills) if(s.bbOk===false) console.log('   blackboard',r.name,s.skill,s.row,s.cmp.map(c=>c.bb.ok?'·':`${c.official}≠${JSON.stringify(c.bb)}`).join(' '));
 for(const r of report.operators) for(const s of r.skills) if(s.bbOk&&s.cmp.some(c=>c.bb.matchedKey==='atk_scale'&&('display_atk_scale' in c.bb||'atk_scale_display' in c.bb))) console.log('   per-hit display',r.name,s.skill,s.row,JSON.stringify(s.cmp[0].bb));
+for(const r of report.operators) for(const m of r.minedOnlyRows) console.log('   mined-only rows',r.name,m.skill,m.labels.join(','));
 for(const r of report.operators) for(const s of r.skills) if(s.minedLabel||s.nameNote) console.log('   label',r.name,s.skill,s.row,'->',s.minedLabel||'',s.nameNote||'');
 console.log('weapon baseAtk',fr(S.weaponBaseAtk),'| skills',fr(S.weaponSkills),'name diffs',S.weaponSkills.nameDiffs,'| ranks',fr(S.weaponSkillRanks),'numbers-only ok',S.weaponSkillRanks.numbersOnlyOk);
 for(const r of report.weapons){ for(const a of r.baseAtk) if(!a.ok) console.log('  ',r.name,'baseAtk',a.level,a.official,'≠',a.mined);
   for(const s of r.skills){ if(s.minedName) console.log('   name',r.name,'slot',s.slot,s.skill,'->',s.minedName); const bad=(s.cmp||[]).filter(c=>!c.ok); if(!bad.length) continue;
     console.log('  ',r.name,s.skill,'ranks',bad.map(c=>c.rank+(c.numbersOk?'':'*')).join(','),'(* = numbers differ)','\n     官方:',norm(bad[0].official),'\n     解包:',norm(bad[0].mined)); } }
+console.log('mined refine invariant base×(1+0.1k)',fr(S.gearRefineInvariantMined),S.gearRefineInvariantMined.bad.join(' '));
 console.log('gear base DEF',fr(S.gearBaseDef),'| attr values',fr(S.gearAttrValues),'exact',S.gearAttrValues.exact,'| two-attr gear',S.gearTwoAttr.length);
 for(const [k,p] of Object.entries(S.gearRulesByPack)) console.log('  ',k.padEnd(34),p.names.join('/'),'n='+p.values,'rule='+p.dominant,JSON.stringify(p.ruleHits),p.roundingExceptions.length?'exceptions '+p.roundingExceptions.join(' '):'',p.conflicts.length?'CONFLICTS '+p.conflicts.join(' '):'');
 for(const r of report.gear) for(const a of r.attrs) if(a.status) console.log('  ',r.name,a.name,a.status);

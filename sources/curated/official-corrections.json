@@ -1,0 +1,18 @@
+{"_doc":"官方显示值与解包值交叉核对后确认的官方笔误（见 docs/data-sources.md §4）。build_data 在生成时应用；界面标注“已按解包值修正”。",
+ "operatorSkillRows":[
+  {"operator":"大潘","skillType":"连携技","row":"伤害倍率","index":9,"official":566,"corrected":556,"reason":"官方笔误；专精1≈RANK9×1.07；解包 atk_scale 5.56"},
+  {"operator":"阿列什","skillType":"普通攻击","row":"普攻第五段倍率","index":10,"official":116,"corrected":114,"reason":"官方笔误；解包 2×0.57"},
+  {"operator":"洁尔佩塔","skillType":"普通攻击","row":"下落攻击倍率","index":2,"official":104,"corrected":96,"reason":"官方序列错位；解包值"},
+  {"operator":"洁尔佩塔","skillType":"普通攻击","row":"下落攻击倍率","index":3,"official":112,"corrected":104,"reason":"官方序列错位；解包值"},
+  {"operator":"洁尔佩塔","skillType":"普通攻击","row":"下落攻击倍率","index":4,"official":120,"corrected":112,"reason":"官方序列错位；解包值"},
+  {"operator":"洁尔佩塔","skillType":"普通攻击","row":"下落攻击倍率","index":5,"official":128,"corrected":120,"reason":"官方序列错位；解包值"}
+ ],
+ "weaponBaseAtk90":[],
+ "weaponAttrValues":[
+  {"weapon":"钢铁余音","skill":"物理伤害提升·中","rank":1,"official":8.0,"corrected":4.4444446,"reason":"官方把 Rank2 抄到 Rank1；解包 0.044444446"},
+  {"weapon":"望乡","skill":"寒冷伤害提升·大","rank":3,"official":14.9,"corrected":14.444445,"reason":"官方笔误；解包 0.14444445"},
+  {"weapon":"玉中身","skill":"寒冷伤害提升·大","rank":3,"official":14.9,"corrected":14.444445,"reason":"官方笔误；解包 0.14444445"}
+ ],
+ "gearDef":[{"gear":"长息加固板","official":15,"corrected":21,"reason":"官方笔误；同档长息配件均 21"}],
+ "nameAliases":{"管理员 (男)":"endministrator","管理员 (女)":"endministrator"}
+}

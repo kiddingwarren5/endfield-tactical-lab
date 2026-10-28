@@ -5,7 +5,7 @@ export const DAMAGE_ZONES=new Set(['bonus','amp','fragile','vulnerable','ratioMu
 export function valueOf(effect,ctx={}){
   const v=effect.value||{}; const r=ctx.rank; // rank: 1-based index into byRank
   if(v.fixed!=null) return v.fixed;
-  if(v.byRank){ const i=Math.max(0,Math.min(v.byRank.length-1,(r??v.byRank.length)-1)); return v.byRank[i]; }
+  if(v.byRank){ const i=Math.max(0,Math.min(v.byRank.length-1,(r??v.byRank.length)-1)); const x=v.byRank[i]; if(x&&typeof x==='object') return valueOf({value:x},ctx); return x; }
   if(v.perStack!=null){ const s=Math.min(ctx.stacks??v.maxStacks??1,v.maxStacks??Infinity); return v.perStack*s; }
   if(v.dependsOn){ const d=v.dependsOn; const attr=ctx.ownerAttrs?.[d.attr]??0; const raw=(d.base??0)+(d.per??0)*attr; return d.cap!=null?Math.min(raw,(d.base??0)+d.cap):raw; }
   if(v.formula){ try{ const vars=Object.assign({},ctx.vars||{}); const f=new Function(...Object.keys(vars),`return (${v.formula});`); return f(...Object.values(vars)); }catch{ return 0; } }

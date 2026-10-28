@@ -237,6 +237,7 @@
   "初次治疗基础治疗值": "param:heal",
   "单次歌声伤害倍率": "segment",
   "单次基础治疗值": "param:heal",
+  "每点敏捷增加的治疗值#2": "param:heal",
   "高歌姿态持续时间（秒）": "param:duration",
   "华彩爆点失衡值": "param:poise",
   "起跳射击伤害倍率": "segment",
@@ -284,5 +285,9 @@
   "combo:封印时间（秒）",
   "skill:强化射击自然爆发伤害倍率",
   "operator-no-data:明河"
+ ],
+ "ambiguousElement": [
+  "skill:血红之影:physical/heat",
+  "skill:疾风迅雷:physical/electric"
  ]
 }

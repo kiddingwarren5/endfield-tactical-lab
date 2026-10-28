@@ -1,0 +1,8897 @@
+[
+  {
+    "id": "wpn_sword_0003.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0003",
+      "name": "塔尔11"
+    },
+    "name": "塔尔11 · 攻击力",
+    "literal": "攻击力+{v}",
+    "zone": "atkFlat",
+    "stat": "atkFlat",
+    "value": {
+      "byRank": [
+        12,
+        14,
+        17,
+        19,
+        22,
+        24,
+        26,
+        29,
+        34
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+12。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0003 skills[1].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0008.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0008",
+      "name": "显锋"
+    },
+    "name": "显锋 · 战技命中后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者的战技命中敌人时",
+      "trigger": "skillHit",
+      "mode": "segment"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者的战技命中敌人时，攻击力+12.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0008 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_sword_0009.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0009",
+      "name": "浪潮"
+    },
+    "name": "浪潮 · 施放连携技后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者施放连携技时",
+      "trigger": "comboCast",
+      "mode": "segment"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放连携技时，获得攻击力+12.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0009 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_sword_0005.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0005",
+      "name": "钢铁余音"
+    },
+    "name": "钢铁余音 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+5.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0005 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0005.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0005",
+      "name": "钢铁余音"
+    },
+    "name": "钢铁余音 · 物理异常后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        7.5,
+        9,
+        10.5,
+        12,
+        13.5,
+        15,
+        16.5,
+        18,
+        21
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者造成物理异常时",
+      "trigger": "physAnomaly",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "装备者造成物理异常时，获得攻击力+7.5%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0005 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加2层，每层单独计算持续时间，每0.1秒最多触发一次；value 为每层数值。"
+  },
+  {
+    "id": "wpn_sword_0007.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0007",
+      "name": "坚城铸造者"
+    },
+    "name": "坚城铸造者 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+5.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0007 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0007.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0007",
+      "name": "坚城铸造者"
+    },
+    "name": "坚城铸造者 · 源石技艺强度",
+    "literal": "源石技艺强度+{v}",
+    "zone": "artsStrength",
+    "stat": "artsStrength",
+    "value": {
+      "byRank": [
+        25,
+        30,
+        35,
+        40,
+        45,
+        50,
+        55,
+        60,
+        70
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "源石技艺强度+25。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0007 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0020.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0020",
+      "name": "逐鳞3.0"
+    },
+    "name": "逐鳞3.0 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+5.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0020 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0020.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0020",
+      "name": "逐鳞3.0"
+    },
+    "name": "逐鳞3.0 · 战技施加冻结后寒冷受伤",
+    "literal": "使目标敌人受到的寒冷伤害+{v}%",
+    "zone": "vulnerable",
+    "stat": null,
+    "value": {
+      "byRank": [
+        7,
+        8.4,
+        9.8,
+        11.2,
+        12.6,
+        14,
+        15.4,
+        16.8,
+        19.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "target",
+    "applies": {
+      "elements": [
+        "cold"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者通过战技施加冻结时",
+      "trigger": "skillApplyFreeze",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过战技施加冻结时，使目标敌人受到的寒冷伤害+7.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0020 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。原文未写“脆弱”，按措辞归 vulnerable。"
+  },
+  {
+    "id": "wpn_sword_0018.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0018",
+      "name": "十二问"
+    },
+    "name": "十二问 · 副能力",
+    "literal": "副能力+{v}%",
+    "zone": "ability",
+    "stat": "sub",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "副能力+5.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0018 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "schema 的 stat 枚举无“副能力”，此处使用 stat=sub。"
+  },
+  {
+    "id": "wpn_sword_0018.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0018",
+      "name": "十二问"
+    },
+    "name": "十二问 · 消耗法术异常后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        7.5,
+        9,
+        10.5,
+        12,
+        13.5,
+        15,
+        16.5,
+        18,
+        21
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者消耗法术异常后",
+      "trigger": "consumeArtsAnomaly",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者消耗法术异常后，攻击力+7.5%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0018 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加2层，每层单独计算持续时间；value 为每层数值。"
+  },
+  {
+    "id": "wpn_sword_0019.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0019",
+      "name": "O.B.J.轻芒"
+    },
+    "name": "O.B.J.轻芒 · 副能力",
+    "literal": "副能力+{v}%",
+    "zone": "ability",
+    "stat": "sub",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "副能力+5.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0019 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "schema 的 stat 枚举无“副能力”，此处使用 stat=sub。"
+  },
+  {
+    "id": "wpn_sword_0019.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0019",
+      "name": "O.B.J.轻芒"
+    },
+    "name": "O.B.J.轻芒 · 恢复技力后全队灼热电磁伤害",
+    "literal": "全队造成的灼热和电磁伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        3,
+        3.6,
+        4.2,
+        4.8,
+        5.4,
+        6,
+        6.6,
+        7.2,
+        8.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": {
+      "elements": [
+        "heat",
+        "electric"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者通过自身技能恢复技力后",
+      "trigger": "spRecoverBySelfSkill",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过自身技能恢复技力后，全队造成的灼热和电磁伤害+3.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0019 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加3层，每层单独计算持续时间；value 为每层数值。"
+  },
+  {
+    "id": "wpn_sword_0015.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0015",
+      "name": "仰止"
+    },
+    "name": "仰止 · 终结技伤害",
+    "literal": "终结技伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "ultimate"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "终结技伤害+16.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0015 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0015.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0015",
+      "name": "仰止"
+    },
+    "name": "仰止 · 击飞后下次终结技物理伤害",
+    "literal": "下次终结技期间造成的物理伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "ultimate"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者造成击飞后，30秒内的下次终结技期间",
+      "trigger": "knockUpThenNextUlt",
+      "mode": "user"
+    },
+    "duration": 30,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.5,
+    "evidence": {
+      "text": "装备者造成击飞后，30秒内的下次终结技期间造成的物理伤害+12.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0015 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加3层，每层单独计算持续时间，每0.5秒最多触发一次；value 为每层数值；duration 为等待下次终结技的窗口，在下次终结技结束后消耗。原文为“终结技期间造成的物理伤害”，严格说含该期间内的所有物理伤害，kinds 暂写 ultimate。"
+  },
+  {
+    "id": "wpn_sword_0021_ink.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0021_ink",
+      "name": "宏愿"
+    },
+    "name": "宏愿 · 源石技艺强度",
+    "literal": "源石技艺强度+{v}",
+    "zone": "artsStrength",
+    "stat": "artsStrength",
+    "value": {
+      "byRank": [
+        30,
+        36,
+        42,
+        48,
+        54,
+        60,
+        66,
+        72,
+        84
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "源石技艺强度+30。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0021_ink skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0021_ink.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0021_ink",
+      "name": "宏愿"
+    },
+    "name": "宏愿 · 结晶/冻结后下次战技或终结技物理伤害",
+    "literal": "下次战技或终结技期间，造成的物理伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        36,
+        43.2,
+        50.4,
+        57.6,
+        64.8,
+        72,
+        79.2,
+        86.4,
+        100.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "skill",
+        "ultimate"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者施加源石结晶或冻结时，20秒内的下次战技或终结技期间",
+      "trigger": "crystalOrFreezeThenNextSkillOrUlt",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施加源石结晶或冻结时，20秒内的下次战技或终结技期间，造成的物理伤害+36.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0021_ink skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。duration 为等待窗口，下次战技或终结技结束后消耗。原文为“期间造成的物理伤害”，kinds 暂写 skill/ultimate。"
+  },
+  {
+    "id": "wpn_sword_0016.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0016",
+      "name": "不知归"
+    },
+    "name": "不知归 · 物理伤害",
+    "literal": "物理伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "物理伤害+16.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0016 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0016.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0016",
+      "name": "不知归"
+    },
+    "name": "不知归 · 恢复技力后自身物理伤害",
+    "literal": "自身造成的物理伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者通过自身技能恢复技力后",
+      "trigger": "spRecoverBySelfSkill",
+      "mode": "user"
+    },
+    "duration": 30,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "装备者通过自身技能恢复技力后，自身造成的物理伤害+5.0%，小队内其他干员造成的物理伤害+2.5%，持续30秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0016 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加5层，每层单独计算持续时间，每0.1秒最多触发一次；value 为每层数值。"
+  },
+  {
+    "id": "wpn_sword_0016.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0016",
+      "name": "不知归"
+    },
+    "name": "不知归 · 恢复技力后队友物理伤害",
+    "literal": "小队内其他干员造成的物理伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        2.5,
+        3,
+        3.5,
+        4,
+        4.5,
+        5,
+        5.5,
+        6,
+        7
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "others",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者通过自身技能恢复技力后",
+      "trigger": "spRecoverBySelfSkill",
+      "mode": "user"
+    },
+    "duration": 30,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "装备者通过自身技能恢复技力后，自身造成的物理伤害+5.0%，小队内其他干员造成的物理伤害+2.5%，持续30秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0016 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "与自身部分同一次触发、同一层数。同名效果最多叠加5层，每层单独计算持续时间，每0.1秒最多触发一次；value 为每层数值。"
+  },
+  {
+    "id": "wpn_sword_0006.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0006",
+      "name": "熔铸火焰"
+    },
+    "name": "熔铸火焰 · 灼热伤害",
+    "literal": "灼热伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "heat"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "灼热伤害+16.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0006 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0006.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0006",
+      "name": "熔铸火焰"
+    },
+    "name": "熔铸火焰 · 终结技后普通攻击伤害",
+    "literal": "普通攻击伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        75,
+        90,
+        105,
+        120,
+        135,
+        150,
+        165,
+        180,
+        210
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者施放终结技时",
+      "trigger": "ultCast",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放终结技时，获得普通攻击伤害+75.0%，持续20.0秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0006 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。"
+  },
+  {
+    "id": "wpn_sword_0010.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0010",
+      "name": "黯色火炬"
+    },
+    "name": "黯色火炬 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        7,
+        8.4,
+        9.8,
+        11.2,
+        12.6,
+        14,
+        15.4,
+        16.8,
+        19.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+7.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0010 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0010.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0010",
+      "name": "黯色火炬"
+    },
+    "name": "黯色火炬 · 敌人燃烧/腐蚀时灼热自然伤害",
+    "literal": "灼热和自然伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        8,
+        9.6,
+        11.2,
+        12.8,
+        14.4,
+        16,
+        17.6,
+        19.2,
+        22.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "heat",
+        "nature"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "场上每有一个敌人被施加燃烧或腐蚀状态时",
+      "trigger": "enemyBurnOrCorrode",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "场上每有一个敌人被施加燃烧或腐蚀状态时，装备者获得灼热和自然伤害+8.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0010 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加2层，每层单独计算持续时间，每0.1秒最多触发1次；value 为每层数值。"
+  },
+  {
+    "id": "wpn_sword_0011.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0011",
+      "name": "扶摇"
+    },
+    "name": "扶摇 · 战技与终结技物理伤害",
+    "literal": "战技和终结技造成的物理伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        15,
+        18,
+        21,
+        24,
+        27,
+        30,
+        33,
+        36,
+        42
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "skill",
+        "ultimate"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "战技和终结技造成的物理伤害+15.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0011 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0011.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0011",
+      "name": "扶摇"
+    },
+    "name": "扶摇 · 对失衡敌人伤害",
+    "literal": "对处于失衡状态的敌人造成的伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        35,
+        42,
+        49,
+        56,
+        63,
+        70,
+        77,
+        84,
+        98
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "目标处于失衡状态",
+      "trigger": "targetStaggered",
+      "mode": "user"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "对处于失衡状态的敌人造成的伤害+35.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0011 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0012.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0012",
+      "name": "热熔切割器"
+    },
+    "name": "热熔切割器 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+10.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0012 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0012.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0012",
+      "name": "热熔切割器"
+    },
+    "name": "热熔切割器 · 恢复技力/连击后全队攻击力",
+    "literal": "全队攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": null,
+    "condition": {
+      "text": "装备者通过自身技能恢复技力或获得连击状态后",
+      "trigger": "spRecoverOrComboState",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过自身技能恢复技力或获得连击状态后，全队攻击力+5.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0012 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加2层，每层单独计算持续时间；value 为每层数值。"
+  },
+  {
+    "id": "wpn_sword_0013.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0013",
+      "name": "显赫声名"
+    },
+    "name": "显赫声名 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+10.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0013 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0013.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0013",
+      "name": "显赫声名"
+    },
+    "name": "显赫声名 · 消耗破防后自身攻击力",
+    "literal": "自身攻击力+[{v}%+{v2}%×消耗层数]",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        {
+          "formula": "5.0+2.5*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "6.0+3.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "7.0+3.5*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "8.0+4.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "9.0+4.5*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "10.0+5.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "11.0+5.5*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "12.0+6.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "14.0+7.0*layers",
+          "vars": [
+            "layers"
+          ]
+        }
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者消耗破防层数后",
+      "trigger": "consumeBreachLayers",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者消耗破防层数后，自身攻击力+[5.0%+2.5%×消耗层数]，小队内其他干员获得一半的效果，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0013 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。value 每 Rank 为公式，layers=消耗的破防层数。"
+  },
+  {
+    "id": "wpn_sword_0013.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0013",
+      "name": "显赫声名"
+    },
+    "name": "显赫声名 · 消耗破防后队友攻击力（一半）",
+    "literal": "小队内其他干员获得一半的效果",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        {
+          "formula": "0.5*(5.0+2.5*layers)",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "0.5*(6.0+3.0*layers)",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "0.5*(7.0+3.5*layers)",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "0.5*(8.0+4.0*layers)",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "0.5*(9.0+4.5*layers)",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "0.5*(10.0+5.0*layers)",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "0.5*(11.0+5.5*layers)",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "0.5*(12.0+6.0*layers)",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "0.5*(14.0+7.0*layers)",
+          "vars": [
+            "layers"
+          ]
+        }
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "others",
+    "applies": null,
+    "condition": {
+      "text": "装备者消耗破防层数后",
+      "trigger": "consumeBreachLayers",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者消耗破防层数后，自身攻击力+[5.0%+2.5%×消耗层数]，小队内其他干员获得一半的效果，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0013 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。原文只写“获得一半的效果”，value 公式为 0.5×(自身公式)，各 Rank 数字均抄自原文，未单独换算。"
+  },
+  {
+    "id": "wpn_sword_0014.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0014",
+      "name": "白夜新星"
+    },
+    "name": "白夜新星 · 法术伤害",
+    "literal": "法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "法术伤害+12.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0014 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0014.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0014",
+      "name": "白夜新星"
+    },
+    "name": "白夜新星 · 燃烧/导电后法术伤害",
+    "literal": "法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者施加燃烧或导电后",
+      "trigger": "applyBurnOrConduct",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施加燃烧或导电后，法术伤害+12.0%，源石技艺强度+25，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0014 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加（与下一条为同一效果，同时触发）。"
+  },
+  {
+    "id": "wpn_sword_0014.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0014",
+      "name": "白夜新星"
+    },
+    "name": "白夜新星 · 燃烧/导电后源石技艺强度",
+    "literal": "源石技艺强度+{v}",
+    "zone": "artsStrength",
+    "stat": "artsStrength",
+    "value": {
+      "byRank": [
+        25,
+        30,
+        35,
+        40,
+        45,
+        50,
+        55,
+        60,
+        70
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者施加燃烧或导电后",
+      "trigger": "applyBurnOrConduct",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施加燃烧或导电后，法术伤害+12.0%，源石技艺强度+25，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0014 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加（与上一条为同一效果，同时触发）。"
+  },
+  {
+    "id": "wpn_claym_0010.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0010",
+      "name": "达尔霍夫7"
+    },
+    "name": "达尔霍夫7 · 攻击力",
+    "literal": "攻击力+{v}",
+    "zone": "atkFlat",
+    "stat": "atkFlat",
+    "value": {
+      "byRank": [
+        12,
+        14,
+        17,
+        19,
+        22,
+        24,
+        26,
+        29,
+        34
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+12。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0010 skills[1].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_claym_0003.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0003",
+      "name": "工业零点一"
+    },
+    "name": "工业零点一 · 战技命中后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者的战技命中敌人时",
+      "trigger": "skillHit",
+      "mode": "segment"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者的战技命中敌人时，获得攻击力+12.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0003 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_claym_0009.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0009",
+      "name": "淬火者"
+    },
+    "name": "淬火者 · 重击后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者对敌人造成重击时",
+      "trigger": "heavyHit",
+      "mode": "user"
+    },
+    "duration": 10,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者对敌人造成重击时，获得攻击力+12.0%，持续10秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0009 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。"
+  },
+  {
+    "id": "wpn_claym_0011.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0011",
+      "name": "探骊"
+    },
+    "name": "探骊 · 主能力",
+    "literal": "主能力+{v}%",
+    "zone": "ability",
+    "stat": "main",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "主能力+5.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0011 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_claym_0011.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0011",
+      "name": "探骊"
+    },
+    "name": "探骊 · 法术爆发后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        6,
+        7.2,
+        8.4,
+        9.6,
+        10.8,
+        12,
+        13.2,
+        14.4,
+        16.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者造成法术爆发时",
+      "trigger": "artsBurst",
+      "mode": "user"
+    },
+    "duration": 30,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "装备者造成法术爆发时，获得攻击力+6.0%，持续30秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0011 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加3层，每层单独计算持续时间，每0.1秒最多触发一次；value 为每层数值。"
+  },
+  {
+    "id": "wpn_claym_0014.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0014",
+      "name": "古渠"
+    },
+    "name": "古渠 · 源石技艺强度",
+    "literal": "源石技艺强度+{v}",
+    "zone": "artsStrength",
+    "stat": "artsStrength",
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "源石技艺强度+10。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0014 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_claym_0014.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0014",
+      "name": "古渠"
+    },
+    "name": "古渠 · 消耗破防后物理伤害",
+    "literal": "物理伤害+[{v}%×消耗层数]",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        {
+          "formula": "5.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "6.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "7.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "8.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "9.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "10.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "11.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "12.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "14.0*layers",
+          "vars": [
+            "layers"
+          ]
+        }
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者消耗破防层数后",
+      "trigger": "consumeBreachLayers",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者消耗破防层数后，物理伤害+[5.0%×消耗层数]，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0014 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。value 每 Rank 为公式，layers=消耗的破防层数。"
+  },
+  {
+    "id": "wpn_claym_0012.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0012",
+      "name": "终点之声"
+    },
+    "name": "终点之声 · 副能力",
+    "literal": "副能力+{v}%",
+    "zone": "ability",
+    "stat": "sub",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "副能力+5.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0012 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "schema 的 stat 枚举无“副能力”，此处使用 stat=sub。 未录入：连携技治疗效果+N%（治疗）。"
+  },
+  {
+    "id": "wpn_claym_0015.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0015",
+      "name": "O.B.J.重荷"
+    },
+    "name": "O.B.J.重荷 · 副能力",
+    "literal": "副能力+{v}%",
+    "zone": "ability",
+    "stat": "sub",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "副能力+5.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0015 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "schema 的 stat 枚举无“副能力”，此处使用 stat=sub。 未录入：造成倒地或施加虚弱时防御力+N%（防御）。"
+  },
+  {
+    "id": "wpn_claym_0013.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0013",
+      "name": "赫拉芬格"
+    },
+    "name": "赫拉芬格 · 所有技能伤害",
+    "literal": "所有技能伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        20,
+        24,
+        28,
+        32,
+        36,
+        40,
+        44,
+        48,
+        56
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "skill",
+        "combo",
+        "ultimate"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "所有技能伤害+20.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0013 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "kinds 按“技能=战技/连携技/终结技”理解，是否含普通攻击未经证实。"
+  },
+  {
+    "id": "wpn_claym_0013.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0013",
+      "name": "赫拉芬格"
+    },
+    "name": "赫拉芬格 · 战技施加寒冷附着后",
+    "literal": "寒冷伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "cold"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者通过战技施加寒冷附着时",
+      "trigger": "skillApplyColdAttach",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过战技施加寒冷附着时，获得寒冷伤害+10.0%，持续15秒。装备者对寒冷附着的敌人造成连携技伤害时，获得寒冷伤害+20.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0013 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。"
+  },
+  {
+    "id": "wpn_claym_0013.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0013",
+      "name": "赫拉芬格"
+    },
+    "name": "赫拉芬格 · 对寒冷附着敌人造成连携技伤害后",
+    "literal": "寒冷伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        20,
+        24,
+        28,
+        32,
+        36,
+        40,
+        44,
+        48,
+        56
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "cold"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者对寒冷附着的敌人造成连携技伤害时",
+      "trigger": "comboHitColdAttached",
+      "mode": "segment"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过战技施加寒冷附着时，获得寒冷伤害+10.0%，持续15秒。装备者对寒冷附着的敌人造成连携技伤害时，获得寒冷伤害+20.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0013 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。需目标处于寒冷附着。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_claym_0004.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0004",
+      "name": "典范"
+    },
+    "name": "典范 · 物理伤害",
+    "literal": "物理伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "物理伤害+10.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0004 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_claym_0004.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0004",
+      "name": "典范"
+    },
+    "name": "典范 · 战技/终结技命中后物理伤害",
+    "literal": "物理伤害额外+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者的战技和终结技命中敌人时",
+      "trigger": "skillOrUltHit",
+      "mode": "segment"
+    },
+    "duration": 30,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "装备者的战技和终结技命中敌人时，物理伤害额外+10.0%，持续30秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0004 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加3层，每层单独计算持续时间，每0.1秒最多触发一次；value 为每层数值。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_claym_0008.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0008",
+      "name": "破碎君王"
+    },
+    "name": "破碎君王 · 重击后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者对敌人造成重击时",
+      "trigger": "heavyHit",
+      "mode": "user"
+    },
+    "duration": 8,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者对敌人造成重击时，获得攻击力+10.0%，持续8秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0008 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。若装备者为主控干员，攻击力提升的数值翻倍（value 为翻倍前原文数值，引擎按主控×2）。"
+  },
+  {
+    "id": "wpn_claym_0008.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0008",
+      "name": "破碎君王"
+    },
+    "name": "破碎君王 · 主控时重击失衡值",
+    "literal": "重击对敌人造成的失衡值+{v}%",
+    "zone": "poise",
+    "stat": null,
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者对敌人造成重击时，且装备者为主控干员",
+      "trigger": "heavyHitAsMainControl",
+      "mode": "user"
+    },
+    "duration": 8,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "若装备者为主控干员，攻击力提升的数值翻倍，且重击对敌人造成的失衡值+12.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0008 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "只记录，不进伤害。与攻击力部分同一效果。"
+  },
+  {
+    "id": "wpn_lance_0009.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0009",
+      "name": "奥佩罗77"
+    },
+    "name": "奥佩罗77 · 攻击力",
+    "literal": "攻击力+{v}",
+    "zone": "atkFlat",
+    "stat": "atkFlat",
+    "value": {
+      "byRank": [
+        12,
+        14,
+        17,
+        19,
+        22,
+        24,
+        26,
+        29,
+        34
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+12。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0009 skills[1].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_lance_0003.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0003",
+      "name": "寻路者道标"
+    },
+    "name": "寻路者道标 · 生命值高于80%时攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        15,
+        18,
+        21,
+        24,
+        27,
+        30,
+        33,
+        36,
+        42
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "当装备者的生命值高于80%时",
+      "trigger": "hpAbove80",
+      "mode": "user"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "当装备者的生命值高于80%时，攻击力+15.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0003 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_lance_0008.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0008",
+      "name": "天使杀手"
+    },
+    "name": "天使杀手 · 战技命中后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者的战技命中敌人时",
+      "trigger": "skillHit",
+      "mode": "segment"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者的战技命中敌人时，攻击力+12.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0008 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_lance_0004.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0004",
+      "name": "嵌合正义"
+    },
+    "name": "嵌合正义 · 暴击率",
+    "literal": "暴击率+{v}%",
+    "zone": "critRate",
+    "stat": "critRate",
+    "value": {
+      "byRank": [
+        3,
+        3.6,
+        4.2,
+        4.8,
+        5.4,
+        6,
+        6.6,
+        7.2,
+        8.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "暴击率+3.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0004 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_lance_0004.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0004",
+      "name": "嵌合正义"
+    },
+    "name": "嵌合正义 · 对无破防敌人施加破防后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        15,
+        18,
+        21,
+        24,
+        27,
+        30,
+        33,
+        36,
+        42
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者对没有破防层数的敌人施加破防时",
+      "trigger": "applyBreachOnZero",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者对没有破防层数的敌人施加破防时，获得攻击力+15.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0004 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。"
+  },
+  {
+    "id": "wpn_lance_0013.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0013",
+      "name": "O.B.J.尖峰"
+    },
+    "name": "O.B.J.尖峰 · 对寒冷附着/冻结敌人伤害",
+    "literal": "对处于寒冷附着和冻结状态的敌人造成的伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        8,
+        9.6,
+        11.2,
+        12.8,
+        14.4,
+        16,
+        17.6,
+        19.2,
+        22.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "目标处于寒冷附着和冻结状态",
+      "trigger": "targetColdOrFrozen",
+      "mode": "user"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者对处于寒冷附着和冻结状态的敌人造成的伤害+8.0%；消耗冻结后，攻击力+12.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0013 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "原文“寒冷附着和冻结状态”，未明确是“任一”还是“同时”，需实测。"
+  },
+  {
+    "id": "wpn_lance_0013.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0013",
+      "name": "O.B.J.尖峰"
+    },
+    "name": "O.B.J.尖峰 · 消耗冻结后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者消耗冻结后",
+      "trigger": "consumeFreeze",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者对处于寒冷附着和冻结状态的敌人造成的伤害+8.0%；消耗冻结后，攻击力+12.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0013 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。"
+  },
+  {
+    "id": "wpn_lance_0006.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0006",
+      "name": "向心之引"
+    },
+    "name": "向心之引 · 连携技伤害",
+    "literal": "连携技伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "combo"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "连携技伤害+10.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0006 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_lance_0006.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0006",
+      "name": "向心之引"
+    },
+    "name": "向心之引 · 连携技后下次战技电磁伤害",
+    "literal": "下次战技期间造成的电磁伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "electric"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者施放连携技后，30秒内的下次战技期间",
+      "trigger": "comboThenNextSkill",
+      "mode": "user"
+    },
+    "duration": 30,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放连携技后，30秒内的下次战技期间造成的电磁伤害+10.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0006 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加3层，每层单独计算持续时间；value 为每层数值；duration 为等待下次战技的窗口。原文为“战技期间造成的电磁伤害”，kinds 暂写 skill。"
+  },
+  {
+    "id": "wpn_lance_0012.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0012",
+      "name": "负山"
+    },
+    "name": "负山 · 对破防敌人伤害",
+    "literal": "对处于破防状态的敌人造成的伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        20,
+        24,
+        28,
+        32,
+        36,
+        40,
+        44,
+        48,
+        56
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "目标处于破防状态",
+      "trigger": "targetBreached",
+      "mode": "user"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者对处于破防状态的敌人造成的伤害+20.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0012 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_lance_0012.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0012",
+      "name": "负山"
+    },
+    "name": "负山 · 战技施加破防后全能力",
+    "literal": "全能力+{v}%",
+    "zone": "ability",
+    "stat": "all",
+    "value": {
+      "byRank": [
+        8,
+        9.6,
+        11.2,
+        12.8,
+        14.4,
+        16,
+        17.6,
+        19.2,
+        22.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者通过自身战技施加破防时",
+      "trigger": "skillApplyBreach",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过自身战技施加破防时，获得全能力+8.0%，持续15秒。装备者通过自身战技施加物理脆弱时，获得全能力+8.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0012 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。"
+  },
+  {
+    "id": "wpn_lance_0012.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0012",
+      "name": "负山"
+    },
+    "name": "负山 · 战技施加物理脆弱后全能力",
+    "literal": "全能力+{v}%",
+    "zone": "ability",
+    "stat": "all",
+    "value": {
+      "byRank": [
+        8,
+        9.6,
+        11.2,
+        12.8,
+        14.4,
+        16,
+        17.6,
+        19.2,
+        22.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者通过自身战技施加物理脆弱时",
+      "trigger": "skillApplyPhysFragile",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过自身战技施加破防时，获得全能力+8.0%，持续15秒。装备者通过自身战技施加物理脆弱时，获得全能力+8.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0012 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。"
+  },
+  {
+    "id": "wpn_lance_0010.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0010",
+      "name": "骁勇"
+    },
+    "name": "骁勇 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+10.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0010 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_lance_0010.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0010",
+      "name": "骁勇"
+    },
+    "name": "骁勇 · 物理异常后额外物理伤害",
+    "literal": "额外造成自身攻击力{v}%的物理伤害",
+    "zone": "other",
+    "stat": null,
+    "value": {
+      "byRank": [
+        120,
+        144,
+        168,
+        192,
+        216,
+        240,
+        264,
+        288,
+        336
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者造成物理异常后",
+      "trigger": "physAnomaly",
+      "mode": "user"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者造成物理异常后，额外造成自身攻击力120.0%的物理伤害。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0010 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "独立的额外伤害实例（倍率 = 攻击力×value%），不是增益，无法归入现有 zone；需引擎作为额外伤害段处理。原文无冷却/次数限制说明。"
+  },
+  {
+    "id": "wpn_lance_0011.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0011",
+      "name": "J.E.T."
+    },
+    "name": "J.E.T. · 法术伤害",
+    "literal": "法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "法术伤害+12.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0011 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_lance_0011.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0011",
+      "name": "J.E.T."
+    },
+    "name": "J.E.T. · 施放战技后法术伤害",
+    "literal": "法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者施放战技时",
+      "trigger": "skillCast",
+      "mode": "segment"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放战技时，获得法术伤害+12.0%，持续15秒。装备者施放连携技时，获得法术伤害+12.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0011 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_lance_0011.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0011",
+      "name": "J.E.T."
+    },
+    "name": "J.E.T. · 施放连携技后法术伤害",
+    "literal": "法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者施放连携技时",
+      "trigger": "comboCast",
+      "mode": "segment"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放战技时，获得法术伤害+12.0%，持续15秒。装备者施放连携技时，获得法术伤害+12.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0011 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_pistol_0001.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0001",
+      "name": "佩科5"
+    },
+    "name": "佩科5 · 攻击力",
+    "literal": "攻击力+{v}",
+    "zone": "atkFlat",
+    "stat": "atkFlat",
+    "value": {
+      "byRank": [
+        12,
+        14,
+        17,
+        19,
+        22,
+        24,
+        26,
+        29,
+        34
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+12。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0001 skills[1].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_pistol_0002.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0002",
+      "name": "呼啸守卫"
+    },
+    "name": "呼啸守卫 · 战技命中后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者的战技命中敌人时",
+      "trigger": "skillHit",
+      "mode": "segment"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者的战技命中敌人时，获得攻击力+12.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0002 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_pistol_0003.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0003",
+      "name": "长路"
+    },
+    "name": "长路 · 施放连携技后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者施放连携技时",
+      "trigger": "comboCast",
+      "mode": "segment"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放连携技时，获得攻击力+12.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0003 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_pistol_0006.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0006",
+      "name": "作品：众生"
+    },
+    "name": "作品：众生 · 暴击率",
+    "literal": "暴击率+{v}%",
+    "zone": "critRate",
+    "stat": "critRate",
+    "value": {
+      "byRank": [
+        3,
+        3.6,
+        4.2,
+        4.8,
+        5.4,
+        6,
+        6.6,
+        7.2,
+        8.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "暴击率+3.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0006 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_pistol_0006.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0006",
+      "name": "作品：众生"
+    },
+    "name": "作品：众生 · 施加法术异常后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        7.5,
+        9,
+        10.5,
+        12,
+        13.5,
+        15,
+        16.5,
+        18,
+        21
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者施加法术异常时",
+      "trigger": "applyArtsAnomaly",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "装备者施加法术异常时，获得攻击力+7.5%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0006 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加2层，每层单独计算持续时间，每0.1秒最多触发一次；value 为每层数值。"
+  },
+  {
+    "id": "wpn_pistol_0012.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0012",
+      "name": "O.B.J.迅极"
+    },
+    "name": "O.B.J.迅极 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+5.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0012 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_pistol_0012.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0012",
+      "name": "O.B.J.迅极"
+    },
+    "name": "O.B.J.迅极 · 消耗法术附着后自然伤害",
+    "literal": "自然伤害+[{v}%×消耗层数]",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        {
+          "formula": "5.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "6.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "7.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "8.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "9.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "10.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "11.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "12.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "14.0*layers",
+          "vars": [
+            "layers"
+          ]
+        }
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "nature"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者消耗法术附着后",
+      "trigger": "consumeArtsAttach",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者消耗法术附着后，自然伤害+[5.0%×消耗层数]，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0012 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。value 每 Rank 为公式，layers=消耗的法术附着层数。"
+  },
+  {
+    "id": "wpn_pistol_0004.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0004",
+      "name": "理性告别"
+    },
+    "name": "理性告别 · 战技伤害",
+    "literal": "战技伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "skill"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "战技伤害+10.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0004 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_pistol_0004.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0004",
+      "name": "理性告别"
+    },
+    "name": "理性告别 · 连携技爆发/燃烧后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者通过连携技造成法术爆发或施加燃烧时",
+      "trigger": "comboArtsBurstOrBurn",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过连携技造成法术爆发或施加燃烧时，获得攻击力+16.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0004 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。"
+  },
+  {
+    "id": "wpn_pistol_0010.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0010",
+      "name": "艺术暴君"
+    },
+    "name": "艺术暴君 · 寒冷伤害",
+    "literal": "寒冷伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "cold"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "寒冷伤害+16.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0010 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_pistol_0010.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0010",
+      "name": "艺术暴君"
+    },
+    "name": "艺术暴君 · 战技/连携技暴击后寒冷伤害",
+    "literal": "寒冷伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        14,
+        16.8,
+        19.6,
+        22.4,
+        25.2,
+        28,
+        30.8,
+        33.6,
+        39.2
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "cold"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者的战技或连携技造成暴击伤害后",
+      "trigger": "skillOrComboCrit",
+      "mode": "user"
+    },
+    "duration": 30,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "装备者的战技或连携技造成暴击伤害后，寒冷伤害+14.0%，持续30秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0010 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加3层，每层单独计算持续时间，每0.1秒最多触发一次；value 为每层数值。"
+  },
+  {
+    "id": "wpn_pistol_0005.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0005",
+      "name": "领航者"
+    },
+    "name": "领航者 · 暴击率",
+    "literal": "暴击率+{v}%",
+    "zone": "critRate",
+    "stat": "critRate",
+    "value": {
+      "byRank": [
+        3.5,
+        4.2,
+        4.9,
+        5.6,
+        6.3,
+        7,
+        7.7,
+        8.4,
+        9.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "暴击率+3.5%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0005 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_pistol_0005.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0005",
+      "name": "领航者"
+    },
+    "name": "领航者 · 敌人冻结/腐蚀时寒冷自然伤害",
+    "literal": "获得寒冷和自然伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        3.5,
+        4.2,
+        4.9,
+        5.6,
+        6.3,
+        7,
+        7.7,
+        8.4,
+        9.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "cold",
+        "nature"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "场上有敌人被施加冻结或腐蚀时",
+      "trigger": "enemyFreezeOrCorrode",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "场上有敌人被施加冻结或腐蚀时，获得寒冷和自然伤害+3.5%，暴击率+2.0%，持续15秒。若由装备者触发该效果，提升的数值翻倍。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0005 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。若由装备者触发该效果，提升的数值翻倍（value 为翻倍前原文数值，引擎按自身触发×2）。"
+  },
+  {
+    "id": "wpn_pistol_0005.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0005",
+      "name": "领航者"
+    },
+    "name": "领航者 · 敌人冻结/腐蚀时暴击率",
+    "literal": "暴击率+{v}%",
+    "zone": "critRate",
+    "stat": "critRate",
+    "value": {
+      "byRank": [
+        2,
+        2.4,
+        2.8,
+        3.2,
+        3.6,
+        4,
+        4.4,
+        4.8,
+        5.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "场上有敌人被施加冻结或腐蚀时",
+      "trigger": "enemyFreezeOrCorrode",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "场上有敌人被施加冻结或腐蚀时，获得寒冷和自然伤害+3.5%，暴击率+2.0%，持续15秒。若由装备者触发该效果，提升的数值翻倍。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0005 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "与上一条为同一效果。若由装备者触发，数值翻倍（value 为翻倍前原文数值）。"
+  },
+  {
+    "id": "wpn_pistol_0008.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0008",
+      "name": "楔子"
+    },
+    "name": "楔子 · 法术伤害",
+    "literal": "法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "法术伤害+12.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0008 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_pistol_0008.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0008",
+      "name": "楔子"
+    },
+    "name": "楔子 · 施放战技后法术伤害",
+    "literal": "法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        8,
+        9.6,
+        11.2,
+        12.8,
+        14.4,
+        16,
+        17.6,
+        19.2,
+        22.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者施放战技时",
+      "trigger": "skillCast",
+      "mode": "segment"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放战技时，获得法术伤害+8.0%，持续15秒。装备者通过自身战技施加法术异常时，获得法术伤害+16.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0008 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_pistol_0008.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0008",
+      "name": "楔子"
+    },
+    "name": "楔子 · 战技施加法术异常后法术伤害",
+    "literal": "法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者通过自身战技施加法术异常时",
+      "trigger": "skillApplyArtsAnomaly",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放战技时，获得法术伤害+8.0%，持续15秒。装备者通过自身战技施加法术异常时，获得法术伤害+16.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0008 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。"
+  },
+  {
+    "id": "wpn_pistol_0009.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0009",
+      "name": "同类相食"
+    },
+    "name": "同类相食 · 法术伤害",
+    "literal": "法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "法术伤害+12.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0009 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_pistol_0009.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0009",
+      "name": "同类相食"
+    },
+    "name": "同类相食 · 消耗法术异常后对应属性受伤",
+    "literal": "使目标敌人受到对应属性的伤害+{v}%",
+    "zone": "vulnerable",
+    "stat": null,
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "target",
+    "applies": {
+      "elements": [
+        "heat",
+        "electric",
+        "cold",
+        "nature"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者消耗法术异常后（属性 = 被消耗异常的属性）",
+      "trigger": "consumeArtsAnomaly",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 25,
+    "evidence": {
+      "text": "装备者消耗法术异常后，使目标敌人受到对应属性的伤害+10.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0009 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "每种效果（按属性）独立生效，且均无法叠加，每25秒最多触发一次。elements 列出全部法术属性，实际只对被消耗异常的对应属性生效，引擎需按所选异常过滤。原文未写“脆弱”，按措辞归 vulnerable。"
+  },
+  {
+    "id": "wpn_funnel_0002.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0002",
+      "name": "吉米尼12"
+    },
+    "name": "吉米尼12 · 攻击力",
+    "literal": "攻击力+{v}",
+    "zone": "atkFlat",
+    "stat": "atkFlat",
+    "value": {
+      "byRank": [
+        12,
+        14,
+        17,
+        19,
+        22,
+        24,
+        26,
+        29,
+        34
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+12。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0002 skills[1].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0001.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0001",
+      "name": "全自动骇新星"
+    },
+    "name": "全自动骇新星 · 生命值高于80%时攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        15,
+        18,
+        21,
+        24,
+        27,
+        30,
+        33,
+        36,
+        42
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "当装备者的生命值高于80%时",
+      "trigger": "hpAbove80",
+      "mode": "user"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "当装备者的生命值高于80%时，攻击力+15.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0001 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0003.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0003",
+      "name": "荧光雷羽"
+    },
+    "name": "荧光雷羽 · 战技命中后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者的战技命中敌人时",
+      "trigger": "skillHit",
+      "mode": "segment"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者的战技命中敌人时，获得攻击力+12.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0003 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_funnel_0005.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0005",
+      "name": "悼亡诗"
+    },
+    "name": "悼亡诗 · 最大生命值",
+    "literal": "最大生命值+{v}%",
+    "zone": "ability",
+    "stat": "hpPct",
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "最大生命值+10.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0005 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "zone 表没有生命值项；schema 的 stat 枚举含 hpPct，暂归 ability/hpPct。另一种处理：视为生存属性不录（仅对按生命值计算伤害的干员有意义）。",
+    "uncertain": true
+  },
+  {
+    "id": "wpn_funnel_0005.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0005",
+      "name": "悼亡诗"
+    },
+    "name": "悼亡诗 · 终结技后异属性干员攻击力",
+    "literal": "和自身属性不同的干员获得攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        8,
+        9.6,
+        11.2,
+        12.8,
+        14.4,
+        16,
+        17.6,
+        19.2,
+        22.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "others",
+    "applies": null,
+    "condition": {
+      "text": "装备者施放终结技时，和自身（装备者）属性不同的干员",
+      "trigger": "ultCast",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放终结技时，和自身属性不同的干员获得攻击力+8.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0005 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。受益者仅限与装备者属性不同的队友，引擎需按属性过滤。原文未写“全队/其他队友”，teamUnique 按规范保持 false。"
+  },
+  {
+    "id": "wpn_funnel_0007.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0007",
+      "name": "莫奈何"
+    },
+    "name": "莫奈何 · 主能力",
+    "literal": "主能力+{v}%",
+    "zone": "ability",
+    "stat": "main",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "主能力+5.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0007 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0007.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0007",
+      "name": "莫奈何"
+    },
+    "name": "莫奈何 · 源石技艺强度",
+    "literal": "源石技艺强度+{v}",
+    "zone": "artsStrength",
+    "stat": "artsStrength",
+    "value": {
+      "byRank": [
+        25,
+        30,
+        35,
+        40,
+        45,
+        50,
+        55,
+        60,
+        70
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "源石技艺强度+25。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0007 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0004.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0004",
+      "name": "迷失荒野"
+    },
+    "name": "迷失荒野 · 源石技艺强度",
+    "literal": "源石技艺强度+{v}",
+    "zone": "artsStrength",
+    "stat": "artsStrength",
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "源石技艺强度+10。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0004 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0004.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0004",
+      "name": "迷失荒野"
+    },
+    "name": "迷失荒野 · 施加导电后全队物理电磁伤害",
+    "literal": "全队获得物理和电磁伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        8,
+        9.6,
+        11.2,
+        12.8,
+        14.4,
+        16,
+        17.6,
+        19.2,
+        22.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": {
+      "elements": [
+        "physical",
+        "electric"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者施加导电时",
+      "trigger": "applyConduct",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施加导电时，全队获得物理和电磁伤害+8.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0004 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。"
+  },
+  {
+    "id": "wpn_funnel_0012.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0012",
+      "name": "布道自由"
+    },
+    "name": "布道自由 · 主能力",
+    "literal": "主能力+{v}%",
+    "zone": "ability",
+    "stat": "main",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "主能力+5.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0012 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "未录入：自身战技治疗后为主控干员额外回复生命值（治疗）。"
+  },
+  {
+    "id": "wpn_funnel_0014.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0014",
+      "name": "O.B.J.术识"
+    },
+    "name": "O.B.J.术识 · 最大生命值",
+    "literal": "最大生命值+{v}%",
+    "zone": "ability",
+    "stat": "hpPct",
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "最大生命值+10.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0014 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "zone 表没有生命值项；schema 的 stat 枚举含 hpPct，暂归 ability/hpPct。另一种处理：视为生存属性不录（仅对按生命值计算伤害的干员有意义）。",
+    "uncertain": true
+  },
+  {
+    "id": "wpn_funnel_0014.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0014",
+      "name": "O.B.J.术识"
+    },
+    "name": "O.B.J.术识 · 连携技爆发/物理异常后全队灼热电磁伤害",
+    "literal": "全队获得灼热和电磁伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        8,
+        9.6,
+        11.2,
+        12.8,
+        14.4,
+        16,
+        17.6,
+        19.2,
+        22.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": {
+      "elements": [
+        "heat",
+        "electric"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "通过自身连携技造成法术爆发或物理异常时",
+      "trigger": "comboArtsBurstOrPhysAnomaly",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "通过自身连携技造成法术爆发或物理异常时，全队获得灼热和电磁伤害+8.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0014 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。"
+  },
+  {
+    "id": "wpn_funnel_0011.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0011",
+      "name": "使命必达"
+    },
+    "name": "使命必达 · 自然伤害",
+    "literal": "自然伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "nature"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "自然伤害+16.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0011 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0011.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0011",
+      "name": "使命必达"
+    },
+    "name": "使命必达 · 连携技击飞后全队法术伤害",
+    "literal": "全队造成的法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者通过自身连携技造成击飞后",
+      "trigger": "comboKnockUp",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过自身连携技造成击飞后，全队造成的法术伤害+12.0%，持续15秒。每有一个被击飞的敌人，全队造成的法术伤害额外+3.5%，最多+10.5%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0011 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。"
+  },
+  {
+    "id": "wpn_funnel_0011.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0011",
+      "name": "使命必达"
+    },
+    "name": "使命必达 · 每个被击飞敌人额外全队法术伤害",
+    "literal": "每有一个被击飞的敌人，全队造成的法术伤害额外+{v}%，最多+{v2}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        {
+          "formula": "min(3.5*enemies,10.5)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(4.2*enemies,12.6)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(4.9*enemies,14.7)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(5.6*enemies,16.8)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(6.3*enemies,18.9)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(7.0*enemies,21.0)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(7.7*enemies,23.1)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(8.4*enemies,25.2)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(9.8*enemies,29.4)",
+          "vars": [
+            "enemies"
+          ]
+        }
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "上一条生效期间，按被击飞的敌人数",
+      "trigger": "comboKnockUp",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过自身连携技造成击飞后，全队造成的法术伤害+12.0%，持续15秒。每有一个被击飞的敌人，全队造成的法术伤害额外+3.5%，最多+10.5%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0011 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。value 每 Rank 为公式，enemies=被击飞的敌人数，上限数值抄自原文。"
+  },
+  {
+    "id": "wpn_funnel_0013.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0013",
+      "name": "沧溟星梦"
+    },
+    "name": "沧溟星梦 · 副能力",
+    "literal": "副能力+{v}%",
+    "zone": "ability",
+    "stat": "sub",
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "副能力+16.0%",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0013 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "schema 的 stat 枚举无“副能力”，此处使用 stat=sub。"
+  },
+  {
+    "id": "wpn_funnel_0013.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0013",
+      "name": "沧溟星梦"
+    },
+    "name": "沧溟星梦 · 消耗腐蚀后法术受伤",
+    "literal": "使目标敌人受到的法术伤害+{v}%",
+    "zone": "vulnerable",
+    "stat": null,
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "target",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者消耗腐蚀后",
+      "trigger": "consumeCorrode",
+      "mode": "user"
+    },
+    "duration": 25,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者消耗腐蚀后，使目标敌人受到的法术伤害+10.0%，持续25秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0013 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。原文未写“脆弱”，按措辞归 vulnerable。"
+  },
+  {
+    "id": "wpn_funnel_0006.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0006",
+      "name": "作品：蚀迹"
+    },
+    "name": "作品：蚀迹 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        7,
+        8.4,
+        9.8,
+        11.2,
+        12.6,
+        14,
+        15.4,
+        16.8,
+        19.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+7.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0006 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0006.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0006",
+      "name": "作品：蚀迹"
+    },
+    "name": "作品：蚀迹 · 战技施加自然附着后队友法术伤害",
+    "literal": "小队内其他干员获得法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "others",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者通过战技施加自然附着时",
+      "trigger": "skillApplyNatureAttach",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过战技施加自然附着时，小队内其他干员获得法术伤害+5.0%，持续15秒。每有一个被自然附着的敌人，小队内其他干员获得法术伤害额外+2.0%，最多+6.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0006 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。"
+  },
+  {
+    "id": "wpn_funnel_0006.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0006",
+      "name": "作品：蚀迹"
+    },
+    "name": "作品：蚀迹 · 每个自然附着敌人额外队友法术伤害",
+    "literal": "每有一个被自然附着的敌人，小队内其他干员获得法术伤害额外+{v}%，最多+{v2}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        {
+          "formula": "min(2.0*enemies,6.0)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(2.4*enemies,7.2)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(2.8*enemies,8.4)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(3.2*enemies,9.6)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(3.6*enemies,10.8)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(4.0*enemies,12.0)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(4.4*enemies,13.2)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(4.8*enemies,14.4)",
+          "vars": [
+            "enemies"
+          ]
+        },
+        {
+          "formula": "min(5.6*enemies,16.8)",
+          "vars": [
+            "enemies"
+          ]
+        }
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "others",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "上一条生效期间，按被自然附着的敌人数",
+      "trigger": "skillApplyNatureAttach",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过战技施加自然附着时，小队内其他干员获得法术伤害+5.0%，持续15秒。每有一个被自然附着的敌人，小队内其他干员获得法术伤害额外+2.0%，最多+6.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0006 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。value 每 Rank 为公式，enemies=被自然附着的敌人数，上限数值抄自原文。"
+  },
+  {
+    "id": "wpn_funnel_0008.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0008",
+      "name": "爆破单元"
+    },
+    "name": "爆破单元 · 副能力",
+    "literal": "副能力+{v}%",
+    "zone": "ability",
+    "stat": "sub",
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "副能力+10.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0008 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "schema 的 stat 枚举无“副能力”，此处使用 stat=sub。"
+  },
+  {
+    "id": "wpn_funnel_0008.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0008",
+      "name": "爆破单元"
+    },
+    "name": "爆破单元 · 法术爆发后法术受伤",
+    "literal": "使目标敌人受到的法术伤害+{v}%",
+    "zone": "vulnerable",
+    "stat": null,
+    "value": {
+      "byRank": [
+        9,
+        10.8,
+        12.6,
+        14.4,
+        16.2,
+        18,
+        19.8,
+        21.6,
+        25.2
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "target",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者造成法术爆发时",
+      "trigger": "artsBurst",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者造成法术爆发时，使目标敌人受到的法术伤害+9.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0008 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。原文未写“脆弱”，按措辞归 vulnerable。"
+  },
+  {
+    "id": "wpn_funnel_0009.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0009",
+      "name": "遗忘"
+    },
+    "name": "遗忘 · 暴击率",
+    "literal": "暴击率+{v}%",
+    "zone": "critRate",
+    "stat": "critRate",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "暴击率+5.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0009 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0009.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0009",
+      "name": "遗忘"
+    },
+    "name": "遗忘 · 施放终结技后法术伤害",
+    "literal": "法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        24,
+        28.8,
+        33.6,
+        38.4,
+        43.2,
+        48,
+        52.8,
+        57.6,
+        67.2
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者施放终结技时",
+      "trigger": "ultCast",
+      "mode": "segment"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放终结技时，获得法术伤害+24.0%，持续15秒；装备者施放连携技时，获得法术伤害+12.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0009 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_funnel_0009.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0009",
+      "name": "遗忘"
+    },
+    "name": "遗忘 · 施放连携技后法术伤害",
+    "literal": "法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者施放连携技时",
+      "trigger": "comboCast",
+      "mode": "segment"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放终结技时，获得法术伤害+24.0%，持续15秒；装备者施放连携技时，获得法术伤害+12.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0009 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_funnel_0010.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0010",
+      "name": "骑士精神"
+    },
+    "name": "骑士精神 · 技能治疗后全队攻击力",
+    "literal": "全队攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        9,
+        10.8,
+        12.6,
+        14.4,
+        16.2,
+        18,
+        19.8,
+        21.6,
+        25.2
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": null,
+    "condition": {
+      "text": "装备者通过自身技能治疗后",
+      "trigger": "selfSkillHeal",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过自身技能治疗后，全队攻击力+9.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0010 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。 未录入：治疗效率+N%（治疗）。"
+  },
+  {
+    "id": "wpn_sword_0017.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0017",
+      "name": "光荣记忆"
+    },
+    "name": "光荣记忆 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        7,
+        8.4,
+        9.8,
+        11.2,
+        12.6,
+        14,
+        15.4,
+        16.8,
+        19.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+7.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0017 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0017.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0017",
+      "name": "光荣记忆"
+    },
+    "name": "光荣记忆 · 施加破防后下次终结技伤害",
+    "literal": "下次终结技期间造成的伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        12,
+        14.4,
+        16.8,
+        19.2,
+        21.6,
+        24,
+        26.4,
+        28.8,
+        33.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "ultimate"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者通过技能施加破防时，30秒内的下次终结技期间",
+      "trigger": "applyBreachThenNextUlt",
+      "mode": "user"
+    },
+    "duration": 30,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.5,
+    "evidence": {
+      "text": "装备者通过技能施加破防时，30秒内的下次终结技期间造成的伤害+12.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0017 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加3层，每层单独计算持续时间，每0.5秒最多触发一次；value 为每层数值；duration 为等待窗口。原文为“终结技期间造成的伤害”，kinds 暂写 ultimate。"
+  },
+  {
+    "id": "wpn_pistol_0007.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0007",
+      "name": "望乡"
+    },
+    "name": "望乡 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        7,
+        8.4,
+        9.8,
+        11.2,
+        12.6,
+        14,
+        15.4,
+        16.8,
+        19.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+7.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0007 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_pistol_0007.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0007",
+      "name": "望乡"
+    },
+    "name": "望乡 · 连携技后战技寒冷自然伤害",
+    "literal": "战技造成的寒冷和自然伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        8,
+        9.6,
+        11.2,
+        12.8,
+        14.4,
+        16,
+        17.6,
+        19.2,
+        22.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "cold",
+        "nature"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者施放连携技后",
+      "trigger": "comboCast",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放连携技后，战技造成的寒冷和自然伤害+8.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0007 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加2层，每层单独计算持续时间；value 为每层数值。"
+  },
+  {
+    "id": "wpn_pistol_0011.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0011",
+      "name": "落草"
+    },
+    "name": "落草 · 寒冷伤害",
+    "literal": "寒冷伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "cold"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "寒冷伤害+16.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0011 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_pistol_0011.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0011",
+      "name": "落草"
+    },
+    "name": "落草 · 战技/终结技施加寒冷附着后寒冷伤害",
+    "literal": "寒冷伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        20,
+        24,
+        28,
+        32,
+        36,
+        40,
+        44,
+        48,
+        56
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "cold"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者通过战技或终结技施加寒冷附着时",
+      "trigger": "skillOrUltApplyColdAttach",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过战技或终结技施加寒冷附着时，获得寒冷伤害+20.0%，持续20秒。装备者通过战技或终结技施加法术脆弱时，使目标敌人受到的法术伤害+6.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0011 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。"
+  },
+  {
+    "id": "wpn_pistol_0011.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_pistol_0011",
+      "name": "落草"
+    },
+    "name": "落草 · 战技/终结技施加法术脆弱后法术受伤",
+    "literal": "使目标敌人受到的法术伤害+{v}%",
+    "zone": "vulnerable",
+    "stat": null,
+    "value": {
+      "byRank": [
+        6,
+        7.2,
+        8.4,
+        9.6,
+        10.8,
+        12,
+        13.2,
+        14.4,
+        16.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "target",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者通过战技或终结技施加法术脆弱时",
+      "trigger": "skillOrUltApplyArtsFragile",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过战技或终结技施加寒冷附着时，获得寒冷伤害+20.0%，持续20秒。装备者通过战技或终结技施加法术脆弱时，使目标敌人受到的法术伤害+6.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_pistol_0011 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。原文未写“脆弱”（“脆弱”只出现在触发条件中），按措辞归 vulnerable。"
+  },
+  {
+    "id": "wpn_sword_0022.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0022",
+      "name": "狼之绯"
+    },
+    "name": "狼之绯 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+16.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0022 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0022.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0022",
+      "name": "狼之绯"
+    },
+    "name": "狼之绯 · 狼血（每层物理灼热伤害）",
+    "literal": "获得1层狼血，物理和灼热伤害+{v}%，最多叠加16层",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        1,
+        1.2,
+        1.4,
+        1.6,
+        1.8,
+        2,
+        2.2,
+        2.4,
+        2.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical",
+        "heat"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者造成暴击伤害后获得1层狼血",
+      "trigger": "critHit",
+      "mode": "user"
+    },
+    "duration": null,
+    "stacking": "stack",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者造成暴击伤害后，获得1层狼血，物理和灼热伤害+1.0%，最多叠加16层。当狼血叠加至16层后，物理和灼热伤害额外+24.0%，持续20秒。持续时间结束后，清空所有狼血叠加层数。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0022 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "value 为每层数值，最多叠加16层；原文未给单层持续时间；16层效果结束后清空所有狼血层数。"
+  },
+  {
+    "id": "wpn_sword_0022.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0022",
+      "name": "狼之绯"
+    },
+    "name": "狼之绯 · 狼血16层额外物理灼热伤害",
+    "literal": "物理和灼热伤害额外+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        24,
+        28.8,
+        33.6,
+        38.4,
+        43.2,
+        48,
+        52.8,
+        57.6,
+        67.2
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical",
+        "heat"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "当狼血叠加至16层后",
+      "trigger": "wolfBlood16",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者造成暴击伤害后，获得1层狼血，物理和灼热伤害+1.0%，最多叠加16层。当狼血叠加至16层后，物理和灼热伤害额外+24.0%，持续20秒。持续时间结束后，清空所有狼血叠加层数。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0022 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "持续时间结束后，清空所有狼血叠加层数。原文未写叠加规则，stacking 按单次效果处理。"
+  },
+  {
+    "id": "wpn_funnel_0015.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0015",
+      "name": "孤舟"
+    },
+    "name": "孤舟 · 电磁伤害",
+    "literal": "电磁伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "electric"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "电磁伤害+16.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0015 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0015.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0015",
+      "name": "孤舟"
+    },
+    "name": "孤舟 · 战技消耗法术异常后战技电磁伤害",
+    "literal": "战技造成的电磁伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        20,
+        24,
+        28,
+        32,
+        36,
+        40,
+        44,
+        48,
+        56
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "electric"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者通过战技消耗法术异常时",
+      "trigger": "skillConsumeArtsAnomaly",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "装备者通过战技消耗法术异常时，战技造成的电磁伤害+20.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0015 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "该效果最多叠加2层，每层单独计算持续时间，每0.1秒最多触发一次；value 为每层数值。"
+  },
+  {
+    "id": "wpn_funnel_0015.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0015",
+      "name": "孤舟"
+    },
+    "name": "孤舟 · 终结技后战技电磁伤害",
+    "literal": "战技造成的电磁伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        40,
+        48,
+        56,
+        64,
+        72,
+        80,
+        88,
+        96,
+        112
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "electric"
+      ],
+      "kinds": [
+        "skill"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者施放终结技后",
+      "trigger": "ultCast",
+      "mode": "user"
+    },
+    "duration": 25,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放终结技后，战技造成的电磁伤害+40.0%，持续25秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0015 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "该效果无法叠加。"
+  },
+  {
+    "id": "wpn_funnel_0017.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0017",
+      "name": "雾中微光"
+    },
+    "name": "雾中微光 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        7,
+        8.4,
+        9.8,
+        11.2,
+        12.6,
+        14,
+        15.4,
+        16.8,
+        19.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+7.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0017 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0017.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0017",
+      "name": "雾中微光"
+    },
+    "name": "雾中微光 · 获得电磁增幅后电磁伤害",
+    "literal": "电磁伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        5.5,
+        6.6,
+        7.7,
+        8.8,
+        9.9,
+        11,
+        12.1,
+        13.2,
+        15.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "electric"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者获得电磁增幅时",
+      "trigger": "gainElectricAmp",
+      "mode": "user"
+    },
+    "duration": 30,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "装备者获得电磁增幅时，电磁伤害+5.5%，持续30秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0017 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加3层，每层单独计算持续时间，每0.1秒最多触发一次；value 为每层数值。效果本身是“电磁伤害+”（增伤区），触发条件才是“增幅”。"
+  },
+  {
+    "id": "wpn_claym_0017.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0017",
+      "name": "赤缨"
+    },
+    "name": "赤缨 · 物理伤害",
+    "literal": "物理伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "物理伤害+16.0%。装备者施加物理脆弱时，源石技艺强度+30，持续20秒；",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0017 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_claym_0017.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0017",
+      "name": "赤缨"
+    },
+    "name": "赤缨 · 施加物理脆弱后源石技艺强度",
+    "literal": "源石技艺强度+{v}",
+    "zone": "artsStrength",
+    "stat": "artsStrength",
+    "value": {
+      "byRank": [
+        30,
+        36,
+        42,
+        48,
+        54,
+        60,
+        66,
+        72,
+        84
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者施加物理脆弱时",
+      "trigger": "applyPhysFragile",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "物理伤害+16.0%。装备者施加物理脆弱时，源石技艺强度+30，持续20秒；",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0017 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。"
+  },
+  {
+    "id": "wpn_claym_0017.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0017",
+      "name": "赤缨"
+    },
+    "name": "赤缨 · 猛击消耗破防后物理伤害",
+    "literal": "自身物理伤害+[{v}%+{v2}%×消耗层数]",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        {
+          "formula": "9.0+3.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "10.8+3.6*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "12.6+4.2*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "14.4+4.8*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "16.2+5.4*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "18.0+6.0*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "19.8+6.6*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "21.6+7.2*layers",
+          "vars": [
+            "layers"
+          ]
+        },
+        {
+          "formula": "25.2+8.4*layers",
+          "vars": [
+            "layers"
+          ]
+        }
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者造成猛击时，根据消耗的最大破防层数",
+      "trigger": "slamConsumeBreach",
+      "mode": "user"
+    },
+    "duration": 30,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者造成猛击时，根据消耗的最大破防层数，使自身物理伤害+[9.0%+3.0%×消耗层数]，持续30秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0017 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。value 每 Rank 为公式，layers=消耗的（最大）破防层数。"
+  },
+  {
+    "id": "wpn_lance_0015.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0015",
+      "name": "镀红祝福"
+    },
+    "name": "镀红祝福 · 终结技充能效率",
+    "literal": "终结技充能效率+{v}%",
+    "zone": "chargeEff",
+    "stat": "chargeEff",
+    "value": {
+      "byRank": [
+        18,
+        21.6,
+        25.2,
+        28.8,
+        32.4,
+        36,
+        39.6,
+        43.2,
+        50.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "终结技充能效率+18.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0015 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_lance_0015.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0015",
+      "name": "镀红祝福"
+    },
+    "name": "镀红祝福 · 恢复技力后全队攻击力",
+    "literal": "全队攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        6,
+        7.2,
+        8.4,
+        9.6,
+        10.8,
+        12,
+        13.2,
+        14.4,
+        16.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": null,
+    "condition": {
+      "text": "装备者通过自身技能恢复技力后",
+      "trigger": "spRecoverBySelfSkill",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过自身技能恢复技力后，全队攻击力+6.0%，持续20秒；装备者通过自身技能施加灼热附着时，全队造成的灼热伤害+6.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0015 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。"
+  },
+  {
+    "id": "wpn_lance_0015.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0015",
+      "name": "镀红祝福"
+    },
+    "name": "镀红祝福 · 施加灼热附着后全队灼热伤害",
+    "literal": "全队造成的灼热伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        6,
+        7.2,
+        8.4,
+        9.6,
+        10.8,
+        12,
+        13.2,
+        14.4,
+        16.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": {
+      "elements": [
+        "heat"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者通过自身技能施加灼热附着时",
+      "trigger": "selfSkillApplyHeatAttach",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过自身技能恢复技力后，全队攻击力+6.0%，持续20秒；装备者通过自身技能施加灼热附着时，全队造成的灼热伤害+6.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0015 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。"
+  },
+  {
+    "id": "wpn_claym_0016.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0016",
+      "name": "幻想苦痛"
+    },
+    "name": "幻想苦痛 · 物理伤害",
+    "literal": "物理伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        7,
+        8.4,
+        9.8,
+        11.2,
+        12.6,
+        14,
+        15.4,
+        16.8,
+        19.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "物理伤害+7.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0016 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_claym_0016.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0016",
+      "name": "幻想苦痛"
+    },
+    "name": "幻想苦痛 · 施放战技/连携技后物理伤害",
+    "literal": "物理伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        5.5,
+        6.6,
+        7.7,
+        8.8,
+        9.9,
+        11,
+        12.1,
+        13.2,
+        15.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者施放战技或连携技时",
+      "trigger": "skillOrComboCast",
+      "mode": "segment"
+    },
+    "duration": 20,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "装备者施放战技或连携技时，物理伤害+5.5%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0016 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加3层，每层单独计算持续时间，每0.1秒最多触发一次；value 为每层数值。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_lance_0007.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0007",
+      "name": "灯火使命"
+    },
+    "name": "灯火使命 · 灼热伤害",
+    "literal": "灼热伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        7,
+        8.4,
+        9.8,
+        11.2,
+        12.6,
+        14,
+        15.4,
+        16.8,
+        19.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "heat"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "灼热伤害+7.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0007 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_lance_0007.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0007",
+      "name": "灯火使命"
+    },
+    "name": "灯火使命 · 施加灼热附着后自身物理灼热伤害",
+    "literal": "自身物理和灼热伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        8,
+        9.6,
+        11.2,
+        12.8,
+        14.4,
+        16,
+        17.6,
+        19.2,
+        22.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "physical",
+        "heat"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者通过自身技能施加灼热附着时",
+      "trigger": "selfSkillApplyHeatAttach",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过自身技能施加灼热附着时，自身物理和灼热伤害+8.0%，持续20秒；装备者通过自身技能施加灼热脆弱时，全队物理和灼热伤害+4.0%，持续30秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0007 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。"
+  },
+  {
+    "id": "wpn_lance_0007.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0007",
+      "name": "灯火使命"
+    },
+    "name": "灯火使命 · 施加灼热脆弱后全队物理灼热伤害",
+    "literal": "全队物理和灼热伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        4,
+        4.8,
+        5.6,
+        6.4,
+        7.2,
+        8,
+        8.8,
+        9.6,
+        11.2
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": {
+      "elements": [
+        "physical",
+        "heat"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者通过自身技能施加灼热脆弱时",
+      "trigger": "selfSkillApplyHeatFragile",
+      "mode": "user"
+    },
+    "duration": 30,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过自身技能施加灼热附着时，自身物理和灼热伤害+8.0%，持续20秒；装备者通过自身技能施加灼热脆弱时，全队物理和灼热伤害+4.0%，持续30秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0007 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。"
+  },
+  {
+    "id": "wpn_funnel_0016.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0016",
+      "name": "四二式·肃阵"
+    },
+    "name": "四二式·肃阵 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+16.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0016 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0016.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0016",
+      "name": "四二式·肃阵"
+    },
+    "name": "四二式·肃阵 · 智≥意·施加法术附着后法术伤害",
+    "literal": "造成的法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        20,
+        24,
+        28,
+        32,
+        36,
+        40,
+        44,
+        48,
+        56
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者智识值≥意志值：装备者通过自身技能施加法术附着时",
+      "trigger": "intGeWill&selfSkillApplyArtsAttach",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者智识值≥意志值：装备者通过自身技能施加法术附着时，造成的法术伤害+20.0%，持续20秒；装备者通过自身技能施加法术脆弱时，攻击力+20.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0016 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。分支条件：智识≥意志（面板能力值，只受等级、天赋、潜能、装备和武器影响）；与“意志>智识”分支两条互斥。"
+  },
+  {
+    "id": "wpn_funnel_0016.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0016",
+      "name": "四二式·肃阵"
+    },
+    "name": "四二式·肃阵 · 智≥意·施加法术脆弱后攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        20,
+        24,
+        28,
+        32,
+        36,
+        40,
+        44,
+        48,
+        56
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者智识值≥意志值：装备者通过自身技能施加法术脆弱时",
+      "trigger": "intGeWill&selfSkillApplyArtsFragile",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者智识值≥意志值：装备者通过自身技能施加法术附着时，造成的法术伤害+20.0%，持续20秒；装备者通过自身技能施加法术脆弱时，攻击力+20.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0016 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。分支条件同上（智识≥意志）。"
+  },
+  {
+    "id": "wpn_funnel_0016.p4",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0016",
+      "name": "四二式·肃阵"
+    },
+    "name": "四二式·肃阵 · 意>智·施加法术爆发后法术受伤",
+    "literal": "使目标敌人受到的法术伤害+{v}%",
+    "zone": "vulnerable",
+    "stat": null,
+    "value": {
+      "byRank": [
+        6,
+        7.2,
+        8.4,
+        9.6,
+        10.8,
+        12,
+        13.2,
+        14.4,
+        16.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "target",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者意志值>智识值：装备者通过自身技能施加法术爆发时",
+      "trigger": "willGtInt&selfSkillArtsBurst",
+      "mode": "user"
+    },
+    "duration": 25,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者意志值>智识值：装备者通过自身技能施加法术爆发时，使目标敌人受到的法术伤害+6.0%，持续25秒；装备者通过自身技能施加法术脆弱时，使目标敌人受到的法术伤害+6.0%，持续25秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0016 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "分支条件：意志>智识；与智识分支互斥。原文未写“脆弱”，按措辞归 vulnerable。不确定点：本条与下一条数值和措辞相同，“同名效果无法叠加”可能指两条互相不叠加（同时触发只算一次），也可能各自独立。",
+    "uncertain": true
+  },
+  {
+    "id": "wpn_funnel_0016.p5",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0016",
+      "name": "四二式·肃阵"
+    },
+    "name": "四二式·肃阵 · 意>智·施加法术脆弱后法术受伤",
+    "literal": "使目标敌人受到的法术伤害+{v}%",
+    "zone": "vulnerable",
+    "stat": null,
+    "value": {
+      "byRank": [
+        6,
+        7.2,
+        8.4,
+        9.6,
+        10.8,
+        12,
+        13.2,
+        14.4,
+        16.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "target",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者意志值>智识值：装备者通过自身技能施加法术脆弱时",
+      "trigger": "willGtInt&selfSkillApplyArtsFragile",
+      "mode": "user"
+    },
+    "duration": 25,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者意志值>智识值：装备者通过自身技能施加法术爆发时，使目标敌人受到的法术伤害+6.0%，持续25秒；装备者通过自身技能施加法术脆弱时，使目标敌人受到的法术伤害+6.0%，持续25秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0016 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "分支条件同上（意志>智识）。不确定点同上：与上一条是否互相叠加未明确。",
+    "uncertain": true
+  },
+  {
+    "id": "wpn_funnel_0018.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0018",
+      "name": "联结点"
+    },
+    "name": "联结点 · 自然伤害",
+    "literal": "自然伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        7,
+        8.4,
+        9.8,
+        11.2,
+        12.6,
+        14,
+        15.4,
+        16.8,
+        19.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "nature"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "自然伤害+7.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0018 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0018.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0018",
+      "name": "联结点"
+    },
+    "name": "联结点 · 连携技施加脆弱/附着后自身攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        6,
+        7.2,
+        8.4,
+        9.6,
+        10.8,
+        12,
+        13.2,
+        14.4,
+        16.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者通过连携技施加法术脆弱或法术附着时",
+      "trigger": "comboApplyArtsFragileOrAttach",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过连携技施加法术脆弱或法术附着时，攻击力+6.0%，小队内其他干员攻击力+1.5%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0018 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加2层，每层单独计算持续时间；value 为每层数值。"
+  },
+  {
+    "id": "wpn_funnel_0018.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0018",
+      "name": "联结点"
+    },
+    "name": "联结点 · 连携技施加脆弱/附着后队友攻击力",
+    "literal": "小队内其他干员攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        1.5,
+        1.8,
+        2.1,
+        2.4,
+        2.7,
+        3,
+        3.3,
+        3.6,
+        4.2
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "others",
+    "applies": null,
+    "condition": {
+      "text": "装备者通过连携技施加法术脆弱或法术附着时",
+      "trigger": "comboApplyArtsFragileOrAttach",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过连携技施加法术脆弱或法术附着时，攻击力+6.0%，小队内其他干员攻击力+1.5%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0018 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "与自身部分同一次触发。同名效果最多叠加2层，每层单独计算持续时间；value 为每层数值。"
+  },
+  {
+    "id": "wpn_lance_0014.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0014",
+      "name": "曜夜的首演"
+    },
+    "name": "曜夜的首演 · 主能力",
+    "literal": "主能力+{v}%",
+    "zone": "ability",
+    "stat": "main",
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "主能力+16.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0014 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_lance_0014.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0014",
+      "name": "曜夜的首演"
+    },
+    "name": "曜夜的首演 · 治疗队友后受治疗者攻击力",
+    "literal": "受到装备者治疗的干员攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        3.5,
+        4.2,
+        4.9,
+        5.6,
+        6.3,
+        7,
+        7.7,
+        8.4,
+        9.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "others",
+    "applies": null,
+    "condition": {
+      "text": "装备者通过自身技能治疗小队内其他干员时，受到装备者治疗的干员",
+      "trigger": "selfSkillHealOthers",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "装备者通过自身技能治疗小队内其他干员时，受到装备者治疗的干员攻击力+3.5%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0014 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果最多叠加4层，每层单独计算持续时间，每名干员每0.1秒最多获得一次该效果；value 为每层数值。受益者仅为被治疗的其他干员。"
+  },
+  {
+    "id": "wpn_sword_0026.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0026",
+      "name": "遥望"
+    },
+    "name": "遥望 · 憧憬·全队伤害",
+    "literal": "全队获得憧憬，造成的伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "当队伍进入战斗时，全队获得憧憬（持续20秒）",
+      "trigger": "battleStart",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": true,
+    "cooldown": null,
+    "evidence": {
+      "text": "当队伍进入战斗时，全队获得憧憬，造成的伤害+5.0%，源石技艺强度+10，防御力+3.0%，持续20秒；",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0026 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。每次进入战斗触发，oncePerBattle 按“每场战斗开始时一次”理解。"
+  },
+  {
+    "id": "wpn_sword_0026.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0026",
+      "name": "遥望"
+    },
+    "name": "遥望 · 憧憬·全队源石技艺强度",
+    "literal": "源石技艺强度+{v}",
+    "zone": "artsStrength",
+    "stat": "artsStrength",
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "team",
+    "applies": null,
+    "condition": {
+      "text": "当队伍进入战斗时，全队获得憧憬（持续20秒）",
+      "trigger": "battleStart",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": true,
+    "cooldown": null,
+    "evidence": {
+      "text": "当队伍进入战斗时，全队获得憧憬，造成的伤害+5.0%，源石技艺强度+10，防御力+3.0%，持续20秒；",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0026 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。与上一条为同一“憧憬”效果。 未录入：憧憬期间防御力+N%（防御）；憧憬结束时为全队回复生命值（治疗）。"
+  },
+  {
+    "id": "wpn_lance_0016.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0016",
+      "name": "黄金时代"
+    },
+    "name": "黄金时代 · 电磁伤害",
+    "literal": "电磁伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        6,
+        7.2,
+        8.4,
+        9.6,
+        10.8,
+        12,
+        13.2,
+        14.4,
+        16.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "electric"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "电磁伤害+6.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0016 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_lance_0016.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_lance_0016",
+      "name": "黄金时代"
+    },
+    "name": "黄金时代 · 连携技治疗队友后全队法术伤害",
+    "literal": "全队法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者通过连携技治疗小队内其他干员时",
+      "trigger": "comboHealOthers",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过连携技造成伤害时，治疗效率+4.0%，持续15秒；装备者通过连携技治疗小队内其他干员时，全队法术伤害+5.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_lance_0016 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。 未录入：连携技造成伤害时治疗效率+N%（治疗）。"
+  },
+  {
+    "id": "wpn_funnel_0019.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0019",
+      "name": "寒夜幽影"
+    },
+    "name": "寒夜幽影 · 法术伤害",
+    "literal": "法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "法术伤害+16.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0019 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0019.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0019",
+      "name": "寒夜幽影"
+    },
+    "name": "寒夜幽影 · 施放战技后源石技艺强度",
+    "literal": "源石技艺强度+{v}",
+    "zone": "artsStrength",
+    "stat": "artsStrength",
+    "value": {
+      "byRank": [
+        35,
+        42,
+        49,
+        56,
+        63,
+        70,
+        77,
+        84,
+        98
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "装备者施放战技后",
+      "trigger": "skillCast",
+      "mode": "segment"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者施放战技后，源石技艺强度+35，并获得4层身形如风，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0019 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "该效果无法叠加。同时获得4层“身形如风”（持续15秒，最多4层），供下一条消耗。计算触发技能本身时按段顺序生效；计算其他技能/时机的伤害时需用户勾选。"
+  },
+  {
+    "id": "wpn_funnel_0019.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0019",
+      "name": "寒夜幽影"
+    },
+    "name": "寒夜幽影 · 法术爆发消耗身形如风后法术伤害",
+    "literal": "法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        4,
+        4.8,
+        5.6,
+        6.4,
+        7.2,
+        8,
+        8.8,
+        9.6,
+        11.2
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者造成法术爆发时，消耗1层身形如风",
+      "trigger": "artsBurstWithWindStack",
+      "mode": "user"
+    },
+    "duration": 30,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "装备者造成法术爆发时，消耗1层身形如风，法术伤害+4.0%，持续30秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0019 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "该效果最多叠加4层，每层单独计算持续时间，每0.1秒最多触发一次；value 为每层数值。需持有身形如风层数（由施放战技获得，最多4层）。"
+  },
+  {
+    "id": "wpn_funnel_0020.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0020",
+      "name": "苦难的尽头"
+    },
+    "name": "苦难的尽头 · 源石技艺强度",
+    "literal": "源石技艺强度+{v}",
+    "zone": "artsStrength",
+    "stat": "artsStrength",
+    "value": {
+      "byRank": [
+        15,
+        18,
+        21,
+        24,
+        27,
+        30,
+        33,
+        36,
+        42
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "源石技艺强度+15。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0020 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_funnel_0020.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0020",
+      "name": "苦难的尽头"
+    },
+    "name": "苦难的尽头 · 法术爆发后自然伤害",
+    "literal": "自然伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        2,
+        2.4,
+        2.8,
+        3.2,
+        3.6,
+        4,
+        4.4,
+        4.8,
+        5.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "nature"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者造成法术爆发时",
+      "trigger": "artsBurst",
+      "mode": "user"
+    },
+    "duration": 25,
+    "stacking": "independent",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": 0.1,
+    "evidence": {
+      "text": "装备者造成法术爆发时，自然伤害+2.0%，持续25秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0020 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "该效果最多叠加4层，每层单独计算持续时间，每0.1秒最多触发一次；value 为每层数值。"
+  },
+  {
+    "id": "wpn_funnel_0020.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_funnel_0020",
+      "name": "苦难的尽头"
+    },
+    "name": "苦难的尽头 · 4层时额外自然伤害",
+    "literal": "自然伤害额外+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        6,
+        7.2,
+        8.4,
+        9.6,
+        10.8,
+        12,
+        13.2,
+        14.4,
+        16.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "nature"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "当上述效果为4层时",
+      "trigger": "artsBurstStacks4",
+      "mode": "user"
+    },
+    "duration": null,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "当上述效果为4层时，自然伤害额外+6.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_funnel_0020 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "该效果无法叠加。原文未写独立持续时间，随上一条层数维持（层数<4 时失效）。"
+  },
+  {
+    "id": "wpn_sword_0023.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0023",
+      "name": "点心时刻"
+    },
+    "name": "点心时刻 · 最大生命值",
+    "literal": "最大生命值+{v}%",
+    "zone": "ability",
+    "stat": "hpPct",
+    "value": {
+      "byRank": [
+        10,
+        12,
+        14,
+        16,
+        18,
+        20,
+        22,
+        24,
+        28
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "最大生命值+10.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0023 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "zone 表没有生命值项；schema 的 stat 枚举含 hpPct，暂归 ability/hpPct。另一种处理：视为生存属性不录（仅对按生命值计算伤害的干员有意义）。",
+    "uncertain": true
+  },
+  {
+    "id": "wpn_sword_0023.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0023",
+      "name": "点心时刻"
+    },
+    "name": "点心时刻 · 连携技治疗后受治疗者源石技艺强度",
+    "literal": "受到装备者治疗的干员源石技艺强度+{v}",
+    "zone": "artsStrength",
+    "stat": "artsStrength",
+    "value": {
+      "byRank": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "team",
+    "applies": null,
+    "condition": {
+      "text": "装备者通过自身连携技治疗后，受到装备者治疗的干员",
+      "trigger": "comboHeal",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过自身连携技治疗后，使受到装备者治疗的干员源石技艺强度+5，法术伤害+3.5%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0023 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。受益者原文为“受到装备者治疗的干员”，不一定是全队；暂写 team，引擎需按实际受治疗者过滤（也可能是 self 或单个队友）。",
+    "uncertain": true
+  },
+  {
+    "id": "wpn_sword_0023.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0023",
+      "name": "点心时刻"
+    },
+    "name": "点心时刻 · 连携技治疗后受治疗者法术伤害",
+    "literal": "受到装备者治疗的干员法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        3.5,
+        4.2,
+        4.9,
+        5.6,
+        6.3,
+        7,
+        7.7,
+        8.4,
+        9.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者通过自身连携技治疗后，受到装备者治疗的干员",
+      "trigger": "comboHeal",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过自身连携技治疗后，使受到装备者治疗的干员源石技艺强度+5，法术伤害+3.5%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0023 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加。受益者原文为“受到装备者治疗的干员”，暂写 team，同上。",
+    "uncertain": true
+  },
+  {
+    "id": "wpn_claym_0018.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0018",
+      "name": "玉中身"
+    },
+    "name": "玉中身 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        16,
+        19.2,
+        22.4,
+        25.6,
+        28.8,
+        32,
+        35.2,
+        38.4,
+        44.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+16.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0018 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_claym_0018.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0018",
+      "name": "玉中身"
+    },
+    "name": "玉中身 · 施加定身后目标受伤",
+    "literal": "使目标敌人受到的伤害+{v}%",
+    "zone": "vulnerable",
+    "stat": null,
+    "value": {
+      "byRank": [
+        7.5,
+        9,
+        10.5,
+        12,
+        13.5,
+        15,
+        16.5,
+        18,
+        21
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "target",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者对敌人施加定身时",
+      "trigger": "applyRoot",
+      "mode": "user"
+    },
+    "duration": 30,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者对敌人施加定身时，使目标敌人受到的伤害+7.5%，持续30秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0018 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。"
+  },
+  {
+    "id": "wpn_claym_0018.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0018",
+      "name": "玉中身"
+    },
+    "name": "玉中身 · 定身/终结技后下个连携技伤害",
+    "literal": "下个连携技造成的伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        25,
+        30,
+        35,
+        40,
+        45,
+        50,
+        55,
+        60,
+        70
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "combo"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者对敌人施加定身或施放终结技后，20秒内的下个连携技",
+      "trigger": "rootOrUltThenNextCombo",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者对敌人施加定身或施放终结技后，20秒内的下个连携技造成的伤害+25.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0018 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。duration 为等待窗口，下个连携技后消耗。"
+  },
+  {
+    "id": "wpn_claym_0019.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0019",
+      "name": "悠久传承"
+    },
+    "name": "悠久传承 · 主能力",
+    "literal": "主能力+{v}%",
+    "zone": "ability",
+    "stat": "main",
+    "value": {
+      "byRank": [
+        7,
+        8.4,
+        9.8,
+        11.2,
+        12.6,
+        14,
+        15.4,
+        16.8,
+        19.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "主能力+7.0%。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0019 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_claym_0019.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0019",
+      "name": "悠久传承"
+    },
+    "name": "悠久传承 · 战技施加寒冷/灼热附着后寒冷伤害",
+    "literal": "寒冷伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        6,
+        7.2,
+        8.4,
+        9.6,
+        10.8,
+        12,
+        13.2,
+        14.4,
+        16.8
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "cold"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "装备者通过战技施加寒冷附着或灼热附着时",
+      "trigger": "skillApplyColdOrHeatAttach",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者通过战技施加寒冷附着或灼热附着时，寒冷伤害+6.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0019 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。原文触发含灼热附着，但加成只写寒冷伤害，照录。"
+  },
+  {
+    "id": "wpn_claym_0019.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_claym_0019",
+      "name": "悠久传承"
+    },
+    "name": "悠久传承 · 对队友施加法术增幅后全队法术伤害",
+    "literal": "全队法术伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        4,
+        4.8,
+        5.6,
+        6.4,
+        7.2,
+        8,
+        8.8,
+        9.6,
+        11.2
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "team",
+    "applies": {
+      "elements": null,
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "arts"
+    },
+    "condition": {
+      "text": "装备者对小队内其他干员施加法术增幅后",
+      "trigger": "applyArtsAmpToOthers",
+      "mode": "user"
+    },
+    "duration": 20,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": true,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "装备者对小队内其他干员施加法术增幅后，全队法术伤害+4.0%，持续20秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_claym_0019 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "两种效果独立生效，且均无法叠加。效果是“法术伤害+”（增伤区），触发条件才是“增幅”。"
+  },
+  {
+    "id": "wpn_sword_0024.p1",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0024",
+      "name": "聚合工业"
+    },
+    "name": "聚合工业 · 攻击力",
+    "literal": "攻击力+{v}%",
+    "zone": "atkPct",
+    "stat": "atkPct",
+    "value": {
+      "byRank": [
+        7,
+        8.4,
+        9.8,
+        11.2,
+        12.6,
+        14,
+        15.4,
+        16.8,
+        19.6
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "常驻（无条件）",
+      "trigger": "always",
+      "mode": "auto"
+    },
+    "duration": null,
+    "stacking": null,
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+7.0%。 通过自身连携技施加电磁附着时，源石技艺强度+15，电磁伤害+8.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0024 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": null
+  },
+  {
+    "id": "wpn_sword_0024.p2",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0024",
+      "name": "聚合工业"
+    },
+    "name": "聚合工业 · 连携技施加电磁附着后源石技艺强度",
+    "literal": "源石技艺强度+{v}",
+    "zone": "artsStrength",
+    "stat": "artsStrength",
+    "value": {
+      "byRank": [
+        15,
+        18,
+        21,
+        24,
+        27,
+        30,
+        33,
+        36,
+        42
+      ]
+    },
+    "unit": "flat",
+    "beneficiary": "self",
+    "applies": null,
+    "condition": {
+      "text": "通过自身连携技施加电磁附着时",
+      "trigger": "comboApplyElectricAttach",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+7.0%。 通过自身连携技施加电磁附着时，源石技艺强度+15，电磁伤害+8.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0024 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加（与下一条为同一效果）。"
+  },
+  {
+    "id": "wpn_sword_0024.p3",
+    "owner": {
+      "kind": "weapon",
+      "id": "wpn_sword_0024",
+      "name": "聚合工业"
+    },
+    "name": "聚合工业 · 连携技施加电磁附着后电磁伤害",
+    "literal": "电磁伤害+{v}%",
+    "zone": "bonus",
+    "stat": null,
+    "value": {
+      "byRank": [
+        8,
+        9.6,
+        11.2,
+        12.8,
+        14.4,
+        16,
+        17.6,
+        19.2,
+        22.4
+      ]
+    },
+    "unit": "%",
+    "beneficiary": "self",
+    "applies": {
+      "elements": [
+        "electric"
+      ],
+      "kinds": [
+        "normal",
+        "skill",
+        "combo",
+        "ultimate",
+        "mech"
+      ],
+      "damageClass": "any"
+    },
+    "condition": {
+      "text": "通过自身连携技施加电磁附着时",
+      "trigger": "comboApplyElectricAttach",
+      "mode": "user"
+    },
+    "duration": 15,
+    "stacking": "none",
+    "exclusiveGroup": null,
+    "teamUnique": false,
+    "oncePerBattle": false,
+    "cooldown": null,
+    "evidence": {
+      "text": "攻击力+7.0%。 通过自身连携技施加电磁附着时，源石技艺强度+15，电磁伤害+8.0%，持续15秒。",
+      "category": "official",
+      "where": "dist/data/weapons.js wpn_sword_0024 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
+    },
+    "notes": "同名效果无法叠加（与上一条为同一效果）。"
+  }
+]
