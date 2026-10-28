@@ -9,3 +9,7 @@ export function calcSkill({stats,segments,rank,enemy,critMode,appliedFor,vars,op
   const results=segments.map(seg=>{ const applied=typeof appliedFor==='function'?appliedFor(seg):(appliedFor||[]); let s=seg; if(seg.kind==='mech'){ const ab=Math.max(1,Math.min(4,vars?.abnormal??1)); s={...seg,ratio:[seg.base*(seg.scale?1+ab:1)]}; } return calcSegment({stats,seg:s,rank,enemy,critMode,applied,vars,options}); });
   return {segments:results,total:results.reduce((a,r)=>a+r.damage,0)};
 }
+
+// 形态切换（目前只有诀：智识 ≥ 意志 → 阵诀·智 = 形态 0，否则阵诀·意 = 形态 1）。member.mode 为数字时手动指定，否则按面板自动判定。
+export function effectiveMode(op,member,stats){ const sk=op?.skills?.skill; if(!sk?.modeVariants) return undefined; if(typeof member?.mode==='number') return member.mode; const a=stats?.abilities||{}; return (a.int??0)>=(a.will??0)?0:1; }
+export const MODE_LABEL=['阵诀·智','阵诀·意'];
