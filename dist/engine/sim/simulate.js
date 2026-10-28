@@ -46,7 +46,7 @@ export function simulate(input){
   // ---------- resources ----------
   function gainSp(amount,why,kind='real'){ const before=S.sp.real+S.sp.poison; const room=T.spMax-before; const g=Math.max(0,Math.min(amount,room)); if(kind==='poison') S.sp.poison+=g; else S.sp.real+=g; if(g<amount) addLog('spOverflow',{why,wasted:round(amount-g)}); addLog('spGain',{why,amount:round(g),kind}); }
   function spendSp(cost,who){ const total=S.sp.real+S.sp.poison; if(total+EPS<cost) return null; let fromPoison=Math.min(S.sp.poison,cost); S.sp.poison-=fromPoison; let fromReal=cost-fromPoison; S.sp.real-=fromReal; addLog('spSpend',{who:who.op.name,cost,real:round(fromReal),poison:round(fromPoison)}); return {real:fromReal,poison:fromPoison}; }
-  function chargeEff(mb){ return 1+(mb.stats.chargeEff||0)/100; }
+  function chargeEff(mb){ return 1+((mb.stats.chargeEff||0)+(P.extraChargeEff?.[mb.idx]||0))/100; }
   function gainEnergy(mb,base,why,{affectedByEff=true,source}={}){ if(mb.mech?.energySources&&source&&!mb.mech.energySources.includes(source)){ addLog('energyBlocked',{who:mb.op.name,why,base}); return; } const g=base*(affectedByEff?chargeEff(mb):1); const before=mb.energy; mb.energy=Math.min(mb.energyMax,mb.energy+g); if(before+g>mb.energyMax+EPS) addLog('energyOverflow',{who:mb.op.name,wasted:round(before+g-mb.energyMax)}); addLog('energyGain',{who:mb.op.name,why,amount:round(mb.energy-before)}); }
   // ---------- buffs ----------
   function activeBuffsFor(mb,seg){ const out=[]; for(const b of S.buffs){ if(b.until<S.t-EPS) continue; const c=b.cand; if(b.beneficiaryIdx!=null&&b.beneficiaryIdx!==mb.idx) continue; if(c.effect.beneficiary==='others'&&b.ownerIdx===mb.idx) continue; if(!effectApplies(c.effect,seg)) continue; out.push({effect:c.effect,value:b.value,label:c.effect.name,ownerIdx:b.ownerIdx,mode:'sim'}); } return out; }
@@ -137,7 +137,7 @@ export function simulate(input){
   }
   const total=hits.reduce((a,h)=>a+h.damage,0); const duration=hits.length?Math.max(...hits.map(h=>h.t)):0;
   const perMember={}, perSkill={}; for(const h of hits){ perMember[h.name]=(perMember[h.name]||0)+h.damage; const k=`${h.name}·${h.skill}`; perSkill[k]=(perSkill[k]||0)+h.damage; }
-  return {simVersion:SIM_VERSION,events:log,hits,errors,samples,summary:{total,duration,dps:duration>0?total/duration:0,perMember,perSkill,ultsCast:log.filter(e=>e.type==='cast'&&e.kind==='ultimate').length,params:P},final:{t:round(S.t),sp:S.sp,energy:alive.map(m=>round(m.energy)),control:S.control,cooldowns:alive.map(m=>({name:m.op.name,combo:round(m.cd.combo),ultimate:round(m.cd.ultimate)}))}};
+  return {simVersion:SIM_VERSION,events:log,hits,errors,samples,summary:{total,duration,dps:duration>0?total/duration:0,perMember,perSkill,ultsCast:log.filter(e=>e.type==='cast'&&e.kind==='ultimate').length,params:P,energyMax:alive.map(m=>m.energyMax),chargeEff:alive.map(m=>round((m.stats.chargeEff||0)+(P.extraChargeEff?.[m.idx]||0)))},final:{t:round(S.t),sp:S.sp,energy:alive.map(m=>round(m.energy)),control:S.control,cooldowns:alive.map(m=>({name:m.op.name,combo:round(m.cd.combo),ultimate:round(m.cd.ultimate)}))}};
   function ultCost(op,m,data){ const base=op.skills.ultimate?.params?.energyCost?.[0]?.values?.[(m.skillRanks?.ultimate??12)-1]??100; const red=(data.effects||[]).filter(e=>e.owner?.id===op.id&&e.zone==='energyCost'&&(e.owner.potential==null||e.owner.potential<=(m.potential||0))).reduce((a,e)=>a+(valueOf(e,{})||0),0); return Math.round(base*(1+red/100)); }
 }
 const round=x=>Math.round(x*1000)/1000;

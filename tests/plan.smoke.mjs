@@ -1,0 +1,12 @@
+import operators from '../dist/data/operators.js'; import weapons from '../dist/data/weapons.js'; import gear from '../dist/data/gear.js'; import sets from '../dist/data/sets.js'; import effects from '../dist/data/effects.js'; import timing from '../dist/data/timing.js';
+import {autoPlan,chargeThreshold} from '../dist/engine/sim/plan.js';
+const data={operators,weapons,gear,sets,effects}; const op=n=>operators.find(o=>o.name===n); const G=n=>gear.find(g=>g.name===n).id;
+const bieli={operatorId:op('别礼').id,potential:0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},weapon:{id:weapons.find(w=>w.name==='赫拉芬格').id,potential:0,substrate:[6,6,3],ranks:[9,9,4]},gear:{armor:{id:G('涌浪重装甲'),refine:[3,3,3]},gloves:{id:G('潮涌手甲'),refine:[3,3,3]},kit1:{id:G('悬河供氧栓'),refine:[3,3,3]},kit2:{id:G('生物辅助护板'),refine:[3,3,3]}},consumables:[]};
+const tang={operatorId:op('汤汤').id,potential:0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},weapon:{id:null},gear:{},consumables:[]};
+const mechanics=[{operatorId:op('别礼').id,normal:{heavySpRefund:{value:30}},skill:{spCost:100,spRefund:{value:30,kind:'return'},energyGain:{self:16},attach:{element:'cold',layers:1,when:'heavy'}},combo:{trigger:{type:'attachLayers',element:'cold',min:3},cooldown:8,consumes:{element:'cold',all:true},energyGain:{self:{formula:'40+15*layers'}}},ultimate:{cooldown:20},energySources:['ownSkill','ownCombo']},
+ {operatorId:op('汤汤').id,normal:{heavySpRefund:{value:20}},skill:{spCost:100,attach:{element:'cold',layers:1}},combo:{trigger:{type:'attachApplied',element:'cold'},cooldown:12,attach:{element:'cold',layers:1},energyGain:{self:10}},ultimate:{cooldown:20}}];
+const enemy={defence:100,resistances:{physical:'D',cold:'D',heat:'D',electric:'D',nature:'D'},custom:{}};
+const input={team:[bieli,tang],data,mechanics,timing,enemy,mainControl:0,initial:{sp:200,energy:[0,0]}};
+console.time('plan'); const plan=autoPlan(input,{beam:6,step:1,horizon:45}); console.timeEnd('plan');
+console.log('best score',JSON.stringify(plan.best.score)); console.log('timeline',plan.best.timeline.map(a=>`${a.t}s m${a.member} ${a.kind}`).join(' | ')); console.log('rationale',plan.rationale); console.log('candidates',plan.candidates.map(c=>c.score.dps.toFixed(0)+' '+JSON.stringify(c.diff).slice(0,120)));
+console.time('threshold'); const th=chargeThreshold({...input,timeline:plan.best.timeline},[{member:0,t:20},{member:1,t:15}]); console.timeEnd('threshold'); console.log(JSON.stringify(th,null,0).slice(0,900));

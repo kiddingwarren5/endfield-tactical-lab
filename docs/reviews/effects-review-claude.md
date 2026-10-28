@@ -35,7 +35,12 @@
     - 2 项是 `condition.mode` 用错；
     - 2 项是异常专属倍率没有限定到异常段；
     - 17 项是 `applies.skills` 里填了分段 id，导致效果永远匹配不上。
-  - 未决 9 项，需要定规则，或需要引擎配合。
+  - 未决 9 项，需要定规则，或需要引擎配合。第二轮又解决了其中的 U1、U4（大部分）、U6、U8（部分）、U9（unit 部分），剩余未决见下表“状态”列。
+- 第二轮按 GPT 报告和协调方要求：
+  - 补录 6 条；
+  - 同类相食 1 条按属性拆成 4 条；
+  - 修改 75 条已有条目的结构字段：武器 maxStacks、等待窗口 window、倍数 unit "x"、食药 stacking "unknown" 等。
+  - 目录条数从 569 变为 **578**，uncertain 从 31 变为 35。
 - 另记录引擎侧发现 6 项（不在本次修改范围）。其中 E1、E2 直接影响这份目录能否发挥作用，建议优先处理。
 - 原文数值、归区、受益者、元素与技能类型筛选方面**没有发现错误**。录入质量很高，问题集中在“数据结构能不能被引擎正确消费”。
 
@@ -120,7 +125,16 @@
 - `node tests/stats.test.mjs`、`node tests/damage.test.mjs`、`node tests/resolve.test.mjs` 全部通过
 - 用 `valueOf` 实算 #1–#6，均得到预期数值
 
-## 未决问题清单（未改，需要定规则或做设计决定）
+## 未决问题清单（需要定规则或做设计决定）
+
+状态说明（第二轮后）：
+
+- **U1 已处理**：24 条都在 `value` 顶层补了 `maxStacks`（方案②的数据部分）。引擎的 byRank 分支仍然只按 1 层计算，还需要引擎和界面支持。
+- **U4 已处理**：3 条都改为 `unit:"x"`。
+- **U6 已处理**：来源分层，见 GPT-2。
+- **U8 部分处理**：已补录赛希潜能3、艾尔黛拉山顶冲浪；艾维文娜潜能2、昼雪潜能3、萤石潜能3 仍未录入。
+- **U9 部分处理**：倍数类 `other` 已统一 `unit:"x"`。
+- U2、U3、U5、U7 仍然未决。
 
 | # | 条目 | 问题 | 读法/方案 ① | 读法/方案 ② |
 |---|---|---|---|---|
@@ -151,6 +165,54 @@
 - 干员 34/34：天赋、潜能、技能中的增益、易伤、脆弱、增幅、倍率、资源效果覆盖完整，只有 U8 所列的少数多目标或排轴类效果缺失。
 - 套装 19/19、食药 25/25：完整。生物辅助装备组和两种回血食物只有治疗或减伤效果，正确地没有录入。
 
+## 对 GPT 报告逐条处理结果（第二轮）
+
+GPT 报告：docs/reviews/effects-review-gpt.md（抽样 182 条，只读）。它的数值结论（未发现抄错）与本报告一致。下表的“处理”是第二轮改动，均在 `814535b` 之上的工作区中。
+
+### 漏录
+
+| # | GPT 指出 | 处理 | 新增/修改条目 |
+|---|---|---|---|
+| GPT-M1 | 艾尔黛拉天赋“山顶冲浪”未录 | **已补录**。`other`，value=1（追加施放次数），user 条件为“战技消耗腐蚀后附近有其他腐蚀敌人；每次主动施放只触发一次” | 新增 chr_0025_ardelia.talent.mountainSurf |
+| GPT-M2 | 赛希潜能3“对周围1个其他目标弹射1次”未录 | **已补录**。写法与佩丽卡“循环协议”一致 | 新增 chr_0011_seraph.pot3.bounce |
+| GPT-M3 | 洛茜“沸血”燃烧时 ×1.5 只写在条件文字里 | **已补录为独立修饰条目**：`other`，1.5，`unit:"x"`，`modifies:[talent.boilingBlood]`；同时从沸血的条件文字中删去“燃烧时1.5倍”。满阶 24%→36%，潜能3 后 32%→48% | 新增 chr_0028_wulfa.talent.boilingBurn；修改 talent.boilingBlood 的条件文字和 notes |
+| GPT-M4 | 庄方宜潜能3“青霆剑存在时间+10秒”未录 | **已补录**。`other` 10 秒，auto，标注“仅排轴使用（36→46 秒）” | 新增 chr_0030_zhuangfy.pot3.swordDuration；修改 pot3.spRefund 的 notes |
+| GPT-M5 | 祀战技替换阶段费用（起墨15、收笔0）未结构化 | **已补录为两条说明性 `other` 条目** | 新增 chr_0036_jsspsi.skill.qimoCost(15)、skill.shoubiCost(0)；修改 skill.inkRecord 的 notes |
+| GPT-M6 | 祀“丹青不渝”30%加速未录 | **未改，列为未决**。原文没有说明“加速”是否只指移动速度，汤汤“肝胆相照”的加速也同样没有录入；建议在规则里统一定义“加速”后再决定 | — |
+| GPT-M7 | 别礼/伊冯/庄方宜技能 params 中的基础资源（返还技力、终结技能量）没有目录条目 | **不改**。schema 规定目录只录入“效果”，基础参数由 operators.js 的 params 提供，模拟器也直接读 params。建议在 schema 中写明这一分工 | — |
+
+### 结构化与问题表
+
+| # | GPT 指出 | 处理 | 涉及条目 |
+|---|---|---|---|
+| GPT-1 | 同类相食 `elements` 列出了全部法术属性，应按被消耗的属性生效 | **已拆条**。按 燃烧/导电/冻结/腐蚀 拆成 4 条，每条只含一个元素、各自 25 秒冷却；原 `wpn_pistol_0009.p2` 删除（全仓库检索过，没有代码引用该 id） | 新增 wpn_pistol_0009.p2.heat / .electric / .cold / .nature |
+| GPT-2 | 别礼低温脆性被扩展到法术脆弱，超出官方原文 | **来源分层**。`evidence.text` 保留官方原文（只写寒冷脆弱）；`evidence.category` 改为 `"official+user"`；notes 中单独写用户实测扩展，并说明该扩展由 build_effects 在构建时写入 `fragileMultiplier`；条件文字保留官方措辞；unit 改为 `"x"`。没有改动 build_effects | chr_0026_lastrite.talent.brittle |
+| GPT-3 | 倍数类 `other` 的 unit 写成 `%` 或 `flat`，量纲不一致 | **统一为 `unit:"x"`**。资源类的倍数条目同时处理（本报告 U4） | 低温脆性、佩丽卡 pot4.conductMul、弧光 pot3.wandererMul、安塔尔 pot1.ampMul、赛希 pot5.ampMul、梨诺 pot5.ampMul、噗切娜 pot1.giftChance / pot5.fragileMul、祀 pot3.ampMul、诀 talent2.corrosion、骏卫 pot5.comboSp、卡缪 pot3.spMul；新增的 boilingBurn 也用 x |
+| GPT-4 | 每层单独计时的武器效果，叠层上限没有结构化 | **在 `value` 顶层补 `maxStacks`**，覆盖 GPT 点名的 7 条和其余 17 条，共 24 条；最大层数逐条从原文正则抽取。引擎的 byRank 分支目前忽略这个字段，计算结果不变，需要引擎配合（见 U1） | 见 U1 列表 |
+| GPT-5 | 等待窗口与生效持续时间混用 | **新增 `window` 字段（秒）**，`duration` 改为 null，表示“只在下一次该技能期间生效，结束后消耗”，notes 同步改写。注意：模拟器 simulate.js 在 duration 为 null 时默认按 15 秒计，需要模拟器改读 `window` | wpn_sword_0015.p2(30)、wpn_sword_0021_ink.p2(20)、wpn_lance_0006.p2(30)、wpn_sword_0017.p2(30)、wpn_claym_0018.p3(20) |
+| GPT-6 | “X期间造成的伤害”被限制为技能 kinds，依据不足 | **标记 `uncertain:true`**。两种读法已在 notes 中：①只算该技能的伤害；②该技能持续期间内的全部伤害 | 上表除 claym_0018.p3 以外的 4 条 |
+| GPT-7 | 伊冯满层暴伤的 `duration=7` 起点不清 | **已修**：duration 改为 null，notes 写明“满层后生效，至本次终结技结束时失效，不从满层时重新计 7 秒” | chr_0017_yvonne.ult.critDmg |
+| GPT-8 | 伊冯“此次重击”、别礼潜能1 低温灌注重击只靠文字约束 | **未改，列为未决**。现有段数据只有普攻第1–N段，没有“重击”段可以筛选；需要先在 operators.js 中标出重击段（或者由模拟器按事件处理），再补 `applies.segments` 和单次消耗字段 | chr_0017_yvonne.talent1.heavyBonus、chr_0026_lastrite.pot1.heavyExtra / heavyPoise |
+| GPT-9 | 伊冯“每次普通攻击”叠暴击率，应按击数叠加 | **未改**。数据已表达为每层 3%、最多 10 层（第一轮已修好 NaN），按击数叠加属于模拟器的事件逻辑；手动计算时用层数选择器 | chr_0017_yvonne.ult.critRate |
+| GPT-10 | 冷却“恢复速度×4”的量纲不明 | **已修**：仍用 `zone:"cdr"`，unit 改为 `"x"` | chr_0030_zhuangfy.ult.comboCdSpeed |
+| GPT-11 | 食药 `stacking:"none"` 没有原文依据 | **已修**：32 条全部改为 `"unknown"`，保留 notes 中的“待规则确认”。注意：界面 buff 卡片会把 stacking 原样显示为 “· unknown” | 全部 item_*.p* |
+| GPT-12 | 十二问等条目的 `stat:"sub"` 不在 schema 枚举中 | **不改数据**。stats.js 已支持 sub（按副能力处理），建议在 docs/effect-schema.md 的 stat 枚举中补上 `sub`。本次按要求不改 schema | wpn_sword_0018.p1、wpn_sword_0019.p1、wpn_claym_0012.p1、wpn_claym_0015.p1、wpn_funnel_0013.p1、wpn_funnel_0008.p1 |
+
+### 第二轮修改清单与验证
+
+| 文件 | 新增 | 修改 | 删除 |
+|---|---|---|---|
+| effects-weapons.json | 4（同类相食拆条） | 26（24 条 maxStacks；5 条 window，其中 3 条与 maxStacks 重叠；4 条 uncertain） | 1（wpn_pistol_0009.p2） |
+| effects-operators-A.json | 2（mountainSurf、boilingBurn） | 5（boilingBlood、brittle 及 3 条 unit） | 0 |
+| effects-operators-B.json | 4（seraph.pot3.bounce、zhuangfy.pot3.swordDuration、jsspsi.skill.qimoCost / shoubiCost） | 12（unit "x" 9 条，含 zhuangfy.ult.comboCdSpeed；yvonne.ult.critDmg；notes 更新 2 条：zhuangfy.pot3.spRefund、jsspsi.skill.inkRecord） | 0 |
+| effects-consumables.json | 0 | 32（stacking unknown） | 0 |
+
+验证：
+
+- `node tools/build_effects.mjs` 输出 `effects 578 uncertain 35 problems 0`
+- stats、damage、resolve 三项测试通过；`tests/sim.smoke.mjs` 可以运行，输出中“别礼终结技能量不足”属于模拟排轴提示，与本次修改的条目无关
+- 新增与拆分的条目已用 `valueOf` 实算：同类相食·冻结 R4=16，沸血燃烧倍率=1.5，钢铁余音 p2 R4=12（maxStacks 没有改变单层值）
+
 ## 总体结论
 
 这份效果目录**忠实于官方原文**：569 条的数值、归区、受益者、元素与技能类型筛选，没有发现与原文不符的地方，31 条 uncertain 的两种读法也都写清楚了。
@@ -162,8 +224,11 @@
 - B 文件 19 条把分段 id 写进 `skills`，导致永远匹配不上；
 - 若干条模式或筛选范围有误。
 
+第二轮处理 GPT 报告后，补齐了 6 处明确漏录，并把等待窗口、叠层上限、倍数量纲、食药叠加规则、同类相食的属性范围、低温脆性的来源分层都写进了结构化字段，目录现为 578 条。
+
 建议维护者接下来按以下顺序处理：
 
 1. 引擎 E1（segments 筛选，1 行代码）和 E2（条件 stat buff 进面板）；
-2. 决定 U1（武器层数）、U2（“翻倍”条件）、U3（多属性 dependsOn）；
-3. 在 build_effects 中加入 E6 的结构校验。
+2. 引擎、界面、模拟器改读新字段：武器 `value.maxStacks`、`window`、`unit:"x"`；
+3. 决定 U2（“翻倍”条件）、U3（多属性 dependsOn）、GPT-8（重击段）、GPT-M6（“加速”的定义）；
+4. 在 build_effects 中加入 E6 的结构校验，并在 schema 中补上 `sub`、`window`、`unknown`、`x`。
