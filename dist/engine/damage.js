@@ -39,7 +39,8 @@ export function calcSegment({stats,seg,rank=12,enemy,critMode='never',applied=[]
   if(seg.per==='unit'){ const n=vars.layers??vars.units??0; ratioTrace.push({label:`×${n} 层`,value:n}); ratio=ratio*n; }
   for(const m of mods.ratioAdd){ ratio+=m.value; ratioTrace.push({label:m.label,value:'+'+m.value}); }
   for(const m of mods.ratioMul){ ratio*=m.value; ratioTrace.push({label:m.label,value:'×'+m.value}); }
-  const crit=critMode==='never'?1:critMode==='always'?1+stats.critDmg/100:1+(clamp(stats.critRate,0,100)/100)*(stats.critDmg/100);
+  // noCrit: burn DoT cannot crit (rules A5)
+  const crit=critMode==='never'||seg.noCrit?1:critMode==='always'?1+stats.critDmg/100:1+(clamp(stats.critRate,0,100)/100)*(stats.critDmg/100);
   const def=clamp(enemy?.defence??100,0,99999); const grade=enemy?.resistances?.[seg.element]??'D';
   const resistance=grade==='custom'?clamp(enemy?.custom?.[seg.element]??0,-100,100):(GRADE_RESISTANCE[grade]??0);
   const mech=seg.kind==='mech'; // 机制伤害：等级系数与技艺强度，沿用 demo（rules A5/A6 待核）
