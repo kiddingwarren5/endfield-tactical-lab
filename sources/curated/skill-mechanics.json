@@ -3444,7 +3444,19 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "定身+持续伤害；主控在图形中下落攻击可提前降下巨浪（ultimate3 替代 ultimate2）"
+   "notes": "定身+持续伤害；主控在图形中下落攻击可提前降下巨浪（ultimate3 替代 ultimate2）",
+   "plungeDuringUlt": {
+    "attach": {
+     "element": "cold",
+     "layers": 1
+    },
+    "tornadoBonus": 0.6,
+    "tornadoSegment": "skill2",
+    "delayedSegment": "ultimate2",
+    "earlyWaveSegment": "ultimate3",
+    "origin": "official",
+    "note": "天赋呼风唤浪·二：主控在古老图形中下落攻击，提前结束演化形成水龙卷（效果同战技，伤害+60%）并降下巨浪（ultimate3）"
+   }
   },
   "modes": null
  },

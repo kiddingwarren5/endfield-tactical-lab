@@ -5,8 +5,8 @@ import {autoPlan,chargeThreshold,greedySchedule} from '../engine/sim/plan.js';
 import {h,fmt,fmt1,pct,ELEMENT_CN,KIND_CN,colorOf,select,panel,field,download} from './ui.js';
 const data={operators,weapons,gear,sets,consumables,effects};
 const clone=x=>JSON.parse(JSON.stringify(x));
-const KIND_LABEL={skill:'战技',combo:'连携技',ultimate:'终结技',switch:'切主控'};
-const KIND_COLOR={skill:'#bd9b43',combo:'#3288c4',ultimate:'#d9573d',switch:'#68716c',normal:'#c9cfc8'};
+const KIND_LABEL={skill:'战技',combo:'连携技',ultimate:'终结技',plunge:'下落攻击',switch:'切主控'};
+const KIND_COLOR={skill:'#bd9b43',combo:'#3288c4',ultimate:'#d9573d',plunge:'#68716c',switch:'#68716c',normal:'#c9cfc8'};
 
 export function defaultSim(){ return {timeline:[],duration:40,initialSp:200,initialEnergy:[0,0,0,0],damageFactor:0.75,rhythmFactor:0.8,inspectT:0,showNormals:true,plan:{beam:8,step:1,horizon:45,result:null},deadlines:[],thresholds:null}; }
 

@@ -13,9 +13,7 @@ export function cycleOf(sim,memberIdxs){ const names=sim.summary.names||[], idxs
 // objective 'guaranteed'：只计主控普攻 + 全员技能（不计副控自动普攻），与页面“保底”口径一致
 export function scoreOf(sim,memberIdxs,horizon,objective,mainControl){ const cyc=cycleOf(sim,memberIdxs); const until=cyc.complete?cyc.end:horizon; const keep=h=>objective==='total'||!(h.kind==='normal'&&h.member!==mainControl); const dmg=sim.hits.filter(h=>h.t<=until&&keep(h)).reduce((a,h)=>a+h.damage,0); let dps=dmg/Math.max(1,until);
   // 'burst'：要求全员首次终结技集中释放（首尾间隔 ≤ 12 s，含演出），分散则按比例折扣 —— 对应玩家“攒满后四连开”的打法
-  if(objective==='burst'&&cyc.complete){ const ts=Object.values(cyc.castByMember); const spread=Math.max(...ts)-Math.min(...ts); const W=12; if(spread>W) dps*=W/spread;
-    // 主控（主C）的终结技收尾：辅助先上增幅/脆弱，主C最后放；主C不是最后则折扣
-    const mcT=cyc.castByMember[mainControl]; if(mcT!=null&&ts.some(t=>t>mcT+1e-6)) dps*=0.7; }
+  if(objective==='burst'&&cyc.complete){ const ts=Object.values(cyc.castByMember); const spread=Math.max(...ts)-Math.min(...ts); const W=12; if(spread>W) dps*=W/spread; }
   return {dps:cyc.complete?dps:dps*0.5,total:dmg,until,complete:cyc.complete,cycle:cyc}; }
 
 function feasibleActions(sim,members,t,mechanicsById){ // from the simulation state near t (samples + events)
@@ -73,15 +71,15 @@ export function evalSequence(input,seq,{horizon=70,objective='guaranteed'}={}){
 }
 // 模拟退火（顺序空间）：状态 = 动作顺序；邻域 = 交换 / 移动 / 删除 / 插入 / 改类型；目标 = 周期内保底每秒伤害；跳过的步骤按 0.9^n 折算。
 export function annealSequence(input,seq0,{horizon=70,objective='guaranteed',budgetMs=8000,maxEvals=1200,onProgress,seed=1}={}){
-  const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const kinds=['skill','combo','ultimate'];
+  const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const kinds=['skill','combo','ultimate']; const mcIdx=input.mainControl??0; const actsAll=[]; for(const m of memberIdxs){ for(const k of kinds) actsAll.push({member:m,kind:k}); if(m===mcIdx) actsAll.push({member:m,kind:'plunge'}); }
   let rs=(seed>>>0)||1; const rnd=()=>{ rs^=rs<<13; rs>>>=0; rs^=rs>>>17; rs^=rs<<5; rs>>>=0; return rs/4294967296; }; const pick=arr=>arr[Math.floor(rnd()*arr.length)];
   const ev=seq=>evalSequence(input,seq,{horizon,objective});
   let cur=seq0.map(a=>({member:a.member,kind:a.kind})); let curE=ev(cur); let best=cur, bestE=curE; const t0=Date.now(); let evals=1, accepted=0; const T0=0.05, T1=0.002;
-  const neighbor=seq=>{ const r=rnd(); const s2=[...seq]; const n=s2.length; if(!n||r<0.15){ s2.splice(Math.floor(rnd()*(n+1)),0,{member:pick(memberIdxs),kind:pick(kinds)}); return s2; }
+  const neighbor=seq=>{ const r=rnd(); const s2=[...seq]; const n=s2.length; if(!n||r<0.15){ s2.splice(Math.floor(rnd()*(n+1)),0,{...pick(actsAll)}); return s2; }
     const i=Math.floor(rnd()*n); if(r<0.45){ const j=Math.floor(rnd()*n); [s2[i],s2[j]]=[s2[j],s2[i]]; return s2; }
     if(r<0.7){ const [a]=s2.splice(i,1); s2.splice(Math.floor(rnd()*(s2.length+1)),0,a); return s2; }
     if(r<0.85){ s2.splice(i,1); return s2; }
-    s2[i]={...s2[i],kind:pick(kinds)}; return s2; };
+    { const a=pick(actsAll); s2[i]={member:a.member,kind:a.kind}; } return s2; };
   while(evals<maxEvals&&Date.now()-t0<budgetMs){ const frac=Math.max(evals/maxEvals,(Date.now()-t0)/budgetMs); const temp=T0*Math.pow(T1/T0,frac);
     const cand=neighbor(cur); const e=ev(cand); evals++; const rel=(e.score-curE.score)/Math.max(1,curE.score);
     if(rel>=0||rnd()<Math.exp(rel/temp)){ cur=cand; curE=e; accepted++; if(e.score>bestE.score){ best=cand; bestE=e; } }
@@ -93,10 +91,10 @@ export function annealSequence(input,seq0,{horizon=70,objective='guaranteed',bud
 // 评价 = evalSequence（模拟器，最早可行解码）；回传均值，UCT 探索项按当前最优分归一化。记录全程最优 rollout。
 export function mctsSequence(input,{horizon=70,objective='guaranteed',budgetMs=8000,maxIters=800,maxLen=36,c=0.7,seedSeq=null,onProgress,seed=7}={}){
   const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const kinds=['skill','combo','ultimate'];
-  const acts=[]; for(const m of memberIdxs) for(const k of kinds) acts.push({member:m,kind:k}); const STOP='stop';
+  const mcIdx=input.mainControl??0; const acts=[]; for(const m of memberIdxs){ for(const k of kinds) acts.push({member:m,kind:k}); if(m===mcIdx) acts.push({member:m,kind:'plunge'}); } const STOP='stop';
   let rs=(seed>>>0)||1; const rnd=()=>{ rs^=rs<<13; rs>>>=0; rs^=rs>>>17; rs^=rs<<5; rs>>>=0; return rs/4294967296; };
   const shuffled=arr=>{ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(rnd()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
-  const randAct=()=>{ const r=rnd(); const kind=r<0.42?'skill':r<0.84?'combo':'ultimate'; return {member:memberIdxs[Math.floor(rnd()*memberIdxs.length)],kind}; };
+  const randAct=()=>{ const r=rnd(); if(r<0.08) return {member:mcIdx,kind:'plunge'}; const kind=r<0.46?'skill':r<0.85?'combo':'ultimate'; return {member:memberIdxs[Math.floor(rnd()*memberIdxs.length)],kind}; };
   const ev=seq=>evalSequence(input,seq,{horizon,objective});
   const mk=seq=>({seq,n:0,w:0,children:new Map(),untried:shuffled([...acts,STOP]),terminal:false});
   const root=mk([]); let best=null, bestScore=-Infinity, iters=0; const t0=Date.now();

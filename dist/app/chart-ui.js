@@ -10,8 +10,8 @@ import {newMember} from './state.js';
 const data={operators,weapons,gear,sets,effects};
 const ENEMY={defence:100,resistances:{physical:'D',cold:'D',heat:'D',electric:'D',nature:'D'},custom:{}}; // 对照靶默认值；页面可改
 const GRADE={D:0,C:20,B:50};
-const KIND_LABEL={skill:'战技',combo:'连携技',ultimate:'终结技'};
-const KIND_COLOR={skill:'#bd9b43',combo:'#3288c4',ultimate:'#d9573d'};
+const KIND_LABEL={skill:'战技',combo:'连携技',ultimate:'终结技',plunge:'下落攻击',switch:'切主控'};
+const KIND_COLOR={skill:'#bd9b43',combo:'#3288c4',ultimate:'#d9573d',plunge:'#68716c',switch:'#68716c'};
 const CIRCLED='①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳㉑㉒㉓㉔㉕㉖㉗㉘㉙㉚㉛㉜㉝㉞㉟㊱㊲㊳㊴㊵㊶㊷㊸㊹㊺㊻㊼㊽㊾㊿';
 const clone=x=>JSON.parse(JSON.stringify(x));
 // ---- 后台计算：Worker 可用时在 Worker 里跑（页面不冻结，显示进度），否则退回主线程同步计算 ----

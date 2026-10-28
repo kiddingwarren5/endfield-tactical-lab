@@ -9,7 +9,7 @@ export function sumHits(sim,{mainControl,until=Infinity,guaranteed=false}={}){ r
 export function buildTeam(preset,data){
   return preset.team.members.map(m=>{ const op=byName(data.operators,m.op), w=byName(data.weapons,m.weapon); const g=m.gear.map(n=>byName(data.gear,n));
     if(!op||!w||g.some(x=>!x)) throw new Error(`预设编队缺少数据：${m.op}/${m.weapon}/${m.gear.join(',')}`);
-    return {operatorId:op.id,potential:m.potential||0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},mode:m.mode||0,weapon:{id:w.id,potential:0,substrate:[6,6,3],ranks:[9,9,4]},gear:{armor:{id:g[0].id,refine:[3,3,3]},gloves:{id:g[1].id,refine:[3,3,3]},kit1:{id:g[2].id,refine:[3,3,3]},kit2:{id:g[3].id,refine:[3,3,3]}},consumables:[],buffs:{}}; });
+    return {operatorId:op.id,potential:m.potential||0,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},mode:m.mode??'auto',weapon:{id:w.id,potential:0,substrate:[6,6,3],ranks:[9,9,4]},gear:{armor:{id:g[0].id,refine:[3,3,3]},gloves:{id:g[1].id,refine:[3,3,3]},kit1:{id:g[2].id,refine:[3,3,3]},kit2:{id:g[3].id,refine:[3,3,3]}},consumables:[],buffs:{}}; });
 }
 // teamOverride：用玩家自己的编队/配装跑预设轴（按干员名对应步骤；主控沿用玩家设置）。
 export function presetInput(preset,{data,mechanics,timing,enemy,params={}},scenario,teamOverride){
@@ -45,7 +45,7 @@ function stateAfter(sim,a,who){
 }
 // 文字轴：给人读的一行一步。
 export function rotationText(preset,res){
-  const KIND={skill:'战技',combo:'连携技',ultimate:'终结技'};
+  const KIND={skill:'战技',combo:'连携技',ultimate:'终结技',plunge:'下落攻击',switch:'切主控'};
   return res.timeline.map((a,i)=>{ const s=res.steps[a.step]; const st=res.states[i]; return `${a.t.toFixed(1)}s ${res.names[a.member]} ${KIND[a.kind]}${s.stage?'「'+s.stage+'」':''}${s.wait?`（寒冷 ${s.wait} 层后）`:''} — ${s.why}${st.consumed?`（消耗 ${st.consumed} 层）`:''}`; }).join('\n');
 }
 
@@ -57,7 +57,7 @@ const ABN_CN={burn:'燃烧',conduct:'导电',freeze:'冻结',corrosion:'腐蚀'}
 export function explainStep(sim,a,who){
   const near=e=>e.t>=a.t-1e-6&&e.t<=a.t+1.0+1e-6; const parts=[]; const cast=sim.events.find(e=>e.type==='cast'&&Math.abs(e.t-a.t)<2e-3&&e.who===who);
   if(cast?.cost!=null) parts.push(`消耗 ${cast.cost} 技力`);
-  for(const e of sim.events){ if(!near(e)) continue; if(e.type==='attach'&&e.by===who) parts.push(`施加${EL_CN[e.element]||e.element}附着 → ${e.layers} 层`); if(e.type==='consume'&&Math.abs(e.t-a.t)<2e-3&&a.kind==='combo') parts.push(`消耗 ${e.layers} 层${EL_CN[e.element]||''}附着`); if(e.type==='abnormal'&&e.by===who) parts.push(`触发${ABN_CN[e.which]||e.which} ${e.level} 级`); if(e.type==='buffStart'&&e.owner===who&&e.name) parts.push(`上「${e.name}」${e.value>0?'+'+e.value+'%':''}`); if(e.type==='cdr'&&e.by===who&&e.who) parts.push(`${e.who} 连携冷却 ${e.before}→${e.after}s`); if(e.type==='energyGain'&&e.who===who&&/连携回能|自身回能/.test(e.why)) parts.push(`自身 +${Math.round(e.amount)} 能量`); if(e.type==='spGain'&&/返还|恢复/.test(e.why)&&e.why.startsWith(who)) parts.push(`返还 ${Math.round(e.amount)} 技力`); }
+  for(const e of sim.events){ if(!near(e)) continue; if(e.type==='earlyWave'&&e.by===who) parts.push(`提前引爆${e.who}的巨浪`); if(e.type==='attach'&&e.by===who) parts.push(`施加${EL_CN[e.element]||e.element}附着 → ${e.layers} 层`); if(e.type==='consume'&&Math.abs(e.t-a.t)<2e-3&&a.kind==='combo') parts.push(`消耗 ${e.layers} 层${EL_CN[e.element]||''}附着`); if(e.type==='abnormal'&&e.by===who) parts.push(`触发${ABN_CN[e.which]||e.which} ${e.level} 级`); if(e.type==='buffStart'&&e.owner===who&&e.name) parts.push(`上「${e.name}」${e.value>0?'+'+e.value+'%':''}`); if(e.type==='cdr'&&e.by===who&&e.who) parts.push(`${e.who} 连携冷却 ${e.before}→${e.after}s`); if(e.type==='energyGain'&&e.who===who&&/连携回能|自身回能/.test(e.why)) parts.push(`自身 +${Math.round(e.amount)} 能量`); if(e.type==='spGain'&&/返还|恢复/.test(e.why)&&e.why.startsWith(who)) parts.push(`返还 ${Math.round(e.amount)} 技力`); }
   const uniq=[...new Set(parts)]; return uniq.slice(0,5).join('；')||'（事件日志中无额外效果）';
 }
 // 自动轴分节：终结技簇（相邻终结技间隔 ≤ 8 s）开始时起新节（爆发），簇结束后第一个相隔 ≥ 3 s 的动作再起新节（充能）。
