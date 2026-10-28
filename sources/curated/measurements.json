@@ -1,0 +1,14 @@
+{
+  "_doc": "实机测量录入表（docs/verification-needed.md 的落地文件）。填写后运行 node tools/build_measurements.mjs，timing.js 与规则引用将优先使用这里的实测值。每项必须附录屏/截图路径与日期，否则保持 null。",
+  "nonControl": {
+    "damageFactor": {"value": null, "range": [0.5, 1.0], "method": "同一干员同木桩：主控 30 s 普攻各段跳字 vs 非主控 30 s；取同段中位数比值", "evidence": null, "date": null},
+    "rhythmFactor": {"value": null, "range": [0.6, 1.0], "measuredByLog": {"诀": 0.98, "别礼": "极低（38 s 内 1 次重击）"}, "method": "每分钟完整攻击串次数 非主控/主控", "evidence": "docs/cases/README.md 末节（zmdlogs）", "date": "2026-10-28"}
+  },
+  "ultimatePausesTimers": {"value": null, "logEvidence": "增益时长 12→14.79 s、15→19.8 s（案例 01）", "method": "开终结技前后记录技力与某增益剩余时间", "evidence": null},
+  "comboWindowSeconds": {"value": null, "assumed": 5},
+  "attachDurationSeconds": {"value": null, "assumed": 20},
+  "foodFlatMode": {"value": null, "options": ["after", "inside"], "method": "同配装吃清炖兽排参须汤前后面板攻击截图", "evidence": null},
+  "heavySpRefund": {"_doc": "未在研究表中的干员：祀/汤汤/诀/梨诺/弭弗/庄方宜/提弗洛斯/卡缪/噗切娜", "values": {}},
+  "normalSegmentSeconds": {"_doc": "按武器类型或干员覆盖 timing.js 默认表，单位秒", "byOperator": {}},
+  "lastriteBrittleAppliesToSpellFragile": {"value": null, "assumed": true, "method": "仅汤汤法术脆弱存在时对比终结技第一段跳字"}
+}

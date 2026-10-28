@@ -30,3 +30,6 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 - 官方数据为准；两源交叉核对；官方笔误采用解包值并记录在 sources/curated/official-corrections.json。
 - 规则与计算代码的变更需独立 subagent / GPT 审核，记录在 docs/reviews/。
 - 未实际执行的验证不得声称完成；假设用 origin/evidence.category 标注。
+
+## 实机测量回填
+把游戏内测得的数值填入 sources/curated/measurements.json（每项附录屏/截图与日期），运行 `node tools/build_measurements.mjs`，再重新发布 dist/。空值不会覆盖默认假设；docs/verification-needed.md 列出每项的测试方法。明河/唤月数据公开后：`node tools/scrape_skland.mjs && node tools/parse_skland.mjs sources/raw/skland sources/skland && node tools/build_data.mjs` 即可接入（明河占位项会自动替换为正式数据）。
