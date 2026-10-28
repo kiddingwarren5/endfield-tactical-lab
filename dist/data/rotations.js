@@ -1,13 +1,15 @@
 // 预设排轴（一图流）。动作顺序来自社区共识案例（docs/cases 06/07：“三充一爆”、每节凑 4 层再让别礼连携吃）与规则推导；
 // 具体时刻不在此写死：界面与 tests/rotations.test.mjs 用 greedySchedule 把顺序轴放到模拟器里最早可行的时刻，保证每一步可执行。
 // 字段：m 干员名；k skill/combo/ultimate；stage 战技替换阶段名（仅说明）；wait 等到寒冷附着达到的层数；seg 节序号；why 这一步的目的。
+import {DEFAULT_BUILDS} from './builds.js';
+const B=n=>({weapon:DEFAULT_BUILDS[n].weapon,gear:DEFAULT_BUILDS[n].gear});
 const COLD_TEAM={
   // 编队顺序 = 01–04 号位（祀终结技“01 号位连携冷却 −20s”作用于 01 号位）。
   members:[
-    {op:'诀',weapon:'作品：蚀迹',gear:['长息装甲','壤流护手','长息辅助臂','长息加固板'],potential:0}, // 意志配装（意志 775 > 智识 376 → 阵诀·意；终结技脆弱按 640 意志封顶 12.8%）
-    {op:'别礼',weapon:'赫拉芬格',gear:['涌浪重装甲','潮涌手甲','悬河供氧栓','生物辅助护板'],potential:0},
-    {op:'汤汤',weapon:'落草',gear:['涌浪重装甲','潮涌手甲','悬河供氧栓','悬河供氧栓'],potential:0},
-    {op:'祀',weapon:'玉中身',gear:['长息改装护甲','长息导能护手','长息测距仪','长息重护板'],potential:3}
+    {op:'诀',...B('诀'),potential:0}, // 意志配装（意志 775 > 智识 376 → 阵诀·意；终结技脆弱按 640 意志封顶 12.8%）
+    {op:'别礼',...B('别礼'),potential:0},
+    {op:'汤汤',...B('汤汤'),potential:0},
+    {op:'祀',...B('祀'),potential:3}
   ],
   mainControl:'别礼',
   initial:{sp:200,energy:[0,0,0,0]}
