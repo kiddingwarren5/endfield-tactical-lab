@@ -71,7 +71,7 @@ function finish(input,ctx,timeline,scenario,plan,modeNote){
   const tl=timeline.map((a,i)=>({t:a.t,member:a.member,kind:a.kind,step:i})); const states=tl.map(a=>stateAfter(main,a,names[a.member]));
   return {input,names,steps,timeline:tl,notes:[],skipped:[],main,lo,hi,cycle,end,duration,states,scenario,auto:true,plan,modeNote};
 }
-export function autoRotation(team,mainControl,ctx,scenario,{beam=6,step=1,horizon=60,onProgress,annealMs=6000,annealEvals=1200,mctsMs=6000,mctsIters=800}={}){
+export function autoRotation(team,mainControl,ctx,scenario,{beam=6,step=1,horizon=60,onProgress,annealMs=6000,annealEvals=1200,mctsMs=6000,mctsIters=800,objective='guaranteed'}={}){
   const {data}=ctx; const base={team,data,mechanics:ctx.mechanics,timing:ctx.timing,enemy:{...ctx.enemy,...(scenario?.enemy||{})},mainControl,initial:scenario?.initial||{sp:200,energy:[0,0,0,0]},params:{}};
   base.names=team.map(m=>m?data.operators.find(o=>o.id===m.operatorId)?.name:null);
   // 形态枚举：有 modeVariants 的干员（诀）在“自动”时分别按形态 0/1 搜索，取保底每秒伤害更高者
@@ -79,10 +79,10 @@ export function autoRotation(team,mainControl,ctx,scenario,{beam=6,step=1,horizo
   const combos=modeSlots.length?modeSlots.reduce((acc,i)=>acc.flatMap(c=>[0,1].map(v=>({...c,[i]:v}))),[{}]):[{}];
   const results=combos.map((modes,ci)=>{ const t2=team.map((m,i)=>m&&modes[i]!=null?{...m,mode:modes[i]}:m); const input={...base,team:t2}; const prog=f=>onProgress&&onProgress((ci+f)/combos.length);
     // 流水线：束搜索（热启动）→ 两条独立路线：A = 模拟退火(束解)；B = MCTS → 模拟退火(MCTS 最优)；取保底每秒更高者
-    const plan=autoPlan(input,{beam,step,horizon,onProgress:f=>prog(f*0.2)}); const seq0=[...plan.best.timeline].sort((a,b)=>a.t-b.t); const H=Math.max(horizon,Math.ceil((plan.best.score.until||horizon)+10));
-    const sa=annealSequence(input,seq0,{horizon:H,budgetMs:annealMs,maxEvals:annealEvals,onProgress:f=>prog(0.2+f*0.3),seed:1});
-    const mc=mctsSequence(input,{horizon:H,budgetMs:mctsMs,maxIters:mctsIters,seedSeq:seq0,onProgress:f=>prog(0.5+f*0.3),seed:7});
-    const sa2=annealSequence(input,mc.sequence.length?mc.sequence:seq0,{horizon:H,budgetMs:Math.round(annealMs*0.6),maxEvals:Math.round(annealEvals*0.6),onProgress:f=>prog(0.8+f*0.2),seed:3});
+    const plan=autoPlan(input,{beam,step,horizon,objective,onProgress:f=>prog(f*0.2)}); const seq0=[...plan.best.timeline].sort((a,b)=>a.t-b.t); const H=Math.max(horizon,Math.ceil((plan.best.score.until||horizon)+10));
+    const sa=annealSequence(input,seq0,{horizon:H,objective,budgetMs:annealMs,maxEvals:annealEvals,onProgress:f=>prog(0.2+f*0.3),seed:1});
+    const mc=mctsSequence(input,{horizon:H,objective,budgetMs:mctsMs,maxIters:mctsIters,seedSeq:seq0,onProgress:f=>prog(0.5+f*0.3),seed:7});
+    const sa2=annealSequence(input,mc.sequence.length?mc.sequence:seq0,{horizon:H,objective,budgetMs:Math.round(annealMs*0.6),maxEvals:Math.round(annealEvals*0.6),onProgress:f=>prog(0.8+f*0.2),seed:3});
     const routes=[{name:'束搜索→退火',r:sa},{name:'MCTS',r:mc},{name:'MCTS→退火',r:sa2}].filter(x=>x.r.score); routes.sort((a,b)=>b.r.score.dps-a.r.score.dps); const win=routes[0];
     plan.improved={method:win.name,routes:routes.map(x=>({name:x.name,dps:Math.round(x.r.score.dps),evals:x.r.evals||x.r.iters,ms:x.r.ms,skipped:x.r.skipped})),before:plan.best.score.dps,after:win.r.score.dps}; const sched=win.r.timeline; const r=finish(input,ctx,sched,scenario,plan,null); const sure=sumHits(r.main,{until:r.end,mainControl,guaranteed:true})/Math.max(1,r.end); return {modes,r,sure}; });
   results.sort((a,b)=>b.sure-a.sure); const best=results[0];

@@ -54,7 +54,7 @@ export function renderRotation(root,state,update){
 function jobKey(state,source,scenario){ const rot=state.rot; return JSON.stringify([source,scenario.id,rot.enemy,source==='auto'?rot.auto:null,state.team,state.mainControl]); }
 function compute(state,source,scenario){
   const rot=state.rot; const key=jobKey(state,source,scenario);
-  const job=source==='auto'?{kind:'auto',team:clone(state.team),mainControl:state.mainControl,enemy:clone(rot.enemy),scenarioId:scenario.id,opts:{beam:rot.auto.beam,step:1,horizon:rot.auto.horizon}}:{kind:'preset',presetId:source,team:clone(state.team),mainControl:state.mainControl,enemy:clone(rot.enemy),scenarioId:scenario.id};
+  const job=source==='auto'?{kind:'auto',team:clone(state.team),mainControl:state.mainControl,enemy:clone(rot.enemy),scenarioId:scenario.id,opts:{beam:rot.auto.beam,step:1,horizon:rot.auto.horizon,objective:rot.auto.objective||'guaranteed'}}:{kind:'preset',presetId:source,team:clone(state.team),mainControl:state.mainControl,enemy:clone(rot.enemy),scenarioId:scenario.id};
   return request(key,job);
 }
 
@@ -71,7 +71,7 @@ function teamPanel(state,update,presetsOk,source,scenario){
     h('div',{class:'slots'},...[0,1,2,3].map(slot)),
     h('div',{class:'row-wrap'},members.length?field('主控（全程普攻）',select(members,state.mainControl,v=>update(s=>{s.mainControl=Number(v);}))):'',h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{ s.team=buildTeam(rotations[0],data); s.mainControl=1; s.active=0; s.rot.source=rotations[0].id; })},'载入示例编队')),
     h('div',{class:'subheading'},'排轴来源'),h('div',{class:'preset-tabs'},...chips),
-    source==='auto'?h('div',{class:'two-col'},field('排多少秒',h('input',{type:'number',min:20,max:120,step:5,value:rot.auto.horizon,onchange:ev=>update(s=>{s.rot.auto.horizon=Number(ev.target.value);})}))):'',
+    source==='auto'?h('div',{class:'two-col'},field('排轴目标',select([['guaranteed','一轮平均伤害最高'],['burst','攒满后集中爆发（四人终结技连开）']],rot.auto.objective||'guaranteed',v=>update(s=>{s.rot.auto.objective=v;}))),field('排多少秒',h('input',{type:'number',min:20,max:120,step:5,value:rot.auto.horizon,onchange:ev=>update(s=>{s.rot.auto.horizon=Number(ev.target.value);})}))):'',
     h('div',{class:'subheading'},'Boss / 场景'),h('div',{class:'preset-tabs'},...scTabs),h('ul',{class:'tips'},...scenario.tips.map(t=>h('li',{},t))),
     h('details',{class:'enemy-box'},h('summary',{},`敌人：防御 ${enemy.defence} · 抗性 ${Object.entries(ELEMENT_CN).map(([k,l])=>`${l}${enemy.resistances[k]==='custom'?(enemy.custom[k]??0)+'%':enemy.resistances[k]}`).join(' / ')}（点开修改）`),h('div',{class:'two-col'},field('防御力',h('input',{type:'number',min:0,max:99999,value:enemy.defence,onchange:ev=>update(s=>{s.rot.enemy.defence=Number(ev.target.value);})})),h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{s.rot.enemy=clone(ENEMY);})},'恢复默认')),resRows));
 }
