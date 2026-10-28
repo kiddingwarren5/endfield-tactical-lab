@@ -1,14 +1,14 @@
 # 交付报告（2026-10-28，会话 1）
 
 ## 1. 成品
-- 公开副本（claude.ai Artifact，需在页面 Share 菜单设为公开）：https://claude.ai/artifact/MA9QgAZesaHBqEia9BdCwg
+- 副本（claude.ai Artifact 版本 4；默认私有，需在页面 Share 菜单设为公开）：https://claude.ai/artifact/MA9QgAZesaHBqEia9BdCwg
 - 源码与数据：本目录（git `main`）。运行与重放见 HANDOFF.md。
 - 功能：34 干员（明河无官方数据）、84 武器、191 件装备（全部金装 + 天灾防护紫装）、25 项输出相关食药；1–4 人编队；单段/技能总伤；统一与分段增益；施加者/受益者与依赖属性手工覆盖；10 格快照；计算留痕导出；事件模拟器与可编辑时间轴；自动排轴（束搜索）与充能阈值；全队逐击与占比。
 
 ## 2. 数据与规则可信度
 - 官方（skland）与解包（warfarin）两源逐值核对约 17,200 项；32 处真实冲突（31 处官方笔误）已按解包值修正并记录（docs/data-sources.md、dist/data/meta.js corrections）。
 - 效果目录 578 条：全量 Claude 审核修正 + GPT 抽样审核（docs/reviews/effects-review-*.md）；35 条标注 uncertain。
-- 规则 docs/rules.md v0.4：两份独立研究 + GPT 审核修正；Claude 审核见 docs/reviews/rules-review-claude.md。
+- 规则 docs/rules.md v0.5：两份独立研究 + GPT 与 Claude 两份独立审核（65 条逐条判断）并入。
 - 计算代码：Claude 审核（含独立算例测试 tests/review-engine.test.mjs）与 GPT 审核（docs/reviews/engine-review-*.md）；修复状态见 docs/progress.md。
 - 案例库 docs/cases：13 个案例（10 份战斗日志、8 个视频、1 篇文字轴），日志数值与数据表交叉核对一致（祀 43.2%、玉中身 21%/12%、诀 18%/11.7%/19.8% 等）。
 
