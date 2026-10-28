@@ -1894,7 +1894,25 @@
    "suitName": "集成重型"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_stragi_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n当装备者击败敌人后，回复<@ba.heal>{hp_add}</>点生命值。该效果每{cd}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 500,
+      "hp_add": 100,
+      "cd": 5
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -2054,7 +2072,25 @@
    "suitName": "集成重型"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_stragi_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n当装备者击败敌人后，回复<@ba.heal>{hp_add}</>点生命值。该效果每{cd}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 500,
+      "hp_add": 100,
+      "cd": 5
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -2214,7 +2250,25 @@
    "suitName": "集成重型"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_stragi_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n当装备者击败敌人后，回复<@ba.heal>{hp_add}</>点生命值。该效果每{cd}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 500,
+      "hp_add": 100,
+      "cd": 5
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -2397,7 +2451,25 @@
    "suitName": "集成重型"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_stragi_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n当装备者击败敌人后，回复<@ba.heal>{hp_add}</>点生命值。该效果每{cd}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 500,
+      "hp_add": 100,
+      "cd": 5
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -2520,7 +2592,25 @@
    "suitName": "集成轻型"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisdwill_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n当装备者击败敌人后，攻击力<@ba.vup>+{atk_up}</>，持续<@ba.vup>{duration}</>秒。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 500,
+      "atk_up": 20,
+      "duration": 5
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -2620,7 +2710,25 @@
    "suitName": "集成轻型"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisdwill_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n当装备者击败敌人后，攻击力<@ba.vup>+{atk_up}</>，持续<@ba.vup>{duration}</>秒。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 500,
+      "atk_up": 20,
+      "duration": 5
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -2720,7 +2828,25 @@
    "suitName": "集成轻型"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisdwill_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n当装备者击败敌人后，攻击力<@ba.vup>+{atk_up}</>，持续<@ba.vup>{duration}</>秒。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 500,
+      "atk_up": 20,
+      "duration": 5
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -2843,7 +2969,25 @@
    "suitName": "集成轻型"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisdwill_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n当装备者击败敌人后，攻击力<@ba.vup>+{atk_up}</>，持续<@ba.vup>{duration}</>秒。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 500,
+      "atk_up": 20,
+      "duration": 5
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -3552,7 +3696,25 @@
    "suitName": "巡行信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_agi_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者敏捷<@ba.vup>+{agi_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "agi_up": 50,
+      "hp_ratio": 0.8,
+      "phy_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -3652,7 +3814,25 @@
    "suitName": "巡行信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_agi_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者敏捷<@ba.vup>+{agi_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "agi_up": 50,
+      "hp_ratio": 0.8,
+      "phy_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -3752,7 +3932,25 @@
    "suitName": "巡行信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_agi_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者敏捷<@ba.vup>+{agi_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "agi_up": 50,
+      "hp_ratio": 0.8,
+      "phy_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -3875,7 +4073,25 @@
    "suitName": "巡行信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_agi_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者敏捷<@ba.vup>+{agi_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "agi_up": 50,
+      "hp_ratio": 0.8,
+      "phy_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -3998,7 +4214,25 @@
    "suitName": "重装信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_str_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者力量<@ba.vup>+{str_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "str_up": 50,
+      "hp_ratio": 0.5,
+      "dmg_taken_down": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -4098,7 +4332,25 @@
    "suitName": "重装信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_str_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者力量<@ba.vup>+{str_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "str_up": 50,
+      "hp_ratio": 0.5,
+      "dmg_taken_down": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -4198,7 +4450,25 @@
    "suitName": "重装信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_str_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者力量<@ba.vup>+{str_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "str_up": 50,
+      "hp_ratio": 0.5,
+      "dmg_taken_down": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -4381,7 +4651,25 @@
    "suitName": "重装信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_str_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者力量<@ba.vup>+{str_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "str_up": 50,
+      "hp_ratio": 0.5,
+      "dmg_taken_down": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -4504,7 +4792,25 @@
    "suitName": "蚀电防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_will_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者意志<@ba.vup>+{will_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，造成的治疗效果<@ba.vup>+{heal_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "will_up": 50,
+      "hp_ratio": 0.5,
+      "heal_up": 0.3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -4604,7 +4910,25 @@
    "suitName": "蚀电防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_will_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者意志<@ba.vup>+{will_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，造成的治疗效果<@ba.vup>+{heal_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "will_up": 50,
+      "hp_ratio": 0.5,
+      "heal_up": 0.3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -4704,7 +5028,25 @@
    "suitName": "蚀电防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_will_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者意志<@ba.vup>+{will_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，造成的治疗效果<@ba.vup>+{heal_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "will_up": 50,
+      "hp_ratio": 0.5,
+      "heal_up": 0.3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -4827,7 +5169,25 @@
    "suitName": "蚀电防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_will_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者意志<@ba.vup>+{will_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，造成的治疗效果<@ba.vup>+{heal_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "will_up": 50,
+      "hp_ratio": 0.5,
+      "heal_up": 0.3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -4950,7 +5310,25 @@
    "suitName": "蚀电屏蔽"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisd_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者智识<@ba.vup>+{wisd_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "wisd_up": 50,
+      "hp_ratio": 0.8,
+      "spell_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -5050,7 +5428,25 @@
    "suitName": "蚀电屏蔽"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisd_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者智识<@ba.vup>+{wisd_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "wisd_up": 50,
+      "hp_ratio": 0.8,
+      "spell_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -5162,7 +5558,25 @@
    "suitName": "蚀电屏蔽"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisd_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者智识<@ba.vup>+{wisd_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "wisd_up": 50,
+      "hp_ratio": 0.8,
+      "spell_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -5262,7 +5676,25 @@
    "suitName": "蚀电屏蔽"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisd_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者智识<@ba.vup>+{wisd_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "wisd_up": 50,
+      "hp_ratio": 0.8,
+      "spell_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -5421,7 +5853,25 @@
    "suitName": "蚀电屏蔽"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisd_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者智识<@ba.vup>+{wisd_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "wisd_up": 50,
+      "hp_ratio": 0.8,
+      "spell_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -6416,7 +6866,25 @@
    "suitName": "巡行信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_agi_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者敏捷<@ba.vup>+{agi_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "agi_up": 50,
+      "hp_ratio": 0.8,
+      "phy_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -6539,7 +7007,25 @@
    "suitName": "巡行信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_agi_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者敏捷<@ba.vup>+{agi_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "agi_up": 50,
+      "hp_ratio": 0.8,
+      "phy_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -6662,7 +7148,25 @@
    "suitName": "巡行信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_agi_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者敏捷<@ba.vup>+{agi_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "agi_up": 50,
+      "hp_ratio": 0.8,
+      "phy_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -6785,7 +7289,25 @@
    "suitName": "巡行信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_agi_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者敏捷<@ba.vup>+{agi_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "agi_up": 50,
+      "hp_ratio": 0.8,
+      "phy_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -6908,7 +7430,25 @@
    "suitName": "巡行信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_agi_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者敏捷<@ba.vup>+{agi_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "agi_up": 50,
+      "hp_ratio": 0.8,
+      "phy_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -7055,7 +7595,25 @@
    "suitName": "阿伯莉遗声"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{dmg_up:0%}</>。\n当装备者施放战技、连携技、终结技时，分别<@ba.vup>+{atk_up:0%}</>攻击力，持续{duration}秒。三种增益状态独立存在，层数无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.24,
+      "atk_up": 0.05,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -7178,7 +7736,25 @@
    "suitName": "阿伯莉遗声"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{dmg_up:0%}</>。\n当装备者施放战技、连携技、终结技时，分别<@ba.vup>+{atk_up:0%}</>攻击力，持续{duration}秒。三种增益状态独立存在，层数无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.24,
+      "atk_up": 0.05,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -7301,7 +7877,25 @@
    "suitName": "阿伯莉遗声"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{dmg_up:0%}</>。\n当装备者施放战技、连携技、终结技时，分别<@ba.vup>+{atk_up:0%}</>攻击力，持续{duration}秒。三种增益状态独立存在，层数无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.24,
+      "atk_up": 0.05,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -7424,7 +8018,25 @@
    "suitName": "阿伯莉遗声"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{dmg_up:0%}</>。\n当装备者施放战技、连携技、终结技时，分别<@ba.vup>+{atk_up:0%}</>攻击力，持续{duration}秒。三种增益状态独立存在，层数无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.24,
+      "atk_up": 0.05,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -7571,7 +8183,25 @@
    "suitName": "阿伯莉遗声"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{dmg_up:0%}</>。\n当装备者施放战技、连携技、终结技时，分别<@ba.vup>+{atk_up:0%}</>攻击力，持续{duration}秒。三种增益状态独立存在，层数无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.24,
+      "atk_up": 0.05,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -7694,7 +8324,25 @@
    "suitName": "阿伯莉遗声"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{dmg_up:0%}</>。\n当装备者施放战技、连携技、终结技时，分别<@ba.vup>+{atk_up:0%}</>攻击力，持续{duration}秒。三种增益状态独立存在，层数无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.24,
+      "atk_up": 0.05,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -7817,7 +8465,25 @@
    "suitName": "阿伯莉遗声"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{dmg_up:0%}</>。\n当装备者施放战技、连携技、终结技时，分别<@ba.vup>+{atk_up:0%}</>攻击力，持续{duration}秒。三种增益状态独立存在，层数无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.24,
+      "atk_up": 0.05,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -7940,7 +8606,25 @@
    "suitName": "阿伯莉遗声"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{dmg_up:0%}</>。\n当装备者施放战技、连携技、终结技时，分别<@ba.vup>+{atk_up:0%}</>攻击力，持续{duration}秒。三种增益状态独立存在，层数无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.24,
+      "atk_up": 0.05,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -8063,7 +8747,25 @@
    "suitName": "阿伯莉遗声"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{dmg_up:0%}</>。\n当装备者施放战技、连携技、终结技时，分别<@ba.vup>+{atk_up:0%}</>攻击力，持续{duration}秒。三种增益状态独立存在，层数无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.24,
+      "atk_up": 0.05,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -8186,7 +8888,25 @@
    "suitName": "阿伯莉遗声"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{dmg_up:0%}</>。\n当装备者施放战技、连携技、终结技时，分别<@ba.vup>+{atk_up:0%}</>攻击力，持续{duration}秒。三种增益状态独立存在，层数无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.24,
+      "atk_up": 0.05,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -8309,7 +9029,25 @@
    "suitName": "阿伯莉遗声"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{dmg_up:0%}</>。\n当装备者施放战技、连携技、终结技时，分别<@ba.vup>+{atk_up:0%}</>攻击力，持续{duration}秒。三种增益状态独立存在，层数无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.24,
+      "atk_up": 0.05,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -8432,7 +9170,25 @@
    "suitName": "重装信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_str_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者力量<@ba.vup>+{str_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "str_up": 50,
+      "hp_ratio": 0.5,
+      "dmg_taken_down": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -8555,7 +9311,25 @@
    "suitName": "重装信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_str_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者力量<@ba.vup>+{str_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "str_up": 50,
+      "hp_ratio": 0.5,
+      "dmg_taken_down": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -8678,7 +9452,25 @@
    "suitName": "重装信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_str_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者力量<@ba.vup>+{str_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "str_up": 50,
+      "hp_ratio": 0.5,
+      "dmg_taken_down": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -8801,7 +9593,25 @@
    "suitName": "重装信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_str_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者力量<@ba.vup>+{str_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "str_up": 50,
+      "hp_ratio": 0.5,
+      "dmg_taken_down": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -8924,7 +9734,25 @@
    "suitName": "重装信使"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_str_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者力量<@ba.vup>+{str_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "str_up": 50,
+      "hp_ratio": 0.5,
+      "dmg_taken_down": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -9047,7 +9875,24 @@
    "suitName": "天灾防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。\n装备者施放战技时<#ba.return>返还</><@ba.vup>{atb_recover:0}</>点技力，此效果每场战斗最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "ultimate_gain_up": 0.2,
+      "atb_recover": 50
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -9170,7 +10015,24 @@
    "suitName": "天灾防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。\n装备者施放战技时<#ba.return>返还</><@ba.vup>{atb_recover:0}</>点技力，此效果每场战斗最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "ultimate_gain_up": 0.2,
+      "atb_recover": 50
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -9293,7 +10155,24 @@
    "suitName": "天灾防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。\n装备者施放战技时<#ba.return>返还</><@ba.vup>{atb_recover:0}</>点技力，此效果每场战斗最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "ultimate_gain_up": 0.2,
+      "atb_recover": 50
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -9416,7 +10295,24 @@
    "suitName": "天灾防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。\n装备者施放战技时<#ba.return>返还</><@ba.vup>{atb_recover:0}</>点技力，此效果每场战斗最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "ultimate_gain_up": 0.2,
+      "atb_recover": 50
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -9539,7 +10435,24 @@
    "suitName": "天灾防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。\n装备者施放战技时<#ba.return>返还</><@ba.vup>{atb_recover:0}</>点技力，此效果每场战斗最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "ultimate_gain_up": 0.2,
+      "atb_recover": 50
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -9662,7 +10575,24 @@
    "suitName": "天灾防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。\n装备者施放战技时<#ba.return>返还</><@ba.vup>{atb_recover:0}</>点技力，此效果每场战斗最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "ultimate_gain_up": 0.2,
+      "atb_recover": 50
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -9785,7 +10715,25 @@
    "suitName": "蚀电防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_will_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者意志<@ba.vup>+{will_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，造成的治疗效果<@ba.vup>+{heal_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "will_up": 50,
+      "hp_ratio": 0.5,
+      "heal_up": 0.3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -9908,7 +10856,25 @@
    "suitName": "蚀电防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_will_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者意志<@ba.vup>+{will_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，造成的治疗效果<@ba.vup>+{heal_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "will_up": 50,
+      "hp_ratio": 0.5,
+      "heal_up": 0.3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -10031,7 +10997,25 @@
    "suitName": "蚀电防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_will_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者意志<@ba.vup>+{will_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，造成的治疗效果<@ba.vup>+{heal_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "will_up": 50,
+      "hp_ratio": 0.5,
+      "heal_up": 0.3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -10154,7 +11138,25 @@
    "suitName": "蚀电防护"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_will_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者意志<@ba.vup>+{will_up}</>。\n当装备者生命值低于{hp_ratio:0%}时，造成的治疗效果<@ba.vup>+{heal_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "will_up": 50,
+      "hp_ratio": 0.5,
+      "heal_up": 0.3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -10277,7 +11279,25 @@
    "suitName": "蚀电屏蔽"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisd_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者智识<@ba.vup>+{wisd_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "wisd_up": 50,
+      "hp_ratio": 0.8,
+      "spell_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -10400,7 +11420,25 @@
    "suitName": "蚀电屏蔽"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisd_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者智识<@ba.vup>+{wisd_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "wisd_up": 50,
+      "hp_ratio": 0.8,
+      "spell_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -10523,7 +11561,25 @@
    "suitName": "蚀电屏蔽"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisd_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者智识<@ba.vup>+{wisd_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "wisd_up": 50,
+      "hp_ratio": 0.8,
+      "spell_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -10623,7 +11679,25 @@
    "suitName": "蚀电屏蔽"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisd_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者智识<@ba.vup>+{wisd_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "wisd_up": 50,
+      "hp_ratio": 0.8,
+      "spell_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -10746,7 +11820,25 @@
    "suitName": "蚀电屏蔽"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_wisd_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者智识<@ba.vup>+{wisd_up}</>。\n当装备者生命值高于{hp_ratio:0%}时，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "wisd_up": 50,
+      "hp_ratio": 0.8,
+      "spell_dmg_up": 0.2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -10917,7 +12009,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -11052,7 +12162,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -11187,7 +12315,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -11322,7 +12468,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -11457,7 +12621,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -11592,7 +12774,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -11763,7 +12963,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -11898,7 +13116,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -12033,7 +13269,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -12168,7 +13422,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -12303,7 +13575,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -12438,7 +13728,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -12609,7 +13917,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -12744,7 +14070,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -12879,7 +14223,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -13014,7 +14376,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -13149,7 +14529,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -13284,7 +14682,25 @@
    "suitName": "集成实训"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_generaltype": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者造成的所有类型伤害<@ba.vup>+{dmg_up:0%}</>，受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>，终结技充能效率<@ba.vup>+{ultimate_gain_up:0%}</>。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "dmg_up": 0.2,
+      "dmg_taken_down": 0.9,
+      "ultimate_gain_up": 0.1
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -15291,7 +16707,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -15426,7 +16860,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -15561,7 +17013,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -15696,7 +17166,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -15831,7 +17319,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -15966,7 +17472,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -16113,7 +17637,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -16221,7 +17763,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -16356,7 +17916,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -16464,7 +18042,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -16599,7 +18195,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -16734,7 +18348,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -16893,7 +18525,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -17028,7 +18678,25 @@
    "suitName": "拓荒"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combosuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n装备者通过技能恢复技力后，全队造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -17163,7 +18831,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -17298,7 +18984,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -17433,7 +19137,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -17592,7 +19314,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -17727,7 +19467,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -17862,7 +19620,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -17997,7 +19773,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -18132,7 +19926,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -18267,7 +20079,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -18426,7 +20256,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -18561,7 +20409,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -18696,7 +20562,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -18831,7 +20715,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -18966,7 +20868,25 @@
    "suitName": "50式应龙"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_atk_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当小队内任意干员施放战技时，装备者获得一层<@ba.key>应龙之锐</>，使得该干员下一次连携技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>应龙之锐</>最多叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.2,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -19101,7 +21021,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -19236,7 +21174,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -19371,7 +21327,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -19506,7 +21480,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -19653,7 +21645,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -19788,7 +21798,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -19923,7 +21951,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -20058,7 +22104,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -20193,7 +22257,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -20328,7 +22410,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -20463,7 +22563,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -20610,7 +22728,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -20757,7 +22893,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -20904,7 +23058,25 @@
    "suitName": "碾骨"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_attrisuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n当装备者施放连携技时，获得一层<@ba.key>碾骨重压</>，下一次的战技伤害<@ba.vup>+{dmg_up:0%}</>，<@ba.key>碾骨重压</>最多可叠加{max_stack:0}层。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.15,
+      "dmg_up": 0.3,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -21039,7 +23211,26 @@
    "suitName": "潮涌"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_burst_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{skill_dmg_up:0%}</>。\n装备者使敌人达到<@ba.key>{stack_cond}</>层及以上<#ba.spellinflict>法术附着</>后，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "skill_dmg_up": 0.2,
+      "stack_cond": 2,
+      "spell_dmg_up": 0.35,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -21174,7 +23365,26 @@
    "suitName": "潮涌"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_burst_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{skill_dmg_up:0%}</>。\n装备者使敌人达到<@ba.key>{stack_cond}</>层及以上<#ba.spellinflict>法术附着</>后，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "skill_dmg_up": 0.2,
+      "stack_cond": 2,
+      "spell_dmg_up": 0.35,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -21321,7 +23531,26 @@
    "suitName": "潮涌"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_burst_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{skill_dmg_up:0%}</>。\n装备者使敌人达到<@ba.key>{stack_cond}</>层及以上<#ba.spellinflict>法术附着</>后，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "skill_dmg_up": 0.2,
+      "stack_cond": 2,
+      "spell_dmg_up": 0.35,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -21468,7 +23697,26 @@
    "suitName": "潮涌"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_burst_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{skill_dmg_up:0%}</>。\n装备者使敌人达到<@ba.key>{stack_cond}</>层及以上<#ba.spellinflict>法术附着</>后，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "skill_dmg_up": 0.2,
+      "stack_cond": 2,
+      "spell_dmg_up": 0.35,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -21603,7 +23851,26 @@
    "suitName": "潮涌"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_burst_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{skill_dmg_up:0%}</>。\n装备者使敌人达到<@ba.key>{stack_cond}</>层及以上<#ba.spellinflict>法术附着</>后，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "skill_dmg_up": 0.2,
+      "stack_cond": 2,
+      "spell_dmg_up": 0.35,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -21750,7 +24017,26 @@
    "suitName": "潮涌"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_burst_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{skill_dmg_up:0%}</>。\n装备者使敌人达到<@ba.key>{stack_cond}</>层及以上<#ba.spellinflict>法术附着</>后，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "skill_dmg_up": 0.2,
+      "stack_cond": 2,
+      "spell_dmg_up": 0.35,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -21897,7 +24183,26 @@
    "suitName": "潮涌"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_burst_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{skill_dmg_up:0%}</>。\n装备者使敌人达到<@ba.key>{stack_cond}</>层及以上<#ba.spellinflict>法术附着</>后，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "skill_dmg_up": 0.2,
+      "stack_cond": 2,
+      "spell_dmg_up": 0.35,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -22056,7 +24361,26 @@
    "suitName": "潮涌"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_burst_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者所有技能伤害<@ba.vup>+{skill_dmg_up:0%}</>。\n装备者使敌人达到<@ba.key>{stack_cond}</>层及以上<#ba.spellinflict>法术附着</>后，造成的<@ba.key>法术伤害</><@ba.vup>+{spell_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "skill_dmg_up": 0.2,
+      "stack_cond": 2,
+      "spell_dmg_up": 0.35,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -22191,7 +24515,26 @@
    "suitName": "清波"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combo_cd01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n当装备者施放连携技时，所有技能伤害<@ba.vup>+{spell_up:0%}</>，持续{duration}秒。该效果最多叠加{max_stack}层，每层单独计算持续时间。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "spell_up": 0.2,
+      "duration": 15,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -22326,7 +24669,26 @@
    "suitName": "清波"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combo_cd01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n当装备者施放连携技时，所有技能伤害<@ba.vup>+{spell_up:0%}</>，持续{duration}秒。该效果最多叠加{max_stack}层，每层单独计算持续时间。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "spell_up": 0.2,
+      "duration": 15,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -22461,7 +24823,26 @@
    "suitName": "清波"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combo_cd01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n当装备者施放连携技时，所有技能伤害<@ba.vup>+{spell_up:0%}</>，持续{duration}秒。该效果最多叠加{max_stack}层，每层单独计算持续时间。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "spell_up": 0.2,
+      "duration": 15,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -22608,7 +24989,26 @@
    "suitName": "清波"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combo_cd01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n当装备者施放连携技时，所有技能伤害<@ba.vup>+{spell_up:0%}</>，持续{duration}秒。该效果最多叠加{max_stack}层，每层单独计算持续时间。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "spell_up": 0.2,
+      "duration": 15,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -22743,7 +25143,26 @@
    "suitName": "清波"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combo_cd01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n当装备者施放连携技时，所有技能伤害<@ba.vup>+{spell_up:0%}</>，持续{duration}秒。该效果最多叠加{max_stack}层，每层单独计算持续时间。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "spell_up": 0.2,
+      "duration": 15,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -22878,7 +25297,26 @@
    "suitName": "清波"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combo_cd01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n当装备者施放连携技时，所有技能伤害<@ba.vup>+{spell_up:0%}</>，持续{duration}秒。该效果最多叠加{max_stack}层，每层单独计算持续时间。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "spell_up": 0.2,
+      "duration": 15,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -23037,7 +25475,26 @@
    "suitName": "清波"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combo_cd01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n当装备者施放连携技时，所有技能伤害<@ba.vup>+{spell_up:0%}</>，持续{duration}秒。该效果最多叠加{max_stack}层，每层单独计算持续时间。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "spell_up": 0.2,
+      "duration": 15,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -23172,7 +25629,26 @@
    "suitName": "清波"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_combo_cd01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者连携技冷却缩减<@ba.vup>+{1-comboskill_cooldown:0%}</>。\n当装备者施放连携技时，所有技能伤害<@ba.vup>+{spell_up:0%}</>，持续{duration}秒。该效果最多叠加{max_stack}层，每层单独计算持续时间。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "comboskill_cooldown": 0.85,
+      "spell_up": 0.2,
+      "duration": 15,
+      "max_stack": 2
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -23307,7 +25783,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -23442,7 +25938,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -23577,7 +26093,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -23712,7 +26248,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -23847,7 +26403,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -23994,7 +26570,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -24129,7 +26725,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -24264,7 +26880,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -24411,7 +27047,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -24546,7 +27202,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -24681,7 +27357,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -24816,7 +27512,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -24951,7 +27667,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -25086,7 +27822,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -25221,7 +27977,27 @@
    "suitName": "M.I.警用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_critsuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者暴击率<@ba.vup>+{crit_up:0%}</>。\n当装备者触发暴击后，{duration}秒内<@ba.vup>+{atk_up:0%}</>攻击力，该效果最多叠加{max_stack:0}层。层数叠满后，额外<@ba.vup>+{crit_up2:0%}</>暴击率，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "crit_up": 0.05,
+      "duration": 5,
+      "atk_up": 0.05,
+      "max_stack": 5,
+      "crit_up2": 0.05
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -25356,7 +28132,26 @@
    "suitName": "旧锋"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_crush_fracture": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者造成<#ba.crush>猛击</>、<#ba.fracture>碎甲</>时，根据<#ba.consume>消耗</>的最大<#ba.noguard>破防</>层数，使自身<@ba.pd>物理伤害</><@ba.vup>+[{phy_dmg_up_perstack:0%}×<#ba.consume>消耗</>层数]</>，持续{duration}秒。若目标已处于<#ba.physicalvul>物理脆弱</>、<@ba.poise>失衡</>状态或被附着<#ba.originium>源石结晶</>，上述增益效果变为<@ba.vup>{special_multi:0.0}</>倍。增益效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.08,
+      "phy_dmg_up_perstack": 0.06,
+      "special_multi": 1.5,
+      "duration": 20
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -25491,7 +28286,26 @@
    "suitName": "旧锋"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_crush_fracture": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者造成<#ba.crush>猛击</>、<#ba.fracture>碎甲</>时，根据<#ba.consume>消耗</>的最大<#ba.noguard>破防</>层数，使自身<@ba.pd>物理伤害</><@ba.vup>+[{phy_dmg_up_perstack:0%}×<#ba.consume>消耗</>层数]</>，持续{duration}秒。若目标已处于<#ba.physicalvul>物理脆弱</>、<@ba.poise>失衡</>状态或被附着<#ba.originium>源石结晶</>，上述增益效果变为<@ba.vup>{special_multi:0.0}</>倍。增益效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.08,
+      "phy_dmg_up_perstack": 0.06,
+      "special_multi": 1.5,
+      "duration": 20
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -25626,7 +28440,26 @@
    "suitName": "旧锋"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_crush_fracture": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者造成<#ba.crush>猛击</>、<#ba.fracture>碎甲</>时，根据<#ba.consume>消耗</>的最大<#ba.noguard>破防</>层数，使自身<@ba.pd>物理伤害</><@ba.vup>+[{phy_dmg_up_perstack:0%}×<#ba.consume>消耗</>层数]</>，持续{duration}秒。若目标已处于<#ba.physicalvul>物理脆弱</>、<@ba.poise>失衡</>状态或被附着<#ba.originium>源石结晶</>，上述增益效果变为<@ba.vup>{special_multi:0.0}</>倍。增益效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.08,
+      "phy_dmg_up_perstack": 0.06,
+      "special_multi": 1.5,
+      "duration": 20
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -25761,7 +28594,26 @@
    "suitName": "旧锋"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_crush_fracture": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者造成<#ba.crush>猛击</>、<#ba.fracture>碎甲</>时，根据<#ba.consume>消耗</>的最大<#ba.noguard>破防</>层数，使自身<@ba.pd>物理伤害</><@ba.vup>+[{phy_dmg_up_perstack:0%}×<#ba.consume>消耗</>层数]</>，持续{duration}秒。若目标已处于<#ba.physicalvul>物理脆弱</>、<@ba.poise>失衡</>状态或被附着<#ba.originium>源石结晶</>，上述增益效果变为<@ba.vup>{special_multi:0.0}</>倍。增益效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.08,
+      "phy_dmg_up_perstack": 0.06,
+      "special_multi": 1.5,
+      "duration": 20
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -25896,7 +28748,26 @@
    "suitName": "旧锋"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_crush_fracture": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者造成<#ba.crush>猛击</>、<#ba.fracture>碎甲</>时，根据<#ba.consume>消耗</>的最大<#ba.noguard>破防</>层数，使自身<@ba.pd>物理伤害</><@ba.vup>+[{phy_dmg_up_perstack:0%}×<#ba.consume>消耗</>层数]</>，持续{duration}秒。若目标已处于<#ba.physicalvul>物理脆弱</>、<@ba.poise>失衡</>状态或被附着<#ba.originium>源石结晶</>，上述增益效果变为<@ba.vup>{special_multi:0.0}</>倍。增益效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.08,
+      "phy_dmg_up_perstack": 0.06,
+      "special_multi": 1.5,
+      "duration": 20
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -26031,7 +28902,26 @@
    "suitName": "旧锋"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_crush_fracture": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者造成<#ba.crush>猛击</>、<#ba.fracture>碎甲</>时，根据<#ba.consume>消耗</>的最大<#ba.noguard>破防</>层数，使自身<@ba.pd>物理伤害</><@ba.vup>+[{phy_dmg_up_perstack:0%}×<#ba.consume>消耗</>层数]</>，持续{duration}秒。若目标已处于<#ba.physicalvul>物理脆弱</>、<@ba.poise>失衡</>状态或被附着<#ba.originium>源石结晶</>，上述增益效果变为<@ba.vup>{special_multi:0.0}</>倍。增益效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.08,
+      "phy_dmg_up_perstack": 0.06,
+      "special_multi": 1.5,
+      "duration": 20
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -26178,7 +29068,26 @@
    "suitName": "壤流"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_expend_spell01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者每次<#ba.consume>消耗</><#ba.conduct>导电</>或<#ba.corrupt>腐蚀</>后，根据<#ba.statuslevel>异常等级</>获得相同层数的强化状态，每层使<@ba.pulse>电磁伤害</>和<@ba.natur>自然伤害</><@ba.vup>+{spell_dmg_up:0%}</>，持续{duration}秒。强化状态最多存在{max_stack}层，每层单独计算持续时间。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.1,
+      "spell_dmg_up": 0.15,
+      "duration": 25,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -26313,7 +29222,26 @@
    "suitName": "壤流"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_expend_spell01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者每次<#ba.consume>消耗</><#ba.conduct>导电</>或<#ba.corrupt>腐蚀</>后，根据<#ba.statuslevel>异常等级</>获得相同层数的强化状态，每层使<@ba.pulse>电磁伤害</>和<@ba.natur>自然伤害</><@ba.vup>+{spell_dmg_up:0%}</>，持续{duration}秒。强化状态最多存在{max_stack}层，每层单独计算持续时间。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.1,
+      "spell_dmg_up": 0.15,
+      "duration": 25,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -26460,7 +29388,26 @@
    "suitName": "壤流"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_expend_spell01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者每次<#ba.consume>消耗</><#ba.conduct>导电</>或<#ba.corrupt>腐蚀</>后，根据<#ba.statuslevel>异常等级</>获得相同层数的强化状态，每层使<@ba.pulse>电磁伤害</>和<@ba.natur>自然伤害</><@ba.vup>+{spell_dmg_up:0%}</>，持续{duration}秒。强化状态最多存在{max_stack}层，每层单独计算持续时间。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.1,
+      "spell_dmg_up": 0.15,
+      "duration": 25,
+      "max_stack": 3
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -26607,7 +29554,27 @@
    "suitName": "动火用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_fninflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.burning>燃烧</>后，<@ba.fire>灼热伤害</>+<@ba.vup>{fire_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.corrupt>腐蚀</>后，<@ba.natur>自然伤害</>+<@ba.vup>{nature_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "fire_dmg_up": 0.5,
+      "duration": 10,
+      "nature_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -26754,7 +29721,27 @@
    "suitName": "动火用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_fninflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.burning>燃烧</>后，<@ba.fire>灼热伤害</>+<@ba.vup>{fire_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.corrupt>腐蚀</>后，<@ba.natur>自然伤害</>+<@ba.vup>{nature_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "fire_dmg_up": 0.5,
+      "duration": 10,
+      "nature_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -26889,7 +29876,27 @@
    "suitName": "动火用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_fninflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.burning>燃烧</>后，<@ba.fire>灼热伤害</>+<@ba.vup>{fire_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.corrupt>腐蚀</>后，<@ba.natur>自然伤害</>+<@ba.vup>{nature_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "fire_dmg_up": 0.5,
+      "duration": 10,
+      "nature_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -26997,7 +30004,27 @@
    "suitName": "动火用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_fninflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.burning>燃烧</>后，<@ba.fire>灼热伤害</>+<@ba.vup>{fire_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.corrupt>腐蚀</>后，<@ba.natur>自然伤害</>+<@ba.vup>{nature_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "fire_dmg_up": 0.5,
+      "duration": 10,
+      "nature_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -27132,7 +30159,27 @@
    "suitName": "动火用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_fninflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.burning>燃烧</>后，<@ba.fire>灼热伤害</>+<@ba.vup>{fire_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.corrupt>腐蚀</>后，<@ba.natur>自然伤害</>+<@ba.vup>{nature_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "fire_dmg_up": 0.5,
+      "duration": 10,
+      "nature_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -27291,7 +30338,27 @@
    "suitName": "动火用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_fninflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.burning>燃烧</>后，<@ba.fire>灼热伤害</>+<@ba.vup>{fire_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.corrupt>腐蚀</>后，<@ba.natur>自然伤害</>+<@ba.vup>{nature_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "fire_dmg_up": 0.5,
+      "duration": 10,
+      "nature_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -27426,7 +30493,27 @@
    "suitName": "动火用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_fninflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.burning>燃烧</>后，<@ba.fire>灼热伤害</>+<@ba.vup>{fire_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.corrupt>腐蚀</>后，<@ba.natur>自然伤害</>+<@ba.vup>{nature_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "fire_dmg_up": 0.5,
+      "duration": 10,
+      "nature_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -27573,7 +30660,27 @@
    "suitName": "动火用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_fninflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.burning>燃烧</>后，<@ba.fire>灼热伤害</>+<@ba.vup>{fire_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.corrupt>腐蚀</>后，<@ba.natur>自然伤害</>+<@ba.vup>{nature_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "fire_dmg_up": 0.5,
+      "duration": 10,
+      "nature_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -27720,7 +30827,27 @@
    "suitName": "动火用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_fninflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.burning>燃烧</>后，<@ba.fire>灼热伤害</>+<@ba.vup>{fire_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.corrupt>腐蚀</>后，<@ba.natur>自然伤害</>+<@ba.vup>{nature_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "fire_dmg_up": 0.5,
+      "duration": 10,
+      "nature_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -27867,7 +30994,27 @@
    "suitName": "动火用"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_fninflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.burning>燃烧</>后，<@ba.fire>灼热伤害</>+<@ba.vup>{fire_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.corrupt>腐蚀</>后，<@ba.natur>自然伤害</>+<@ba.vup>{nature_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "fire_dmg_up": 0.5,
+      "duration": 10,
+      "nature_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -28002,7 +31149,26 @@
    "suitName": "生物辅助"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_healup_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者治疗效率<@ba.vup>+{heal_up:0%}</>。\n当装备者治疗我方目标后，使该目标在{duration}秒内受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>；如果该目标受到的治疗量溢出，则受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down2:0%}</>。上述效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "heal_up": 0.2,
+      "duration": 10,
+      "dmg_taken_down": 0.85,
+      "dmg_taken_down2": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -28137,7 +31303,26 @@
    "suitName": "生物辅助"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_healup_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者治疗效率<@ba.vup>+{heal_up:0%}</>。\n当装备者治疗我方目标后，使该目标在{duration}秒内受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>；如果该目标受到的治疗量溢出，则受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down2:0%}</>。上述效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "heal_up": 0.2,
+      "duration": 10,
+      "dmg_taken_down": 0.85,
+      "dmg_taken_down2": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -28272,7 +31457,26 @@
    "suitName": "生物辅助"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_healup_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者治疗效率<@ba.vup>+{heal_up:0%}</>。\n当装备者治疗我方目标后，使该目标在{duration}秒内受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>；如果该目标受到的治疗量溢出，则受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down2:0%}</>。上述效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "heal_up": 0.2,
+      "duration": 10,
+      "dmg_taken_down": 0.85,
+      "dmg_taken_down2": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -28467,7 +31671,26 @@
    "suitName": "生物辅助"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_healup_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者治疗效率<@ba.vup>+{heal_up:0%}</>。\n当装备者治疗我方目标后，使该目标在{duration}秒内受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>；如果该目标受到的治疗量溢出，则受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down2:0%}</>。上述效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "heal_up": 0.2,
+      "duration": 10,
+      "dmg_taken_down": 0.85,
+      "dmg_taken_down2": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -28575,7 +31798,26 @@
    "suitName": "生物辅助"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_healup_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者治疗效率<@ba.vup>+{heal_up:0%}</>。\n当装备者治疗我方目标后，使该目标在{duration}秒内受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>；如果该目标受到的治疗量溢出，则受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down2:0%}</>。上述效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "heal_up": 0.2,
+      "duration": 10,
+      "dmg_taken_down": 0.85,
+      "dmg_taken_down2": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -28710,7 +31952,26 @@
    "suitName": "生物辅助"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_healup_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者治疗效率<@ba.vup>+{heal_up:0%}</>。\n当装备者治疗我方目标后，使该目标在{duration}秒内受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>；如果该目标受到的治疗量溢出，则受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down2:0%}</>。上述效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "heal_up": 0.2,
+      "duration": 10,
+      "dmg_taken_down": 0.85,
+      "dmg_taken_down2": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -28818,7 +32079,26 @@
    "suitName": "生物辅助"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_healup_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者治疗效率<@ba.vup>+{heal_up:0%}</>。\n当装备者治疗我方目标后，使该目标在{duration}秒内受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>；如果该目标受到的治疗量溢出，则受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down2:0%}</>。上述效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "heal_up": 0.2,
+      "duration": 10,
+      "dmg_taken_down": 0.85,
+      "dmg_taken_down2": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -28953,7 +32233,26 @@
    "suitName": "生物辅助"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_healup_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者治疗效率<@ba.vup>+{heal_up:0%}</>。\n当装备者治疗我方目标后，使该目标在{duration}秒内受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>；如果该目标受到的治疗量溢出，则受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down2:0%}</>。上述效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "heal_up": 0.2,
+      "duration": 10,
+      "dmg_taken_down": 0.85,
+      "dmg_taken_down2": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -29088,7 +32387,26 @@
    "suitName": "生物辅助"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_healup_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者治疗效率<@ba.vup>+{heal_up:0%}</>。\n当装备者治疗我方目标后，使该目标在{duration}秒内受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>；如果该目标受到的治疗量溢出，则受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down2:0%}</>。上述效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "heal_up": 0.2,
+      "duration": 10,
+      "dmg_taken_down": 0.85,
+      "dmg_taken_down2": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -29223,7 +32541,26 @@
    "suitName": "生物辅助"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_healup_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者治疗效率<@ba.vup>+{heal_up:0%}</>。\n当装备者治疗我方目标后，使该目标在{duration}秒内受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>；如果该目标受到的治疗量溢出，则受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down2:0%}</>。上述效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "heal_up": 0.2,
+      "duration": 10,
+      "dmg_taken_down": 0.85,
+      "dmg_taken_down2": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -29358,7 +32695,26 @@
    "suitName": "生物辅助"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_healup_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者治疗效率<@ba.vup>+{heal_up:0%}</>。\n当装备者治疗我方目标后，使该目标在{duration}秒内受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down:0%}</>；如果该目标受到的治疗量溢出，则受到的所有类型伤害<@ba.vup>-{1-dmg_taken_down2:0%}</>。上述效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "heal_up": 0.2,
+      "duration": 10,
+      "dmg_taken_down": 0.85,
+      "dmg_taken_down2": 0.7
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -29493,7 +32849,26 @@
    "suitName": "点剑"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_physuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者失衡效率加成<@ba.vup>+{poise_up:0%}</>。\n当装备者造成<#ba.physicalstatus>物理异常</>后，额外造成一次{atk_scale:0%}攻击力的物理伤害[<@ba.poise>{poise}</>点失衡值]。该效果每{duration}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "poise_up": 0.2,
+      "atk_scale": 2.5,
+      "poise": 10,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -29628,7 +33003,26 @@
    "suitName": "点剑"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_physuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者失衡效率加成<@ba.vup>+{poise_up:0%}</>。\n当装备者造成<#ba.physicalstatus>物理异常</>后，额外造成一次{atk_scale:0%}攻击力的物理伤害[<@ba.poise>{poise}</>点失衡值]。该效果每{duration}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "poise_up": 0.2,
+      "atk_scale": 2.5,
+      "poise": 10,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -29763,7 +33157,26 @@
    "suitName": "点剑"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_physuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者失衡效率加成<@ba.vup>+{poise_up:0%}</>。\n当装备者造成<#ba.physicalstatus>物理异常</>后，额外造成一次{atk_scale:0%}攻击力的物理伤害[<@ba.poise>{poise}</>点失衡值]。该效果每{duration}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "poise_up": 0.2,
+      "atk_scale": 2.5,
+      "poise": 10,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -29898,7 +33311,26 @@
    "suitName": "点剑"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_physuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者失衡效率加成<@ba.vup>+{poise_up:0%}</>。\n当装备者造成<#ba.physicalstatus>物理异常</>后，额外造成一次{atk_scale:0%}攻击力的物理伤害[<@ba.poise>{poise}</>点失衡值]。该效果每{duration}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "poise_up": 0.2,
+      "atk_scale": 2.5,
+      "poise": 10,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -30006,7 +33438,26 @@
    "suitName": "点剑"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_physuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者失衡效率加成<@ba.vup>+{poise_up:0%}</>。\n当装备者造成<#ba.physicalstatus>物理异常</>后，额外造成一次{atk_scale:0%}攻击力的物理伤害[<@ba.poise>{poise}</>点失衡值]。该效果每{duration}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "poise_up": 0.2,
+      "atk_scale": 2.5,
+      "poise": 10,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -30141,7 +33592,26 @@
    "suitName": "点剑"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_physuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者失衡效率加成<@ba.vup>+{poise_up:0%}</>。\n当装备者造成<#ba.physicalstatus>物理异常</>后，额外造成一次{atk_scale:0%}攻击力的物理伤害[<@ba.poise>{poise}</>点失衡值]。该效果每{duration}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "poise_up": 0.2,
+      "atk_scale": 2.5,
+      "poise": 10,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -30276,7 +33746,26 @@
    "suitName": "点剑"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_physuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者失衡效率加成<@ba.vup>+{poise_up:0%}</>。\n当装备者造成<#ba.physicalstatus>物理异常</>后，额外造成一次{atk_scale:0%}攻击力的物理伤害[<@ba.poise>{poise}</>点失衡值]。该效果每{duration}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "poise_up": 0.2,
+      "atk_scale": 2.5,
+      "poise": 10,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -30411,7 +33900,26 @@
    "suitName": "点剑"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_physuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者失衡效率加成<@ba.vup>+{poise_up:0%}</>。\n当装备者造成<#ba.physicalstatus>物理异常</>后，额外造成一次{atk_scale:0%}攻击力的物理伤害[<@ba.poise>{poise}</>点失衡值]。该效果每{duration}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "poise_up": 0.2,
+      "atk_scale": 2.5,
+      "poise": 10,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -30546,7 +34054,26 @@
    "suitName": "点剑"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_physuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者失衡效率加成<@ba.vup>+{poise_up:0%}</>。\n当装备者造成<#ba.physicalstatus>物理异常</>后，额外造成一次{atk_scale:0%}攻击力的物理伤害[<@ba.poise>{poise}</>点失衡值]。该效果每{duration}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "poise_up": 0.2,
+      "atk_scale": 2.5,
+      "poise": 10,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -30681,7 +34208,26 @@
    "suitName": "点剑"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_physuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者失衡效率加成<@ba.vup>+{poise_up:0%}</>。\n当装备者造成<#ba.physicalstatus>物理异常</>后，额外造成一次{atk_scale:0%}攻击力的物理伤害[<@ba.poise>{poise}</>点失衡值]。该效果每{duration}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "poise_up": 0.2,
+      "atk_scale": 2.5,
+      "poise": 10,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -30816,7 +34362,26 @@
    "suitName": "点剑"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_physuit_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者失衡效率加成<@ba.vup>+{poise_up:0%}</>。\n当装备者造成<#ba.physicalstatus>物理异常</>后，额外造成一次{atk_scale:0%}攻击力的物理伤害[<@ba.poise>{poise}</>点失衡值]。该效果每{duration}秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "poise_up": 0.2,
+      "atk_scale": 2.5,
+      "poise": 10,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -30951,7 +34516,29 @@
    "suitName": "轻超域"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_poisebreak_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者施加<#ba.noguard>破防</>后，<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>，持续{duration}秒，最多可叠加{max_stack:0}层。若使目标达到{stack_cond:0}层<#ba.noguard>破防</>，<@ba.pd>物理伤害</>额外<@ba.vup>+{phy_dmg_up2:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.08,
+      "phy_dmg_up": 0.08,
+      "duration": 15,
+      "max_stack": 4,
+      "stack_cond": 4,
+      "phy_dmg_up2": 0.16,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -31086,7 +34673,29 @@
    "suitName": "轻超域"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_poisebreak_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者施加<#ba.noguard>破防</>后，<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>，持续{duration}秒，最多可叠加{max_stack:0}层。若使目标达到{stack_cond:0}层<#ba.noguard>破防</>，<@ba.pd>物理伤害</>额外<@ba.vup>+{phy_dmg_up2:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.08,
+      "phy_dmg_up": 0.08,
+      "duration": 15,
+      "max_stack": 4,
+      "stack_cond": 4,
+      "phy_dmg_up2": 0.16,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -31221,7 +34830,29 @@
    "suitName": "轻超域"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_poisebreak_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者施加<#ba.noguard>破防</>后，<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>，持续{duration}秒，最多可叠加{max_stack:0}层。若使目标达到{stack_cond:0}层<#ba.noguard>破防</>，<@ba.pd>物理伤害</>额外<@ba.vup>+{phy_dmg_up2:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.08,
+      "phy_dmg_up": 0.08,
+      "duration": 15,
+      "max_stack": 4,
+      "stack_cond": 4,
+      "phy_dmg_up2": 0.16,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -31356,7 +34987,29 @@
    "suitName": "轻超域"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_poisebreak_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者施加<#ba.noguard>破防</>后，<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>，持续{duration}秒，最多可叠加{max_stack:0}层。若使目标达到{stack_cond:0}层<#ba.noguard>破防</>，<@ba.pd>物理伤害</>额外<@ba.vup>+{phy_dmg_up2:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.08,
+      "phy_dmg_up": 0.08,
+      "duration": 15,
+      "max_stack": 4,
+      "stack_cond": 4,
+      "phy_dmg_up2": 0.16,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -31491,7 +35144,29 @@
    "suitName": "轻超域"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_poisebreak_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者施加<#ba.noguard>破防</>后，<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>，持续{duration}秒，最多可叠加{max_stack:0}层。若使目标达到{stack_cond:0}层<#ba.noguard>破防</>，<@ba.pd>物理伤害</>额外<@ba.vup>+{phy_dmg_up2:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.08,
+      "phy_dmg_up": 0.08,
+      "duration": 15,
+      "max_stack": 4,
+      "stack_cond": 4,
+      "phy_dmg_up2": 0.16,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -31626,7 +35301,29 @@
    "suitName": "轻超域"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_poisebreak_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者施加<#ba.noguard>破防</>后，<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>，持续{duration}秒，最多可叠加{max_stack:0}层。若使目标达到{stack_cond:0}层<#ba.noguard>破防</>，<@ba.pd>物理伤害</>额外<@ba.vup>+{phy_dmg_up2:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.08,
+      "phy_dmg_up": 0.08,
+      "duration": 15,
+      "max_stack": 4,
+      "stack_cond": 4,
+      "phy_dmg_up2": 0.16,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -31785,7 +35482,29 @@
    "suitName": "轻超域"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_poisebreak_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者攻击力<@ba.vup>+{atk_up:0%}</>。\n装备者施加<#ba.noguard>破防</>后，<@ba.pd>物理伤害</><@ba.vup>+{phy_dmg_up:0%}</>，持续{duration}秒，最多可叠加{max_stack:0}层。若使目标达到{stack_cond:0}层<#ba.noguard>破防</>，<@ba.pd>物理伤害</>额外<@ba.vup>+{phy_dmg_up2:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "atk_up": 0.08,
+      "phy_dmg_up": 0.08,
+      "duration": 15,
+      "max_stack": 4,
+      "stack_cond": 4,
+      "phy_dmg_up2": 0.16,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -31920,7 +35639,27 @@
    "suitName": "脉冲式"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_cpinflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.conduct>导电</>后，<@ba.pulse>电磁伤害</><@ba.vup>+{pulse_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.frozen>冻结</>后，<@ba.cryst>寒冷伤害</><@ba.vup>+{cryst_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "pulse_dmg_up": 0.5,
+      "duration": 10,
+      "cryst_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -32067,7 +35806,27 @@
    "suitName": "脉冲式"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_cpinflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.conduct>导电</>后，<@ba.pulse>电磁伤害</><@ba.vup>+{pulse_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.frozen>冻结</>后，<@ba.cryst>寒冷伤害</><@ba.vup>+{cryst_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "pulse_dmg_up": 0.5,
+      "duration": 10,
+      "cryst_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -32202,7 +35961,27 @@
    "suitName": "脉冲式"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_cpinflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.conduct>导电</>后，<@ba.pulse>电磁伤害</><@ba.vup>+{pulse_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.frozen>冻结</>后，<@ba.cryst>寒冷伤害</><@ba.vup>+{cryst_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "pulse_dmg_up": 0.5,
+      "duration": 10,
+      "cryst_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -32310,7 +36089,27 @@
    "suitName": "脉冲式"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_cpinflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.conduct>导电</>后，<@ba.pulse>电磁伤害</><@ba.vup>+{pulse_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.frozen>冻结</>后，<@ba.cryst>寒冷伤害</><@ba.vup>+{cryst_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "pulse_dmg_up": 0.5,
+      "duration": 10,
+      "cryst_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -32418,7 +36217,27 @@
    "suitName": "脉冲式"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_cpinflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.conduct>导电</>后，<@ba.pulse>电磁伤害</><@ba.vup>+{pulse_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.frozen>冻结</>后，<@ba.cryst>寒冷伤害</><@ba.vup>+{cryst_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "pulse_dmg_up": 0.5,
+      "duration": 10,
+      "cryst_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -32553,7 +36372,27 @@
    "suitName": "脉冲式"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_cpinflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.conduct>导电</>后，<@ba.pulse>电磁伤害</><@ba.vup>+{pulse_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.frozen>冻结</>后，<@ba.cryst>寒冷伤害</><@ba.vup>+{cryst_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "pulse_dmg_up": 0.5,
+      "duration": 10,
+      "cryst_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -32700,7 +36539,27 @@
    "suitName": "脉冲式"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_cpinflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.conduct>导电</>后，<@ba.pulse>电磁伤害</><@ba.vup>+{pulse_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.frozen>冻结</>后，<@ba.cryst>寒冷伤害</><@ba.vup>+{cryst_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "pulse_dmg_up": 0.5,
+      "duration": 10,
+      "cryst_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -32847,7 +36706,27 @@
    "suitName": "脉冲式"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_cpinflict_01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者源石技艺强度<@ba.vup>+{phy_spell_up:0}</>。\n当装备者施加<#ba.conduct>导电</>后，<@ba.pulse>电磁伤害</><@ba.vup>+{pulse_dmg_up:0%}</>，持续{duration}秒，该效果无法叠加；当装备者施加<#ba.frozen>冻结</>后，<@ba.cryst>寒冷伤害</><@ba.vup>+{cryst_dmg_up:0%}</>，持续{duration2}秒，该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 30,
+      "pulse_dmg_up": 0.5,
+      "duration": 10,
+      "cryst_dmg_up": 0.5,
+      "duration2": 10
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -32982,7 +36861,26 @@
    "suitName": "险关"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_spellburst01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者法术伤害<@ba.vup>+{spell_dmg_up:0%}</>。\n当装备者造成<#ba.naturalburst>自然爆发</>、<#ba.crystburst>寒冷爆发</>时，源石技艺强度<@ba.vup>+{phy_spell_up:0}</>，持续{duration}秒。该效果最多叠加{max_stack}层，每层单独计算持续时间，每0.1秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 16,
+      "spell_dmg_up": 0.16,
+      "max_stack": 3,
+      "duration": 20
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -33117,7 +37015,26 @@
    "suitName": "险关"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_spellburst01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者法术伤害<@ba.vup>+{spell_dmg_up:0%}</>。\n当装备者造成<#ba.naturalburst>自然爆发</>、<#ba.crystburst>寒冷爆发</>时，源石技艺强度<@ba.vup>+{phy_spell_up:0}</>，持续{duration}秒。该效果最多叠加{max_stack}层，每层单独计算持续时间，每0.1秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 16,
+      "spell_dmg_up": 0.16,
+      "max_stack": 3,
+      "duration": 20
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -33252,7 +37169,26 @@
    "suitName": "险关"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_spellburst01": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者法术伤害<@ba.vup>+{spell_dmg_up:0%}</>。\n当装备者造成<#ba.naturalburst>自然爆发</>、<#ba.crystburst>寒冷爆发</>时，源石技艺强度<@ba.vup>+{phy_spell_up:0}</>，持续{duration}秒。该效果最多叠加{max_stack}层，每层单独计算持续时间，每0.1秒最多触发一次。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "phy_spell_up": 16,
+      "spell_dmg_up": 0.16,
+      "max_stack": 3,
+      "duration": 20
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -33387,7 +37323,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -33495,7 +37449,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -33630,7 +37602,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -33765,7 +37755,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -33900,7 +37908,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -34035,7 +38061,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -34170,7 +38214,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -34305,7 +38367,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -34413,7 +38493,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -34548,7 +38646,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -34683,7 +38799,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -34818,7 +38952,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -34953,7 +39105,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -35088,7 +39258,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -35223,7 +39411,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -35358,7 +39564,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  },
@@ -35493,7 +39717,25 @@
    "suitName": "长息"
   },
   "suitSkill": {
-   "SkillPatchDataBundle": []
+   "passive_equipsuit_usp_02": [
+    {
+     "level": 1,
+     "name": "",
+     "description": "3件套组效果：装备者生命值<@ba.vup>+{hp_up}</>。\n装备者施加<#ba.enhance>增幅</>、<#ba.guard>庇护</>、<#ba.vulnerable>脆弱</>、<#ba.weak>虚弱</>后，使其他队友造成的伤害<@ba.vup>+{dmg_up:0%}</>，持续{duration}秒。该效果无法叠加。",
+     "cost": {
+      "type": 0,
+      "value": 0
+     },
+     "coolDown": 0,
+     "maxChargeTime": 1,
+     "blackboard": {
+      "hp_up": 1000,
+      "dmg_up": 0.16,
+      "duration": 15
+     },
+     "subDesc": []
+    }
+   ]
   },
   "other": []
  }

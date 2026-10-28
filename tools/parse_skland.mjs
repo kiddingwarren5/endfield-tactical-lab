@@ -30,7 +30,8 @@ function tagMap(catalogFile,subId){ const cat=JSON.parse(fs.readFileSync(catalog
 function tagsOf(item,tm){ const out={}; for(const t of item.tagIds||[]){ const e=tm.map[t]; if(!e) continue; (out[e.group]??=[]).push(e.name); } return out; }
 const findWidget=(chapters,title)=>chapters.flatMap(c=>c.widgets).find(w=>w.title===title);
 const tableAfterHeading=(blocks,heading)=>{ const i=blocks.findIndex(b=>b.kind==='heading'&&b.text===heading); if(i<0) return null; const t=blocks.slice(i+1).find(b=>b.kind==='table'); return t?t.rows:null; };
-const rowsToSeries=rows=>{ const o={header:rows[0]}; for(const r of rows.slice(1)) o[r[0]]=r.slice(1); return o; };
+// Some skill tables repeat a row label (梨诺's ultimate has two "每点敏捷增加的治疗值" rows); keep later copies as "label#2" instead of overwriting.
+const rowsToSeries=rows=>{ const o={header:rows[0]}; for(const r of rows.slice(1)){ let k=r[0], n=1; while(k in o) k=`${r[0]}#${++n}`; o[k]=r.slice(1); } return o; };
 
 function parseOperator(item,tm){
   const ch=walkItem(item); const tags=tagsOf(item,tm);
@@ -46,7 +47,8 @@ function parseWeapon(item,tm){
   const info=Object.fromEntries((findWidget(ch,'武器资料')?.tableList||[]).map(r=>[r.label,r.value]));
   const wb=findWidget(ch,'武器信息')?.tabs[0]?.blocks||[]; const base=tableAfterHeading(wb,'基础信息'); const bt=tableAfterHeading(wb,'突破总览');
   const sk=findWidget(ch,'武器技能')?.tabs[0]?.blocks.find(b=>b.kind==='table')?.rows||[];
-  const skillNames=sk[0]?.slice(1)||[]; const skills=skillNames.map((n,i)=>({name:n,ranks:sk.slice(1).map(r=>({rank:r[0],text:r[i+1]}))}));
+  const skillNames=sk[0]?.slice(1)||[]; // 3-star weapon pages leave an empty spacer column between their two skills; drop it so skills stay aligned with the game's skill list.
+  const skills=skillNames.map((n,i)=>({name:n,ranks:sk.slice(1).map(r=>({rank:r[0],text:r[i+1]}))})).filter(s=>s.name||s.ranks.some(r=>r.text));
   return {itemId:item.itemId,name:item.name,cover:item.brief?.cover,tags,info,baseAttack:base?rowsToSeries(base):null,breakthrough:bt,skills,publishedAtTs:item.publishedAtTs};
 }
 function parseGear(item,tm){
