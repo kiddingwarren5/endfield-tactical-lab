@@ -13,7 +13,9 @@ export function cycleOf(sim,memberIdxs){ const names=sim.summary.names||[], idxs
 // objective 'guaranteed'：只计主控普攻 + 全员技能（不计副控自动普攻），与页面“保底”口径一致
 export function scoreOf(sim,memberIdxs,horizon,objective,mainControl){ const cyc=cycleOf(sim,memberIdxs); const until=cyc.complete?cyc.end:horizon; const keep=h=>objective==='total'||!(h.kind==='normal'&&h.member!==mainControl); const dmg=sim.hits.filter(h=>h.t<=until&&keep(h)).reduce((a,h)=>a+h.damage,0); let dps=dmg/Math.max(1,until);
   // 'burst'：要求全员首次终结技集中释放（首尾间隔 ≤ 12 s，含演出），分散则按比例折扣 —— 对应玩家“攒满后四连开”的打法
-  if(objective==='burst'&&cyc.complete){ const ts=Object.values(cyc.castByMember); const spread=Math.max(...ts)-Math.min(...ts); const W=12; if(spread>W) dps*=W/spread; }
+  if(objective==='burst'&&cyc.complete){ const ts=Object.values(cyc.castByMember); const spread=Math.max(...ts)-Math.min(...ts); const W=12; if(spread>W) dps*=W/spread;
+    // 主控（主C）的终结技收尾：辅助先上增幅/脆弱，主C最后放；主C不是最后则折扣
+    const mcT=cyc.castByMember[mainControl]; if(mcT!=null&&ts.some(t=>t>mcT+1e-6)) dps*=0.7; }
   return {dps:cyc.complete?dps:dps*0.5,total:dmg,until,complete:cyc.complete,cycle:cyc}; }
 
 function feasibleActions(sim,members,t,mechanicsById){ // from the simulation state near t (samples + events)
