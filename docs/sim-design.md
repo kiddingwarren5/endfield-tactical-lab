@@ -78,3 +78,14 @@
 - 终结技演出（castSeconds.ultimate=3 s，timing.ultimatePausesTimers）期间，任何干员不能施放战技/连携/终结技（实机：演出全局暂停）。此前允许重叠，导致搜索利用“先放别礼、再放祀增幅、别礼伤害在增幅内结算”的模型漏洞。
 - 同一时刻的事件顺序：状态事件（命中、附着、爆发）→ 普攻 → 计划动作；与 `sequence` 模式解码一致，保证“解码出的时刻回放时可执行”。
 - `input.sequence`：顺序轴模式，每 0.5 s 或任一事件后尝试执行下一步；输出 `sim.scheduled`（精确时刻）。
+
+## 触发系统（2026-10-29 重写）
+- 以前：按条件文本正则猜测触发（十几种说法），其余效果在模拟中永不触发（约 170 条静默）。
+- 现在：以效果目录 `condition.trigger` 代码为唯一依据，查 `dist/engine/sim/triggers.js`：
+  - 事件型 `{on:…}`：施放（cast）、命中（hit，按段）、附着（attach）、层数（attachLayers）、消耗（consume）、异常（abnormal）、爆发（burst）、重击（heavy）、定身（root）、水龙卷数量（tornado）、提前引爆（earlyWave）、终结技结束（ultimateEnd）、碎冰（iceShatter）、战斗开始（battleStart）、施加增幅/脆弱/易伤类（applyDebuffCategory）、自身技能回技力（spGain）。过滤字段：kind/by/element/which/zone/source/min/heavy/infused/targetHas/state/anyone/once/duration。
+  - 状态型 `{state:…}`：结算时判定（终结技期间、目标冻结/寒冷附着/失衡、智形态、恒真/恒假）。
+  - `{handled}`：引擎别处已处理（别礼脆弱 ×1.5、祀按层倍率、汤汤涡流返还）。
+  - `{unmodeled:原因}`：明确未建模（治疗、暴击、破防/物理异常、源石结晶、法术异常消耗、各类专属状态），原因列在 docs/trigger-coverage.md。
+- 形态门槛：代码前缀 `intGeWill&` / `willGtInt&`，以及文本“阵诀·智/意”，按干员当前形态（面板自动判定）门控。
+- 新机制：汤汤涡流（连携生成、战技/提前引爆消耗，每处返还 20 技力、多一个水龙卷）、定身事件（祀战技、汤汤终结技）、终结技结束事件、主控下落攻击。
+- 覆盖测试：tests/triggers.test.mjs 要求目录里每个代码都在表中有归属，并生成 docs/trigger-coverage.md。

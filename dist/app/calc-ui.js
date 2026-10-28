@@ -3,6 +3,7 @@ import operators from '../data/operators.js'; import weapons from '../data/weapo
 import {getStats} from '../engine/stats.js'; import {ENGINE_VERSION,GRADE_RESISTANCE,calcSegment} from '../engine/damage.js'; import {skillSegments,effectiveMode,mechSegments} from '../engine/skills.js'; import {candidateEffects,appliedFor,resolveValue,segmentStatus,splitApplied} from '../engine/resolve.js'; import {effectApplies} from '../engine/damage.js';
 import {h,$,fmt,pct,pct2,ELEMENT_CN,KIND_CN,PROF_CN,WT_CN,ABIL_CN,colorOf,select,picker,panel,field,download} from './ui.js';
 import {newMember,clone,weaponPotentialToRank,rankToWeaponPotential} from './state.js';
+import {runSim} from './timeline-ui.js';
 
 const data={operators,weapons,gear,sets,consumables,effects};
 const ZONE_CN={bonus:'增伤',amp:'增幅',fragile:'脆弱',vulnerable:'易伤',ratioMul:'倍率倍增',ratioAdd:'倍率加成',other:'其他/特殊'};
@@ -33,7 +34,7 @@ export function renderCalc(root,state,update){
   if(!member){ left.append(h('section',{class:'panel'},h('p',{},'请选择干员。'))); root.append(h('div',{class:'workspace'},left,center,right)); return; }
   const fold=(id,c)=>{ state.ui.folds[id]=c; };
   left.append(operatorPanel(state,update,member,res,fold), gearPanel(state,update,member,res,fold), consumablePanel(state,update,member,fold));
-  center.append(hitPanel(state,update,member,res,fold), buffPanel(state,update,member,res,fold), enemyPanel(state,update,fold));
+  center.append(hitPanel(state,update,member,res,fold), rotationStatePanel(state,member,res,fold), buffPanel(state,update,member,res,fold), enemyPanel(state,update,fold));
   right.append(resultPanel(state,update,res), breakdownPanel(state,res,fold));
   root.append(h('div',{class:'workspace'},left,center,right), h('div',{class:'workspace single bottom'},snapshotBox(state,update,res,fold), importEntry()));
 }
@@ -105,6 +106,20 @@ function hitPanel(state,update,member,res,fold){
   return panel({id:'hit',index:'03',title:'选择一段伤害',folds:state.ui.folds,onFold:fold},field('伤害段 / 技能总伤 / 机制伤害',s),h('div',{class:'event-controls'},...controls),readout,desc);
 }
 
+// 排轴实际状态：这段伤害在当前轴（排轴页生成/编辑的动作序列）里每次命中的实际数值与生效效果，不需要手动勾选
+const simCache=new Map();
+function rotationStatePanel(state,member,res,fold){
+  const sim=state.sim; const body=[];
+  if(!sim?.timeline?.length){ body.push(h('p',{class:'muted'},'还没有轴。到“排轴”页生成后，这里会显示这段伤害在轴里每次命中的实际数值。')); }
+  else { const key=JSON.stringify([state.team,sim.timeline,sim.initialSp,sim.initialEnergy,sim.duration,state.enemy,state.mainControl,state.options]); let M=simCache.get(key); if(!M){ try{ M=runSim(state)?.main; }catch(e){ M=null; } if(simCache.size>6) simCache.delete(simCache.keys().next().value); simCache.set(key,M); }
+    if(!M) body.push(h('p',{class:'muted'},'轴无法模拟。')); else { const segIds=new Set(res.segments.map(x=>x.id)); const hits=M.hits.filter(x=>x.member===state.active&&segIds.has(x.segment));
+      if(!hits.length) body.push(h('p',{class:'muted'},'这段伤害在当前轴里没有出现。')); else { const groups=[]; for(const x of hits){ let g=groups.find(y=>Math.abs(y.t-x.t)<1.5&&y.kind===x.kind); if(!g){ g={t:x.t,kind:x.kind,dmg:0,applied:new Map()}; groups.push(g); } g.dmg+=x.damage; for(const a of x.applied) if(!g.applied.has(a.id)) g.applied.set(a.id,a); }
+        const total=groups.reduce((a,g)=>a+g.dmg,0);
+        body.push(h('div',{class:'result-mini'},h('span',{},`在轴里出现 ${groups.length} 次`),h('strong',{},`合计 ${fmt(total)}`)));
+        body.push(h('table',{class:'seg-table'},h('thead',{},h('tr',{},h('th',{},'时刻'),h('th',{},'伤害'),h('th',{},'当时生效的效果'))),h('tbody',{},...groups.map(g=>h('tr',{},h('td',{},`${g.t.toFixed(1)}s`),h('td',{},fmt(g.dmg)),h('td',{class:'small muted'},[...g.applied.values()].map(a=>`${a.name} ${a.value>=0?'+':''}${a.value}${a.zone==='ratioMul'||a.zone==='other'?'':'%'}`).join('；')||'无'))))));
+      } } }
+  return panel({id:'rotstate',index:'03b',title:'排轴里的实际伤害',folds:state.ui.folds,onFold:fold},...body);
+}
 function buffPanel(state,update,member,res,fold){
   const sel=state.selection; const segs=res.segments; const tabs=[['unified','统一设置'],...(segs.length>1?segs.map(s=>[s.id,s.label]):[])];
   if(!tabs.some(t=>t[0]===state.buffTab)) state.buffTab='unified';
@@ -121,7 +136,7 @@ function buffPanel(state,update,member,res,fold){
     segForTab?(inheriting?h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{s.buffs.perSegment[segForTab.id]=clone(s.buffs.unified);})},'单独设置此段'):h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{delete s.buffs.perSegment[segForTab.id];})},'恢复继承统一设置')):'');
   const note=segForTab?h('div',{class:'muted small'},inheriting?'跟随统一设置。':'已单独设置。'):h('div',{class:'muted small'},'标“自动”的效果不用勾选。');
   const groups=[...DAMAGE_ZONES,'stat'].map(z=>{ const list=filtered.filter(c=>z==='stat'?!DAMAGE_ZONES.includes(c.effect.zone):c.effect.zone===z); if(!list.length) return ''; return h('div',{class:'buff-group'},h('div',{class:'buff-group-title'},h('span',{},z==='stat'?'属性类（条件触发）':ZONE_CN[z]+'乘区'),h('span',{},z==='stat'?'进面板':'同区相加')),...list.map(c=>buffCard(c,settings,inheriting,segForTab,update,state,segForTab?res.results.find(r=>r.segmentId===segForTab.id)?.segIndex:null))); });
-  return panel({id:'buff',index:'04',title:'增益与减益',folds:state.ui.folds,onFold:fold},tabBar,note,toolbar,...groups,filtered.length?'':h('div',{class:'muted'},'当前伤害段没有可用效果。'));
+  return panel({id:'buff',index:'04',title:'手动假设（可选）',defaultCollapsed:true,folds:state.ui.folds,onFold:fold},tabBar,note,toolbar,...groups,filtered.length?'':h('div',{class:'muted'},'当前伤害段没有可用效果。'));
 }
 function buffCard(c,settings,inheriting,seg,update,state,segIndex){
   const e=c.effect; const segSt=seg?segmentStatus(c,seg,segIndex,state.active):'user'; const auto=(e.condition?.mode||'auto')==='auto'||segSt==='auto'; const disabled=segSt==='disabled'; const on=!disabled&&(auto||Boolean(settings.toggles[e.id]));
