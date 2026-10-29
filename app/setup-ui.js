@@ -69,10 +69,9 @@ function memberEditor(state,update,i){
     const opts=gear.filter(g=>g.slot===type).sort((a,b)=>(a.setName||'').localeCompare(b.setName||'')).map(g=>({id:g.id,name:g.name,icon:g.icon,sub:`${(g.setName||'').replace('装备组','')} · ${g.attrs.map(a=>a.name).join(' / ')}`,disabled:g.id===otherKit}));
     return h('div',{class:'gear-row'},h('div',{class:'gear-head'},h('span',{class:'gear-slot-label'},label),picker({options:opts,value:conf.id,placeholder:'未装备',onChange:id=>custom(x=>{x.gear[slot]={id,refine:[3,3,3]};})})),
       item?h('div',{class:'refine-grid'},...item.attrs.map((a,k)=>{ const r=conf.refine[k]??3; return h('label',{class:'refine-field'},h('span',{},a.name,' ',h('b',{},a.pct?pct(a.display?.[r]??a.values[r]):fmt(a.values[r]))),select([0,1,2,3].map(n=>[n,`精锻 +${n}`]),r,v=>custom(x=>{x.gear[slot].refine[k]=Number(v);}))); })):''); });
-  const setLines=Object.entries(st.sets).map(([id,n])=>{ const s=sets.find(x=>x.id===id); const need=s?.pieces||3; return h('div',{class:n>=need?'':'muted'},`${s?.name||id} ${n} / ${need} 件${n>=need?'，套装效果生效':''}`); });
   const schemes=schemesOf(op); const curScheme=m.buildSource==='custom'?'custom':String(m.buildScheme||0);
   const schemeBlock=block('配装方案',select([...schemes.map((s,k)=>[k,s.name]),['custom','自定义']],curScheme,v=>{ if(v==='custom') return; update(s=>{ applyDefaultBuild(s.team[i],Number(v)); }); }));
-  const gearBlock=block('装备',...gearRows,h('div',{class:'set-status'},setLines.length?setLines:h('span',{class:'muted'},'未装备套装')));
+  const gearBlock=block('装备',...gearRows);
   const chips=m.consumables.map(id=>{ const c=consumables.find(x=>x.id===id); return h('span',{class:'chip'},h('img',{class:'chip-thumb',src:c?.icon,alt:''}),c?.name||id,h('button',{type:'button',class:'chip-x',onclick:()=>edit(x=>{x.consumables=x.consumables.filter(y=>y!==id);})},'×')); });
   const foodBlock=block('食物与药剂',h('div',{class:'chips'},chips.length?chips:h('span',{class:'muted'},'未使用')),picker({options:consumables.filter(c=>!m.consumables.includes(c.id)).map(c=>({id:c.id,name:c.name,icon:c.icon,sub:c.effectText})),value:null,placeholder:'添加食药',empty:false,onChange:id=>edit(x=>{x.consumables.push(id);})}),
     state.team.filter(Boolean).length>1?h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{ for(const o of s.team) if(o) o.consumables=[...s.team[i].consumables]; })},'全队同样'):'');
