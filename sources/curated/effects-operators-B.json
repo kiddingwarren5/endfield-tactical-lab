@@ -3482,7 +3482,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0013_aglina.potentials[1]"
   },
-  "notes": "此条为相对无潜能时的增量；含潜能2总值=基础+per×2×min(破防层数+1,4)。不确定：①“视为额外1层破防”仅在目标已破防时生效（按此填）；②目标0层破防时也视为1层（则0层时也应有增量 2×per）。",
+  "notes": "此条为相对无潜能时的增量；含潜能2总值=基础+per×2×min(破防层数+1,4)。不确定：①“视为额外1层破防”仅在目标已破防时生效（）；②目标0层破防时也视为1层（则0层时也应有增量 2×per）。 按原文“结算时视为目标额外拥有 1 层破防”：0 层也按 1 层计（verification-needed 74）",
   "rankType": "skill12",
   "modifies": [
    "chr_0013_aglina.ult.fragile.breach"

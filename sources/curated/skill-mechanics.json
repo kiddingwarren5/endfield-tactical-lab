@@ -4571,7 +4571,7 @@
     }
    ],
    "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
-   "heals": true
+   "healsNote": "天赋迟来的回信要命中至少两个敌人才治疗，单目标靶上不发生（scenario）"
   },
   "combo": {
    "trigger": {
@@ -4619,8 +4619,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
-   "heals": true
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 90,
@@ -5309,11 +5308,11 @@
      "id": "skill2",
      "from": "skill",
      "times": 1,
-     "delay": 0.5,
      "when": {
       "targetState": "wing"
      },
-     "note": "衔火血翼爆裂（短暂延迟）"
+     "note": "衔火血翼爆裂：连携命中后短暂延迟",
+     "afterHit": 0.5
     }
    ],
    "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算"

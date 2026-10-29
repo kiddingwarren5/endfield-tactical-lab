@@ -1,6 +1,6 @@
 # 触发覆盖（由 tests/triggers.test.mjs 生成）
 
-生成：2026-10-29T15:35:14.381Z
+生成：2026-10-29T15:43:27.256Z
 
 | 归属 | 效果数 |
 |---|---|
@@ -20,7 +20,7 @@
 - 需要打断敌人蓄力；对照靶不蓄力（1）：chr_0005_chen.talent.poise
 - 需要受到法术伤害并按概率免疫；对照靶的攻击按物理计，保底不计概率（1）：chr_0022_bounda.talent.elusive
 - 暴击伤害只在暴击口径生效；层数每次终结技重数，终结技结束失效（1）：chr_0017_yvonne.ult.critDmg
-- 仅暴击口径（critMode ≠ never）触发；保底口径按不暴击计；16 层后生效 20 s 并清空狼血（1）：wpn_sword_0022.p3
+- 仅暴击口径（critMode ≠ never）触发；保底口径按不暴击计；16 层后生效 20 s，结束时清空狼血（1）：wpn_sword_0022.p3
 - 身形如风 4 层：战技后 15 s 内最多 4 次（1）：wpn_funnel_0019.p3
 
 ## 逐条
@@ -300,7 +300,7 @@
 | wpn_pistol_0011.p2 | skillOrUltApplyColdAttach | event |
 | wpn_pistol_0011.p3 | skillOrUltApplyArtsFragile | event |
 | wpn_sword_0022.p2 | critHit | event：仅暴击口径（critMode ≠ never）触发；保底口径按不暴击计 |
-| wpn_sword_0022.p3 | wolfBlood16 | event：仅暴击口径（critMode ≠ never）触发；保底口径按不暴击计；16 层后生效 20 s 并清空狼血 |
+| wpn_sword_0022.p3 | wolfBlood16 | event：仅暴击口径（critMode ≠ never）触发；保底口径按不暴击计；16 层后生效 20 s，结束时清空狼血 |
 | wpn_funnel_0015.p2 | skillConsumeArtsAnomaly | event |
 | wpn_funnel_0015.p3 | ultCast | event |
 | wpn_funnel_0017.p2 | gainElectricAmp | event |
