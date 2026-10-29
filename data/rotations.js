@@ -1,8 +1,16 @@
 // 预设排轴（一图流）。动作顺序来自社区共识案例（docs/cases 06/07：“三充一爆”、每节凑 4 层再让别礼连携吃）与规则推导；
 // 具体时刻不在此写死：界面与 tests/rotations.test.mjs 用 greedySchedule 把顺序轴放到模拟器里最早可行的时刻，保证每一步可执行。
 // 字段：m 干员名；k skill/combo/ultimate；stage 战技替换阶段名（仅说明）；wait 等到寒冷附着达到的层数；seg 节序号；why 这一步的目的。
-import {DEFAULT_BUILDS} from './builds.js';
-const B=n=>({weapon:DEFAULT_BUILDS[n].weapon,gear:DEFAULT_BUILDS[n].gear});
+// 标答编队的配装钉死在这里，按案例 06 视频 2:59–3:33 作者推荐：祀 应龙×3 + 生物辅助护板、别礼 潮涌×3 + 生物辅助护板、汤汤 碾骨×3、诀 长息×3 + 集成时运腰带。
+// 视频没说武器和具体件名：件名取社区同套装的主流写法；汤汤第四件、诀的腰带（数据里没有）用社区方案替代；武器按社区主推（诀用作品：蚀迹保持意形态）。见 docs/verification-needed.md 45。
+// 页面上的默认配装表（builds.js）按社区方案排序，与这里不联动。
+const CASE06={
+  '诀':{weapon:'作品：蚀迹',gear:['长息轻护甲','长息裹手','长息加固板','长息辅助臂']},
+  '别礼':{weapon:'赫拉芬格',gear:['涌浪重装甲','潮涌手甲','悬河供氧栓','生物辅助护板']},
+  '汤汤':{weapon:'落草',gear:['碾骨重护甲','碾骨腕带·壹型','碾骨面具·贰型','生物辅助护板']},
+  '祀':{weapon:'玉中身',gear:['50式应龙软甲','50式应龙手套','50式应龙信标','生物辅助护板']}
+};
+const B=n=>CASE06[n];
 const COLD_TEAM={
   // 编队顺序 = 01–04 号位（祀终结技“01 号位连携冷却 −20s”作用于 01 号位）。
   members:[
@@ -78,20 +86,20 @@ export default [
 const FULL_ENERGY=[100,240,90,80]; // 诀/别礼/汤汤/祀 终结技能量上限（祀潜 3；汤汤潜 4 可 −15%）
 export const scenarios=[
   {id:'target',name:'常规 · 对照靶',desc:'无限血木桩，无开局终结技能量（常规关卡 / 战争回响）。防御 100、抗性 0 为假设值。',enemy:{},initial:{sp:200,energy:[0,0,0,0]},
-   tips:['无限血木桩，开局没有终结技能量。','先充能，再集中爆发。']},
+   facts:['开局没有终结技能量']},
   {id:'dusk-short',name:'危境再现 · 短战 Boss（罗丹 / 阿莱克琉斯）',desc:'榜单日志（案例 01、03）显示终结技在 3–10 s 内出现，按“开局四人终结技能量已满”处理；目标是 25 s 内打完，不做充能节。',enemy:{},initial:{sp:200,energy:FULL_ENERGY},timeLimit:25,
    steps:[
      {m:'汤汤',k:'skill',seg:1,why:'寒冷第 1 层'},{m:'祀',k:'skill',stage:'河山共影',seg:1,why:'寒冷第 2 层；笔意记录整场爆发'},{m:'汤汤',k:'combo',seg:1,why:'涡流 + 回能'},{m:'诀',k:'combo',seg:1,why:'寒冷脆弱 + 自然脆弱'},
      {m:'别礼',k:'skill',seg:1,why:'灌注 → 重击幻影追击：第 3 层'},{m:'祀',k:'ultimate',seg:1,why:'增幅 43.2% 先上；01 号位诀连携冷却 −20 s'},{m:'诀',k:'ultimate',seg:1,why:'破晦阵 + 终结技脆弱'},{m:'汤汤',k:'ultimate',seg:1,why:'定身 + 持续伤害'},
      {m:'别礼',k:'combo',wait:3,seg:1,why:'增幅/脆弱覆盖内吃 3 层（短战不等第 4 层）'},{m:'别礼',k:'ultimate',seg:1,why:'临终别礼收尾（脆弱 ×1.5）'},{m:'祀',k:'combo',seg:1,why:'成竹在胸'},{m:'祀',k:'skill',stage:'起墨',seg:1,why:'墨魂'},
      {m:'汤汤',k:'skill',seg:2,why:'第二轮：寒冷第 1 层'},{m:'祀',k:'skill',stage:'收笔',seg:2,why:'结算第一轮笔意（0 技力）'},{m:'汤汤',k:'combo',seg:2,why:'涡流 + 回能'},{m:'祀',k:'skill',stage:'河山共影',seg:2,why:'第 2 层；新一轮笔意'},{m:'诀',k:'combo',seg:2,why:'祀终结技刷新后的诀连携'},{m:'别礼',k:'skill',seg:2,why:'第 3 层'},{m:'别礼',k:'combo',wait:3,seg:2,why:'第二次斩击（通常已超出 25 s，Boss 没死再打）'},{m:'祀',k:'combo',seg:2,why:'成竹在胸'}],
-   tips:['开局四人终结技都是满的，25 秒内打完。','别礼连携不等第 4 层。','祀终结技先开，别礼终结技在增幅里放。']},
+   facts:['开局四人终结技能量满','限时 25 秒']},
   {id:'dusk-phase',name:'危境再现 · 阶段转换 Boss',desc:'日志显示 12.0–31.4 s 几乎无伤害（推测为转阶段 / 无敌段）。第一段用掉祀、诀、汤汤终结技与一次别礼 4 层连携；别礼终结技留到第二段收尾（不等增幅）。',enemy:{invulnerable:[[12,31.4]]},initial:{sp:200,energy:FULL_ENERGY},
    steps:[
      {m:'汤汤',k:'skill',seg:1,why:'寒冷第 1 层'},{m:'祀',k:'skill',stage:'河山共影',seg:1,why:'寒冷第 2 层；笔意'},{m:'汤汤',k:'combo',seg:1,why:'涡流 + 回能'},{m:'诀',k:'combo',seg:1,why:'脆弱'},{m:'别礼',k:'skill',seg:1,why:'第 3 层'},
      {m:'祀',k:'ultimate',seg:1,why:'第一段用掉祀增幅'},{m:'诀',k:'ultimate',seg:1,why:'破晦阵'},{m:'汤汤',k:'ultimate',seg:1,why:'定身'},{m:'别礼',k:'combo',wait:3,seg:1,why:'第一段的斩击'},{m:'祀',k:'combo',seg:1,why:'成竹在胸'},{m:'祀',k:'skill',stage:'收笔',seg:1,why:'在无敌段前结算笔意'},
      {m:'祀',k:'skill',stage:'河山共影',seg:2,minT:31.5,why:'第二段开始：重新标记'},{m:'汤汤',k:'skill',seg:2,why:'第 2 层'},{m:'汤汤',k:'combo',seg:2,why:'涡流'},{m:'诀',k:'combo',seg:2,why:'脆弱'},{m:'别礼',k:'skill',seg:2,why:'第 3 层'},{m:'别礼',k:'combo',wait:3,seg:2,why:'第二段斩击'},{m:'别礼',k:'ultimate',seg:2,why:'别礼终结技收尾，不等祀增幅'},{m:'祀',k:'combo',seg:2,why:'成竹在胸'},{m:'祀',k:'skill',stage:'收笔',seg:2,why:'结算笔意'}],
-   tips:['Boss 在 12 到 31 秒无敌。','第一段用掉祀、诀、汤汤终结技；别礼终结技留到第二段收尾。','转阶段前先收笔。']},
+   facts:['开局终结技能量满','12 到 31.4 秒 Boss 无敌']},
   {id:'stagger',name:'危境再现 · 可失衡 Boss（白垩界卫）',desc:'日志：失衡后承伤 +30%、持续 11.19 s。失衡值上限官方未公开（此处假设 400，可在排轴模拟页的敌人设置里改）；模拟器会把主控处决与回技力算进去。',enemy:{staggerThreshold:400,staggerWindow:11.19,tier:'eliteOrBoss'},initial:{sp:200,energy:FULL_ENERGY},
-   tips:['Boss 失衡后 11 秒内多受 30% 伤害。','把别礼的 4 层连携和终结技放进失衡窗口。']}
+   facts:['开局终结技能量满','失衡后 11.2 秒内多受 30% 伤害']}
 ];

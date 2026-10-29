@@ -1,12 +1,12 @@
 // Boot: tab routing, global state, re-render on change. Persistence: localStorage (best effort).
-import {defaultState,STATE_VERSION} from './state.js';
+import {defaultState,ensureBuilds,STATE_VERSION} from './state.js';
 import {renderCalc,snapshotDialog} from './calc-ui.js';
 import {renderRotation} from './chart-ui.js';
 import {renderSetup} from './setup-ui.js';
 import {$,h} from './ui.js';
 
 let state=load()||defaultState();
-function load(){ try{ const raw=localStorage.getItem('endfield-lab-state'); if(!raw) return null; const s=JSON.parse(raw); if(s.version!==STATE_VERSION) return null; delete s.pendingSnapshot; return s; }catch{ return null; } }
+function load(){ try{ const raw=localStorage.getItem('endfield-lab-state'); if(!raw) return null; const s=JSON.parse(raw); if(s.version!==STATE_VERSION) return null; delete s.pendingSnapshot; ensureBuilds(s); return s; }catch{ return null; } }
 function save(){ try{ localStorage.setItem('endfield-lab-state',JSON.stringify(state)); }catch{} }
 
 const tabs={setup:'配置',rotation:'排轴',calculator:'伤害计算'};
