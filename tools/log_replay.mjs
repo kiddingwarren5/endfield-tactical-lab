@@ -1,11 +1,11 @@
 // 战斗日志逐击复现：用引擎 calcSegment 重算 zmdlogs 里每一次技能命中，和日志数值对照。
 // 面板按 roster 配装算；增益按日志区间；常驻被动（mode=auto）按效果目录；敌人防御/抗性按解包表。
-// 用法：node tools/log_replay.mjs [--detail] [--log <id后6位>]
+// 用法：node tools/log_replay.mjs [--detail] [--log <id后6位>] [--json <输出文件>]
 import fs from 'node:fs'; import path from 'node:path'; import {fileURLToPath} from 'node:url';
 const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'); const DIR=path.join(ROOT,'sources/raw/zmdlogs');
 const operators=(await import(ROOT+'/dist/data/operators.js')).default, weapons=(await import(ROOT+'/dist/data/weapons.js')).default, gear=(await import(ROOT+'/dist/data/gear.js')).default, sets=(await import(ROOT+'/dist/data/sets.js')).default, effects=(await import(ROOT+'/dist/data/effects.js')).default;
 const {getStats}=await import(ROOT+'/dist/engine/stats.js'); const {valueOf,ownedEffects,DAMAGE_ZONES}=await import(ROOT+'/dist/engine/effects.js'); const {calcSegment}=await import(ROOT+'/dist/engine/damage.js'); const {skillSegments}=await import(ROOT+'/dist/engine/skills.js'); const {loadWf}=await import(ROOT+'/tools/wf.mjs');
-const argv=process.argv.slice(2); const DETAIL=argv.includes('--detail'); const ONLY=argv[argv.indexOf('--log')+1]; const data={operators,weapons,gear,sets,effects};
+const argv=process.argv.slice(2); const DETAIL=argv.includes('--detail'); const ONLY=argv.includes('--log')?argv[argv.indexOf('--log')+1]:null; const JSON_OUT=argv.includes('--json')?argv[argv.indexOf('--json')+1]:null; const data={operators,weapons,gear,sets,effects};
 const ELEM={cryst:'cold',fire:'heat',pulse:'electric',natural:'nature',physical:'physical'}; const ZONE={dmg_inc:'bonus',amp:'amp',fragile:'fragile',vuln_taken:'vulnerable',prod_vuln_taken:'vulnerable',prod_dmg_inc:'bonus'};
 const all=JSON.parse(fs.readFileSync(path.join(DIR,'zmd_all.json')));
 
@@ -41,6 +41,7 @@ for(const [bid,{battle,events}] of Object.entries(all)){ if(ONLY&&!bid.endsWith(
   for(const list of Object.values(groups)){ const name=list[0].sourceCharacterName; const mb=byName[name]; if(!mb) continue; const key=list[0].eventKey.replace(/^(buff_)?chr_\d+_[a-z]+_/,''); const plan=mapGroup(name,key,list,mb,buffs); if(!plan){ const k=`${name} ${key}`; unmapped[k]=(unmapped[k]||0)+list.reduce((a,e)=>a+e.value,0); continue; }
     for(const p of plan){ const {ap,atk,names}=appliedAt(buffs,mb,p.e); const st=atk?getStats(mb.m,data,{extraStats:[{zone:'atkPct',value:atk*100,why:'日志攻击增益'}]}):mb.stats; const r=calcSegment({stats:st,seg:p.seg,rank:mb.m.skillRanks[p.kind],enemy,critMode:'never',applied:passives(mb).concat(ap),vars:p.vars||{}});
       rows.push({log:bid.slice(-6),boss:battle.bossName,t:p.e.tsMsFromStart/1000,tag:p.tag,pot:mb.m.potential,refine:mb.m.weapon.potential+1,logged:norm(p.e),engine:r.damage,ratio:norm(p.e)/r.damage,f:r.factors,buffs:names.join(' '),enemyAssumed:enemy.assumed}); } } }
+if(JSON_OUT) fs.writeFileSync(JSON_OUT,JSON.stringify(rows.map(r=>({...r,f:undefined,factors:r.f})),null,1));
 const stat=a=>{ const m=a.reduce((x,y)=>x+y,0)/a.length; const sd=Math.sqrt(a.reduce((x,y)=>x+(y-m)**2,0)/a.length); return {m,cv:sd/m,n:a.length}; };
 console.log(`已映射命中 ${rows.length}；未映射（按伤害合计）：${Object.entries(unmapped).sort((a,b)=>b[1]-a[1]).slice(0,12).map(([k,v])=>`${k} ${Math.round(v/1000)}k`).join('，')}`);
 const byTag={}; for(const r of rows) ((byTag[r.tag]??={})[`${r.log} ${r.boss}`]??=[]).push(r);
