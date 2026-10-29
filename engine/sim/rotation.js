@@ -29,7 +29,7 @@ export function resolveRotation(preset,ctx,scenario,isMain=true,teamOverride,{ma
   const timeline=g.timeline.map(a=>({t:a.t,member:a.member,kind:a.kind,step:a.idx}));
   const last=timeline.at(-1)?.t??0; const duration=Math.ceil(Math.max(last+6,scenario?.timeLimit||0));
   const run=p=>simulate({...input,timeline,params:{...input.params,duration,...p}});
-  const main=run({}); const lo=run({damageFactor:ctx.timing.nonControl.damageFactor[0],rhythmFactor:ctx.timing.nonControl.rhythmFactor[0]}); const hi=run({damageFactor:ctx.timing.nonControl.damageFactor[1],rhythmFactor:ctx.timing.nonControl.rhythmFactor[1]});
+  const main=run({}); const lo=run({damageFactor:ctx.timing.nonControl.damageFactor[0],rhythmFactor:ctx.timing.nonControl.rhythmFactor[0],controlUptime:ctx.timing.control?.uptime?.[0]}); const hi=run({damageFactor:ctx.timing.nonControl.damageFactor[1],rhythmFactor:ctx.timing.nonControl.rhythmFactor[1],controlUptime:ctx.timing.control?.uptime?.[1]});
   const cycle=cycleOf(main,input.team.map((_,i)=>i)); const end=scenario?.timeLimit??(cycle.complete?cycle.end:duration);
   const states=timeline.map(a=>stateAfter(main,a,names[a.member]));
   return {input,names,steps,timeline,notes:g.notes,skipped:g.skipped,main,lo,hi,cycle,end,duration,states,scenario};
@@ -65,7 +65,7 @@ function segmentize(timeline){ let seg=1, lastUlt=-Infinity, inBurst=false; retu
 function finish(input,ctx,timeline,scenario,plan,modeNote,window=null){
   const names=input.names; const last=timeline.at(-1)?.t??0; const duration=window??Math.ceil(Math.max(last+6,scenario?.timeLimit||0));
   const run=p=>simulate({...input,timeline,params:{...input.params,duration,...p}});
-  const main=run({}); const lo=run({damageFactor:ctx.timing.nonControl.damageFactor[0],rhythmFactor:ctx.timing.nonControl.rhythmFactor[0]}); const hi=run({damageFactor:ctx.timing.nonControl.damageFactor[1],rhythmFactor:ctx.timing.nonControl.rhythmFactor[1]});
+  const main=run({}); const lo=run({damageFactor:ctx.timing.nonControl.damageFactor[0],rhythmFactor:ctx.timing.nonControl.rhythmFactor[0],controlUptime:ctx.timing.control?.uptime?.[0]}); const hi=run({damageFactor:ctx.timing.nonControl.damageFactor[1],rhythmFactor:ctx.timing.nonControl.rhythmFactor[1],controlUptime:ctx.timing.control?.uptime?.[1]});
   const cycle=cycleOf(main,input.team.map((_,i)=>i).filter(i=>input.team[i])); const end=window??(scenario?.timeLimit??(cycle.complete?cycle.end:duration));
   const segs=segmentize(timeline); const steps=timeline.map((a,i)=>({m:names[a.member],k:a.kind,seg:segs[i],why:explainStep(main,a,names[a.member]),stage:main.events.find(e=>e.type==='cast'&&Math.abs(e.t-a.t)<2e-3&&e.who===names[a.member])?.stage}));
   const tl=timeline.map((a,i)=>({t:a.t,member:a.member,kind:a.kind,step:i})); const states=tl.map(a=>stateAfter(main,a,names[a.member]));

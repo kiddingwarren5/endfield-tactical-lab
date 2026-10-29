@@ -4,7 +4,7 @@
 //   历史最优单独保护；精英档案保留结构不同的好计划供重启；最后对精英轮流做由粗到细的时刻精调。
 // 同刻动作：统一按 (时刻, 成员, 类型) 排序后交给模拟器执行，缓存键用同一顺序，两边语义一致（docs/reviews/planner-review-gpt-2.md 第 1 条）。
 import {simulate} from './simulate.js';
-import {scoreOf} from './plan.js';
+import {scoreOf,plungeUseful} from './plan.js';
 const KINDS=['skill','combo','ultimate'];
 const r1=x=>Math.round(x*10)/10;
 const canon=plan=>[...plan].sort((a,b)=>a.t-b.t||a.member-b.member||a.kind.localeCompare(b.kind));
@@ -40,7 +40,7 @@ export function anchorsOf(sim,horizon){
 
 export function localSearchPlan(input,{horizon=60,objective='guaranteed',budgetMs=15000,maxEvals=2500,seeds=[],onProgress,seed=1,repair=6,archiveSize=12,stall=60,refineShare=0.25,deadline=null}={}){
   const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const mcIdx=input.mainControl??0; const W=horizon;
-  const actKinds=m=>m===mcIdx?[...KINDS,'plunge']:KINDS;
+  const canPlunge=plungeUseful(input); const actKinds=m=>(m===mcIdx&&canPlunge)?[...KINDS,'plunge']:KINDS;
   let rs=(seed>>>0)||1; const rnd=()=>{ rs^=rs<<13; rs>>>=0; rs^=rs>>>17; rs>>>=0; rs^=rs<<5; rs>>>=0; return rs/4294967296; }; const pick=arr=>arr[Math.floor(rnd()*arr.length)];
   const t0=Date.now(); const end=Math.min(t0+budgetMs,deadline??Infinity); const cache=new Map(); let evals=0, proposals=0, fresh=0, legal=0;
   const timeUp=()=>Date.now()>=end||evals>=maxEvals;

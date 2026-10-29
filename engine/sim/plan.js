@@ -1,5 +1,6 @@
 // 批次 7：自动排轴（束搜索 + 候选对照）与充能阈值（二分）。以 simulate() 为唯一评估器，不另建资源模型。
 import {simulate} from './simulate.js';
+import {specFor} from './triggers.js';
 const clone=x=>JSON.parse(JSON.stringify(x));
 export const PLAN_VERSION='0.1.0';
 
@@ -24,6 +25,9 @@ function feasibleActions(sim,members,t,mechanicsById){ // from the simulation st
   const ultCd={},comboCd={}; for(const e of sim.events){ if(e.t>t+1e-6) break; if(e.type==='cast'&&e.kind==='ultimate') ultCd[e.who]=e.cooldownUntil; if(e.type==='cast'&&e.kind==='combo') comboCd[e.who]=e.cooldownUntil; }
   members.forEach((m,k)=>{ const cost=m.skillCost??100; if(spAvail>=cost-1e-6) acts.push({member:m.idx,kind:'skill'}); if(comboReady[m.name]>=t-1e-6&&!(comboCd[m.name]>t+1e-6)) acts.push({member:m.idx,kind:'combo'}); if((s.energy[k]||0)>=m.energyMax-1e-6&&!(ultCd[m.name]>t+1e-6)) acts.push({member:m.idx,kind:'ultimate'}); });
   return acts; }
+
+// 下落攻击不是输出手段：只有编队里有依赖它的机制（汤汤提前引爆、以下落施加附着的效果）时才进入可排动作。否则搜索会把它当高效普攻连刷（对照表 2026-10-30 查出）。
+export function plungeUseful(input){ const team=(input.team||[]).filter(Boolean); const mechs=input.mechanics||[]; const ids=new Set(team.map(m=>m.operatorId)); for(const m of mechs){ if(ids.has(m.operatorId)&&m.ultimate?.plungeDuringUlt) return true; } for(const e of (input.data?.effects||[])){ if(!ids.has(e.owner?.id)) continue; const sp=specFor(e.condition?.trigger); if(!sp||sp.unknown) continue; if((sp.specs||[]).some(x=>x.by==='plunge'||(x.byIn||[]).includes('plunge'))) return true; } return false; }
 
 export function autoPlan(input,{beam=8,step=1.0,horizon=40,onProgress,objective='guaranteed'}={}){ const mc=input.mainControl??0;
   const {team,data}=input; const members=team.map((m,i)=>m?{idx:i,name:data.operators.find(o=>o.id===m.operatorId)?.name}:null).filter(Boolean);
@@ -78,7 +82,7 @@ export const WAIT_ACTS=[{kind:'wait',layers:3},{kind:'wait',layers:4}];
 const normAct=a=>a.kind==='wait'?(a.seconds!=null?{kind:'wait',seconds:a.seconds}:{kind:'wait',layers:a.layers}):(a.minT!=null?{member:a.member,kind:a.kind,minT:a.minT}:{member:a.member,kind:a.kind});
 const SHIFTS=[-4,-2,-1,1,2,4,8];
 export function annealSequence(input,seq0,{horizon=70,objective='guaranteed',budgetMs=8000,maxEvals=1200,onProgress,seed=1,noHold=false,deadline=null}={}){
-  const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const kinds=['skill','combo','ultimate']; const mcIdx=input.mainControl??0; const actsAll=noHold?[]:[...WAIT_ACTS]; /* noHold：既不按住也不生成等待动作 */ for(const m of memberIdxs){ for(const k of kinds) actsAll.push({member:m,kind:k}); if(m===mcIdx) actsAll.push({member:m,kind:'plunge'}); }
+  const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const kinds=['skill','combo','ultimate']; const mcIdx=input.mainControl??0; const actsAll=noHold?[]:[...WAIT_ACTS]; /* noHold：既不按住也不生成等待动作 */ for(const m of memberIdxs){ for(const k of kinds) actsAll.push({member:m,kind:k}); if(m===mcIdx&&plungeUseful(input)) actsAll.push({member:m,kind:'plunge'}); }
   let rs=(seed>>>0)||1; const rnd=()=>{ rs^=rs<<13; rs>>>=0; rs^=rs>>>17; rs^=rs<<5; rs>>>=0; return rs/4294967296; }; const pick=arr=>arr[Math.floor(rnd()*arr.length)];
   const ev=seq=>evalSequence(input,seq,{horizon,objective});
   let cur=seq0.map(normAct); let curE=ev(cur); let best=cur, bestE=curE; const t0=Date.now(); let evals=1, accepted=0; const T0=0.05, T1=0.002;
@@ -115,7 +119,7 @@ export function polishSequence(input,seq0,{horizon=70,objective='guaranteed',max
 // 第 0 层做一次 rollout（按策略采样整条序列并模拟打分），上层每轮调用下层、记住最好序列、把策略向它做一步梯度（Rosin 的 adapt）。有预算就停。
 export function nrpaSequence(input,{horizon=70,objective='guaranteed',budgetMs=8000,level=3,iters=10,maxLen=40,alpha=1,seedSeq=null,onProgress,seed=13}={}){
   const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const kinds=['skill','combo','ultimate']; const mcIdx=input.mainControl??0;
-  const acts=[...WAIT_ACTS,{kind:'wait',seconds:2},{kind:'wait',seconds:4}]; for(const m of memberIdxs){ for(const k of kinds) acts.push({member:m,kind:k}); if(m===mcIdx) acts.push({member:m,kind:'plunge'}); }
+  const acts=[...WAIT_ACTS,{kind:'wait',seconds:2},{kind:'wait',seconds:4}]; for(const m of memberIdxs){ for(const k of kinds) acts.push({member:m,kind:k}); if(m===mcIdx&&plungeUseful(input)) acts.push({member:m,kind:'plunge'}); }
   const STOP={kind:'stop'}; const all=[...acts,STOP]; const key=a=>a.kind==='stop'?'stop':a.kind==='wait'?`wait:${a.seconds??''}:${a.layers??''}`:`${a.member}:${a.kind}`; const allKeys=all.map(key); const code=(prev,k)=>prev+'>'+k;
   let rs=(seed>>>0)||1; const rnd=()=>{ rs^=rs<<13; rs>>>=0; rs^=rs>>>17; rs^=rs<<5; rs>>>=0; return rs/4294967296; };
   const t0=Date.now(); let evals=0; let gBest={score:-Infinity,seq:[],E:null}; const timeUp=()=>Date.now()-t0>budgetMs;
@@ -134,10 +138,10 @@ export function nrpaSequence(input,{horizon=70,objective='guaranteed',budgetMs=8
 // 评价 = evalSequence（模拟器，最早可行解码）；回传均值，UCT 探索项按当前最优分归一化。记录全程最优 rollout。
 export function mctsSequence(input,{horizon=70,objective='guaranteed',budgetMs=8000,maxIters=800,maxLen=36,c=0.7,seedSeq=null,onProgress,seed=7}={}){
   const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const kinds=['skill','combo','ultimate'];
-  const mcIdx=input.mainControl??0; const acts=[...WAIT_ACTS]; for(const m of memberIdxs){ for(const k of kinds) acts.push({member:m,kind:k}); if(m===mcIdx) acts.push({member:m,kind:'plunge'}); } const STOP='stop';
+  const mcIdx=input.mainControl??0; const acts=[...WAIT_ACTS]; for(const m of memberIdxs){ for(const k of kinds) acts.push({member:m,kind:k}); if(m===mcIdx&&plungeUseful(input)) acts.push({member:m,kind:'plunge'}); } const STOP='stop';
   let rs=(seed>>>0)||1; const rnd=()=>{ rs^=rs<<13; rs>>>=0; rs^=rs>>>17; rs^=rs<<5; rs>>>=0; return rs/4294967296; };
   const shuffled=arr=>{ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(rnd()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
-  const randAct=()=>{ const r=rnd(); if(r<0.08) return {member:mcIdx,kind:'plunge'}; const kind=r<0.46?'skill':r<0.85?'combo':'ultimate'; return {member:memberIdxs[Math.floor(rnd()*memberIdxs.length)],kind}; };
+  const randAct=()=>{ const r=rnd(); if(r<0.08&&plungeUseful(input)) return {member:mcIdx,kind:'plunge'}; const kind=r<0.46?'skill':r<0.85?'combo':'ultimate'; return {member:memberIdxs[Math.floor(rnd()*memberIdxs.length)],kind}; };
   const ev=seq=>evalSequence(input,seq,{horizon,objective});
   const mk=seq=>({seq,n:0,w:0,children:new Map(),untried:shuffled([...acts,STOP]),terminal:false});
   const root=mk([]); let best=null, bestScore=-Infinity, iters=0; const t0=Date.now();
