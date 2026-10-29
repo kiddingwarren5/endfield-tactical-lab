@@ -64,9 +64,14 @@
 ## 4. 数据接口
 - 需要新增的数据：各干员普攻段时长（假设表）、重击回技力表（部分已知）、连携触发条件的可机读表（由技能描述整理）、终结技演出时长（假设）。全部放 dist/data/timing.js 并带 origin 标记。
 
-## 5. 已知限制（来自 docs/reviews/engine-review-gpt.md，2026-10-28）
-模拟器 v0.1 的以下项目尚未实现或存在简化，影响排轴结果的可信度；修复状态见 docs/progress.md：
-- 条件伤害段无条件执行（如狼卫追加射击需消耗异常）；所有段压在同一命中时刻。
+## 5. 已知限制（2026-10-30 更新）
+下面带删除线的是 2026-10-28 评审列出、现已解决的；其余仍是简化：
+- ~~条件伤害段无条件执行；所有段压在同一命中时刻~~ → 段计划按条件词表判定，延迟 / 重复段按时刻结算（见 §8）。
+- 技能的多段命中仍压在同一时刻（除显式 delay / every 的段）；提弗洛斯 5 次空中普攻、大潘 6 段连斩都在一个事件里结算，对“每次命中”类效果的时序是近似。
+- 敌人只做两件事：每 4 s 攻击主控、挨打。不蓄力、不移动、无限血、单目标；触发表里 scenario 类效果因此不发生（docs/trigger-coverage.md）。
+- 暴击口径：保底（critMode never）下暴击类效果不触发；期望 / 必暴击口径下按每次命中都暴击触发，是上界。
+- 概率口径：保底下概率段与概率效果不发生；options.procMode=expected 按概率折算段伤害，但概率效果（珍鳞攻击力、特殊赠礼脆弱）一旦发生按全额算，是上界。
+- 连击状态的乘区（战技 +30% / 终结技 +20% 每层，施放时消耗）按研究值，消费规则没有实测（verification-needed 60）。
 - 替换型战技各阶段共用基础伤害段（祀起墨/收笔、弭弗三段）。
 - 异常状态的后续效果（导电/碎甲易伤、腐蚀减抗、燃烧跳伤、碎冰）未完整进入伤害流程。
 - 终结技演出暂停只作用于技力回复与非主控普攻，增益到期与冷却未暂停。
@@ -89,3 +94,18 @@
 - 形态门槛：代码前缀 `intGeWill&` / `willGtInt&`，以及文本“阵诀·智/意”，按干员当前形态（面板自动判定）门控。
 - 新机制：汤汤涡流（连携生成、战技/提前引爆消耗，每处返还 20 技力、多一个水龙卷）、定身事件（祀战技、汤汤终结技）、终结技结束事件、主控下落攻击。
 - 覆盖测试：tests/triggers.test.mjs 要求目录里每个代码都在表中有归属，并生成 docs/trigger-coverage.md。
+
+## 8. 条件词表与状态机（2026-10-30）
+机制数据不再允许“未建模”：每个伤害段、机制异常、附着、回能、返还要么无条件，要么带一个结构化条件；触发表不再允许 {unmodeled}，只允许 {scenario} 与 {noDamage} 两类带理由的例外（tests/triggers.test.mjs 与 tests/segment-conditions.test.mjs 断言）。
+
+条件词表（simulate.js planOk，对象里每个键都要成立）：duringUltimate、targetFrozen、consumedAbnormal（true / false / 异常列表）、consumedAttach（true / false / 属性列表 / {min}）、consumedBreach{min}、consumedCrystal、resourceSpent（资源 id）、triggerLayers{min,max}（连携触发时的层数）、stage（阶段链 / 两段连携的第几次）、proc（概率名；保底口径只打 not 分支）、targetFragile、targetBreach{min}、targetAttached、targetAbnormal、airborne。施放上下文记在 S.perCast[成员|技能类]：abnormalAtCast、consumedAbnormal、consumedAttach / consumedAttachEls、consumedBreach、consumedCrystal、resSpent、triggerLayers、stageIndex、comboMul。
+
+段计划字段：times、timesFrom（资源数 / consumed:异常）、lastMul、delay（从施放时刻起）、every（重复间隔，从首次命中起）、from（取别的技能类的段，如终结技后的空中普攻）、asHeavy（主控视为重击）、factor、when。when.fires=rule 表示该段由资源 / 触发 / 目标状态规则打出（熔火追加、连击追加、铁誓袭扰 / 决胜、集束打击、囹圄爆炸、反击段、击碎结晶）。
+
+新事件：crit（仅暴击口径）、proc（仅期望口径）、counter / block / enemyAttack（对照靶每 4 s 攻击主控；立盾干员格挡、带反击段的反击）、crystalConsumed、targetState / targetStateEnd、ultFollowup（铁誓后续效果）、ultFollowUp（后续终结技，如破晦诀明）。新状态：targetState(id)、targetScarred / targetSlowed / targetImprisoned / targetCrystal / inArrowField / inGravityField、selfShielded、targetBurning、buffStacks(id,min)。修饰器规格 {modifier}：conductVuln（导电易伤 ×）、burnMul（燃烧跳伤 ×）、spRefundMul（技力返还 ×）。
+
+目标状态（mechanics.<kind>.targetStates=[{id,duration,onSegment?,cond?,endSegment?,earlyEnd?}]）：命中时施加；endSegment 在到期时打出（囹圄爆炸）；earlyEnd.by=ownSkillHit 时自身战技命中提前结束并打出 segments、返还技力、刷新脆弱（诀智）。源石结晶是 id=crystal 的目标状态：物理异常 / 破防 / 终结技消耗它，施加者打出 crystal.breakSegment。
+
+资源事件（resources[].spend[].on=physicalAbnormal | comboHit，带 segment / finaleSegment / sp / finaleSp / event）：铁誓按事件逐点消耗，最后一点打决胜段。备料：gains.on=ultimateHit（按段）、spend.on=comboHit，冷却效果走效果目录的 resourceSpend 触发。
+
+其他：nextNormalHeavy（战技条件成立后下一次普攻直接重击）、combo.casts=2 + castWindow（两段连携，冷却从最后一次起算，段 / 消耗 / 异常按 stage 条件）、ultimate.triggered + followUp（领域内主控重击 / 处决触发段，达次数后终结技切换为后续技，不耗能量）、skill.counterSegment + blocks（立盾反击段只在受击时打出）、shield{self|team|other,duration,cooldown}、procs{name:{base,perInt,stacksEffect,perStack,mul}}、airborneSeconds / resetsAirAttacks（浮空与重置空中普攻）、effect.grants=comboState（授予连击状态）。

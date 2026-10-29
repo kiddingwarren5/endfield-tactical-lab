@@ -14,7 +14,7 @@
 | 技能 skill | `skill:<干员>:<normal/skill/combo/ultimate>` | operators.js + mechanics.js | 名称、阶段链（河山共影 → 起墨 → 收笔）、形态差异 |
 | 效果 effect | `effect:` | effects.js（目录） | 区、受益者、全队唯一、条件性（§3） |
 | 触发代码 trigger | `trigger:` | effects.condition.trigger | 由触发表解析到事件 / 状态 / 已处理 / 未建模 |
-| 事件 event | `event:` | vocab.EVENT_FAMILIES、CUSTOM_EVENTS | 施放、命中、重击、附着、达到层数、消耗、异常、爆发、定身、水龙卷、提前巨浪、终结技结束、碎冰、施加增幅类、技力恢复、处决、队友连携；自定义：主控受击、异常被消耗、晶体被消耗、敌人蓄力、失衡 |
+| 事件 event | `event:` | vocab.EVENT_FAMILIES、CUSTOM_EVENTS（2026-10-30 新增 crit / proc / counter / block / enemyAttack / crystalConsumed / targetState / ultFollowup / ultFollowUp） | 施放、命中、重击、附着、达到层数、消耗、异常、爆发、定身、水龙卷、提前巨浪、终结技结束、碎冰、施加增幅类、技力恢复、处决、队友连携；自定义：主控受击、异常被消耗、晶体被消耗、敌人蓄力、失衡 |
 | 状态 state | `state:` | vocab.STATES + 机制里的自身状态 | 终结技期间、目标冻结/寒冷/脆弱/失衡/低血、形态智、自身状态（启示已满、晶体耗尽、演唱姿态） |
 | 资源 resource | `resource:` | vocab.RESOURCES | 技力、返还技力、能量、附着层、破防层、涡流、笔意、熔火、雷枪、炸弹、连击、晶体、猎矢、启示、姿态 |
 | 元素 / 异常 | `element:` `abnormal:` | vocab | 五元素；法术异常四种、物理异常四种；伪异常 trigger / artsBurst |
@@ -54,7 +54,10 @@
 |---|---|---|
 | modeled | 引擎按目录数值结算（含 modifies / 脆弱倍率这类修饰器） | 触发有事件或状态归属；或无触发且区不是 other |
 | handled | 引擎在机制里结算（笔意、强制异常等） | 触发表标 handled |
-| unmodeled | 引擎不算 | 触发表标 unmodeled、代码未知、或区为 other 且不是修饰器 |
+| modifier | 乘在别的结算上（导电易伤、燃烧跳伤、技力返还倍率） | 触发表标 modifier |
+| scenario | 对照靶上不会发生（单目标、无限血、不蓄力） | 触发表标 scenario，带理由 |
+| noDamage | 不影响伤害与资源（治疗） | 触发表标 noDamage，带理由 |
+| ~~unmodeled~~ | 已取消：目录里每条效果都必须落到上面某一类（tests/triggers.test.mjs 断言） | |
 | informational | 明确标为只记录 | effect.informational |
 
 “区为 other”只表示归区，不代表不算：别礼低温脆性的脆弱倍率、祀笔意记录、潜能对增幅的乘法修饰都参与结算。恒真状态（对照靶上永远成立的条件）按 static 记。修饰器继承被修饰效果的生效方式。
@@ -105,3 +108,10 @@ resources:[{ id, name, max, initial,
 2. mechanics.js：战技 / 连携 / 终结技的附着、消耗、异常、资源、阶段链、连携发动条件（类型必须在词表）。
 3. effects 目录：每条效果标触发代码；新代码在触发表加一行（覆盖测试强制）。
 4. `node tools/validate_graph.mjs` 零错误；报告里的待裁定项逐条处理或记入 verification-needed。
+
+## 8. 目标状态、护盾、概率、连击状态（2026-10-30）
+- 目标状态（mechanics.<kind>.targetStates）：斫痕、囹圄、缓速、源石结晶、箭阵、重力紊乱、衔火血翼。图里按 state:targetState(id) 表达；效果用 {state:'targetScarred'} 等判定。
+- 护盾（mechanics.<kind>.shield）与 selfShielded 状态；格挡 / 反击由对照靶的攻击事件驱动（counter / block / enemyAttack）。
+- 概率（mechanics.procs）：段计划的 proc 分支与 {on:'proc'} 事件只在期望口径发生；保底口径按不发生。
+- 连击状态（effect.grants=comboState）：战技 / 终结技施放时消耗，乘区按 rules A（研究值）。
+- 条件词表与段计划字段见 docs/sim-design.md §8。
