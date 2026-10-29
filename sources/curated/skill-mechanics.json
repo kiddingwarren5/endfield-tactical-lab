@@ -635,32 +635,41 @@
      "id": "ultimate1",
      "times": 0,
      "when": {
-      "unmodeled": "强化普攻第一段倍率"
+      "normalOverride": true
      }
     },
     {
      "id": "ultimate2",
      "times": 0,
      "when": {
-      "unmodeled": "强化普攻第二段倍率"
+      "normalOverride": true
      }
     },
     {
      "id": "ultimate3",
      "times": 0,
      "when": {
-      "unmodeled": "强化普攻第三段倍率"
+      "normalOverride": true
      }
     },
     {
      "id": "ultimate4",
      "times": 0,
      "when": {
-      "unmodeled": "强化普攻第四段倍率"
+      "normalOverride": true
      }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "终结技期间主控普攻改打强化普攻四段循环，第 3 段施加灼热附着（simulate normalOverride，2026-10-30）",
+   "normalOverride": {
+    "segmentIds": [
+     "ultimate1",
+     "ultimate2",
+     "ultimate3",
+     "ultimate4"
+    ],
+    "attachOnSegment": "ultimate3"
+   }
   },
   "modes": null,
   "resources": [
@@ -4236,24 +4245,44 @@
    "segmentPlan": [
     {
      "id": "ultimate1",
-     "times": 1
+     "times": 0,
+     "when": {
+      "normalOverride": true
+     }
     },
     {
      "id": "ultimate2",
      "times": 0,
      "when": {
-      "unmodeled": "强力攻击伤害倍率"
+      "normalOverride": true
      }
     },
     {
      "id": "ultimate3",
      "times": 0,
      "when": {
-      "unmodeled": "额外攻击伤害倍率"
+      "normalOverride": true
      }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "终结技期间主控普攻改打 ultimate1（20%）；7 s 结束时最后一下变为重击 ultimate2（300%），目标冻结再追加 ultimate3（600%）并消耗冻结（simulate normalOverride，2026-10-30）",
+   "normalOverride": {
+    "segmentIds": [
+     "ultimate1"
+    ],
+    "finalHeavy": {
+     "segmentId": "ultimate2",
+     "extra": [
+      {
+       "segmentId": "ultimate3",
+       "when": {
+        "targetFrozen": true
+       },
+       "consumesAbnormal": "freeze"
+      }
+     ]
+    }
+   }
   },
   "modes": null
  },
@@ -4808,27 +4837,34 @@
    "segmentPlan": [
     {
      "id": "ultimate1",
-     "times": 1,
+     "times": 0,
      "when": {
-      "duringUltimate": true
+      "normalOverride": true
      }
     },
     {
      "id": "ultimate2",
-     "times": 1,
+     "times": 0,
      "when": {
-      "duringUltimate": true
+      "normalOverride": true
      }
     },
     {
      "id": "ultimate3",
-     "times": 1,
+     "times": 0,
      "when": {
-      "duringUltimate": true
+      "normalOverride": true
      }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "终结技期间主控普攻改打三段循环（此前误为施放时一次性打三段；simulate normalOverride，2026-10-30）",
+   "normalOverride": {
+    "segmentIds": [
+     "ultimate1",
+     "ultimate2",
+     "ultimate3"
+    ]
+   }
   },
   "modes": null,
   "resources": [

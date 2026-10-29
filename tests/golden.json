@@ -2,8 +2,8 @@
  "preset:cold-3charge-1burst": {
   "per": {
    "诀": {
-    "damage": 249453.27,
-    "hits": 106
+    "damage": 239827.626,
+    "hits": 105
    },
    "别礼": {
     "damage": 3294102.496,
@@ -14,7 +14,7 @@
     "hits": 127
    },
    "祀": {
-    "damage": 2023358.319,
+    "damage": 2022106.985,
     "hits": 74
    }
   },
@@ -27,7 +27,7 @@
    "energyBlocked": 20,
    "spGain": 414,
    "inkStart": 5,
-   "attach": 19,
+   "attach": 18,
    "comboReady": 24,
    "vortex": 4,
    "buffRefresh": 65,
@@ -83,7 +83,7 @@
    "pause": 4,
    "cdr": 1,
    "instant": 1,
-   "note": 4
+   "note": 3
   },
   "errors": 0
  },
@@ -121,7 +121,7 @@
    "vortex": 4,
    "enemyAttack": 31,
    "consume": 3,
-   "note": 7,
+   "note": 6,
    "buffEnd": 45,
    "inkBurst": 4,
    "energyOverflow": 18,
@@ -208,33 +208,32 @@
  "solo:莱万汀": {
   "per": {
    "莱万汀": {
-    "damage": 18013.078,
-    "hits": 42
+    "damage": 32126.642,
+    "hits": 45
    }
   },
   "events": {
-   "normalHit": 32,
-   "spOverflow": 45,
-   "spGain": 45,
+   "normalHit": 33,
+   "spOverflow": 47,
+   "spGain": 47,
    "spSpend": 3,
    "cast": 4,
    "energyOverflow": 4,
    "energyGain": 6,
-   "note": 5,
-   "resourceGain": 4,
+   "note": 1,
+   "resourceGain": 3,
    "enemyAttack": 5,
    "error": 2,
    "pause": 1,
-   "attach": 2,
-   "consume": 1
+   "attach": 4
   },
   "errors": 2
  },
  "solo:洛茜": {
   "per": {
    "洛茜": {
-    "damage": 25976.682,
-    "hits": 46
+    "damage": 25069.335,
+    "hits": 45
    }
   },
   "events": {
@@ -250,7 +249,7 @@
    "enemyAttack": 5,
    "error": 1,
    "pause": 1,
-   "attach": 2,
+   "attach": 1,
    "comboReady": 2,
    "buffStart": 2,
    "buffRefresh": 4
@@ -359,8 +358,8 @@
  "solo:弧光": {
   "per": {
    "弧光": {
-    "damage": 13572.806,
-    "hits": 40
+    "damage": 12668.623,
+    "hits": 39
    }
   },
   "events": {
@@ -377,7 +376,7 @@
    "pause": 1,
    "abnormal": 1,
    "comboReady": 1,
-   "attach": 2,
+   "attach": 1,
    "consumeAbnormal": 1
   },
   "errors": 1
@@ -385,8 +384,8 @@
  "solo:阿列什": {
   "per": {
    "阿列什": {
-    "damage": 20039,
-    "hits": 40
+    "damage": 19197.959,
+    "hits": 39
    }
   },
   "events": {
@@ -403,7 +402,7 @@
    "enemyAttack": 5,
    "error": 2,
    "pause": 1,
-   "attach": 2,
+   "attach": 1,
    "consume": 1
   },
   "errors": 2
@@ -721,8 +720,8 @@
  "solo:洁尔佩塔": {
   "per": {
    "洁尔佩塔": {
-    "damage": 24694.164,
-    "hits": 42
+    "damage": 23496.466,
+    "hits": 41
    }
   },
   "events": {
@@ -733,7 +732,7 @@
    "cast": 4,
    "energyOverflow": 2,
    "energyGain": 3,
-   "attach": 5,
+   "attach": 4,
    "enemyAttack": 5,
    "error": 2,
    "pause": 1,
@@ -769,14 +768,14 @@
  "solo:庄方宜": {
   "per": {
    "庄方宜": {
-    "damage": 20246.039,
+    "damage": 30020.958,
     "hits": 40
    }
   },
   "events": {
-   "normalHit": 28,
-   "spOverflow": 41,
-   "spGain": 41,
+   "normalHit": 31,
+   "spOverflow": 39,
+   "spGain": 39,
    "spSpend": 2,
    "cast": 4,
    "resourceGain": 4,
@@ -789,7 +788,6 @@
    "pause": 1,
    "note": 1,
    "attach": 1,
-   "comboReady": 1,
    "buffEnd": 1
   },
   "errors": 2
@@ -797,8 +795,8 @@
  "solo:卡缪": {
   "per": {
    "卡缪": {
-    "damage": 16309.995,
-    "hits": 35
+    "damage": 15386.432,
+    "hits": 34
    }
   },
   "events": {
@@ -811,7 +809,7 @@
    "energyGain": 3,
    "buffStart": 1,
    "buffRefresh": 5,
-   "attach": 5,
+   "attach": 4,
    "enemyAttack": 5,
    "error": 2,
    "pause": 1
@@ -1017,8 +1015,8 @@
  "team:莱万汀狼卫": {
   "per": {
    "莱万汀": {
-    "damage": 20428.621,
-    "hits": 48
+    "damage": 48104.688,
+    "hits": 54
    },
    "狼卫": {
     "damage": 12485.692,
@@ -1026,18 +1024,18 @@
    }
   },
   "events": {
-   "normalHit": 76,
-   "spOverflow": 92,
-   "spGain": 92,
+   "normalHit": 78,
+   "spOverflow": 94,
+   "spGain": 94,
    "spSpend": 4,
    "cast": 6,
    "energyOverflow": 8,
    "energyGain": 11,
-   "note": 6,
-   "resourceGain": 5,
-   "attach": 5,
+   "note": 2,
+   "resourceGain": 4,
+   "attach": 10,
    "comboReady": 2,
-   "consume": 3,
+   "consume": 2,
    "enemyAttack": 6,
    "error": 2,
    "pause": 1
@@ -1149,8 +1147,8 @@
  "team:伊冯佩丽卡汤汤": {
   "per": {
    "伊冯": {
-    "damage": 17576.678,
-    "hits": 49
+    "damage": 17617.056,
+    "hits": 52
    },
    "佩丽卡": {
     "damage": 10644.424,
@@ -1162,9 +1160,9 @@
    }
   },
   "events": {
-   "normalHit": 104,
-   "spOverflow": 96,
-   "spGain": 131,
+   "normalHit": 107,
+   "spOverflow": 82,
+   "spGain": 129,
    "spSpend": 6,
    "cast": 10,
    "energyOverflow": 17,
@@ -1173,14 +1171,14 @@
    "attach": 4,
    "comboReady": 7,
    "enemyAttack": 6,
-   "note": 3,
+   "note": 1,
    "vortex": 1,
    "pause": 1,
-   "consumeAbnormal": 1,
    "error": 2,
    "buffStart": 2,
-   "buffRefresh": 14,
-   "consume": 1
+   "buffRefresh": 17,
+   "consume": 1,
+   "consumeAbnormal": 1
   },
   "errors": 2
  }

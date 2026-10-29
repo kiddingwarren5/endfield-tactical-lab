@@ -21,10 +21,10 @@ export function teamMatchesPreset(preset,team,data){ const names=(team||[]).filt
 // 场景可替换主轴（首个预设）的动作顺序；其余预设只换敌人与初始资源。
 export function stepsFor(preset,scenario,isMain){ return (isMain&&scenario?.steps)||preset.steps; }
 // 返回：timeline（含步骤序号）、模拟结果（基准与 δ/φ 区间）、周期、每步执行后的资源快照。
-export function resolveRotation(preset,ctx,scenario,isMain=true,teamOverride){
+export function resolveRotation(preset,ctx,scenario,isMain=true,teamOverride,{maxWait=30}={}){
   const input=presetInput(preset,ctx,scenario,teamOverride); const names=input.names; const steps=stepsFor(preset,scenario,isMain);
   const ordered=steps.map(s=>({member:names.indexOf(s.m),kind:s.k,...(s.optional?{optional:true}:{}),...(s.minT?{minT:s.minT}:{}),...(s.wait?{waitFor:{attachLayers:{element:s.waitElement||'cold',min:s.wait}}}:{})}));
-  const dec=simulate({...input,timeline:[],sequence:ordered,params:{...input.params,duration:150,seqMaxWait:30}}); // 顺序解码：一次模拟得到最早可行时刻
+  const dec=simulate({...input,timeline:[],sequence:ordered,params:{...input.params,duration:150,seqMaxWait:maxWait}}); // 顺序解码：一次模拟得到最早可行时刻
   const g={timeline:dec.scheduled.map(a=>({t:a.t,member:a.member,kind:a.kind,idx:a.idx})),notes:dec.events.filter(e=>e.type==='seqSkip').map(e=>`第 ${e.idx+1} 步 ${names[e.member]} ${e.kind}：${e.message}`),skipped:ordered.map((a,i)=>i).filter(i=>!dec.scheduled.some(x=>x.idx===i))};
   const timeline=g.timeline.map(a=>({t:a.t,member:a.member,kind:a.kind,step:a.idx}));
   const last=timeline.at(-1)?.t??0; const duration=Math.ceil(Math.max(last+6,scenario?.timeLimit||0));

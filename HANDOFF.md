@@ -102,3 +102,10 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 - autoRotation：束搜索热启动 → 3 条独立退火取优（第一段 62% 预算，压退火轨迹方差）→ 三条退火结果和束搜索时间表都作为起点做时刻局部搜索与精调（剩余预算，统一截止时刻）；候选 = 时刻搜索最优 + 精英 + 各退火结果，去重后前 4。“集中爆发”不再单独搜索。plan.js 里的 polishSequence / nrpaSequence / mctsSequence / WAIT_ACTS 不再被流程使用，保留给测试与对照。
 - 第二轮审核（docs/reviews/planner-review-gpt-2.md）修正：同刻动作统一顺序且缓存键一致；历史最优单独保护；窗口末尾未执行记 planSkip；预算贯穿；等待秒数不丢；集中爆发目标不逃罚；交接时同刻动作按原顺序错开 0.001 s。未做：规则层乐观上界、多编队多种子 anytime 曲线、“保底”口径裁定（笔意会记录队友普攻）。
 - 教训（已写进 CLAUDE.md）：顺序表示里加按住变量会让后面所有人跟着等（B 配置实测崩）；单独用时刻搜索一半候选非法；“等待”当动作稀释预算；比较算法要同预算多种子。
+
+## 2026-10-30 深夜：视频逐帧标答、终结技强化普攻、附着双推修复
+- 案例 19（伊汤赛洁）、20（莱狼秋羊）、21（提诀梨佩）从视频逐帧转写（docs/cases/case-19/20/21）；sources/curated/rotations-community.json 里这三支为“视频逐帧”，其余六支仍是文字轴。工具：tools/merge_rotations.mjs、tools/compare_rotations.mjs（支持 fullEnergy）。
+- 方法论：docs/rotation-methodology.md（启发式清单 1.1–1.8、算法与启发式的对应、改算法流程、标答对照怎么用）。
+- 模拟器：mechanics.ultimate.normalOverride（终结技期间强化普攻 + 结束重击 + 条件追加 + 段上附着），伊冯 / 莱万汀 / 庄方宜 数据接入；终结技附着双推修复（验证清单 47–49）。测试 tests/ult-normal-override.test.mjs。
+- 案例 22（管理员物理队）也从视频逐帧转写（docs/cases/case-22）。一致性校验改为按备选的形态模拟（此前诀的意形态备选被当智形态跑，只靠附着双推才“点亮”）。标答解码可配等待上限（对照用 8 s），对照表带“可比 / 未建模 / 跳过”结论列。
+- 模拟器缺口（验证清单 49–51）：提弗洛斯启示 / 空中普攻未建模；非寒冷队终结技能量增长疑似偏低；标答编码按触发链排、主控必须用名字。
