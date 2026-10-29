@@ -9687,8 +9687,8 @@
   "beneficiary": "self",
   "applies": null,
   "condition": {
-   "text": "施放连携技成竹在胸时",
-   "trigger": "comboHitLayers",
+   "text": "施放连携技成竹在胸时（按施放时消耗的层数；日志 ed2ab0：攻击提升 buff 在施放标记 7.17 s 出现，数值 0.23 = 8%+3%×5）",
+   "trigger": "comboCastLayers",
    "mode": "user"
   },
   "duration": 10,
@@ -9969,7 +9969,7 @@
   },
   "condition": {
    "text": "配装即生效",
-   "trigger": null,
+   "trigger": "layersAddByPotential",
    "mode": "auto"
   },
   "duration": null,
@@ -9983,10 +9983,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0036_jsspsi.potentials[4]"
   },
-  "notes": "使连携技每层提高倍率与潜能2攻击力的层数变量 layers +1。",
-  "modifies": [
-   "chr_0036_jsspsi.combo.perLayer",
-   "chr_0036_jsspsi.pot2.atk"
-  ]
+  "notes": "连携技终击层数 +1（解包 potential_5：EntityBB_combo_count +1）。由 skill-mechanics 祀 combo.layersAddByPotential 结算，不再通过 modifies。",
+  "modifies": []
  }
 ]

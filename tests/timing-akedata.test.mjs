@@ -61,3 +61,16 @@ test('默认模式的固定时刻不变：战技命中 0.48、连携 0.72、终�
 test('终结技不受自身动作忙碌限制：别礼连携后 0.2 s 就能放终结技（解包 AllowNext 从不含终结技；日志连携首击后 0.06–0.21 s 有终结技首击）',()=>{
   const tl=[{t:0,member:1,kind:'skill'},{t:2,member:1,kind:'skill'},{t:4,member:1,kind:'skill'},{t:6,member:0,kind:'combo'},{t:6.2,member:0,kind:'ultimate'}];
   for(const source of ['akedata','default']){ const r=run([mk('别礼'),mk('汤汤')],tl,{energy:[300,0],source}); assert.ok(castAt(r,'别礼','ultimate',6.2),`${source} 6.2 s 放出终结技`); assert.ok(!busyErr(r,'别礼',6.2)); } });
+
+test('接续窗口按下一动作种类：骏卫战技后 1.5 s 可再放战技，普攻要等 1.6 s；普攻等待时调度器不空转',()=>{
+  const c=ake[op('骏卫').id].cast.skill; assert.deepEqual(c.allow,{attack:1.6,skill:1.5,combo:1.5});
+  const r=run([mk('骏卫'),mk('祀')],[{t:0.3,member:0,kind:'skill'},{t:1.8,member:0,kind:'skill'}],{auto:true,duration:6});
+  assert.ok(castAt(r,'骏卫','skill',1.8)); const n=r.hits.filter(h=>h.name==='骏卫'&&h.kind==='normal'); assert.ok(!n.some(h=>h.t>0.3&&h.t<1.9),`战技后 1.6 s 内不应有普攻 ${n.map(h=>h.t.toFixed(2)).join(' ')}`);
+  const r2=run([mk('骏卫'),mk('祀')],[{t:0.3,member:0,kind:'skill'}],{auto:true,duration:6}); const n2=r2.hits.filter(h=>h.name==='骏卫'&&h.kind==='normal'); assert.ok(n2.some(h=>h.t>=1.9&&h.t<4),'普攻在 1.9 s 后恢复'); });
+
+test('AllowNext 没列出的种类沿用最早可接主动作帧，不退回 exclusiveFrame：别礼战技→战技 1.133 s（日志 3fd54f 实测间隔 2.73 s，exclusiveFrame 12.43 s 是灌注状态时长）',()=>{
+  const c=ake[op('别礼').id].cast.skill; assert.equal(c.allow.skill,1.133); assert.equal(c.exclusive,12.433);
+  const r=run([mk('别礼'),mk('祀')],[{t:0,member:0,kind:'skill'},{t:2.7,member:0,kind:'skill'}]); assert.equal(r.events.filter(e=>e.type==='cast'&&e.who==='别礼'&&e.kind==='skill').length,2); });
+
+test('强化普攻链沿 AllowNext 走：伊冯 1_1→2_1→2_2→3_1→3_2',()=>{
+  assert.deepEqual(ake[op('伊冯').id].ultNormal.names,['ult_attack1_1','ult_attack2_1','ult_attack2_2','ult_attack3_1','ult_attack3_2']); });
