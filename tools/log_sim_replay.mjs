@@ -20,15 +20,15 @@ const ake=data.timing.byOperator||{}; const useAke=!argv.includes('--default-tim
 const hitDelay=(m,kind)=>{ const c=useAke?ake[members[m].op.id]?.cast?.[kind]:null; if(c?.hitFrames?.length) return c.hitFrames[0]/30; const cs=c?.seconds??data.timing.castSeconds[kind]; return cs*(kind==='ultimate'?0.8:0.6); };
 // 没有命中的施放标记（起墨 / 收笔、未记录命中的技能）也算一次施放
 for(const m of markers){ if(m.kind==null||m.member==null) continue; const hit=casts.some(c=>c.member===m.member&&c.kind===m.kind&&m.t<=c.first+0.05&&m.t>=c.first-4); if(!hit) casts.push({member:m.member,name:members[m.member].name,kind:m.kind,first:m.t,last:m.t,sum:0,n:0,keys:new Set(['（无命中）']),markerOnly:true}); }
-for(const c of casts){ const mk=markers.find(x=>x.member===c.member&&x.kind===c.kind&&x.t<=c.first+0.05&&x.t>=c.first-4); /* 施放标记在首击前 4 s 内才认：解包里施放到首击最长的是祀终结技（63 帧 2.1 s）与别礼终结技（86 帧 2.87 s），留出切人余量 */ c.t=mk?mk.t:+(c.first-hitDelay(c.member,c.kind)).toFixed(3); c.from=mk?'标记':'首击回推'; }
+// 施放时刻：有命中的按首击时刻减解包命中帧回推（标记是按键时刻，祀连携 ed2ab0 标记 7.17 而首跳 9.17）；终结技要扣掉演出（日志计时在演出期间不走）；没有命中的才用标记
+const cutsceneOf=(m)=>{ const c=useAke?ake[members[m].op.id]?.cast?.ultimate:null; return c?(c.cutscene??0):data.timing.castSeconds.ultimate; };
+for(const c of casts){ const mk=markers.find(x=>x.member===c.member&&x.kind===c.kind&&x.t<=c.first+0.05&&x.t>=c.first-4); if(c.n>0){ const hd=hitDelay(c.member,c.kind); const back=c.kind==='ultimate'?Math.max(0,hd-cutsceneOf(c.member)):hd; c.t=+(c.first-back).toFixed(3); c.from=mk?'首击回推（有标记）':'首击回推'; } else { c.t=mk?mk.t:c.first; c.from='标记'; } }
 casts.sort((a,b)=>a.t-b.t);
 // 祀战技三段：日志标记只有 normal_skill 一个键。有 abilityrange_1 命中的是河山共影；没有命中、1.5 s 内跟着笔意爆发（inkmove）的是收笔（解包：爆发只在收笔或笔意自然结束时发生）；起墨没有记录，按解包 normal_skill_1 的独占时长 1.0 s 放在收笔前。
 const inferred=[]; for(const c of casts){ if(c.name!=='祀'||c.kind!=='skill') continue; const hasHit=[...c.keys].some(k=>/abilityrange_1/.test(k)); const burstSoon=hits.some(e=>e.sourceCharacterName==='祀'&&/inkmove/.test(e.eventKey)&&e.tsMsFromStart/1000>c.t&&e.tsMsFromStart/1000<=c.t+1.5); if(!hasHit&&burstSoon){ c.stage='收笔'; inferred.push({member:c.member,kind:'skill',t:+(c.t-1.0).toFixed(3),name:'祀',stage:'起墨（推断）',from:'推断',first:c.t-1.0,sum:0,n:0,keys:new Set(['起墨']),inferred:true}); } else if(hasHit) c.stage='河山共影'; }
 for(const x of inferred) casts.push(x); casts.sort((a,b)=>a.t-b.t);
-// 日志时间 → 模拟时间：日志的计时在终结技演出（时停）期间不走（证据：别礼连携首击后 0.06 s 就有终结技首击，而解包终结技首击在演出结束后一帧；祀终结技标记到首跳 0.10–0.28 s = 首跳帧 63 − 演出 58 帧）。模拟器里演出占真实时间，所以每放一次终结技，之后的施放时刻都要加上该终结技的演出时长。
-const cutOf=m=>{ const c=useAke?ake[members[m].op.id]?.cast?.ultimate:null; return c?(c.cutscene??0):data.timing.castSeconds.ultimate; };
-let shift=0; const timeline=[]; for(const c of casts){ timeline.push({t:Math.max(0,c.t+shift),member:c.member,kind:c.kind}); c.simT=Math.max(0,c.t+shift); if(c.kind==='ultimate') shift+=cutOf(c.member); }
-const duration=Math.ceil(battle.durationMs/1000+shift)+2; /* 模拟时长 = 日志时长 + 全部演出位移 + 余量 */
+// 日志时间 = 模拟时间：演出不锁队友、计时器暂停已在模拟器内处理（timing.ultimateLocksTeam=false）
+const timeline=casts.map(c=>{ c.simT=Math.max(0,c.t); return {t:c.simT,member:c.member,kind:c.kind}; }); const duration=Math.ceil(battle.durationMs/1000)+2;
 const sp=+(opt('--sp')??300), energy=+(opt('--energy')??300);
 const r=simulate({team:members.map(m=>m.member),data,mechanics:data.mechanics,timing:data.timing,enemy,mainControl,initial:{sp,energy:members.map(()=>energy)},timeline,params:{duration,controlUptime:1,timingSource:useAke?'akedata':undefined,mainAutoNormal:true,planRepair:+(opt('--repair')??6)},options:{}});
 console.log(`== ${bid} ${battle.bossName} ${battle.durationMs/1000}s 主控 ${mainName||members[0].name} 敌人 def${enemy.defence} ${JSON.stringify(enemy.custom)}${enemy.assumed?'（敌人表缺失）':''} 时序 ${useAke?'解包':'默认'} 初始 sp${sp} 能量${energy}`);

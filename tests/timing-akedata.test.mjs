@@ -31,16 +31,17 @@ test('命中落在解包的命中帧（含子实体）：别礼连携首击 13 �
   const tl=[{t:0,member:1,kind:'skill'},{t:2,member:1,kind:'skill'},{t:4,member:1,kind:'skill'},{t:6,member:0,kind:'combo'}];
   const a=run([mk('别礼'),mk('汤汤')],tl); const h=a.hits.find(x=>x.name==='别礼'&&x.kind==='combo'); assert.ok(h&&near(h.t,6+13/30),`解包命中时刻 ${h?.t}`);
   const d=run([mk('别礼'),mk('汤汤')],tl,{source:'default'}); const hd=d.hits.find(x=>x.name==='别礼'&&x.kind==='combo'); assert.ok(hd&&near(hd.t,6+timing.castSeconds.combo*0.6),`默认命中时刻 ${hd?.t}`);
-  const s=run([mk('祀'),mk('汤汤')],[{t:0,member:0,kind:'ultimate'}],{energy:[300,0]}); const hs=s.hits.find(x=>x.name==='祀'&&x.kind==='ultimate'); assert.ok(hs&&near(hs.t,2.1),`祀终结技首击 ${hs?.t}`);
+  const s=run([mk('祀'),mk('汤汤')],[{t:0,member:0,kind:'ultimate'}],{energy:[300,0]}); const hs=s.hits.find(x=>x.name==='祀'&&x.kind==='ultimate'); assert.ok(hs&&near(hs.t,(63-58)/30),`祀终结技首击（扣除演出 58 帧）${hs?.t}`);
   const sd=run([mk('祀'),mk('汤汤')],[{t:0,member:0,kind:'ultimate'}],{energy:[300,0],source:'default'}); const hsd=sd.hits.find(x=>x.name==='祀'&&x.kind==='ultimate'); assert.ok(hsd&&near(hsd.t,timing.castSeconds.ultimate*0.8),`默认终结技命中 ${hsd?.t}`); });
 
 test('没有命中帧的技能按默认表估命中（艾尔黛拉终结技 2.4 s），不是解包施放时长 6.967 s 的比例',()=>{
   const r=run([mk('艾尔黛拉'),mk('祀')],[{t:0,member:0,kind:'ultimate'}],{energy:[300,0]}); const h=r.hits.find(x=>x.name==='艾尔黛拉'&&x.kind==='ultimate'); assert.ok(h&&near(h.t,timing.castSeconds.ultimate*0.8),`命中 ${h?.t}`); });
 
-test('终结技演出按干员：别礼 2.833 s 全队暂停、4.667 s 后才能再出手；解包无演出动作的（大潘）不暂停',()=>{
-  const r=run([mk('别礼'),mk('祀')],[{t:0,member:0,kind:'ultimate'},{t:3.0,member:1,kind:'skill'},{t:4.0,member:0,kind:'skill'},{t:4.8,member:0,kind:'skill'}],{energy:[300,0]});
-  const p=r.events.find(e=>e.type==='pause'); assert.ok(p&&near(p.seconds,2.833),`演出 ${JSON.stringify(p)}`); assert.ok(castAt(r,'祀','skill',3.0)); assert.ok(busyErr(r,'别礼',4.0)); assert.ok(castAt(r,'别礼','skill',4.8));
-  const d=run([mk('大潘'),mk('祀')],[{t:0,member:0,kind:'ultimate'},{t:0.5,member:1,kind:'skill'}],{energy:[300,0]}); assert.ok(!d.events.some(e=>e.type==='pause'&&e.seconds>0),'大潘终结技无演出'); assert.ok(castAt(d,'祀','skill',0.5),'队友不被暂停'); });
+test('终结技演出按干员：别礼演出 2.833 s 只暂停计时不锁队友，自己 4.667 s 后才能再出手；首击按扣除演出帧（第 86−85 帧）落地；解包无演出动作的（大潘）不暂停',()=>{
+  const r=run([mk('别礼'),mk('祀')],[{t:0,member:0,kind:'ultimate'},{t:1.0,member:1,kind:'skill'},{t:4.0,member:0,kind:'skill'},{t:4.8,member:0,kind:'skill'}],{energy:[300,0]});
+  const p=r.events.find(e=>e.type==='pause'); assert.ok(p&&near(p.seconds,2.833),`演出 ${JSON.stringify(p)}`); assert.ok(castAt(r,'祀','skill',1.0),'演出期间队友照常施放'); assert.ok(busyErr(r,'别礼',4.0)); assert.ok(castAt(r,'别礼','skill',4.8));
+  const h=r.hits.find(x=>x.name==='别礼'&&x.kind==='ultimate'); assert.ok(h&&near(h.t,(86-85)/30),`终结技首击 ${h?.t}`);
+  const d=run([mk('大潘'),mk('祀')],[{t:0,member:0,kind:'ultimate'},{t:0.5,member:1,kind:'skill'}],{energy:[300,0]}); assert.ok(!d.events.some(e=>e.type==='pause'&&e.seconds>0),'大潘终结技无演出'); assert.ok(castAt(d,'祀','skill',0.5)); });
 
 test('下落攻击在解包口径下仍按 2.0 s，不能当普攻连刷',()=>{
   const r=run([mk('伊冯'),mk('祀')],[{t:0,member:0,kind:'plunge'},{t:1.0,member:0,kind:'plunge'},{t:2.1,member:0,kind:'plunge'}]); assert.ok(busyErr(r,'伊冯',1.0)); assert.ok(castAt(r,'伊冯','plunge',2.1)); });

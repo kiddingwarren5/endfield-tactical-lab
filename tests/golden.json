@@ -2,37 +2,37 @@
  "preset:cold-3charge-1burst": {
   "per": {
    "诀": {
-    "damage": 306205.372,
-    "hits": 130
+    "damage": 272754.602,
+    "hits": 123
    },
    "别礼": {
-    "damage": 2519733.798,
-    "hits": 78
+    "damage": 2350125.346,
+    "hits": 72
    },
    "汤汤": {
-    "damage": 1490150.015,
-    "hits": 156
+    "damage": 1458091.772,
+    "hits": 151
    },
    "祀": {
-    "damage": 1868110.462,
-    "hits": 90
+    "damage": 1992642.379,
+    "hits": 85
    }
   },
   "events": {
-   "normalHit": 379,
+   "normalHit": 359,
    "spSpend": 20,
    "cast": 40,
-   "buffStart": 59,
+   "buffStart": 58,
    "energyGain": 80,
    "energyBlocked": 20,
-   "spGain": 457,
-   "inkStart": 5,
-   "attach": 18,
+   "spGain": 445,
+   "inkStart": 4,
+   "attach": 16,
    "comboReady": 27,
    "vortex": 4,
-   "buffRefresh": 46,
+   "buffRefresh": 41,
    "targetState": 8,
-   "enemyAttack": 23,
+   "enemyAttack": 20,
    "buffEnd": 43,
    "consume": 4,
    "absorbWindow": 4,
@@ -42,51 +42,51 @@
    "pause": 4,
    "cdr": 1,
    "instant": 1,
-   "ultTriggered": 2,
-   "ultFollowUpReady": 1
+   "note": 1,
+   "ultTriggered": 1
   },
   "errors": 0
  },
  "preset:cold-ult-asap": {
   "per": {
    "诀": {
-    "damage": 295495.526,
-    "hits": 129
+    "damage": 286181.026,
+    "hits": 124
    },
    "别礼": {
-    "damage": 2463781.552,
-    "hits": 79
+    "damage": 2247622.866,
+    "hits": 73
    },
    "汤汤": {
-    "damage": 1526370.51,
-    "hits": 155
+    "damage": 1498324.314,
+    "hits": 152
    },
    "祀": {
-    "damage": 1858333.856,
-    "hits": 89
+    "damage": 1988476.053,
+    "hits": 85
    }
   },
   "events": {
-   "normalHit": 378,
+   "normalHit": 361,
    "spSpend": 20,
    "cast": 40,
-   "buffStart": 56,
+   "buffStart": 55,
    "energyGain": 80,
    "energyBlocked": 20,
-   "spGain": 453,
-   "inkStart": 5,
-   "attach": 17,
-   "comboReady": 28,
+   "spGain": 419,
+   "inkStart": 4,
+   "attach": 16,
+   "comboReady": 27,
    "vortex": 4,
-   "buffRefresh": 49,
+   "buffRefresh": 48,
    "targetState": 8,
-   "enemyAttack": 23,
-   "buffEnd": 48,
+   "enemyAttack": 21,
+   "buffEnd": 44,
    "consume": 4,
    "absorbWindow": 4,
    "targetStateEnd": 4,
    "inkBurst": 4,
-   "energyOverflow": 14,
+   "energyOverflow": 13,
    "pause": 4,
    "cdr": 1,
    "instant": 1,
@@ -99,40 +99,40 @@
  "preset:cold-3layer-fast": {
   "per": {
    "诀": {
-    "damage": 288605.62,
-    "hits": 132
+    "damage": 250928.75,
+    "hits": 126
    },
    "别礼": {
-    "damage": 2311807.445,
-    "hits": 82
+    "damage": 2094213.754,
+    "hits": 77
    },
    "汤汤": {
-    "damage": 1281666.084,
-    "hits": 157
+    "damage": 1238125.517,
+    "hits": 154
    },
    "祀": {
-    "damage": 1698338.188,
-    "hits": 98
+    "damage": 1765756.298,
+    "hits": 93
    }
   },
   "events": {
-   "normalHit": 398,
+   "normalHit": 383,
    "spSpend": 19,
    "cast": 39,
    "energyGain": 77,
    "energyBlocked": 19,
-   "buffStart": 56,
-   "buffRefresh": 46,
-   "spGain": 458,
-   "attach": 15,
-   "comboReady": 30,
-   "inkStart": 5,
+   "buffStart": 55,
+   "buffRefresh": 41,
+   "spGain": 457,
+   "attach": 12,
+   "comboReady": 29,
+   "inkStart": 4,
    "vortex": 4,
    "targetState": 8,
-   "enemyAttack": 24,
+   "enemyAttack": 22,
    "consume": 4,
    "absorbWindow": 4,
-   "note": 3,
+   "note": 5,
    "buffEnd": 43,
    "inkBurst": 4,
    "targetStateEnd": 4,
@@ -140,8 +140,7 @@
    "pause": 4,
    "cdr": 1,
    "instant": 1,
-   "ultTriggered": 2,
-   "ultFollowUpReady": 1
+   "ultTriggered": 1
   },
   "errors": 0
  },
@@ -1031,48 +1030,50 @@
  "team:诀别汤祀": {
   "per": {
    "诀": {
-    "damage": 19402.258,
-    "hits": 36
+    "damage": 22297.154,
+    "hits": 37
    },
    "别礼": {
-    "damage": 13169.256,
-    "hits": 19
+    "damage": 24324.231,
+    "hits": 21
    },
    "汤汤": {
-    "damage": 16286.222,
-    "hits": 41
+    "damage": 25258.104,
+    "hits": 44
    },
    "祀": {
-    "damage": 12025.785,
-    "hits": 23
+    "damage": 19415.629,
+    "hits": 24
    }
   },
   "events": {
    "normalHit": 96,
-   "spOverflow": 58,
-   "spGain": 124,
+   "spOverflow": 50,
+   "spGain": 118,
    "spSpend": 8,
-   "cast": 11,
-   "energyOverflow": 22,
+   "cast": 14,
+   "energyOverflow": 15,
    "energyGain": 28,
    "energyBlocked": 8,
    "attach": 7,
-   "comboReady": 7,
+   "comboReady": 6,
    "abnormal": 4,
    "inkStart": 1,
    "enemyAttack": 6,
-   "error": 5,
-   "buffStart": 3,
+   "error": 2,
+   "buffStart": 6,
    "targetState": 2,
    "vortex": 1,
-   "pause": 1,
+   "pause": 4,
+   "cdr": 1,
+   "instant": 1,
+   "targetStateEarlyEnd": 1,
    "ultTriggered": 2,
-   "targetStateEnd": 1,
    "buffEnd": 2,
    "ultFollowUpReady": 1,
    "inkBurst": 1
   },
-  "errors": 5
+  "errors": 2
  },
  "team:莱万汀狼卫": {
   "per": {
@@ -1081,72 +1082,80 @@
     "hits": 45
    },
    "狼卫": {
-    "damage": 12485.692,
-    "hits": 40
+    "damage": 17494.234,
+    "hits": 42
    }
   },
   "events": {
    "normalHit": 71,
-   "spOverflow": 86,
-   "spGain": 86,
+   "spOverflow": 94,
+   "spGain": 94,
    "spSpend": 4,
-   "cast": 6,
-   "energyOverflow": 7,
+   "cast": 7,
+   "energyOverflow": 5,
    "energyGain": 9,
    "resourceGain": 3,
-   "attach": 10,
-   "comboReady": 2,
+   "attach": 9,
+   "comboReady": 3,
    "enemyAttack": 6,
-   "error": 2,
+   "error": 1,
    "consume": 1,
-   "pause": 1
+   "pause": 2,
+   "abnormal": 1,
+   "buffStart": 1,
+   "consumeAbnormal": 1,
+   "instant": 1,
+   "buffEnd": 1
   },
-  "errors": 2
+  "errors": 1
  },
  "team:提弗洛斯诀": {
   "per": {
    "提弗洛斯": {
-    "damage": 18914.922,
+    "damage": 19473.951,
     "hits": 47
    },
    "诀": {
-    "damage": 10073.474,
-    "hits": 32
+    "damage": 16192.987,
+    "hits": 34
    }
   },
   "events": {
-   "normalHit": 50,
-   "spOverflow": 61,
-   "spGain": 61,
+   "normalHit": 49,
+   "spOverflow": 58,
+   "spGain": 58,
    "spSpend": 4,
-   "cast": 6,
-   "energyOverflow": 7,
+   "cast": 7,
+   "energyOverflow": 5,
    "energyGain": 10,
    "buffStart": 4,
    "resourceGain": 7,
    "attach": 2,
    "comboReady": 3,
    "enemyAttack": 6,
-   "error": 2,
+   "error": 1,
    "targetState": 1,
-   "pause": 1,
+   "pause": 2,
+   "ultTriggered": 2,
    "consume": 1,
    "resourceSpend": 2,
    "buffRefresh": 6,
    "resourceExhausted": 1,
+   "abnormal": 1,
+   "ultFollowUpReady": 1,
    "targetStateEnd": 1,
    "buffEnd": 2
   },
-  "errors": 2
+  "errors": 1
  },
  "team:别礼赛希": {
   "per": {
    "别礼": {
-    "damage": 18618.44,
+    "damage": 22056.068,
     "hits": 20
    },
    "赛希": {
-    "damage": 4462.703,
+    "damage": 5207.545,
     "hits": 29
    }
   },
@@ -1155,22 +1164,23 @@
    "spOverflow": 59,
    "spGain": 59,
    "spSpend": 4,
-   "cast": 5,
+   "cast": 6,
    "energyBlocked": 4,
-   "energyOverflow": 5,
+   "energyOverflow": 3,
    "energyGain": 6,
    "resourceGain": 2,
    "enemyAttack": 6,
-   "error": 3,
+   "error": 2,
    "resourceSpend": 3,
-   "buffStart": 1,
+   "buffStart": 3,
    "attach": 2,
-   "pause": 1,
+   "pause": 2,
    "buffRefresh": 2,
    "resourceExhausted": 1,
-   "comboReady": 1
+   "comboReady": 1,
+   "buffEnd": 2
   },
-  "errors": 3
+  "errors": 2
  },
  "team:陈千语卡契尔弭弗": {
   "per": {
@@ -1179,57 +1189,57 @@
     "hits": 27
    },
    "卡契尔": {
-    "damage": 7302.735,
-    "hits": 23
+    "damage": 10949.558,
+    "hits": 27
    },
    "弭弗": {
-    "damage": 8265.348,
-    "hits": 23
+    "damage": 11711.744,
+    "hits": 26
    }
   },
   "events": {
-   "normalHit": 62,
+   "normalHit": 63,
    "spOverflow": 67,
-   "spGain": 83,
+   "spGain": 84,
    "spSpend": 6,
-   "cast": 9,
-   "energyOverflow": 16,
+   "cast": 11,
+   "energyOverflow": 10,
    "energyGain": 19,
-   "buffStart": 1,
-   "breach": 3,
-   "abnormal": 3,
+   "buffStart": 2,
+   "breach": 5,
+   "abnormal": 5,
    "comboReady": 5,
    "enemyAttack": 6,
    "shield": 1,
-   "buffRefresh": 4,
-   "error": 3,
-   "pause": 1,
+   "buffRefresh": 6,
+   "error": 1,
+   "pause": 3,
    "buffEnd": 1
   },
-  "errors": 3
+  "errors": 1
  },
  "team:伊冯佩丽卡汤汤": {
   "per": {
    "伊冯": {
-    "damage": 15340.324,
+    "damage": 15369.377,
     "hits": 44
    },
    "佩丽卡": {
-    "damage": 10644.424,
+    "damage": 14448.133,
     "hits": 33
    },
    "汤汤": {
-    "damage": 15548.642,
-    "hits": 41
+    "damage": 19372.418,
+    "hits": 44
    }
   },
   "events": {
    "normalHit": 96,
-   "spOverflow": 72,
-   "spGain": 119,
+   "spOverflow": 68,
+   "spGain": 115,
    "spSpend": 6,
-   "cast": 10,
-   "energyOverflow": 18,
+   "cast": 12,
+   "energyOverflow": 12,
    "energyGain": 22,
    "attach": 4,
    "abnormal": 5,
@@ -1237,8 +1247,7 @@
    "enemyAttack": 6,
    "vortex": 1,
    "targetState": 1,
-   "pause": 1,
-   "error": 2,
+   "pause": 3,
    "buffStart": 4,
    "buffRefresh": 17,
    "consume": 1,
@@ -1246,6 +1255,6 @@
    "consumeAbnormal": 1,
    "buffEnd": 2
   },
-  "errors": 2
+  "errors": 0
  }
 }
