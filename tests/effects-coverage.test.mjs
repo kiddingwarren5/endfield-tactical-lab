@@ -64,7 +64,7 @@ test('艾维文娜高效派送：掷出 / 召回雷枪每次命中 +4 能量，�
 
 test('审核复核回归：替换战技只有追猎算连携；非主控提弗洛斯的空中普攻仍计入保底；%atk 额外一击无等级系数；卡缪爆裂在连携命中之后',()=>{
   const a=run([mk('梨诺')],[{t:0.5,member:0,kind:'ultimate'},{t:5,member:0,kind:'skill'}],{energy:[160],sp:0,duration:10}); assert.ok(!a.events.some(e=>e.type==='cast'&&e.kind==='combo'&&e.who==='梨诺'),'梨诺终结技后的战技不是追猎'); const sk=a.events.find(e=>e.type==='cast'&&e.kind==='skill'&&e.who==='梨诺'); assert.ok(sk&&sk.cost===25,'仍按战技施放并付 25 技力');
-  const b=run([mk('诀'),mk('提弗洛斯')],[{t:0.5,member:1,kind:'skill'}],{mc:0,duration:6}); const air=b.hits.filter(h=>h.name==='提弗洛斯'&&h.segment==='skill2'); assert.ok(air.length===4&&air.every(h=>h.kind==='skill'),'空中普攻记为战技命中（保底口径不剔除）');
+  const b=run([mk('诀'),mk('提弗洛斯')],[{t:0.5,member:1,kind:'skill'}],{mc:0,duration:6}); const air=b.hits.filter(h=>h.name==='提弗洛斯'&&h.segment==='skill2'); assert.ok(air.length===5&&air.every(h=>h.kind==='skill'),`非主控五次都是普通空中普攻、记为战技命中（保底口径不剔除）：${air.length}`);
   const c=run([mk('黎风')],[{t:0.5,member:0,kind:'skill'}],{duration:4}); const ex=c.hits.find(h=>h.name==='黎风'&&h.segment==='extraHit'); assert.ok(ex&&ex.factors.level===1&&ex.factors.artsStrength===1,'伏魔额外一击不吃异常等级系数');
   const d=run([mk('卡缪'),mk('汤汤')],[{t:0.5,member:0,kind:'skill'},{t:3,member:1,kind:'skill'},{t:5,member:0,kind:'combo'}],{duration:10}); const c1=d.hits.find(h=>h.name==='卡缪'&&h.segment==='combo1'); const burst=d.hits.find(h=>h.name==='卡缪'&&h.segment==='skill2'&&h.t>4); if(c1&&burst) assert.ok(burst.t>c1.t+0.4,'爆裂在连携命中之后'); });
 
