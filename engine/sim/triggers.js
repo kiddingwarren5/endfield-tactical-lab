@@ -18,7 +18,7 @@ const ARTS=['heat','cold','electric','nature'];
 const cast=(kind,extra={})=>({on:'cast',kind,...extra});
 const hit=(kind,extra={})=>({on:'hit',kind,...extra});
 const U=reason=>({unmodeled:reason});
-const BREACH=U('破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常）');
+const PHYS=['knockup','knockdown','crush','armorBreak'];
 const HEAL=U('治疗未建模');
 const CRIT=U('模拟按不暴击计算时不会触发；选择必暴击/期望时同样未建模');
 const CRYSTAL=U('源石结晶（管理员机制）未建模：结晶附着被忽略，不进入法术附着');
@@ -31,14 +31,14 @@ export const TRIGGERS={
   ultimateHit:hit('ultimate'), ultimateFinalHit:hit('ultimate'), onSkillOrUltimateHit:hit(['skill','ultimate']), skillOrUltHit:hit(['skill','ultimate']),
   skillFinalHitNoBreach:hit('skill'), skillFinalHitBreachLe2:hit('skill'),
   duringUltimateNormalHit:hit('normal',{state:'duringUltimate'}),
-  afterUltimateCast:cast('ultimate'), ultCast:cast('ultimate'), afterUltimate:cast('ultimate'), ultimateFieldSpawn:cast('ultimate'),
+  afterUltimateCast:cast('ultimate'), ultCast:cast('ultimate'), afterUltimate:cast('ultimate'),
   comboCast:cast('combo'), afterComboCast:cast('combo'), onComboCast:cast('combo'), comboCastNextSkill:cast('combo',{consumeOn:cast('skill')}), comboHitLayers:hit('combo'), afterComboCastCd45:cast('combo',{cooldown:45}), afterComboNextSkill:cast('combo',{consumeOn:cast('skill'),duration:30}),
   onSkillCast:cast('skill'), skillCast:cast('skill'), firstSkillInBattle:cast('skill',{once:true}),
   skillOrComboCast:cast(['skill','combo']), teamSkillCast:cast('skill',{anyone:true}),
   afterUltimateEnd:{on:'ultimateEnd'}, battleStart:{on:'battleStart'},
   // “X 后 N 秒内的下次技能期间”：按施放事件触发，持续到下次该类技能（近似为原文时长）
   comboThenNextSkill:cast('combo',{duration:30,consumeOn:cast('skill')}), rootOrUltThenNextCombo:[{on:'root',duration:20,consumeOn:cast('combo')},cast('ultimate',{duration:20,consumeOn:cast('combo')})],
-  knockUpThenNextUlt:BREACH, applyBreachThenNextUlt:BREACH, crystalOrFreezeThenNextSkillOrUlt:[{on:'abnormal',which:'freeze',duration:20,consumeOn:cast(['skill','ultimate'])}],
+  knockUpThenNextUlt:{on:'abnormal',which:'knockup',consumeOn:cast('ultimate')}, applyBreachThenNextUlt:{on:'breach',consumeOn:cast('ultimate')}, crystalOrFreezeThenNextSkillOrUlt:[{on:'abnormal',which:'freeze',duration:20,consumeOn:cast(['skill','ultimate'])}],
   firstSkillDuringUltimate:U('终结技期间首次战技免技力费用未建模（技力消耗由 mechanics 决定）'),
   // ---- 附着 / 层数 / 消耗 ----
   skillApplyColdAttach:{on:'attach',by:'skill',element:'cold'}, skillApplyNatureAttach:{on:'attach',by:'skill',element:'nature'}, targetNatureAttachedCount:{state:'targetAttached',element:'nature'},
@@ -90,8 +90,9 @@ export const TRIGGERS={
   afterSelfSkillHeal:hit('combo',{stacks:2}), selfSkillHeal:HEAL, selfSkillHealOthers:HEAL, comboHeal:HEAL, comboHealOthers:HEAL, crystalHealAtFullHp:{on:'heavy',anyone:true,ownerRecent:{kind:'skill',within:20},maxPerCast:2},
   afterCrit:CRIT, critAtkStacksFull:CRIT, critHit:CRIT, wolfBlood16:CRIT, skillOrComboCrit:CRIT, critOnScarredTarget:CRIT, artsImmuneProc:U('免疫法术概率触发未建模'),
   crystalConsumed:CRYSTAL, skillConsumeCrystal:CRYSTAL, ultimateConsumeCrystal:CRYSTAL, afterCrystalConsumed:CRYSTAL, targetCrystal:CRYSTAL, targetHasCrystal:CRYSTAL,
-  onKnockdown:BREACH, comboKnockUp:BREACH, onSmashOrArmorBreak:BREACH, slamConsumeBreach:BREACH, consumeBreachLayers:BREACH, afterApplyBreach:BREACH, targetBreach4:BREACH,
-  applyBreachOnZero:BREACH, targetBreached:BREACH, skillApplyBreach:BREACH, afterPhysicalAnomaly:BREACH, physAnomaly:BREACH, comboHitBroken:BREACH, consumeBreak:BREACH, comboSlam:BREACH, interruptCharge:U('敌人蓄力 / 打断未建模'),
+  onKnockdown:{on:'abnormal',which:'knockdown'}, comboKnockUp:{on:'abnormal',which:'knockup',by:'combo'}, onSmashOrArmorBreak:{on:'abnormal',whichIn:['crush','armorBreak']}, slamConsumeBreach:{on:'consume',element:'breach'}, consumeBreachLayers:{on:'consume',element:'breach'}, afterApplyBreach:{on:'breach'}, targetBreach4:{state:'targetBreach4'},
+  applyBreachOnZero:{on:'breach',min:1,max:1}, targetBreached:{state:'targetBreached'}, skillApplyBreach:{on:'breach',by:'skill'}, afterPhysicalAnomaly:{on:'abnormal',whichIn:PHYS}, physAnomaly:{on:'abnormal',whichIn:PHYS}, comboHitBroken:hit('combo',{state:'targetBreached'}), consumeBreak:{on:'consume',element:'breach'}, comboSlam:{on:'abnormal',which:'crush',by:'combo'},
+  stageChainRefund:{handled:'阶段链第一段的返还技力由 castSkill 按 chain.spRefund 结算'}, energySourceRestricted:{handled:'别礼终结技能量只来自自身战技与连携（simulate gainEnergy 按 energySource 屏蔽外部来源）'}, interruptCharge:U('敌人蓄力 / 打断未建模'),
   skillAmberHit:U('爪印斫痕（需命中破防目标）未建模'), boilingBloodTargetBurning:U('沸血机制未建模'), comboRareFish:U('珍鳞概率未建模'),
   lanceHit:U('雷枪掷出/召回命中未建模'), targetElectricFragile:{state:'targetFragile',element:'electric'},
   skillCounter:U('格挡反击未建模（对照靶不攻击）'), skillFirstBlock:U('格挡未建模（对照靶不攻击）'), takeDamage:U('承伤未建模（对照靶不攻击）'), hasUltimateShield:cast('ultimate'), onSkillHitWithShield:U('护盾未建模'),
@@ -100,7 +101,7 @@ export const TRIGGERS={
   moltenStacks4:U('熔火层数未建模'), skillFollowupHit:U('焚灭追加攻击未建模'), skillBurn:U('战技燃烧伤害倍率单独加成未建模'),
   comboConduct:U('导电来源区分未建模'), comboHitWithPrep:U('备料层数未建模'), afterUltimateFollowup:U('盾卫旗队后续效果未建模（物理异常分支）'),
   ultimateMaxStacks:U('模拟按不暴击计算，暴击率层数不影响伤害'), nextHeavyAfterSkillFreeze:U('下一次普攻改重击未建模'),
-  inGravityField:cast('ultimate'), inGravityFieldBreach:BREACH,
+  inGravityField:cast('ultimate'), inGravityFieldBreach:U('重力场（终结技领域内）未建模'),
   wingHovering:hit('skill'), comboHitWingTarget:U('“连击”乘区未建模'),
   inArrowField:U('箭阵持续时间官方未给出'), enhancedShot:U('猎矢强化射击未建模'), enhancedShotConsumeAttach:U('猎矢强化射击未建模'), airborne:cast('skill',{duration:1.5}),
   specialGiftHit:U('代言人特殊赠礼概率未建模'), inkMarked:{handled:'笔意：河山共影命中后按参数表比例记录目标所受伤害，笔意时长结束或收笔时以固定伤害爆发（simulate inkBurst）'},

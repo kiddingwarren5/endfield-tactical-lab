@@ -6,8 +6,8 @@ import {newMember,clone,weaponPotentialToRank,rankToWeaponPotential} from './sta
 import {runSim} from './timeline-ui.js';
 
 const data={operators,weapons,gear,sets,consumables,effects};
-const ZONE_CN={bonus:'增伤',amp:'增幅',fragile:'脆弱',vulnerable:'易伤',ratioMul:'倍率倍增',ratioAdd:'倍率加成',other:'其他/特殊'};
-const DAMAGE_ZONES=['bonus','amp','fragile','vulnerable','ratioMul','ratioAdd','other'];
+const ZONE_CN={bonus:'增伤',amp:'增幅',fragile:'脆弱',vulnerable:'易伤',resIgnore:'无视抗性',ratioMul:'倍率倍增',ratioAdd:'倍率加成',other:'其他/特殊'};
+const DAMAGE_ZONES=['bonus','amp','fragile','vulnerable','resIgnore','ratioMul','ratioAdd','other'];
 let calcCounter=0;
 
 // ---------- compute ----------

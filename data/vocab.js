@@ -9,8 +9,8 @@ export const DAMAGE_CLASSES=['any','arts','physical'];
 export const ABNORMALS={arts:['burn','conduct','freeze','corrosion'],physical:['knockup','knockdown','crush','armorBreak']};
 // 伪异常：trigger = 再次施加触发本次连携的异常；artsBurst = 该动作直接造成法术爆发
 export const ABNORMAL_PSEUDO=['trigger','artsBurst'];
-export const ZONES={damage:['bonus','amp','fragile','vulnerable','ratioMul','ratioAdd'],stat:['atkPct','atkFlat','ability','critRate','critDmg','chargeEff','artsStrength'],resource:['spRefund','spRegen','energyCost','energyGain','cdr'],other:['poise','other']};
-export const STATS=['str','agi','int','will','main','sub','all','atkPct','atkFlat','critRate','critDmg','chargeEff','artsStrength','hpPct','dmgBonus','healEff'];
+export const ZONES={damage:['bonus','amp','fragile','vulnerable','ratioMul','ratioAdd','resIgnore'],stat:['atkPct','atkFlat','ability','critRate','critDmg','chargeEff','artsStrength'],resource:['spRefund','spRegen','energyCost','energyGain','cdr'],mechanic:['extraHit'],other:['poise','other']}; // resIgnore：无视目标 N 点抗性（按元素）；extraHit：触发时追加一次固定伤害（公式）
+export const STATS=['str','agi','int','will','main','sub','all','atkPct','atkFlat','critRate','critDmg','chargeEff','artsStrength','hpPct','dmgBonus','healEff','def'];
 export const GEAR_STATS=['str','agi','int','will','main','sub','chargeEff','artsStrength','critRate','hp','comboDmg','physicalDmg','skillDmg','coldElecDmg','heatNatureDmg','ultDmg','allSkillDmg','normalDmg','artsDmg','healEff','dmgTaken','brokenDmg'];
 export const BENEFICIARIES=['self','team','others','mainControl','target'];
 export const STACKING=['none','stack','highest','independent','unknown'];
@@ -18,8 +18,8 @@ export const CONDITION_MODES=['auto','user','segment'];
 export const UNITS=['%','flat','x'];
 export const OWNER_KINDS=['operator','weapon','gearSet','consumable'];
 // 模拟器事件族（触发表 on:）与状态（触发表 state:）
-export const EVENT_FAMILIES=['battleStart','cast','hit','heavy','attach','attachLayers','consume','abnormal','consumeAbnormal','burst','root','tornado','earlyWave','ultimateEnd','iceShatter','applyDebuffCategory','spGain','execute','allyCombo'];
-export const STATES=['always','never','duringUltimate','modeInt','targetAttached','targetColdAttached','targetFrozen','targetColdOrFrozen','targetFragile','targetStaggered','targetHpBelow'];
+export const EVENT_FAMILIES=['battleStart','cast','hit','heavy','attach','attachLayers','consume','abnormal','consumeAbnormal','burst','breach','root','tornado','earlyWave','ultimateEnd','iceShatter','applyDebuffCategory','spGain','execute','allyCombo'];
+export const STATES=['always','never','duringUltimate','modeInt','targetAttached','targetColdAttached','targetFrozen','targetColdOrFrozen','targetFragile','targetStaggered','targetHpBelow','targetBreached','targetBreach4'];
 // 连携技发动条件类型（mechanics combo.trigger.type）与自定义事件
 export const COMBO_TRIGGER_TYPES=['attachApplied','anyAttachApplied','attachLayers','attachConsumed','abnormal','burst','heavyHit','execute','allyCombo','skillState','custom'];
 export const CUSTOM_EVENTS=['controlledHit','abnormalConsumed','crystalConsumed','enemyCharging','stagger'];
