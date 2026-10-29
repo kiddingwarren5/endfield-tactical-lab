@@ -11,6 +11,8 @@ export default {
   skillEnergyPer100RealSp:6.5,    // research（战技：每 100 真实技力全队各 +6.5）
   comboWindowSeconds:5,           // research（单一来源）
   attachDurationSeconds:20,       // research（单一来源）
+  // 主控实际出手比例：技力曲线实测（2026-10-30，案例 19 / 20 / 22 视频按 0.25 s 读技力条）——自然回复斜率 6.4–8.4/s 与研究值 8 相符，但技力总收入只有 8–10/s，模拟器连续普攻时 14–17/s；差额是重击次数：实战 30 s 里 3–6 次重击回技力，模拟 10–13 次。按出手比例 0.5（区间 0.4–0.7）校准，见 docs/verification-needed.md 78
+  control:{uptime:[0.4,0.7],default:{uptime:0.5},origin:'measured'},
   nonControl:{damageFactor:[0.5,1.0],rhythmFactor:[0.6,1.0],default:{damageFactor:0.75,rhythmFactor:0.8},
     measured:{origin:'zmdlogs 白刃穿水 74.8s（docs/cases/README.md 末节）',rhythm:{'诀(非主控)':'24 次重击/67.8s，攻击串周期≈2.8s，与主控祀(25/71.8s)相当 → φ≈0.98','别礼(非主控)':'38s 内 1 次重击，长时间不普攻（施法/AI 停顿）','汤汤(非主控)':'仅记录第3/4段，节奏不可判'},damage:'日志跨账号/跨副本的绝对校准不一致（含未知副本加成），衰减 δ 未能测得，保持区间'}}, // 节奏已有一例日志测量；衰减未知
   staggerMultiplier:1.3,          // research（默认对照靶不失衡，不启用）

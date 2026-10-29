@@ -6,7 +6,7 @@ import {simulate} from '../dist/engine/sim/simulate.js'; import {triggerCoverage
 const data={operators,weapons,gear,sets,effects}; const op=n=>operators.find(o=>o.name===n);
 const mk=(name,pot=0,mode='auto')=>({operatorId:op(name).id,potential:pot,skillRanks:{normal:12,skill:12,combo:12,ultimate:12},mode,weapon:{id:null,potential:0,substrate:[6,6,3],ranks:[9,9,4]},gear:{armor:{id:null,refine:[3,3,3]},gloves:{id:null,refine:[3,3,3]},kit1:{id:null,refine:[3,3,3]},kit2:{id:null,refine:[3,3,3]}},consumables:[],buffs:{}});
 const enemy={defence:100,resistances:{physical:'D',cold:'D',heat:'D',electric:'D',nature:'D'},custom:{},attackInterval:4};
-const run=(team,timeline,o={})=>simulate({team,data,mechanics,timing,enemy,mainControl:o.mc??0,initial:{sp:o.sp??300,energy:o.energy||[0,0,0,0]},timeline,params:{duration:o.duration||24},critMode:o.critMode||'never',options:o.options||{}});
+const run=(team,timeline,o={})=>simulate({team,data,mechanics,timing,enemy,mainControl:o.mc??0,initial:{sp:o.sp??300,energy:o.energy||[0,0,0,0]},timeline,params:{duration:o.duration||24,controlUptime:1},critMode:o.critMode||'never',options:o.options||{}}); /* 机制测试按主控连续普攻（出手比例 1），不受实测出手比例影响 */
 const segs=(r,who)=>r.hits.filter(h=>h.name===who&&h.kind!=='normal').map(h=>h.segment);
 const near=(a,b,eps=0.05)=>Math.abs(a-b)<eps; const sp=(r,re)=>r.events.filter(e=>e.type==='spGain'&&re.test(e.why));
 
