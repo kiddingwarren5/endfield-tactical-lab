@@ -29,7 +29,7 @@ test('写出 docs/rotations.md',()=>{
     L.push(`\n来源：${preset.sources.join('；')}\n\n待实机验证：${preset.verify.join('；')}\n`);
   }
   L.push('## Boss / 场景调轴（主轴）\n\n| 场景 | 口径 | 保底总伤 | 保底每秒 | 含副控普攻每秒 | 顺序 |\n|---|---|---|---|---|---|');
-  for(const sc of scenarios){ const r=scen[sc.id]; if(!r) continue; const end=r.end; const sure=sumHits(r.main,{until:end,mainControl:r.input.mainControl,guaranteed:true}), tot=sumHits(r.main,{until:end}); L.push(`| ${sc.name} | ${sc.timeLimit?`限时 ${end} s`:`周期 ${end.toFixed(1)} s`} | ${fmt(sure)} | ${fmt(sure/end)} | ${fmt(tot/end)} | ${r.timeline.map(a=>`${a.t.toFixed(1)}s ${r.names[a.member]}${({skill:'战技',combo:'连携',ultimate:'终结技',plunge:'下落攻击'})[a.kind]}`).join(' → ')} |`); L.push(`\n${sc.desc} 要点：${sc.tips.join('；')}\n`); }
+  for(const sc of scenarios){ const r=scen[sc.id]; if(!r) continue; const end=r.end; const sure=sumHits(r.main,{until:end,mainControl:r.input.mainControl,guaranteed:true}), tot=sumHits(r.main,{until:end}); L.push(`| ${sc.name} | ${sc.timeLimit?`限时 ${end} s`:`周期 ${end.toFixed(1)} s`} | ${fmt(sure)} | ${fmt(sure/end)} | ${fmt(tot/end)} | ${r.timeline.map(a=>`${a.t.toFixed(1)}s ${r.names[a.member]}${({skill:'战技',combo:'连携',ultimate:'终结技',plunge:'下落攻击'})[a.kind]}`).join(' → ')} |`); L.push(`\n${sc.desc} 要点：${sc.facts.join('；')}\n`); }
   fs.writeFileSync('docs/rotations.md',L.join('\n'));
 });
 

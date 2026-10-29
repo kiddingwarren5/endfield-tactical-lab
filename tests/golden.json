@@ -2,19 +2,19 @@
  "preset:cold-3charge-1burst": {
   "per": {
    "诀": {
-    "damage": 308717.148,
+    "damage": 249453.27,
     "hits": 106
    },
    "别礼": {
-    "damage": 3295202.493,
+    "damage": 3294102.496,
     "hits": 110
    },
    "汤汤": {
-    "damage": 1264473.674,
+    "damage": 1381027.647,
     "hits": 127
    },
    "祀": {
-    "damage": 1473976.756,
+    "damage": 2023358.319,
     "hits": 74
    }
   },
@@ -22,7 +22,7 @@
    "normalHit": 343,
    "spSpend": 20,
    "cast": 40,
-   "buffStart": 47,
+   "buffStart": 48,
    "energyGain": 80,
    "energyBlocked": 20,
    "spGain": 414,
@@ -30,12 +30,12 @@
    "attach": 19,
    "comboReady": 24,
    "vortex": 4,
-   "buffRefresh": 48,
+   "buffRefresh": 65,
    "enemyAttack": 19,
+   "buffEnd": 32,
    "consume": 4,
-   "buffEnd": 30,
    "inkBurst": 4,
-   "energyOverflow": 20,
+   "energyOverflow": 21,
    "pause": 4,
    "cdr": 1,
    "instant": 1,
@@ -46,7 +46,7 @@
  "preset:cold-ult-asap": {
   "per": {
    "诀": {
-    "damage": 269707.578,
+    "damage": 224816.252,
     "hits": 99
    },
    "别礼": {
@@ -54,11 +54,11 @@
     "hits": 107
    },
    "汤汤": {
-    "damage": 1318147.345,
+    "damage": 1445967.03,
     "hits": 121
    },
    "祀": {
-    "damage": 1532683.138,
+    "damage": 2008541.878,
     "hits": 70
    }
   },
@@ -66,7 +66,7 @@
    "normalHit": 326,
    "spSpend": 20,
    "cast": 40,
-   "buffStart": 39,
+   "buffStart": 41,
    "energyGain": 80,
    "energyBlocked": 20,
    "spGain": 401,
@@ -74,12 +74,12 @@
    "attach": 16,
    "comboReady": 22,
    "vortex": 4,
-   "buffRefresh": 54,
+   "buffRefresh": 70,
    "enemyAttack": 18,
+   "buffEnd": 33,
    "consume": 4,
-   "buffEnd": 31,
    "inkBurst": 4,
-   "energyOverflow": 12,
+   "energyOverflow": 13,
    "pause": 4,
    "cdr": 1,
    "instant": 1,
@@ -90,19 +90,19 @@
  "preset:cold-3layer-fast": {
   "per": {
    "诀": {
-    "damage": 312121.406,
+    "damage": 286608.164,
     "hits": 168
    },
    "别礼": {
-    "damage": 2659616.303,
+    "damage": 2653101.706,
     "hits": 170
    },
    "汤汤": {
-    "damage": 1172486.559,
+    "damage": 1385925.775,
     "hits": 208
    },
    "祀": {
-    "damage": 1155306.71,
+    "damage": 1551491.75,
     "hits": 122
    }
   },
@@ -112,7 +112,8 @@
    "cast": 35,
    "energyGain": 71,
    "energyBlocked": 18,
-   "buffStart": 41,
+   "buffStart": 45,
+   "buffRefresh": 49,
    "spGain": 672,
    "attach": 12,
    "comboReady": 24,
@@ -120,11 +121,10 @@
    "vortex": 4,
    "enemyAttack": 31,
    "consume": 3,
-   "buffRefresh": 33,
    "note": 7,
-   "buffEnd": 41,
+   "buffEnd": 45,
    "inkBurst": 4,
-   "energyOverflow": 16,
+   "energyOverflow": 18,
    "spOverflow": 247,
    "attachExpire": 1,
    "pause": 4,

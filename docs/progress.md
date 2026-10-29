@@ -32,6 +32,8 @@
 | 11 | 触发系统重写并经两份独立审核修正：触发表 `dist/engine/sim/triggers.js`（196 代码：事件 / 状态 / 已处理 / 未建模）、模拟器按代码触发（战技/终结技/普攻按段命中、附着/消耗/异常/爆发/重击/定身/水龙卷/提前引爆/终结技结束/碎冰/战斗开始/增益施加/技力恢复），互斥组取最大、叠层首层起算与独立计时、演出暂停计时、终结技时长取官方参数、形态门槛按面板、资源区效果即时结算、“下一次 X”消耗、冷却与每场一次 | 已做 | 审核：docs/reviews/triggers-review-claude.md（58 条）、engine-trigger-review-claude.md（24 条），全部采纳；tests/triggers.test.mjs（覆盖）、tests/triggers-behavior.test.mjs（11 条行为算例）；覆盖表 docs/trigger-coverage.md |
 | 发布 | 当前账号副本公开发布 | 已做 | https://claude.ai/artifact/MA9QgAZesaHBqEia9BdCwg（版本 7）；分享权限已在页面 Share 菜单设为“知道链接的任何人”（无需 Claude 账号即可打开）。备选：`gh auth login` 后 `sh tools/deploy_pages.sh` 发布到 GitHub Pages |
 
+| 配置页 | 第一页规范 + 社区默认配装多方案（2026-10-29） | 已做 | docs/spec-page-1-setup.md；sources/curated/builds.json → tools/build_builds.mjs；docs/cases/case-17；验证清单 44–46 |
+
 ## 2. 需求覆盖矩阵（NEXT_STEPS.md 逐条对账）
 状态：☐ 未做 / ◐ 进行中 / ☑ 已做并验证 / ✗ 阻塞
 

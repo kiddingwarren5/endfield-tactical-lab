@@ -80,3 +80,9 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 - 迁移脚本 tools/migrate_textfields.mjs（幂等）把以上字段写进 curated 数据。
 - 随之修正的三处行为：祀终结技减冷却只给 01 号位；大潘“备料”减冷却不再被“终结技…后”的文本误判成终结技后触发；噗切娜“我没有睡着！”立盾不打伤害、头槌只在替换段。
 - 七种干员资源全部走 mechanics.resources 规则（熔火、启示 / 猎矢、支援晶体、雷枪 / 强雷枪、自制炸弹、连击、青霆剑）；段计划支持 timesFrom / lastMul / delay，消耗规则支持 extraSegment / factor / cancelDelayed，获得规则支持 perAbnormalLevel / duringUltimateFirst / duration。敌人默认每 4 秒攻击主控。
+
+## 2026-10-29 晚：配置页规范与社区默认配装
+- 规范：docs/spec-page-1-setup.md。配置页改动：场景只列影响轴的事实；限时场景“排多少秒”换成“限时 N 秒”；新增“敌人每隔几秒打一次主控”；编辑区左移/右移换号位；完成键旁提示未配装人数；恢复默认回到示例编队。
+- 默认配装改为多方案：sources/curated/builds.json（34 人 196 套，社区标配，按来源数排序，第 0 套入队默认）→ `node tools/build_builds.mjs` 生成 dist/data/builds.js 和 docs/cases/case-17-community-builds.md（名称校验不过就不写盘）。子代理收集结果用 `node tools/merge_builds.mjs a.json …` 合并，近似重复折叠，报告在 sources/curated/builds.report.md。
+- 编辑区“配装方案”下拉切换方案；改过任何一件就是“自定义”，再选方案整套覆盖。通用兜底规则 engine/defaultBuild.js 只给没有社区方案的干员用。
+- 标答编队的配装钉死在 dist/data/rotations.js（案例 06 视频作者推荐），不再读默认配装表；此前标成“案例 06”的两套无来源配装已删除（验证清单 44–46）。
