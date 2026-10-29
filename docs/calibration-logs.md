@@ -40,3 +40,15 @@
 1. 别礼终结、别礼连携、诀破晦阵的残差：查测评视频 / 论坛实测，逐条列假设，用 9 场日志验证（必须所有场一致才采用）。
 2. 把祀连携（按层）、汤汤水龙卷、祀终结、笔意爆发、寒冷爆发映射进来，覆盖未映射的 85% 伤害。
 3. 用 zmdlogs 客户端（EndfieldLogsClient，zmdlogs.com 首页下载）在训练场按固定动作打一遍上传，拿没有 Boss 阶段和未知增益的干净日志。
+
+## 协议层证据（2026-10-30，来源：开源项目 deepdarkssj/ZMDLogs 仓库里的游戏 protobuf 定义，MIT）
+zmdlogs 的客户端是 Npcap 被动抓包：监听游戏客户端与战斗服务器之间的流量，用本机 GameAssembly.dll 的导出函数解密，再按 protobuf 定义解析。仓库 `proto/` 里有 1778 个游戏协议定义，和伤害有关的几条直接说明了结算结构：
+- `DAMAGE_PROCESSOR_TYPE`：AttackerCritRate / AttackerAtk / AttackerCritDamage / AttackerPen / DamageScale / DefenderDef / ModifyCalculateResult / InstantModifyAttribute。伤害是一串处理器依次作用。
+- `DAMAGE_SCALE_PROCESSOR { damage_scale_side, zone_name, addition }`：增益对伤害的作用是"往某个命名乘区加一个值"。日志里的 dmg_inc / amp / fragile / vuln_taken / prod_vuln_taken 就是 zone_name。所以"乘区之间相乘、区内加算"是数据定义层面的结构，不是社区猜的；prod_ 前缀的区是另一类，只见于 Boss 被动和失衡。
+- `ATK_CALCULATION_TYPE`：AtkScale（攻击×倍率）/ DefiniteValue（固定值）/ MultiplyAttribute（某属性×倍率+加值）/ BreakingAtkCalc / PrimaryAttrCalc。目录里"固定伤害""按防御力倍率""记录伤害"这些路径对应前三种。
+- `BUFF_RES`：每个 buff 带 `attr_modifiers`、`damage_modifiers`、`stacking_settings { stacking_type, stacking_key, max_stack_cnt, priority }`、`duration`。同名能否叠加、取大还是取新，是每个 buff 自己的字段。
+- `BATTLE_DAMAGE_DETAIL`：每一击带 value、is_crit、attacker_modifiers / defender_modifiers（作用于这一击的 buff 句柄）。
+- `SKILL_COST_TYPE`：SkillCostUltSp（终结技能量）/ SkillCostAtb（技力）。`BATTLE_ATB_DATA { atb_value, atb_recovery_speed, client_tick_ts, reason }`、`BATTLE_UPDATE_ATB_INFO_OP_DATA { delta_value, template_id }`：技力当前值、自然回复速度、每次变化量和来源都在包里。
+- `BATTLE_SKILL_START_CAST_OP_DATA` / `END_CAST`：施放开始、结束各一条，带时间戳。
+
+意义：假设清单里"时序"一节（施放时间、普攻段时长、终结技演出）和"技力经济"一节（自然回复、重击回技、能量）都能从抓包得到精确值，不用逐帧看视频。zmdlogs.com 网页只展示了其中一部分（伤害与增益），技力、能量、施放窗口在原始包里但没上网页。
