@@ -2302,7 +2302,7 @@
      "element": "cold",
      "layers": 1,
      "when": "立盾期间受击触发反击命中",
-     "bind": "hit"
+     "bind": "counter"
     }
    ],
    "consumes": null,
@@ -2919,7 +2919,7 @@
      "element": "breach",
      "layers": 1,
      "when": "立盾期间受击触发反击命中",
-     "bind": "hit"
+     "bind": "counter"
     }
    ],
    "consumes": null,
