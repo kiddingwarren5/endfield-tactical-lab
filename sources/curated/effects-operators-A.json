@@ -1971,12 +1971,15 @@
   },
   "name": "洛茜 · 斫痕（天赋） · 持续伤害",
   "literal": "目标每秒受到洛茜攻击力{v}%的物理伤害",
-  "zone": "other",
+  "zone": "dot",
   "stat": null,
   "value": {
-   "fixed": 30
+   "formula": "atk*0.30",
+   "vars": [
+    "atk"
+   ]
   },
-  "unit": "%",
+  "unit": "flat",
   "beneficiary": "target",
   "applies": {
    "elements": [
@@ -2026,19 +2029,22 @@
   },
   "name": "洛茜 · 沸血（天赋）",
   "literal": "额外触发一次攻击力{v}%的灼热伤害",
-  "zone": "other",
+  "zone": "extraHit",
   "stat": null,
   "value": {
-   "fixed": 24
+   "formula": "atk*0.24",
+   "vars": [
+    "atk"
+   ]
   },
-  "unit": "%",
+  "unit": "flat",
   "beneficiary": "self",
   "applies": {
    "elements": [
     "heat"
    ],
    "kinds": null,
-   "damageClass": "any"
+   "damageClass": "arts"
   },
   "condition": {
    "text": "洛茜对处于爪印斫痕状态的敌人施放技能造成暴击伤害时",

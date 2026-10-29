@@ -2,7 +2,7 @@
  "preset:cold-3charge-1burst": {
   "per": {
    "诀": {
-    "damage": 268902.357,
+    "damage": 269922.12,
     "hits": 107
    },
    "别礼": {
@@ -14,7 +14,7 @@
     "hits": 127
    },
    "祀": {
-    "damage": 2023949.073,
+    "damage": 1620210.384,
     "hits": 74
    }
   },
@@ -25,15 +25,17 @@
    "buffStart": 48,
    "energyGain": 80,
    "energyBlocked": 20,
-   "spGain": 414,
+   "spGain": 416,
    "inkStart": 5,
    "attach": 18,
    "comboReady": 24,
    "vortex": 4,
-   "buffRefresh": 73,
+   "buffRefresh": 57,
+   "targetState": 8,
    "enemyAttack": 19,
    "buffEnd": 32,
    "consume": 4,
+   "targetStateEnd": 4,
    "inkBurst": 4,
    "energyOverflow": 21,
    "pause": 4,
@@ -47,7 +49,7 @@
  "preset:cold-ult-asap": {
   "per": {
    "诀": {
-    "damage": 254491.157,
+    "damage": 255020.982,
     "hits": 101
    },
    "别礼": {
@@ -59,7 +61,7 @@
     "hits": 121
    },
    "祀": {
-    "damage": 2020643.266,
+    "damage": 1744926.143,
     "hits": 70
    }
   },
@@ -70,15 +72,17 @@
    "buffStart": 41,
    "energyGain": 80,
    "energyBlocked": 20,
-   "spGain": 401,
+   "spGain": 403,
    "inkStart": 4,
    "attach": 16,
    "comboReady": 22,
    "vortex": 4,
-   "buffRefresh": 78,
+   "buffRefresh": 62,
+   "targetState": 8,
    "enemyAttack": 18,
    "buffEnd": 33,
    "consume": 4,
+   "targetStateEnd": 4,
    "inkBurst": 4,
    "energyOverflow": 13,
    "pause": 4,
@@ -93,7 +97,7 @@
  "preset:cold-3layer-fast": {
   "per": {
    "诀": {
-    "damage": 307911.986,
+    "damage": 308824.575,
     "hits": 170
    },
    "别礼": {
@@ -105,7 +109,7 @@
     "hits": 208
    },
    "祀": {
-    "damage": 1551491.75,
+    "damage": 1363656.55,
     "hits": 122
    }
   },
@@ -116,17 +120,19 @@
    "energyGain": 71,
    "energyBlocked": 18,
    "buffStart": 45,
-   "buffRefresh": 57,
-   "spGain": 672,
+   "buffRefresh": 45,
+   "spGain": 675,
    "attach": 12,
    "comboReady": 24,
    "inkStart": 4,
    "vortex": 4,
+   "targetState": 7,
    "enemyAttack": 31,
    "consume": 3,
    "note": 4,
    "buffEnd": 45,
    "inkBurst": 4,
+   "targetStateEnd": 4,
    "energyOverflow": 18,
    "spOverflow": 247,
    "attachExpire": 1,
@@ -235,27 +241,31 @@
  "solo:洛茜": {
   "per": {
    "洛茜": {
-    "damage": 23946.135,
-    "hits": 44
+    "damage": 29399.949,
+    "hits": 63
    }
   },
   "events": {
    "normalHit": 30,
-   "spOverflow": 45,
-   "spGain": 45,
+   "spOverflow": 56,
+   "spGain": 56,
    "spSpend": 3,
    "cast": 5,
    "energyOverflow": 2,
    "energyGain": 4,
-   "breach": 5,
-   "abnormal": 4,
+   "breach": 3,
+   "abnormal": 3,
    "enemyAttack": 5,
+   "buffStart": 1,
+   "dotStart": 2,
+   "instant": 2,
+   "targetState": 2,
    "error": 1,
    "pause": 1,
    "attach": 1,
-   "comboReady": 2,
-   "buffStart": 2,
-   "buffRefresh": 4
+   "comboReady": 1,
+   "buffRefresh": 1,
+   "comboStage": 1
   },
   "errors": 1
  },
@@ -328,7 +338,12 @@
    "enemyAttack": 5,
    "error": 1,
    "pause": 1,
-   "comboReady": 1,
+   "resourceGain": 1,
+   "comboReady": 2,
+   "resourceSpend": 1,
+   "cdr": 1,
+   "instant": 1,
+   "resourceExhausted": 1,
    "consume": 1,
    "buffStart": 2
   },
@@ -337,7 +352,7 @@
  "solo:余烬": {
   "per": {
    "余烬": {
-    "damage": 18621.128,
+    "damage": 21377.895,
     "hits": 29
    }
   },
@@ -352,7 +367,9 @@
    "breach": 4,
    "abnormal": 4,
    "enemyAttack": 5,
+   "buffStart": 1,
    "comboReady": 2,
+   "buffRefresh": 4,
    "error": 2
   },
   "errors": 2
@@ -431,6 +448,7 @@
    "buffStart": 1,
    "resourceSpend": 1,
    "resourceExhausted": 1,
+   "instant": 2,
    "attach": 1,
    "comboReady": 2
   },
@@ -439,8 +457,8 @@
  "solo:管理员 (男)": {
   "per": {
    "管理员 (男)": {
-    "damage": 18678.537,
-    "hits": 40
+    "damage": 16530.537,
+    "hits": 39
    }
   },
   "events": {
@@ -471,10 +489,13 @@
    "spGain": 48,
    "spSpend": 3,
    "cast": 4,
-   "energyOverflow": 4,
-   "energyGain": 4,
+   "energyOverflow": 7,
+   "energyGain": 7,
    "enemyAttack": 5,
+   "block": 3,
    "attach": 3,
+   "counter": 3,
+   "instant": 3,
    "comboReady": 2,
    "error": 2
   },
@@ -566,8 +587,11 @@
    "energyOverflow": 3,
    "energyGain": 3,
    "enemyAttack": 5,
+   "block": 3,
    "breach": 3,
+   "counter": 3,
    "comboReady": 2,
+   "shield": 1,
    "error": 2
   },
   "errors": 2
@@ -575,7 +599,7 @@
  "solo:秋栗": {
   "per": {
    "秋栗": {
-    "damage": 13436.617,
+    "damage": 13775.017,
     "hits": 38
    }
   },
@@ -590,14 +614,17 @@
    "attach": 3,
    "enemyAttack": 5,
    "error": 2,
-   "pause": 1
+   "pause": 1,
+   "comboState": 1,
+   "buffStart": 1,
+   "comboConsumed": 1
   },
   "errors": 2
  },
  "solo:黎风": {
   "per": {
    "黎风": {
-    "damage": 26993.538,
+    "damage": 27678.777,
     "hits": 46
    }
   },
@@ -618,21 +645,23 @@
    "comboReady": 2,
    "enemyAttack": 5,
    "resourceGain": 1,
-   "error": 2
+   "comboState": 1,
+   "error": 2,
+   "comboConsumed": 1
   },
   "errors": 2
  },
  "solo:骏卫": {
   "per": {
    "骏卫": {
-    "damage": 17926.46,
-    "hits": 44
+    "damage": 16523.02,
+    "hits": 43
    }
   },
   "events": {
    "normalHit": 32,
-   "spOverflow": 45,
-   "spGain": 45,
+   "spOverflow": 46,
+   "spGain": 46,
    "spSpend": 3,
    "cast": 4,
    "energyOverflow": 2,
@@ -640,7 +669,10 @@
    "abnormal": 3,
    "enemyAttack": 5,
    "error": 2,
-   "pause": 1
+   "pause": 1,
+   "resourceGain": 1,
+   "resourceSpend": 1,
+   "buffStack": 2
   },
   "errors": 2
  },
@@ -675,8 +707,8 @@
  "solo:管理员 (女)": {
   "per": {
    "管理员 (女)": {
-    "damage": 18678.537,
-    "hits": 40
+    "damage": 16530.537,
+    "hits": 39
    }
   },
   "events": {
@@ -712,7 +744,7 @@
    "enemyAttack": 5,
    "error": 2,
    "pause": 1,
-   "buffStart": 1,
+   "buffStart": 2,
    "buffRefresh": 17
   },
   "errors": 2
@@ -737,7 +769,9 @@
    "error": 2,
    "pause": 1,
    "buffStart": 1,
-   "buffEnd": 1
+   "targetState": 1,
+   "buffEnd": 1,
+   "targetStateEnd": 1
   },
   "errors": 2
  },
@@ -760,6 +794,7 @@
    "comboReady": 2,
    "enemyAttack": 5,
    "vortex": 1,
+   "targetState": 1,
    "error": 2,
    "buffStart": 1
   },
@@ -795,7 +830,7 @@
  "solo:卡缪": {
   "per": {
    "卡缪": {
-    "damage": 15386.432,
+    "damage": 15360.462,
     "hits": 34
    }
   },
@@ -807,8 +842,7 @@
    "cast": 4,
    "energyOverflow": 2,
    "energyGain": 3,
-   "buffStart": 1,
-   "buffRefresh": 5,
+   "targetState": 3,
    "attach": 4,
    "enemyAttack": 5,
    "error": 2,
@@ -842,14 +876,14 @@
  "solo:诀": {
   "per": {
    "诀": {
-    "damage": 18382.99,
-    "hits": 39
+    "damage": 16419.99,
+    "hits": 38
    }
   },
   "events": {
    "normalHit": 31,
-   "spOverflow": 49,
-   "spGain": 49,
+   "spOverflow": 50,
+   "spGain": 50,
    "spSpend": 3,
    "cast": 4,
    "energyOverflow": 4,
@@ -858,8 +892,9 @@
    "comboReady": 2,
    "enemyAttack": 5,
    "buffStart": 2,
-   "buffRefresh": 4,
+   "targetState": 1,
    "error": 2,
+   "targetStateEnd": 1,
    "buffEnd": 2
   },
   "errors": 2
@@ -914,7 +949,8 @@
    "pause": 1,
    "resourceSpend": 7,
    "resourceExhausted": 3,
-   "comboReady": 1
+   "comboReady": 1,
+   "targetState": 2
   },
   "errors": 1
  },
@@ -931,10 +967,14 @@
    "spGain": 63,
    "spSpend": 3,
    "cast": 4,
-   "energyOverflow": 4,
-   "energyGain": 4,
+   "energyOverflow": 7,
+   "energyGain": 7,
    "enemyAttack": 5,
+   "block": 3,
+   "instant": 3,
+   "buffStart": 1,
    "comboReady": 2,
+   "buffRefresh": 2,
    "error": 2
   },
   "errors": 2
@@ -969,8 +1009,8 @@
  "team:诀别汤祀": {
   "per": {
    "诀": {
-    "damage": 18442.096,
-    "hits": 36
+    "damage": 16592.165,
+    "hits": 35
    },
    "别礼": {
     "damage": 26647.349,
@@ -981,7 +1021,7 @@
     "hits": 41
    },
    "祀": {
-    "damage": 18317.448,
+    "damage": 16602.307,
     "hits": 23
    }
   },
@@ -1001,13 +1041,15 @@
    "enemyAttack": 6,
    "consume": 1,
    "buffStart": 4,
-   "buffRefresh": 5,
+   "targetState": 2,
    "vortex": 1,
    "pause": 1,
    "error": 3,
+   "targetStateEnd": 1,
    "ultTriggered": 2,
    "buffEnd": 2,
    "ultFollowUpReady": 1,
+   "buffRefresh": 1,
    "inkBurst": 1
   },
   "errors": 3
@@ -1048,8 +1090,8 @@
     "hits": 64
    },
    "诀": {
-    "damage": 12036.474,
-    "hits": 33
+    "damage": 10073.474,
+    "hits": 32
    }
   },
   "events": {
@@ -1066,10 +1108,12 @@
    "comboReady": 3,
    "enemyAttack": 6,
    "error": 2,
-   "buffRefresh": 10,
+   "targetState": 1,
    "pause": 1,
+   "targetStateEnd": 1,
    "consume": 1,
    "resourceSpend": 2,
+   "buffRefresh": 6,
    "resourceExhausted": 1,
    "buffEnd": 2
   },
@@ -1136,6 +1180,9 @@
    "abnormal": 3,
    "comboReady": 6,
    "enemyAttack": 6,
+   "block": 2,
+   "counter": 2,
+   "shield": 2,
    "buffRefresh": 4,
    "pause": 1,
    "error": 2,
@@ -1146,7 +1193,7 @@
  "team:伊冯佩丽卡汤汤": {
   "per": {
    "伊冯": {
-    "damage": 17714.369,
+    "damage": 17779.973,
     "hits": 54
    },
    "佩丽卡": {
@@ -1160,8 +1207,8 @@
   },
   "events": {
    "normalHit": 110,
-   "spOverflow": 81,
-   "spGain": 131,
+   "spOverflow": 85,
+   "spGain": 132,
    "spSpend": 6,
    "cast": 9,
    "energyOverflow": 17,
@@ -1172,11 +1219,14 @@
    "enemyAttack": 6,
    "error": 3,
    "vortex": 1,
+   "targetState": 1,
    "pause": 1,
-   "buffStart": 2,
+   "buffStart": 4,
    "buffRefresh": 17,
    "consume": 1,
-   "consumeAbnormal": 1
+   "note": 1,
+   "consumeAbnormal": 1,
+   "buffEnd": 2
   },
   "errors": 3
  }

@@ -414,14 +414,14 @@
    "fixed": 1
   },
   "unit": "flat",
-  "beneficiary": "self",
+  "beneficiary": "team",
   "applies": null,
   "condition": {
-   "text": "施放终结技小队，集结！期间",
-   "trigger": "duringUltimate",
+   "text": "施放终结技小队，集结！期间（持续施法时长官方未给，按 12 s）",
+   "trigger": "ultCast",
    "mode": "user"
   },
-  "duration": null,
+  "duration": 12,
   "stacking": "none",
   "exclusiveGroup": null,
   "teamUnique": false,
@@ -432,7 +432,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0019_karin.talents[1].stages[0]"
   },
-  "notes": "获得“连击”状态（伤害公式中的连击乘区），数值由规则定义，value 仅表示获得该状态。"
+  "notes": "获得“连击”状态（伤害公式中的连击乘区），数值由规则定义，value 仅表示获得该状态。",
+  "grants": "comboState"
  },
  {
   "id": "chr_0019_karin.pot1.atk",
@@ -649,7 +650,7 @@
    "fixed": 5
   },
   "unit": "flat",
-  "beneficiary": "self",
+  "beneficiary": "team",
   "applies": null,
   "condition": {
    "text": "终结技小队，集结！结束后",
@@ -670,7 +671,8 @@
   "notes": "延长天赋心流时间的连击状态5秒（连击乘区），单位：秒",
   "modifies": [
    "chr_0019_karin.talent2.combo"
-  ]
+  ],
+  "grants": "comboState"
  },
  {
   "id": "chr_0015_lifeng.skill.physFragile",
@@ -772,7 +774,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0015_lifeng.skills.combo.description + params"
   },
-  "notes": "获得“连击”状态（连击乘区）；终结技消耗连击时追加伤害段 ultimate3 已在分段中。"
+  "notes": "获得“连击”状态（连击乘区）；终结技消耗连击时追加伤害段 ultimate3 已在分段中。",
+  "grants": "comboState"
  },
  {
   "id": "chr_0015_lifeng.talent1.atk",
@@ -4984,7 +4987,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0033_camille.talents[0].stages[1]"
   },
-  "notes": "获得“连击”状态（连击乘区）；回复生命值未录入（但会触发天赋血涌苏生）。"
+  "notes": "获得“连击”状态（连击乘区）；回复生命值未录入（但会触发天赋血涌苏生）。",
+  "grants": "comboState"
  },
  {
   "id": "chr_0033_camille.talent2.heatBonus",
@@ -6151,8 +6155,8 @@
    "damageClass": "any"
   },
   "condition": {
-   "text": "阵诀·智生效（智识≥意志）；连携技命中后（自身战技命中囹圄目标时再次施加）",
-   "trigger": "afterComboHit",
+   "text": "阵诀·智生效（智识≥意志）；连携技第一段命中后（囹圄结束的爆炸不再施加）（自身战技命中囹圄目标时再次施加）",
+   "trigger": "comboFirstHit",
    "mode": "user",
    "form": "智"
   },
@@ -6216,8 +6220,8 @@
    "damageClass": "any"
   },
   "condition": {
-   "text": "阵诀·智生效（智识≥意志）；连携技命中后（自身战技命中囹圄目标时再次施加）",
-   "trigger": "afterComboHit",
+   "text": "阵诀·智生效（智识≥意志）；连携技第一段命中后（囹圄结束的爆炸不再施加）（自身战技命中囹圄目标时再次施加）",
+   "trigger": "comboFirstHit",
    "mode": "user",
    "form": "智"
   },
@@ -6319,8 +6323,8 @@
    "damageClass": "any"
   },
   "condition": {
-   "text": "阵诀·意生效（意志>智识）；连携技命中后",
-   "trigger": "afterComboHit",
+   "text": "阵诀·意生效（意志>智识）；连携技第一段命中后（囹圄结束的爆炸不再施加）",
+   "trigger": "comboFirstHit",
    "mode": "user",
    "form": "意"
   },
@@ -6423,8 +6427,8 @@
    "damageClass": "any"
   },
   "condition": {
-   "text": "阵诀·意生效（意志>智识）；连携技命中后",
-   "trigger": "afterComboHit",
+   "text": "阵诀·意生效（意志>智识）；连携技第一段命中后（囹圄结束的爆炸不再施加）",
+   "trigger": "comboFirstHit",
    "mode": "user",
    "form": "意"
   },

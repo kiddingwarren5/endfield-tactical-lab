@@ -35,7 +35,7 @@ test('显式时刻计划：动作在指定时刻放；不可行就顺延，超�
 test('事件锚点来自模拟事件，都落在窗口内',()=>{ const e=evalPlan(input,[{member:3,kind:'skill',t:0},{member:2,kind:'combo',t:1}],{horizon:40}); const an=anchorsOf(e.sim,40).times; assert.ok(an.length>=2); assert.ok(an.every(t=>t>=0&&t<=40)); });
 test('迭代局部搜索：结果不低于种子；同一随机种子结果一致；诊断量齐全',()=>{
   const seed=[{member:3,kind:'skill',t:0},{member:2,kind:'combo',t:1},{member:1,kind:'skill',t:1.5}]; const e0=evalPlan(input,seed,{horizon:40}).score;
-  const a=localSearchPlan(input,{horizon:40,budgetMs:3000,maxEvals:150,seeds:[seed],seed:3}); const b=localSearchPlan(input,{horizon:40,budgetMs:3000,maxEvals:150,seeds:[seed],seed:3});
+  /* 预算只由 maxEvals 决定：墙钟预算给足，否则多个测试文件并行时 150 次评估跑不完、两次结果不同 */ const a=localSearchPlan(input,{horizon:40,budgetMs:60000,maxEvals:150,seeds:[seed],seed:3}); const b=localSearchPlan(input,{horizon:40,budgetMs:60000,maxEvals:150,seeds:[seed],seed:3});
   assert.ok(a.score.dps>=e0-1e-9); assert.deepEqual(a.timeline,b.timeline); assert.ok(a.diag.evals>0&&a.diag.legalRatio>=0&&a.diag.ops.moveTime);
 });
 test('审核修正：同刻动作按统一顺序执行，缓存键与执行一致',()=>{

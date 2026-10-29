@@ -1,6 +1,6 @@
 // Merge sources/curated/effects-*.json into dist/data/effects.js with schema validation. Usage: node tools/build_effects.mjs
 import fs from 'node:fs';
-const ZONES=new Set(['resIgnore','extraHit','bonus','amp','fragile','vulnerable','atkPct','atkFlat','ability','critRate','critDmg','chargeEff','artsStrength','ratioMul','ratioAdd','spRefund','spRegen','energyCost','energyGain','cdr','poise','other']);
+const ZONES=new Set(['resIgnore','extraHit','bonus','amp','fragile','vulnerable','atkPct','atkFlat','ability','critRate','critDmg','chargeEff','artsStrength','ratioMul','ratioAdd','spRefund','spRegen','energyCost','energyGain','cdr','poise','dot','other']);
 const files=fs.readdirSync('sources/curated').filter(f=>/^effects-.*\.json$/.test(f)).sort();
 const all=[]; const problems=[]; const ids=new Set();
 for(const f of files){ let arr; try{ arr=JSON.parse(fs.readFileSync('sources/curated/'+f,'utf8')); }catch(e){ problems.push(`${f}: JSON 解析失败 ${e.message}`); continue; } if(!Array.isArray(arr)){ problems.push(`${f}: 不是数组`); continue; }

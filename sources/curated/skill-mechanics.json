@@ -802,7 +802,16 @@
      }
     }
    ],
-   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算",
+   "targetStates": [
+    {
+     "id": "scar",
+     "name": "爪印斫痕",
+     "duration": 25,
+     "onSegment": "skill2",
+     "origin": "official"
+    }
+   ]
   },
   "combo": {
    "trigger": {
@@ -833,7 +842,10 @@
     {
      "element": "anyArts",
      "all": true,
-     "when": "第二次连携"
+     "when": "第二次连携",
+     "cond": {
+      "stage": 1
+     }
     }
    ],
    "energyGain": {
@@ -850,14 +862,20 @@
      "element": "breach",
      "layers": 1,
      "when": "第二次连携精准衔接时额外施加1层破防",
-     "bind": "hit"
+     "bind": "hit",
+     "cond": {
+      "stage": 1
+     }
     }
    ],
    "abnormal": [
     {
      "type": "knockup",
      "forced": false,
-     "when": "第二次连携"
+     "when": "第二次连携",
+     "cond": {
+      "stage": 1
+     }
     }
    ],
    "buffs": [
@@ -868,18 +886,34 @@
    "segmentPlan": [
     {
      "id": "combo1",
-     "times": 1
+     "times": 1,
+     "when": {
+      "stage": 0
+     }
     },
     {
      "id": "combo2",
-     "times": 1
+     "times": 1,
+     "when": {
+      "stage": 1
+     }
     },
     {
      "id": "combo3",
-     "times": 1
+     "times": 1,
+     "when": {
+      "stage": 1
+     },
+     "note": "消耗每层附着额外伤害，按消耗层数计"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算",
+   "casts": 2,
+   "castWindow": {
+    "value": 5,
+    "origin": "assumed",
+    "note": "两次连携的衔接窗口官方未给"
+   }
   },
   "ultimate": {
    "energyCost": 110,
@@ -1352,7 +1386,34 @@
    ],
    "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
-  "modes": null
+  "modes": null,
+  "resources": [
+   {
+    "id": "prep",
+    "name": "备料",
+    "max": 2,
+    "initial": 0,
+    "origin": "official",
+    "gains": [
+     {
+      "on": "ultimateHit",
+      "segments": [
+       "ultimate2"
+      ],
+      "amount": 1,
+      "duration": 20,
+      "note": "终结技最后一击每命中一个敌人 +1（天赋尝尝咸淡·二 上限 2）"
+     }
+    ],
+    "spend": [
+     {
+      "on": "comboHit",
+      "amount": 1,
+      "note": "连携命中消耗一层：立即恢复 40% 冷却（效果 chr_0018_dapan.talent.prep）"
+     }
+    ]
+   }
+  ]
  },
  {
   "operatorId": "chr_0009_azrila",
@@ -1485,7 +1546,12 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "shield": {
+    "team": true,
+    "duration": 10,
+    "origin": "official"
+   }
   },
   "modes": null
  },
@@ -2208,31 +2274,6 @@
       "note": "战技召回强雷枪：更高伤害并施加电磁附着"
      }
     ]
-   },
-   {
-    "id": "lance",
-    "name": "雷枪",
-    "max": 9,
-    "initial": 0,
-    "virtual": true,
-    "gains": [
-     {
-      "on": "skillHit",
-      "segments": [
-       "skill2",
-       "skill3"
-      ],
-      "amount": 0,
-      "energy": 4,
-      "note": "天赋：召回雷枪命中 +4 能量"
-     },
-     {
-      "on": "comboHit",
-      "amount": 0,
-      "energy": 4,
-      "note": "天赋：掷出雷枪命中 +4 能量（按一次近似）"
-     }
-    ]
    }
   ]
  },
@@ -2346,10 +2387,18 @@
     },
     {
      "id": "combo2",
-     "times": 1
+     "when": {
+      "fires": "rule"
+     },
+     "note": "结晶被物理异常 / 破防消耗时击碎"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算",
+   "crystal": {
+    "duration": 5,
+    "breakSegment": "combo2",
+    "origin": "official"
+   }
   },
   "ultimate": {
    "energyCost": 80,
@@ -2374,10 +2423,13 @@
     },
     {
      "id": "ultimate2",
-     "times": 1
+     "times": 1,
+     "when": {
+      "consumedCrystal": true
+     }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "modes": null
  },
@@ -2451,10 +2503,15 @@
    "segmentPlan": [
     {
      "id": "skill1",
-     "times": 1
+     "when": {
+      "fires": "rule"
+     },
+     "note": "立盾期间受击才反击"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算",
+   "counterSegment": "skill1",
+   "blocks": true
   },
   "combo": {
    "trigger": {
@@ -2748,7 +2805,16 @@
      "delay": 2
     }
    ],
-   "segmentPlanNote": "炸弹“短暂延迟后爆炸”，时长官方未给，暂按 2 s（verification-needed 41）"
+   "segmentPlanNote": "炸弹“短暂延迟后爆炸”，时长官方未给，暂按 2 s（verification-needed 41）",
+   "targetStates": [
+    {
+     "id": "slowed",
+     "name": "缓速",
+     "duration": 10,
+     "origin": "assumed",
+     "note": "缓速持续时间官方未给"
+    }
+   ]
   },
   "combo": {
    "trigger": {
@@ -3108,10 +3174,15 @@
    "segmentPlan": [
     {
      "id": "skill1",
-     "times": 1
+     "when": {
+      "fires": "rule"
+     },
+     "note": "立盾期间受击才反击"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算",
+   "counterSegment": "skill1",
+   "blocks": true
   },
   "combo": {
    "trigger": {
@@ -3161,7 +3232,12 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "shield": {
+    "other": true,
+    "duration": 10,
+    "origin": "official"
+   }
   },
   "ultimate": {
    "energyCost": 80,
@@ -3721,7 +3797,7 @@
     "enhancedThird": 23,
     "kind": "recover",
     "origin": "official",
-    "condition": "斩击次数 = 消耗的最高破防层数（≤3）；消耗4层时第3击强化"
+    "note": "斩击次数 = 消耗的最高破防层数（≤3）；消耗4层时第3击强化"
    },
    "attach": null,
    "abnormal": null,
@@ -3828,16 +3904,62 @@
     },
     {
      "id": "ultimate2",
-     "times": 1
+     "when": {
+      "fires": "rule"
+     },
+     "note": "铁誓袭扰"
     },
     {
      "id": "ultimate3",
-     "times": 1
+     "when": {
+      "fires": "rule"
+     },
+     "note": "铁誓决胜"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算"
   },
-  "modes": null
+  "modes": null,
+  "resources": [
+   {
+    "id": "ironOath",
+    "name": "铁誓",
+    "max": 5,
+    "initial": 0,
+    "origin": "official",
+    "gains": [
+     {
+      "on": "ultimateCast",
+      "set": 5,
+      "duration": 30,
+      "note": "终结技生成 5 点铁誓，持续 30 s"
+     }
+    ],
+    "spend": [
+     {
+      "on": "physicalAbnormal",
+      "amount": 1,
+      "segment": "ultimate2",
+      "sp": "perHarass",
+      "finaleSegment": "ultimate3",
+      "finaleSp": "finale",
+      "event": "ultFollowup",
+      "note": "敌人受到物理异常：袭扰；最后一点：决胜"
+     },
+     {
+      "on": "comboHit",
+      "own": true,
+      "amount": 1,
+      "segment": "ultimate2",
+      "sp": "perHarass",
+      "finaleSegment": "ultimate3",
+      "finaleSp": "finale",
+      "event": "ultFollowup",
+      "note": "骏卫连携伤害：袭扰 / 决胜"
+     }
+    ]
+   }
+  ]
  },
  {
   "operatorId": "chr_0011_seraph",
@@ -4110,10 +4232,18 @@
     },
     {
      "id": "combo2",
-     "times": 1
+     "when": {
+      "fires": "rule"
+     },
+     "note": "结晶被物理异常 / 破防消耗时击碎"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算",
+   "crystal": {
+    "duration": 5,
+    "breakSegment": "combo2",
+    "origin": "official"
+   }
   },
   "ultimate": {
    "energyCost": 80,
@@ -4138,10 +4268,13 @@
     },
     {
      "id": "ultimate2",
-     "times": 1
+     "times": 1,
+     "when": {
+      "consumedCrystal": true
+     }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "modes": null
  },
@@ -4238,7 +4371,14 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "nextNormalHeavy": {
+    "cond": {
+     "consumedAttach": true
+    },
+    "origin": "official",
+    "note": "天赋科技连击"
+   }
   },
   "combo": {
    "trigger": {
@@ -4522,7 +4662,15 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "targetStates": [
+    {
+     "id": "gravityField",
+     "name": "重力紊乱",
+     "duration": 5,
+     "origin": "official"
+    }
+   ]
   },
   "modes": null
  },
@@ -4664,7 +4812,16 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "targetStates": [
+    {
+     "id": "slowed",
+     "name": "缓速",
+     "duration": 30,
+     "origin": "official",
+     "note": "天赋肝胆相照：涡流 5 米内敌人缓速；单目标靶视为在范围内"
+    }
+   ]
   },
   "ultimate": {
    "energyCost": 90,
@@ -5069,7 +5226,15 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "targetStates": [
+    {
+     "id": "wing",
+     "name": "衔火血翼",
+     "duration": 45,
+     "origin": "official"
+    }
+   ]
   },
   "combo": {
    "trigger": {
@@ -5387,7 +5552,14 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "shield": {
+    "self": true,
+    "duration": 10,
+    "cooldown": 60,
+    "origin": "official",
+    "note": "天赋怒意留心"
+   }
   },
   "ultimate": {
    "energyCost": 80,
@@ -5519,25 +5691,7 @@
     "self": 10,
     "origin": "official"
    },
-   "spRefund": {
-    "byRank": [
-     28,
-     28,
-     28,
-     28,
-     28,
-     28,
-     28,
-     28,
-     28,
-     30,
-     30,
-     30
-    ],
-    "origin": "official",
-    "kind": "refund",
-    "condition": "自身战技命中处于囹圄状态的敌人（提前结束囹圄、再次施加脆弱）"
-   },
+   "spRefund": null,
    "attach": null,
    "abnormal": null,
    "buffs": [
@@ -5552,14 +5706,63 @@
     },
     {
      "id": "combo2",
-     "times": 1
+     "when": {
+      "fires": "rule"
+     },
+     "note": "囹圄结束 / 提前结束时爆炸"
     },
     {
      "id": "combo3",
-     "times": 1
+     "when": {
+      "fires": "rule"
+     },
+     "note": "战技提前结束囹圄时的额外伤害"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算",
+   "targetStates": [
+    {
+     "id": "imprison",
+     "name": "囹圄",
+     "duration": 4,
+     "onSegment": "combo1",
+     "endSegment": "combo2",
+     "earlyEnd": {
+      "by": "ownSkillHit",
+      "segments": [
+       "combo2",
+       "combo3"
+      ],
+      "spRefund": {
+       "byRank": [
+        28,
+        28,
+        28,
+        28,
+        28,
+        28,
+        28,
+        28,
+        28,
+        30,
+        30,
+        30
+       ],
+       "kind": "refund",
+       "origin": "official"
+      },
+      "refreshBuffs": {
+       "ids": [
+        "chr_0032_lizhiyan.combo.int.natureFragile",
+        "chr_0032_lizhiyan.combo.int.coldFragile"
+       ],
+       "seconds": 2
+      }
+     },
+     "origin": "official"
+    }
+   ],
+   "spRefundNote": "智：战技命中囹圄目标时返还（targetStates.earlyEnd.spRefund）"
   },
   "ultimate": {
    "energyCost": 100,
@@ -5699,25 +5902,7 @@
       "self": 10,
       "origin": "official"
      },
-     "spRefund": {
-      "byRank": [
-       28,
-       28,
-       28,
-       28,
-       28,
-       28,
-       28,
-       28,
-       28,
-       30,
-       30,
-       30
-      ],
-      "origin": "official",
-      "kind": "refund",
-      "condition": "自身战技命中处于囹圄状态的敌人（提前结束囹圄、再次施加脆弱）"
-     },
+     "spRefund": null,
      "attach": null,
      "abnormal": null,
      "buffs": [
@@ -5732,13 +5917,62 @@
       },
       {
        "id": "combo2",
-       "times": 1
+       "when": {
+        "fires": "rule"
+       },
+       "note": "囹圄结束 / 提前结束时爆炸"
       },
       {
        "id": "combo3",
-       "times": 1
+       "when": {
+        "fires": "rule"
+       },
+       "note": "战技提前结束囹圄时的额外伤害"
       }
-     ]
+     ],
+     "targetStates": [
+      {
+       "id": "imprison",
+       "name": "囹圄",
+       "duration": 4,
+       "onSegment": "combo1",
+       "endSegment": "combo2",
+       "earlyEnd": {
+        "by": "ownSkillHit",
+        "segments": [
+         "combo2",
+         "combo3"
+        ],
+        "spRefund": {
+         "byRank": [
+          28,
+          28,
+          28,
+          28,
+          28,
+          28,
+          28,
+          28,
+          28,
+          30,
+          30,
+          30
+         ],
+         "kind": "refund",
+         "origin": "official"
+        },
+        "refreshBuffs": {
+         "ids": [
+          "chr_0032_lizhiyan.combo.int.natureFragile",
+          "chr_0032_lizhiyan.combo.int.coldFragile"
+         ],
+         "seconds": 2
+        }
+       },
+       "origin": "official"
+      }
+     ],
+     "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算"
     },
     "ultimate": {
      "energyCost": 100,
@@ -5889,9 +6123,23 @@
       },
       {
        "id": "combo2",
-       "times": 1
+       "when": {
+        "fires": "rule"
+       },
+       "note": "囹圄结束时爆炸"
       }
-     ]
+     ],
+     "targetStates": [
+      {
+       "id": "imprison",
+       "name": "囹圄",
+       "duration": 6,
+       "onSegment": "combo1",
+       "endSegment": "combo2",
+       "origin": "official"
+      }
+     ],
+     "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算"
     },
     "ultimate": {
      "energyCost": 100,
@@ -6316,7 +6564,22 @@
     }
    ],
    "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算",
-   "resetsAirAttacks": true
+   "resetsAirAttacks": true,
+   "targetStates": [
+    {
+     "id": "arrowField",
+     "name": "箭阵",
+     "duration": 8,
+     "origin": "assumed",
+     "note": "箭阵持续时间官方未给"
+    },
+    {
+     "id": "slowed",
+     "name": "缓速",
+     "duration": 8,
+     "origin": "assumed"
+    }
+   ]
   },
   "ultimate": {
    "energyCost": 200,
@@ -6542,7 +6805,8 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "blocks": true
   },
   "combo": {
    "trigger": {
@@ -6656,7 +6920,9 @@
    "specialGift": {
     "base": 0.2,
     "origin": "official",
-    "note": "基础概率 20%；天赋每次格挡 +10%（未计）、潜能 ×1.5（未计）"
+    "note": "基础概率 20%；天赋每次格挡 +10%（未计）、潜能 ×1.5（未计）",
+    "stacksEffect": "chr_0038_purrche.talent1.giftChance",
+    "perStack": 0.1
    }
   }
  },

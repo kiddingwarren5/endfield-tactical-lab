@@ -12,22 +12,26 @@
 //   {on:'applyDebuffCategory',zone?|zoneIn?}                  施加增幅/脆弱/易伤/庇护/虚弱类效果后
 //   {on:'spGain',source}                                      通过自身技能恢复/返还技力后
 //   {state:'duringUltimate'|'targetFrozen'|'targetColdAttached'|'targetColdOrFrozen'|'targetStaggered'|'always'|'never'}  状态型：结算时判定
-//   {handled:'…'}  引擎在别处已处理   {unmodeled:'…'}  明确未建模（原因）
+//   {on:'crit'} 暴击（仅暴击口径） {on:'proc',name} 概率效果（仅期望口径） {on:'counter'|'block'|'enemyAttack'} 反击 / 格挡 / 主控受击 {on:'crystalConsumed'} {on:'targetState',id} {on:'ultFollowUp'} {on:'ultFollowup'} {on:'resourceSpend',resource}
+//   {state:'targetScarred'|'targetSlowed'|'targetImprisoned'|'targetCrystal'|'inArrowField'|'inGravityField'|'selfShielded'|'targetBurning'|'airborne'|'buffStacks'(id,min)|'targetState'(id)}
+//   {modifier:'conductVuln'|'burnMul'|'spRefundMul'}  乘在别的结算上（导电易伤、燃烧跳伤、技力返还）
+//   {handled:'…'}  引擎在别处已处理   {scenario:'…'}  对照靶上不会发生   {noDamage:'…'}  不影响伤害与资源。不再允许 {unmodeled}
 //   可以用数组表示“任一满足”。前缀 intGeWill& / willGtInt& 表示形态门槛（智识≥意志 / 意志>智识）。
 const ARTS=['heat','cold','electric','nature'];
 const cast=(kind,extra={})=>({on:'cast',kind,...extra});
 const hit=(kind,extra={})=>({on:'hit',kind,...extra});
-const U=reason=>({unmodeled:reason});
 const PHYS=['knockup','knockdown','crush','armorBreak'];
-const HEAL=U('治疗未建模');
-const CRIT=U('模拟按不暴击计算时不会触发；选择必暴击/期望时同样未建模');
-const CRYSTAL=U('源石结晶（管理员机制）未建模：结晶附着被忽略，不进入法术附着');
+// 两类明确的例外（不是“未建模”）：scenario = 对照靶上不会发生（单目标、无限血、不蓄力）；noDamage = 不影响伤害与资源（治疗）
+const SC=reason=>({scenario:reason});
+const ND=reason=>({noDamage:reason});
+const CRITNOTE='仅暴击口径（critMode ≠ never）触发；保底口径按不暴击计';
+const PROCNOTE='概率效果：保底口径不触发，期望口径（options.procMode=expected）触发';
 
 export const TRIGGERS={
   // ---- 通用：施放 / 命中 ----
   duringUltimate:{state:'duringUltimate'},
-  afterComboHit:hit('combo'), afterComboDamage:hit('combo'), afterCombo2:hit('combo'),
-  skillHit:hit('skill'), anySkillHit:hit(['skill','combo','ultimate']), skillHitSingle:hit('skill'), skillSingleHit:hit('skill'), skillHit2Plus:U('对照靶只有一个目标：多目标条件不成立'), comboHitOtherTargetNearby:U('对照靶只有一个目标：多目标条件不成立'),
+  afterComboHit:hit('combo'), comboFirstHit:hit('combo',{segment:'combo1'}), afterComboDamage:hit('combo'), afterCombo2:hit('combo',{stage:1}),
+  skillHit:hit('skill'), anySkillHit:hit(['skill','combo','ultimate']), skillHitSingle:hit('skill'), skillSingleHit:hit('skill'), skillHit2Plus:SC('对照靶只有一个目标'), comboHitOtherTargetNearby:SC('对照靶只有一个目标'),
   ultimateHit:hit('ultimate'), ultimateFinalHit:hit('ultimate'), onSkillOrUltimateHit:hit(['skill','ultimate']), skillOrUltHit:hit(['skill','ultimate']),
   skillFinalHitNoBreach:hit('skill'), skillFinalHitBreachLe2:hit('skill'),
   duringUltimateNormalHit:hit('normal',{state:'duringUltimate'}),
@@ -39,7 +43,7 @@ export const TRIGGERS={
   // “X 后 N 秒内的下次技能期间”：按施放事件触发，持续到下次该类技能（近似为原文时长）
   comboThenNextSkill:cast('combo',{duration:30,consumeOn:cast('skill')}), rootOrUltThenNextCombo:[{on:'root',duration:20,consumeOn:cast('combo')},cast('ultimate',{duration:20,consumeOn:cast('combo')})],
   knockUpThenNextUlt:{on:'abnormal',which:'knockup',consumeOn:cast('ultimate')}, applyBreachThenNextUlt:{on:'breach',consumeOn:cast('ultimate')}, crystalOrFreezeThenNextSkillOrUlt:[{on:'abnormal',which:'freeze',duration:20,consumeOn:cast(['skill','ultimate'])}],
-  firstSkillDuringUltimate:U('终结技期间首次战技免技力费用未建模（技力消耗由 mechanics 决定）'),
+  firstSkillDuringUltimate:{handled:'终结技期间首次战技不耗技力：mechanics freeFirstDuringUltimate，castSkill 结算'},
   // ---- 附着 / 层数 / 消耗 ----
   skillApplyColdAttach:{on:'attach',by:'skill',element:'cold'}, skillApplyNatureAttach:{on:'attach',by:'skill',element:'nature'}, targetNatureAttachedCount:{state:'targetAttached',element:'nature'},
   selfSkillApplyHeatAttach:{on:'attach',element:'heat'}, skillApplyColdOrHeatAttach:{on:'attach',by:'skill',elementIn:['cold','heat']},
@@ -60,11 +64,11 @@ export const TRIGGERS={
   enemyFreezeOrCorrode:{on:'abnormal',whichIn:['freeze','corrosion'],anyone:true}, enemyBurnOrCorrode:{on:'abnormal',whichIn:['burn','corrosion'],anyone:true},
   artsBurst:{on:'burst',elementIn:ARTS}, onNatureOrColdBurst:{on:'burst',elementIn:['nature','cold']}, comboArtsBurstOrBurn:[{on:'burst',by:'combo',elementIn:ARTS},{on:'abnormal',which:'burn',by:'combo'}],
   comboArtsBurstOrPhysAnomaly:{on:'burst',by:'combo',elementIn:ARTS}, 'willGtInt&selfSkillArtsBurst':{on:'burst',elementIn:ARTS},
-  artsBurstWithWindStack:U('身形如风层数未建模'), artsBurstStacks4:U('苦难的尽头层数未建模'),
+  artsBurstWithWindStack:{on:'burst',elementIn:ARTS,requiresActive:'wpn_funnel_0019.p2',maxPerCast:4,note:'身形如风 4 层：战技后 15 s 内最多 4 次'}, artsBurstStacks4:{state:'buffStacks',id:'wpn_funnel_0020.p2',min:4},
   afterShatter:{on:'iceShatter',anyone:true},
   // 消耗法术异常（战技消耗燃烧/导电/腐蚀/冻结）：模拟器只建模了附着消耗，异常消耗尚未建模
-  skillConsumeArtsAnomaly:{on:'consumeAbnormal',by:'skill',whichIn:['burn','conduct']}, skillConsumeArtsAnomalyWhileFang:U('灼热獠牙状态叠加未建模'), consumeArtsAnomaly:[{on:'consumeAbnormal'},{on:'iceShatter'}],
-  skillConsumeCorrosion:{on:'consumeAbnormal',by:'skill',which:'corrosion'}, skillConsumeCorrosionOtherCorroded:U('对照靶只有一个目标：附近其他腐蚀目标不成立'), skillConsumeConduct:{on:'consumeAbnormal',by:'skill',which:'conduct'}, skillConsumeConduct3:U('3 次消耗导电计数未建模'),
+  skillConsumeArtsAnomaly:{on:'consumeAbnormal',by:'skill',whichIn:['burn','conduct']}, skillConsumeArtsAnomalyWhileFang:{on:'consumeAbnormal',by:'skill',whichIn:['burn','conduct'],requiresActive:'chr_0006_wolfgd.talent.fang'}, consumeArtsAnomaly:[{on:'consumeAbnormal'},{on:'iceShatter'}],
+  skillConsumeCorrosion:{on:'consumeAbnormal',by:'skill',which:'corrosion'}, skillConsumeCorrosionOtherCorroded:SC('对照靶只有一个目标'), skillConsumeConduct:{on:'consumeAbnormal',by:'skill',which:'conduct'}, skillConsumeConduct3:{on:'consumeAbnormal',by:'skill',which:'conduct',per:3},
   'consume_燃烧':{on:'consumeAbnormal',which:'burn'}, 'consume_导电':{on:'consumeAbnormal',which:'conduct'}, 'consume_冻结':[{on:'consumeAbnormal',which:'freeze'},{on:'iceShatter'}], 'consume_腐蚀':{on:'consumeAbnormal',which:'corrosion'},
   consumeFreeze:[{on:'consumeAbnormal',which:'freeze'},{on:'iceShatter'}], consumeCorrode:{on:'consumeAbnormal',which:'corrosion'}, afterConsumeElectrifyOrCorrosion:{on:'consumeAbnormal',whichIn:['conduct','corrosion']},
   // ---- 增益类施加 / 技力 ----
@@ -79,7 +83,7 @@ export const TRIGGERS={
   tornadoCount2:{on:'tornado',min:2,max:2}, tornadoCount3:{on:'tornado',min:3}, tornadoCount2Plus:{on:'tornado',min:2},
   ultimateEarlyTornado:{on:'earlyWave',duration:1}, skillConsumeVortex:{handled:'战技每消耗一处涡流返还技力：mechanics 20 + 潜能 1 的 5，由 castSkill 按涡流数结算'},
   // ---- 形态 ----
-  intMode:{state:'modeInt'}, afterUltimate2:U('终结技二段破晦诀明未建模'), skillHitImprisoned:U('囹圄状态未建模'), ultimateFieldSpawn:{handled:'阵诀·智终结技的强制腐蚀由 mechanics 的 forced abnormal 结算'},
+  intMode:{state:'modeInt'}, afterUltimate2:{on:'ultFollowUp'}, skillHitImprisoned:hit('skill',{state:'targetImprisoned'}), ultimateFieldSpawn:{handled:'阵诀·智终结技的强制腐蚀由 mechanics 的 forced abnormal 结算'},
   // ---- 梨诺姿态：演唱姿态 = 战技（第 0 阶段）后 60 s，姿态中止（第 1 阶段）或终结技结束它；高歌姿态 = 终结技期间 ----
   singingStance:cast('skill',{stage:0,duration:60,endOn:[cast('skill',{stage:1}),cast('ultimate')]}), highSingingStance:{state:'duringUltimate'}, singingOrHighStance:[cast('skill',{stage:0,duration:60,endOn:cast('skill',{stage:1})}),{state:'duringUltimate'}],
   // ---- 对照靶上恒真 / 恒假 ----
@@ -87,25 +91,25 @@ export const TRIGGERS={
   // ---- 失衡 ----
   targetStaggered:{state:'targetStaggered'}, targetPhysFragileOrStagger:[{state:'targetStaggered'},{state:'targetFragile',element:'physical'}],
   // ---- 未建模机制（逐条注明原因）----
-  afterSelfSkillHeal:hit('combo',{stacks:2}), selfSkillHeal:HEAL, selfSkillHealOthers:HEAL, comboHeal:HEAL, comboHealOthers:HEAL, crystalHealAtFullHp:{on:'resourceSpend',resource:'crystal',maxPerCast:2},
-  afterCrit:CRIT, critAtkStacksFull:CRIT, critHit:CRIT, wolfBlood16:CRIT, skillOrComboCrit:CRIT, critOnScarredTarget:CRIT, artsImmuneProc:U('免疫法术概率触发未建模'),
-  crystalConsumed:CRYSTAL, skillConsumeCrystal:CRYSTAL, ultimateConsumeCrystal:CRYSTAL, afterCrystalConsumed:CRYSTAL, targetCrystal:CRYSTAL, targetHasCrystal:CRYSTAL,
+  afterSelfSkillHeal:hit('combo',{stacks:2}), selfSkillHeal:ND('治疗量不进伤害结算'), selfSkillHealOthers:ND('治疗量不进伤害结算'), comboHeal:ND('治疗量不进伤害结算'), comboHealOthers:ND('治疗量不进伤害结算'), crystalHealAtFullHp:{on:'resourceSpend',resource:'crystal',maxPerCast:2},
+  afterCrit:{on:'crit',note:CRITNOTE}, critAtkStacksFull:{state:'buffStacks',id:'suit_criti01.p2',min:5,note:CRITNOTE}, critHit:{on:'crit',note:CRITNOTE}, wolfBlood16:{state:'buffStacks',id:'wpn_sword_0022.p2',min:16,note:CRITNOTE}, skillOrComboCrit:{on:'crit',kinds:['skill','combo'],note:CRITNOTE}, critOnScarredTarget:{on:'crit',state:'targetScarred',note:CRITNOTE}, artsImmuneProc:SC('需要受到法术伤害并按概率免疫；对照靶的攻击不分属性，保底不计概率'),
+  crystalConsumed:{on:'crystalConsumed',anyone:true}, skillConsumeCrystal:{on:'crystalConsumed',by:'skill'}, ultimateConsumeCrystal:{on:'crystalConsumed',by:'ultimate'}, afterCrystalConsumed:{on:'crystalConsumed',anyone:true}, targetCrystal:{state:'targetCrystal'}, targetHasCrystal:{state:'targetCrystal'},
   onKnockdown:{on:'abnormal',which:'knockdown'}, comboKnockUp:{on:'abnormal',which:'knockup',by:'combo'}, onSmashOrArmorBreak:{on:'abnormal',whichIn:['crush','armorBreak']}, slamConsumeBreach:{on:'consume',element:'breach'}, consumeBreachLayers:{on:'consume',element:'breach'}, afterApplyBreach:{on:'breach'}, targetBreach4:{state:'targetBreach4'},
   applyBreachOnZero:{on:'breach',min:1,max:1}, targetBreached:{state:'targetBreached'}, skillApplyBreach:{on:'breach',by:'skill'}, afterPhysicalAnomaly:{on:'abnormal',whichIn:PHYS}, physAnomaly:{on:'abnormal',whichIn:PHYS}, comboHitBroken:hit('combo',{state:'targetBreached'}), consumeBreak:{on:'consume',element:'breach'}, comboSlam:{on:'abnormal',which:'crush',by:'combo'},
-  spRefundMultiplier:U('技力返还倍率修饰未建模'), stageChainRefund:{handled:'阶段链第一段的返还技力由 castSkill 按 chain.spRefund 结算'}, energySourceRestricted:{handled:'别礼终结技能量只来自自身战技与连携（simulate gainEnergy 按 energySource 屏蔽外部来源）'}, interruptCharge:U('敌人蓄力 / 打断未建模'),
-  skillAmberHit:U('爪印斫痕（需命中破防目标）未建模'), boilingBloodTargetBurning:U('沸血机制未建模'), comboRareFish:U('珍鳞概率未建模'),
-  lanceHit:U('雷枪掷出/召回命中未建模'), targetElectricFragile:{state:'targetFragile',element:'electric'},
-  skillCounter:U('格挡反击未建模（对照靶不攻击）'), skillFirstBlock:U('格挡未建模（对照靶不攻击）'), takeDamage:U('承伤未建模（对照靶不攻击）'), hasUltimateShield:cast('ultimate'), onSkillHitWithShield:U('护盾未建模'),
-  targetFocused:hit('skill'), focused20s:hit('skill',{delay:20,duration:40}), focusedKilled:U('击败事件未建模（对照靶无限血）'),
-  ultimateKill:U('击败事件未建模（对照靶无限血）'), killDuringUltimate:U('击败事件未建模（对照靶无限血）'),
-  moltenStacks4:{state:'resourceAtLeast',resource:'molten',min:4,duration:20}, skillFollowupHit:{on:'resourceSpend',resource:'molten'}, skillBurn:U('战技燃烧伤害倍率单独加成未建模'),
-  comboConduct:U('导电来源区分未建模'), comboHitWithPrep:U('备料层数未建模'), afterUltimateFollowup:U('盾卫旗队后续效果未建模（物理异常分支）'),
-  ultimateMaxStacks:U('模拟按不暴击计算，暴击率层数不影响伤害'), nextHeavyAfterSkillFreeze:U('下一次普攻改重击未建模'),
-  inGravityField:cast('ultimate'), inGravityFieldBreach:U('重力场（终结技领域内）未建模'),
-  wingHovering:hit('skill'), comboHitWingTarget:U('“连击”乘区未建模'),
-  inArrowField:U('箭阵持续时间官方未给出'), enhancedShot:{on:'resourceSpend',resource:'arrow'}, enhancedShotConsumeAttach:{on:'resourceSpend',resource:'arrow',consumedAttach:true}, airborne:cast('skill',{duration:1.5}),
-  specialGiftHit:U('代言人特殊赠礼概率未建模'), inkMarked:{handled:'笔意：河山共影命中后按参数表比例记录目标所受伤害，笔意时长结束或收笔时以固定伤害爆发（simulate inkBurst）'},
-  ultimateDetonateBomb:U('自制炸弹未建模'), targetSlowed:U('缓速持续时间官方未给出'), skillLastStrike:U('雷击逐次命中未建模'), skillFirstTarget:{state:'always'},
+  spRefundMultiplier:{modifier:'spRefundMul',kinds:['combo']}, stageChainRefund:{handled:'阶段链第一段的返还技力由 castSkill 按 chain.spRefund 结算'}, energySourceRestricted:{handled:'别礼终结技能量只来自自身战技与连携（simulate gainEnergy 按 energySource 屏蔽外部来源）'}, interruptCharge:SC('需要打断敌人蓄力；对照靶不蓄力'),
+  skillAmberHit:hit('skill',{segment:'skill2'}), boilingBloodTargetBurning:{state:'targetBurning'}, comboRareFish:{on:'proc',name:'rareFish',note:PROCNOTE},
+  lanceHit:[hit('skill',{segment:'skill2'}),hit('skill',{segment:'skill3'}),hit('combo')], targetElectricFragile:{state:'targetFragile',element:'electric'},
+  skillCounter:{on:'counter'}, skillFirstBlock:{on:'block',first:true}, takeDamage:{on:'enemyAttack'}, hasUltimateShield:cast('ultimate'), onSkillHitWithShield:hit('skill',{state:'selfShielded'}),
+  targetFocused:hit('skill'), focused20s:hit('skill',{delay:20,duration:40}), focusedKilled:SC('对照靶无限血，不会被击败'),
+  ultimateKill:SC('对照靶无限血，不会被击败'), killDuringUltimate:SC('对照靶无限血，不会被击败'),
+  moltenStacks4:{state:'resourceAtLeast',resource:'molten',min:4,duration:20}, skillFollowupHit:{on:'resourceSpend',resource:'molten'}, skillBurn:{modifier:'burnMul',by:'skill'},
+  comboConduct:{modifier:'conductVuln',by:'combo'}, comboHitWithPrep:{on:'resourceSpend',resource:'prep'}, afterUltimateFollowup:{on:'ultFollowup',anyone:true},
+  ultimateMaxStacks:{on:'hit',kind:'normal',state:'duringUltimate',per:10,duration:7,note:'暴击伤害只在暴击口径生效'}, nextHeavyAfterSkillFreeze:{on:'abnormal',which:'freeze',by:'skill',duration:10,endOn:{on:'heavy'}},
+  inGravityField:cast('ultimate'), inGravityFieldBreach:{state:'inGravityField'},
+  wingHovering:{state:'targetState',id:'wing'}, comboHitWingTarget:hit('combo',{state:'targetState',id:'wing'}),
+  inArrowField:{state:'inArrowField'}, enhancedShot:{on:'resourceSpend',resource:'arrow'}, enhancedShotConsumeAttach:{on:'resourceSpend',resource:'arrow',consumedAttach:true}, airborne:{state:'airborne'},
+  specialGiftHit:{on:'proc',name:'specialGift',note:PROCNOTE}, inkMarked:{handled:'笔意：河山共影命中后按参数表比例记录目标所受伤害，笔意时长结束或收笔时以固定伤害爆发（simulate inkBurst）'},
+  ultimateDetonateBomb:{handled:'终结技引爆炸弹 +30%：资源规则 factor 1.3 结算'}, targetSlowed:{state:'targetSlowed'}, skillLastStrike:{handled:'最后一次雷击 ×6：段计划 lastMul 结算'}, skillFirstTarget:{state:'always'},
   targetColdFragile:{handled:'别礼二天赋：终结技享受的脆弱 ×1.5，由 fragileMultiplier 结算'},
 };
 
@@ -120,6 +124,6 @@ export function specFor(code){
   return {code,specs,modeGate:gate};
 }
 export function triggerCoverage(effects){
-  const rows=[]; for(const e of effects){ const code=e.condition?.trigger; if(!code||code==='always') continue; const s=specFor(code); let kind=!s||s.unknown?'unknown':s.specs.some(x=>x.on)?'event':s.specs.some(x=>x.state)?'state':s.specs.some(x=>x.handled)?'handled':'unmodeled'; if((kind==='event'||kind==='state')&&e.zone==='other') kind='event-noop'; /* “其他”区的效果触发了也不进伤害/资源结算 */ rows.push({id:e.id,code,kind,reason:s?.specs?.find(x=>x.unmodeled)?.unmodeled||''}); }
+  const rows=[]; for(const e of effects){ const code=e.condition?.trigger; if(!code||code==='always') continue; const s=specFor(code); let kind=!s||s.unknown?'unknown':s.specs.some(x=>x.on)?'event':s.specs.some(x=>x.state)?'state':s.specs.some(x=>x.modifier)?'modifier':s.specs.some(x=>x.handled)?'handled':s.specs.some(x=>x.scenario)?'scenario':s.specs.some(x=>x.noDamage)?'noDamage':'unmodeled'; if((kind==='event'||kind==='state')&&e.zone==='other'&&!e.grants) kind='event-noop'; /* “其他”区的效果触发了也不进伤害/资源结算（grants 的除外：授予连击状态） */ const sp0=s?.specs||[]; rows.push({id:e.id,code,kind,reason:sp0.find(x=>x.unmodeled)?.unmodeled||sp0.find(x=>x.scenario)?.scenario||sp0.find(x=>x.noDamage)?.noDamage||sp0.find(x=>x.note)?.note||''}); }
   return rows;
 }
