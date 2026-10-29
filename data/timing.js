@@ -6,7 +6,8 @@ export default {
   // seconds per normal-attack segment by weapon type (last segment = heavy hit). Calibrate against docs/cases videos.
   normalSegmentSeconds:{sword:[0.45,0.45,0.5,0.55,0.7],greatsword:[0.7,0.75,0.8,1.0,1.1],polearm:[0.5,0.55,0.6,0.8,0.9],pistol:[0.4,0.4,0.45,0.5,0.6],arts:[0.5,0.5,0.55,0.6,0.7]},
   castSeconds:{skill:0.8,combo:1.2,ultimate:3.0,switch:0.3,plunge:2.0,execute:1.5}, // plunge：起跳 + 下落 + 落地硬直整段按 2.0 s（假设，verification-needed 65）；此前 0.9 s 让自动排轴把下落攻击当成高效普攻连刷
-  ultimatePausesTimers:true,      // 终结技演出期间：自然回技力暂停、增益/冷却计时暂停（部分官方说明，rules F）
+  ultimatePausesTimers:true,      // 终结技演出期间：自然回技力暂停、增益/冷却计时暂停（日志：祀增幅 14.79 s = 12 + 别礼演出 2.83；docs/cases/case-01）
+  ultimateLocksTeam:false,        // 演出不锁队友行动：日志里别礼终结技 22.38 s 起的演出窗口内，汤汤战技 22.38、祀连携 22.14 起的十跳、诀连携标记 23.89 都照常发生（docs/calibration-logs.md）
   heavySpRefundByName:{origin:'research (666bj/NGA 重击技力表)',values:{'别礼':30,'余烬':28,'昼雪':25,'卡契尔':25,'大潘':21,'黎风':21,'管理员 (男)':20,'管理员 (女)':20,'莱万汀':20,'骏卫':20,'秋栗':19,'埃特拉':19,'阿列什':19,'艾维文娜':19,'狼卫':18,'陈千语':18,'艾尔黛拉':18,'弧光':17,'伊冯':17,'洁尔佩塔':16,'佩丽卡':15,'赛希':15,'安塔尔':15,'萤石':15}},
   spRegenPerSecond:8,             // research
   spMax:300, spInitial:200,       // research
