@@ -1,14 +1,14 @@
 # 触发覆盖（由 tests/triggers.test.mjs 生成）
 
-生成：2026-10-29T02:02:08.411Z
+生成：2026-10-29T02:16:57.857Z
 
 | 归属 | 效果数 |
 |---|---|
-| event | 183 |
-| unmodeled | 70 |
+| event | 188 |
+| unmodeled | 65 |
 | handled | 9 |
-| state | 28 |
-| event-noop | 13 |
+| state | 30 |
+| event-noop | 11 |
 
 ## 未建模原因汇总
 
@@ -17,7 +17,6 @@
 - 治疗未建模（5）：wpn_funnel_0010.p1、wpn_lance_0014.p2、wpn_lance_0016.p2、wpn_sword_0023.p2、wpn_sword_0023.p3
 - 击败事件未建模（对照靶无限血）（3）：chr_0016_laevat.pot5.ultExtend、chr_0018_dapan.pot1.physDmg、chr_0023_antal.pot3.spRefund
 - 爪印斫痕（需命中破防目标）未建模（3）：chr_0028_wulfa.talent.scarVuln、chr_0028_wulfa.talent.scarDot、chr_0028_wulfa.pot1.spRefund
-- 猎矢强化射击未建模（3）：chr_0034_typhoea.skill.burstMul、chr_0034_typhoea.talent1.arrowMul、chr_0034_typhoea.pot5.burstMul
 - 雷枪掷出/召回命中未建模（2）：chr_0012_avywen.talent.delivery、chr_0012_avywen.pot1.delivery
 - 格挡反击未建模（对照靶不攻击）（2）：chr_0014_aurora.talent.counterEnergy、chr_0014_aurora.pot5.spRefund
 - 盾卫旗队后续效果未建模（物理异常分支）（2）：chr_0029_pograni.talent2.atk、chr_0029_pograni.talent2.arts
@@ -27,8 +26,6 @@
 - 格挡未建模（对照靶不攻击）（2）：chr_0038_purrche.talent1.energy、chr_0038_purrche.talent1.giftChance
 - 灼热獠牙状态叠加未建模（1）：chr_0006_wolfgd.pot3.teamFang
 - 导电来源区分未建模（1）：chr_0004_pelica.pot4.conductMul
-- 熔火层数未建模（1）：chr_0016_laevat.talent.resIgnore
-- 焚灭追加攻击未建模（1）：chr_0016_laevat.pot1.spRefund
 - 战技燃烧伤害倍率单独加成未建模（1）：chr_0016_laevat.pot3.burnDmg
 - 沸血机制未建模（1）：chr_0028_wulfa.talent.boilingBurn
 - 对照靶只有一个目标：附近其他腐蚀目标不成立（1）：chr_0025_ardelia.talent.mountainSurf
@@ -70,8 +67,8 @@
 | chr_0004_pelica.talent.bounce | comboHitBroken | event-noop |
 | chr_0004_pelica.pot3.atk | afterApplyConduct | event |
 | chr_0004_pelica.pot4.conductMul | comboConduct | unmodeled：导电来源区分未建模 |
-| chr_0016_laevat.talent.resIgnore | moltenStacks4 | unmodeled：熔火层数未建模 |
-| chr_0016_laevat.pot1.spRefund | skillFollowupHit | unmodeled：焚灭追加攻击未建模 |
+| chr_0016_laevat.talent.resIgnore | moltenStacks4 | state |
+| chr_0016_laevat.pot1.spRefund | skillFollowupHit | event |
 | chr_0016_laevat.pot3.burnDmg | skillBurn | unmodeled：战技燃烧伤害倍率单独加成未建模 |
 | chr_0016_laevat.pot5.ultExtend | killDuringUltimate | unmodeled：击败事件未建模（对照靶无限血） |
 | chr_0028_wulfa.combo.critRate | afterCombo2 | event |
@@ -130,7 +127,7 @@
 | chr_0021_whiten.pot3.firstHit | skillFirstTarget | state |
 | chr_0021_whiten.pot5.freezeEnergy | enemyFrozen | event |
 | chr_0020_meurs.talent2.shockwave | ultimateFinalHit | event-noop |
-| chr_0020_meurs.pot1.extraHit | onSkillOrUltimateHit | event-noop |
+| chr_0020_meurs.pot1.extraHit | onSkillOrUltimateHit | event |
 | chr_0020_meurs.pot5.spRefund | onSkillHitWithShield | unmodeled：护盾未建模 |
 | chr_0019_karin.talent2.combo | duringUltimate | event-noop |
 | chr_0019_karin.pot1.atk | afterSkillSpRecover | event |
@@ -183,7 +180,7 @@
 | chr_0030_zhuangfy.talent1.elecAmp | onSkillCast | event |
 | chr_0030_zhuangfy.pot1.extraSword | firstSkillInBattle | event-noop |
 | chr_0030_zhuangfy.pot3.spRefund | skillConsumeConduct | event |
-| chr_0030_zhuangfy.pot5.resIgnore | duringUltimate | event-noop |
+| chr_0030_zhuangfy.pot5.resIgnore | duringUltimate | state |
 | chr_0033_camille.skill.heatFragile | wingHovering | event |
 | chr_0033_camille.talent1.combo | comboHitWingTarget | unmodeled：“连击”乘区未建模 |
 | chr_0033_camille.talent2.heatBonus | afterSelfSkillHeal | event |
@@ -219,12 +216,12 @@
 | chr_0035_liino.talent2.spRefund | afterComboNextSkill | event |
 | chr_0035_liino.pot1.spRefund | firstSkillInBattle | event |
 | chr_0035_liino.pot1.teamAtk | singingOrHighStance | event |
-| chr_0034_typhoea.skill.burstMul | enhancedShotConsumeAttach | unmodeled：猎矢强化射击未建模 |
+| chr_0034_typhoea.skill.burstMul | enhancedShotConsumeAttach | event |
 | chr_0034_typhoea.combo.burstVuln | inArrowField | unmodeled：箭阵持续时间官方未给出 |
-| chr_0034_typhoea.talent1.arrowMul | enhancedShot | unmodeled：猎矢强化射击未建模 |
+| chr_0034_typhoea.talent1.arrowMul | enhancedShot | event |
 | chr_0034_typhoea.pot1.atk | airborne | event |
 | chr_0034_typhoea.pot3.burstVuln | inArrowField | unmodeled：箭阵持续时间官方未给出 |
-| chr_0034_typhoea.pot5.burstMul | enhancedShot | unmodeled：猎矢强化射击未建模 |
+| chr_0034_typhoea.pot5.burstMul | enhancedShot | event |
 | chr_0038_purrche.ult.artsFragile | specialGiftHit | unmodeled：代言人特殊赠礼概率未建模 |
 | chr_0038_purrche.talent1.energy | skillFirstBlock | unmodeled：格挡未建模（对照靶不攻击） |
 | chr_0038_purrche.talent1.giftChance | skillFirstBlock | unmodeled：格挡未建模（对照靶不攻击） |

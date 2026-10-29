@@ -82,6 +82,22 @@
 
 形态（诀智/意）与阶段链（河山共影 → 起墨 → 收笔、断云 → 追形 → 开天、替换战技）作为技能的变体进入 emits / requires 边的 mode / stage 字段，查询按形态过滤。
 
+## 7. 资源状态机（mechanics.resources）
+
+干员自带的计数资源（熔火、启示、猎矢、支援晶体……）用同一套规则表达，引擎按规则结算，不写角色专用分支：
+
+```
+resources:[{ id, name, max, initial,
+  gains:[{on, amount|amountPerLayer|set, requireTargetAttach?, consumeAttach?, absorbAttach?, control?, element?, segments?, energy?, duration?, note}],
+  spend:[{on, amount|all, min?, convertTo?+ratio?, extraSegment?, energy?, burst?, freeIfControlHeavy?, note}] }]
+```
+
+- `on` ∈ skillHit / comboHit / skillCast / comboCast / ultimateCast / heavy / burst（词表 RESOURCE_RULE_EVENTS）。
+- 连携条件 `{type:'resource', id, min}` 或 `{type:'resource', id, exhausted:true}`；效果触发 `{state:'resourceAtLeast', resource, min}`、`{on:'resourceSpend'|'resourceGain'|'resourceExhausted', resource}`。
+- 异常条目可以写 `requiresResourceSpend: id`，表示只有本次施放消耗了该资源才施加（莱万汀 4 层熔火的追加攻击燃烧）。
+- 已接入：莱万汀熔火、提弗洛斯启示与猎矢、赛希支援晶体。登记但未写规则：雷枪 / 强雷枪、自制炸弹、连击、剑数（各自官方文本转成规则后接入，验证清单 35）。
+- 近似：一段多次命中（提弗洛斯空中普攻）按 `segments:{段:次数}` 展开；每次命中各判一次条件。
+
 ## 6. 新干员接入清单
 
 1. operators.js（官方）→ 校验器会要求 mechanics.js 有对应条目。

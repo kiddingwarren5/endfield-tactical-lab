@@ -420,7 +420,8 @@
      "type": "burn",
      "forced": true,
      "when": "4层熔火追加攻击命中",
-     "duration": 5
+     "duration": 5,
+     "requiresResourceSpend": "molten"
     }
    ],
    "replaces": null,
@@ -493,7 +494,45 @@
     "note": "参数表「持续时间（秒）」"
    }
   },
-  "modes": null
+  "modes": null,
+  "resources": [
+   {
+    "id": "molten",
+    "name": "熔火",
+    "max": 4,
+    "initial": 0,
+    "origin": "official",
+    "gains": [
+     {
+      "on": "skillHit",
+      "amount": 1,
+      "note": "战技命中 +1"
+     },
+     {
+      "on": "comboHit",
+      "amount": 1,
+      "note": "连携命中 +1"
+     },
+     {
+      "on": "heavy",
+      "control": true,
+      "absorbAttach": "heat",
+      "amountPerLayer": 1,
+      "note": "天赋：主控重击 / 处决命中时吸收灼热附着，每层 +1"
+     }
+    ],
+    "spend": [
+     {
+      "on": "skillCast",
+      "min": 4,
+      "all": true,
+      "extraSegment": "skill3",
+      "energy": 100,
+      "note": "施放时已满 4 层：消耗全部，追加攻击（skill3）+ 强制燃烧 + 100 能量"
+     }
+    ]
+   }
+  ]
  },
  {
   "operatorId": "chr_0028_wulfa",
@@ -2952,9 +2991,9 @@
   },
   "combo": {
    "trigger": {
-    "type": "skillState",
-    "state": "支援晶体生命回复次数耗尽",
-    "count": 2,
+    "type": "resource",
+    "id": "crystal",
+    "exhausted": true,
     "text": "当支援晶体的生命回复次数耗尽后可以发动",
     "dependsOn": {
      "event": "heavyHit"
@@ -3015,7 +3054,32 @@
     "note": "参数表「持续时间（秒）」"
    }
   },
-  "modes": null
+  "modes": null,
+  "resources": [
+   {
+    "id": "crystal",
+    "name": "支援晶体",
+    "max": 2,
+    "initial": 0,
+    "origin": "official",
+    "gains": [
+     {
+      "on": "skillCast",
+      "set": 2,
+      "duration": 20,
+      "note": "战技召唤晶体，20 s 内最多治疗 2 次"
+     }
+    ],
+    "spend": [
+     {
+      "on": "heavy",
+      "control": true,
+      "amount": 1,
+      "note": "主控重击时晶体治疗一次；满血时改为法术增幅（效果目录 crystalHealAtFullHp）"
+     }
+    ]
+   }
+  ]
  },
  {
   "operatorId": "chr_0003_endminf",
@@ -4649,34 +4713,39 @@
    "attach": null,
    "consumes": [
     {
-     "element": "nature",
-     "layers": 1,
-     "when": "每次空中普攻命中带自然附着的敌人（获得1点启示）"
-    },
-    {
      "resource": "猎矢",
      "layers": 1,
      "when": "存有猎矢时每次空中普攻转为强化射击"
     }
    ],
-   "abnormal": [
-    {
-     "type": "artsBurst",
-     "forced": true,
-     "when": "强化射击命中（element nature）；第5次空中普攻作为主控时同时视为重击与强化射击且不耗猎矢",
-     "element": "nature"
-    }
-   ],
+   "abnormal": [],
    "replaces": null,
    "buffs": [
     "chr_0034_typhoea.skill.burstMul"
    ],
-   "notes": "5次空中普攻，每次至多2目标"
+   "notes": "5次空中普攻，每次至多2目标",
+   "abnormalNote": "强化射击的自然爆发由资源规则（arrow spend）结算",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 4
+    },
+    {
+     "id": "skill3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "起跳射击 1 次；空中普攻 5 次（4 次常规 + 第 5 次空中重击），官方：期间可施放 5 次空中普通攻击"
   },
   "combo": {
    "trigger": {
-    "type": "skillState",
-    "state": "自身启示已满",
+    "type": "resource",
+    "id": "revelation",
+    "min": 8,
     "text": "当自身启示已满时可以发动",
     "dependsOn": {
      "attach": [
@@ -4717,7 +4786,18 @@
    "buffs": [
     "chr_0034_typhoea.combo.burstVuln"
    ],
-   "notes": "箭阵：持续伤害+缓速+受到的自然爆发伤害提高。启示上限未在技能原文给出"
+   "notes": "箭阵：持续伤害+缓速+受到的自然爆发伤害提高。启示上限未在技能原文给出",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    },
+    {
+     "id": "combo2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "箭阵持续伤害的跳数官方未给，暂按 1 次"
   },
   "ultimate": {
    "energyCost": 200,
@@ -4728,9 +4808,92 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "立即获得2枚猎矢；进入浮空并重置空中普攻次数，之后5次空中普攻各引发箭雨（第5轮强化）"
+   "notes": "立即获得2枚猎矢；进入浮空并重置空中普攻次数，之后5次空中普攻各引发箭雨（第5轮强化）",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 4
+    },
+    {
+     "id": "ultimate3",
+     "times": 1
+    }
+   ]
   },
-  "modes": null
+  "modes": null,
+  "resources": [
+   {
+    "id": "revelation",
+    "name": "启示",
+    "max": 8,
+    "initial": 4,
+    "origin": "official",
+    "gains": [
+     {
+      "on": "skillHit",
+      "segments": [
+       "skill2",
+       "skill3"
+      ],
+      "requireTargetAttach": "nature",
+      "consumeAttach": {
+       "element": "nature",
+       "layers": 1
+      },
+      "amount": 1,
+      "energy": 12,
+      "note": "每次空中普攻命中自然附着目标：消耗 1 层，+1 启示，+12 能量（skill2 按 4 次、skill3 按 1 次近似）"
+     },
+     {
+      "on": "burst",
+      "element": "nature",
+      "anyone": true,
+      "amount": 1,
+      "note": "天赋：任何自然爆发 +1"
+     }
+    ],
+    "spend": [
+     {
+      "on": "comboCast",
+      "all": true,
+      "convertTo": "arrow",
+      "ratio": 2,
+      "note": "连携：启示全部转化为猎矢，每 2 点 1 枚"
+     }
+    ]
+   },
+   {
+    "id": "arrow",
+    "name": "猎矢",
+    "max": 4,
+    "initial": 0,
+    "origin": "official",
+    "gains": [
+     {
+      "on": "ultimateCast",
+      "amount": 2,
+      "note": "终结技立即获得 2 枚"
+     }
+    ],
+    "spend": [
+     {
+      "on": "skillHit",
+      "segments": [
+       "skill2",
+       "skill3"
+      ],
+      "amount": 1,
+      "burst": "nature",
+      "freeIfControlHeavy": "skill3",
+      "note": "存有猎矢时每次空中普攻转为强化射击：消耗 1 枚并强制自然爆发；主控第五次（skill3）不耗猎矢"
+     }
+    ]
+   }
+  ]
  },
  {
   "operatorId": "chr_0038_purrche",
