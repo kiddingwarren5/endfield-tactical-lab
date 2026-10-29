@@ -71,8 +71,7 @@ function memberEditor(state,update,i){
       item?h('div',{class:'refine-grid'},...item.attrs.map((a,k)=>{ const r=conf.refine[k]??3; return h('label',{class:'refine-field'},h('span',{},a.name,' ',h('b',{},a.pct?pct(a.display?.[r]??a.values[r]):fmt(a.values[r]))),select([0,1,2,3].map(n=>[n,`精锻 +${n}`]),r,v=>custom(x=>{x.gear[slot].refine[k]=Number(v);}))); })):''); });
   const setLines=Object.entries(st.sets).map(([id,n])=>{ const s=sets.find(x=>x.id===id); const need=s?.pieces||3; return h('div',{class:n>=need?'':'muted'},`${s?.name||id} ${n} / ${need} 件${n>=need?'，套装效果生效':''}`); });
   const schemes=schemesOf(op); const curScheme=m.buildSource==='custom'?'custom':String(m.buildScheme||0);
-  const schemeBlock=block('配装方案',select([...schemes.map((s,k)=>[k,s.name]),['custom','自定义']],curScheme,v=>{ if(v==='custom') return; update(s=>{ applyDefaultBuild(s.team[i],Number(v)); }); }),
-    h('div',{class:'muted small'},m.buildSource==='custom'?'选一个方案会覆盖当前的武器和装备':[schemes[m.buildScheme||0]?.why||'',schemes[m.buildScheme||0]?.weaponAlt?.length?`备选武器：${schemes[m.buildScheme||0].weaponAlt.join('、')}`:''].filter(Boolean).join('。')));
+  const schemeBlock=block('配装方案',select([...schemes.map((s,k)=>[k,s.name]),['custom','自定义']],curScheme,v=>{ if(v==='custom') return; update(s=>{ applyDefaultBuild(s.team[i],Number(v)); }); }));
   const gearBlock=block('装备',...gearRows,h('div',{class:'set-status'},setLines.length?setLines:h('span',{class:'muted'},'未装备套装')));
   const chips=m.consumables.map(id=>{ const c=consumables.find(x=>x.id===id); return h('span',{class:'chip'},h('img',{class:'chip-thumb',src:c?.icon,alt:''}),c?.name||id,h('button',{type:'button',class:'chip-x',onclick:()=>edit(x=>{x.consumables=x.consumables.filter(y=>y!==id);})},'×')); });
   const foodBlock=block('食物与药剂',h('div',{class:'chips'},chips.length?chips:h('span',{class:'muted'},'未使用')),picker({options:consumables.filter(c=>!m.consumables.includes(c.id)).map(c=>({id:c.id,name:c.name,icon:c.icon,sub:c.effectText})),value:null,placeholder:'添加食药',empty:false,onChange:id=>edit(x=>{x.consumables.push(id);})}),
@@ -97,13 +96,14 @@ function swapSlots(update,a,b){ update(s=>{ [s.team[a],s.team[b]]=[s.team[b],s.t
 function targetPanel(state,update,rot){
   const scenario=scenarios.find(x=>x.id===rot.scenario)||scenarios[0]; const enemy=rot.enemy;
   const scTabs=scenarios.map(x=>h('button',{type:'button',class:'preset-tab'+(x.id===scenario.id?' active':''),onclick:()=>update(s=>{s.rot.scenario=x.id;})},x.name));
-  const resRows=h('div',{class:'resistance-list'},...Object.entries(ELEMENT_CN).map(([k,l])=>{ const g=enemy.resistances[k]; const v=g==='custom'?(enemy.custom[k]??0):(GRADE[g]??0);
-    return h('div',{class:'resistance-row'},h('span',{style:`color:${colorOf(k)}`},l),select([['D','D 级 0%'],['C','C 级 20%'],['B','B 级 50%'],['custom','自定义']],g,val=>update(s=>{s.rot.enemy.resistances[k]=val;})),h('output',{},pct(v)),g==='custom'?h('input',{class:'custom-res',type:'number',min:-100,max:100,step:1,value:v,onchange:ev=>update(s=>{s.rot.enemy.custom[k]=Number(ev.target.value);})}):''); }));
+  const num=(value,unit,attrs)=>h('div',{class:'unit-input'},h('input',{type:'number',...attrs,value}),unit?h('b',{},unit):'');
+  const resCards=h('div',{class:'resistance-list'},...Object.entries(ELEMENT_CN).map(([k,l])=>{ const g=enemy.resistances[k]; const v=g==='custom'?(enemy.custom[k]??0):(GRADE[g]??0);
+    return h('div',{class:'resistance-row',style:`--el:${colorOf(k)}`},h('div',{class:'res-head'},h('span',{},l),h('output',{},pct(v))),select([['D','D 级'],['C','C 级'],['B','B 级'],['custom','自定义']],g,val=>update(s=>{s.rot.enemy.resistances[k]=val;})),g==='custom'?num(v,'%',{min:-100,max:100,step:1,onchange:ev=>update(s=>{s.rot.enemy.custom[k]=Number(ev.target.value);})}):''); }));
   return h('section',{class:'panel'},h('div',{class:'panel-heading'},h('span',{class:'index'},'02'),h('h2',{},'目标')),
     h('div',{class:'preset-tabs'},...scTabs),h('ul',{class:'facts'},...scenario.facts.map(t=>h('li',{},t))),
-    h('div',{class:'three-col'},
-      field('排多少秒',scenario.timeLimit?h('output',{class:'fixed-value'},`限时 ${scenario.timeLimit} 秒`):h('input',{type:'number',min:20,max:180,step:5,value:rot.auto.horizon,onchange:ev=>update(s=>{s.rot.auto.horizon=Number(ev.target.value);})})),
-      field('敌人防御力',h('input',{type:'number',min:0,max:99999,value:enemy.defence,onchange:ev=>update(s=>{s.rot.enemy.defence=Number(ev.target.value);})})),
-      field('敌人每隔几秒打一次主控',h('input',{type:'number',min:0,max:60,step:1,value:enemy.attackInterval??ENEMY_DEFAULT.attackInterval,onchange:ev=>update(s=>{s.rot.enemy.attackInterval=Number(ev.target.value);})}),'0 = 不攻击')),
-    h('div',{class:'subheading'},'敌人抗性'),resRows,h('button',{type:'button',class:'mini-btn',onclick:()=>update(s=>{s.rot.enemy=clone(ENEMY_DEFAULT);})},'抗性和防御恢复默认'));
+    h('div',{class:'target-fields'},
+      field('总计战斗时间',scenario.timeLimit?h('output',{class:'fixed-value'},`限时 ${scenario.timeLimit} 秒`):num(rot.auto.horizon,'秒',{min:20,max:180,step:5,onchange:ev=>update(s=>{s.rot.auto.horizon=Number(ev.target.value);})})),
+      field('敌人防御力',num(enemy.defence,'',{min:0,max:99999,onchange:ev=>update(s=>{s.rot.enemy.defence=Number(ev.target.value);})})),
+      field('敌人攻击间隔',num(enemy.attackInterval??ENEMY_DEFAULT.attackInterval,'秒',{min:0,max:60,step:1,onchange:ev=>update(s=>{s.rot.enemy.attackInterval=Number(ev.target.value);})}),'0 = 不攻击')),
+    h('div',{class:'subheading'},'敌人抗性'),resCards,h('button',{type:'button',class:'mini-btn target-reset',onclick:()=>update(s=>{s.rot.enemy=clone(ENEMY_DEFAULT);})},'抗性和防御恢复默认'));
 }
