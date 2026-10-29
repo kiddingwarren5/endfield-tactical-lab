@@ -6592,7 +6592,7 @@
   },
   "duration": 10,
   "stacking": "none",
-  "exclusiveGroup": "lizhiyan_natureFragile_ult_vs_combo",
+  "exclusiveGroup": null,
   "teamUnique": false,
   "oncePerBattle": false,
   "cooldown": null,
@@ -6601,7 +6601,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0032_lizhiyan.talents[0].stages[1]"
   },
-  "notes": "筹谋·一无此效果。潜能5再+7%（另条）；+7%是否受12.8%上限限制未写明。exclusiveGroup 依 docs/architecture.md 2.5（“诀寒冷脆弱 vs 诀终结技寒冷脆弱”互斥）设置，但原文仅写“该效果无法叠加”，未写明与连携技脆弱互斥：①互斥取高/取选；②两者独立相加。",
+  "notes": "筹谋·一无此效果。潜能5再+7%（另条）；+7%是否受12.8%上限限制未写明。exclusiveGroup 依 docs/architecture.md 2.5（“诀寒冷脆弱 vs 诀终结技寒冷脆弱”互斥）设置，但原文仅写“该效果无法叠加”，未写明与连携技脆弱互斥：①互斥取高/取选；②两者独立相加。 用户裁定（2026-10-29）：终结技脆弱只算一次（不与自身叠加），与连携脆弱可以叠加。",
   "stages": [
    {
     "stage": "筹谋·一",
@@ -6662,7 +6662,7 @@
   },
   "duration": 10,
   "stacking": "none",
-  "exclusiveGroup": "lizhiyan_coldFragile_ult_vs_combo",
+  "exclusiveGroup": null,
   "teamUnique": false,
   "oncePerBattle": false,
   "cooldown": null,
@@ -6671,7 +6671,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0032_lizhiyan.talents[0].stages[1]"
   },
-  "notes": "筹谋·一无此效果。潜能5再+7%（另条）；+7%是否受12.8%上限限制未写明。exclusiveGroup 依 docs/architecture.md 2.5（“诀寒冷脆弱 vs 诀终结技寒冷脆弱”互斥）设置，但原文仅写“该效果无法叠加”，未写明与连携技脆弱互斥：①互斥取高/取选；②两者独立相加。",
+  "notes": "筹谋·一无此效果。潜能5再+7%（另条）；+7%是否受12.8%上限限制未写明。exclusiveGroup 依 docs/architecture.md 2.5（“诀寒冷脆弱 vs 诀终结技寒冷脆弱”互斥）设置，但原文仅写“该效果无法叠加”，未写明与连携技脆弱互斥：①互斥取高/取选；②两者独立相加。 用户裁定（2026-10-29）：终结技脆弱只算一次（不与自身叠加），与连携脆弱可以叠加。",
   "stages": [
    {
     "stage": "筹谋·一",

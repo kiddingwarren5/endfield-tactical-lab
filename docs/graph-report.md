@@ -1,6 +1,6 @@
 # 图谱报告（由 tools/validate_graph.mjs 生成）
 
-生成：2026-10-29T02:41:18.343Z
+生成：2026-10-29T03:09:46.231Z
 
 ## 规模
 
@@ -20,8 +20,8 @@
 | state | 15 |
 | resource | 15 |
 | abnormal | 9 |
-| exclusiveGroup | 8 |
 | handled | 7 |
+| exclusiveGroup | 6 |
 | element | 5 |
 | actor | 4 |
 | scenario | 4 |
@@ -48,7 +48,7 @@
 | inflicts | 35 |
 | applies | 34 |
 | dependsOn | 16 |
-| inExclusiveGroup | 14 |
+| inExclusiveGroup | 12 |
 | supports | 9 |
 | consumes | 9 |
 | replaces | 4 |
@@ -57,9 +57,7 @@
 
 ## 校验
 
-错误 0 条，待裁定 7 条。
-- 待裁定：互斥组只有一个成员：lizhiyan_natureFragile_ult_vs_combo（chr_0032_lizhiyan.talent1.will.natureFragile）
-- 待裁定：互斥组只有一个成员：lizhiyan_coldFragile_ult_vs_combo（chr_0032_lizhiyan.talent1.will.coldFragile）
+错误 0 条，待裁定 5 条。
 - 待裁定：连携条件无人能满足（对照靶）：余烬：custom/controlledHit
 - 待裁定：连携条件无人能满足（对照靶）：昼雪：custom/controlledHit
 - 待裁定：连携条件无人能满足（对照靶）：卡契尔：custom/enemyCharging 或 custom/controlledHit
