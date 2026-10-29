@@ -1,17 +1,17 @@
 # 图谱报告（由 tools/validate_graph.mjs 生成）
 
-生成：2026-10-29T02:16:57.788Z
+生成：2026-10-29T02:41:18.343Z
 
 ## 规模
 
 | 节点类型 | 数量 |
 |---|---|
 | effect | 578 |
-| trigger | 206 |
+| trigger | 207 |
 | gear | 191 |
 | skill | 136 |
 | weapon | 84 |
-| unmodeled | 36 |
+| unmodeled | 37 |
 | operator | 35 |
 | event | 28 |
 | stat | 25 |
@@ -31,8 +31,8 @@
 |---|---|
 | gives | 688 |
 | hasEffect | 578 |
-| triggersOn | 303 |
-| resolvesTo | 214 |
+| triggersOn | 306 |
+| resolvesTo | 215 |
 | inSet | 191 |
 | appliesTo | 150 |
 | hasSkill | 136 |
@@ -70,7 +70,7 @@
 
 | 来源 | static | event | state | segment | modeled | handled | unmodeled | informational |
 |---|---|---|---|---|---|---|---|---|
-| operator | 149 | 160 | 24 | 5 | 249 | 8 | 78 | 3 |
+| operator | 146 | 163 | 24 | 5 | 247 | 8 | 80 | 3 |
 | consumable | 32 | 0 | 0 | 0 | 30 | 0 | 0 | 2 |
 | gearSet | 16 | 18 | 1 | 0 | 32 | 0 | 3 | 0 |
 | weapon | 70 | 83 | 4 | 16 | 162 | 0 | 11 | 0 |

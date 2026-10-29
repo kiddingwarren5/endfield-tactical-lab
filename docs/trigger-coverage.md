@@ -1,11 +1,11 @@
 # 触发覆盖（由 tests/triggers.test.mjs 生成）
 
-生成：2026-10-29T02:16:57.857Z
+生成：2026-10-29T02:41:18.415Z
 
 | 归属 | 效果数 |
 |---|---|
-| event | 188 |
-| unmodeled | 65 |
+| event | 189 |
+| unmodeled | 67 |
 | handled | 9 |
 | state | 30 |
 | event-noop | 11 |
@@ -21,6 +21,7 @@
 - 格挡反击未建模（对照靶不攻击）（2）：chr_0014_aurora.talent.counterEnergy、chr_0014_aurora.pot5.spRefund
 - 盾卫旗队后续效果未建模（物理异常分支）（2）：chr_0029_pograni.talent2.atk、chr_0029_pograni.talent2.arts
 - 对照靶只有一个目标：多目标条件不成立（2）：chr_0029_pograni.pot1.spRefund、chr_0011_seraph.pot3.bounce
+- 技力返还倍率修饰未建模（2）：chr_0029_pograni.pot5.comboSp、chr_0033_camille.pot3.spMul
 - 重力场（终结技领域内）未建模（2）：chr_0013_aglina.ult.fragile.breach、chr_0013_aglina.pot2.fragile
 - 箭阵持续时间官方未给出（2）：chr_0034_typhoea.combo.burstVuln、chr_0034_typhoea.pot3.burstVuln
 - 格挡未建模（对照靶不攻击）（2）：chr_0038_purrche.talent1.energy、chr_0038_purrche.talent1.giftChance
@@ -62,6 +63,7 @@
 | chr_0026_lastrite.talent.brittle | targetColdFragile | handled |
 | chr_0026_lastrite.pot1.heavyExtra | infusedHeavyHit | handled |
 | chr_0026_lastrite.pot1.heavyPoise | infusedHeavyHit | handled |
+| chr_0026_lastrite.pot5.spRefund | onSkillCast | event |
 | chr_0026_lastrite.ult.energySource | energySourceRestricted | handled |
 | chr_0004_pelica.talent.annihilate | targetStaggered | state |
 | chr_0004_pelica.talent.bounce | comboHitBroken | event-noop |
@@ -143,6 +145,7 @@
 | chr_0029_pograni.talent2.atk | afterUltimateFollowup | unmodeled：盾卫旗队后续效果未建模（物理异常分支） |
 | chr_0029_pograni.talent2.arts | afterUltimateFollowup | unmodeled：盾卫旗队后续效果未建模（物理异常分支） |
 | chr_0029_pograni.pot1.spRefund | skillHit2Plus | unmodeled：对照靶只有一个目标：多目标条件不成立 |
+| chr_0029_pograni.pot5.comboSp | spRefundMultiplier | unmodeled：技力返还倍率修饰未建模 |
 | chr_0011_seraph.skill.artsAmp | crystalHealAtFullHp | event |
 | chr_0011_seraph.ult.amp.cold | afterUltimateCast | event |
 | chr_0011_seraph.ult.amp.nature | afterUltimateCast | event |
@@ -186,6 +189,7 @@
 | chr_0033_camille.talent2.heatBonus | afterSelfSkillHeal | event |
 | chr_0033_camille.talent2.heatBonusOthers | afterSelfSkillHeal | event |
 | chr_0033_camille.pot1.fragile | wingHovering | event |
+| chr_0033_camille.pot3.spMul | spRefundMultiplier | unmodeled：技力返还倍率修饰未建模 |
 | chr_0033_camille.pot5.heatBonus | afterSelfSkillHeal | event |
 | chr_0033_camille.pot5.heatBonusOthers | afterSelfSkillHeal | event |
 | chr_0031_mifu.skill.duanyunRefund | stageChainRefund | handled |

@@ -1,0 +1,1134 @@
+{
+ "preset:cold-3charge-1burst": {
+  "per": {
+   "诀": {
+    "damage": 308717.148,
+    "hits": 106
+   },
+   "别礼": {
+    "damage": 3295202.493,
+    "hits": 110
+   },
+   "汤汤": {
+    "damage": 1264473.674,
+    "hits": 127
+   },
+   "祀": {
+    "damage": 1473976.756,
+    "hits": 74
+   }
+  },
+  "events": {
+   "normalHit": 343,
+   "spSpend": 20,
+   "cast": 40,
+   "buffStart": 47,
+   "energyGain": 80,
+   "energyBlocked": 20,
+   "spGain": 399,
+   "inkStart": 5,
+   "attach": 19,
+   "comboReady": 24,
+   "vortex": 4,
+   "buffRefresh": 48,
+   "consume": 4,
+   "buffEnd": 30,
+   "inkBurst": 4,
+   "energyOverflow": 20,
+   "pause": 4,
+   "cdr": 1,
+   "instant": 1,
+   "note": 2
+  },
+  "errors": 0
+ },
+ "preset:cold-ult-asap": {
+  "per": {
+   "诀": {
+    "damage": 269707.578,
+    "hits": 99
+   },
+   "别礼": {
+    "damage": 3388213.528,
+    "hits": 107
+   },
+   "汤汤": {
+    "damage": 1318147.345,
+    "hits": 121
+   },
+   "祀": {
+    "damage": 1532683.138,
+    "hits": 70
+   }
+  },
+  "events": {
+   "normalHit": 326,
+   "spSpend": 20,
+   "cast": 40,
+   "buffStart": 39,
+   "energyGain": 80,
+   "energyBlocked": 20,
+   "spGain": 387,
+   "inkStart": 4,
+   "attach": 16,
+   "comboReady": 22,
+   "vortex": 4,
+   "buffRefresh": 54,
+   "consume": 4,
+   "buffEnd": 31,
+   "inkBurst": 4,
+   "energyOverflow": 12,
+   "pause": 4,
+   "cdr": 1,
+   "instant": 1,
+   "note": 4
+  },
+  "errors": 0
+ },
+ "preset:cold-3layer-fast": {
+  "per": {
+   "诀": {
+    "damage": 312121.406,
+    "hits": 168
+   },
+   "别礼": {
+    "damage": 2659616.303,
+    "hits": 170
+   },
+   "汤汤": {
+    "damage": 1172486.559,
+    "hits": 208
+   },
+   "祀": {
+    "damage": 1155306.71,
+    "hits": 122
+   }
+  },
+  "events": {
+   "normalHit": 608,
+   "spSpend": 18,
+   "cast": 35,
+   "energyGain": 71,
+   "energyBlocked": 18,
+   "buffStart": 41,
+   "spGain": 643,
+   "attach": 12,
+   "comboReady": 24,
+   "inkStart": 4,
+   "vortex": 4,
+   "consume": 3,
+   "buffRefresh": 33,
+   "note": 7,
+   "buffEnd": 41,
+   "inkBurst": 4,
+   "energyOverflow": 16,
+   "spOverflow": 235,
+   "attachExpire": 1,
+   "pause": 4,
+   "cdr": 1,
+   "instant": 1
+  },
+  "errors": 0
+ },
+ "solo:狼卫": {
+  "per": {
+   "狼卫": {
+    "damage": 19719.08,
+    "hits": 48
+   }
+  },
+  "events": {
+   "normalHit": 41,
+   "spOverflow": 62,
+   "spGain": 62,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 4,
+   "energyGain": 4,
+   "note": 1,
+   "attach": 4,
+   "comboReady": 2,
+   "error": 2
+  },
+  "errors": 2
+ },
+ "solo:别礼": {
+  "per": {
+   "别礼": {
+    "damage": 26916.061,
+    "hits": 31
+   }
+  },
+  "events": {
+   "normalHit": 20,
+   "spOverflow": 35,
+   "spGain": 35,
+   "spSpend": 3,
+   "cast": 5,
+   "energyBlocked": 3,
+   "energyOverflow": 2,
+   "energyGain": 4,
+   "attach": 3,
+   "error": 1,
+   "pause": 1,
+   "comboReady": 1,
+   "consume": 1,
+   "buffStart": 1
+  },
+  "errors": 1
+ },
+ "solo:佩丽卡": {
+  "per": {
+   "佩丽卡": {
+    "damage": 17333.275,
+    "hits": 41
+   }
+  },
+  "events": {
+   "normalHit": 35,
+   "spOverflow": 51,
+   "spGain": 51,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 4,
+   "energyGain": 4,
+   "attach": 3,
+   "comboReady": 2,
+   "abnormal": 1,
+   "error": 2
+  },
+  "errors": 2
+ },
+ "solo:莱万汀": {
+  "per": {
+   "莱万汀": {
+    "damage": 18013.078,
+    "hits": 42
+   }
+  },
+  "events": {
+   "normalHit": 32,
+   "spOverflow": 44,
+   "spGain": 44,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 4,
+   "energyGain": 6,
+   "note": 5,
+   "resourceGain": 4,
+   "error": 2,
+   "pause": 1,
+   "attach": 2,
+   "consume": 1
+  },
+  "errors": 2
+ },
+ "solo:洛茜": {
+  "per": {
+   "洛茜": {
+    "damage": 25976.682,
+    "hits": 46
+   }
+  },
+  "events": {
+   "normalHit": 30,
+   "spOverflow": 43,
+   "spGain": 43,
+   "spSpend": 3,
+   "cast": 5,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "breach": 5,
+   "abnormal": 4,
+   "error": 1,
+   "pause": 1,
+   "attach": 2,
+   "comboReady": 2,
+   "buffStart": 2,
+   "buffRefresh": 4
+  },
+  "errors": 1
+ },
+ "solo:艾尔黛拉": {
+  "per": {
+   "艾尔黛拉": {
+    "damage": 18966.543,
+    "hits": 40
+   }
+  },
+  "events": {
+   "normalHit": 35,
+   "spOverflow": 49,
+   "spGain": 49,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 4,
+   "energyGain": 4,
+   "comboReady": 2,
+   "abnormal": 1,
+   "error": 2,
+   "consumeAbnormal": 1,
+   "buffStart": 2
+  },
+  "errors": 2
+ },
+ "solo:陈千语": {
+  "per": {
+   "陈千语": {
+    "damage": 16631.53,
+    "hits": 41
+   }
+  },
+  "events": {
+   "normalHit": 34,
+   "spOverflow": 49,
+   "spGain": 49,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 4,
+   "energyGain": 4,
+   "buffStart": 1,
+   "breach": 4,
+   "abnormal": 4,
+   "comboReady": 2,
+   "buffRefresh": 3,
+   "error": 2
+  },
+  "errors": 2
+ },
+ "solo:大潘": {
+  "per": {
+   "大潘": {
+    "damage": 19839.733,
+    "hits": 30
+   }
+  },
+  "events": {
+   "normalHit": 20,
+   "spOverflow": 33,
+   "spGain": 33,
+   "spSpend": 3,
+   "cast": 5,
+   "energyOverflow": 2,
+   "energyGain": 4,
+   "breach": 5,
+   "abnormal": 6,
+   "error": 1,
+   "pause": 1,
+   "note": 1,
+   "comboReady": 1,
+   "consume": 1,
+   "buffStart": 2
+  },
+  "errors": 1
+ },
+ "solo:余烬": {
+  "per": {
+   "余烬": {
+    "damage": 18881.807,
+    "hits": 26
+   }
+  },
+  "events": {
+   "normalHit": 20,
+   "spOverflow": 32,
+   "spGain": 32,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "breach": 3,
+   "abnormal": 3,
+   "error": 2,
+   "pause": 1
+  },
+  "errors": 2
+ },
+ "solo:弧光": {
+  "per": {
+   "弧光": {
+    "damage": 13572.806,
+    "hits": 40
+   }
+  },
+  "events": {
+   "normalHit": 30,
+   "spOverflow": 47,
+   "spGain": 47,
+   "spSpend": 3,
+   "cast": 5,
+   "energyOverflow": 2,
+   "energyGain": 4,
+   "note": 1,
+   "error": 1,
+   "pause": 1,
+   "abnormal": 1,
+   "comboReady": 1,
+   "attach": 2,
+   "consumeAbnormal": 1
+  },
+  "errors": 1
+ },
+ "solo:阿列什": {
+  "per": {
+   "阿列什": {
+    "damage": 20039,
+    "hits": 40
+   }
+  },
+  "events": {
+   "normalHit": 32,
+   "spOverflow": 45,
+   "spGain": 45,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 6,
+   "energyGain": 9,
+   "abnormal": 3,
+   "instant": 6,
+   "iceShatter": 3,
+   "error": 2,
+   "pause": 1,
+   "attach": 2,
+   "consume": 1
+  },
+  "errors": 2
+ },
+ "solo:艾维文娜": {
+  "per": {
+   "艾维文娜": {
+    "damage": 16677.435,
+    "hits": 39
+   }
+  },
+  "events": {
+   "normalHit": 27,
+   "spOverflow": 42,
+   "spGain": 42,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 4,
+   "energyGain": 4,
+   "attach": 3,
+   "comboReady": 2,
+   "error": 2
+  },
+  "errors": 2
+ },
+ "solo:管理员 (男)": {
+  "per": {
+   "管理员 (男)": {
+    "damage": 18678.537,
+    "hits": 40
+   }
+  },
+  "events": {
+   "normalHit": 32,
+   "spOverflow": 44,
+   "spGain": 44,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "abnormal": 3,
+   "error": 2,
+   "pause": 1
+  },
+  "errors": 2
+ },
+ "solo:昼雪": {
+  "per": {
+   "昼雪": {
+    "damage": 21043.377,
+    "hits": 30
+   }
+  },
+  "events": {
+   "normalHit": 22,
+   "spOverflow": 42,
+   "spGain": 42,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "attach": 3,
+   "error": 2,
+   "pause": 1,
+   "abnormal": 1,
+   "iceShatter": 1
+  },
+  "errors": 2
+ },
+ "solo:安塔尔": {
+  "per": {
+   "安塔尔": {
+    "damage": 12490.428,
+    "hits": 34
+   }
+  },
+  "events": {
+   "normalHit": 31,
+   "spOverflow": 43,
+   "spGain": 43,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "buffStart": 4,
+   "buffRefresh": 4,
+   "error": 2,
+   "pause": 1
+  },
+  "errors": 2
+ },
+ "solo:萤石": {
+  "per": {
+   "萤石": {
+    "damage": 20150.422,
+    "hits": 48
+   }
+  },
+  "events": {
+   "normalHit": 41,
+   "spOverflow": 62,
+   "spGain": 62,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 3,
+   "energyGain": 3,
+   "attach": 4,
+   "comboReady": 2,
+   "error": 2
+  },
+  "errors": 2
+ },
+ "solo:埃特拉": {
+  "per": {
+   "埃特拉": {
+    "damage": 15934.795,
+    "hits": 32
+   }
+  },
+  "events": {
+   "normalHit": 26,
+   "spOverflow": 40,
+   "spGain": 40,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "attach": 3,
+   "error": 2,
+   "pause": 1,
+   "breach": 1,
+   "abnormal": 1
+  },
+  "errors": 2
+ },
+ "solo:卡契尔": {
+  "per": {
+   "卡契尔": {
+    "damage": 16064.187,
+    "hits": 27
+   }
+  },
+  "events": {
+   "normalHit": 20,
+   "spOverflow": 36,
+   "spGain": 36,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "breach": 4,
+   "error": 2,
+   "pause": 1,
+   "buffStart": 1,
+   "buffRefresh": 2,
+   "abnormal": 1
+  },
+  "errors": 2
+ },
+ "solo:秋栗": {
+  "per": {
+   "秋栗": {
+    "damage": 13436.617,
+    "hits": 38
+   }
+  },
+  "events": {
+   "normalHit": 33,
+   "spOverflow": 50,
+   "spGain": 50,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "attach": 3,
+   "error": 2,
+   "pause": 1
+  },
+  "errors": 2
+ },
+ "solo:黎风": {
+  "per": {
+   "黎风": {
+    "damage": 24212.538,
+    "hits": 43
+   }
+  },
+  "events": {
+   "normalHit": 30,
+   "spOverflow": 45,
+   "spGain": 45,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 4,
+   "energyGain": 4,
+   "buffStart": 3,
+   "buffRefresh": 10,
+   "breach": 3,
+   "abnormal": 3,
+   "comboReady": 2,
+   "error": 2
+  },
+  "errors": 2
+ },
+ "solo:骏卫": {
+  "per": {
+   "骏卫": {
+    "damage": 17926.46,
+    "hits": 44
+   }
+  },
+  "events": {
+   "normalHit": 32,
+   "spOverflow": 44,
+   "spGain": 44,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "abnormal": 3,
+   "error": 2,
+   "pause": 1
+  },
+  "errors": 2
+ },
+ "solo:赛希": {
+  "per": {
+   "赛希": {
+    "damage": 9202.714,
+    "hits": 28
+   }
+  },
+  "events": {
+   "normalHit": 27,
+   "spOverflow": 39,
+   "spGain": 39,
+   "spSpend": 3,
+   "cast": 5,
+   "resourceGain": 3,
+   "energyOverflow": 2,
+   "energyGain": 4,
+   "resourceSpend": 5,
+   "buffStart": 3,
+   "buffRefresh": 4,
+   "error": 1,
+   "pause": 1,
+   "resourceExhausted": 2,
+   "comboReady": 2,
+   "attach": 1
+  },
+  "errors": 1
+ },
+ "solo:管理员 (女)": {
+  "per": {
+   "管理员 (女)": {
+    "damage": 18678.537,
+    "hits": 40
+   }
+  },
+  "events": {
+   "normalHit": 32,
+   "spOverflow": 44,
+   "spGain": 44,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "abnormal": 3,
+   "error": 2,
+   "pause": 1
+  },
+  "errors": 2
+ },
+ "solo:伊冯": {
+  "per": {
+   "伊冯": {
+    "damage": 16834.065,
+    "hits": 44
+   }
+  },
+  "events": {
+   "normalHit": 37,
+   "spOverflow": 53,
+   "spGain": 53,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 3,
+   "energyGain": 3,
+   "abnormal": 4,
+   "comboReady": 2,
+   "note": 1,
+   "error": 2
+  },
+  "errors": 2
+ },
+ "solo:洁尔佩塔": {
+  "per": {
+   "洁尔佩塔": {
+    "damage": 24694.164,
+    "hits": 42
+   }
+  },
+  "events": {
+   "normalHit": 31,
+   "spOverflow": 45,
+   "spGain": 45,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "attach": 5,
+   "error": 2,
+   "pause": 1,
+   "buffStart": 1,
+   "buffEnd": 1
+  },
+  "errors": 2
+ },
+ "solo:汤汤": {
+  "per": {
+   "汤汤": {
+    "damage": 20832.454,
+    "hits": 47
+   }
+  },
+  "events": {
+   "normalHit": 37,
+   "spOverflow": 60,
+   "spGain": 60,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 4,
+   "energyGain": 4,
+   "attach": 3,
+   "comboReady": 2,
+   "vortex": 1,
+   "error": 2,
+   "buffStart": 1
+  },
+  "errors": 2
+ },
+ "solo:庄方宜": {
+  "per": {
+   "庄方宜": {
+    "damage": 13611.653,
+    "hits": 35
+   }
+  },
+  "events": {
+   "normalHit": 28,
+   "spOverflow": 39,
+   "spGain": 39,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 4,
+   "energyGain": 6,
+   "buffStart": 1,
+   "buffRefresh": 2,
+   "error": 2,
+   "pause": 1,
+   "buffEnd": 1
+  },
+  "errors": 2
+ },
+ "solo:卡缪": {
+  "per": {
+   "卡缪": {
+    "damage": 16309.995,
+    "hits": 35
+   }
+  },
+  "events": {
+   "normalHit": 24,
+   "spOverflow": 37,
+   "spGain": 37,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "buffStart": 1,
+   "buffRefresh": 5,
+   "attach": 5,
+   "error": 2,
+   "pause": 1
+  },
+  "errors": 2
+ },
+ "solo:弭弗": {
+  "per": {
+   "弭弗": {
+    "damage": 15206.184,
+    "hits": 24
+   }
+  },
+  "events": {
+   "normalHit": 20,
+   "spOverflow": 33,
+   "spGain": 33,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "error": 2,
+   "pause": 1,
+   "breach": 1,
+   "abnormal": 1
+  },
+  "errors": 2
+ },
+ "solo:诀": {
+  "per": {
+   "诀": {
+    "damage": 18382.99,
+    "hits": 39
+   }
+  },
+  "events": {
+   "normalHit": 31,
+   "spOverflow": 47,
+   "spGain": 47,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 4,
+   "energyGain": 4,
+   "attach": 3,
+   "comboReady": 2,
+   "buffStart": 2,
+   "buffRefresh": 4,
+   "error": 2,
+   "buffEnd": 2
+  },
+  "errors": 2
+ },
+ "solo:梨诺": {
+  "per": {
+   "梨诺": {
+    "damage": 15572.154,
+    "hits": 29
+   }
+  },
+  "events": {
+   "normalHit": 23,
+   "spOverflow": 35,
+   "spGain": 35,
+   "spSpend": 3,
+   "cast": 5,
+   "energyOverflow": 1,
+   "energyGain": 4,
+   "buffStart": 2,
+   "note": 1,
+   "buffEnd": 1,
+   "error": 1,
+   "pause": 1,
+   "abnormal": 1,
+   "comboReady": 1,
+   "instant": 1
+  },
+  "errors": 1
+ },
+ "solo:提弗洛斯": {
+  "per": {
+   "提弗洛斯": {
+    "damage": 22834.4,
+    "hits": 58
+   }
+  },
+  "events": {
+   "normalHit": 27,
+   "spOverflow": 39,
+   "spGain": 39,
+   "spSpend": 3,
+   "cast": 5,
+   "energyOverflow": 4,
+   "energyGain": 7,
+   "buffStart": 1,
+   "resourceGain": 7,
+   "buffRefresh": 4,
+   "error": 1,
+   "pause": 1,
+   "resourceSpend": 3,
+   "resourceExhausted": 2,
+   "comboReady": 1
+  },
+  "errors": 1
+ },
+ "solo:噗切娜": {
+  "per": {
+   "噗切娜": {
+    "damage": 20228.232,
+    "hits": 35
+   }
+  },
+  "events": {
+   "normalHit": 34,
+   "spOverflow": 55,
+   "spGain": 55,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "error": 2,
+   "pause": 1,
+   "note": 3
+  },
+  "errors": 2
+ },
+ "solo:祀": {
+  "per": {
+   "祀": {
+    "damage": 9934.385,
+    "hits": 22
+   }
+  },
+  "events": {
+   "normalHit": 19,
+   "spOverflow": 30,
+   "spGain": 30,
+   "spSpend": 3,
+   "cast": 4,
+   "energyOverflow": 2,
+   "energyGain": 3,
+   "inkStart": 1,
+   "attach": 1,
+   "error": 2,
+   "pause": 1,
+   "buffStart": 2,
+   "cdr": 1,
+   "instant": 1,
+   "inkBurst": 1
+  },
+  "errors": 2
+ },
+ "team:诀别汤祀": {
+  "per": {
+   "诀": {
+    "damage": 14899.822,
+    "hits": 34
+   },
+   "别礼": {
+    "damage": 26647.349,
+    "hits": 35
+   },
+   "汤汤": {
+    "damage": 17440.63,
+    "hits": 41
+   },
+   "祀": {
+    "damage": 17856.953,
+    "hits": 23
+   }
+  },
+  "events": {
+   "normalHit": 108,
+   "spOverflow": 76,
+   "spGain": 135,
+   "spSpend": 8,
+   "cast": 13,
+   "energyOverflow": 24,
+   "energyGain": 30,
+   "energyBlocked": 8,
+   "attach": 7,
+   "comboReady": 6,
+   "abnormal": 3,
+   "inkStart": 1,
+   "consume": 1,
+   "buffStart": 4,
+   "buffRefresh": 5,
+   "vortex": 1,
+   "pause": 1,
+   "note": 2,
+   "error": 3,
+   "buffEnd": 2,
+   "inkBurst": 1
+  },
+  "errors": 3
+ },
+ "team:莱万汀狼卫": {
+  "per": {
+   "莱万汀": {
+    "damage": 20428.621,
+    "hits": 48
+   },
+   "狼卫": {
+    "damage": 12485.692,
+    "hits": 40
+   }
+  },
+  "events": {
+   "normalHit": 76,
+   "spOverflow": 90,
+   "spGain": 90,
+   "spSpend": 4,
+   "cast": 6,
+   "energyOverflow": 8,
+   "energyGain": 11,
+   "note": 6,
+   "resourceGain": 5,
+   "attach": 5,
+   "comboReady": 2,
+   "consume": 3,
+   "error": 2,
+   "pause": 1
+  },
+  "errors": 2
+ },
+ "team:提弗洛斯诀": {
+  "per": {
+   "提弗洛斯": {
+    "damage": 22312.06,
+    "hits": 58
+   },
+   "诀": {
+    "damage": 12036.474,
+    "hits": 33
+   }
+  },
+  "events": {
+   "normalHit": 64,
+   "spOverflow": 77,
+   "spGain": 77,
+   "spSpend": 4,
+   "cast": 6,
+   "energyOverflow": 8,
+   "energyGain": 12,
+   "buffStart": 4,
+   "resourceGain": 6,
+   "attach": 2,
+   "comboReady": 3,
+   "error": 2,
+   "buffRefresh": 9,
+   "pause": 1,
+   "buffEnd": 2,
+   "consume": 1,
+   "resourceSpend": 2,
+   "resourceExhausted": 1
+  },
+  "errors": 2
+ },
+ "team:别礼赛希": {
+  "per": {
+   "别礼": {
+    "damage": 26481.662,
+    "hits": 33
+   },
+   "赛希": {
+    "damage": 4462.703,
+    "hits": 29
+   }
+  },
+  "events": {
+   "normalHit": 56,
+   "spOverflow": 70,
+   "spGain": 70,
+   "spSpend": 4,
+   "cast": 5,
+   "energyBlocked": 4,
+   "energyOverflow": 5,
+   "energyGain": 6,
+   "resourceGain": 2,
+   "resourceSpend": 4,
+   "buffStart": 1,
+   "attach": 2,
+   "error": 3,
+   "buffRefresh": 3,
+   "resourceExhausted": 2,
+   "comboReady": 2,
+   "pause": 1
+  },
+  "errors": 3
+ },
+ "team:陈千语卡契尔弭弗": {
+  "per": {
+   "陈千语": {
+    "damage": 21594.747,
+    "hits": 45
+   },
+   "卡契尔": {
+    "damage": 9451.449,
+    "hits": 23
+   },
+   "弭弗": {
+    "damage": 9502.448,
+    "hits": 24
+   }
+  },
+  "events": {
+   "normalHit": 80,
+   "spOverflow": 86,
+   "spGain": 101,
+   "spSpend": 6,
+   "cast": 9,
+   "energyOverflow": 17,
+   "energyGain": 20,
+   "buffStart": 2,
+   "breach": 5,
+   "abnormal": 3,
+   "comboReady": 4,
+   "error": 3,
+   "buffRefresh": 4,
+   "pause": 1,
+   "buffEnd": 1
+  },
+  "errors": 3
+ },
+ "team:伊冯佩丽卡汤汤": {
+  "per": {
+   "伊冯": {
+    "damage": 17576.678,
+    "hits": 47
+   },
+   "佩丽卡": {
+    "damage": 10644.424,
+    "hits": 33
+   },
+   "汤汤": {
+    "damage": 15548.642,
+    "hits": 41
+   }
+  },
+  "events": {
+   "normalHit": 104,
+   "spOverflow": 94,
+   "spGain": 128,
+   "spSpend": 6,
+   "cast": 10,
+   "energyOverflow": 17,
+   "energyGain": 20,
+   "abnormal": 6,
+   "attach": 4,
+   "comboReady": 7,
+   "note": 3,
+   "vortex": 1,
+   "pause": 1,
+   "consumeAbnormal": 1,
+   "error": 2,
+   "buffStart": 2,
+   "buffRefresh": 14,
+   "consume": 1
+  },
+  "errors": 2
+ }
+}

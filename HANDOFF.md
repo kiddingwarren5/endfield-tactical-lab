@@ -73,3 +73,9 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 - 图谱：形态 / 阶段变体、派生反应（带守卫）、硬 / 软分离、结构化前提、grants 边、场景节点；tools/check_graph_sim.mjs 检查图与模拟器一致性（docs/graph-sim-consistency.md）。
 - 处置表：docs/reviews/graph-review-claude.md；Codex 报告 docs/reviews/graph-review-gpt.md。待做：通用资源状态机（提弗洛斯、赛希、莱万汀先做）。
 - 资源状态机（mechanics.resources，docs/ontology.md §7）：熔火、启示 / 猎矢、支援晶体已接入；显式段计划（mechanics.<kind>.segmentPlan）优先于按标签猜条件段，提弗洛斯三技能已写计划。tests/resources.test.mjs。
+
+## 2026-10-29 深夜：去特判整理
+- 金标准回归 tools/golden.mjs（tests/golden.json，43 组：三条预设轴、每个干员单人固定时间线、六个小队）；tests/golden.test.mjs 要求一致；有意改动必须重写快照并在提交说明里写原因。
+- 引擎不再按技能文本做正则判断：触发只认触发代码（删除文本猜测后备）；形态门槛用 effect.condition.form；返还 / 恢复用 effect.spKind 与 mechanics spRefund.kind（recover / refund）；附着绑定用 attach.bind（hit / controlHeavy / slot1Element）；阶段链按 stage.segment 选段；处决 / 下落按 normal.segmentIds；条件伤害段只认 mechanics.<kind>.segmentPlan（校验器要求每个干员三技能都有计划，times 0 + when.unmodeled 表示未建模）；终结技后减冷却走即时区并按受益者 / 01 号位结算。
+- 迁移脚本 tools/migrate_textfields.mjs（幂等）把以上字段写进 curated 数据。
+- 随之修正的三处行为：祀终结技减冷却只给 01 号位；大潘“备料”减冷却不再被“终结技…后”的文本误判成终结技后触发；噗切娜“我没有睡着！”立盾不打伤害、头槌只在替换段。

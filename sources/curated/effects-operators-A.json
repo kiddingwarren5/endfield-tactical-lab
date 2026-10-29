@@ -104,7 +104,8 @@
     "stage": "·二",
     "value": 10
    }
-  ]
+  ],
+  "spKind": "refund"
  },
  {
   "id": "chr_0006_wolfgd.pot1.str",
@@ -236,7 +237,8 @@
   "notes": "与天赋节制准则的返还相加。",
   "modifies": [
    "chr_0006_wolfgd.talent.temperance"
-  ]
+  ],
+  "spKind": "refund"
  },
  {
   "id": "chr_0006_wolfgd.pot3.teamFang",
@@ -809,8 +811,8 @@
   },
   "condition": {
    "text": "",
-   "trigger": null,
-   "mode": "auto"
+   "trigger": "onSkillCast",
+   "mode": "user"
   },
   "duration": null,
   "stacking": "none",
@@ -823,7 +825,8 @@
    "category": "official",
    "where": "operators.js chr_0026_lastrite potentials[4]"
   },
-  "notes": "叠加在战技 params.spRefund（30）之上。"
+  "notes": "叠加在战技 params.spRefund（30）之上。",
+  "spKind": "refund"
  },
  {
   "id": "chr_0026_lastrite.pot5.phantomRatio",
@@ -1391,7 +1394,8 @@
    "category": "official",
    "where": "operators.js chr_0016_laevat potentials[0]"
   },
-  "notes": ""
+  "notes": "",
+  "spKind": "refund"
  },
  {
   "id": "chr_0016_laevat.pot2.int",
@@ -2212,7 +2216,8 @@
    "category": "official",
    "where": "operators.js chr_0028_wulfa potentials[0]"
   },
-  "notes": ""
+  "notes": "",
+  "spKind": "refund"
  },
  {
   "id": "chr_0028_wulfa.pot2.agi",
@@ -4147,7 +4152,8 @@
    "category": "official",
    "where": "operators.js chr_0007_ikut potentials[0]"
   },
-  "notes": "叠加在战技 params.spRefund 之上。"
+  "notes": "叠加在战技 params.spRefund 之上。",
+  "spKind": "recover"
  },
  {
   "id": "chr_0007_ikut.pot2.agi",
@@ -4597,7 +4603,8 @@
    "category": "official",
    "where": "operators.js chr_0024_deepfin potentials[0]"
   },
-  "notes": ""
+  "notes": "",
+  "spKind": "recover"
  },
  {
   "id": "chr_0024_deepfin.pot2.str",
@@ -5305,7 +5312,8 @@
    "category": "official",
    "where": "operators.js official_89 potentials[0]"
   },
-  "notes": ""
+  "notes": "",
+  "spKind": "refund"
  },
  {
   "id": "official_89.pot2.othersAtk",
@@ -5632,7 +5640,8 @@
    "category": "official",
    "where": "operators.js chr_0014_aurora potentials[4]"
   },
-  "notes": ""
+  "notes": "",
+  "spKind": "refund"
  },
  {
   "id": "chr_0023_antal.skill.electricFragile",
@@ -6002,7 +6011,8 @@
    "category": "official",
    "where": "operators.js chr_0023_antal potentials[2]"
   },
-  "notes": ""
+  "notes": "",
+  "spKind": "refund"
  },
  {
   "id": "chr_0023_antal.pot4.int",
@@ -6633,7 +6643,8 @@
     "stage": "·二",
     "value": 15
    }
-  ]
+  ],
+  "spKind": "refund"
  },
  {
   "id": "chr_0021_whiten.pot1.fragileDuration",

@@ -69,7 +69,8 @@
    "category": "official",
    "where": "dist/data/sets.js suit_usp01.description"
   },
-  "notes": "资源效果，不进伤害；每场战斗最多一次"
+  "notes": "资源效果，不进伤害；每场战斗最多一次",
+  "spKind": "refund"
  },
  {
   "id": "suit_phy01.p1",

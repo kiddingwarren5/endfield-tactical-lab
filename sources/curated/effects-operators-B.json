@@ -328,7 +328,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0020_meurs.potentials[4]"
   },
-  "notes": "资源效果，不进伤害"
+  "notes": "资源效果，不进伤害",
+  "spKind": "refund"
  },
  {
   "id": "chr_0019_karin.talent1.comboSp",
@@ -393,7 +394,8 @@
      "cap": 75
     }
    }
-  ]
+  ],
+  "spKind": "recover"
  },
  {
   "id": "chr_0019_karin.talent2.combo",
@@ -1356,7 +1358,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0029_pograni.potentials[0]"
   },
-  "notes": "资源效果，不进伤害"
+  "notes": "资源效果，不进伤害",
+  "spKind": "refund"
  },
  {
   "id": "chr_0029_pograni.pot2.will",
@@ -1604,8 +1607,8 @@
   },
   "condition": {
    "text": "配装即生效",
-   "trigger": null,
-   "mode": "auto"
+   "trigger": "spRefundMultiplier",
+   "mode": "user"
   },
   "duration": null,
   "stacking": "none",
@@ -1618,7 +1621,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0029_pograni.potentials[4]"
   },
-  "notes": "value 为乘数，乘在连携技 params.spRefund 各段上。资源效果，不进伤害"
+  "notes": "value 为乘数，乘在连携技 params.spRefund 各段上。资源效果，不进伤害",
+  "spKind": "recover"
  },
  {
   "id": "chr_0011_seraph.skill.artsAmp",
@@ -2331,7 +2335,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0003_endminf.potentials[0]"
   },
-  "notes": "资源效果，不进伤害"
+  "notes": "资源效果，不进伤害",
+  "spKind": "refund"
  },
  {
   "id": "chr_0003_endminf.pot2.othersAtk",
@@ -3039,7 +3044,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0017_yvonne.potentials[3]"
   },
-  "notes": "资源效果"
+  "notes": "资源效果",
+  "spKind": "refund"
  },
  {
   "id": "chr_0017_yvonne.pot5.atk",
@@ -3977,7 +3983,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0027_tangtang.potentials[0]"
   },
-  "notes": "叠加在 params「每处涡流技力返还」20 之上；maxStacks=2 为场上涡流上限。资源效果"
+  "notes": "叠加在 params「每处涡流技力返还」20 之上；maxStacks=2 为场上涡流上限。资源效果",
+  "spKind": "refund"
  },
  {
   "id": "chr_0027_tangtang.pot2.agi",
@@ -4731,7 +4738,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0030_zhuangfy.potentials[2]"
   },
-  "notes": "资源效果。青霆剑存在时间+10秒见 pot3.swordDuration。"
+  "notes": "资源效果。青霆剑存在时间+10秒见 pot3.swordDuration。",
+  "spKind": "refund"
  },
  {
   "id": "chr_0030_zhuangfy.pot3.swordDuration",
@@ -5347,8 +5355,8 @@
   },
   "condition": {
    "text": "配装即生效",
-   "trigger": null,
-   "mode": "auto"
+   "trigger": "spRefundMultiplier",
+   "mode": "user"
   },
   "duration": null,
   "stacking": "none",
@@ -5361,7 +5369,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0033_camille.potentials[2]"
   },
-  "notes": "value 为乘数，乘在连携技 params「技力恢复」「追猎技力恢复」上。资源效果"
+  "notes": "value 为乘数，乘在连携技 params「技力恢复」「追猎技力恢复」上。资源效果",
+  "spKind": "recover"
  },
  {
   "id": "chr_0033_camille.pot4.energyCost",
@@ -5564,7 +5573,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0031_mifu.skills.skill.description"
   },
-  "notes": "文本资源效果（params 缺技力消耗）：断云消耗100返还50，追形消耗50，开天消耗50。资源效果 返还由阶段链结算（机制处理）。"
+  "notes": "文本资源效果（params 缺技力消耗）：断云消耗100返还50，追形消耗50，开天消耗50。资源效果 返还由阶段链结算（机制处理）。",
+  "spKind": "refund"
  },
  {
   "id": "chr_0031_mifu.skill.kaitianAsCrush",
@@ -6140,7 +6150,8 @@
   "condition": {
    "text": "阵诀·智生效（智识≥意志）；连携技命中后（自身战技命中囹圄目标时再次施加）",
    "trigger": "afterComboHit",
-   "mode": "user"
+   "mode": "user",
+   "form": "智"
   },
   "duration": 4,
   "stacking": "none",
@@ -6204,7 +6215,8 @@
   "condition": {
    "text": "阵诀·智生效（智识≥意志）；连携技命中后（自身战技命中囹圄目标时再次施加）",
    "trigger": "afterComboHit",
-   "mode": "user"
+   "mode": "user",
+   "form": "智"
   },
   "duration": 4,
   "stacking": "none",
@@ -6306,7 +6318,8 @@
   "condition": {
    "text": "阵诀·意生效（意志>智识）；连携技命中后",
    "trigger": "afterComboHit",
-   "mode": "user"
+   "mode": "user",
+   "form": "意"
   },
   "duration": 6,
   "stacking": "none",
@@ -6409,7 +6422,8 @@
   "condition": {
    "text": "阵诀·意生效（意志>智识）；连携技命中后",
    "trigger": "afterComboHit",
-   "mode": "user"
+   "mode": "user",
+   "form": "意"
   },
   "duration": 6,
   "stacking": "none",
@@ -6459,7 +6473,8 @@
   "condition": {
    "text": "阵诀·智生效（智识≥意志）；破晦阵生成时",
    "trigger": "ultimateFieldSpawn",
-   "mode": "user"
+   "mode": "user",
+   "form": "智"
   },
   "duration": 15,
   "stacking": "none",
@@ -6506,7 +6521,8 @@
   "condition": {
    "text": "阵诀·智生效（智识≥意志）；终结技破晦期间",
    "trigger": "duringUltimate",
-   "mode": "user"
+   "mode": "user",
+   "form": "智"
   },
   "duration": null,
   "stacking": "none",
@@ -6571,7 +6587,8 @@
   "condition": {
    "text": "阵诀·意生效（意志>智识）；终结技一段破晦阵和二段破晦诀明对敌人造成伤害时",
    "trigger": "ultimateHit",
-   "mode": "user"
+   "mode": "user",
+   "form": "意"
   },
   "duration": 10,
   "stacking": "none",
@@ -6640,7 +6657,8 @@
   "condition": {
    "text": "阵诀·意生效（意志>智识）；终结技一段破晦阵和二段破晦诀明对敌人造成伤害时",
    "trigger": "ultimateHit",
-   "mode": "user"
+   "mode": "user",
+   "form": "意"
   },
   "duration": 10,
   "stacking": "none",
@@ -6792,7 +6810,8 @@
   "condition": {
    "text": "阵诀·智生效（智识≥意志）；自身战技命中处于囹圄状态的敌人时",
    "trigger": "skillHitImprisoned",
-   "mode": "user"
+   "mode": "user",
+   "form": "智"
   },
   "duration": null,
   "stacking": "none",
@@ -6805,7 +6824,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0032_lizhiyan.potentials[0]"
   },
-  "notes": "资源效果"
+  "notes": "资源效果",
+  "spKind": "refund"
  },
  {
   "id": "chr_0032_lizhiyan.pot1.will.natureFragile",
@@ -6842,7 +6862,8 @@
   "condition": {
    "text": "阵诀·意生效（意志>智识）；连携技应龙四式命中后",
    "trigger": "afterComboHit",
-   "mode": "user"
+   "mode": "user",
+   "form": "意"
   },
   "duration": 6,
   "stacking": "none",
@@ -6895,7 +6916,8 @@
   "condition": {
    "text": "阵诀·意生效（意志>智识）；连携技应龙四式命中后",
    "trigger": "afterComboHit",
-   "mode": "user"
+   "mode": "user",
+   "form": "意"
   },
   "duration": 6,
   "stacking": "none",
@@ -7145,7 +7167,8 @@
   "condition": {
    "text": "阵诀·智生效（智识≥意志）；终结技破晦期间",
    "trigger": "duringUltimate",
-   "mode": "user"
+   "mode": "user",
+   "form": "智"
   },
   "duration": null,
   "stacking": "none",
@@ -7198,7 +7221,8 @@
   "condition": {
    "text": "阵诀·智生效（智识≥意志）",
    "trigger": "intMode",
-   "mode": "user"
+   "mode": "user",
+   "form": "智"
   },
   "duration": null,
   "stacking": "none",
@@ -7248,7 +7272,8 @@
   "condition": {
    "text": "阵诀·意生效（意志>智识）；终结技一段破晦阵和二段破晦诀明对敌人造成伤害时",
    "trigger": "ultimateHit",
-   "mode": "user"
+   "mode": "user",
+   "form": "意"
   },
   "duration": 10,
   "stacking": "none",
@@ -7301,7 +7326,8 @@
   "condition": {
    "text": "阵诀·意生效（意志>智识）；终结技一段破晦阵和二段破晦诀明对敌人造成伤害时",
    "trigger": "ultimateHit",
-   "mode": "user"
+   "mode": "user",
+   "form": "意"
   },
   "duration": 10,
   "stacking": "none",
@@ -7348,7 +7374,8 @@
   "condition": {
    "text": "阵诀·意生效（意志>智识）；施放终结技二段破晦诀明后，连携技处于冷却中",
    "trigger": "afterUltimate2",
-   "mode": "user"
+   "mode": "user",
+   "form": "意"
   },
   "duration": null,
   "stacking": "none",
@@ -7698,7 +7725,8 @@
     "stage": "一等星的鼓舞·二",
     "value": 10
    }
-  ]
+  ],
+  "spKind": "refund"
  },
  {
   "id": "chr_0035_liino.pot1.spRefund",
@@ -7742,7 +7770,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0035_liino.potentials[0]"
   },
-  "notes": "资源效果"
+  "notes": "资源效果",
+  "spKind": "refund"
  },
  {
   "id": "chr_0035_liino.pot1.teamAtk",

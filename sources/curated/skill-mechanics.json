@@ -7,7 +7,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": 18,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "research",
     "note": "rules C11 样本（WG 单一来源）；仅主控重击"
    },
@@ -51,7 +51,8 @@
     {
      "element": "heat",
      "layers": 1,
-     "when": "最后一次射击，且目标不处于燃烧/导电"
+     "when": "最后一次射击，且目标不处于燃烧/导电",
+     "bind": "hit"
     }
    ],
    "consumes": [
@@ -67,7 +68,21 @@
    "abnormal": null,
    "replaces": null,
    "buffs": [],
-   "notes": "天赋节制准则：成功消耗法术异常时返还技力（见 chr_0006_wolfgd.talent.temperance）"
+   "notes": "天赋节制准则：成功消耗法术异常时返还技力（见 chr_0006_wolfgd.talent.temperance）",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 0,
+     "when": {
+      "unmodeled": "追加伤害倍率"
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -99,11 +114,19 @@
     {
      "element": "heat",
      "layers": 1,
-     "when": "爆炸命中范围内敌人"
+     "when": "爆炸命中范围内敌人",
+     "bind": "hit"
     }
    ],
    "abnormal": null,
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 90,
@@ -119,7 +142,14 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "5次灼热伤害"
+   "notes": "5次灼热伤害",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -131,7 +161,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": 30,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "research",
     "note": "rules C11 样本（WG 单一来源）；仅主控重击"
    },
@@ -164,7 +194,7 @@
    "spRefund": {
     "value": 30,
     "origin": "official",
-    "kind": "返还",
+    "kind": "refund",
     "condition": "施放后立即返还（返还技力/毒技力）"
    },
    "energyGain": {
@@ -183,14 +213,22 @@
     {
      "element": "cold",
      "layers": 1,
-     "when": "主控下次重击命中（幻影追击）"
+     "when": "主控下次重击命中（幻影追击）",
+     "bind": "controlHeavy"
     }
    ],
    "consumes": null,
    "abnormal": null,
    "replaces": null,
    "buffs": [],
-   "notes": "低温灌注：持续 15s 内主控下一次重击生成幻影追击；主控为别礼时不中断普攻"
+   "notes": "低温灌注：持续 15s 内主控下一次重击生成幻影追击；主控为别礼时不中断普攻",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -229,7 +267,22 @@
    },
    "attach": null,
    "abnormal": null,
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    },
+    {
+     "id": "combo2",
+     "times": 1
+    },
+    {
+     "id": "combo3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 240,
@@ -242,7 +295,22 @@
    "buffs": [
     "chr_0026_lastrite.ult.energySource"
    ],
-   "notes": "施放期间免疫所有伤害；别礼只能从自身战技、连携技获得终结技能量"
+   "notes": "施放期间免疫所有伤害；别礼只能从自身战技、连携技获得终结技能量",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    },
+    {
+     "id": "ultimate3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -254,7 +322,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": 15,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "research",
     "note": "rules C11 样本（WG 单一来源）；仅主控重击"
    },
@@ -297,14 +365,22 @@
    "attach": [
     {
      "element": "electric",
-     "layers": 1
+     "layers": 1,
+     "bind": "hit"
     }
    ],
    "consumes": null,
    "abnormal": null,
    "replaces": null,
    "buffs": [],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -340,7 +416,14 @@
      "duration": 5
     }
    ],
-   "notes": "强制施加短暂导电"
+   "notes": "强制施加短暂导电",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 80,
@@ -351,7 +434,14 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -363,7 +453,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -426,7 +516,46 @@
    ],
    "replaces": null,
    "buffs": [],
-   "notes": "命中敌人获得1点熔火（自身资源，上限4）；终结技期间战技增强（skill4–6 段，燃烧时长同为 5s）"
+   "notes": "命中敌人获得1点熔火（自身资源，上限4）；终结技期间战技增强（skill4–6 段，燃烧时长同为 5s）",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 1
+    },
+    {
+     "id": "skill3",
+     "times": 0,
+     "when": {
+      "unmodeled": "追加伤害倍率"
+     }
+    },
+    {
+     "id": "skill4",
+     "times": 1,
+     "when": {
+      "duringUltimate": true
+     }
+    },
+    {
+     "id": "skill5",
+     "times": 1,
+     "when": {
+      "duringUltimate": true
+     }
+    },
+    {
+     "id": "skill6",
+     "times": 1,
+     "when": {
+      "duringUltimate": true
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -466,7 +595,14 @@
    },
    "attach": null,
    "abnormal": null,
-   "notes": "命中获得1层熔火"
+   "notes": "命中获得1层熔火",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 300,
@@ -475,7 +611,8 @@
     {
      "element": "heat",
      "layers": 1,
-     "when": "强化普攻第3段"
+     "when": "强化普攻第3段",
+     "bind": "hit"
     }
    ],
    "consumes": null,
@@ -492,7 +629,38 @@
     "value": 15,
     "origin": "official",
     "note": "参数表「持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 0,
+     "when": {
+      "unmodeled": "强化普攻第一段倍率"
+     }
+    },
+    {
+     "id": "ultimate2",
+     "times": 0,
+     "when": {
+      "unmodeled": "强化普攻第二段倍率"
+     }
+    },
+    {
+     "id": "ultimate3",
+     "times": 0,
+     "when": {
+      "unmodeled": "强化普攻第三段倍率"
+     }
+    },
+    {
+     "id": "ultimate4",
+     "times": 0,
+     "when": {
+      "unmodeled": "强化普攻第四段倍率"
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null,
   "resources": [
@@ -542,7 +710,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -592,7 +760,18 @@
    ],
    "replaces": null,
    "buffs": [],
-   "notes": "目标已有破防时额外释放狼之珀（灼热伤害，skill2）"
+   "notes": "目标已有破防时额外释放狼之珀（灼热伤害，skill2）",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -639,7 +818,8 @@
     {
      "element": "breach",
      "layers": 1,
-     "when": "第二次连携精准衔接时额外施加1层破防"
+     "when": "第二次连携精准衔接时额外施加1层破防",
+     "bind": "hit"
     }
    ],
    "abnormal": [
@@ -653,7 +833,22 @@
     "chr_0028_wulfa.combo.critRate",
     "chr_0028_wulfa.combo.critDmg"
    ],
-   "notes": "可连续发动两次；第二次后自身暴击率/暴击伤害提升 15s"
+   "notes": "可连续发动两次；第二次后自身暴击率/暴击伤害提升 15s",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    },
+    {
+     "id": "combo2",
+     "times": 1
+    },
+    {
+     "id": "combo3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 110,
@@ -662,7 +857,8 @@
     {
      "element": "heat",
      "layers": 1,
-     "when": "匕首两段斩击"
+     "when": "匕首两段斩击",
+     "bind": "hit"
     }
    ],
    "consumes": null,
@@ -672,7 +868,22 @@
    "buffs": [
     "chr_0028_wulfa.ult.critDmg"
    ],
-   "notes": "本技能暴击伤害更高"
+   "notes": "本技能暴击伤害更高",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    },
+    {
+     "id": "ultimate3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -684,7 +895,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -740,7 +951,14 @@
     "chr_0025_ardelia.skill.physFragile",
     "chr_0025_ardelia.skill.artsFragile"
    ],
-   "notes": "消耗腐蚀时施加物理脆弱与法术脆弱 30s"
+   "notes": "消耗腐蚀时施加物理脆弱与法术脆弱 30s",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -782,7 +1000,18 @@
      "duration": 7
     }
    ],
-   "notes": "爆炸对周围其他敌人造成一半伤害"
+   "notes": "爆炸对周围其他敌人造成一半伤害",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    },
+    {
+     "id": "combo2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 90,
@@ -798,7 +1027,14 @@
     "value": 3,
     "origin": "official",
     "note": "参数表「持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -810,7 +1046,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -860,7 +1096,14 @@
    ],
    "replaces": null,
    "buffs": [],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -898,7 +1141,14 @@
      "when": "路径上所有敌人"
     }
    ],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 70,
@@ -909,7 +1159,18 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "7段斩击"
+   "notes": "7段斩击",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -921,7 +1182,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -971,7 +1232,14 @@
    ],
    "replaces": null,
    "buffs": [],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -1011,7 +1279,14 @@
    "buffs": [
     "chr_0018_dapan.combo.slamDmg"
    ],
-   "notes": "本次猛击伤害额外提升（猛击按规则消耗破防）"
+   "notes": "本次猛击伤害额外提升（猛击按规则消耗破防）",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 90,
@@ -1033,7 +1308,21 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "6段连续斩击"
+   "notes": "6段连续斩击",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 0,
+     "when": {
+      "unmodeled": "空中连斩伤害倍率"
+     }
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -1045,7 +1334,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -1095,7 +1384,14 @@
    ],
    "replaces": null,
    "buffs": [],
-   "notes": "施放中受击则命中额外失衡"
+   "notes": "施放中受击则命中额外失衡",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -1131,7 +1427,14 @@
      "forced": false
     }
    ],
-   "notes": "物理伤害；治疗主控"
+   "notes": "物理伤害；治疗主控",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 100,
@@ -1147,7 +1450,14 @@
     "value": 10,
     "origin": "official",
     "note": "参数表「护盾持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -1159,7 +1469,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -1205,7 +1515,7 @@
      40
     ],
     "origin": "official",
-    "kind": "恢复",
+    "kind": "recover",
     "condition": "目标处于导电，消耗导电并追加攻击后"
    },
    "energyGain": {
@@ -1230,7 +1540,25 @@
    "abnormal": null,
    "replaces": null,
    "buffs": [],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 1
+    },
+    {
+     "id": "skill3",
+     "times": 0,
+     "when": {
+      "unmodeled": "追加伤害倍率"
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -1269,11 +1597,18 @@
      10
     ],
     "origin": "official",
-    "kind": "恢复"
+    "kind": "recover"
    },
    "attach": null,
    "abnormal": null,
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 90,
@@ -1282,7 +1617,8 @@
     {
      "element": "electric",
      "layers": 1,
-     "when": "冲刺路径命中"
+     "when": "冲刺路径命中",
+     "bind": "hit"
     }
    ],
    "consumes": [
@@ -1302,7 +1638,18 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -1314,7 +1661,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -1411,7 +1758,7 @@
       ]
      }
     },
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "official",
     "condition": "按消耗寒冷附着层数；多目标仅1次"
    },
@@ -1441,7 +1788,14 @@
    ],
    "replaces": null,
    "buffs": [],
-   "notes": "物理伤害"
+   "notes": "物理伤害",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -1498,7 +1852,7 @@
      15
     ],
     "origin": "official",
-    "kind": "恢复",
+    "kind": "recover",
     "extra": {
      "value": 10,
      "origin": "official",
@@ -1507,7 +1861,21 @@
    },
    "attach": null,
    "abnormal": null,
-   "notes": "珍鳞：伤害改用 combo2"
+   "notes": "珍鳞：伤害改用 combo2",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    },
+    {
+     "id": "combo2",
+     "times": 0,
+     "when": {
+      "unmodeled": "强化伤害倍率"
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 100,
@@ -1515,7 +1883,8 @@
    "attach": [
     {
      "element": "cold",
-     "layers": 1
+     "layers": 1,
+     "bind": "hit"
     }
    ],
    "consumes": null,
@@ -1536,7 +1905,7 @@
      25
     ],
     "origin": "official",
-    "kind": "恢复",
+    "kind": "recover",
     "perKill": {
      "byRank": [
       12,
@@ -1558,7 +1927,14 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -1570,7 +1946,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -1614,7 +1990,8 @@
     {
      "element": "electric",
      "layers": 1,
-     "when": "强雷枪召回穿过敌人"
+     "when": "强雷枪召回穿过敌人",
+     "bind": "hit"
     }
    ],
    "consumes": [
@@ -1627,7 +2004,22 @@
    "abnormal": null,
    "replaces": null,
    "buffs": [],
-   "notes": "雷枪来自连携（3支，存在30s），强雷枪来自终结技"
+   "notes": "雷枪来自连携（3支，存在30s），强雷枪来自终结技",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 1
+    },
+    {
+     "id": "skill3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -1672,7 +2064,14 @@
    },
    "attach": null,
    "abnormal": null,
-   "notes": "掷出3支雷枪（存在 30s）"
+   "notes": "掷出3支雷枪（存在 30s）",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 100,
@@ -1688,7 +2087,14 @@
     "value": 30,
     "origin": "official",
     "note": "参数表「强雷枪存在时间（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -1700,7 +2106,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": 20,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "research",
     "note": "rules C11 样本（WG 单一来源）；仅主控重击"
    },
@@ -1750,7 +2156,14 @@
    ],
    "replaces": null,
    "buffs": [],
-   "notes": "潜能1：消耗源石结晶返还50技力（见 effects）"
+   "notes": "潜能1：消耗源石结晶返还50技力（见 effects）",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -1782,11 +2195,23 @@
     {
      "element": "originiumCrystal",
      "layers": 1,
-     "when": "附着源石结晶并封印一段时间（非法术附着）"
+     "when": "附着源石结晶并封印一段时间（非法术附着）",
+     "bind": "hit"
     }
    ],
    "abnormal": null,
-   "notes": "施加物理异常或破防会消耗源石结晶并额外造成物理伤害（combo2）"
+   "notes": "施加物理异常或破防会消耗源石结晶并额外造成物理伤害（combo2）",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    },
+    {
+     "id": "combo2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 80,
@@ -1803,7 +2228,18 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -1815,7 +2251,7 @@
    "heavyIndex": 2,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -1848,7 +2284,7 @@
    "spRefund": {
     "value": 30,
     "origin": "official",
-    "kind": "返还",
+    "kind": "refund",
     "condition": "施放后立即返还"
    },
    "energyGain": {
@@ -1865,14 +2301,22 @@
     {
      "element": "cold",
      "layers": 1,
-     "when": "立盾期间受击触发反击命中"
+     "when": "立盾期间受击触发反击命中",
+     "bind": "hit"
     }
    ],
    "consumes": null,
    "abnormal": null,
    "replaces": null,
    "buffs": [],
-   "notes": "自身及周围干员获得庇护"
+   "notes": "自身及周围干员获得庇护",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -1904,7 +2348,9 @@
    },
    "attach": null,
    "abnormal": null,
-   "notes": "纯治疗，无伤害段"
+   "notes": "纯治疗，无伤害段",
+   "segmentPlan": [],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 80,
@@ -1926,7 +2372,18 @@
     "value": 5,
     "origin": "official",
     "note": "参数表「持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -1938,7 +2395,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -1986,7 +2443,14 @@
     "chr_0023_antal.skill.electricFragile",
     "chr_0023_antal.skill.heatFragile"
    ],
-   "notes": "施加聚焦 60s（最多1个目标）：电磁脆弱+灼热脆弱"
+   "notes": "施加聚焦 60s（最多1个目标）：电磁脆弱+灼热脆弱",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -2034,7 +2498,8 @@
     {
      "element": "trigger",
      "layers": 1,
-     "when": "再次施加触发本次连携的法术附着"
+     "when": "再次施加触发本次连携的法术附着",
+     "bind": "hit"
     }
    ],
    "abnormal": [
@@ -2044,7 +2509,14 @@
      "when": "再次施加触发本次连携的物理异常"
     }
    ],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 100,
@@ -2063,7 +2535,9 @@
     "value": 12,
     "origin": "official",
     "note": "参数表「持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -2075,7 +2549,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": 15,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "research",
     "note": "claude-mechanics Q11（WG 单一来源，“15（萤石）”）"
    },
@@ -2119,14 +2593,22 @@
     {
      "element": "nature",
      "layers": 1,
-     "when": "炸弹延迟爆炸"
+     "when": "炸弹延迟爆炸",
+     "bind": "hit"
     }
    ],
    "consumes": null,
    "abnormal": null,
    "replaces": null,
    "buffs": [],
-   "notes": "黏附时施加缓速；场上同时只能存在一个炸弹"
+   "notes": "黏附时施加缓速；场上同时只能存在一个炸弹",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -2164,11 +2646,19 @@
     {
      "element": "trigger",
      "layers": 1,
-     "when": "施加该法术附着（寒冷或自然）"
+     "when": "施加该法术附着（寒冷或自然）",
+     "bind": "hit"
     }
    ],
    "abnormal": null,
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 100,
@@ -2177,7 +2667,8 @@
     {
      "element": "trigger",
      "layers": 1,
-     "when": "最后一段命中处于≥2层寒冷或自然附着的目标时，再次施加该附着"
+     "when": "最后一段命中处于≥2层寒冷或自然附着的目标时，再次施加该附着",
+     "bind": "hit"
     }
    ],
    "consumes": [
@@ -2193,7 +2684,26 @@
    "buffs": [
     "chr_0022_bounda.ult.bombDmg"
    ],
-   "notes": "4段自然伤害"
+   "notes": "4段自然伤害",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    },
+    {
+     "id": "ultimate3",
+     "times": 1
+    },
+    {
+     "id": "ultimate4",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -2205,7 +2715,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -2249,14 +2759,22 @@
     {
      "element": "cold",
      "layers": 1,
-     "when": "直线上所有敌人"
+     "when": "直线上所有敌人",
+     "bind": "hit"
     }
    ],
    "consumes": null,
    "abnormal": null,
    "replaces": null,
    "buffs": [],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -2297,7 +2815,24 @@
    "buffs": [
     "chr_0021_whiten.combo.physFragile"
    ],
-   "notes": "命中冻结敌人：额外伤害（combo2）并施加物理脆弱 6s；物理伤害"
+   "notes": "命中冻结敌人：额外伤害（combo2）并施加物理脆弱 6s；物理伤害",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1,
+     "when": {
+      "targetFrozen": false
+     }
+    },
+    {
+     "id": "combo2",
+     "times": 1,
+     "when": {
+      "targetFrozen": true
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 70,
@@ -2314,7 +2849,14 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "物理伤害"
+   "notes": "物理伤害",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -2326,7 +2868,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -2359,7 +2901,7 @@
    "spRefund": {
     "value": 30,
     "origin": "official",
-    "kind": "返还",
+    "kind": "refund",
     "condition": "施放后立即返还"
    },
    "energyGain": {
@@ -2376,14 +2918,22 @@
     {
      "element": "breach",
      "layers": 1,
-     "when": "立盾期间受击触发反击命中"
+     "when": "立盾期间受击触发反击命中",
+     "bind": "hit"
     }
    ],
    "consumes": null,
    "abnormal": null,
    "replaces": null,
    "buffs": [],
-   "notes": "自身及周围干员获得庇护"
+   "notes": "自身及周围干员获得庇护",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -2422,7 +2972,18 @@
    },
    "attach": null,
    "abnormal": null,
-   "notes": "自身和另一名友方（主控优先）获得护盾"
+   "notes": "自身和另一名友方（主控优先）获得护盾",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    },
+    {
+     "id": "combo2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 80,
@@ -2444,7 +3005,22 @@
     "value": 8,
     "origin": "official",
     "note": "参数表「虚弱持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    },
+    {
+     "id": "ultimate3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -2456,7 +3032,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -2499,14 +3075,22 @@
    "attach": [
     {
      "element": "heat",
-     "layers": 1
+     "layers": 1,
+     "bind": "hit"
     }
    ],
    "consumes": null,
    "abnormal": null,
    "replaces": null,
    "buffs": [],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -2538,13 +3122,20 @@
    "spRefund": {
     "value": 7.5,
     "origin": "official",
-    "kind": "恢复",
+    "kind": "recover",
     "perHit": true,
     "hits": 2
    },
    "attach": null,
    "abnormal": null,
-   "notes": "2段突刺，物理伤害；研究称连携回能按段每段5，params 为“获得终结技能量 10”，取 params"
+   "notes": "2段突刺，物理伤害；研究称连携回能按段每段5，params 为“获得终结技能量 10”，取 params",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 120,
@@ -2568,13 +3159,15 @@
      80
     ],
     "origin": "official",
-    "kind": "恢复",
+    "kind": "recover",
     "note": "原文“发射3枚，每次发射恢复一定技力”；params 一行，是否为每发值未确认（按每发×3 则合计 3 倍）"
    },
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "无伤害段"
+   "notes": "无伤害段",
+   "segmentPlan": [],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -2586,7 +3179,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": 21,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "research",
     "note": "rules C11 样本（WG 单一来源）；仅主控重击"
    },
@@ -2639,7 +3232,22 @@
    "buffs": [
     "chr_0015_lifeng.skill.physFragile"
    ],
-   "notes": "最后一击命中不处于破防的敌人时施加物理脆弱 12s"
+   "notes": "最后一击命中不处于破防的敌人时施加物理脆弱 12s",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 1
+    },
+    {
+     "id": "skill3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -2676,7 +3284,18 @@
    "buffs": [
     "chr_0015_lifeng.combo.comboState"
    ],
-   "notes": "获得连击 20s（自身状态）"
+   "notes": "获得连击 20s（自身状态）",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    },
+    {
+     "id": "combo2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 90,
@@ -2704,7 +3323,25 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "聚拢敌人"
+   "notes": "聚拢敌人",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    },
+    {
+     "id": "ultimate3",
+     "times": 0,
+     "when": {
+      "unmodeled": "追加伤害倍率"
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -2716,7 +3353,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -2798,7 +3435,7 @@
       ]
      }
     },
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "official",
     "condition": "按碎甲消耗的破防层数；多目标仅1次"
    },
@@ -2827,7 +3464,18 @@
    ],
    "replaces": null,
    "buffs": [],
-   "notes": "两次斩击"
+   "notes": "两次斩击",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -2867,13 +3515,35 @@
      13
     ],
     "enhancedThird": 23,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "official",
     "condition": "斩击次数 = 消耗的最高破防层数（≤3）；消耗4层时第3击强化"
    },
    "attach": null,
    "abnormal": null,
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    },
+    {
+     "id": "combo2",
+     "times": 1
+    },
+    {
+     "id": "combo3",
+     "times": 1
+    },
+    {
+     "id": "combo4",
+     "times": 0,
+     "when": {
+      "unmodeled": "强化第三段伤害倍率"
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 90,
@@ -2916,7 +3586,7 @@
      ],
      "origin": "official"
     },
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "official",
     "condition": "敌人受到物理异常或骏卫连携伤害后消耗1点铁誓发动袭扰；最后一点铁誓发动决胜"
    },
@@ -2928,7 +3598,22 @@
     "value": 30,
     "origin": "official",
     "note": "参数表「铁誓持续时间」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    },
+    {
+     "id": "ultimate3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -2940,7 +3625,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -2987,7 +3672,9 @@
    "buffs": [
     "chr_0011_seraph.skill.artsAmp"
    ],
-   "notes": "支援晶体 20s：主控重击时治疗，最多2次；满血时改为施加法术增幅 25s（不叠加）。无伤害段"
+   "notes": "支援晶体 20s：主控重击时治疗，最多2次；满血时改为施加法术增幅 25s（不叠加）。无伤害段",
+   "segmentPlan": [],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -3029,11 +3716,19 @@
    "attach": [
     {
      "element": "cold",
-     "layers": 1
+     "layers": 1,
+     "bind": "hit"
     }
    ],
    "abnormal": null,
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 80,
@@ -3052,7 +3747,9 @@
     "value": 12,
     "origin": "official",
     "note": "参数表「持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null,
   "resources": [
@@ -3089,7 +3786,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": 20,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "research",
     "note": "rules C11 样本（WG 单一来源）；仅主控重击"
    },
@@ -3139,7 +3836,14 @@
    ],
    "replaces": null,
    "buffs": [],
-   "notes": "潜能1：消耗源石结晶返还50技力（见 effects）"
+   "notes": "潜能1：消耗源石结晶返还50技力（见 effects）",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -3171,11 +3875,23 @@
     {
      "element": "originiumCrystal",
      "layers": 1,
-     "when": "附着源石结晶并封印一段时间（非法术附着）"
+     "when": "附着源石结晶并封印一段时间（非法术附着）",
+     "bind": "hit"
     }
    ],
    "abnormal": null,
-   "notes": "施加物理异常或破防会消耗源石结晶并额外造成物理伤害（combo2）"
+   "notes": "施加物理异常或破防会消耗源石结晶并额外造成物理伤害（combo2）",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    },
+    {
+     "id": "combo2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 80,
@@ -3192,7 +3908,18 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -3204,7 +3931,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -3268,7 +3995,22 @@
    ],
    "replaces": null,
    "buffs": [],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 1
+    },
+    {
+     "id": "skill3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -3314,7 +4056,21 @@
      "when": "速冻仔 3s 后自爆"
     }
    ],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 0,
+     "when": {
+      "unmodeled": "能量伤害倍率"
+     }
+    },
+    {
+     "id": "combo2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 220,
@@ -3341,7 +4097,28 @@
     "value": 7,
     "origin": "official",
     "note": "参数表「持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 0,
+     "when": {
+      "unmodeled": "强力攻击伤害倍率"
+     }
+    },
+    {
+     "id": "ultimate3",
+     "times": 0,
+     "when": {
+      "unmodeled": "额外攻击伤害倍率"
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -3353,7 +4130,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -3397,14 +4174,26 @@
     {
      "element": "nature",
      "layers": 1,
-     "when": "施法结束奇点爆炸"
+     "when": "施法结束奇点爆炸",
+     "bind": "hit"
     }
    ],
    "consumes": null,
    "abnormal": null,
    "replaces": null,
    "buffs": [],
-   "notes": "持续施法"
+   "notes": "持续施法",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -3445,7 +4234,14 @@
      "forced": true
     }
    ],
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 90,
@@ -3454,7 +4250,8 @@
     {
      "element": "nature",
      "layers": 1,
-     "when": "生成区域时"
+     "when": "生成区域时",
+     "bind": "hit"
     }
    ],
    "consumes": null,
@@ -3470,7 +4267,14 @@
     "value": 5,
     "origin": "official",
     "note": "参数表「力场持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -3482,7 +4286,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -3515,7 +4319,7 @@
    "spRefund": {
     "value": 20,
     "origin": "official",
-    "kind": "返还",
+    "kind": "refund",
     "per": "vortexConsumed",
     "condition": "施放时消耗附近所有涡流（最多2处）"
    },
@@ -3532,7 +4336,8 @@
     {
      "element": "cold",
      "layers": 1,
-     "when": "水龙卷；本次形成多个水龙卷时不重复施加"
+     "when": "水龙卷；本次形成多个水龙卷时不重复施加",
+     "bind": "hit"
     }
    ],
    "consumes": [
@@ -3549,7 +4354,18 @@
     "chr_0027_tangtang.skill.fragile3"
    ],
    "notes": "形成≥2个水龙卷时施加法术脆弱 15s；水龙卷伤害视为战技伤害",
-   "extraSegmentPerConsumed": "skill2"
+   "extraSegmentPerConsumed": "skill2",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -3593,7 +4409,14 @@
     "duration": 30,
     "origin": "official",
     "note": "河水，助我！：迸射出一处涡流，场上最多 2 处（存在时长按研究值 30 s）"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 90,
@@ -3625,7 +4448,22 @@
     "value": 4,
     "origin": "official",
     "note": "古老图形持续时间 4 s（参数表）"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    },
+    {
+     "id": "ultimate3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -3637,7 +4475,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -3697,7 +4535,29 @@
    "buffs": [
     "chr_0030_zhuangfy.skill.lastStrike"
    ],
-   "notes": "青霆剑（存在 36s，上限9，单次战技最多生成3柄）；现存<3柄时未消耗导电也生成1柄；终结技期间最后一次雷击施加电磁附着、首次战技不耗技力和导电"
+   "notes": "青霆剑（存在 36s，上限9，单次战技最多生成3柄）；现存<3柄时未消耗导电也生成1柄；终结技期间最后一次雷击施加电磁附着、首次战技不耗技力和导电",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 1
+    },
+    {
+     "id": "skill3",
+     "times": 1,
+     "when": {
+      "duringUltimate": true
+     }
+    },
+    {
+     "id": "skill4",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -3757,7 +4617,21 @@
      "when": "消耗电磁附着后；若已处于导电则异常等级+1"
     }
    ],
-   "notes": "终结技期间范围生效、冷却恢复速度×4"
+   "notes": "终结技期间范围生效、冷却恢复速度×4",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    },
+    {
+     "id": "combo2",
+     "times": 1,
+     "when": {
+      "duringUltimate": true
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 240,
@@ -3776,7 +4650,31 @@
     "value": 25,
     "origin": "official",
     "note": "参数表「持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1,
+     "when": {
+      "duringUltimate": true
+     }
+    },
+    {
+     "id": "ultimate2",
+     "times": 1,
+     "when": {
+      "duringUltimate": true
+     }
+    },
+    {
+     "id": "ultimate3",
+     "times": 1,
+     "when": {
+      "duringUltimate": true
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -3788,7 +4686,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -3831,12 +4729,14 @@
    "attach": [
     {
      "element": "heat",
-     "layers": 1
+     "layers": 1,
+     "bind": "hit"
     },
     {
      "element": "heat",
      "layers": 1,
-     "when": "目标被击败后血翼转移到另一敌人"
+     "when": "目标被击败后血翼转移到另一敌人",
+     "bind": "hit"
     }
    ],
    "consumes": null,
@@ -3845,7 +4745,18 @@
    "buffs": [
     "chr_0033_camille.skill.heatFragile"
    ],
-   "notes": "衔火血翼 45s：虚弱+灼热脆弱；被卡缪连携命中时爆裂（skill2）"
+   "notes": "衔火血翼 45s：虚弱+灼热脆弱；被卡缪连携命中时爆裂（skill2）",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -3891,11 +4802,22 @@
      20
     ],
     "origin": "official",
-    "kind": "恢复"
+    "kind": "recover"
    },
    "attach": null,
    "abnormal": null,
-   "notes": ""
+   "notes": "",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    },
+    {
+     "id": "combo2",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 130,
@@ -3903,7 +4825,8 @@
    "attach": [
     {
      "element": "heat",
-     "layers": 1
+     "layers": 1,
+     "bind": "hit"
     }
    ],
    "consumes": null,
@@ -3924,7 +4847,7 @@
      40
     ],
     "origin": "official",
-    "kind": "恢复"
+    "kind": "recover"
    },
    "replaces": {
     "skill": [
@@ -3952,7 +4875,7 @@
         40
        ],
        "origin": "official",
-       "kind": "恢复"
+       "kind": "recover"
       },
       "segment": "combo2"
      }
@@ -3966,7 +4889,14 @@
     "value": 15,
     "origin": "official",
     "note": "参数表「追猎状态持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -3978,7 +4908,7 @@
    "heavyIndex": 3,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -4015,7 +4945,7 @@
    "spRefund": {
     "value": 50,
     "origin": "official",
-    "kind": "返还",
+    "kind": "refund",
     "condition": "断云施放后返还"
    },
    "energyGain": {
@@ -4042,7 +4972,7 @@
       "spRefund": {
        "value": 50,
        "origin": "official",
-       "kind": "返还"
+       "kind": "refund"
       },
       "segment": "skill1",
       "next": "追形"
@@ -4084,7 +5014,22 @@
     "chr_0031_mifu.skill.duanyunRefund",
     "chr_0031_mifu.skill.kaitianAsCrush"
    ],
-   "notes": "断云拉取目标"
+   "notes": "断云拉取目标",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 1
+    },
+    {
+     "id": "skill3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -4122,7 +5067,14 @@
    "buffs": [
     "chr_0031_mifu.combo.physFragile"
    ],
-   "notes": "施加物理脆弱 16s；施放后战技替换为追形"
+   "notes": "施加物理脆弱 16s；施放后战技替换为追形",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 80,
@@ -4141,7 +5093,14 @@
    "switchesControl": false,
    "pausesTimers": "unknown",
    "buffs": [],
-   "notes": "施放后战技替换为追形"
+   "notes": "施放后战技替换为追形",
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -4153,7 +5112,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -4196,14 +5155,22 @@
    "attach": [
     {
      "element": "nature",
-     "layers": 1
+     "layers": 1,
+     "bind": "hit"
     }
    ],
    "consumes": null,
    "abnormal": null,
    "replaces": null,
    "buffs": [],
-   "notes": "智：伤害更高"
+   "notes": "智：伤害更高",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -4255,7 +5222,7 @@
      30
     ],
     "origin": "official",
-    "kind": "返还",
+    "kind": "refund",
     "condition": "自身战技命中处于囹圄状态的敌人（提前结束囹圄、再次施加脆弱）"
    },
    "attach": null,
@@ -4264,7 +5231,22 @@
     "chr_0032_lizhiyan.combo.int.natureFragile",
     "chr_0032_lizhiyan.combo.int.coldFragile"
    ],
-   "notes": "自然脆弱+寒冷脆弱，囹圄 4s"
+   "notes": "自然脆弱+寒冷脆弱，囹圄 4s",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    },
+    {
+     "id": "combo2",
+     "times": 1
+    },
+    {
+     "id": "combo3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 100,
@@ -4293,7 +5275,28 @@
     "value": 20,
     "origin": "official",
     "note": "参数表「破晦阵持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 0,
+     "when": {
+      "unmodeled": "集束打击总伤害倍率"
+     }
+    },
+    {
+     "id": "ultimate3",
+     "times": 0,
+     "when": {
+      "unmodeled": "破晦诀明伤害倍率"
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": [
    {
@@ -4314,14 +5317,21 @@
      "attach": [
       {
        "element": "nature",
-       "layers": 1
+       "layers": 1,
+       "bind": "hit"
       }
      ],
      "consumes": null,
      "abnormal": null,
      "replaces": null,
      "buffs": [],
-     "notes": "智：伤害更高"
+     "notes": "智：伤害更高",
+     "segmentPlan": [
+      {
+       "id": "skill1",
+       "times": 1
+      }
+     ]
     },
     "combo": {
      "trigger": {
@@ -4373,7 +5383,7 @@
        30
       ],
       "origin": "official",
-      "kind": "返还",
+      "kind": "refund",
       "condition": "自身战技命中处于囹圄状态的敌人（提前结束囹圄、再次施加脆弱）"
      },
      "attach": null,
@@ -4382,7 +5392,21 @@
       "chr_0032_lizhiyan.combo.int.natureFragile",
       "chr_0032_lizhiyan.combo.int.coldFragile"
      ],
-     "notes": "自然脆弱+寒冷脆弱，囹圄 4s"
+     "notes": "自然脆弱+寒冷脆弱，囹圄 4s",
+     "segmentPlan": [
+      {
+       "id": "combo1",
+       "times": 1
+      },
+      {
+       "id": "combo2",
+       "times": 1
+      },
+      {
+       "id": "combo3",
+       "times": 1
+      }
+     ]
     },
     "ultimate": {
      "energyCost": 100,
@@ -4406,7 +5430,27 @@
       "ultimate": "破晦诀明",
       "condition": "集束打击发动2次后（主控重击或处决阵中敌人触发，最多2次）"
      },
-     "notes": "破晦阵 20s"
+     "notes": "破晦阵 20s",
+     "segmentPlan": [
+      {
+       "id": "ultimate1",
+       "times": 1
+      },
+      {
+       "id": "ultimate2",
+       "times": 0,
+       "when": {
+        "unmodeled": "集束打击总伤害倍率"
+       }
+      },
+      {
+       "id": "ultimate3",
+       "times": 0,
+       "when": {
+        "unmodeled": "破晦诀明伤害倍率"
+       }
+      }
+     ]
     }
    },
    {
@@ -4427,14 +5471,21 @@
      "attach": [
       {
        "element": "nature",
-       "layers": 1
+       "layers": 1,
+       "bind": "hit"
       }
      ],
      "consumes": null,
      "abnormal": null,
      "replaces": null,
      "buffs": [],
-     "notes": "意：伤害时向中心牵引"
+     "notes": "意：伤害时向中心牵引",
+     "segmentPlan": [
+      {
+       "id": "skill1",
+       "times": 1
+      }
+     ]
     },
     "combo": {
      "trigger": {
@@ -4469,7 +5520,8 @@
        "element": "same",
        "layers": 1,
        "origin": "official",
-       "note": "阵诀·意：战术分身再次施加该法术附着（+1 层，与触发的附着同属性）"
+       "note": "阵诀·意：战术分身再次施加该法术附着（+1 层，与触发的附着同属性）",
+       "bind": "hit"
       }
      ],
      "abnormal": null,
@@ -4477,7 +5529,17 @@
       "chr_0032_lizhiyan.combo.will.natureFragile",
       "chr_0032_lizhiyan.combo.will.coldFragile"
      ],
-     "notes": "自然脆弱+寒冷脆弱（意志额外提升），囹圄 6s；小幅牵引"
+     "notes": "自然脆弱+寒冷脆弱（意志额外提升），囹圄 6s；小幅牵引",
+     "segmentPlan": [
+      {
+       "id": "combo1",
+       "times": 1
+      },
+      {
+       "id": "combo2",
+       "times": 1
+      }
+     ]
     },
     "ultimate": {
      "energyCost": 100,
@@ -4487,7 +5549,8 @@
        "element": "same",
        "layers": 1,
        "origin": "official",
-       "note": "阵诀·意：破晦阵生成时对处于法术附着状态的敌人再次施加该法术附着"
+       "note": "阵诀·意：破晦阵生成时对处于法术附着状态的敌人再次施加该法术附着",
+       "bind": "hit"
       }
      ],
      "consumes": null,
@@ -4499,7 +5562,27 @@
       "ultimate": "破晦诀明",
       "condition": "集束打击发动2次后（主控重击或处决阵中敌人触发，最多2次）"
      },
-     "notes": "破晦阵 20s"
+     "notes": "破晦阵 20s",
+     "segmentPlan": [
+      {
+       "id": "ultimate1",
+       "times": 1
+      },
+      {
+       "id": "ultimate2",
+       "times": 0,
+       "when": {
+        "unmodeled": "集束打击总伤害倍率"
+       }
+      },
+      {
+       "id": "ultimate3",
+       "times": 0,
+       "when": {
+        "unmodeled": "破晦诀明伤害倍率"
+       }
+      }
+     ]
     }
    }
   ]
@@ -4512,7 +5595,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -4572,7 +5655,21 @@
    "buffs": [
     "chr_0035_liino.skill.teamAtk"
    ],
-   "notes": "演唱姿态 60s：全队攻击力提升、持续治疗；每 10s 追加攻击"
+   "notes": "演唱姿态 60s：全队攻击力提升、持续治疗；每 10s 追加攻击",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    },
+    {
+     "id": "skill2",
+     "times": 0,
+     "when": {
+      "unmodeled": "追加攻击伤害倍率"
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -4623,7 +5720,14 @@
    },
    "attach": null,
    "abnormal": null,
-   "notes": "治疗主控；不打断演唱姿态。高歌姿态是否满足“演唱姿态期间”未知"
+   "notes": "治疗主控；不打断演唱姿态。高歌姿态是否满足“演唱姿态期间”未知",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 160,
@@ -4653,7 +5757,22 @@
     "value": 15,
     "origin": "official",
     "note": "参数表「高歌姿态持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    },
+    {
+     "id": "ultimate2",
+     "times": 1
+    },
+    {
+     "id": "ultimate3",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -4665,7 +5784,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -4903,7 +6022,7 @@
    "heavyIndex": 2,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -4936,7 +6055,7 @@
    "spRefund": {
     "value": 20,
     "origin": "official",
-    "kind": "返还",
+    "kind": "refund",
     "condition": "施放后立即返还",
     "extra": {
      "value": 20,
@@ -4983,7 +6102,14 @@
     }
    },
    "buffs": [],
-   "notes": "立盾庇护（随格挡次数降低）；头槌造成自然伤害（干员元素物理）"
+   "notes": "立盾庇护（随格挡次数降低）；头槌造成自然伤害（干员元素物理）",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -5014,7 +6140,24 @@
    },
    "attach": null,
    "abnormal": null,
-   "notes": "随机：炸弹（combo1）/手工作业（combo2）/点心（治疗）"
+   "notes": "随机：炸弹（combo1）/手工作业（combo2）/点心（治疗）",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 0,
+     "when": {
+      "unmodeled": "炸弹：伤害倍率"
+     }
+    },
+    {
+     "id": "combo2",
+     "times": 0,
+     "when": {
+      "unmodeled": "手工作业：伤害倍率"
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 100,
@@ -5032,7 +6175,31 @@
     "value": 5,
     "origin": "official",
     "note": "参数表「脆弱持续时间（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 0,
+     "when": {
+      "unmodeled": "炸弹：伤害倍率"
+     }
+    },
+    {
+     "id": "ultimate2",
+     "times": 0,
+     "when": {
+      "unmodeled": "手工作业：伤害倍率"
+     }
+    },
+    {
+     "id": "ultimate3",
+     "times": 0,
+     "when": {
+      "unmodeled": "代言人的特殊赠礼：伤害倍率"
+     }
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  },
@@ -5044,7 +6211,7 @@
    "heavyIndex": 4,
    "heavySpRefund": {
     "value": null,
-    "kind": "恢复",
+    "kind": "recover",
     "origin": "unknown",
     "note": "研究范围 15–30（C11）；仅主控重击"
    },
@@ -5088,12 +6255,15 @@
     {
      "element": "cold",
      "layers": 1,
-     "when": "默认"
+     "when": "默认",
+     "bind": "hit"
     },
     {
      "element": "heat",
      "layers": 1,
-     "when": "小队01号位为灼热属性干员时改为灼热"
+     "when": "小队01号位为灼热属性干员时改为灼热",
+     "bind": "slot1Element",
+     "ifSlot1Element": "heat"
     }
    ],
    "consumes": null,
@@ -5163,13 +6333,25 @@
      "note": "参数表「伤害记录比例」（%）"
     },
     "burstStage": "收笔",
-    "note": "河山共影命中后开始记录目标所受伤害的比例；笔意时长结束或收笔（墨魂提前消失）时以固定伤害爆发。固定伤害按记录值原样结算，不吃增益/防御/抗性（假设，见 verification-needed）"
+    "note": "河山共影命中后开始记录目标所受伤害的比例；笔意时长结束或收笔（墨魂提前消失）时以固定伤害爆发。固定伤害按记录值原样结算，不吃增益/防御/抗性（假设，见 verification-needed）",
+    "burstPoise": {
+     "value": 5,
+     "origin": "official",
+     "note": "参数表「笔意爆发失衡值」"
+    }
    },
    "notes": "笔意 20s 记录伤害，结束时爆发为固定伤害；定身 1s",
    "applies": [
     "root"
    ],
-   "appliesNote": "河山共影：对目标施加笔意和定身（官方文本）"
+   "appliesNote": "河山共影：对目标施加笔意和定身（官方文本）",
+   "segmentPlan": [
+    {
+     "id": "skill1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "combo": {
    "trigger": {
@@ -5207,7 +6389,14 @@
    "buffs": [
     "chr_0036_jsspsi.combo.perLayer"
    ],
-   "notes": "伤害随被消耗/吸收的最高层数提升"
+   "notes": "伤害随被消耗/吸收的最高层数提升",
+   "segmentPlan": [
+    {
+     "id": "combo1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "ultimate": {
    "energyCost": 80,
@@ -5226,7 +6415,14 @@
     "value": 12,
     "origin": "official",
     "note": "参数表「增幅时长（秒）」"
-   }
+   },
+   "segmentPlan": [
+    {
+     "id": "ultimate1",
+     "times": 1
+    }
+   ],
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
   "modes": null
  }
