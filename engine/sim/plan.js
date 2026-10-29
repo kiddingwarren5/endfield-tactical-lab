@@ -15,7 +15,7 @@ export function cycleOf(sim,memberIdxs){ const names=sim.summary.names||[], idxs
 // 笔意、巨浪、终结技先后、第二轮终结技要不要放，都由窗口内总伤决定，不另加规则。cycle 只用来分节和说明。
 export function scoreOf(sim,memberIdxs,horizon,objective,mainControl){ const cyc=cycleOf(sim,memberIdxs); const until=horizon; const keep=h=>objective==='total'||!(h.kind==='normal'&&h.member!==mainControl); const dmg=sim.hits.filter(h=>h.t<=until+1e-6&&keep(h)).reduce((a,h)=>a+h.damage,0); let dps=dmg/Math.max(1,until);
   // 'burst'：要求全员首次终结技集中释放（首尾间隔 ≤ 12 s，含演出），分散则按比例折扣 —— 对应玩家“攒满后四连开”的打法
-  if(objective==='burst'&&cyc.complete){ const ts=Object.values(cyc.castByMember); const spread=Math.max(...ts)-Math.min(...ts); const W=12; if(spread>W) dps*=W/spread; }
+  if(objective==='burst'){ const ts=Object.values(cyc.castByMember); const spread=cyc.complete?Math.max(...ts)-Math.min(...ts):horizon; /* 少放一人的终结技按最分散算，不逃罚 */ const W=12; if(spread>W) dps*=W/Math.max(spread,W); }
   return {dps,total:dmg,until,complete:cyc.complete,cycle:cyc}; }
 
 function feasibleActions(sim,members,t,mechanicsById){ // from the simulation state near t (samples + events)
@@ -75,10 +75,10 @@ export function evalSequence(input,seq,{horizon=70,objective='guaranteed'}={}){
 // 时刻是搜索变量：每个动作可带 minT（不早于这个时刻放），解码仍在“不早于 minT 的最早可行时刻”执行，所以永远可执行，又能把技能按住留给爆发。
 // 另有条件等待动作 {kind:'wait',layers:n}：等任一元素附着叠到 n 层。
 export const WAIT_ACTS=[{kind:'wait',layers:3},{kind:'wait',layers:4}];
-const normAct=a=>a.kind==='wait'?{kind:'wait',layers:a.layers}:(a.minT!=null?{member:a.member,kind:a.kind,minT:a.minT}:{member:a.member,kind:a.kind});
+const normAct=a=>a.kind==='wait'?(a.seconds!=null?{kind:'wait',seconds:a.seconds}:{kind:'wait',layers:a.layers}):(a.minT!=null?{member:a.member,kind:a.kind,minT:a.minT}:{member:a.member,kind:a.kind});
 const SHIFTS=[-4,-2,-1,1,2,4,8];
-export function annealSequence(input,seq0,{horizon=70,objective='guaranteed',budgetMs=8000,maxEvals=1200,onProgress,seed=1,noHold=false}={}){
-  const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const kinds=['skill','combo','ultimate']; const mcIdx=input.mainControl??0; const actsAll=[...WAIT_ACTS]; for(const m of memberIdxs){ for(const k of kinds) actsAll.push({member:m,kind:k}); if(m===mcIdx) actsAll.push({member:m,kind:'plunge'}); }
+export function annealSequence(input,seq0,{horizon=70,objective='guaranteed',budgetMs=8000,maxEvals=1200,onProgress,seed=1,noHold=false,deadline=null}={}){
+  const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const kinds=['skill','combo','ultimate']; const mcIdx=input.mainControl??0; const actsAll=noHold?[]:[...WAIT_ACTS]; /* noHold：既不按住也不生成等待动作 */ for(const m of memberIdxs){ for(const k of kinds) actsAll.push({member:m,kind:k}); if(m===mcIdx) actsAll.push({member:m,kind:'plunge'}); }
   let rs=(seed>>>0)||1; const rnd=()=>{ rs^=rs<<13; rs>>>=0; rs^=rs>>>17; rs^=rs<<5; rs>>>=0; return rs/4294967296; }; const pick=arr=>arr[Math.floor(rnd()*arr.length)];
   const ev=seq=>evalSequence(input,seq,{horizon,objective});
   let cur=seq0.map(normAct); let curE=ev(cur); let best=cur, bestE=curE; const t0=Date.now(); let evals=1, accepted=0; const T0=0.05, T1=0.002;
@@ -90,7 +90,7 @@ export function annealSequence(input,seq0,{horizon=70,objective='guaranteed',bud
     if(r<0.8){ s2[i]=normAct(pick(actsAll)); return s2; }
     /* 挪时刻：按住或松开某个动作。以它当前实际放出的时刻为基准挪几秒；挪成负数或解除就是“尽早放” */
     { const a=s2[i]; if(noHold||a.kind==='wait'){ s2[i]=normAct(pick(actsAll)); return s2; } const base=tOf(i); if(base==null||rnd()<0.2){ const {minT,...rest}=a; s2[i]=rest; return s2; } const nt=Math.round((base+pick(SHIFTS))*10)/10; s2[i]=nt>0?{...a,minT:nt}:(({minT,...rest})=>rest)(a); return s2; } };
-  while(evals<maxEvals&&Date.now()-t0<budgetMs){ const frac=Math.max(evals/maxEvals,(Date.now()-t0)/budgetMs); const temp=T0*Math.pow(T1/T0,frac);
+  const dl=deadline??Infinity; while(evals<maxEvals&&Date.now()-t0<budgetMs&&Date.now()<dl){ const frac=Math.max(evals/maxEvals,(Date.now()-t0)/budgetMs); const temp=T0*Math.pow(T1/T0,frac);
     const cand=neighbor(cur); const e=ev(cand); evals++; const rel=(e.score-curE.score)/Math.max(1,curE.score);
     if(rel>=0||rnd()<Math.exp(rel/temp)){ cur=cand; curE=e; accepted++; if(e.score>bestE.score){ best=cand; bestE=e; } }
     if(onProgress&&evals%20===0) onProgress(frac); }
