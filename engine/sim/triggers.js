@@ -92,7 +92,7 @@ export const TRIGGERS={
   crystalConsumed:CRYSTAL, skillConsumeCrystal:CRYSTAL, ultimateConsumeCrystal:CRYSTAL, afterCrystalConsumed:CRYSTAL, targetCrystal:CRYSTAL, targetHasCrystal:CRYSTAL,
   onKnockdown:{on:'abnormal',which:'knockdown'}, comboKnockUp:{on:'abnormal',which:'knockup',by:'combo'}, onSmashOrArmorBreak:{on:'abnormal',whichIn:['crush','armorBreak']}, slamConsumeBreach:{on:'consume',element:'breach'}, consumeBreachLayers:{on:'consume',element:'breach'}, afterApplyBreach:{on:'breach'}, targetBreach4:{state:'targetBreach4'},
   applyBreachOnZero:{on:'breach',min:1,max:1}, targetBreached:{state:'targetBreached'}, skillApplyBreach:{on:'breach',by:'skill'}, afterPhysicalAnomaly:{on:'abnormal',whichIn:PHYS}, physAnomaly:{on:'abnormal',whichIn:PHYS}, comboHitBroken:hit('combo',{state:'targetBreached'}), consumeBreak:{on:'consume',element:'breach'}, comboSlam:{on:'abnormal',which:'crush',by:'combo'},
-  stageChainRefund:{handled:'阶段链第一段的返还技力由 castSkill 按 chain.spRefund 结算'}, energySourceRestricted:{handled:'别礼终结技能量只来自自身战技与连携（simulate gainEnergy 按 energySource 屏蔽外部来源）'}, interruptCharge:U('敌人蓄力 / 打断未建模'),
+  spRefundMultiplier:U('技力返还倍率修饰未建模'), stageChainRefund:{handled:'阶段链第一段的返还技力由 castSkill 按 chain.spRefund 结算'}, energySourceRestricted:{handled:'别礼终结技能量只来自自身战技与连携（simulate gainEnergy 按 energySource 屏蔽外部来源）'}, interruptCharge:U('敌人蓄力 / 打断未建模'),
   skillAmberHit:U('爪印斫痕（需命中破防目标）未建模'), boilingBloodTargetBurning:U('沸血机制未建模'), comboRareFish:U('珍鳞概率未建模'),
   lanceHit:U('雷枪掷出/召回命中未建模'), targetElectricFragile:{state:'targetFragile',element:'electric'},
   skillCounter:U('格挡反击未建模（对照靶不攻击）'), skillFirstBlock:U('格挡未建模（对照靶不攻击）'), takeDamage:U('承伤未建模（对照靶不攻击）'), hasUltimateShield:cast('ultimate'), onSkillHitWithShield:U('护盾未建模'),

@@ -1,4 +1,5 @@
 // Team-aware effect resolution: which catalog effects can apply to a beneficiary member's segment, with values from the actual owner's loadout.
+import {specFor} from './sim/triggers.js';
 import {ownedEffects,valueOf} from './effects.js';
 import {getStats} from './stats.js';
 import {effectApplies} from './damage.js';
@@ -30,14 +31,15 @@ export function resolveValue(c,{data,overrides={},stacks={},vars={}}){
 // Build the applied list for a segment given user toggles. toggles: {effectId:bool}; auto effects always on.
 const isOn=(e,toggles)=>((e.condition?.mode||'auto')==='auto')||Boolean(toggles[e.id]);
 // Segment-triggered effects (mode 'segment'): "造成连携技伤害后 …" cannot apply to the first hit of that skill, and necessarily applies to later hits.
-export function triggerKindOf(e){ const t=(e.condition?.text||'')+(e.condition?.trigger||''); if(/连携技|combo/i.test(t)) return 'combo'; if(/终结技|ultimate/i.test(t)) return 'ultimate'; if(/战技|skill/i.test(t)) return 'skill'; if(/重击|普通攻击|normal/i.test(t)) return 'normal'; return null; }
+// 段内触发的效果作用于哪种技能：按触发表里 cast/hit 规格的 kind 判断（不再看条件文本）
+export function triggerKindOf(e){ const s=specFor(e.condition?.trigger); if(!s||s.unknown) return null; for(const sp of s.specs){ const ks=sp.kinds||(sp.kind?[].concat(sp.kind):null); if(ks) for(const k of ks) if(['skill','combo','ultimate'].includes(k)) return k; } return null; }
 export function segmentStatus(c,seg,segIndex,bIdx){ const e=c.effect; if((e.condition?.mode||'auto')!=='segment') return 'user'; if(c.ownerIdx!==bIdx) return 'user'; const k=triggerKindOf(e); if(!k||seg.skillKey!==k||segIndex==null) return 'user'; return segIndex===0?'disabled':'auto'; }
 // Modifier effects (`modifies:[ids]`): zone 'other' with a multiplier (“视为/提升至原本的N倍”) multiplies the target value;
 // same-zone modifiers (“脆弱效果+8%”) add to it. Duration/stack-only modifiers are informational.
 export function applyModifiers(applied,candidates,toggles,ctx){
   for(const c of candidates){ const m=c.effect; if(!Array.isArray(m.modifies)||!m.modifies.length) continue; if(!isOn(m,toggles)) continue; if(m.fragileMultiplier) continue;
     for(const target of applied){ if(!m.modifies.includes(target.effect.id)) continue; const {value:mv}=resolveValue(c,ctx);
-      if(m.zone==='other'&&(m.unit==='x'||/倍/.test(m.literal||''))&&mv>0){ target.value=target.value*mv; target.label=`${target.label} ×${mv}（${m.owner?.ref||m.name}）`; target.modifiedBy=[...(target.modifiedBy||[]),m.id]; }
+      if(m.zone==='other'&&m.unit==='x'&&mv>0){ target.value=target.value*mv; target.label=`${target.label} ×${mv}（${m.owner?.ref||m.name}）`; target.modifiedBy=[...(target.modifiedBy||[]),m.id]; }
       else if(m.zone===target.effect.zone&&typeof mv==='number'){ target.value=target.value+mv; target.label=`${target.label} +${mv}（${m.owner?.ref||m.name}）`; target.modifiedBy=[...(target.modifiedBy||[]),m.id]; } } }
 }
 export function appliedFor({candidates,seg,segIndex=null,bIdx=0,toggles={},data,overrides,stacks,vars,memberModes={}}){
