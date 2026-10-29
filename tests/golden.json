@@ -2,30 +2,30 @@
  "preset:cold-3charge-1burst": {
   "per": {
    "诀": {
-    "damage": 303721.236,
-    "hits": 129
+    "damage": 306205.372,
+    "hits": 130
    },
    "别礼": {
-    "damage": 2560207.899,
-    "hits": 79
+    "damage": 2519733.798,
+    "hits": 78
    },
    "汤汤": {
     "damage": 1490150.015,
     "hits": 156
    },
    "祀": {
-    "damage": 1862832.069,
-    "hits": 89
+    "damage": 1868110.462,
+    "hits": 90
    }
   },
   "events": {
-   "normalHit": 378,
+   "normalHit": 379,
    "spSpend": 20,
    "cast": 40,
    "buffStart": 59,
    "energyGain": 80,
    "energyBlocked": 20,
-   "spGain": 453,
+   "spGain": 457,
    "inkStart": 5,
    "attach": 18,
    "comboReady": 27,
@@ -50,33 +50,33 @@
  "preset:cold-ult-asap": {
   "per": {
    "诀": {
-    "damage": 297781.486,
-    "hits": 130
+    "damage": 295495.526,
+    "hits": 129
    },
    "别礼": {
-    "damage": 2362071.907,
+    "damage": 2463781.552,
     "hits": 79
    },
    "汤汤": {
-    "damage": 1501718.71,
-    "hits": 156
+    "damage": 1526370.51,
+    "hits": 155
    },
    "祀": {
-    "damage": 1816059.144,
+    "damage": 1858333.856,
     "hits": 89
    }
   },
   "events": {
-   "normalHit": 380,
+   "normalHit": 378,
    "spSpend": 20,
    "cast": 40,
    "buffStart": 56,
    "energyGain": 80,
    "energyBlocked": 20,
-   "spGain": 465,
+   "spGain": 453,
    "inkStart": 5,
    "attach": 17,
-   "comboReady": 27,
+   "comboReady": 28,
    "vortex": 4,
    "buffRefresh": 49,
    "targetState": 8,
@@ -99,31 +99,31 @@
  "preset:cold-3layer-fast": {
   "per": {
    "诀": {
-    "damage": 289512.8,
+    "damage": 288605.62,
     "hits": 132
    },
    "别礼": {
-    "damage": 2315169.939,
+    "damage": 2311807.445,
     "hits": 82
    },
    "汤汤": {
-    "damage": 1289121.393,
-    "hits": 159
+    "damage": 1281666.084,
+    "hits": 157
    },
    "祀": {
-    "damage": 1696532.9,
+    "damage": 1698338.188,
     "hits": 98
    }
   },
   "events": {
-   "normalHit": 400,
+   "normalHit": 398,
    "spSpend": 19,
    "cast": 39,
    "energyGain": 77,
    "energyBlocked": 19,
    "buffStart": 56,
    "buffRefresh": 46,
-   "spGain": 459,
+   "spGain": 458,
    "attach": 15,
    "comboReady": 30,
    "inkStart": 5,
@@ -148,24 +148,29 @@
  "solo:狼卫": {
   "per": {
    "狼卫": {
-    "damage": 12840.91,
-    "hits": 29
+    "damage": 16533.468,
+    "hits": 28
    }
   },
   "events": {
-   "normalHit": 22,
-   "spOverflow": 40,
-   "spGain": 40,
+   "normalHit": 19,
+   "spOverflow": 43,
+   "spGain": 43,
    "spSpend": 3,
-   "cast": 4,
-   "energyOverflow": 4,
+   "cast": 5,
+   "energyOverflow": 3,
    "energyGain": 4,
-   "attach": 4,
+   "attach": 3,
    "comboReady": 2,
    "enemyAttack": 5,
-   "error": 2
+   "pause": 1,
+   "abnormal": 1,
+   "buffStart": 1,
+   "consumeAbnormal": 1,
+   "instant": 1,
+   "error": 1
   },
-  "errors": 2
+  "errors": 1
  },
  "solo:别礼": {
   "per": {
@@ -193,25 +198,26 @@
  "solo:佩丽卡": {
   "per": {
    "佩丽卡": {
-    "damage": 12150.105,
-    "hits": 24
+    "damage": 15312.697,
+    "hits": 22
    }
   },
   "events": {
-   "normalHit": 18,
-   "spOverflow": 33,
-   "spGain": 33,
+   "normalHit": 15,
+   "spOverflow": 30,
+   "spGain": 30,
    "spSpend": 3,
-   "cast": 4,
-   "energyOverflow": 4,
+   "cast": 5,
+   "energyOverflow": 3,
    "energyGain": 4,
    "attach": 3,
    "comboReady": 2,
    "enemyAttack": 5,
    "abnormal": 1,
-   "error": 2
+   "pause": 1,
+   "error": 1
   },
-  "errors": 2
+  "errors": 1
  },
  "solo:莱万汀": {
   "per": {
@@ -270,51 +276,53 @@
  "solo:艾尔黛拉": {
   "per": {
    "艾尔黛拉": {
-    "damage": 12082.716,
-    "hits": 23
+    "damage": 11611.729,
+    "hits": 21
    }
   },
   "events": {
-   "normalHit": 18,
-   "spOverflow": 31,
-   "spGain": 31,
+   "normalHit": 15,
+   "spOverflow": 28,
+   "spGain": 28,
    "spSpend": 3,
-   "cast": 4,
-   "energyOverflow": 4,
+   "cast": 5,
+   "energyOverflow": 3,
    "energyGain": 4,
    "comboReady": 2,
    "enemyAttack": 5,
    "abnormal": 1,
-   "error": 2,
+   "pause": 1,
    "consumeAbnormal": 1,
-   "buffStart": 2
+   "buffStart": 2,
+   "error": 1
   },
-  "errors": 2
+  "errors": 1
  },
  "solo:陈千语": {
   "per": {
    "陈千语": {
-    "damage": 12291.775,
-    "hits": 25
+    "damage": 17149.859,
+    "hits": 24
    }
   },
   "events": {
-   "normalHit": 18,
-   "spOverflow": 32,
-   "spGain": 32,
+   "normalHit": 15,
+   "spOverflow": 28,
+   "spGain": 28,
    "spSpend": 3,
-   "cast": 4,
-   "energyOverflow": 4,
+   "cast": 5,
+   "energyOverflow": 3,
    "energyGain": 4,
    "buffStart": 1,
    "breach": 4,
    "abnormal": 4,
    "comboReady": 2,
    "enemyAttack": 5,
-   "buffRefresh": 3,
-   "error": 2
+   "buffRefresh": 5,
+   "pause": 1,
+   "error": 1
   },
-  "errors": 2
+  "errors": 1
  },
  "solo:大潘": {
   "per": {
@@ -350,17 +358,17 @@
  "solo:余烬": {
   "per": {
    "余烬": {
-    "damage": 15908.965,
-    "hits": 20
+    "damage": 17682.815,
+    "hits": 19
    }
   },
   "events": {
-   "normalHit": 13,
-   "spOverflow": 29,
-   "spGain": 29,
+   "normalHit": 11,
+   "spOverflow": 24,
+   "spGain": 24,
    "spSpend": 3,
-   "cast": 4,
-   "energyOverflow": 4,
+   "cast": 5,
+   "energyOverflow": 3,
    "energyGain": 4,
    "breach": 4,
    "abnormal": 4,
@@ -368,9 +376,11 @@
    "buffStart": 1,
    "comboReady": 2,
    "buffRefresh": 4,
-   "error": 2
+   "pause": 1,
+   "shield": 1,
+   "error": 1
   },
-  "errors": 2
+  "errors": 1
  },
  "solo:弧光": {
   "per": {
@@ -477,17 +487,17 @@
  "solo:昼雪": {
   "per": {
    "昼雪": {
-    "damage": 13222.716,
-    "hits": 18
+    "damage": 14968.497,
+    "hits": 19
    }
   },
   "events": {
-   "normalHit": 13,
-   "spOverflow": 34,
-   "spGain": 34,
+   "normalHit": 11,
+   "spOverflow": 29,
+   "spGain": 29,
    "spSpend": 3,
-   "cast": 4,
-   "energyOverflow": 7,
+   "cast": 5,
+   "energyOverflow": 5,
    "energyGain": 7,
    "enemyAttack": 5,
    "block": 3,
@@ -495,9 +505,12 @@
    "counter": 3,
    "instant": 3,
    "comboReady": 2,
-   "error": 2
+   "pause": 1,
+   "abnormal": 1,
+   "iceShatter": 1,
+   "error": 1
   },
-  "errors": 2
+  "errors": 1
  },
  "solo:安塔尔": {
   "per": {
@@ -525,28 +538,29 @@
  "solo:萤石": {
   "per": {
    "萤石": {
-    "damage": 17537.644,
-    "hits": 29
+    "damage": 21704.79,
+    "hits": 31
    }
   },
   "events": {
-   "normalHit": 22,
-   "spOverflow": 42,
-   "spGain": 42,
+   "normalHit": 19,
+   "spOverflow": 36,
+   "spGain": 36,
    "spSpend": 3,
-   "cast": 4,
+   "cast": 5,
    "resourceGain": 3,
-   "energyOverflow": 3,
+   "energyOverflow": 2,
    "energyGain": 3,
    "targetState": 3,
    "resourceSpend": 3,
    "resourceExhausted": 3,
-   "attach": 4,
+   "attach": 5,
    "enemyAttack": 5,
    "comboReady": 2,
-   "error": 2
+   "pause": 1,
+   "error": 1
   },
-  "errors": 2
+  "errors": 1
  },
  "solo:埃特拉": {
   "per": {
@@ -573,27 +587,31 @@
  "solo:卡契尔": {
   "per": {
    "卡契尔": {
-    "damage": 10492.22,
-    "hits": 18
+    "damage": 13282.227,
+    "hits": 20
    }
   },
   "events": {
-   "normalHit": 13,
-   "spOverflow": 32,
-   "spGain": 32,
+   "normalHit": 11,
+   "spOverflow": 28,
+   "spGain": 28,
    "spSpend": 3,
-   "cast": 4,
-   "energyOverflow": 3,
+   "cast": 5,
+   "energyOverflow": 2,
    "energyGain": 3,
    "enemyAttack": 5,
    "block": 3,
-   "breach": 3,
+   "breach": 4,
    "counter": 3,
    "comboReady": 2,
    "shield": 1,
-   "error": 2
+   "pause": 1,
+   "buffStart": 1,
+   "buffRefresh": 2,
+   "abnormal": 1,
+   "error": 1
   },
-  "errors": 2
+  "errors": 1
  },
  "solo:秋栗": {
   "per": {
@@ -623,31 +641,32 @@
  "solo:黎风": {
   "per": {
    "黎风": {
-    "damage": 20235.152,
-    "hits": 32
+    "damage": 29190.29,
+    "hits": 36
    }
   },
   "events": {
-   "normalHit": 16,
-   "spOverflow": 32,
-   "spGain": 32,
+   "normalHit": 13,
+   "spOverflow": 27,
+   "spGain": 27,
    "spSpend": 3,
-   "cast": 4,
-   "energyOverflow": 4,
+   "cast": 5,
+   "energyOverflow": 3,
    "energyGain": 4,
    "buffStart": 2,
    "buffRefresh": 8,
-   "breach": 3,
-   "abnormal": 3,
-   "extraHit": 3,
-   "instant": 3,
+   "breach": 5,
+   "abnormal": 5,
+   "extraHit": 5,
+   "instant": 5,
    "comboReady": 2,
    "enemyAttack": 5,
    "comboState": 1,
-   "error": 2,
-   "comboConsumed": 1
+   "pause": 1,
+   "comboConsumed": 1,
+   "error": 1
   },
-  "errors": 2
+  "errors": 1
  },
  "solo:骏卫": {
   "per": {
@@ -776,27 +795,28 @@
  "solo:汤汤": {
   "per": {
    "汤汤": {
-    "damage": 16026.4,
-    "hits": 31
+    "damage": 17948.665,
+    "hits": 30
    }
   },
   "events": {
-   "normalHit": 21,
-   "spOverflow": 43,
-   "spGain": 43,
+   "normalHit": 18,
+   "spOverflow": 38,
+   "spGain": 38,
    "spSpend": 3,
-   "cast": 4,
-   "energyOverflow": 4,
+   "cast": 5,
+   "energyOverflow": 3,
    "energyGain": 4,
    "attach": 3,
    "comboReady": 2,
    "enemyAttack": 5,
    "vortex": 1,
    "targetState": 1,
-   "error": 2,
-   "buffStart": 1
+   "pause": 1,
+   "buffStart": 1,
+   "error": 1
   },
-  "errors": 2
+  "errors": 1
  },
  "solo:庄方宜": {
   "per": {
@@ -877,28 +897,32 @@
  "solo:诀": {
   "per": {
    "诀": {
-    "damage": 12601.2,
-    "hits": 24
+    "damage": 21458.538,
+    "hits": 26
    }
   },
   "events": {
-   "normalHit": 17,
-   "spOverflow": 34,
-   "spGain": 34,
+   "normalHit": 15,
+   "spOverflow": 32,
+   "spGain": 32,
    "spSpend": 3,
-   "cast": 4,
-   "energyOverflow": 4,
+   "cast": 5,
+   "energyOverflow": 3,
    "energyGain": 4,
    "attach": 3,
    "comboReady": 2,
    "enemyAttack": 5,
    "buffStart": 2,
    "targetState": 1,
-   "error": 2,
-   "targetStateEnd": 1,
-   "buffEnd": 2
+   "pause": 1,
+   "abnormal": 1,
+   "targetStateEarlyEnd": 1,
+   "error": 1,
+   "ultTriggered": 2,
+   "buffEnd": 2,
+   "ultFollowUpReady": 1
   },
-  "errors": 2
+  "errors": 1
  },
  "solo:梨诺": {
   "per": {
@@ -958,23 +982,24 @@
  "solo:噗切娜": {
   "per": {
    "噗切娜": {
-    "damage": 12355.362,
+    "damage": 12340.742,
     "hits": 21
    }
   },
   "events": {
-   "normalHit": 20,
-   "spOverflow": 40,
-   "spGain": 40,
+   "normalHit": 17,
+   "spOverflow": 35,
+   "spGain": 35,
    "spSpend": 3,
-   "cast": 4,
-   "energyOverflow": 4,
+   "cast": 5,
+   "energyOverflow": 3,
    "energyGain": 4,
    "enemyAttack": 5,
    "comboReady": 2,
-   "error": 2
+   "pause": 1,
+   "error": 1
   },
-  "errors": 2
+  "errors": 1
  },
  "solo:祀": {
   "per": {

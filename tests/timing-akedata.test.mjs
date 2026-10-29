@@ -20,8 +20,8 @@ test('解包时序表：34 名干员；普攻链沿 AllowNext 走，最后一段
 test('生成器可复现：重跑 --check 与仓库里的文件一致（本地没有解包原始文件时跳过）',t=>{ if(!fs.existsSync('sources/raw/akedata/TableCfg/SkillPatchTable.json')){ t.skip('未下载解包原始文件，见 sources/raw/akedata/README.md'); return; } const out=execFileSync('node',['tools/build_timing_akedata.mjs','--check'],{encoding:'utf8'}); assert.match(out,/一致/); });
 
 test('施放时长只认主动作：噗切娜战技（AllowNext 只给反击）按 exclusiveFrame 1.667 s',()=>{
-  const r=run([mk('噗切娜'),mk('祀')],[{t:0,member:0,kind:'skill'},{t:1.0,member:0,kind:'ultimate'},{t:1.7,member:0,kind:'ultimate'}],{energy:[300,0]});
-  assert.ok(busyErr(r,'噗切娜',1.0),'1.0 s 还在战技里'); assert.ok(castAt(r,'噗切娜','ultimate',1.7),'1.7 s 可以放终结技'); });
+  const r=run([mk('噗切娜'),mk('祀')],[{t:0,member:0,kind:'skill'},{t:1.0,member:0,kind:'skill'},{t:1.7,member:0,kind:'skill'}],{sp:900});
+  assert.ok(busyErr(r,'噗切娜',1.0),'1.0 s 还在战技里'); assert.ok(castAt(r,'噗切娜','skill',1.7),'1.7 s 可以再放战技'); });
 
 test('战技施放时长按干员：别礼 1.133 s 内不能再出手，之后可以',()=>{
   const busy=run([mk('别礼'),mk('祀')],[{t:0,member:0,kind:'skill'},{t:1.0,member:0,kind:'skill'}]); assert.ok(busyErr(busy,'别礼',1.0));
@@ -56,3 +56,7 @@ test('强化普攻段数与技能表不一致时记 note 并退回武器表（�
 test('默认模式的固定时刻不变：战技命中 0.48、连携 0.72、终结技 2.4、演出 3.0',()=>{
   const r=run([mk('别礼'),mk('汤汤')],[{t:0,member:1,kind:'skill'},{t:2,member:1,kind:'skill'},{t:4,member:1,kind:'skill'},{t:6,member:0,kind:'combo'},{t:8,member:0,kind:'ultimate'}],{source:'default',energy:[300,0]});
   const hs=r.hits.find(h=>h.name==='汤汤'&&h.kind==='skill'); assert.ok(near(hs.t,0.48)); const hc=r.hits.find(h=>h.name==='别礼'&&h.kind==='combo'); assert.ok(near(hc.t,6.72)); const hu=r.hits.find(h=>h.name==='别礼'&&h.kind==='ultimate'); assert.ok(near(hu.t,10.4)); const p=r.events.find(e=>e.type==='pause'&&e.t>7); assert.ok(p&&near(p.seconds,3.0)); });
+
+test('终结技不受自身动作忙碌限制：别礼连携后 0.2 s 就能放终结技（解包 AllowNext 从不含终结技；日志连携首击后 0.06–0.21 s 有终结技首击）',()=>{
+  const tl=[{t:0,member:1,kind:'skill'},{t:2,member:1,kind:'skill'},{t:4,member:1,kind:'skill'},{t:6,member:0,kind:'combo'},{t:6.2,member:0,kind:'ultimate'}];
+  for(const source of ['akedata','default']){ const r=run([mk('别礼'),mk('汤汤')],tl,{energy:[300,0],source}); assert.ok(castAt(r,'别礼','ultimate',6.2),`${source} 6.2 s 放出终结技`); assert.ok(!busyErr(r,'别礼',6.2)); } });
