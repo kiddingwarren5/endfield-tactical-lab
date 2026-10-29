@@ -34,6 +34,8 @@
 
 | 配置页 | 第一页规范 + 社区默认配装多方案（2026-10-29） | 已做 | docs/spec-page-1-setup.md；sources/curated/builds.json → tools/build_builds.mjs；docs/cases/case-17；验证清单 44–46 |
 
+| 排轴 / 归因 | 目标改固定窗口 + 整理步骤；排轴页只读；伤害归因页替代计算器（2026-10-29） | 已做 | HANDOFF “排轴目标改固定窗口”一节；tests/plan-window.test.mjs |
+
 ## 2. 需求覆盖矩阵（NEXT_STEPS.md 逐条对账）
 状态：☐ 未做 / ◐ 进行中 / ☑ 已做并验证 / ✗ 阻塞
 

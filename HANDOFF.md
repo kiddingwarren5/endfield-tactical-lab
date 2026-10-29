@@ -86,3 +86,10 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 - 默认配装改为多方案：sources/curated/builds.json（34 人 196 套，社区标配，按来源数排序，第 0 套入队默认）→ `node tools/build_builds.mjs` 生成 dist/data/builds.js 和 docs/cases/case-17-community-builds.md（名称校验不过就不写盘）。子代理收集结果用 `node tools/merge_builds.mjs a.json …` 合并，近似重复折叠，报告在 sources/curated/builds.report.md。
 - 编辑区“配装方案”下拉切换方案；改过任何一件就是“自定义”，再选方案整套覆盖。通用兜底规则 engine/defaultBuild.js 只给没有社区方案的干员用。
 - 标答编队的配装钉死在 dist/data/rotations.js（案例 06 视频作者推荐），不再读默认配装表；此前标成“案例 06”的两套无来源配装已删除（验证清单 44–46）。
+
+## 2026-10-29 深夜：排轴目标改固定窗口、排轴页只读、伤害归因页
+- 目标函数：`scoreOf` 改为固定窗口 [0, 总计战斗时间] 内的保底伤害 / 窗口（限时场景用限时）；不再按“每人一次终结技的周期”算，束搜索也排到窗口末尾。笔意、巨浪、终结技顺序、第二轮终结技都由窗口内总伤决定。
+- 搜索后整理 `polishSequence`：逐个试删（不掉分就删，去掉溢出附着等无用动作），再逐位置试插每位干员的连携（加分就留）。测试 tests/plan-window.test.mjs。
+- 路线从五条减到三条（束搜索→退火；树搜索→退火；集中爆发→退火），技能形态按面板决定不再枚举两种；全队四人 60 秒窗口在浏览器里约 40 秒算完。
+- 排轴页（chart-ui.js）：去掉“高级”手动编辑；统计口径改为总计战斗时间。导出 `currentResult / waitingPanel / candidateTabs / onResultReady` 供伤害归因页复用。
+- 伤害归因页（attribution-ui.js，替代原伤害计算器 calc-ui.js / timeline-ui.js，两文件已删）：总览、各干员伤害占比（按人 × 技能类型的堆叠条）、伤害时间分布（每 5 秒一柱，爆发节底色）、增益构成（每个乘区按“提供了多少”折算，再按来源数值占比分到具体效果；敌人防御等按“减少了多少”）、单次最高伤害（乘区链）。颜色按 dataviz 校验过的调色板，图下都有表格。

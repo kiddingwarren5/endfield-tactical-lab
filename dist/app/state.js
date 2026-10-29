@@ -21,10 +21,7 @@ export function applyDefaultBuild(member,k=0){ const op=operators.find(o=>o.id==
 export function ensureBuilds(state){ for(const m of state.team||[]){ if(m&&m.buildSource!=='custom'&&!m.weapon?.id&&!Object.values(m.gear||{}).some(x=>x?.id)) applyDefaultBuild(m); } }
 export function exampleTeam(){ const t=rotations[0].team; const team=t.members.map(m=>{ const nm=newMember(byName(operators,m.op).id); applyDefaultBuild(nm); nm.potential=m.potential||0; return nm; }); return {team,mainControl:Math.max(0,t.members.findIndex(m=>m.op===t.mainControl))}; }
 export function buildStatus(member){ const any=member.weapon?.id||Object.values(member.gear||{}).some(x=>x?.id); if(!any) return {kind:'none',label:'未配装'}; if(member.buildSource!=='default') return {kind:'custom',label:'已自定义'}; const list=schemesOf(operators.find(o=>o.id===member.operatorId)); const s=list[member.buildScheme||0]; return {kind:'default',label:'默认配装',scheme:list.length>1&&s?s.name:''}; }
-export function defaultState(){ const ex=exampleTeam(); return {version:STATE_VERSION,team:ex.team,active:ex.mainControl,mainControl:ex.mainControl,rot:defaultRot(),savedTeams:[],
-  enemy:{defence:100,resistances:{physical:'D',cold:'D',heat:'D',electric:'D',nature:'D'},custom:{}},critMode:'never',options:{artsStrength:0,combo:0,stagger:0,reduction:0},
-  selection:{kind:'segment',skillKey:'combo',segmentId:'combo2'},vars:{layers:4,abnormal:1,mechElement:'cold'},
-  buffs:{unified:{toggles:{},stacks:{},overrides:{}},perSegment:{}},buffTab:'unified',buffFilter:'',snapshots:[],ui:{folds:{}}}; }
+export function defaultState(){ const ex=exampleTeam(); return {version:STATE_VERSION,team:ex.team,active:ex.mainControl,mainControl:ex.mainControl,rot:defaultRot(),savedTeams:[],ui:{folds:{}}}; }
 export const clone=x=>JSON.parse(JSON.stringify(x));
 export function weaponPotentialToRank(p){ return 4+Math.max(0,Math.min(5,Number(p)||0)); }
 export function rankToWeaponPotential(r){ return Math.max(0,Math.min(5,(Number(r)||4)-4)); }
