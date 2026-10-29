@@ -67,3 +67,8 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 - 原则：硬依赖（连携发动条件）由模拟器强制；软条件（效果触发）只作搜索先验，绝不当约束。图不算伤害。
 - 修正：解包里没有的装备（拓荒护甲·叄型、集成实训突袭刺刀）词条属性按官方名称映射（build_data.mjs ATTR_NAME_STAT）。
 - 待裁定：docs/verification-needed.md 32–33。
+
+## 2026-10-29 深夜：两份图谱审核的处置
+- 模拟器：连携发动条件重写（trMet：元素集合、破防层数、异常种类、结构化目标前提 targetRequires）；物理异常系统（applyPhysicalAnomaly / applyMechAbnormals，异常改为命中时统一施加）；终结技声明的附着现在真的会施加；'trigger' 再次施加按连携条件元素；处决事件进连携条件；新增 resIgnore 区（无视抗性）、ability/def（防御力）、extraHit（追加固定伤害）。
+- 图谱：形态 / 阶段变体、派生反应（带守卫）、硬 / 软分离、结构化前提、grants 边、场景节点；tools/check_graph_sim.mjs 检查图与模拟器一致性（docs/graph-sim-consistency.md）。
+- 处置表：docs/reviews/graph-review-claude.md；Codex 报告 docs/reviews/graph-review-gpt.md。待做：通用资源状态机（提弗洛斯、赛希、莱万汀先做）。

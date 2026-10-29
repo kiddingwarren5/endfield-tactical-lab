@@ -9,6 +9,7 @@
 | engine-review-gpt.md | GPT-6 Astra（codex，只读） | dist/engine/* | 审核 | 3 个独立手算例通过；模拟器/规划器 14 项高影响问题（修复状态见 docs/progress.md） |
 | engine-review-claude.md | Claude subagent | dist/engine/* | 审核并修正（含 tests/review-engine.test.mjs，32 算例） | 13 个 bug 已修，16 项未决（多数已由主会话后续处理，见 docs/progress.md §5） |
 | graph-review-gpt.md | GPT-6 Astra（codex，只读） | docs/ontology.md、dist/data/vocab.js、dist/engine/graph.js | 审核 | 10 项（6 项 P1）：连携匹配字段错误与派生事件缺失、形态/阶段未进图、硬软分离但输出不足、软条件本人限制缺失、条件性把分区当实现状态、“全 static 不必重排”不成立、校验放过坏数据；已全部按建议重写 graph.js 并加反例测试 |
+| graph-review-claude.md | Claude subagent（独立上下文） | 同上（重写后版本） | 审核 | 6 高、8 中、若干低：图与模拟器判定不一致（已修模拟器）、派生来源错把“再次施加”当异常源、自环、形态过滤、文本匹配、软条件匹配不一致、实现状态误判、能量边丢失等；逐条处置见该文件末尾 |
 | ../data-sources.md | Claude subagent（数据审计） | 官方 vs 解包 ~17,200 值 | 审核并修正解析器 | 32 处真实冲突，取整规律 |
 
 审核约定：审核者不读实现者的自述作为依据；审核报告必须包含审核版本（git hash）、独立算例与复现方法；修正后的复核由修正者在报告中补记，再由后续会话抽查。

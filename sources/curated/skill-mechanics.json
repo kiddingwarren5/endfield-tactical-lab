@@ -707,6 +707,10 @@
    "trigger": {
     "type": "heavyHit",
     "targetCondition": "目标不处于破防且不处于法术附着",
+    "targetRequires": {
+     "notBreach": true,
+     "notArtsAttached": true
+    },
     "text": "当主控干员对不处于破防或法术附着状态的敌人造成重击后可以发动"
    },
    "cooldown": {
@@ -1590,6 +1594,20 @@
    "trigger": {
     "type": "heavyHit",
     "targetCondition": "目标处于电磁附着或导电",
+    "targetRequires": {
+     "anyOf": [
+      {
+       "attach": [
+        "electric"
+       ]
+      },
+      {
+       "abnormal": [
+        "conduct"
+       ]
+      }
+     ]
+    },
     "text": "主控干员对处于电磁附着或导电状态的目标进行重击后可以发动"
    },
    "cooldown": {
@@ -1935,6 +1953,9 @@
    "trigger": {
     "type": "anyAttachApplied",
     "targetCondition": "目标被聚焦",
+    "targetRequires": {
+     "focused": true
+    },
     "or": [
      {
       "type": "abnormal",
@@ -2585,6 +2606,9 @@
    "trigger": {
     "type": "heavyHit",
     "targetCondition": "目标处于物理脆弱或碎甲",
+    "targetRequires": {
+     "physicalFragile": true
+    },
     "text": "当处于物理脆弱或碎甲状态的敌人受到主控干员重击后可以发动"
    },
    "cooldown": {
@@ -2931,7 +2955,11 @@
     "type": "skillState",
     "state": "支援晶体生命回复次数耗尽",
     "count": 2,
-    "text": "当支援晶体的生命回复次数耗尽后可以发动"
+    "text": "当支援晶体的生命回复次数耗尽后可以发动",
+    "dependsOn": {
+     "event": "heavyHit"
+    },
+    "dependsNote": "支援晶体在主控重击时治疗，最多 2 次，耗尽后可连携"
    },
    "cooldown": {
     "byRank": [
@@ -3182,6 +3210,11 @@
    "trigger": {
     "type": "heavyHit",
     "targetCondition": "目标处于冻结",
+    "targetRequires": {
+     "abnormal": [
+      "freeze"
+     ]
+    },
     "text": "当主控干员对处于冻结状态的敌人造成重击时可以发动"
    },
    "cooldown": {
@@ -3606,10 +3639,20 @@
    "trigger": {
     "type": "heavyHit",
     "targetCondition": "目标处于电磁附着",
+    "targetRequires": {
+     "attach": [
+      "electric"
+     ]
+    },
     "or": [
      {
       "type": "execute",
-      "targetCondition": "目标处于电磁附着"
+      "targetCondition": "目标处于电磁附着",
+      "targetRequires": {
+       "attach": [
+        "electric"
+       ]
+      }
      }
     ],
     "text": "主控干员的重击或处决，命中处于电磁附着状态的敌人后可以发动"
@@ -4634,7 +4677,13 @@
    "trigger": {
     "type": "skillState",
     "state": "自身启示已满",
-    "text": "当自身启示已满时可以发动"
+    "text": "当自身启示已满时可以发动",
+    "dependsOn": {
+     "attach": [
+      "nature"
+     ]
+    },
+    "dependsNote": "启示：空中普攻命中自然附着目标各 +1（消耗 1 层）、自然爆发 +1、进战 4 点，上限 8；连携要求已满"
    },
    "cooldown": {
     "byRank": [
@@ -4927,8 +4976,29 @@
     "chr_0036_jsspsi.skill.shoubiCost"
    ],
    "ink": {
-    "duration": {"value": 20, "origin": "official", "note": "参数表「笔意时长（秒）」"},
-    "recordRatio": {"byRank": [8, 8, 8, 9, 9, 9, 10, 10, 10, 11, 12, 13], "origin": "official", "note": "参数表「伤害记录比例」（%）"},
+    "duration": {
+     "value": 20,
+     "origin": "official",
+     "note": "参数表「笔意时长（秒）」"
+    },
+    "recordRatio": {
+     "byRank": [
+      8,
+      8,
+      8,
+      9,
+      9,
+      9,
+      10,
+      10,
+      10,
+      11,
+      12,
+      13
+     ],
+     "origin": "official",
+     "note": "参数表「伤害记录比例」（%）"
+    },
     "burstStage": "收笔",
     "note": "河山共影命中后开始记录目标所受伤害的比例；笔意时长结束或收笔（墨魂提前消失）时以固定伤害爆发。固定伤害按记录值原样结算，不吃增益/防御/抗性（假设，见 verification-needed）"
    },

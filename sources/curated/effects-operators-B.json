@@ -10,8 +10,8 @@
   },
   "name": "卡契尔 · 天赋「坚韧防线」意志转防御",
   "literal": "每有10点意志，防御力+{v}",
-  "zone": "other",
-  "stat": null,
+  "zone": "ability",
+  "stat": "def",
   "value": {
    "dependsOn": {
     "attr": "will",
@@ -127,7 +127,7 @@
   },
   "name": "卡契尔 · 潜能1「多重战备」战技/终结技追加伤害",
   "literal": "额外造成一次[300+防御力×5.0]的物理伤害",
-  "zone": "other",
+  "zone": "extraHit",
   "stat": null,
   "value": {
    "formula": "300+5*def",
@@ -163,7 +163,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0020_meurs.potentials[0]"
   },
-  "notes": "不是增益而是一次独立追加伤害，基数为固定值+防御力而非攻击力。未写明伤害类型：①按触发技能类型计（战技/终结技增伤生效）；②独立无类型伤害。",
+  "notes": "不是增益而是一次独立追加伤害，基数为固定值+防御力而非攻击力。未写明伤害类型：①按触发技能类型计（战技/终结技增伤生效）；②独立无类型伤害。 触发时按公式追加一次固定伤害。",
   "uncertain": true
  },
  {
@@ -178,8 +178,8 @@
   },
   "name": "卡契尔 · 潜能2「额外特训」防御力",
   "literal": "防御力+{v}",
-  "zone": "other",
-  "stat": null,
+  "zone": "ability",
+  "stat": "def",
   "value": {
    "fixed": 20
   },
@@ -4836,7 +4836,7 @@
   },
   "name": "庄方宜 · 潜能5「风云之变」无视电磁抗性",
   "literal": "自身造成的伤害无视敌人{v}点电磁抗性",
-  "zone": "other",
+  "zone": "resIgnore",
   "stat": null,
   "value": {
    "fixed": 15
@@ -4872,7 +4872,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0030_zhuangfy.potentials[4]"
   },
-  "notes": "抗性穿透（作用于抗性区），schema 无对应区，归 other。"
+  "notes": "抗性穿透（作用于抗性区），schema 无对应区，归 other。 无视抗性：从目标该元素抗性里扣掉 N 点。"
  },
  {
   "id": "chr_0033_camille.skill.heatFragile",
@@ -5550,7 +5550,7 @@
   },
   "condition": {
    "text": "施放断云后",
-   "trigger": "onSkillCast",
+   "trigger": "stageChainRefund",
    "mode": "auto"
   },
   "duration": null,
@@ -5564,7 +5564,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0031_mifu.skills.skill.description"
   },
-  "notes": "文本资源效果（params 缺技力消耗）：断云消耗100返还50，追形消耗50，开天消耗50。资源效果"
+  "notes": "文本资源效果（params 缺技力消耗）：断云消耗100返还50，追形消耗50，开天消耗50。资源效果 返还由阶段链结算（机制处理）。"
  },
  {
   "id": "chr_0031_mifu.skill.kaitianAsCrush",
@@ -8874,8 +8874,8 @@
   },
   "name": "噗切娜 · 潜能2「“精力十足”」防御力",
   "literal": "防御力+{v}",
-  "zone": "other",
-  "stat": null,
+  "zone": "ability",
+  "stat": "def",
   "value": {
    "fixed": 20
   },
@@ -9230,7 +9230,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0036_jsspsi.skills.skill.description + params"
   },
-  "notes": "说明条目：战技替换阶段的技力消耗（params 未列，取自描述原文）；不沿用基础战技 100 技力。仅资源/排轴使用。"
+  "notes": "说明条目：战技替换阶段的技力消耗（params 未列，取自描述原文）；不沿用基础战技 100 技力。仅资源/排轴使用。 费用由机制数据的阶段链结算，这里只记录。",
+  "informational": true
  },
  {
   "id": "chr_0036_jsspsi.skill.shoubiCost",
@@ -9277,7 +9278,8 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0036_jsspsi.skills.skill.description + params"
   },
-  "notes": "说明条目：战技替换阶段的技力消耗（params 未列，取自描述原文）；不沿用基础战技 100 技力。仅资源/排轴使用。"
+  "notes": "说明条目：战技替换阶段的技力消耗（params 未列，取自描述原文）；不沿用基础战技 100 技力。仅资源/排轴使用。 费用由机制数据的阶段链结算，这里只记录。",
+  "informational": true
  },
  {
   "id": "chr_0036_jsspsi.combo.perLayer",

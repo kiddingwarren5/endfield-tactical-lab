@@ -19,7 +19,7 @@
 | 资源 resource | `resource:` | vocab.RESOURCES | 技力、返还技力、能量、附着层、破防层、涡流、笔意、熔火、雷枪、炸弹、连击、晶体、猎矢、启示、姿态 |
 | 元素 / 异常 | `element:` `abnormal:` | vocab | 五元素；法术异常四种、物理异常四种；伪异常 trigger / artsBurst |
 | 武器 / 装备 / 套装 / 食药 | `weapon:` `gear:` `set:` `consumable:` | 各数据文件 | 武器类型、槽位、套装件数、是否无套组技能、全队唯一（由效果推出） |
-| 角色 actor | `actor:mainControl` `actor:enemy` `actor:ally` | 固定 | 主控重击/处决、敌人行为、队友连携这类“不是某个技能”的提供者 |
+| 角色 actor | `actor:mainControl` `actor:enemy` `actor:ally` `actor:slot1` | 固定 | 主控重击/处决、敌人行为、队友连携、01 号位这类“不是某个技能”的提供者或受益者 |
 
 ## 2. 关系（边）
 
@@ -28,8 +28,10 @@
 | hasSkill / hasEffect / hasElement | 干员 → 技能；来源 → 效果 | 归属 | |
 | emits | 技能 → 事件 | 这个动作会产生该事件（附着带元素与层数，异常带种类，消耗带元素） | |
 | applies / inflicts / creates / consumes / gains | 技能 → 元素、异常、资源 | 施加附着、施加异常、生成资源（涡流、笔意）、消耗资源、回技力/能量 | |
-| chains | 技能 → 自身 | 阶段链（替换段名列表） | |
-| requires | 连携技 → 事件 / 状态 | **发动条件**：不满足就放不出来（模拟器强制） | 硬 |
+| chains / replaces | 技能 → 自身；连携或终结技 → 战技 | 阶段链（段名、费用、进入条件）；替换关系（卡缪追猎视为连携、时间窗口） | |
+| grants | 技能 → 效果 | 机制数据声明这个动作施加的效果（用于“施加增幅 / 脆弱类效果后”这类条件的解析） | |
+| appliesToSkill / dependsOn | 效果 → 技能；效果 → 属性 | 效果只作用于某技能（段）；数值依赖谁的哪项属性 | |
+| requires | 连携技 → 事件 / 状态 | **发动条件**：不满足就放不出来，由模拟器判可行（模拟器曾读错破防层数、数组元素、异常种类、目标前提，2026-10-29 已修并有 tests/combo-triggers.test.mjs 锁定） | 硬 |
 | triggersOn → resolvesTo | 效果 → 触发代码 → 事件 / 状态 / handled / unmodeled | **效果条件**：满足了伤害或资源更好，不满足只是没这条加成 | 软 |
 | appliesTo / benefits / affects | 效果 → 元素 / 队友 / 主控 / 敌人 | 效果作用范围 | |
 | inExclusiveGroup / modifies | 效果 → 互斥组 / 效果 | 同组取最大；潜能修改天赋 | |
@@ -55,7 +57,7 @@
 | unmodeled | 引擎不算 | 触发表标 unmodeled、代码未知、或区为 other 且不是修饰器 |
 | informational | 明确标为只记录 | effect.informational |
 
-“区为 other”只表示归区，不代表不算：别礼低温症的脆弱倍率、祀笔意记录、潜能对增幅的乘法修饰都参与结算。
+“区为 other”只表示归区，不代表不算：别礼低温脆性的脆弱倍率、祀笔意记录、潜能对增幅的乘法修饰都参与结算。恒真状态（对照靶上永远成立的条件）按 static 记。修饰器继承被修饰效果的生效方式。
 
 一件装备 / 武器 / 套装要不要重排（`itemSensitivity`）：有已建模的 event / state / segment 效果，或有常驻的资源类效果（充能、能量消耗、冷却、技力）都要重排，因为它们改变可行轴；只剩 unmodeled 效果时结论是“未知”，不是“不敏感”。没有“固定轴边际收益就是准的”这种保证。
 

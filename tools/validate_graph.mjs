@@ -1,8 +1,8 @@
 // 图谱校验：node tools/validate_graph.mjs —— 构图、按词表与引用关系校验、写出 docs/graph-report.md。errors 非空时退出码 1。
 import fs from 'node:fs';
-import operators from '../dist/data/operators.js'; import weapons from '../dist/data/weapons.js'; import gear from '../dist/data/gear.js'; import sets from '../dist/data/sets.js'; import consumables from '../dist/data/consumables.js'; import effects from '../dist/data/effects.js'; import mechanics from '../dist/data/mechanics.js';
+import operators from '../dist/data/operators.js'; import weapons from '../dist/data/weapons.js'; import gear from '../dist/data/gear.js'; import sets from '../dist/data/sets.js'; import consumables from '../dist/data/consumables.js'; import effects from '../dist/data/effects.js'; import mechanics from '../dist/data/mechanics.js'; import {scenarios} from '../dist/data/rotations.js';
 import {buildGraph} from '../dist/engine/graph.js';
-export const DATA={operators,weapons,gear,sets,consumables,effects,mechanics};
+export const DATA={operators,weapons,gear,sets,consumables,effects,mechanics,scenarios};
 const flat=x=>x==null?[]:(Array.isArray(x)?x:[x]);
 export function graphReport(g,res){
   const L=[]; L.push('# 图谱报告（由 tools/validate_graph.mjs 生成）',`\n生成：${new Date().toISOString()}`,'\n## 规模\n','| 节点类型 | 数量 |','|---|---|',...Object.entries(res.stats.nodes).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`| ${k} | ${v} |`),'','| 关系 | 数量 |','|---|---|',...Object.entries(res.stats.edges).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`| ${k} | ${v} |`));

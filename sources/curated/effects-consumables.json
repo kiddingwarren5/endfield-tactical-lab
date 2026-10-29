@@ -1,1208 +1,1210 @@
 [
-  {
-    "id": "item_44.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_44",
-      "name": "意乱药剂"
-    },
-    "name": "意乱药剂 · 终结技充能效率",
-    "literal": "终结技充能效率增加{v}%",
-    "zone": "chargeEff",
-    "stat": "chargeEff",
-    "value": {
-      "fixed": 24
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "终结技充能效率增加24%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_44.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+ {
+  "id": "item_44.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_44",
+   "name": "意乱药剂"
   },
-  {
-    "id": "item_135.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_135",
-      "name": "开工日肉汤"
-    },
-    "name": "开工日肉汤 · 攻击力",
-    "literal": "增加{v}%攻击力",
-    "zone": "atkPct",
-    "stat": "atkPct",
-    "value": {
-      "fixed": 12
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "增加12%攻击力，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_135.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "name": "意乱药剂 · 终结技充能效率",
+  "literal": "终结技充能效率增加{v}%",
+  "zone": "chargeEff",
+  "stat": "chargeEff",
+  "value": {
+   "fixed": 24
   },
-  {
-    "id": "item_519.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_519",
-      "name": "塞什卡风肉排"
-    },
-    "name": "塞什卡风肉排 · 全能力",
-    "literal": "增加{v}点全能力",
-    "zone": "ability",
-    "stat": "all",
-    "value": {
-      "fixed": 15
-    },
-    "unit": "flat",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加15点全能力，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_519.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
   },
-  {
-    "id": "item_524.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_524",
-      "name": "可食用巢雕"
-    },
-    "name": "可食用巢雕 · 攻击力",
-    "literal": "增加{v}%攻击力",
-    "zone": "atkPct",
-    "stat": "atkPct",
-    "value": {
-      "fixed": 7
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加7%攻击力，增加3%暴击率，造成的所有伤害增加7%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_524.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "终结技充能效率增加24%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_44.effectText"
   },
-  {
-    "id": "item_524.p2",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_524",
-      "name": "可食用巢雕"
-    },
-    "name": "可食用巢雕 · 暴击率",
-    "literal": "增加{v}%暴击率",
-    "zone": "critRate",
-    "stat": "critRate",
-    "value": {
-      "fixed": 3
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加7%攻击力，增加3%暴击率，造成的所有伤害增加7%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_524.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_135.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_135",
+   "name": "开工日肉汤"
   },
-  {
-    "id": "item_524.p3",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_524",
-      "name": "可食用巢雕"
-    },
-    "name": "可食用巢雕 · 所有伤害",
-    "literal": "造成的所有伤害增加{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 7
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加7%攻击力，增加3%暴击率，造成的所有伤害增加7%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_524.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "name": "开工日肉汤 · 攻击力",
+  "literal": "增加{v}%攻击力",
+  "zone": "atkPct",
+  "stat": "atkPct",
+  "value": {
+   "fixed": 12
   },
-  {
-    "id": "item_535.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_535",
-      "name": "附术瓶"
-    },
-    "name": "附术瓶 · 所有伤害",
-    "literal": "造成的所有伤害增加{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 18
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，造成的所有伤害增加18%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_535.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
   },
-  {
-    "id": "item_537.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_537",
-      "name": "约翰老爹汉堡"
-    },
-    "name": "约翰老爹汉堡 · 物理伤害",
-    "literal": "造成的物理伤害增加{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 21
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": [
-        "physical"
-      ],
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "physical"
-    },
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，造成的物理伤害增加21%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_537.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "增加12%攻击力，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_135.effectText"
   },
-  {
-    "id": "item_585.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_585",
-      "name": "附术铁瓶"
-    },
-    "name": "附术铁瓶 · 所有伤害",
-    "literal": "造成的所有伤害增加{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 25
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，造成的所有伤害增加25%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_585.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_519.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_519",
+   "name": "塞什卡风肉排"
   },
-  {
-    "id": "item_595.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_595",
-      "name": "正本补元汤剂"
-    },
-    "name": "正本补元汤剂 · 暴击率",
-    "literal": "增加{v}%暴击率",
-    "zone": "critRate",
-    "stat": "critRate",
-    "value": {
-      "fixed": 9
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加9%暴击率，造成的所有的伤害增加18%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_595.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "name": "塞什卡风肉排 · 全能力",
+  "literal": "增加{v}点全能力",
+  "zone": "ability",
+  "stat": "all",
+  "value": {
+   "fixed": 15
   },
-  {
-    "id": "item_595.p2",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_595",
-      "name": "正本补元汤剂"
-    },
-    "name": "正本补元汤剂 · 所有伤害",
-    "literal": "造成的所有的伤害增加{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 18
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加9%暴击率，造成的所有的伤害增加18%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_595.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "unit": "flat",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
   },
-  {
-    "id": "item_770.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_770",
-      "name": "清炖息壤球"
-    },
-    "name": "清炖息壤球 · 暴击率",
-    "literal": "增加{v}%暴击率",
-    "zone": "critRate",
-    "stat": "critRate",
-    "value": {
-      "fixed": 21
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加21%暴击率，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_770.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加15点全能力，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_519.effectText"
   },
-  {
-    "id": "item_894.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_894",
-      "name": "清炖兽排参须汤"
-    },
-    "name": "清炖兽排参须汤 · 固定攻击力",
-    "literal": "增加{v}点攻击力",
-    "zone": "atkFlat",
-    "stat": "atkFlat",
-    "value": {
-      "fixed": 180
-    },
-    "unit": "flat",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加180点攻击力，增加11%暴击率，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_894.effectText"
-    },
-    "notes": "食药固定加攻：主副能力乘算后再加（用户实测）；同类叠加规则：待规则确认"
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_524.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_524",
+   "name": "可食用巢雕"
   },
-  {
-    "id": "item_894.p2",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_894",
-      "name": "清炖兽排参须汤"
-    },
-    "name": "清炖兽排参须汤 · 暴击率",
-    "literal": "增加{v}%暴击率",
-    "zone": "critRate",
-    "stat": "critRate",
-    "value": {
-      "fixed": 11
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加180点攻击力，增加11%暴击率，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_894.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "name": "可食用巢雕 · 攻击力",
+  "literal": "增加{v}%攻击力",
+  "zone": "atkPct",
+  "stat": "atkPct",
+  "value": {
+   "fixed": 7
   },
-  {
-    "id": "item_895.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_895",
-      "name": "雅各布的遗产"
-    },
-    "name": "雅各布的遗产 · 攻击力",
-    "literal": "增加{v}%攻击力",
-    "zone": "atkPct",
-    "stat": "atkPct",
-    "value": {
-      "fixed": 27
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加27%攻击力，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_895.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
   },
-  {
-    "id": "item_924.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_924",
-      "name": "小糖画"
-    },
-    "name": "小糖画 · 攻击力",
-    "literal": "增加{v}%攻击力",
-    "zone": "atkPct",
-    "stat": "atkPct",
-    "value": {
-      "fixed": 18
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加18%攻击力，增加9%暴击率，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_924.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加7%攻击力，增加3%暴击率，造成的所有伤害增加7%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_524.effectText"
   },
-  {
-    "id": "item_924.p2",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_924",
-      "name": "小糖画"
-    },
-    "name": "小糖画 · 暴击率",
-    "literal": "增加{v}%暴击率",
-    "zone": "critRate",
-    "stat": "critRate",
-    "value": {
-      "fixed": 9
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加18%攻击力，增加9%暴击率，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_924.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_524.p2",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_524",
+   "name": "可食用巢雕"
   },
-  {
-    "id": "item_1070.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_1070",
-      "name": "竹笋炒肉"
-    },
-    "name": "竹笋炒肉 · 终结技充能效率",
-    "literal": "终结技充能效率增加{v}%",
-    "zone": "chargeEff",
-    "stat": "chargeEff",
-    "value": {
-      "fixed": 21
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，终结技充能效率增加21%，受治疗效率加成提高35%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_1070.effectText"
-    },
-    "notes": "未录入：受治疗效率加成提高35%；同类叠加规则：待规则确认"
+  "name": "可食用巢雕 · 暴击率",
+  "literal": "增加{v}%暴击率",
+  "zone": "critRate",
+  "stat": "critRate",
+  "value": {
+   "fixed": 3
   },
-  {
-    "id": "item_1599.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_1599",
-      "name": "陈皮拌笋"
-    },
-    "name": "陈皮拌笋 · 暴击率",
-    "literal": "增加{v}%暴击率",
-    "zone": "critRate",
-    "stat": "critRate",
-    "value": {
-      "fixed": 25
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加25%暴击率，降低5%防御力，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_1599.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
   },
-  {
-    "id": "item_1599.p2",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_1599",
-      "name": "陈皮拌笋"
-    },
-    "name": "陈皮拌笋 · 降低防御力",
-    "literal": "降低{v}%防御力",
-    "zone": "other",
-    "stat": null,
-    "value": {
-      "fixed": -5
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加25%暴击率，降低5%防御力，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_1599.effectText"
-    },
-    "notes": "原文未写降低谁的防御力。①使用者自身防御降低（副作用，不影响输出，按此填 beneficiary=self）；②敌方防御降低（则影响防御区）。待规则确认；同类叠加规则：待规则确认",
-    "uncertain": true
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加7%攻击力，增加3%暴击率，造成的所有伤害增加7%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_524.effectText"
   },
-  {
-    "id": "item_1870.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_1870",
-      "name": "蓄石秘剂"
-    },
-    "name": "蓄石秘剂 · 终结技充能效率",
-    "literal": "终结技充能效率增加{v}%",
-    "zone": "chargeEff",
-    "stat": "chargeEff",
-    "value": {
-      "fixed": 49
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，终结技充能效率增加49%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_1870.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_524.p3",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_524",
+   "name": "可食用巢雕"
   },
-  {
-    "id": "item_2675.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_2675",
-      "name": "酥麻炸虫蛹"
-    },
-    "name": "酥麻炸虫蛹 · 攻击力",
-    "literal": "增加{v}%攻击力",
-    "zone": "atkPct",
-    "stat": "atkPct",
-    "value": {
-      "fixed": 12
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加12%攻击力，增加6%暴击率，造成的所有伤害增加12%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_2675.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "name": "可食用巢雕 · 所有伤害",
+  "literal": "造成的所有伤害增加{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 7
   },
-  {
-    "id": "item_2675.p2",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_2675",
-      "name": "酥麻炸虫蛹"
-    },
-    "name": "酥麻炸虫蛹 · 暴击率",
-    "literal": "增加{v}%暴击率",
-    "zone": "critRate",
-    "stat": "critRate",
-    "value": {
-      "fixed": 6
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加12%攻击力，增加6%暴击率，造成的所有伤害增加12%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_2675.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
   },
-  {
-    "id": "item_2675.p3",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_2675",
-      "name": "酥麻炸虫蛹"
-    },
-    "name": "酥麻炸虫蛹 · 所有伤害",
-    "literal": "造成的所有伤害增加{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 12
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加12%攻击力，增加6%暴击率，造成的所有伤害增加12%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_2675.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
   },
-  {
-    "id": "item_2702.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_2702",
-      "name": "大碗碎茶"
-    },
-    "name": "大碗碎茶 · 所有伤害",
-    "literal": "造成的所有伤害增加{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 13
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": null,
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "any"
-    },
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，造成的所有伤害增加13%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_2702.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加7%攻击力，增加3%暴击率，造成的所有伤害增加7%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_524.effectText"
   },
-  {
-    "id": "item_2703.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_2703",
-      "name": "玉米汁"
-    },
-    "name": "玉米汁 · 暴击率",
-    "literal": "增加{v}%暴击率",
-    "zone": "critRate",
-    "stat": "critRate",
-    "value": {
-      "fixed": 9
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加9%暴击率，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_2703.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_535.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_535",
+   "name": "附术瓶"
   },
-  {
-    "id": "item_2704.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_2704",
-      "name": "瓶装脆蔗汁"
-    },
-    "name": "瓶装脆蔗汁 · 终结技充能效率",
-    "literal": "终结技充能效率增加{v}%",
-    "zone": "chargeEff",
-    "stat": "chargeEff",
-    "value": {
-      "fixed": 21
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，终结技充能效率增加21%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_2704.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "name": "附术瓶 · 所有伤害",
+  "literal": "造成的所有伤害增加{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 18
   },
-  {
-    "id": "item_2748.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_2748",
-      "name": "梨花香茶"
-    },
-    "name": "梨花香茶 · 全能力",
-    "literal": "增加{v}点全能力",
-    "zone": "ability",
-    "stat": "all",
-    "value": {
-      "fixed": 27
-    },
-    "unit": "flat",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加27点全能力，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_2748.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
   },
-  {
-    "id": "item_2749.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_2749",
-      "name": "游人酒"
-    },
-    "name": "游人酒 · 暴击率",
-    "literal": "增加{v}%暴击率",
-    "zone": "critRate",
-    "stat": "critRate",
-    "value": {
-      "fixed": 14
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加14%暴击率，降低3%防御力，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_2749.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
   },
-  {
-    "id": "item_2749.p2",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_2749",
-      "name": "游人酒"
-    },
-    "name": "游人酒 · 降低防御力",
-    "literal": "降低{v}%防御力",
-    "zone": "other",
-    "stat": null,
-    "value": {
-      "fixed": -3
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加14%暴击率，降低3%防御力，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_2749.effectText"
-    },
-    "notes": "原文未写降低谁的防御力。①使用者自身防御降低（副作用，不影响输出，按此填 beneficiary=self）；②敌方防御降低（则影响防御区）。待规则确认；同类叠加规则：待规则确认",
-    "uncertain": true
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，造成的所有伤害增加18%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_535.effectText"
   },
-  {
-    "id": "item_2750.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_2750",
-      "name": "瓶装霞莓饮"
-    },
-    "name": "瓶装霞莓饮 · 攻击力",
-    "literal": "增加{v}%攻击力",
-    "zone": "atkPct",
-    "stat": "atkPct",
-    "value": {
-      "fixed": 29
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": null,
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，增加29%攻击力，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_2750.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_537.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_537",
+   "name": "约翰老爹汉堡"
   },
-  {
-    "id": "item_2803.p1",
-    "owner": {
-      "kind": "consumable",
-      "id": "item_2803",
-      "name": "陈酿葡萄露"
-    },
-    "name": "陈酿葡萄露 · 物理伤害",
-    "literal": "造成的物理伤害增加{v}%",
-    "zone": "bonus",
-    "stat": null,
-    "value": {
-      "fixed": 33
-    },
-    "unit": "%",
-    "beneficiary": "self",
-    "applies": {
-      "elements": [
-        "physical"
-      ],
-      "kinds": [
-        "normal",
-        "skill",
-        "combo",
-        "ultimate",
-        "mech"
-      ],
-      "damageClass": "physical"
-    },
-    "condition": {
-      "text": "使用后（食药生效期间）",
-      "trigger": null,
-      "mode": "auto"
-    },
-    "duration": 300,
-    "stacking": "unknown",
-    "exclusiveGroup": null,
-    "teamUnique": false,
-    "oncePerBattle": false,
-    "cooldown": null,
-    "evidence": {
-      "text": "使用后，造成的物理伤害增加33%，持续300秒。",
-      "category": "official",
-      "where": "dist/data/consumables.js item_2803.effectText"
-    },
-    "notes": "同类叠加规则：待规则确认"
-  }
+  "name": "约翰老爹汉堡 · 物理伤害",
+  "literal": "造成的物理伤害增加{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 21
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": [
+    "physical"
+   ],
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "physical"
+  },
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，造成的物理伤害增加21%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_537.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_585.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_585",
+   "name": "附术铁瓶"
+  },
+  "name": "附术铁瓶 · 所有伤害",
+  "literal": "造成的所有伤害增加{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 25
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，造成的所有伤害增加25%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_585.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_595.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_595",
+   "name": "正本补元汤剂"
+  },
+  "name": "正本补元汤剂 · 暴击率",
+  "literal": "增加{v}%暴击率",
+  "zone": "critRate",
+  "stat": "critRate",
+  "value": {
+   "fixed": 9
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加9%暴击率，造成的所有的伤害增加18%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_595.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_595.p2",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_595",
+   "name": "正本补元汤剂"
+  },
+  "name": "正本补元汤剂 · 所有伤害",
+  "literal": "造成的所有的伤害增加{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 18
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加9%暴击率，造成的所有的伤害增加18%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_595.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_770.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_770",
+   "name": "清炖息壤球"
+  },
+  "name": "清炖息壤球 · 暴击率",
+  "literal": "增加{v}%暴击率",
+  "zone": "critRate",
+  "stat": "critRate",
+  "value": {
+   "fixed": 21
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加21%暴击率，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_770.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_894.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_894",
+   "name": "清炖兽排参须汤"
+  },
+  "name": "清炖兽排参须汤 · 固定攻击力",
+  "literal": "增加{v}点攻击力",
+  "zone": "atkFlat",
+  "stat": "atkFlat",
+  "value": {
+   "fixed": 180
+  },
+  "unit": "flat",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加180点攻击力，增加11%暴击率，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_894.effectText"
+  },
+  "notes": "食药固定加攻：主副能力乘算后再加（用户实测）；同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_894.p2",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_894",
+   "name": "清炖兽排参须汤"
+  },
+  "name": "清炖兽排参须汤 · 暴击率",
+  "literal": "增加{v}%暴击率",
+  "zone": "critRate",
+  "stat": "critRate",
+  "value": {
+   "fixed": 11
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加180点攻击力，增加11%暴击率，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_894.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_895.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_895",
+   "name": "雅各布的遗产"
+  },
+  "name": "雅各布的遗产 · 攻击力",
+  "literal": "增加{v}%攻击力",
+  "zone": "atkPct",
+  "stat": "atkPct",
+  "value": {
+   "fixed": 27
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加27%攻击力，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_895.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_924.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_924",
+   "name": "小糖画"
+  },
+  "name": "小糖画 · 攻击力",
+  "literal": "增加{v}%攻击力",
+  "zone": "atkPct",
+  "stat": "atkPct",
+  "value": {
+   "fixed": 18
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加18%攻击力，增加9%暴击率，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_924.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_924.p2",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_924",
+   "name": "小糖画"
+  },
+  "name": "小糖画 · 暴击率",
+  "literal": "增加{v}%暴击率",
+  "zone": "critRate",
+  "stat": "critRate",
+  "value": {
+   "fixed": 9
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加18%攻击力，增加9%暴击率，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_924.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_1070.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_1070",
+   "name": "竹笋炒肉"
+  },
+  "name": "竹笋炒肉 · 终结技充能效率",
+  "literal": "终结技充能效率增加{v}%",
+  "zone": "chargeEff",
+  "stat": "chargeEff",
+  "value": {
+   "fixed": 21
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，终结技充能效率增加21%，受治疗效率加成提高35%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_1070.effectText"
+  },
+  "notes": "未录入：受治疗效率加成提高35%；同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_1599.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_1599",
+   "name": "陈皮拌笋"
+  },
+  "name": "陈皮拌笋 · 暴击率",
+  "literal": "增加{v}%暴击率",
+  "zone": "critRate",
+  "stat": "critRate",
+  "value": {
+   "fixed": 25
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加25%暴击率，降低5%防御力，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_1599.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_1599.p2",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_1599",
+   "name": "陈皮拌笋"
+  },
+  "name": "陈皮拌笋 · 降低防御力",
+  "literal": "降低{v}%防御力",
+  "zone": "other",
+  "stat": null,
+  "value": {
+   "fixed": -5
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加25%暴击率，降低5%防御力，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_1599.effectText"
+  },
+  "notes": "原文未写降低谁的防御力。①使用者自身防御降低（副作用，不影响输出，按此填 beneficiary=self）；②敌方防御降低（则影响防御区）。待规则确认；同类叠加规则：待规则确认 自身防御力下降，不进伤害计算。",
+  "uncertain": true,
+  "informational": true
+ },
+ {
+  "id": "item_1870.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_1870",
+   "name": "蓄石秘剂"
+  },
+  "name": "蓄石秘剂 · 终结技充能效率",
+  "literal": "终结技充能效率增加{v}%",
+  "zone": "chargeEff",
+  "stat": "chargeEff",
+  "value": {
+   "fixed": 49
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，终结技充能效率增加49%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_1870.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_2675.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_2675",
+   "name": "酥麻炸虫蛹"
+  },
+  "name": "酥麻炸虫蛹 · 攻击力",
+  "literal": "增加{v}%攻击力",
+  "zone": "atkPct",
+  "stat": "atkPct",
+  "value": {
+   "fixed": 12
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加12%攻击力，增加6%暴击率，造成的所有伤害增加12%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_2675.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_2675.p2",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_2675",
+   "name": "酥麻炸虫蛹"
+  },
+  "name": "酥麻炸虫蛹 · 暴击率",
+  "literal": "增加{v}%暴击率",
+  "zone": "critRate",
+  "stat": "critRate",
+  "value": {
+   "fixed": 6
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加12%攻击力，增加6%暴击率，造成的所有伤害增加12%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_2675.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_2675.p3",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_2675",
+   "name": "酥麻炸虫蛹"
+  },
+  "name": "酥麻炸虫蛹 · 所有伤害",
+  "literal": "造成的所有伤害增加{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 12
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加12%攻击力，增加6%暴击率，造成的所有伤害增加12%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_2675.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_2702.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_2702",
+   "name": "大碗碎茶"
+  },
+  "name": "大碗碎茶 · 所有伤害",
+  "literal": "造成的所有伤害增加{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 13
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": null,
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "any"
+  },
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，造成的所有伤害增加13%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_2702.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_2703.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_2703",
+   "name": "玉米汁"
+  },
+  "name": "玉米汁 · 暴击率",
+  "literal": "增加{v}%暴击率",
+  "zone": "critRate",
+  "stat": "critRate",
+  "value": {
+   "fixed": 9
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加9%暴击率，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_2703.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_2704.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_2704",
+   "name": "瓶装脆蔗汁"
+  },
+  "name": "瓶装脆蔗汁 · 终结技充能效率",
+  "literal": "终结技充能效率增加{v}%",
+  "zone": "chargeEff",
+  "stat": "chargeEff",
+  "value": {
+   "fixed": 21
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，终结技充能效率增加21%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_2704.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_2748.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_2748",
+   "name": "梨花香茶"
+  },
+  "name": "梨花香茶 · 全能力",
+  "literal": "增加{v}点全能力",
+  "zone": "ability",
+  "stat": "all",
+  "value": {
+   "fixed": 27
+  },
+  "unit": "flat",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加27点全能力，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_2748.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_2749.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_2749",
+   "name": "游人酒"
+  },
+  "name": "游人酒 · 暴击率",
+  "literal": "增加{v}%暴击率",
+  "zone": "critRate",
+  "stat": "critRate",
+  "value": {
+   "fixed": 14
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加14%暴击率，降低3%防御力，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_2749.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_2749.p2",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_2749",
+   "name": "游人酒"
+  },
+  "name": "游人酒 · 降低防御力",
+  "literal": "降低{v}%防御力",
+  "zone": "other",
+  "stat": null,
+  "value": {
+   "fixed": -3
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加14%暴击率，降低3%防御力，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_2749.effectText"
+  },
+  "notes": "原文未写降低谁的防御力。①使用者自身防御降低（副作用，不影响输出，按此填 beneficiary=self）；②敌方防御降低（则影响防御区）。待规则确认；同类叠加规则：待规则确认 自身防御力下降，不进伤害计算。",
+  "uncertain": true,
+  "informational": true
+ },
+ {
+  "id": "item_2750.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_2750",
+   "name": "瓶装霞莓饮"
+  },
+  "name": "瓶装霞莓饮 · 攻击力",
+  "literal": "增加{v}%攻击力",
+  "zone": "atkPct",
+  "stat": "atkPct",
+  "value": {
+   "fixed": 29
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": null,
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，增加29%攻击力，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_2750.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ },
+ {
+  "id": "item_2803.p1",
+  "owner": {
+   "kind": "consumable",
+   "id": "item_2803",
+   "name": "陈酿葡萄露"
+  },
+  "name": "陈酿葡萄露 · 物理伤害",
+  "literal": "造成的物理伤害增加{v}%",
+  "zone": "bonus",
+  "stat": null,
+  "value": {
+   "fixed": 33
+  },
+  "unit": "%",
+  "beneficiary": "self",
+  "applies": {
+   "elements": [
+    "physical"
+   ],
+   "kinds": [
+    "normal",
+    "skill",
+    "combo",
+    "ultimate",
+    "mech"
+   ],
+   "damageClass": "physical"
+  },
+  "condition": {
+   "text": "使用后（食药生效期间）",
+   "trigger": null,
+   "mode": "auto"
+  },
+  "duration": 300,
+  "stacking": "unknown",
+  "exclusiveGroup": null,
+  "teamUnique": false,
+  "oncePerBattle": false,
+  "cooldown": null,
+  "evidence": {
+   "text": "使用后，造成的物理伤害增加33%，持续300秒。",
+   "category": "official",
+   "where": "dist/data/consumables.js item_2803.effectText"
+  },
+  "notes": "同类叠加规则：待规则确认"
+ }
 ]

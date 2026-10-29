@@ -30,7 +30,7 @@ export function effectApplies(e,seg){
 }
 // applied: [{effect, value, label, zone}] already resolved by the caller (effects.js / skills.js)
 export function calcSegment({stats,seg,rank=12,enemy,critMode='never',applied=[],vars={},options={}}){
-  const buckets={bonus:[],amp:[],fragile:[],vulnerable:[]}; const mods={ratioMul:[],ratioAdd:[],fragileMul:[],other:[]};
+  const buckets={bonus:[],amp:[],fragile:[],vulnerable:[],resIgnore:[]}; const mods={ratioMul:[],ratioAdd:[],fragileMul:[],other:[]};
   for(const it of panelBonusItems(stats,{...seg,targetStaggered:(options.stagger??0)>0})) buckets.bonus.push(it);
   for(const ap of applied){ const e=ap.effect; if(!effectApplies(e,seg)) continue; const item={label:ap.label||e.name,value:ap.value,source:e.id};
     if(buckets[e.zone]) buckets[e.zone].push(item); else if(e.zone==='ratioMul') mods.ratioMul.push(item); else if(e.zone==='ratioAdd') mods.ratioAdd.push(item); else if(e.fragileMultiplier) mods.fragileMul.push({...item,value:e.fragileMultiplier}); else mods.other.push(item); }
@@ -43,11 +43,11 @@ export function calcSegment({stats,seg,rank=12,enemy,critMode='never',applied=[]
   // noCrit: burn DoT cannot crit (rules A5)
   const crit=critMode==='never'||seg.noCrit?1:critMode==='always'?1+stats.critDmg/100:1+(clamp(stats.critRate,0,100)/100)*(stats.critDmg/100);
   const def=clamp(enemy?.defence??100,0,99999); const grade=enemy?.resistances?.[seg.element]??'D';
-  const resistance=grade==='custom'?clamp(enemy?.custom?.[seg.element]??0,-100,100):(GRADE_RESISTANCE[grade]??0);
+  const baseResistance=grade==='custom'?clamp(enemy?.custom?.[seg.element]??0,-100,100):(GRADE_RESISTANCE[grade]??0); const resIgnore=sum(buckets.resIgnore.map(x=>x.value)); const resistance=Math.max(-100,baseResistance-resIgnore); /* 无视抗性：从目标抗性里扣掉 N 点（莱万汀熔火、庄方宜天理合真） */
   const mech=seg.kind==='mech'; // 机制伤害：等级系数与技艺强度，沿用 demo（rules A5/A6 待核）
   const lf=stats.operator?.exact90; const levelClass=seg.levelClass||(isArts(seg.element)?'arts':'physical'); const levelFactor=mech?(levelClass==='arts'?(lf?.artsLevelFactor??1+89/196):(lf?.physicalLevelFactor??1+89/392)):1; // rules A5：法术 1+(l-1)/196，物理 1+(l-1)/392（解包 attr 49/25 一致）
   const artsFactor=mech?1+clamp(stats.artsStrength,0,9999)/100:1;
   const factors={attack:stats.atk.panel,ratio:ratio/100,crit,bonus:1+sum(buckets.bonus.map(x=>x.value))/100,amp:1+sum(buckets.amp.map(x=>x.value))/100,fragile:1+sum(buckets.fragile.map(x=>x.value))/100,vulnerable:1+sum(buckets.vulnerable.map(x=>x.value))/100,combo:1+clamp(options.combo??0,0,999)/100,stagger:1+clamp(options.stagger??0,0,999)/100,defence:100/(100+def),resistance:1-resistance/100,reduction:1-clamp(options.reduction??0,0,100)/100,level:levelFactor,artsStrength:artsFactor};
   const damage=Object.values(factors).reduce((a,b)=>a*b,1);
-  return {segmentId:seg.id,label:seg.label,element:seg.element,kind:seg.kind,rank,damage,factors,buckets,mods,ratioTrace,resistance,grade,defence:def,rounding:'引擎不取整；界面显示四舍五入到整数'};
+  return {segmentId:seg.id,label:seg.label,element:seg.element,kind:seg.kind,rank,damage,factors,buckets,mods,ratioTrace,resistance,baseResistance,resIgnore,grade,defence:def,rounding:'引擎不取整；界面显示四舍五入到整数'};
 }

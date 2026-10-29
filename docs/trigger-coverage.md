@@ -1,18 +1,17 @@
 # 触发覆盖（由 tests/triggers.test.mjs 生成）
 
-生成：2026-10-28T23:27:41.044Z
+生成：2026-10-29T02:02:08.411Z
 
 | 归属 | 效果数 |
 |---|---|
-| event | 169 |
-| unmodeled | 92 |
-| handled | 7 |
-| state | 26 |
-| event-noop | 8 |
+| event | 183 |
+| unmodeled | 70 |
+| handled | 9 |
+| state | 28 |
+| event-noop | 13 |
 
 ## 未建模原因汇总
 
-- 破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常）（24）：chr_0004_pelica.talent.bounce、chr_0018_dapan.combo.slamDmg、chr_0018_dapan.talent.thicken、chr_0015_lifeng.talent2.knockdown、chr_0015_lifeng.pot5.knockdown、chr_0013_aglina.ult.fragile.breach、chr_0013_aglina.pot2.fragile、suit_phy01.p2 …
 - 源石结晶（管理员机制）未建模：结晶附着被忽略，不进入法术附着（10）：official_89.talent.disintegrate、official_89.talent.stasis、official_89.pot1.spRefund、official_89.pot2.othersAtk、official_89.pot3.energy、chr_0003_endminf.talent1.atk、chr_0003_endminf.talent2.physVuln、chr_0003_endminf.pot1.spRefund …
 - 模拟按不暴击计算时不会触发；选择必暴击/期望时同样未建模（6）：chr_0028_wulfa.talent.boilingBlood、suit_criti01.p2、suit_criti01.p3、wpn_pistol_0010.p2、wpn_sword_0022.p2、wpn_sword_0022.p3
 - 治疗未建模（5）：wpn_funnel_0010.p1、wpn_lance_0014.p2、wpn_lance_0016.p2、wpn_sword_0023.p2、wpn_sword_0023.p3
@@ -23,6 +22,7 @@
 - 格挡反击未建模（对照靶不攻击）（2）：chr_0014_aurora.talent.counterEnergy、chr_0014_aurora.pot5.spRefund
 - 盾卫旗队后续效果未建模（物理异常分支）（2）：chr_0029_pograni.talent2.atk、chr_0029_pograni.talent2.arts
 - 对照靶只有一个目标：多目标条件不成立（2）：chr_0029_pograni.pot1.spRefund、chr_0011_seraph.pot3.bounce
+- 重力场（终结技领域内）未建模（2）：chr_0013_aglina.ult.fragile.breach、chr_0013_aglina.pot2.fragile
 - 箭阵持续时间官方未给出（2）：chr_0034_typhoea.combo.burstVuln、chr_0034_typhoea.pot3.burstVuln
 - 格挡未建模（对照靶不攻击）（2）：chr_0038_purrche.talent1.energy、chr_0038_purrche.talent1.giftChance
 - 灼热獠牙状态叠加未建模（1）：chr_0006_wolfgd.pot3.teamFang
@@ -65,8 +65,9 @@
 | chr_0026_lastrite.talent.brittle | targetColdFragile | handled |
 | chr_0026_lastrite.pot1.heavyExtra | infusedHeavyHit | handled |
 | chr_0026_lastrite.pot1.heavyPoise | infusedHeavyHit | handled |
+| chr_0026_lastrite.ult.energySource | energySourceRestricted | handled |
 | chr_0004_pelica.talent.annihilate | targetStaggered | state |
-| chr_0004_pelica.talent.bounce | comboHitBroken | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| chr_0004_pelica.talent.bounce | comboHitBroken | event-noop |
 | chr_0004_pelica.pot3.atk | afterApplyConduct | event |
 | chr_0004_pelica.pot4.conductMul | comboConduct | unmodeled：导电来源区分未建模 |
 | chr_0016_laevat.talent.resIgnore | moltenStacks4 | unmodeled：熔火层数未建模 |
@@ -88,8 +89,8 @@
 | chr_0005_chen.talent.edge | anySkillHit | event |
 | chr_0005_chen.talent.poise | interruptCharge | unmodeled：敌人蓄力 / 打断未建模 |
 | chr_0005_chen.pot1.lowHp | targetHpBelow50 | state |
-| chr_0018_dapan.combo.slamDmg | comboSlam | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
-| chr_0018_dapan.talent.thicken | consumeBreak | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| chr_0018_dapan.combo.slamDmg | comboSlam | event |
+| chr_0018_dapan.talent.thicken | consumeBreak | event |
 | chr_0018_dapan.talent.prep | comboHitWithPrep | unmodeled：备料层数未建模 |
 | chr_0018_dapan.pot1.physDmg | ultimateKill | unmodeled：击败事件未建模（对照靶无限血） |
 | chr_0018_dapan.pot5.extraBreak | skillSingleHit | event-noop |
@@ -137,9 +138,9 @@
 | chr_0019_karin.pot5.comboExtend | afterUltimateEnd | event-noop |
 | chr_0015_lifeng.skill.physFragile | skillFinalHitNoBreach | event |
 | chr_0015_lifeng.combo.comboState | afterComboCast | event-noop |
-| chr_0015_lifeng.talent2.knockdown | onKnockdown | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| chr_0015_lifeng.talent2.knockdown | onKnockdown | event-noop |
 | chr_0015_lifeng.pot1.fragile | skillFinalHitBreachLe2 | event |
-| chr_0015_lifeng.pot5.knockdown | onKnockdown | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| chr_0015_lifeng.pot5.knockdown | onKnockdown | event-noop |
 | chr_0029_pograni.talent1.atk | afterSelfSkillSpRecover80 | event |
 | chr_0029_pograni.talent1.arts | afterSelfSkillSpRecover80 | event |
 | chr_0029_pograni.talent2.atk | afterUltimateFollowup | unmodeled：盾卫旗队后续效果未建模（物理异常分支） |
@@ -168,8 +169,8 @@
 | chr_0017_yvonne.pot5.atk | duringUltimate | state |
 | chr_0017_yvonne.pot5.critDmg | duringUltimate | state |
 | chr_0013_aglina.ult.fragile.base | inGravityField | event |
-| chr_0013_aglina.ult.fragile.breach | inGravityFieldBreach | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
-| chr_0013_aglina.pot2.fragile | inGravityFieldBreach | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| chr_0013_aglina.ult.fragile.breach | inGravityFieldBreach | unmodeled：重力场（终结技领域内）未建模 |
+| chr_0013_aglina.pot2.fragile | inGravityFieldBreach | unmodeled：重力场（终结技领域内）未建模 |
 | chr_0027_tangtang.skill.fragile2 | tornadoCount2 | event |
 | chr_0027_tangtang.skill.fragile3 | tornadoCount3 | event |
 | chr_0027_tangtang.talent2.tornadoBonus | ultimateEarlyTornado | event |
@@ -190,7 +191,7 @@
 | chr_0033_camille.pot1.fragile | wingHovering | event |
 | chr_0033_camille.pot5.heatBonus | afterSelfSkillHeal | event |
 | chr_0033_camille.pot5.heatBonusOthers | afterSelfSkillHeal | event |
-| chr_0031_mifu.skill.duanyunRefund | onSkillCast | event |
+| chr_0031_mifu.skill.duanyunRefund | stageChainRefund | handled |
 | chr_0031_mifu.combo.physFragile | afterComboHit | event |
 | chr_0031_mifu.talent1.kaitianMul | targetPhysFragileOrStagger | state |
 | chr_0031_mifu.pot1.fragile | afterComboHit | event |
@@ -235,13 +236,13 @@
 | chr_0036_jsspsi.pot1.inkRecord | inkMarked | handled |
 | chr_0036_jsspsi.pot2.atk | comboHitLayers | event |
 | suit_usp01.p2 | firstSkillInBattle | event |
-| suit_phy01.p2 | afterPhysicalAnomaly | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| suit_phy01.p2 | afterPhysicalAnomaly | event-noop |
 | suit_attri01.p2 | comboCastNextSkill | event |
 | suit_pulse_cryst01.p2 | afterApplyElectrify | event |
 | suit_pulse_cryst01.p3 | afterApplyFreeze | event |
 | suit_atb01.p2 | afterSkillSpRecover | event |
-| suit_poise01.p2 | afterApplyBreach | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
-| suit_poise01.p3 | targetBreach4 | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| suit_poise01.p2 | afterApplyBreach | event |
+| suit_poise01.p3 | targetBreach4 | state |
 | suit_fire_natr01.p2 | afterApplyBurn | event |
 | suit_fire_natr01.p3 | afterApplyCorrosion | event |
 | suit_criti01.p2 | afterCrit | unmodeled：模拟按不暴击计算时不会触发；选择必暴击/期望时同样未建模 |
@@ -251,15 +252,15 @@
 | suit_usp02.p1 | afterApplyAmpProtectFragileWeaken | event |
 | suit_expend_spell01.p2 | afterConsumeElectrifyOrCorrosion | event |
 | suit_combo_cd01.p2 | onComboCast | event |
-| suit_crush_fracture.p2 | onSmashOrArmorBreak | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| suit_crush_fracture.p2 | onSmashOrArmorBreak | event |
 | suit_spellburst.p2 | onNatureOrColdBurst | event |
 | wpn_sword_0008.p1 | skillHit | event |
 | wpn_sword_0009.p1 | comboCast | event |
-| wpn_sword_0005.p2 | physAnomaly | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| wpn_sword_0005.p2 | physAnomaly | event |
 | wpn_sword_0020.p2 | skillApplyFreeze | event |
 | wpn_sword_0018.p2 | consumeArtsAnomaly | event |
 | wpn_sword_0019.p2 | spRecoverBySelfSkill | event |
-| wpn_sword_0015.p2 | knockUpThenNextUlt | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| wpn_sword_0015.p2 | knockUpThenNextUlt | event |
 | wpn_sword_0021_ink.p2 | crystalOrFreezeThenNextSkillOrUlt | event |
 | wpn_sword_0016.p2 | spRecoverBySelfSkill | event |
 | wpn_sword_0016.p3 | spRecoverBySelfSkill | event |
@@ -267,14 +268,14 @@
 | wpn_sword_0010.p2 | enemyBurnOrCorrode | event |
 | wpn_sword_0011.p2 | targetStaggered | state |
 | wpn_sword_0012.p2 | spRecoverOrComboState | event |
-| wpn_sword_0013.p2 | consumeBreachLayers | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
-| wpn_sword_0013.p3 | consumeBreachLayers | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| wpn_sword_0013.p2 | consumeBreachLayers | event |
+| wpn_sword_0013.p3 | consumeBreachLayers | event |
 | wpn_sword_0014.p2 | applyBurnOrConduct | event |
 | wpn_sword_0014.p3 | applyBurnOrConduct | event |
 | wpn_claym_0003.p1 | skillHit | event |
 | wpn_claym_0009.p1 | heavyHit | event |
 | wpn_claym_0011.p2 | artsBurst | event |
-| wpn_claym_0014.p2 | consumeBreachLayers | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| wpn_claym_0014.p2 | consumeBreachLayers | event |
 | wpn_claym_0013.p2 | skillApplyColdAttach | event |
 | wpn_claym_0013.p3 | comboHitColdAttached | event |
 | wpn_claym_0004.p2 | skillOrUltHit | event |
@@ -282,14 +283,14 @@
 | wpn_claym_0008.p2 | heavyHitAsMainControl | event |
 | wpn_lance_0003.p1 | hpAbove80 | state |
 | wpn_lance_0008.p1 | skillHit | event |
-| wpn_lance_0004.p2 | applyBreachOnZero | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| wpn_lance_0004.p2 | applyBreachOnZero | event |
 | wpn_lance_0013.p1 | targetColdOrFrozen | state |
 | wpn_lance_0013.p2 | consumeFreeze | event |
 | wpn_lance_0006.p2 | comboThenNextSkill | event |
-| wpn_lance_0012.p1 | targetBreached | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
-| wpn_lance_0012.p2 | skillApplyBreach | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| wpn_lance_0012.p1 | targetBreached | state |
+| wpn_lance_0012.p2 | skillApplyBreach | event |
 | wpn_lance_0012.p3 | skillApplyPhysFragile | event |
-| wpn_lance_0010.p2 | physAnomaly | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| wpn_lance_0010.p2 | physAnomaly | event-noop |
 | wpn_lance_0011.p2 | skillCast | event |
 | wpn_lance_0011.p3 | comboCast | event |
 | wpn_pistol_0002.p1 | skillHit | event |
@@ -311,8 +312,8 @@
 | wpn_funnel_0005.p2 | ultCast | event |
 | wpn_funnel_0004.p2 | applyConduct | event |
 | wpn_funnel_0014.p2 | comboArtsBurstOrPhysAnomaly | event |
-| wpn_funnel_0011.p2 | comboKnockUp | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
-| wpn_funnel_0011.p3 | comboKnockUp | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| wpn_funnel_0011.p2 | comboKnockUp | event |
+| wpn_funnel_0011.p3 | comboKnockUp | event |
 | wpn_funnel_0013.p2 | consumeCorrode | event |
 | wpn_funnel_0006.p2 | skillApplyNatureAttach | event |
 | wpn_funnel_0006.p3 | targetNatureAttachedCount | state |
@@ -320,7 +321,7 @@
 | wpn_funnel_0009.p2 | ultCast | event |
 | wpn_funnel_0009.p3 | comboCast | event |
 | wpn_funnel_0010.p1 | selfSkillHeal | unmodeled：治疗未建模 |
-| wpn_sword_0017.p2 | applyBreachThenNextUlt | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| wpn_sword_0017.p2 | applyBreachThenNextUlt | event |
 | wpn_pistol_0007.p2 | comboCast | event |
 | wpn_pistol_0011.p2 | skillOrUltApplyColdAttach | event |
 | wpn_pistol_0011.p3 | skillOrUltApplyArtsFragile | event |
@@ -330,7 +331,7 @@
 | wpn_funnel_0015.p3 | ultCast | event |
 | wpn_funnel_0017.p2 | gainElectricAmp | event |
 | wpn_claym_0017.p2 | applyPhysFragile | event |
-| wpn_claym_0017.p3 | slamConsumeBreach | unmodeled：破防 / 物理异常（击飞、倒地、猛击、碎甲）系统未建模（破防仅计层，不结算异常） |
+| wpn_claym_0017.p3 | slamConsumeBreach | event |
 | wpn_lance_0015.p2 | spRecoverBySelfSkill | event |
 | wpn_lance_0015.p3 | selfSkillApplyHeatAttach | event |
 | wpn_claym_0016.p2 | skillOrComboCast | event |

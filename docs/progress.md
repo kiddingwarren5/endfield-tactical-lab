@@ -98,6 +98,7 @@
 | 燃烧跳伤、冻结打碎等异常流程 | 已做（燃烧每秒跳伤 10 s 不暴击；对冻结目标的物理伤害触发碎冰，归属打碎者） |
 | 祀笔意（记录 → 固定伤害爆发）、汤汤巨浪提前引爆守卫、搜索预算 | 已做（2026-10-29：参数表 20 s / 8–13% 记录比例，收笔提前爆发；修复开局 0 s 下落白拿巨浪；默认预算 10 s/路线；案例 14–16 新来源） |
 | 本体与知识图谱（词表、构图、硬/软依赖、条件性、校验器） | 已做（2026-10-29：vocab.js、engine/graph.js、tools/validate_graph.mjs、tests/graph.test.mjs；校验零错误；发现并修正两件装备词条未映射） |
+| 两份图谱审核（Codex、Claude）的处置：模拟器连携条件修正、物理异常系统、图谱重写、一致性检查 | 已做（2026-10-29 晚：tests/combo-triggers.test.mjs 5 例、tests/graph.test.mjs 12 例；未完成项列在 docs/reviews/graph-review-claude.md 处置表） |
 
 ### 规则（docs/reviews/rules-review-gpt.md）→ rules v0.4 已并入；Claude 审核待并入。
 ### 效果目录（docs/reviews/effects-review-*.md）→ 578 条，31 修正，9 未决（见报告）。

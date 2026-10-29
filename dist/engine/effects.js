@@ -1,6 +1,6 @@
 // Effect catalog access + resolution helpers (pure). Catalog entries follow docs/effect-schema.md.
 export const STAT_ZONES=new Set(['ability','atkPct','atkFlat','critRate','critDmg','chargeEff','artsStrength']);
-export const DAMAGE_ZONES=new Set(['bonus','amp','fragile','vulnerable','ratioMul','ratioAdd','other']);
+export const DAMAGE_ZONES=new Set(['bonus','amp','fragile','vulnerable','ratioMul','ratioAdd','resIgnore','other']);
 
 // Weapon skill ranks: slot1/2 = 3(培养满) + 基质加级(0–6)；slot3 = 1 + 潜能(0–5) + 匹配基质加级(0–3)。默认基质满（9/9/4），与“0潜=Rank4”继承规则一致（rules D22）。
 // Lives here so panel attrs (stats.js) and slot-3 catalog effects (ownedEffects) read the same rank.

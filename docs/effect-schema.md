@@ -41,6 +41,9 @@
 | `energyGain` | “获得终结技能量+N” | |
 | `cdr` | “冷却时间-2秒”“冷却缩减+15%” | |
 | `poise` | 失衡值相关 | 只记录，不进伤害 |
+| `resIgnore` | “无视敌人 N 点 X 抗性” | 无视抗性区：按 applies.elements 从目标抗性里扣 N 点，进抗性因子 |
+| `extraHit` | “额外造成一次 [公式] 伤害” | 触发时追加一次固定伤害，value 用 formula（vars 可用 def 等面板量） |
+| `ability` 的 `stat: def` | “防御力+N” | 防御力进面板（装备 def 之和 + 效果），供 extraHit 公式使用 |
 | `other` | 无法归类 | notes 写明 |
 
 ## 其他规则

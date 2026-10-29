@@ -902,7 +902,7 @@
   },
   "condition": {
    "text": "",
-   "trigger": null,
+   "trigger": "energySourceRestricted",
    "mode": "auto"
   },
   "duration": null,
@@ -916,7 +916,8 @@
    "category": "official",
    "where": "operators.js chr_0026_lastrite skills.ultimate.description"
   },
-  "notes": "资源规则：排轴时屏蔽队友/装备等外部终结技能量来源。非数值效果。"
+  "notes": "资源规则：排轴时屏蔽队友/装备等外部终结技能量来源。非数值效果。 引擎按此屏蔽外部能量来源（机制处理）。",
+  "informational": false
  },
  {
   "id": "chr_0004_pelica.talent.annihilate",
@@ -1250,7 +1251,7 @@
   },
   "name": "莱万汀 · 灼心（天赋）",
   "literal": "莱万汀造成的伤害无视敌人{v}点灼热抗性",
-  "zone": "other",
+  "zone": "resIgnore",
   "stat": null,
   "value": {
    "fixed": 20
@@ -1280,7 +1281,7 @@
    "category": "official",
    "where": "operators.js chr_0016_laevat talents[0].stages[2]"
   },
-  "notes": "抗性区（无视抗性），schema 暂无对应 zone，按 other 录入；引擎接入时归抗性区减去对应点数。熔火由天赋、战技、连携技获得。",
+  "notes": "抗性区（无视抗性），schema 暂无对应 zone，按 other 录入；引擎接入时归抗性区减去对应点数。熔火由天赋、战技、连携技获得。 无视抗性：从目标该元素抗性里扣掉 N 点。",
   "stages": [
    {
     "stage": "·一",
@@ -3385,7 +3386,7 @@
    ],
    "damageClass": "physical",
    "anomaly": [
-    "slam"
+    "crush"
    ],
    "skills": [
     "mech"
