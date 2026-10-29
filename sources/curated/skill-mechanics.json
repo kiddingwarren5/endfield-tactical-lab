@@ -52,7 +52,10 @@
      "element": "heat",
      "layers": 1,
      "when": "最后一次射击，且目标不处于燃烧/导电",
-     "bind": "hit"
+     "bind": "hit",
+     "cond": {
+      "consumedAbnormal": false
+     }
     }
    ],
    "consumes": [
@@ -76,13 +79,16 @@
     },
     {
      "id": "skill2",
-     "times": 0,
+     "times": 1,
      "when": {
-      "unmodeled": "追加伤害倍率"
+      "consumedAbnormal": [
+       "burn",
+       "conduct"
+      ]
      }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "combo": {
    "trigger": {
@@ -488,7 +494,8 @@
     "self": {
      "value": 100,
      "origin": "official",
-     "condition": "施放时已有4层熔火，追加攻击命中敌人"
+     "condition": "施放时已有4层熔火，追加攻击命中敌人",
+     "handledBy": "resource:molten"
     },
     "team": {
      "formula": "6.5*realSpConsumed/100",
@@ -520,18 +527,25 @@
    "segmentPlan": [
     {
      "id": "skill1",
-     "times": 1
+     "times": 1,
+     "when": {
+      "duringUltimate": false
+     }
     },
     {
      "id": "skill2",
-     "times": 1
+     "times": 1,
+     "when": {
+      "duringUltimate": false
+     },
+     "note": "持续伤害段数官方未给，按 1 段计（verification-needed）"
     },
     {
      "id": "skill3",
-     "times": 0,
      "when": {
-      "unmodeled": "追加伤害倍率"
-     }
+      "fires": "rule"
+     },
+     "note": "满 4 层熔火时由资源规则追加"
     },
     {
      "id": "skill4",
@@ -549,13 +563,13 @@
     },
     {
      "id": "skill6",
-     "times": 1,
      "when": {
-      "duringUltimate": true
-     }
+      "fires": "rule"
+     },
+     "note": "终结技期间满 4 层由资源规则追加"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "combo": {
    "trigger": {
@@ -703,7 +717,10 @@
       "on": "skillCast",
       "min": 4,
       "all": true,
-      "extraSegment": "skill3",
+      "extraSegment": {
+       "default": "skill3",
+       "duringUltimate": "skill6"
+      },
       "energy": 100,
       "note": "施放时已满 4 层：消耗全部，追加攻击（skill3）+ 强制燃烧 + 100 能量"
      }
@@ -777,10 +794,15 @@
     },
     {
      "id": "skill2",
-     "times": 1
+     "times": 1,
+     "when": {
+      "targetBreach": {
+       "min": 1
+      }
+     }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "combo": {
    "trigger": {
@@ -1321,17 +1343,14 @@
    "segmentPlan": [
     {
      "id": "ultimate1",
-     "times": 0,
-     "when": {
-      "unmodeled": "空中连斩伤害倍率"
-     }
+     "times": 6
     },
     {
      "id": "ultimate2",
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "modes": null
  },
@@ -1525,7 +1544,12 @@
     ],
     "origin": "official",
     "kind": "recover",
-    "condition": "目标处于导电，消耗导电并追加攻击后"
+    "condition": "目标处于导电，消耗导电并追加攻击后",
+    "cond": {
+     "consumedAbnormal": [
+      "conduct"
+     ]
+    }
    },
    "energyGain": {
     "self": null,
@@ -1561,13 +1585,15 @@
     },
     {
      "id": "skill3",
-     "times": 0,
+     "times": 1,
      "when": {
-      "unmodeled": "追加伤害倍率"
+      "consumedAbnormal": [
+       "conduct"
+      ]
      }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "combo": {
    "trigger": {
@@ -1634,14 +1660,19 @@
     {
      "element": "electric",
      "all": true,
-     "when": "引爆电弧时目标处于电磁附着"
+     "when": "引爆电弧时目标处于电磁附着",
+     "onSegment": "ultimate2"
     }
    ],
    "abnormal": [
     {
      "type": "conduct",
      "forced": true,
-     "when": "引爆时消耗电磁附着后"
+     "when": "引爆时消耗电磁附着后",
+     "onSegment": "ultimate2",
+     "cond": {
+      "consumedAttach": true
+     }
     }
    ],
    "switchesControl": false,
@@ -1655,10 +1686,12 @@
     },
     {
      "id": "ultimate2",
-     "times": 1
+     "times": 1,
+     "delay": 4.5,
+     "note": "“一段时间后引爆”：按冲刺命中后 2 s（施放后 4.5 s）计，时长官方未给（verification-needed）"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "modes": null
  },
@@ -1792,7 +1825,10 @@
     {
      "type": "freeze",
      "forced": true,
-     "when": "消耗寒冷附着后"
+     "when": "消耗寒冷附着后",
+     "cond": {
+      "consumedAttach": true
+     }
     }
    ],
    "replaces": null,
@@ -1865,7 +1901,10 @@
     "extra": {
      "value": 10,
      "origin": "official",
-     "condition": "钓起珍鳞（基础概率 10%）"
+     "condition": "钓起珍鳞（基础概率 10%）",
+     "cond": {
+      "proc": "rareFish"
+     }
     }
    },
    "attach": null,
@@ -1874,17 +1913,23 @@
    "segmentPlan": [
     {
      "id": "combo1",
-     "times": 1
+     "times": 1,
+     "when": {
+      "proc": {
+       "name": "rareFish",
+       "not": true
+      }
+     }
     },
     {
      "id": "combo2",
-     "times": 0,
+     "times": 1,
      "when": {
-      "unmodeled": "强化伤害倍率"
+      "proc": "rareFish"
      }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "ultimate": {
    "energyCost": 100,
@@ -1945,7 +1990,19 @@
    ],
    "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
   },
-  "modes": null
+  "modes": null,
+  "procs": {
+   "rareFish": {
+    "base": 0.1,
+    "perInt": {
+     "per": 10,
+     "add": 0.005,
+     "max": 0.3
+    },
+    "origin": "official",
+    "note": "连携“钓起珍鳞概率 10%”+ 天赋钓鳞老手·二"
+   }
+  }
  },
  {
   "operatorId": "chr_0012_avywen",
@@ -2961,7 +3018,10 @@
     {
      "type": "knockup",
      "forced": true,
-     "when": "目标处于物理脆弱"
+     "when": "目标处于物理脆弱",
+     "cond": {
+      "targetFragile": "physical"
+     }
     }
    ],
    "switchesControl": false,
@@ -3453,13 +3513,13 @@
     },
     {
      "id": "ultimate3",
-     "times": 0,
      "when": {
-      "unmodeled": "追加伤害倍率"
-     }
+      "fires": "rule"
+     },
+     "note": "消耗连击时由资源规则追加"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "modes": null,
   "resources": [
@@ -3669,25 +3729,43 @@
    "segmentPlan": [
     {
      "id": "combo1",
-     "times": 1
+     "times": 1,
+     "when": {
+      "triggerLayers": {
+       "min": 1
+      }
+     }
     },
     {
      "id": "combo2",
-     "times": 1
+     "times": 1,
+     "when": {
+      "triggerLayers": {
+       "min": 2
+      }
+     }
     },
     {
      "id": "combo3",
-     "times": 1
+     "times": 1,
+     "when": {
+      "triggerLayers": {
+       "min": 3,
+       "max": 3
+      }
+     }
     },
     {
      "id": "combo4",
-     "times": 0,
+     "times": 1,
      "when": {
-      "unmodeled": "强化第三段伤害倍率"
+      "triggerLayers": {
+       "min": 4
+      }
      }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "ultimate": {
    "energyCost": 90,
@@ -4110,7 +4188,10 @@
     "self": {
      "formula": "10+30*layers",
      "origin": "official",
-     "condition": "成功施加冻结；多目标仅1次"
+     "condition": "成功施加冻结；多目标仅1次",
+     "cond": {
+      "consumedAttach": true
+     }
     },
     "team": {
      "formula": "6.5*realSpConsumed/100",
@@ -4134,7 +4215,10 @@
     {
      "type": "freeze",
      "forced": true,
-     "when": "消耗附着后"
+     "when": "消耗附着后",
+     "cond": {
+      "consumedAttach": true
+     }
     }
    ],
    "replaces": null,
@@ -4197,24 +4281,24 @@
     {
      "type": "freeze",
      "forced": true,
-     "when": "速冻仔 3s 后自爆"
+     "when": "速冻仔 3s 后自爆",
+     "onSegment": "combo2"
     }
    ],
    "notes": "",
    "segmentPlan": [
     {
      "id": "combo1",
-     "times": 0,
-     "when": {
-      "unmodeled": "能量伤害倍率"
-     }
+     "times": 4,
+     "every": 0.75
     },
     {
      "id": "combo2",
-     "times": 1
+     "times": 1,
+     "delay": 3
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "ultimate": {
    "energyCost": 220,
@@ -5512,20 +5596,39 @@
     },
     {
      "id": "ultimate2",
-     "times": 0,
      "when": {
-      "unmodeled": "集束打击总伤害倍率"
-     }
+      "fires": "rule"
+     },
+     "note": "主控重击 / 处决触发，最多 2 次"
     },
     {
      "id": "ultimate3",
-     "times": 0,
      "when": {
-      "unmodeled": "破晦诀明伤害倍率"
-     }
+      "fires": "rule"
+     },
+     "note": "后续技破晦诀明"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算",
+   "triggered": [
+    {
+     "segment": "ultimate2",
+     "on": [
+      "controlHeavy",
+      "execute"
+     ],
+     "max": 2
+    }
+   ],
+   "followUp": {
+    "segment": "ultimate3",
+    "name": "破晦诀明",
+    "after": {
+     "segment": "ultimate2",
+     "count": 2
+    },
+    "note": "是否消耗能量、是否有演出官方未写，按不耗能量、不暂停计时处理（verification-needed）"
+   }
   },
   "modes": [
    {
@@ -5667,19 +5770,39 @@
       },
       {
        "id": "ultimate2",
-       "times": 0,
        "when": {
-        "unmodeled": "集束打击总伤害倍率"
-       }
+        "fires": "rule"
+       },
+       "note": "主控重击 / 处决触发，最多 2 次"
       },
       {
        "id": "ultimate3",
-       "times": 0,
        "when": {
-        "unmodeled": "破晦诀明伤害倍率"
-       }
+        "fires": "rule"
+       },
+       "note": "后续技破晦诀明"
       }
-     ]
+     ],
+     "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算",
+     "triggered": [
+      {
+       "segment": "ultimate2",
+       "on": [
+        "controlHeavy",
+        "execute"
+       ],
+       "max": 2
+      }
+     ],
+     "followUp": {
+      "segment": "ultimate3",
+      "name": "破晦诀明",
+      "after": {
+       "segment": "ultimate2",
+       "count": 2
+      },
+      "note": "是否消耗能量、是否有演出官方未写，按不耗能量、不暂停计时处理（verification-needed）"
+     }
     }
    },
    {
@@ -5799,19 +5922,39 @@
       },
       {
        "id": "ultimate2",
-       "times": 0,
        "when": {
-        "unmodeled": "集束打击总伤害倍率"
-       }
+        "fires": "rule"
+       },
+       "note": "主控重击 / 处决触发，最多 2 次"
       },
       {
        "id": "ultimate3",
-       "times": 0,
        "when": {
-        "unmodeled": "破晦诀明伤害倍率"
-       }
+        "fires": "rule"
+       },
+       "note": "后续技破晦诀明"
       }
-     ]
+     ],
+     "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算",
+     "triggered": [
+      {
+       "segment": "ultimate2",
+       "on": [
+        "controlHeavy",
+        "execute"
+       ],
+       "max": 2
+      }
+     ],
+     "followUp": {
+      "segment": "ultimate3",
+      "name": "破晦诀明",
+      "after": {
+       "segment": "ultimate2",
+       "count": 2
+      },
+      "note": "是否消耗能量、是否有演出官方未写，按不耗能量、不暂停计时处理（verification-needed）"
+     }
     }
    }
   ]
@@ -5876,7 +6019,8 @@
        "value": 0,
        "origin": "official"
       },
-      "note": "提前结束演唱姿态，战技进入短暂冷却（时长未知）"
+      "note": "提前结束演唱姿态，战技进入短暂冷却（时长未知）",
+      "cancelsDelayed": true
      }
     ],
     "window": 60
@@ -5892,13 +6036,12 @@
     },
     {
      "id": "skill2",
-     "times": 0,
-     "when": {
-      "unmodeled": "追加攻击伤害倍率"
-     }
+     "times": 6,
+     "delay": 10,
+     "every": 10
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "combo": {
    "trigger": {
@@ -5990,7 +6133,8 @@
    "segmentPlan": [
     {
      "id": "ultimate1",
-     "times": 1
+     "times": 1,
+     "note": "“持续释放舞台焰火”次数官方未给，按 1 次计（verification-needed）"
     },
     {
      "id": "ultimate2",
@@ -5998,10 +6142,13 @@
     },
     {
      "id": "ultimate3",
-     "times": 1
+     "times": 11,
+     "every": 1.5,
+     "lastMul": 3,
+     "note": "歌声 15 s 每 1.5 s 一次 + 结束时 3 倍"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "modes": null
  },
@@ -6084,10 +6231,16 @@
     },
     {
      "id": "skill3",
-     "times": 1
+     "times": 1,
+     "asHeavy": true
     }
    ],
-   "segmentPlanNote": "起跳射击 1 次；空中普攻 5 次（4 次常规 + 第 5 次空中重击），官方：期间可施放 5 次空中普通攻击"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算",
+   "airborneSeconds": {
+    "value": 4,
+    "origin": "assumed",
+    "note": "浮空时长官方未给"
+   }
   },
   "combo": {
    "trigger": {
@@ -6143,9 +6296,27 @@
     {
      "id": "combo2",
      "times": 1
+    },
+    {
+     "id": "skill2",
+     "from": "skill",
+     "times": 4,
+     "when": {
+      "airborne": true
+     }
+    },
+    {
+     "id": "skill3",
+     "from": "skill",
+     "times": 1,
+     "asHeavy": true,
+     "when": {
+      "airborne": true
+     }
     }
    ],
-   "segmentPlanNote": "箭阵持续伤害的跳数官方未给，暂按 1 次"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算",
+   "resetsAirAttacks": true
   },
   "ultimate": {
    "energyCost": 200,
@@ -6163,14 +6334,47 @@
      "times": 1
     },
     {
-     "id": "ultimate2",
-     "times": 4
+     "id": "skill2",
+     "from": "skill"
     },
     {
-     "id": "ultimate3",
-     "times": 1
+     "id": "ultimate2"
+    },
+    {
+     "id": "skill2",
+     "from": "skill"
+    },
+    {
+     "id": "ultimate2"
+    },
+    {
+     "id": "skill2",
+     "from": "skill"
+    },
+    {
+     "id": "ultimate2"
+    },
+    {
+     "id": "skill2",
+     "from": "skill"
+    },
+    {
+     "id": "ultimate2"
+    },
+    {
+     "id": "skill3",
+     "from": "skill",
+     "asHeavy": true
+    },
+    {
+     "id": "ultimate3"
     }
-   ]
+   ],
+   "airborneSeconds": {
+    "value": 4,
+    "origin": "assumed"
+   },
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "modes": null,
   "resources": [
@@ -6373,20 +6577,20 @@
    "segmentPlan": [
     {
      "id": "combo1",
-     "times": 0,
+     "times": 1,
      "when": {
-      "unmodeled": "炸弹：伤害倍率"
+      "proc": "giftBomb"
      }
     },
     {
      "id": "combo2",
-     "times": 0,
+     "times": 1,
      "when": {
-      "unmodeled": "手工作业：伤害倍率"
+      "proc": "giftHandiwork"
      }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "ultimate": {
    "energyCost": 100,
@@ -6408,29 +6612,53 @@
    "segmentPlan": [
     {
      "id": "ultimate1",
-     "times": 0,
+     "times": 3,
      "when": {
-      "unmodeled": "炸弹：伤害倍率"
+      "proc": "boxBomb"
      }
     },
     {
      "id": "ultimate2",
-     "times": 0,
+     "times": 3,
      "when": {
-      "unmodeled": "手工作业：伤害倍率"
+      "proc": {
+       "name": "boxBomb",
+       "not": true
+      }
      }
     },
     {
      "id": "ultimate3",
-     "times": 0,
+     "times": 1,
      "when": {
-      "unmodeled": "代言人的特殊赠礼：伤害倍率"
+      "proc": "specialGift"
      }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
   },
-  "modes": null
+  "modes": null,
+  "procs": {
+   "giftBomb": {
+    "base": 0.3333333333333333,
+    "origin": "assumed",
+    "note": "三选一随机，概率官方未给"
+   },
+   "giftHandiwork": {
+    "base": 0.3333333333333333,
+    "origin": "assumed"
+   },
+   "boxBomb": {
+    "base": 0.5,
+    "origin": "assumed",
+    "note": "炸弹 / 手工作业二选一，概率官方未给"
+   },
+   "specialGift": {
+    "base": 0.2,
+    "origin": "official",
+    "note": "基础概率 20%；天赋每次格挡 +10%（未计）、潜能 ×1.5（未计）"
+   }
+  }
  },
  {
   "operatorId": "chr_0036_jsspsi",
