@@ -1,6 +1,8 @@
 // Timing assumptions for the event simulator. Every value is an ASSUMPTION unless origin says otherwise (docs/sim-design.md §1.4).
+import akedata from './timing-akedata.js'; // 解包时序（按干员），只在模拟器 params.timingSource='akedata' 时生效；默认仍是下面的武器假设表
 export default {
   origin:'assumed',
+  byOperator:akedata.byOperator, byOperatorFps:akedata.fps, byOperatorOrigin:`${akedata.origin} ${akedata.version}`,
   // seconds per normal-attack segment by weapon type (last segment = heavy hit). Calibrate against docs/cases videos.
   normalSegmentSeconds:{sword:[0.45,0.45,0.5,0.55,0.7],greatsword:[0.7,0.75,0.8,1.0,1.1],polearm:[0.5,0.55,0.6,0.8,0.9],pistol:[0.4,0.4,0.45,0.5,0.6],arts:[0.5,0.5,0.55,0.6,0.7]},
   castSeconds:{skill:0.8,combo:1.2,ultimate:3.0,switch:0.3,plunge:2.0,execute:1.5}, // plunge：起跳 + 下落 + 落地硬直整段按 2.0 s（假设，verification-needed 65）；此前 0.9 s 让自动排轴把下落攻击当成高效普攻连刷
