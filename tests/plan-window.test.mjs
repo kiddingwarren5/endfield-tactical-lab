@@ -1,7 +1,7 @@
 // 排轴目标：固定窗口内的保底伤害 / 窗口；搜索后的整理不降分。
 import test from 'node:test'; import assert from 'node:assert/strict';
 import operators from '../dist/data/operators.js'; import weapons from '../dist/data/weapons.js'; import gear from '../dist/data/gear.js'; import sets from '../dist/data/sets.js'; import effects from '../dist/data/effects.js'; import mechanics from '../dist/data/mechanics.js'; import timing from '../dist/data/timing.js'; import rotations from '../dist/data/rotations.js';
-import {evalSequence,polishSequence} from '../dist/engine/sim/plan.js'; import {buildTeam} from '../dist/engine/sim/rotation.js';
+import * as plan from '../dist/engine/sim/plan.js'; const {evalSequence,polishSequence}=plan; import {buildTeam} from '../dist/engine/sim/rotation.js';
 const data={operators,weapons,gear,sets,effects}; const team=buildTeam(rotations[0],data); const names=team.map(m=>operators.find(o=>o.id===m.operatorId).name);
 const input={team,data,mechanics,timing,enemy:{defence:100,resistances:{physical:'D',cold:'D',heat:'D',electric:'D',nature:'D'},custom:{},attackInterval:4},mainControl:1,initial:{sp:200,energy:[0,0,0,0]},params:{},names};
 const seq=[{member:3,kind:'skill'},{member:2,kind:'combo'},{member:1,kind:'skill'},{member:0,kind:'combo'},{member:2,kind:'skill'},{member:1,kind:'combo'},{member:3,kind:'combo'}];
@@ -32,9 +32,25 @@ test('显式时刻计划：动作在指定时刻放；不可行就顺延，超�
   const bad=evalPlan(input,[{member:1,kind:'ultimate',t:0}],{horizon:W}); assert.equal(bad.executed.length,0); assert.equal(bad.skipped,1); assert.equal(bad.sim.errors.length,0);
   const both=evalPlan(input,[{member:3,kind:'skill',t:5},{member:2,kind:'skill',t:5}],{horizon:W}); assert.equal(both.executed.length,2); assert.ok(Math.abs(both.executed[0].t-both.executed[1].t)<1e-6,'不同成员同一时刻可以同时放');
 });
-test('事件锚点来自模拟事件，都落在窗口内',()=>{ const e=evalPlan(input,[{member:3,kind:'skill',t:0},{member:2,kind:'combo',t:1}],{horizon:40}); const an=anchorsOf(e.sim,40,{ultimate:3}); assert.ok(an.length>=2); assert.ok(an.every(t=>t>=0&&t<=40)); });
+test('事件锚点来自模拟事件，都落在窗口内',()=>{ const e=evalPlan(input,[{member:3,kind:'skill',t:0},{member:2,kind:'combo',t:1}],{horizon:40}); const an=anchorsOf(e.sim,40).times; assert.ok(an.length>=2); assert.ok(an.every(t=>t>=0&&t<=40)); });
 test('迭代局部搜索：结果不低于种子；同一随机种子结果一致；诊断量齐全',()=>{
   const seed=[{member:3,kind:'skill',t:0},{member:2,kind:'combo',t:1},{member:1,kind:'skill',t:1.5}]; const e0=evalPlan(input,seed,{horizon:40}).score;
   const a=localSearchPlan(input,{horizon:40,budgetMs:3000,maxEvals:150,seeds:[seed],seed:3}); const b=localSearchPlan(input,{horizon:40,budgetMs:3000,maxEvals:150,seeds:[seed],seed:3});
   assert.ok(a.score.dps>=e0-1e-9); assert.deepEqual(a.timeline,b.timeline); assert.ok(a.diag.evals>0&&a.diag.legalRatio>=0&&a.diag.ops.moveTime);
+});
+test('审核修正：同刻动作按统一顺序执行，缓存键与执行一致',()=>{
+  const W=10; const a=evalPlan({...input,initial:{sp:100,energy:[0,0,0,0]}},[{member:3,kind:'skill',t:0},{member:2,kind:'skill',t:0}],{horizon:W}); const b=evalPlan({...input,initial:{sp:100,energy:[0,0,0,0]}},[{member:2,kind:'skill',t:0},{member:3,kind:'skill',t:0}],{horizon:W});
+  assert.equal(a.score,b.score); assert.deepEqual(a.executed.map(x=>[x.t,x.member]),b.executed.map(x=>[x.t,x.member]));
+});
+test('审核修正：窗口末尾仍没执行的动作算放弃；评估次数不超过上限；历史最优不低于任何精英',()=>{
+  const cut=evalPlan(input,[{member:1,kind:'ultimate',t:35}],{horizon:40}); assert.equal(cut.executed.length,0); assert.equal(cut.skipped,1);
+  const r=localSearchPlan(input,{horizon:40,budgetMs:20000,maxEvals:60,seeds:[[{member:3,kind:'skill',t:0}]],seed:2}); assert.ok(r.diag.evals<=60,`评估 ${r.diag.evals} > 60`); assert.ok(r.elites.every(e=>e.score.dps<=r.score.dps+1e-9));
+});
+test('审核修正：等待秒数经退火归一化后不丢；集中爆发目标少放终结技要扣分',()=>{
+  const {annealSequence,scoreOf}=plan; const r=annealSequence(input,[{kind:'wait',seconds:4},{member:3,kind:'skill'}],{horizon:40,budgetMs:200,maxEvals:1,seed:1}); assert.ok(r.timeline[0].t>=4-1e-6,`战技应在 4 秒后放，实际 ${r.timeline[0].t}`);
+  const e=evalSequence(input,[{member:3,kind:'skill'},{member:2,kind:'combo'}],{horizon:40,objective:'burst'}); const g=evalSequence(input,[{member:3,kind:'skill'},{member:2,kind:'combo'}],{horizon:40,objective:'guaranteed'}); assert.ok(e.sc.dps<g.sc.dps,'没放终结技的轴在集中爆发口径下应被扣分');
+});
+test('交接：顺序解码的时间表作为显式时刻起点时，分数不低于解码分（同刻先后保持）',()=>{
+  const W=40; const seq=[{member:3,kind:'skill'},{member:2,kind:'skill'},{member:2,kind:'combo'},{member:1,kind:'skill'},{member:0,kind:'combo'},{member:1,kind:'combo'}]; const e=evalSequence(input,seq,{horizon:W});
+  const r=localSearchPlan(input,{horizon:W,budgetMs:2000,maxEvals:3,seeds:[e.timeline],seed:1,refineShare:0}); assert.ok(r.score.dps>=e.sc.dps-1e-6,`${r.score.dps} < ${e.sc.dps}`);
 });

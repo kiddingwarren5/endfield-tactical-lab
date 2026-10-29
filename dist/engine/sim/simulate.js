@@ -321,6 +321,7 @@ export function simulate(input){
   }
   const total=hits.reduce((a,h)=>a+h.damage,0); const lastHit=hits.length?Math.max(...hits.map(h=>h.t)):0; const duration=P.duration;
   const perMember={}, perSkill={}; for(const h of hits){ perMember[h.name]=(perMember[h.name]||0)+h.damage; const k=`${h.name}·${h.skill}`; perSkill[k]=(perSkill[k]||0)+h.damage; }
+  if(P.planRepair!=null) for(const e of evq) if(e.type==='planned') addLog('planSkip',{member:e.action.member,kind:e.action.kind,requested:e.action.t,message:'到窗口末尾仍未执行（horizonCut）'});
   return {simVersion:SIM_VERSION,events:log,hits,errors,samples,scheduled,summary:{total,duration,lastHit,names:alive.map(m=>m.op.name),memberIdx:alive.map(m=>m.idx),dps:duration>0?total/duration:0,perMember,perSkill,ultsCast:log.filter(e=>e.type==='cast'&&e.kind==='ultimate').length,params:P,energyMax:alive.map(m=>m.energyMax),chargeEff:alive.map(m=>round((m.stats.chargeEff||0)+(P.extraChargeEff?.[m.idx]||0)))},final:{t:round(S.t),sp:S.sp,energy:alive.map(m=>round(m.energy)),control:S.control,cooldowns:alive.map(m=>({name:m.op.name,combo:round(m.cd.combo),ultimate:round(m.cd.ultimate)}))}};
   function ultCost(op,m,data){ const base=op.skills.ultimate?.params?.energyCost?.[0]?.values?.[(m.skillRanks?.ultimate??12)-1]??100; const red=(data.effects||[]).filter(e=>e.owner?.id===op.id&&e.zone==='energyCost'&&(e.owner.potential==null||e.owner.potential<=(m.potential||0))).reduce((a,e)=>a+(valueOf(e,{})||0),0); return Math.round(base*(1+red/100)); }
 }

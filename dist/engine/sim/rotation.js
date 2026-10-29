@@ -23,7 +23,7 @@ export function stepsFor(preset,scenario,isMain){ return (isMain&&scenario?.step
 // 返回：timeline（含步骤序号）、模拟结果（基准与 δ/φ 区间）、周期、每步执行后的资源快照。
 export function resolveRotation(preset,ctx,scenario,isMain=true,teamOverride){
   const input=presetInput(preset,ctx,scenario,teamOverride); const names=input.names; const steps=stepsFor(preset,scenario,isMain);
-  const ordered=steps.map(s=>({member:names.indexOf(s.m),kind:s.k,...(s.optional?{optional:true}:{}),...(s.minT?{minT:s.minT}:{}),...(s.wait?{waitFor:{attachLayers:{element:'cold',min:s.wait}}}:{})}));
+  const ordered=steps.map(s=>({member:names.indexOf(s.m),kind:s.k,...(s.optional?{optional:true}:{}),...(s.minT?{minT:s.minT}:{}),...(s.wait?{waitFor:{attachLayers:{element:s.waitElement||'cold',min:s.wait}}}:{})}));
   const dec=simulate({...input,timeline:[],sequence:ordered,params:{...input.params,duration:150,seqMaxWait:30}}); // 顺序解码：一次模拟得到最早可行时刻
   const g={timeline:dec.scheduled.map(a=>({t:a.t,member:a.member,kind:a.kind,idx:a.idx})),notes:dec.events.filter(e=>e.type==='seqSkip').map(e=>`第 ${e.idx+1} 步 ${names[e.member]} ${e.kind}：${e.message}`),skipped:ordered.map((a,i)=>i).filter(i=>!dec.scheduled.some(x=>x.idx===i))};
   const timeline=g.timeline.map(a=>({t:a.t,member:a.member,kind:a.kind,step:a.idx}));
@@ -72,24 +72,26 @@ function finish(input,ctx,timeline,scenario,plan,modeNote,window=null){
   const slim={team:input.team,mainControl:input.mainControl,enemy:input.enemy,initial:input.initial,names:input.names}; // 结果里不带数据表引用，便于跨线程传递
   return {input:slim,names,steps,timeline:tl,notes:[],skipped:[],main,lo,hi,cycle,end,duration,states,scenario,auto:true,plan,modeNote};
 }
-export function autoRotation(team,mainControl,ctx,scenario,{beam=6,step=1,horizon=60,onProgress,budgetMs=36000,maxEvals=4000}={}){
+export function autoRotation(team,mainControl,ctx,scenario,{beam=6,step=1,horizon=60,onProgress,budgetMs=36000,maxEvals=4000,starts=1,saShare=0.8}={}){
   const W=scenario?.timeLimit??horizon; /* 评价窗口：限时场景用限时，否则用玩家给的总计战斗时间 */
   const {data}=ctx; const base={team,data,mechanics:ctx.mechanics,timing:ctx.timing,enemy:{...ctx.enemy,...(scenario?.enemy||{})},mainControl,initial:scenario?.initial||{sp:200,energy:[0,0,0,0]},params:{}};
   base.names=team.map(m=>m?data.operators.find(o=>o.id===m.operatorId)?.name:null);
-  const input=base; const prog=f=>onProgress&&onProgress(f); const cs=ctx.timing?.castSeconds||{};
-  // 两段式（基准测试 docs/reviews/planner-benchmark.md）：先搜结构，再搜时刻。
-  // 结构：动作顺序 + 最早可行解码（活动列表 + 串行调度生成），束搜索热启动 → 模拟退火；时刻：以退火结果的实际时刻为起点做显式时刻局部搜索（含延迟）与精调。
-  const plan=autoPlan(input,{beam,step,horizon:W,objective:'guaranteed',onProgress:f=>prog(f*0.08)}); const seq0=[...plan.best.timeline].sort((a,b)=>a.t-b.t);
-  const stage=(name,objective,share,seedTl,seed,from)=>{ const ms=Math.round(budgetMs*share), ev=Math.round(maxEvals*share); const sa=annealSequence(input,seedTl,{horizon:W,objective,budgetMs:Math.round(ms*0.6),maxEvals:Math.round(ev*0.6),noHold:true,onProgress:f=>prog(from+f*share*0.6),seed});
-    const ls=localSearchPlan(input,{horizon:W,objective,budgetMs:Math.round(ms*0.4),maxEvals:Math.round(ev*0.4),seeds:[sa.timeline],castSeconds:cs,refineShare:0.5,onProgress:f=>prog(from+share*0.6+f*share*0.4),seed:seed+10});
-    return {name,objective,sa,ls}; };
-  const routes=[stage('均衡','guaranteed',0.56,seq0,1,0.08),stage('集中爆发','burst',0.36,seq0,5,0.64)];
+  const input=base; const prog=f=>onProgress&&onProgress(f);
+  // 两段式（留出验证见 docs/reviews/planner-benchmark.md 第 6–7 节）：第一段找结构——束搜索热启动后单次模拟退火（顺序 + 最早可行解码，80% 预算）；
+  // 第二段只精调时刻——以退火结果的实际时刻为起点、各成员独立时间线、逐动作由粗到细挪时刻、只接受改进（20% 预算）。
+  // 多起点退火和带插删破坏的时刻搜索在别的编队上没有泛化（第 6 节），不用。最终候选按无修复重放的分数排序，退火结果本身也在候选里，所以不会低于退火。
+  const T0=Date.now(); const deadline=T0+budgetMs;
+  const plan=autoPlan(input,{beam,step,horizon:W,objective:'guaranteed',onProgress:f=>prog(f*0.06)}); const seq0=[...plan.best.timeline].sort((a,b)=>a.t-b.t);
+  const saEach=Math.round(budgetMs*saShare/starts); const saEvals=Math.round(maxEvals*saShare/starts); const sas=[];
+  for(let k=0;k<starts;k++){ if(Date.now()>=deadline-1000) break; sas.push(annealSequence(input,seq0,{horizon:W,objective:'guaranteed',budgetMs:saEach,maxEvals:saEvals,noHold:true,deadline:Math.min(deadline,Date.now()+saEach),seed:1+k*7,onProgress:f=>prog(0.06+(k+f)/starts*saShare*0.9)})); }
+  const lsMs=Math.max(500,deadline-Date.now()); const ls=localSearchPlan(input,{horizon:W,objective:'guaranteed',budgetMs:lsMs,maxEvals:Math.max(50,maxEvals-sas.reduce((a,x)=>a+x.evals,0)),seeds:[...sas.map(x=>x.timeline),seq0],refineShare:1,deadline,seed:11,onProgress:f=>prog(0.06+saShare*0.9+f*(1-0.06-saShare*0.9))});
   const cands=[]; const sigOf=tl=>tl.map(a=>`${a.member}${a.kind[0]}`).join('');
-  for(const x of routes){ const list=[{timeline:x.ls.timeline},...x.ls.elites.slice(0,3),{timeline:x.sa.timeline}]; for(const el of list){ if(!el.timeline?.length) continue; const res=finish(input,ctx,el.timeline,scenario,{...plan,improved:{method:x.name,anneal:{evals:x.sa.evals,ms:x.sa.ms},local:x.ls.diag}},null,W); const sure=sumHits(res.main,{until:res.end,mainControl,guaranteed:true})/Math.max(1,res.end); cands.push({name:x.name,objective:x.objective,res,sure,sig:sigOf(el.timeline)}); } }
+  const list=[{timeline:ls.timeline},...ls.elites.slice(0,5),...sas.map(x=>({timeline:x.timeline}))];
+  for(const el of list){ if(!el.timeline?.length) continue; const res=finish(input,ctx,el.timeline,scenario,{...plan,improved:{anneal:sas.map(x=>({evals:x.evals,ms:x.ms,dps:Math.round(x.score.dps)})),local:ls.diag}},null,W); const sure=sumHits(res.main,{until:res.end,mainControl,guaranteed:true})/Math.max(1,res.end); cands.push({res,sure,sig:sigOf(el.timeline)}); }
   // 去重（动作顺序相同只留一个），按保底每秒排序，最多 4 条候选
   const uniq=[]; for(const c of cands.sort((a,b)=>b.sure-a.sure)){ if(uniq.some(u=>u.sig===c.sig)) continue; uniq.push(c); if(uniq.length>=4) break; }
   const best=uniq[0]; if(!best) throw new Error('没有找到可执行的轴');
-  best.res.candidates=uniq.map((c,i)=>({name:`方案 ${i+1}`,method:c.name,sure:Math.round(c.sure),objective:c.objective,res:i===0?null:c.res}));
-  best.res.search=routes.map(x=>({name:x.name,anneal:{evals:x.sa.evals,ms:x.sa.ms,dps:Math.round(x.sa.score.dps)},local:x.ls.diag,dps:Math.round(x.ls.score.dps)}));
+  best.res.candidates=uniq.map((c,i)=>({name:`方案 ${i+1}`,sure:Math.round(c.sure),res:i===0?null:c.res}));
+  best.res.search={anneal:sas.map(x=>({evals:x.evals,ms:x.ms,dps:Math.round(x.score.dps)})),local:ls.diag,dps:Math.round(ls.score.dps),ms:Date.now()-T0};
   return best.res;
 }
