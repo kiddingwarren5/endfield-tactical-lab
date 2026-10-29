@@ -132,7 +132,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 90,
@@ -155,7 +155,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  },
@@ -234,7 +234,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -288,7 +288,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 240,
@@ -316,7 +316,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  },
@@ -386,7 +386,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -429,7 +429,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 80,
@@ -447,7 +447,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  },
@@ -616,7 +616,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 300,
@@ -948,7 +948,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  },
@@ -1023,7 +1023,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "heals": true
   },
   "combo": {
@@ -1077,7 +1077,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 90,
@@ -1100,7 +1100,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "heals": true
   },
   "modes": null
@@ -1170,7 +1170,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -1215,7 +1215,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 70,
@@ -1237,7 +1237,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  },
@@ -1306,7 +1306,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -1353,7 +1353,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 90,
@@ -1490,7 +1490,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -1533,7 +1533,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "heals": true
   },
   "ultimate": {
@@ -1557,7 +1557,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "shield": {
     "team": true,
     "duration": 10,
@@ -1720,7 +1720,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 90,
@@ -1917,7 +1917,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -2065,7 +2065,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null,
   "procs": {
@@ -2215,7 +2215,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 100,
@@ -2238,7 +2238,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null,
   "resources": [
@@ -2353,7 +2353,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -2556,7 +2556,7 @@
    "abnormal": null,
    "notes": "纯治疗，无伤害段",
    "segmentPlan": [],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "heals": true
   },
   "ultimate": {
@@ -2590,7 +2590,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  },
@@ -2657,7 +2657,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -2723,7 +2723,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 100,
@@ -2744,7 +2744,7 @@
     "note": "参数表「持续时间（秒）」"
    },
    "segmentPlan": [],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  },
@@ -2876,7 +2876,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 100,
@@ -2921,7 +2921,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null,
   "resources": [
@@ -3027,7 +3027,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -3085,7 +3085,7 @@
      }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 70,
@@ -3112,7 +3112,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  },
@@ -3244,7 +3244,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "shield": {
     "other": true,
     "duration": 10,
@@ -3286,7 +3286,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  },
@@ -3356,7 +3356,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -3401,7 +3401,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 120,
@@ -3433,7 +3433,7 @@
    "buffs": [],
    "notes": "无伤害段",
    "segmentPlan": [],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  },
@@ -3513,7 +3513,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -3561,7 +3561,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 90,
@@ -3736,7 +3736,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -3999,7 +3999,7 @@
    ],
    "notes": "支援晶体 20s：主控重击时治疗，最多2次；满血时改为施加法术增幅 25s（不叠加）。无伤害段",
    "segmentPlan": [],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "heals": true
   },
   "combo": {
@@ -4054,7 +4054,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 80,
@@ -4075,7 +4075,7 @@
     "note": "参数表「持续时间（秒）」"
    },
    "segmentPlan": [],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null,
   "resources": [
@@ -4169,7 +4169,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -4570,7 +4570,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "healsNote": "天赋迟来的回信要命中至少两个敌人才治疗，单目标靶上不发生（scenario）"
   },
   "combo": {
@@ -4619,7 +4619,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 90,
@@ -4652,7 +4652,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "targetStates": [
     {
      "id": "gravityField",
@@ -4758,7 +4758,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -4809,7 +4809,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "targetStates": [
     {
      "id": "slowed",
@@ -4865,7 +4865,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  },
@@ -5052,7 +5052,7 @@
      }
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "ultimate": {
    "energyCost": 240,
@@ -5394,7 +5394,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  },
@@ -5527,7 +5527,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -5572,7 +5572,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "shield": {
     "self": true,
     "duration": 10,
@@ -5605,7 +5605,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  },
@@ -5675,7 +5675,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -6368,7 +6368,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "heals": true
   },
   "ultimate": {
@@ -6877,7 +6877,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "blocks": true,
    "counterWindow": {
     "value": 3,
@@ -7153,7 +7153,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "combo": {
    "trigger": {
@@ -7200,7 +7200,7 @@
      "note": "解包 combo_skill_abilityrange：10 跳在第 14–43 帧（各 40%），终击在第 49 帧（350% + 100%×层数）；合并为一次事件按终击时刻结算，层数在终击时取值"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件",
    "absorb": {
     "element": [
      "cold",
@@ -7238,7 +7238,7 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；当时按标签标记的条件段已全部换成结构化条件"
   },
   "modes": null
  }

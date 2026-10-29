@@ -28,3 +28,15 @@
 ## 这轮自己发现的
 - 调度器死循环：`nextT` 只看 `busyUntil`，普攻被 `allowAt.attack` 挡住时时间不推进（骏卫战技 1.5 对 1.6）。已修并由骏卫测试覆盖。
 - 未列出种类退回 exclusiveFrame 是错的：日志 3fd54f 别礼战技→战技 2.73 s，exclusiveFrame 12.43 s 是灌注状态时长（verification-needed 89）。
+
+## 第三轮（审 3746316）
+| 项 | 处置 |
+|---|---|
+| 高1 梨诺解包口径下放不出姿态中止（allow.skill 取到 60.567 s） | 阶段链的后续段只看 busyUntil（它是另一个技能 id，解包第 50 帧就放行）；verification-needed 89 的梨诺描述改正；测试 |
+| 高2 追猎 / 后续终结技 / 切人只延长 busyUntil，被旧 allowAt 盖掉 | 统一成 `gateAt(mb,kind)=max(busyUntil, allowAt[kind])`，所有门槛（战技 / 连携 / 追猎 / 普攻 / 下落 / 调度器）都走它；测试覆盖四种情形 |
+| 中3 下落攻击没接 allowAt | 同上，下落按普攻键取 allow.attack；测试（梨诺终结技后 6 s 下落被拒） |
+| 中4 吸收把施加者侧"施加附着后"效果也屏蔽了 | 裁定为假设：施加者侧效果照常触发（施加动作发生了），目标侧不触发；写进 87 条与代码注释；测试（卡缪灯火使命 p2） |
+| 低5 水龙卷追加段事件没带 castT | 补上 |
+| 低6 报错时刻显示 busyUntil 而非真正门槛；骏卫测试空转会挂起 | 报错改显示门槛；测试加 20 s 超时。"有立即段也有延迟段的技能上的下一次类增益"没有补测试 |
+| 不在 diff 内：skill-mechanics 66 处过时的 segmentPlanNote 提到已不存在的 unmodeled 字段 | 改成现状描述并重建 mechanics.js |
+| 不在 diff 内：黎风潜能 5"下一次触发伏魔 +250%"仍未实现（effects-operators-B notes，verification-needed 42） | 未处理，留给用户决定优先级 |

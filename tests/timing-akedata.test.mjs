@@ -62,7 +62,7 @@ test('终结技不受自身动作忙碌限制：别礼连携后 0.2 s 就能放�
   const tl=[{t:0,member:1,kind:'skill'},{t:2,member:1,kind:'skill'},{t:4,member:1,kind:'skill'},{t:6,member:0,kind:'combo'},{t:6.2,member:0,kind:'ultimate'}];
   for(const source of ['akedata','default']){ const r=run([mk('别礼'),mk('汤汤')],tl,{energy:[300,0],source}); assert.ok(castAt(r,'别礼','ultimate',6.2),`${source} 6.2 s 放出终结技`); assert.ok(!busyErr(r,'别礼',6.2)); } });
 
-test('接续窗口按下一动作种类：骏卫战技后 1.5 s 可再放战技，普攻要等 1.6 s；普攻等待时调度器不空转',()=>{
+test('接续窗口按下一动作种类：骏卫战技后 1.5 s 可再放战技，普攻要等 1.6 s；普攻等待时调度器不空转（空转会让本测试超时而不是挂起）',{timeout:20000},()=>{
   const c=ake[op('骏卫').id].cast.skill; assert.deepEqual(c.allow,{attack:1.6,skill:1.5,combo:1.5});
   const r=run([mk('骏卫'),mk('祀')],[{t:0.3,member:0,kind:'skill'},{t:1.8,member:0,kind:'skill'}],{auto:true,duration:6});
   assert.ok(castAt(r,'骏卫','skill',1.8)); const n=r.hits.filter(h=>h.name==='骏卫'&&h.kind==='normal'); assert.ok(!n.some(h=>h.t>0.3&&h.t<1.9),`战技后 1.6 s 内不应有普攻 ${n.map(h=>h.t.toFixed(2)).join(' ')}`);
@@ -74,3 +74,19 @@ test('AllowNext 没列出的种类沿用最早可接主动作帧，不退回 exc
 
 test('强化普攻链沿 AllowNext 走：伊冯 1_1→2_1→2_2→3_1→3_2',()=>{
   assert.deepEqual(ake[op('伊冯').id].ultNormal.names,['ult_attack1_1','ult_attack2_1','ult_attack2_2','ult_attack3_1','ult_attack3_2']); });
+
+test('阶段链的后续段不受 allow.skill 限制：梨诺战技 60.6 s 内不能从头再放，但 5 s 时能放姿态中止',()=>{
+  assert.equal(ake[op('梨诺').id].cast.skill.allow.skill,60.567);
+  const r=run([mk('梨诺'),mk('祀')],[{t:0,member:0,kind:'skill'},{t:5,member:0,kind:'skill'}],{duration:8}); const casts=r.events.filter(e=>e.type==='cast'&&e.who==='梨诺'&&e.kind==='skill');
+  assert.equal(casts.length,2,JSON.stringify(r.events.filter(e=>e.type==='error'))); assert.equal(casts[1].stage,'姿态中止'); });
+
+test('只延长 busyUntil 的动作不会被上一次施放的 allowAt 盖掉：切人 / 追猎 / 后续终结技 / 下落攻击',{timeout:20000},()=>{
+  const sw=run([mk('祀'),mk('别礼')],[{t:0,member:1,kind:'skill'},{t:5,member:1,kind:'switch'},{t:5.1,member:1,kind:'skill'},{t:5.3,member:1,kind:'skill'}],{duration:8});
+  assert.ok(busyErr(sw,'别礼',5.1),'切人后 0.3 s 内不能出手'); assert.ok(castAt(sw,'别礼','skill',5.3));
+  const hunt=run([mk('卡缪'),mk('祀')],[{t:0,member:0,kind:'ultimate'},{t:8,member:0,kind:'skill'},{t:8.2,member:0,kind:'skill'}],{energy:[400,0],auto:true,duration:12});
+  const h=hunt.events.find(e=>e.type==='cast'&&e.who==='卡缪'&&e.replacedSkill); assert.ok(h&&near(h.t,8),`8 s 应放出追猎 ${JSON.stringify(h)}`); assert.ok(busyErr(hunt,'卡缪',8.2),'追猎施放中不能再放战技');
+  const huntBusy=8+ake[op('卡缪').id].cast.combo.seconds; assert.ok(!hunt.hits.some(x=>x.name==='卡缪'&&x.kind==='normal'&&x.t>8&&x.t<huntBusy-0.01),'追猎施放中没有普攻');
+  const tl=[{t:0,member:0,kind:'ultimate'}]; for(let t=1;t<14;t+=0.5) tl.push({t,member:0,kind:'ultimate'});
+  const j=run([mk('诀'),mk('祀')],tl,{energy:[400,0],auto:true,duration:16}); const fu=j.events.filter(e=>e.type==='cast'&&e.who==='诀'&&e.followUp); assert.ok(fu.length>=1,'应放出破晦诀明');
+  const u2=ake[op('诀').id].cast.ultimate2.seconds; for(const f of fu) assert.ok(!j.hits.some(x=>x.name==='诀'&&x.kind==='normal'&&x.t>f.t+0.01&&x.t<f.t+u2-0.01),`后续终结技施放中（${u2} s）不该有普攻`);
+  const pl=run([mk('梨诺'),mk('祀')],[{t:0,member:0,kind:'ultimate'},{t:6,member:0,kind:'plunge'}],{energy:[400,0],duration:8}); assert.ok(busyErr(pl,'梨诺',6),`梨诺终结技后普攻键要等 ${ake[op('梨诺').id].cast.ultimate.allow.attack} s，6 s 的下落攻击应被拒`); });

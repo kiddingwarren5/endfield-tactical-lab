@@ -39,3 +39,9 @@ test('玉中身「下个连携技伤害」在终结技后武装、在连携的�
   const r=run([mk('祀',0,'玉中身'),mk('汤汤'),mk('别礼')],[{t:0.2,member:0,kind:'ultimate'},...base],{energy:[300,0,0,0]});
   const h=siHit(r); assert.ok(h.applied.some(a=>a.id==='wpn_claym_0018.p3'),'终击应计入玉中身 p3');
   const end=r.events.find(e=>e.type==='buffEnd'&&e.id==='wpn_claym_0018.p3'); assert.ok(end&&Math.abs(end.t-h.t)<0.02,`p3 应在终击时刻消耗 ${JSON.stringify(end)} 终击 ${h.t}`); });
+
+test('被吸收的附着仍触发施加者侧"施加附着后"效果（假设，verification-needed 87）：卡缪灯火使命 p2 在墨龙窗口内照常触发',()=>{
+  const team=[mk('祀'),mk('汤汤'),mk('别礼'),mk('卡缪',0,'灯火使命')]; const r=run(team,[...base,{t:9.0,member:3,kind:'skill'}]);
+  const ab=r.events.find(e=>e.type==='absorb'&&e.element==='heat'); assert.ok(ab,'应有灼热吸收');
+  const b=r.events.find(e=>e.type==='buffStart'&&e.id==='wpn_lance_0007.p2'); assert.ok(b&&Math.abs(b.t-ab.t)<0.02,`灯火使命 p2 应在吸收时刻触发 ${JSON.stringify(b)}`);
+  assert.ok(!r.events.some(e=>e.type==='attach'&&e.t>9&&e.t<10.2),'目标侧不叠层'); });
