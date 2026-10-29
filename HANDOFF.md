@@ -79,3 +79,4 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 - 引擎不再按技能文本做正则判断：触发只认触发代码（删除文本猜测后备）；形态门槛用 effect.condition.form；返还 / 恢复用 effect.spKind 与 mechanics spRefund.kind（recover / refund）；附着绑定用 attach.bind（hit / controlHeavy / slot1Element）；阶段链按 stage.segment 选段；处决 / 下落按 normal.segmentIds；条件伤害段只认 mechanics.<kind>.segmentPlan（校验器要求每个干员三技能都有计划，times 0 + when.unmodeled 表示未建模）；终结技后减冷却走即时区并按受益者 / 01 号位结算。
 - 迁移脚本 tools/migrate_textfields.mjs（幂等）把以上字段写进 curated 数据。
 - 随之修正的三处行为：祀终结技减冷却只给 01 号位；大潘“备料”减冷却不再被“终结技…后”的文本误判成终结技后触发；噗切娜“我没有睡着！”立盾不打伤害、头槌只在替换段。
+- 七种干员资源全部走 mechanics.resources 规则（熔火、启示 / 猎矢、支援晶体、雷枪 / 强雷枪、自制炸弹、连击、青霆剑）；段计划支持 timesFrom / lastMul / delay，消耗规则支持 extraSegment / factor / cancelDelayed，获得规则支持 perAbnormalLevel / duringUltimateFirst / duration。敌人默认每 4 秒攻击主控。

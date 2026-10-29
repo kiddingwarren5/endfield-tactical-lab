@@ -1,8 +1,8 @@
 # 图与模拟器一致性（由 tools/check_graph_sim.mjs 生成）
 
-生成：2026-10-29T03:21:50.440Z
+生成：2026-10-29T03:28:44.580Z
 
-显式提供者 325 条：可直接检验 139 条，其中点亮 106、未点亮 0、未点亮但提供者带守卫（目标先要处于某状态，单独检不出）33；未检 186 条（提供者自身需要前置条件，列在表里）。未点亮的每条都要有原因：要么提供者需要目标先处于某状态（图里带守卫），要么模拟器缺这段机制（写进 verification-needed）。
+显式提供者 330 条：可直接检验 143 条，其中点亮 102、未点亮 0、未点亮但提供者带守卫（目标先要处于某状态，单独检不出）41；未检 187 条（提供者自身需要前置条件，列在表里）。未点亮的每条都要有原因：要么提供者需要目标先处于某状态（图里带守卫），要么模拟器缺这段机制（写进 verification-needed）。
 
 | 干员 | 条件 | 提供者 | 结果 | 动作报错 |
 |---|---|---|---|---|
@@ -12,7 +12,7 @@
 | 狼卫 | anyAttachApplied anyArts | 洛茜 · “利爪”奇袭（匕首两段斩击） | 点亮 |  |
 | 狼卫 | anyAttachApplied anyArts | 弧光 · 轰雷掣电（冲刺路径命中） | 点亮 |  |
 | 狼卫 | anyAttachApplied anyArts | 阿列什 · 大鳞，上钩! | 点亮 |  |
-| 狼卫 | anyAttachApplied anyArts | 艾维文娜 · 雷枪·截回（强雷枪召回穿过敌人） | 点亮 |  |
+| 狼卫 | anyAttachApplied anyArts | 艾维文娜 · 雷枪·截回（强雷枪召回穿过敌人） | 未点亮（有守卫） |  |
 | 狼卫 | anyAttachApplied anyArts | 昼雪 · 饱和性防御（立盾期间受击触发反击命中） | 点亮 |  |
 | 狼卫 | anyAttachApplied anyArts | 安塔尔 · 磁暴试验场（目标被施加过触发其连携的附着） | 未检 | 提供者是连携技，要先满足它自己的条件 |
 | 狼卫 | anyAttachApplied anyArts | 萤石 · 小惊喜（炸弹延迟爆炸） | 点亮 |  |
@@ -24,6 +24,7 @@
 | 狼卫 | anyAttachApplied anyArts | 洁尔佩塔 · 秘杖·引力模式（施法结束奇点爆炸） | 点亮 |  |
 | 狼卫 | anyAttachApplied anyArts | 洁尔佩塔 · 秘杖·重力场（生成区域时） | 点亮 |  |
 | 狼卫 | anyAttachApplied anyArts | 汤汤 · 踏潮卷浪！（水龙卷；本次形成多个水龙卷时不重复施加） | 点亮 |  |
+| 狼卫 | anyAttachApplied anyArts | 庄方宜 · 惊霆诀（终结技期间最后一次雷击施加电磁附着） | 未点亮（有守卫） |  |
 | 狼卫 | anyAttachApplied anyArts | 卡缪 · 驱火焚影 | 点亮 |  |
 | 狼卫 | anyAttachApplied anyArts | 卡缪 · 猩红坠雨 | 点亮 |  |
 | 狼卫 | anyAttachApplied anyArts | 诀 · 摧玉网格 | 未检 | 提供者带阶段 / 形态前提 |
@@ -66,6 +67,7 @@
 | 洛茜 | custom anyArts ≥1 | 洁尔佩塔 · 秘杖·引力模式（施法结束奇点爆炸） | 未检 | 同时条件，单个提供者不够 |
 | 洛茜 | custom anyArts ≥1 | 洁尔佩塔 · 秘杖·重力场（生成区域时） | 未检 | 同时条件，单个提供者不够 |
 | 洛茜 | custom anyArts ≥1 | 汤汤 · 踏潮卷浪！（水龙卷；本次形成多个水龙卷时不重复施加） | 未检 | 同时条件，单个提供者不够 |
+| 洛茜 | custom anyArts ≥1 | 庄方宜 · 惊霆诀（终结技期间最后一次雷击施加电磁附着） | 未检 | 同时条件，单个提供者不够 |
 | 洛茜 | custom anyArts ≥1 | 卡缪 · 驱火焚影 | 未检 | 同时条件，单个提供者不够 |
 | 洛茜 | custom anyArts ≥1 | 卡缪 · 猩红坠雨 | 未检 | 同时条件，单个提供者不够 |
 | 洛茜 | custom anyArts ≥1 | 诀 · 摧玉网格 | 未检 | 同时条件，单个提供者不够 |
@@ -131,7 +133,7 @@
 | 安塔尔 | anyAttachApplied anyArts | 洛茜 · “利爪”奇袭（匕首两段斩击） | 点亮 |  |
 | 安塔尔 | anyAttachApplied anyArts | 弧光 · 轰雷掣电（冲刺路径命中） | 点亮 |  |
 | 安塔尔 | anyAttachApplied anyArts | 阿列什 · 大鳞，上钩! | 点亮 |  |
-| 安塔尔 | anyAttachApplied anyArts | 艾维文娜 · 雷枪·截回（强雷枪召回穿过敌人） | 点亮 |  |
+| 安塔尔 | anyAttachApplied anyArts | 艾维文娜 · 雷枪·截回（强雷枪召回穿过敌人） | 未点亮（有守卫） |  |
 | 安塔尔 | anyAttachApplied anyArts | 昼雪 · 饱和性防御（立盾期间受击触发反击命中） | 点亮 |  |
 | 安塔尔 | anyAttachApplied anyArts | 萤石 · 小惊喜（炸弹延迟爆炸） | 点亮 |  |
 | 安塔尔 | anyAttachApplied anyArts | 萤石 · 免费赠礼（目标被施加过触发其连携的附着） | 未检 | 提供者是连携技，要先满足它自己的条件 |
@@ -142,6 +144,7 @@
 | 安塔尔 | anyAttachApplied anyArts | 洁尔佩塔 · 秘杖·引力模式（施法结束奇点爆炸） | 点亮 |  |
 | 安塔尔 | anyAttachApplied anyArts | 洁尔佩塔 · 秘杖·重力场（生成区域时） | 点亮 |  |
 | 安塔尔 | anyAttachApplied anyArts | 汤汤 · 踏潮卷浪！（水龙卷；本次形成多个水龙卷时不重复施加） | 点亮 |  |
+| 安塔尔 | anyAttachApplied anyArts | 庄方宜 · 惊霆诀（终结技期间最后一次雷击施加电磁附着） | 未点亮（有守卫） |  |
 | 安塔尔 | anyAttachApplied anyArts | 卡缪 · 驱火焚影 | 点亮 |  |
 | 安塔尔 | anyAttachApplied anyArts | 卡缪 · 猩红坠雨 | 点亮 |  |
 | 安塔尔 | anyAttachApplied anyArts | 诀 · 摧玉网格 | 未检 | 提供者带阶段 / 形态前提 |
@@ -257,7 +260,7 @@
 | 诀（意） | attachApplied any | 洛茜 · “利爪”奇袭（匕首两段斩击） | 点亮 |  |
 | 诀（意） | attachApplied any | 弧光 · 轰雷掣电（冲刺路径命中） | 点亮 |  |
 | 诀（意） | attachApplied any | 阿列什 · 大鳞，上钩! | 点亮 |  |
-| 诀（意） | attachApplied any | 艾维文娜 · 雷枪·截回（强雷枪召回穿过敌人） | 点亮 |  |
+| 诀（意） | attachApplied any | 艾维文娜 · 雷枪·截回（强雷枪召回穿过敌人） | 未点亮（有守卫） |  |
 | 诀（意） | attachApplied any | 昼雪 · 饱和性防御（立盾期间受击触发反击命中） | 点亮 |  |
 | 诀（意） | attachApplied any | 安塔尔 · 磁暴试验场（目标被施加过触发其连携的附着） | 未检 | 提供者是连携技，要先满足它自己的条件 |
 | 诀（意） | attachApplied any | 萤石 · 小惊喜（炸弹延迟爆炸） | 点亮 |  |
@@ -269,6 +272,7 @@
 | 诀（意） | attachApplied any | 洁尔佩塔 · 秘杖·引力模式（施法结束奇点爆炸） | 点亮 |  |
 | 诀（意） | attachApplied any | 洁尔佩塔 · 秘杖·重力场（生成区域时） | 点亮 |  |
 | 诀（意） | attachApplied any | 汤汤 · 踏潮卷浪！（水龙卷；本次形成多个水龙卷时不重复施加） | 点亮 |  |
+| 诀（意） | attachApplied any | 庄方宜 · 惊霆诀（终结技期间最后一次雷击施加电磁附着） | 未点亮（有守卫） |  |
 | 诀（意） | attachApplied any | 卡缪 · 驱火焚影 | 点亮 |  |
 | 诀（意） | attachApplied any | 卡缪 · 猩红坠雨 | 点亮 |  |
 | 诀（意） | attachApplied any | 噗切娜 · 我没有睡着！ | 未检 | 提供者带阶段 / 形态前提 |
@@ -288,7 +292,7 @@
 | 诀（智）（或） | attachLayers otherArts ≥2 | 洛茜 · “利爪”奇袭（匕首两段斩击） | 未检 | 一次终结技只施加 1 层，层数条件要配合别的来源 |
 | 诀（智）（或） | attachLayers otherArts ≥2 | 弧光 · 轰雷掣电（冲刺路径命中） | 未检 | 一次终结技只施加 1 层，层数条件要配合别的来源 |
 | 诀（智）（或） | attachLayers otherArts ≥2 | 阿列什 · 大鳞，上钩! | 未检 | 一次终结技只施加 1 层，层数条件要配合别的来源 |
-| 诀（智）（或） | attachLayers otherArts ≥2 | 艾维文娜 · 雷枪·截回（强雷枪召回穿过敌人） | 点亮 |  |
+| 诀（智）（或） | attachLayers otherArts ≥2 | 艾维文娜 · 雷枪·截回（强雷枪召回穿过敌人） | 未点亮（有守卫） |  |
 | 诀（智）（或） | attachLayers otherArts ≥2 | 昼雪 · 饱和性防御（立盾期间受击触发反击命中） | 点亮 |  |
 | 诀（智）（或） | attachLayers otherArts ≥2 | 安塔尔 · 磁暴试验场（目标被施加过触发其连携的附着） | 未检 | 提供者是连携技，要先满足它自己的条件 |
 | 诀（智）（或） | attachLayers otherArts ≥2 | 萤石 · 免费赠礼（目标被施加过触发其连携的附着） | 未检 | 提供者是连携技，要先满足它自己的条件 |
@@ -297,6 +301,7 @@
 | 诀（智）（或） | attachLayers otherArts ≥2 | 秋栗 · 热情迸发 | 点亮 |  |
 | 诀（智）（或） | attachLayers otherArts ≥2 | 赛希 · 压力测试 | 未检 | 提供者是连携技，要先满足它自己的条件 |
 | 诀（智）（或） | attachLayers otherArts ≥2 | 汤汤 · 踏潮卷浪！（水龙卷；本次形成多个水龙卷时不重复施加） | 点亮 |  |
+| 诀（智）（或） | attachLayers otherArts ≥2 | 庄方宜 · 惊霆诀（终结技期间最后一次雷击施加电磁附着） | 未点亮（有守卫） |  |
 | 诀（智）（或） | attachLayers otherArts ≥2 | 卡缪 · 驱火焚影 | 点亮 |  |
 | 诀（智）（或） | attachLayers otherArts ≥2 | 卡缪 · 猩红坠雨 | 未检 | 一次终结技只施加 1 层，层数条件要配合别的来源 |
 | 诀（智）（或） | attachLayers otherArts ≥2 | 祀 · 河山共影（默认） | 未点亮（有守卫） |  |

@@ -411,24 +411,29 @@
  "solo:艾维文娜": {
   "per": {
    "艾维文娜": {
-    "damage": 16677.435,
-    "hits": 39
+    "damage": 12981.033,
+    "hits": 29
    }
   },
   "events": {
-   "normalHit": 27,
-   "spOverflow": 44,
-   "spGain": 44,
+   "normalHit": 23,
+   "spOverflow": 36,
+   "spGain": 36,
    "spSpend": 3,
-   "cast": 4,
-   "energyOverflow": 4,
-   "energyGain": 4,
-   "attach": 3,
-   "comboReady": 2,
+   "cast": 5,
+   "energyOverflow": 2,
+   "energyGain": 6,
    "enemyAttack": 5,
-   "error": 2
+   "error": 1,
+   "pause": 1,
+   "resourceGain": 2,
+   "buffStart": 1,
+   "resourceSpend": 1,
+   "resourceExhausted": 1,
+   "attach": 1,
+   "comboReady": 2
   },
-  "errors": 2
+  "errors": 1
  },
  "solo:管理员 (男)": {
   "per": {
@@ -506,12 +511,15 @@
   },
   "events": {
    "normalHit": 41,
-   "spOverflow": 64,
-   "spGain": 64,
+   "spOverflow": 63,
+   "spGain": 63,
    "spSpend": 3,
    "cast": 4,
+   "resourceGain": 3,
    "energyOverflow": 3,
    "energyGain": 3,
+   "resourceSpend": 3,
+   "resourceExhausted": 3,
    "attach": 4,
    "enemyAttack": 5,
    "comboReady": 2,
@@ -590,8 +598,8 @@
  "solo:黎风": {
   "per": {
    "黎风": {
-    "damage": 24212.538,
-    "hits": 43
+    "damage": 26993.538,
+    "hits": 46
    }
   },
   "events": {
@@ -602,12 +610,15 @@
    "cast": 4,
    "energyOverflow": 4,
    "energyGain": 4,
-   "buffStart": 3,
-   "buffRefresh": 10,
+   "buffStart": 2,
+   "buffRefresh": 8,
    "breach": 3,
    "abnormal": 3,
+   "extraHit": 3,
+   "instant": 3,
    "comboReady": 2,
    "enemyAttack": 5,
+   "resourceGain": 1,
    "error": 2
   },
   "errors": 2
@@ -688,7 +699,7 @@
   "per": {
    "伊冯": {
     "damage": 16834.065,
-    "hits": 44
+    "hits": 47
    }
   },
   "events": {
@@ -758,23 +769,27 @@
  "solo:庄方宜": {
   "per": {
    "庄方宜": {
-    "damage": 13611.653,
-    "hits": 35
+    "damage": 20246.039,
+    "hits": 40
    }
   },
   "events": {
    "normalHit": 28,
    "spOverflow": 41,
    "spGain": 41,
-   "spSpend": 3,
+   "spSpend": 2,
    "cast": 4,
-   "energyOverflow": 4,
-   "energyGain": 6,
+   "resourceGain": 4,
+   "energyOverflow": 7,
+   "energyGain": 15,
    "buffStart": 1,
    "enemyAttack": 5,
    "buffRefresh": 2,
    "error": 2,
    "pause": 1,
+   "note": 1,
+   "attach": 1,
+   "comboReady": 1,
    "buffEnd": 1
   },
   "errors": 2
@@ -1135,7 +1150,7 @@
   "per": {
    "伊冯": {
     "damage": 17576.678,
-    "hits": 47
+    "hits": 49
    },
    "佩丽卡": {
     "damage": 10644.424,

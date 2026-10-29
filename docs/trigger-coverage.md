@@ -1,14 +1,14 @@
 # 触发覆盖（由 tests/triggers.test.mjs 生成）
 
-生成：2026-10-29T03:21:50.363Z
+生成：2026-10-29T03:28:44.505Z
 
 | 归属 | 效果数 |
 |---|---|
-| event | 189 |
+| event | 190 |
 | unmodeled | 67 |
 | handled | 9 |
 | state | 30 |
-| event-noop | 11 |
+| event-noop | 10 |
 
 ## 未建模原因汇总
 
@@ -137,7 +137,7 @@
 | chr_0019_karin.pot5.comboExtend | afterUltimateEnd | event-noop |
 | chr_0015_lifeng.skill.physFragile | skillFinalHitNoBreach | event |
 | chr_0015_lifeng.combo.comboState | afterComboCast | event-noop |
-| chr_0015_lifeng.talent2.knockdown | onKnockdown | event-noop |
+| chr_0015_lifeng.talent2.knockdown | onKnockdown | event |
 | chr_0015_lifeng.pot1.fragile | skillFinalHitBreachLe2 | event |
 | chr_0015_lifeng.pot5.knockdown | onKnockdown | event-noop |
 | chr_0029_pograni.talent1.atk | afterSelfSkillSpRecover80 | event |

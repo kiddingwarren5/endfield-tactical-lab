@@ -841,12 +841,15 @@
   },
   "name": "黎风 · 天赋「伏魔」倒地追加伤害",
   "literal": "额外造成攻击力{v}%的物理伤害",
-  "zone": "other",
+  "zone": "extraHit",
   "stat": null,
   "value": {
-   "fixed": 100
+   "formula": "atk*1.0",
+   "vars": [
+    "atk"
+   ]
   },
-  "unit": "%",
+  "unit": "flat",
   "beneficiary": "self",
   "applies": {
    "elements": [
@@ -871,7 +874,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0015_lifeng.talents[1].stages[1]"
   },
-  "notes": "不是增益而是一次独立追加伤害（攻击力100%物理伤害）。未写明伤害类型：①独立伤害，不属于任何技能类型；②按造成倒地的技能类型（战技/终结技）计。",
+  "notes": "不是增益而是一次独立追加伤害（攻击力100%物理伤害）。未写明伤害类型：①独立伤害，不属于任何技能类型；②按造成倒地的技能类型（战技/终结技）计。 按固定伤害追加（攻击力 100%）。",
   "stages": [
    {
     "stage": "伏魔·一",
@@ -1111,7 +1114,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0015_lifeng.potentials[4]"
   },
-  "notes": "独立追加伤害（攻击力250%物理伤害，5点失衡），是否替代或附加于伏魔的100%原文为“额外造成”，按附加理解。",
+  "notes": "独立追加伤害（攻击力250%物理伤害，5点失衡），是否替代或附加于伏魔的100%原文为“额外造成”，按附加理解。 “下一次触发时”的触发时机官方未明，未建模（verification-needed 42）。",
   "modifies": [
    "chr_0015_lifeng.talent2.knockdown"
   ]

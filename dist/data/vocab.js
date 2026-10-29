@@ -23,10 +23,11 @@ export const STATES=['always','never','duringUltimate','modeInt','targetAttached
 // 连携技发动条件类型（mechanics combo.trigger.type）与自定义事件
 export const COMBO_TRIGGER_TYPES=['attachApplied','anyAttachApplied','attachLayers','attachConsumed','abnormal','burst','heavyHit','execute','allyCombo','skillState','resource','custom'];
 export const CUSTOM_EVENTS=['controlledHit','abnormalConsumed','crystalConsumed','enemyCharging','stagger'];
-export const RESOURCES=[{id:'sp',name:'技力'},{id:'poisonSp',name:'返还技力'},{id:'energy',name:'终结技能量'},{id:'attach',name:'法术附着层'},{id:'breach',name:'破防层'},{id:'vortex',name:'涡流'},{id:'ink',name:'笔意 / 墨魂'},{id:'molten',name:'熔火'},{id:'lance',name:'雷枪 / 强雷枪'},{id:'bomb',name:'自制炸弹'},{id:'comboCount',name:'连击'},{id:'crystal',name:'支援晶体'},{id:'arrow',name:'猎矢'},{id:'revelation',name:'启示'},{id:'stance',name:'姿态'}];
+export const RESOURCES=[{id:'sp',name:'技力'},{id:'poisonSp',name:'返还技力'},{id:'energy',name:'终结技能量'},{id:'attach',name:'法术附着层'},{id:'breach',name:'破防层'},{id:'vortex',name:'涡流'},{id:'ink',name:'笔意 / 墨魂'},{id:'molten',name:'熔火'},{id:'lance',name:'雷枪'},{id:'strongLance',name:'强雷枪'},{id:'sword',name:'青霆剑（剑数）'},{id:'bomb',name:'自制炸弹'},{id:'comboCount',name:'连击'},{id:'crystal',name:'支援晶体'},{id:'arrow',name:'猎矢'},{id:'revelation',name:'启示'},{id:'stance',name:'姿态'}];
 // 资源规则（mechanics.resources）：gains/spend 的 on ∈ skillHit | comboHit | skillCast | comboCast | ultimateCast | heavy | burst
 export const RESOURCE_RULE_EVENTS=['skillHit','comboHit','skillCast','comboCast','ultimateCast','heavy','burst'];
-export const RESOURCE_ALIASES={'涡流':'vortex','熔火':'molten','雷枪/强雷枪':'lance','自制炸弹':'bomb','连击':'comboCount','支援晶体':'crystal','猎矢':'arrow','启示':'revelation'};
+// 段计划条目：{id, times?, timesFrom?('资源 id' 或 'consumed:异常'), lastMul?, delay?, when?}
+export const RESOURCE_ALIASES={'涡流':'vortex','熔火':'molten','雷枪/强雷枪':'lance','雷枪':'lance','强雷枪':'strongLance','自制炸弹':'bomb','连击':'comboCount','支援晶体':'crystal','猎矢':'arrow','启示':'revelation','青霆剑':'sword','剑数':'sword'};
 // 效果的条件性：static 配装即生效（看面板就能算）；eventDriven / stateDriven / handled 取决于轴里做了什么；unmodeled 引擎不算；informational 只记录不进伤害
 // 效果两个维度：生效方式（看什么才生效）与实现状态（引擎算不算）
 export const ACTIVATION=['static','event','state','segment'];
