@@ -69,19 +69,27 @@ export function evalSequence(input,seq,{horizon=70,objective='guaranteed'}={}){
   const mc=input.mainControl??0; const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]);
   const sim=simulate({...input,timeline:[],sequence:seq,params:{...(input.params||{}),duration:horizon}});
   const skipped=sim.events.filter(e=>e.type==='seqSkip').length; const sc=scoreOf(sim,memberIdxs,horizon,objective,mc);
-  return {sim,score:sc.dps*(skipped?Math.pow(0.9,skipped):1),sc,timeline:sim.scheduled.map(a=>({t:a.t,member:a.member,kind:a.kind})),skipped};
+  return {sim,score:sc.dps*(skipped?Math.pow(0.9,skipped):1),sc,timeline:sim.scheduled.map(a=>({t:a.t,member:a.member,kind:a.kind,idx:a.idx})),skipped};
 }
 // 模拟退火（顺序空间）：状态 = 动作顺序；邻域 = 交换 / 移动 / 删除 / 插入 / 改类型；目标 = 周期内保底每秒伤害；跳过的步骤按 0.9^n 折算。
-export function annealSequence(input,seq0,{horizon=70,objective='guaranteed',budgetMs=8000,maxEvals=1200,onProgress,seed=1}={}){
-  const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const kinds=['skill','combo','ultimate']; const mcIdx=input.mainControl??0; const actsAll=[]; for(const m of memberIdxs){ for(const k of kinds) actsAll.push({member:m,kind:k}); if(m===mcIdx) actsAll.push({member:m,kind:'plunge'}); }
+// 时刻是搜索变量：每个动作可带 minT（不早于这个时刻放），解码仍在“不早于 minT 的最早可行时刻”执行，所以永远可执行，又能把技能按住留给爆发。
+// 另有条件等待动作 {kind:'wait',layers:n}：等任一元素附着叠到 n 层。
+export const WAIT_ACTS=[{kind:'wait',layers:3},{kind:'wait',layers:4}];
+const normAct=a=>a.kind==='wait'?{kind:'wait',layers:a.layers}:(a.minT!=null?{member:a.member,kind:a.kind,minT:a.minT}:{member:a.member,kind:a.kind});
+const SHIFTS=[-4,-2,-1,1,2,4,8];
+export function annealSequence(input,seq0,{horizon=70,objective='guaranteed',budgetMs=8000,maxEvals=1200,onProgress,seed=1,noHold=false}={}){
+  const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const kinds=['skill','combo','ultimate']; const mcIdx=input.mainControl??0; const actsAll=[...WAIT_ACTS]; for(const m of memberIdxs){ for(const k of kinds) actsAll.push({member:m,kind:k}); if(m===mcIdx) actsAll.push({member:m,kind:'plunge'}); }
   let rs=(seed>>>0)||1; const rnd=()=>{ rs^=rs<<13; rs>>>=0; rs^=rs>>>17; rs^=rs<<5; rs>>>=0; return rs/4294967296; }; const pick=arr=>arr[Math.floor(rnd()*arr.length)];
   const ev=seq=>evalSequence(input,seq,{horizon,objective});
-  let cur=seq0.map(a=>({member:a.member,kind:a.kind})); let curE=ev(cur); let best=cur, bestE=curE; const t0=Date.now(); let evals=1, accepted=0; const T0=0.05, T1=0.002;
-  const neighbor=seq=>{ const r=rnd(); const s2=[...seq]; const n=s2.length; if(!n||r<0.15){ s2.splice(Math.floor(rnd()*(n+1)),0,{...pick(actsAll)}); return s2; }
-    const i=Math.floor(rnd()*n); if(r<0.45){ const j=Math.floor(rnd()*n); [s2[i],s2[j]]=[s2[j],s2[i]]; return s2; }
-    if(r<0.7){ const [a]=s2.splice(i,1); s2.splice(Math.floor(rnd()*(s2.length+1)),0,a); return s2; }
-    if(r<0.85){ s2.splice(i,1); return s2; }
-    { const a=pick(actsAll); s2[i]={member:a.member,kind:a.kind}; } return s2; };
+  let cur=seq0.map(normAct); let curE=ev(cur); let best=cur, bestE=curE; const t0=Date.now(); let evals=1, accepted=0; const T0=0.05, T1=0.002;
+  const tOf=i=>curE.timeline.find(x=>x.idx===i)?.t;
+  const neighbor=seq=>{ const r=rnd(); const s2=[...seq]; const n=s2.length; if(!n||r<0.12){ s2.splice(Math.floor(rnd()*(n+1)),0,normAct(pick(actsAll))); return s2; }
+    const i=Math.floor(rnd()*n); if(r<0.38){ const j=Math.floor(rnd()*n); [s2[i],s2[j]]=[s2[j],s2[i]]; return s2; }
+    if(r<0.58){ const [a]=s2.splice(i,1); s2.splice(Math.floor(rnd()*(s2.length+1)),0,a); return s2; }
+    if(r<0.7){ s2.splice(i,1); return s2; }
+    if(r<0.8){ s2[i]=normAct(pick(actsAll)); return s2; }
+    /* 挪时刻：按住或松开某个动作。以它当前实际放出的时刻为基准挪几秒；挪成负数或解除就是“尽早放” */
+    { const a=s2[i]; if(noHold||a.kind==='wait'){ s2[i]=normAct(pick(actsAll)); return s2; } const base=tOf(i); if(base==null||rnd()<0.2){ const {minT,...rest}=a; s2[i]=rest; return s2; } const nt=Math.round((base+pick(SHIFTS))*10)/10; s2[i]=nt>0?{...a,minT:nt}:(({minT,...rest})=>rest)(a); return s2; } };
   while(evals<maxEvals&&Date.now()-t0<budgetMs){ const frac=Math.max(evals/maxEvals,(Date.now()-t0)/budgetMs); const temp=T0*Math.pow(T1/T0,frac);
     const cand=neighbor(cur); const e=ev(cand); evals++; const rel=(e.score-curE.score)/Math.max(1,curE.score);
     if(rel>=0||rnd()<Math.exp(rel/temp)){ cur=cand; curE=e; accepted++; if(e.score>bestE.score){ best=cand; bestE=e; } }
@@ -89,22 +97,44 @@ export function annealSequence(input,seq0,{horizon=70,objective='guaranteed',bud
   return {sequence:best,timeline:bestE.timeline,score:bestE.sc,evals,accepted,ms:Date.now()-t0,skipped:bestE.skipped};
 }
 
-// 搜索后的整理：先逐个试删（拿掉也不掉分就删，去掉溢出的附着和无用动作），再在每个位置试插每位干员的连携（加分就留），反复到没有改进或用完预算。
+// 搜索后的整理：先逐个试删（拿掉也不掉分就删，去掉溢出的附着和无用动作），再在每个位置试插每位干员的连携（加分就留），再把每个动作试按住 2 / 4 秒（加分就留），反复到没有改进或用完预算。
 export function polishSequence(input,seq0,{horizon=70,objective='guaranteed',maxEvals=400,maxPasses=3}={}){
   const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const ev=seq=>evalSequence(input,seq,{horizon,objective});
-  let cur=seq0.map(a=>({member:a.member,kind:a.kind})); let curE=ev(cur); let evals=1, removed=0, inserted=0; const EPS=1e-9;
+  let cur=seq0.map(normAct); let curE=ev(cur); let evals=1, removed=0, inserted=0, held=0; const EPS=1e-9; const inserts=memberIdxs.map(m=>({member:m,kind:'combo'}));
   for(let pass=0;pass<maxPasses&&evals<maxEvals;pass++){ let changed=false;
     for(let i=0;i<cur.length&&evals<maxEvals;){ const cand=cur.filter((_,k)=>k!==i); const e=ev(cand); evals++; if(e.score>=curE.score-EPS){ cur=cand; curE=e; removed++; changed=true; } else i++; }
-    for(let i=0;i<=cur.length&&evals<maxEvals;i++){ for(const m of memberIdxs){ if(evals>=maxEvals) break; const cand=[...cur.slice(0,i),{member:m,kind:'combo'},...cur.slice(i)]; const e=ev(cand); evals++; if(e.score>curE.score*(1+1e-6)){ cur=cand; curE=e; inserted++; changed=true; i++; } } }
+    for(let i=0;i<=cur.length&&evals<maxEvals;i++){ for(const ins of inserts){ if(evals>=maxEvals) break; const cand=[...cur.slice(0,i),{...ins},...cur.slice(i)]; const e=ev(cand); evals++; if(e.score>curE.score*(1+1e-6)){ cur=cand; curE=e; inserted++; changed=true; i++; } } }
+    /* 按住：每个动作试“不早于当前时刻 + 2 / 4 秒”，加分就留；已按住的试松开 */
+    for(let i=0;i<cur.length&&evals<maxEvals;i++){ const a=cur[i]; if(a.kind==='wait') continue; const base=curE.timeline.find(x=>x.idx===i)?.t; if(base==null) continue; const opts=[2,4].map(d=>({...a,minT:Math.round((base+d)*10)/10})); if(a.minT!=null){ const {minT,...rest}=a; opts.push(rest); }
+      for(const o of opts){ if(evals>=maxEvals) break; const cand=cur.map((x,k)=>k===i?o:x); const e=ev(cand); evals++; if(e.score>curE.score*(1+1e-6)){ cur=cand; curE=e; held++; changed=true; break; } } }
     if(!changed) break; }
-  return {sequence:cur,timeline:curE.timeline,score:curE.sc,evals,removed,inserted,skipped:curE.skipped};
+  return {sequence:cur,timeline:curE.timeline,score:curE.sc,evals,removed,inserted,held,skipped:curE.skipped};
+}
+
+// NRPA（Rosin 2011，嵌套 rollout 策略自适应）：单智能体确定性序列问题的嵌套蒙特卡洛。策略 = “上一动作 → 下一动作”的权重表（softmax 采样）；
+// 第 0 层做一次 rollout（按策略采样整条序列并模拟打分），上层每轮调用下层、记住最好序列、把策略向它做一步梯度（Rosin 的 adapt）。有预算就停。
+export function nrpaSequence(input,{horizon=70,objective='guaranteed',budgetMs=8000,level=3,iters=10,maxLen=40,alpha=1,seedSeq=null,onProgress,seed=13}={}){
+  const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const kinds=['skill','combo','ultimate']; const mcIdx=input.mainControl??0;
+  const acts=[...WAIT_ACTS,{kind:'wait',seconds:2},{kind:'wait',seconds:4}]; for(const m of memberIdxs){ for(const k of kinds) acts.push({member:m,kind:k}); if(m===mcIdx) acts.push({member:m,kind:'plunge'}); }
+  const STOP={kind:'stop'}; const all=[...acts,STOP]; const key=a=>a.kind==='stop'?'stop':a.kind==='wait'?`wait:${a.seconds??''}:${a.layers??''}`:`${a.member}:${a.kind}`; const allKeys=all.map(key); const code=(prev,k)=>prev+'>'+k;
+  let rs=(seed>>>0)||1; const rnd=()=>{ rs^=rs<<13; rs>>>=0; rs^=rs>>>17; rs^=rs<<5; rs>>>=0; return rs/4294967296; };
+  const t0=Date.now(); let evals=0; let gBest={score:-Infinity,seq:[],E:null}; const timeUp=()=>Date.now()-t0>budgetMs;
+  const ev=seq=>{ evals++; const e=evalSequence(input,seq,{horizon,objective}); if(e.score>gBest.score) gBest={score:e.score,seq,E:e}; return e.score; };
+  const probs=(pol,prev)=>{ const ws=allKeys.map(k=>Math.exp(pol.get(code(prev,k))||0)); const sum=ws.reduce((a,b)=>a+b,0); return ws.map(w=>w/sum); };
+  const playout=pol=>{ const seq=[], codes=[]; let prev='start'; for(let step=0;step<maxLen;step++){ const p=probs(pol,prev); let r=rnd(), i=all.length-1; for(let j=0;j<p.length;j++){ r-=p[j]; if(r<=0){ i=j; break; } } const a=all[i]; if(a.kind==='stop'){ if(seq.length) { codes.push({prev,i}); break; } continue; } codes.push({prev,i}); seq.push(normAct(a)); prev=allKeys[i]; } return {seq,codes,score:ev(seq)}; };
+  const adapt=(pol,best)=>{ const p2=new Map(pol); for(const {prev,i} of best.codes){ const p=probs(pol,prev); for(let j=0;j<allKeys.length;j++){ const c=code(prev,allKeys[j]); p2.set(c,(p2.get(c)||0)-alpha*p[j]); } const c=code(prev,allKeys[i]); p2.set(c,(p2.get(c)||0)+alpha); } return p2; };
+  const rec=(lv,pol)=>{ if(lv===0) return playout(pol); let best=null; for(let it=0;it<iters;it++){ if(timeUp()&&best) break; const r=rec(lv-1,new Map(pol)); if(!best||r.score>=best.score) best=r; pol=adapt(pol,best); if(onProgress&&lv===level) onProgress(Math.min(1,(Date.now()-t0)/budgetMs)); } return best; };
+  let pol=new Map(); if(seedSeq&&seedSeq.length){ /* 热启动：把种子序列当作一次最优 rollout，先向它适应三步 */ const seq=seedSeq.map(normAct); const codes=[]; let prev='start'; for(const a of seq){ const i=allKeys.indexOf(key(a)); if(i<0) continue; codes.push({prev,i}); prev=allKeys[i]; } const seedRun={seq,codes,score:ev(seq)}; for(let k=0;k<3;k++) pol=adapt(pol,seedRun); }
+  while(!timeUp()) rec(level,pol);
+  const E=gBest.E||evalSequence(input,[],{horizon,objective});
+  return {sequence:gBest.seq,timeline:E.timeline,score:E.sc,evals,ms:Date.now()-t0,skipped:E.skipped};
 }
 
 // 蒙特卡洛树搜索（顺序空间 UCT）：节点 = 动作前缀；子节点 = 追加一个 (干员, 类型) 或 STOP；rollout = 随机续写到最大长度；
 // 评价 = evalSequence（模拟器，最早可行解码）；回传均值，UCT 探索项按当前最优分归一化。记录全程最优 rollout。
 export function mctsSequence(input,{horizon=70,objective='guaranteed',budgetMs=8000,maxIters=800,maxLen=36,c=0.7,seedSeq=null,onProgress,seed=7}={}){
   const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const kinds=['skill','combo','ultimate'];
-  const mcIdx=input.mainControl??0; const acts=[]; for(const m of memberIdxs){ for(const k of kinds) acts.push({member:m,kind:k}); if(m===mcIdx) acts.push({member:m,kind:'plunge'}); } const STOP='stop';
+  const mcIdx=input.mainControl??0; const acts=[...WAIT_ACTS]; for(const m of memberIdxs){ for(const k of kinds) acts.push({member:m,kind:k}); if(m===mcIdx) acts.push({member:m,kind:'plunge'}); } const STOP='stop';
   let rs=(seed>>>0)||1; const rnd=()=>{ rs^=rs<<13; rs>>>=0; rs^=rs>>>17; rs^=rs<<5; rs>>>=0; return rs/4294967296; };
   const shuffled=arr=>{ const a=[...arr]; for(let i=a.length-1;i>0;i--){ const j=Math.floor(rnd()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; };
   const randAct=()=>{ const r=rnd(); if(r<0.08) return {member:mcIdx,kind:'plunge'}; const kind=r<0.46?'skill':r<0.85?'combo':'ultimate'; return {member:memberIdxs[Math.floor(rnd()*memberIdxs.length)],kind}; };
@@ -112,11 +142,11 @@ export function mctsSequence(input,{horizon=70,objective='guaranteed',budgetMs=8
   const mk=seq=>({seq,n:0,w:0,children:new Map(),untried:shuffled([...acts,STOP]),terminal:false});
   const root=mk([]); let best=null, bestScore=-Infinity, iters=0; const t0=Date.now();
   const consider=(seq,e)=>{ if(e.score>bestScore){ bestScore=e.score; best={seq,e}; } };
-  if(seedSeq&&seedSeq.length){ const sq=seedSeq.map(a=>({member:a.member,kind:a.kind})); consider(sq,ev(sq)); iters++; }
+  if(seedSeq&&seedSeq.length){ const sq=seedSeq.map(a=>(normAct(a))); consider(sq,ev(sq)); iters++; }
   while(iters<maxIters&&Date.now()-t0<budgetMs){
     let node=root; const path=[root];
     while(!node.terminal&&node.untried.length===0&&node.children.size){ let pickN=null, pickV=-Infinity; for(const ch of node.children.values()){ const mean=ch.n?ch.w/ch.n:0; const v=mean/Math.max(1,bestScore)+c*Math.sqrt(Math.log(node.n+1)/(ch.n+1e-9)); if(v>pickV){ pickV=v; pickN=ch; } } node=pickN; path.push(node); }
-    if(!node.terminal&&node.untried.length&&node.seq.length<maxLen){ const a=node.untried.pop(); const key=a===STOP?STOP:`${a.member}:${a.kind}`; const child=mk(a===STOP?node.seq:[...node.seq,a]); child.terminal=(a===STOP||child.seq.length>=maxLen); node.children.set(key,child); node=child; path.push(child); }
+    if(!node.terminal&&node.untried.length&&node.seq.length<maxLen){ const a=node.untried.pop(); const key=a===STOP?STOP:a.kind==='wait'?`wait:${a.seconds??''}:${a.layers??''}`:`${a.member}:${a.kind}`; const child=mk(a===STOP?node.seq:[...node.seq,a]); child.terminal=(a===STOP||child.seq.length>=maxLen); node.children.set(key,child); node=child; path.push(child); }
     const seq=[...node.seq]; if(!node.terminal){ const len=node.seq.length+Math.floor(rnd()*(maxLen-node.seq.length+1)); while(seq.length<len) seq.push(randAct()); }
     const e=ev(seq); iters++; consider(seq,e); for(const nd of path){ nd.n++; nd.w+=e.score; }
     if(onProgress&&iters%10===0) onProgress(Math.max(iters/maxIters,(Date.now()-t0)/budgetMs)); }

@@ -36,6 +36,8 @@
 
 | 排轴 / 归因 | 目标改固定窗口 + 整理步骤；排轴页只读；伤害归因页替代计算器（2026-10-29） | 已做 | HANDOFF “排轴目标改固定窗口”一节；tests/plan-window.test.mjs |
 
+| 排轴搜索 | 两段式：顺序退火找结构 → 显式时刻局部搜索（2026-10-30） | 已做 | docs/reviews/planner-benchmark.md（基准）、planner-ideas-gpt.md（独立评审）；tests/plan-window.test.mjs |
+
 ## 2. 需求覆盖矩阵（NEXT_STEPS.md 逐条对账）
 状态：☐ 未做 / ◐ 进行中 / ☑ 已做并验证 / ✗ 阻塞
 

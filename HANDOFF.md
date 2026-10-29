@@ -91,5 +91,13 @@ node tools/build_data.mjs && node tools/build_effects.mjs && node tools/build_me
 - 目标函数：`scoreOf` 改为固定窗口 [0, 总计战斗时间] 内的保底伤害 / 窗口（限时场景用限时）；不再按“每人一次终结技的周期”算，束搜索也排到窗口末尾。笔意、巨浪、终结技顺序、第二轮终结技都由窗口内总伤决定。
 - 搜索后整理 `polishSequence`：逐个试删（不掉分就删，去掉溢出附着等无用动作），再逐位置试插每位干员的连携（加分就留）。测试 tests/plan-window.test.mjs。
 - 路线从五条减到三条（束搜索→退火；树搜索→退火；集中爆发→退火），技能形态按面板决定不再枚举两种；全队四人 60 秒窗口在浏览器里约 40 秒算完。
+- “等”是动作（plan.js `WAIT_ACTS`，simulate.js 顺序解码）：{kind:'wait',seconds:n} 什么都不放等 n 秒（从上一个动作放出时刻起算）、{kind:'wait',layers:n} 等任一元素附着叠到 n 层。退火、树搜索、整理都能插删改它们；没有“等”，顺序只能表达“A 在 B 之后”，表达不了留技能打爆发。
 - 排轴页（chart-ui.js）：去掉“高级”手动编辑；统计口径改为总计战斗时间。导出 `currentResult / waitingPanel / candidateTabs / onResultReady` 供伤害归因页复用。
 - 伤害归因页（attribution-ui.js，替代原伤害计算器 calc-ui.js / timeline-ui.js，两文件已删）：总览、各干员伤害占比（按人 × 技能类型的堆叠条）、伤害时间分布（每 5 秒一柱，爆发节底色）、增益构成（每个乘区按“提供了多少”折算，再按来源数值占比分到具体效果；敌人防御等按“减少了多少”）、单次最高伤害（乘区链）。颜色按 dataviz 校验过的调色板，图下都有表格。
+
+## 2026-10-30：排轴搜索重做（两段式）
+- 独立评审：docs/reviews/planner-ideas-gpt.md（不带倾向的问题描述 → GPT 的建模 / 算法建议与文献）；基准与采用理由：docs/reviews/planner-benchmark.md。
+- 模拟器：`params.planRepair` 开启显式时刻计划执行——动作在自己的时刻不可行就逐 0.1 s 顺延，超上限记 planSkip 放弃；各成员互不排队；实际执行时刻进 `scheduled`。
+- 搜索层 engine/sim/search.js：`evalPlan`（显式时刻计划打分）、`anchorsOf`（事件锚点）、`localSearchPlan`（迭代局部搜索 + 自适应邻域 + 精英档案 + 由粗到细时刻精调，返回诊断量）。
+- autoRotation：束搜索热启动 → 顺序退火（不带按住）找结构 → 以退火结果的实际时刻为起点做时刻局部搜索；两条路线（保底 / 集中爆发），候选取各路线最优与精英去重后前 4。plan.js 里的 polishSequence / nrpaSequence / mctsSequence / WAIT_ACTS 不再被流程使用，保留给测试与对照。
+- 教训（已写进 CLAUDE.md）：顺序表示里加按住变量会让后面所有人跟着等（B 配置实测崩）；单独用时刻搜索一半候选非法；“等待”当动作稀释预算；比较算法要同预算多种子。
