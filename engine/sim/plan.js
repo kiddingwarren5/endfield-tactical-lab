@@ -11,10 +11,12 @@ export function cycleOf(sim,memberIdxs){ const names=sim.summary.names||[], idxs
   let end=0; for(const i of memberIdxs){ const t0=castByMember[i]; const name=names[idxs.indexOf(i)]; const laterUlt=sim.events.find(e=>e.type==='cast'&&e.kind==='ultimate'&&e.who===name&&e.t>t0+1e-6); const hitsOf=sim.hits.filter(h=>h.member===i&&h.kind==='ultimate'&&h.t>=t0-1e-6&&(!laterUlt||h.t<laterUlt.t)); if(!hitsOf.length&&(sim.summary.params?.duration??Infinity)<t0+2.5) return {complete:false,end:null,castByMember,note:'终结技伤害未在时限内结算'}; const settle=hitsOf.length?Math.max(...hitsOf.map(h=>h.t)):t0; end=Math.max(end,settle); }
   return {complete:true,end:end+0.05,castByMember}; }
 // objective 'guaranteed'：只计主控普攻 + 全员技能（不计副控自动普攻），与页面“保底”口径一致
-export function scoreOf(sim,memberIdxs,horizon,objective,mainControl){ const cyc=cycleOf(sim,memberIdxs); const until=cyc.complete?cyc.end:horizon; const keep=h=>objective==='total'||!(h.kind==='normal'&&h.member!==mainControl); const dmg=sim.hits.filter(h=>h.t<=until&&keep(h)).reduce((a,h)=>a+h.damage,0); let dps=dmg/Math.max(1,until);
+// 评价口径：固定窗口 [0, horizon] 内的保底伤害 / 窗口长度。窗口 = 玩家给的总计战斗时间（限时场景 = 限时）。
+// 笔意、巨浪、终结技先后、第二轮终结技要不要放，都由窗口内总伤决定，不另加规则。cycle 只用来分节和说明。
+export function scoreOf(sim,memberIdxs,horizon,objective,mainControl){ const cyc=cycleOf(sim,memberIdxs); const until=horizon; const keep=h=>objective==='total'||!(h.kind==='normal'&&h.member!==mainControl); const dmg=sim.hits.filter(h=>h.t<=until+1e-6&&keep(h)).reduce((a,h)=>a+h.damage,0); let dps=dmg/Math.max(1,until);
   // 'burst'：要求全员首次终结技集中释放（首尾间隔 ≤ 12 s，含演出），分散则按比例折扣 —— 对应玩家“攒满后四连开”的打法
   if(objective==='burst'&&cyc.complete){ const ts=Object.values(cyc.castByMember); const spread=Math.max(...ts)-Math.min(...ts); const W=12; if(spread>W) dps*=W/spread; }
-  return {dps:cyc.complete?dps:dps*0.5,total:dmg,until,complete:cyc.complete,cycle:cyc}; }
+  return {dps,total:dmg,until,complete:cyc.complete,cycle:cyc}; }
 
 function feasibleActions(sim,members,t,mechanicsById){ // from the simulation state near t (samples + events)
   const s=[...sim.samples].reverse().find(x=>x.t<=t+1e-6)||sim.samples[0]; if(!s) return []; const acts=[]; const spAvail=s.sp;
@@ -33,9 +35,9 @@ export function autoPlan(input,{beam=8,step=1.0,horizon=40,onProgress,objective=
       const acts=feasibleActions(b.sim,members,t); for(const a of acts){ if(b.tl.some(x=>Math.abs(x.t-t)<step-1e-6&&x.member===a.member)) continue; const tl=[...b.tl,{t:Math.round(t*10)/10,...a}].sort((p,q)=>p.t-q.t); const sim=evalTl(tl); if(sim.errors.some(e=>Math.abs(e.t-t)<1e-6)) continue; next.push({tl,sim,keep,score:scoreOf(sim,memberIdxs,horizon,objective,mc)}); } }
     // de-dup by timeline signature; keep best `beam`
     const seen=new Set(); const uniq=[]; for(const n of next){ const sig=n.tl.map(a=>`${a.t}:${a.member}:${a.kind}`).join('|'); if(seen.has(sig)) continue; seen.add(sig); uniq.push(n); }
-    uniq.sort((a,b)=>heuristic(b,t,horizon)-heuristic(a,t,horizon)); beams=uniq.slice(0,beam); if(onProgress) onProgress(t/horizon); if(beams[0]?.score.complete&&t>beams[0].score.until+2) break; }
+    uniq.sort((a,b)=>heuristic(b,t,horizon)-heuristic(a,t,horizon)); beams=uniq.slice(0,beam); if(onProgress) onProgress(t/horizon); }
   const ranked=[...beams].sort((a,b)=>b.score.dps-a.score.dps); const best=ranked[0];
-  return {planVersion:PLAN_VERSION,best:{timeline:best.tl,score:best.score,summary:best.sim.summary,errors:best.sim.errors},candidates:ranked.slice(1,5).map(c=>({timeline:c.tl,score:c.score,diff:diffTimelines(best.tl,c.tl)})),objective:(objective==='guaranteed'?'所有干员至少一次终结技的周期内“保底”每秒伤害（主控普攻 + 全员技能，不计副控普攻；不完整周期按 0.5 折算）':'所有干员至少一次终结技的周期内平均每秒伤害（不完整周期按 0.5 折算）'),searchSpace:{beam,step,horizon,evaluated:'束搜索：每个决策点展开可行动作（战技/连携/终结技），保留分值前 '+beam+' 条'},rationale:rationaleOf(best)}; }
+  return {planVersion:PLAN_VERSION,best:{timeline:best.tl,score:best.score,summary:best.sim.summary,errors:best.sim.errors},candidates:ranked.slice(1,5).map(c=>({timeline:c.tl,score:c.score,diff:diffTimelines(best.tl,c.tl)})),objective:(objective==='guaranteed'?'总计战斗时间内的“保底”每秒伤害（主控普攻 + 全员技能，不计副控普攻）':'总计战斗时间内的平均每秒伤害'),searchSpace:{beam,step,horizon,evaluated:'束搜索：每个决策点展开可行动作（战技/连携/终结技），保留分值前 '+beam+' 条'},rationale:rationaleOf(best)}; }
 function heuristic(b,t,horizon){ // damage so far per second + progress toward every member's ultimate (energy fraction) + completion
   const dmg=b.sim.hits.filter(h=>h.t<=t+3+1e-6&&(b.keep?b.keep(h):true)).reduce((a,h)=>a+h.damage,0); /* 含 3 s 内落地的技能命中（终结技演出 3 s 后才出伤），否则刚放的终结技会被剪枝 */ const ults=b.sim.events.filter(e=>e.type==='cast'&&e.kind==='ultimate'&&e.t<=t+1e-6).length; const smp=[...b.sim.samples].reverse().find(x=>x.t<=t+1e-6); const maxes=b.sim.summary.energyMax||[]; const prog=smp?smp.energy.reduce((a,v,i)=>a+Math.min(1,v/Math.max(1,maxes[i]||1)),0):0; const base=dmg/Math.max(1,t+1); return base*(1+0.15*prog)+ults*0.1*base+(b.score.complete?b.score.dps:0); }
 function diffTimelines(a,b){ const sa=new Set(a.map(x=>`${x.t}:${x.member}:${x.kind}`)), sb=new Set(b.map(x=>`${x.t}:${x.member}:${x.kind}`)); return {removed:[...sa].filter(x=>!sb.has(x)),added:[...sb].filter(x=>!sa.has(x))}; }
@@ -85,6 +87,17 @@ export function annealSequence(input,seq0,{horizon=70,objective='guaranteed',bud
     if(rel>=0||rnd()<Math.exp(rel/temp)){ cur=cand; curE=e; accepted++; if(e.score>bestE.score){ best=cand; bestE=e; } }
     if(onProgress&&evals%20===0) onProgress(frac); }
   return {sequence:best,timeline:bestE.timeline,score:bestE.sc,evals,accepted,ms:Date.now()-t0,skipped:bestE.skipped};
+}
+
+// 搜索后的整理：先逐个试删（拿掉也不掉分就删，去掉溢出的附着和无用动作），再在每个位置试插每位干员的连携（加分就留），反复到没有改进或用完预算。
+export function polishSequence(input,seq0,{horizon=70,objective='guaranteed',maxEvals=400,maxPasses=3}={}){
+  const memberIdxs=input.team.map((m,i)=>i).filter(i=>input.team[i]); const ev=seq=>evalSequence(input,seq,{horizon,objective});
+  let cur=seq0.map(a=>({member:a.member,kind:a.kind})); let curE=ev(cur); let evals=1, removed=0, inserted=0; const EPS=1e-9;
+  for(let pass=0;pass<maxPasses&&evals<maxEvals;pass++){ let changed=false;
+    for(let i=0;i<cur.length&&evals<maxEvals;){ const cand=cur.filter((_,k)=>k!==i); const e=ev(cand); evals++; if(e.score>=curE.score-EPS){ cur=cand; curE=e; removed++; changed=true; } else i++; }
+    for(let i=0;i<=cur.length&&evals<maxEvals;i++){ for(const m of memberIdxs){ if(evals>=maxEvals) break; const cand=[...cur.slice(0,i),{member:m,kind:'combo'},...cur.slice(i)]; const e=ev(cand); evals++; if(e.score>curE.score*(1+1e-6)){ cur=cand; curE=e; inserted++; changed=true; i++; } } }
+    if(!changed) break; }
+  return {sequence:cur,timeline:curE.timeline,score:curE.sc,evals,removed,inserted,skipped:curE.skipped};
 }
 
 // 蒙特卡洛树搜索（顺序空间 UCT）：节点 = 动作前缀；子节点 = 追加一个 (干员, 类型) 或 STOP；rollout = 随机续写到最大长度；
