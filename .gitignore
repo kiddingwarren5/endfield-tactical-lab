@@ -1,3 +1,5 @@
 node_modules/
 .DS_Store
 sources/raw/akedata/index/asset-sync-index.json
+sources/raw/akedata/Json/
+sources/raw/akedata/TableCfg/

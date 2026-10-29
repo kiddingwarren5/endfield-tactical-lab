@@ -14,7 +14,7 @@
     "hits": 156
    },
    "祀": {
-    "damage": 1984141.086,
+    "damage": 1862832.069,
     "hits": 89
    }
   },
@@ -25,7 +25,7 @@
    "buffStart": 59,
    "energyGain": 80,
    "energyBlocked": 20,
-   "spGain": 449,
+   "spGain": 453,
    "inkStart": 5,
    "attach": 18,
    "comboReady": 27,
@@ -35,6 +35,7 @@
    "enemyAttack": 23,
    "buffEnd": 43,
    "consume": 4,
+   "absorbWindow": 4,
    "targetStateEnd": 4,
    "inkBurst": 4,
    "energyOverflow": 21,
@@ -61,7 +62,7 @@
     "hits": 156
    },
    "祀": {
-    "damage": 1822750.001,
+    "damage": 1816059.144,
     "hits": 89
    }
   },
@@ -72,7 +73,7 @@
    "buffStart": 56,
    "energyGain": 80,
    "energyBlocked": 20,
-   "spGain": 462,
+   "spGain": 465,
    "inkStart": 5,
    "attach": 17,
    "comboReady": 27,
@@ -82,6 +83,7 @@
    "enemyAttack": 23,
    "buffEnd": 48,
    "consume": 4,
+   "absorbWindow": 4,
    "targetStateEnd": 4,
    "inkBurst": 4,
    "energyOverflow": 14,
@@ -109,7 +111,7 @@
     "hits": 159
    },
    "祀": {
-    "damage": 1797735.179,
+    "damage": 1696532.9,
     "hits": 98
    }
   },
@@ -121,7 +123,7 @@
    "energyBlocked": 19,
    "buffStart": 56,
    "buffRefresh": 46,
-   "spGain": 455,
+   "spGain": 459,
    "attach": 15,
    "comboReady": 30,
    "inkStart": 5,
@@ -129,6 +131,7 @@
    "targetState": 8,
    "enemyAttack": 24,
    "consume": 4,
+   "absorbWindow": 4,
    "note": 3,
    "buffEnd": 43,
    "inkBurst": 4,
