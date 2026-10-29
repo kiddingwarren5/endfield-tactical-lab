@@ -432,7 +432,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0019_karin.talents[1].stages[0]"
   },
-  "notes": "获得“连击”状态（伤害公式中的连击乘区），数值由规则定义，value 仅表示获得该状态。",
+  "notes": "获得“连击”状态（伤害公式中的连击乘区），数值由规则定义，value 仅表示获得该状态。 原文“获得连击”未写全队；案例 20 视频作者说队友都吃到秋栗大招的连击，按全队处理并记 verification-needed",
   "grants": "comboState"
  },
  {
@@ -668,11 +668,12 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0019_karin.potentials[4]"
   },
-  "notes": "延长天赋心流时间的连击状态5秒（连击乘区），单位：秒",
+  "notes": "延长天赋心流时间的连击状态5秒（连击乘区），单位：秒 只延长连击状态 5 s，不加层",
   "modifies": [
    "chr_0019_karin.talent2.combo"
   ],
-  "grants": "comboState"
+  "grants": "comboState",
+  "comboExtend": true
  },
  {
   "id": "chr_0015_lifeng.skill.physFragile",
@@ -847,12 +848,9 @@
   "zone": "extraHit",
   "stat": null,
   "value": {
-   "formula": "atk*1.0",
-   "vars": [
-    "atk"
-   ]
+   "fixed": 100
   },
-  "unit": "flat",
+  "unit": "%atk",
   "beneficiary": "self",
   "applies": {
    "elements": [
@@ -877,7 +875,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0015_lifeng.talents[1].stages[1]"
   },
-  "notes": "不是增益而是一次独立追加伤害（攻击力100%物理伤害）。未写明伤害类型：①独立伤害，不属于任何技能类型；②按造成倒地的技能类型（战技/终结技）计。 按固定伤害追加（攻击力 100%）。",
+  "notes": "不是增益而是一次独立追加伤害（攻击力100%物理伤害）。未写明伤害类型：①独立伤害，不属于任何技能类型；②按造成倒地的技能类型（战技/终结技）计。 按固定伤害追加（攻击力 100%）。 “攻击力 100% 的物理伤害”走正常结算，不再按固定伤害（verification-needed 39 更新）",
   "stages": [
    {
     "stage": "伏魔·一",
@@ -3208,75 +3206,75 @@
   "value": {
    "byRank": [
     {
-     "formula": "1.8*Math.min(layers,4)",
+     "formula": "1.8*Math.min(breach,4)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "1.8*Math.min(layers,4)",
+     "formula": "1.8*Math.min(breach,4)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "1.8*Math.min(layers,4)",
+     "formula": "1.8*Math.min(breach,4)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "2.2*Math.min(layers,4)",
+     "formula": "2.2*Math.min(breach,4)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "2.2*Math.min(layers,4)",
+     "formula": "2.2*Math.min(breach,4)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "2.2*Math.min(layers,4)",
+     "formula": "2.2*Math.min(breach,4)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "2.6*Math.min(layers,4)",
+     "formula": "2.6*Math.min(breach,4)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "2.6*Math.min(layers,4)",
+     "formula": "2.6*Math.min(breach,4)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "2.6*Math.min(layers,4)",
+     "formula": "2.6*Math.min(breach,4)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "3*Math.min(layers,4)",
+     "formula": "3*Math.min(breach,4)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "3*Math.min(layers,4)",
+     "formula": "3*Math.min(breach,4)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "3*Math.min(layers,4)",
+     "formula": "3*Math.min(breach,4)",
      "vars": [
-      "layers"
+      "breach"
      ]
     }
    ]
@@ -3382,75 +3380,75 @@
   "value": {
    "byRank": [
     {
-     "formula": "1.8*(2*Math.min(layers+1,4)-layers)",
+     "formula": "1.8*(2*Math.min(breach+1,4)-breach)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "1.8*(2*Math.min(layers+1,4)-layers)",
+     "formula": "1.8*(2*Math.min(breach+1,4)-breach)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "1.8*(2*Math.min(layers+1,4)-layers)",
+     "formula": "1.8*(2*Math.min(breach+1,4)-breach)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "2.2*(2*Math.min(layers+1,4)-layers)",
+     "formula": "2.2*(2*Math.min(breach+1,4)-breach)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "2.2*(2*Math.min(layers+1,4)-layers)",
+     "formula": "2.2*(2*Math.min(breach+1,4)-breach)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "2.2*(2*Math.min(layers+1,4)-layers)",
+     "formula": "2.2*(2*Math.min(breach+1,4)-breach)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "2.6*(2*Math.min(layers+1,4)-layers)",
+     "formula": "2.6*(2*Math.min(breach+1,4)-breach)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "2.6*(2*Math.min(layers+1,4)-layers)",
+     "formula": "2.6*(2*Math.min(breach+1,4)-breach)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "2.6*(2*Math.min(layers+1,4)-layers)",
+     "formula": "2.6*(2*Math.min(breach+1,4)-breach)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "3*(2*Math.min(layers+1,4)-layers)",
+     "formula": "3*(2*Math.min(breach+1,4)-breach)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "3*(2*Math.min(layers+1,4)-layers)",
+     "formula": "3*(2*Math.min(breach+1,4)-breach)",
      "vars": [
-      "layers"
+      "breach"
      ]
     },
     {
-     "formula": "3*(2*Math.min(layers+1,4)-layers)",
+     "formula": "3*(2*Math.min(breach+1,4)-breach)",
      "vars": [
-      "layers"
+      "breach"
      ]
     }
    ]
@@ -8837,7 +8835,7 @@
    "trigger": "skillFirstBlock",
    "mode": "user"
   },
-  "duration": null,
+  "duration": 999,
   "stacking": "stack",
   "exclusiveGroup": null,
   "teamUnique": false,
@@ -8848,7 +8846,7 @@
    "category": "official",
    "where": "dist/data/operators.js chr_0038_purrche.talents[0].stages[1]"
   },
-  "notes": "影响终结技特殊赠礼（伤害段 ultimate3 与法术脆弱）的触发概率；“提升10%”为加算概率还是相对提升未写明。",
+  "notes": "影响终结技特殊赠礼（伤害段 ultimate3 与法术脆弱）的触发概率；“提升10%”为加算概率还是相对提升未写明。 作用于下一次终结技，终结技施放后清空（mechanics procs.consumeStacksOnUltimate）",
   "stages": [
    {
     "stage": "道歉也来不及了！·一",

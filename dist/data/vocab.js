@@ -15,10 +15,10 @@ export const GEAR_STATS=['str','agi','int','will','main','sub','chargeEff','arts
 export const BENEFICIARIES=['self','team','others','mainControl','target'];
 export const STACKING=['none','stack','highest','independent','unknown'];
 export const CONDITION_MODES=['auto','user','segment'];
-export const UNITS=['%','flat','x'];
+export const UNITS=['%','flat','x','%atk'];
 export const OWNER_KINDS=['operator','weapon','gearSet','consumable'];
 // 模拟器事件族（触发表 on:）与状态（触发表 state:）
-export const EVENT_FAMILIES=['battleStart','cast','hit','heavy','attach','attachLayers','consume','abnormal','consumeAbnormal','burst','breach','root','tornado','earlyWave','ultimateEnd','iceShatter','applyDebuffCategory','spGain','execute','allyCombo','resourceGain','resourceSpend','resourceExhausted','crit','proc','counter','block','enemyAttack','crystalConsumed','ultFollowup','ultFollowUp','targetState','targetStateEnd']; // crit：仅暴击口径；proc：仅期望口径；counter / block / enemyAttack：对照靶每 4 s 攻击主控；crystalConsumed：源石结晶被物理异常 / 破防 / 终结技消耗；ultFollowup：铁誓袭扰 / 决胜；ultFollowUp：后续终结技（破晦诀明）；targetState：目标状态施加 / 结束
+export const EVENT_FAMILIES=['battleStart','cast','hit','heavy','attach','attachLayers','consume','abnormal','consumeAbnormal','burst','breach','root','tornado','earlyWave','ultimateEnd','iceShatter','applyDebuffCategory','spGain','execute','allyCombo','resourceGain','resourceSpend','resourceExhausted','crit','proc','counter','block','enemyAttack','crystalConsumed','ultFollowup','ultFollowUp','targetState','targetStateEnd','heal']; // heal：机制数据 heals=true 的技能命中（治疗后的增益） // crit：仅暴击口径；proc：仅期望口径；counter / block / enemyAttack：对照靶每 4 s 攻击主控；crystalConsumed：源石结晶被物理异常 / 破防 / 终结技消耗；ultFollowup：铁誓袭扰 / 决胜；ultFollowUp：后续终结技（破晦诀明）；targetState：目标状态施加 / 结束
 export const STATES=['always','never','duringUltimate','modeInt','targetAttached','targetColdAttached','targetFrozen','targetColdOrFrozen','targetFragile','targetStaggered','targetHpBelow','targetBreached','targetBreach4','resourceAtLeast','airborne','targetState','targetScarred','targetSlowed','targetImprisoned','targetCrystal','inArrowField','inGravityField','selfShielded','targetBurning','targetAbnormal','buffStacks']; // targetState(id)：通用目标状态；buffStacks(id,min)：某效果的层数
 // 连携技发动条件类型（mechanics combo.trigger.type）与自定义事件
 export const COMBO_TRIGGER_TYPES=['attachApplied','anyAttachApplied','attachLayers','attachConsumed','abnormal','burst','heavyHit','execute','allyCombo','skillState','resource','custom'];

@@ -1,27 +1,26 @@
 # 触发覆盖（由 tests/triggers.test.mjs 生成）
 
-生成：2026-10-29T15:17:15.195Z
+生成：2026-10-29T15:33:34.130Z
 
 | 归属 | 效果数 |
 |---|---|
-| event | 225 |
+| event | 231 |
 | handled | 12 |
-| state | 43 |
+| state | 42 |
 | event-noop | 9 |
 | modifier | 4 |
 | scenario | 8 |
-| noDamage | 5 |
 
 ## 例外与说明汇总（scenario = 对照靶上不会发生；noDamage = 不影响伤害；其余为口径说明）
 
-- 仅暴击口径（critMode ≠ never）触发；保底口径按不暴击计（6）：chr_0028_wulfa.talent.boilingBlood、suit_criti01.p2、suit_criti01.p3、wpn_pistol_0010.p2、wpn_sword_0022.p2、wpn_sword_0022.p3
-- 治疗量不进伤害结算（5）：wpn_funnel_0010.p1、wpn_lance_0014.p2、wpn_lance_0016.p2、wpn_sword_0023.p2、wpn_sword_0023.p3
+- 仅暴击口径（critMode ≠ never）触发；保底口径按不暴击计（5）：chr_0028_wulfa.talent.boilingBlood、suit_criti01.p2、suit_criti01.p3、wpn_pistol_0010.p2、wpn_sword_0022.p2
 - 对照靶无限血，不会被击败（3）：chr_0016_laevat.pot5.ultExtend、chr_0018_dapan.pot1.physDmg、chr_0023_antal.pot3.spRefund
 - 对照靶只有一个目标（3）：chr_0025_ardelia.talent.mountainSurf、chr_0029_pograni.pot1.spRefund、chr_0011_seraph.pot3.bounce
 - 概率效果：保底口径不触发，期望口径（options.procMode=expected）触发（2）：chr_0024_deepfin.pot3.teamAtk、chr_0038_purrche.ult.artsFragile
 - 需要打断敌人蓄力；对照靶不蓄力（1）：chr_0005_chen.talent.poise
-- 需要受到法术伤害并按概率免疫；对照靶的攻击不分属性，保底不计概率（1）：chr_0022_bounda.talent.elusive
-- 暴击伤害只在暴击口径生效（1）：chr_0017_yvonne.ult.critDmg
+- 需要受到法术伤害并按概率免疫；对照靶的攻击按物理计，保底不计概率（1）：chr_0022_bounda.talent.elusive
+- 暴击伤害只在暴击口径生效；层数每次终结技重数，终结技结束失效（1）：chr_0017_yvonne.ult.critDmg
+- 仅暴击口径（critMode ≠ never）触发；保底口径按不暴击计；16 层后生效 20 s 并清空狼血（1）：wpn_sword_0022.p3
 - 身形如风 4 层：战技后 15 s 内最多 4 次（1）：wpn_funnel_0019.p3
 
 ## 逐条
@@ -96,7 +95,7 @@
 | chr_0023_antal.pot5.heatFragile | focused20s | event |
 | chr_0022_bounda.ult.bombDmg | ultimateDetonateBomb | handled |
 | chr_0022_bounda.talent.slowedTarget | targetSlowed | state |
-| chr_0022_bounda.talent.elusive | artsImmuneProc | scenario：需要受到法术伤害并按概率免疫；对照靶的攻击不分属性，保底不计概率 |
+| chr_0022_bounda.talent.elusive | artsImmuneProc | scenario：需要受到法术伤害并按概率免疫；对照靶的攻击按物理计，保底不计概率 |
 | chr_0022_bounda.pot5.comboCdr | enemyColdOrNatureAttach | event |
 | chr_0021_whiten.combo.physFragile | comboHitFrozen | event |
 | chr_0021_whiten.talent.shatterRefund | afterShatter | event |
@@ -132,7 +131,7 @@
 | chr_0003_endminf.pot2.othersAtk | afterCrystalConsumed | event |
 | chr_0003_endminf.pot3.energy | ultimateConsumeCrystal | event |
 | chr_0017_yvonne.ult.critRate | duringUltimateNormalHit | event |
-| chr_0017_yvonne.ult.critDmg | ultimateMaxStacks | event：暴击伤害只在暴击口径生效 |
+| chr_0017_yvonne.ult.critDmg | ultimateMaxStacks | event：暴击伤害只在暴击口径生效；层数每次终结技重数，终结技结束失效 |
 | chr_0017_yvonne.talent1.heavyBonus | nextHeavyAfterSkillFreeze | event |
 | chr_0017_yvonne.talent2.critDmg.cold | targetColdAttached | state |
 | chr_0017_yvonne.talent2.critDmg.frozen | targetFrozen | state |
@@ -295,13 +294,13 @@
 | wpn_funnel_0008.p2 | artsBurst | event |
 | wpn_funnel_0009.p2 | ultCast | event |
 | wpn_funnel_0009.p3 | comboCast | event |
-| wpn_funnel_0010.p1 | selfSkillHeal | noDamage：治疗量不进伤害结算 |
+| wpn_funnel_0010.p1 | selfSkillHeal | event |
 | wpn_sword_0017.p2 | applyBreachThenNextUlt | event |
 | wpn_pistol_0007.p2 | comboCast | event |
 | wpn_pistol_0011.p2 | skillOrUltApplyColdAttach | event |
 | wpn_pistol_0011.p3 | skillOrUltApplyArtsFragile | event |
 | wpn_sword_0022.p2 | critHit | event：仅暴击口径（critMode ≠ never）触发；保底口径按不暴击计 |
-| wpn_sword_0022.p3 | wolfBlood16 | state：仅暴击口径（critMode ≠ never）触发；保底口径按不暴击计 |
+| wpn_sword_0022.p3 | wolfBlood16 | event：仅暴击口径（critMode ≠ never）触发；保底口径按不暴击计；16 层后生效 20 s 并清空狼血 |
 | wpn_funnel_0015.p2 | skillConsumeArtsAnomaly | event |
 | wpn_funnel_0015.p3 | ultCast | event |
 | wpn_funnel_0017.p2 | gainElectricAmp | event |
@@ -318,16 +317,16 @@
 | wpn_funnel_0016.p5 | willGtInt&selfSkillApplyArtsFragile | event |
 | wpn_funnel_0018.p2 | comboApplyArtsFragileOrAttach | event |
 | wpn_funnel_0018.p3 | comboApplyArtsFragileOrAttach | event |
-| wpn_lance_0014.p2 | selfSkillHealOthers | noDamage：治疗量不进伤害结算 |
+| wpn_lance_0014.p2 | selfSkillHealOthers | event |
 | wpn_sword_0026.p1 | battleStart | event |
 | wpn_sword_0026.p2 | battleStart | event |
-| wpn_lance_0016.p2 | comboHealOthers | noDamage：治疗量不进伤害结算 |
+| wpn_lance_0016.p2 | comboHealOthers | event |
 | wpn_funnel_0019.p2 | skillCast | event |
 | wpn_funnel_0019.p3 | artsBurstWithWindStack | event：身形如风 4 层：战技后 15 s 内最多 4 次 |
 | wpn_funnel_0020.p2 | artsBurst | event |
 | wpn_funnel_0020.p3 | artsBurstStacks4 | state |
-| wpn_sword_0023.p2 | comboHeal | noDamage：治疗量不进伤害结算 |
-| wpn_sword_0023.p3 | comboHeal | noDamage：治疗量不进伤害结算 |
+| wpn_sword_0023.p2 | comboHeal | event |
+| wpn_sword_0023.p3 | comboHeal | event |
 | wpn_claym_0018.p2 | applyRoot | event |
 | wpn_claym_0018.p3 | rootOrUltThenNextCombo | event |
 | wpn_claym_0019.p2 | skillApplyColdOrHeatAttach | event |

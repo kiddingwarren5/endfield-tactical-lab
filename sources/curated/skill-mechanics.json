@@ -912,7 +912,7 @@
    "castWindow": {
     "value": 5,
     "origin": "assumed",
-    "note": "两次连携的衔接窗口官方未给"
+    "note": "两次连携的衔接窗口官方未给；冷却从第一次连携起算（审核意见）"
    }
   },
   "ultimate": {
@@ -1023,7 +1023,8 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "heals": true
   },
   "combo": {
    "trigger": {
@@ -1099,7 +1100,8 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "heals": true
   },
   "modes": null
  },
@@ -1411,6 +1413,14 @@
       "amount": 1,
       "note": "连携命中消耗一层：立即恢复 40% 冷却（效果 chr_0018_dapan.talent.prep）"
      }
+    ],
+    "potentialMods": [
+     {
+      "potential": 2,
+      "max": 1,
+      "duration": 10,
+      "note": "潜能 2：备料持续 +10 s、上限 +1"
+     }
     ]
    }
   ]
@@ -1523,7 +1533,8 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "heals": true
   },
   "ultimate": {
    "energyCost": 100,
@@ -2545,7 +2556,8 @@
    "abnormal": null,
    "notes": "纯治疗，无伤害段",
    "segmentPlan": [],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "heals": true
   },
   "ultimate": {
    "energyCost": 80,
@@ -3555,13 +3567,7 @@
    "energyCost": 90,
    "cooldown": 15,
    "attach": null,
-   "consumes": [
-    {
-     "resource": "连击",
-     "all": true,
-     "when": "自身处于连击：追加大量物理伤害（ultimate3）"
-    }
-   ],
+   "consumes": null,
    "abnormal": [
     {
      "type": "knockdown",
@@ -3589,41 +3595,16 @@
     },
     {
      "id": "ultimate3",
+     "times": 1,
      "when": {
-      "fires": "rule"
+      "comboStateConsumed": true
      },
-     "note": "消耗连击时由资源规则追加"
+     "note": "终结技消耗了连击状态（自己的连携或队友给的）时追加"
     }
    ],
-   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算"
   },
-  "modes": null,
-  "resources": [
-   {
-    "id": "comboCount",
-    "name": "连击",
-    "max": 1,
-    "initial": 0,
-    "origin": "official",
-    "gains": [
-     {
-      "on": "comboCast",
-      "set": 1,
-      "duration": 20,
-      "note": "连携获得连击 20 s"
-     }
-    ],
-    "spend": [
-     {
-      "on": "ultimateCast",
-      "min": 1,
-      "all": true,
-      "extraSegment": "ultimate3",
-      "note": "终结技消耗连击：追加大量物理伤害"
-     }
-    ]
-   }
-  ]
+  "modes": null
  },
  {
   "operatorId": "chr_0029_pograni",
@@ -4018,7 +3999,8 @@
    ],
    "notes": "支援晶体 20s：主控重击时治疗，最多2次；满血时改为施加法术增幅 25s（不叠加）。无伤害段",
    "segmentPlan": [],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "heals": true
   },
   "combo": {
    "trigger": {
@@ -4364,14 +4346,17 @@
     },
     {
      "id": "skill2",
-     "times": 1
+     "times": 1,
+     "when": {
+      "consumedAttach": true
+     }
     },
     {
      "id": "skill3",
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算",
    "nextNormalHeavy": {
     "cond": {
      "consumedAttach": true
@@ -4430,7 +4415,11 @@
     {
      "id": "combo1",
      "times": 4,
-     "every": 0.75
+     "every": 0.75,
+     "timesByPotential": {
+      "1": 6
+     },
+     "note": "潜能 1：额外施放 2 次能量"
     },
     {
      "id": "combo2",
@@ -4581,7 +4570,8 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "heals": true
   },
   "combo": {
    "trigger": {
@@ -4629,7 +4619,8 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "heals": true
   },
   "ultimate": {
    "energyCost": 90,
@@ -4669,6 +4660,13 @@
      "name": "重力紊乱",
      "duration": 5,
      "origin": "official"
+    },
+    {
+     "id": "slowed",
+     "name": "缓速",
+     "duration": 5,
+     "origin": "official",
+     "note": "重力紊乱区域内缓速"
     }
    ]
   },
@@ -5223,15 +5221,21 @@
     },
     {
      "id": "skill2",
-     "times": 1
+     "when": {
+      "fires": "rule"
+     },
+     "note": "血翼盘桓的目标被卡缪连携命中时爆裂"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算",
    "targetStates": [
     {
      "id": "wing",
      "name": "衔火血翼",
      "duration": 45,
+     "durationByPotential": {
+      "1": 60
+     },
      "origin": "official"
     }
    ]
@@ -5288,14 +5292,31 @@
    "segmentPlan": [
     {
      "id": "combo1",
-     "times": 1
+     "times": 1,
+     "when": {
+      "hunt": false
+     }
     },
     {
      "id": "combo2",
-     "times": 1
+     "times": 1,
+     "when": {
+      "hunt": true
+     },
+     "note": "追猎：终结技后下一次战技替换，视为连携"
+    },
+    {
+     "id": "skill2",
+     "from": "skill",
+     "times": 1,
+     "delay": 0.5,
+     "when": {
+      "targetState": "wing"
+     },
+     "note": "衔火血翼爆裂（短暂延迟）"
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "ultimate": {
    "energyCost": 130,
@@ -6289,7 +6310,8 @@
      "every": 10
     }
    ],
-   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算",
+   "heals": true
   },
   "combo": {
    "trigger": {
@@ -6347,7 +6369,8 @@
      "times": 1
     }
    ],
-   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行"
+   "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
+   "heals": true
   },
   "ultimate": {
    "energyCost": 160,
@@ -6396,7 +6419,9 @@
      "note": "歌声 15 s 每 1.5 s 一次 + 结束时 3 倍"
     }
    ],
-   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算",
+   "cancelsDelayedSkill": true,
+   "heals": true
   },
   "modes": null
  },
@@ -6475,15 +6500,28 @@
     },
     {
      "id": "skill2",
-     "times": 4
+     "times": 4,
+     "asKind": "normal"
     },
     {
      "id": "skill3",
      "times": 1,
-     "asHeavy": true
+     "asHeavy": true,
+     "asKind": "normal",
+     "when": {
+      "control": true
+     }
+    },
+    {
+     "id": "skill2",
+     "times": 1,
+     "asKind": "normal",
+     "when": {
+      "control": false
+     }
     }
    ],
-   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算",
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算；空中普攻按普攻结算增益",
    "airborneSeconds": {
     "value": 4,
     "origin": "assumed",
@@ -6543,12 +6581,14 @@
     },
     {
      "id": "combo2",
-     "times": 1
+     "times": 1,
+     "note": "区域持续伤害跳数官方未给，按 1 次计（verification-needed）"
     },
     {
      "id": "skill2",
      "from": "skill",
      "times": 4,
+     "asKind": "normal",
      "when": {
       "airborne": true
      }
@@ -6558,9 +6598,22 @@
      "from": "skill",
      "times": 1,
      "asHeavy": true,
+     "asKind": "normal",
      "when": {
-      "airborne": true
+      "airborne": true,
+      "control": true
      }
+    },
+    {
+     "id": "skill2",
+     "from": "skill",
+     "times": 1,
+     "asKind": "normal",
+     "when": {
+      "airborne": true,
+      "control": false
+     },
+     "note": "非主控第五次按普通空中普攻"
     }
    ],
    "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算",
@@ -6598,28 +6651,32 @@
     },
     {
      "id": "skill2",
-     "from": "skill"
+     "from": "skill",
+     "asKind": "normal"
     },
     {
      "id": "ultimate2"
     },
     {
      "id": "skill2",
-     "from": "skill"
+     "from": "skill",
+     "asKind": "normal"
     },
     {
      "id": "ultimate2"
     },
     {
      "id": "skill2",
-     "from": "skill"
+     "from": "skill",
+     "asKind": "normal"
     },
     {
      "id": "ultimate2"
     },
     {
      "id": "skill2",
-     "from": "skill"
+     "from": "skill",
+     "asKind": "normal"
     },
     {
      "id": "ultimate2"
@@ -6627,7 +6684,22 @@
     {
      "id": "skill3",
      "from": "skill",
-     "asHeavy": true
+     "times": 1,
+     "asHeavy": true,
+     "asKind": "normal",
+     "when": {
+      "control": true
+     }
+    },
+    {
+     "id": "skill2",
+     "from": "skill",
+     "times": 1,
+     "asKind": "normal",
+     "when": {
+      "control": false
+     },
+     "note": "非主控第五次按普通空中普攻"
     },
     {
      "id": "ultimate3"
@@ -6637,7 +6709,7 @@
     "value": 4,
     "origin": "assumed"
    },
-   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
+   "segmentPlanNote": "段计划：条件按结构化词表判定；fires=rule 的段由资源 / 触发规则结算"
   },
   "modes": null,
   "resources": [
@@ -6757,7 +6829,8 @@
      "value": 20,
      "origin": "official",
      "kind": "返还",
-     "condition": "立盾期间首次成功格挡"
+     "condition": "立盾期间首次成功格挡",
+     "onFirstBlock": true
     }
    },
    "energyGain": {
@@ -6806,7 +6879,12 @@
     }
    ],
    "segmentPlanNote": "由原按标签判定的条件段规则迁移生成（2026-10-29）；times 0 + when.unmodeled 表示该段条件未建模、不执行",
-   "blocks": true
+   "blocks": true,
+   "counterWindow": {
+    "value": 3,
+    "origin": "official",
+    "note": "立盾状态持续时间 3 秒"
+   }
   },
   "combo": {
    "trigger": {
@@ -6854,7 +6932,8 @@
      }
     }
    ],
-   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算"
+   "segmentPlanNote": "段计划：条件按结构化词表（docs/sim-design.md 条件词表）判定；fires=rule 的段由资源 / 触发规则结算",
+   "heals": true
   },
   "ultimate": {
    "energyCost": 100,
@@ -6922,7 +7001,8 @@
     "origin": "official",
     "note": "基础概率 20%；天赋每次格挡 +10%（未计）、潜能 ×1.5（未计）",
     "stacksEffect": "chr_0038_purrche.talent1.giftChance",
-    "perStack": 0.1
+    "perStack": 0.1,
+    "consumeStacksOnUltimate": true
    }
   }
  },

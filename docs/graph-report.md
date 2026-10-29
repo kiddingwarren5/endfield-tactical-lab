@@ -1,6 +1,6 @@
 # 图谱报告（由 tools/validate_graph.mjs 生成）
 
-生成：2026-10-29T15:17:14.478Z
+生成：2026-10-29T15:33:33.834Z
 
 ## 规模
 
@@ -11,7 +11,7 @@
 | gear | 191 |
 | skill | 136 |
 | weapon | 84 |
-| event | 37 |
+| event | 38 |
 | operator | 35 |
 | state | 26 |
 | stat | 25 |
@@ -31,7 +31,7 @@
 | gives | 688 |
 | hasEffect | 578 |
 | triggersOn | 306 |
-| resolvesTo | 203 |
+| resolvesTo | 210 |
 | inSet | 191 |
 | appliesTo | 150 |
 | hasSkill | 136 |
@@ -49,7 +49,7 @@
 | supports | 17 |
 | dependsOn | 16 |
 | inExclusiveGroup | 12 |
-| consumes | 9 |
+| consumes | 8 |
 | replaces | 4 |
 | chains | 4 |
 | creates | 2 |
@@ -66,7 +66,7 @@
 | operator | 146 | 153 | 34 | 5 | 294 | 11 | 30 | 3 |
 | consumable | 32 | 0 | 0 | 0 | 30 | 0 | 0 | 2 |
 | gearSet | 16 | 17 | 2 | 0 | 34 | 0 | 1 | 0 |
-| weapon | 70 | 81 | 6 | 16 | 172 | 0 | 1 | 0 |
+| weapon | 70 | 82 | 5 | 16 | 172 | 0 | 1 | 0 |
 
 ## 套装与武器：换它要不要重排
 

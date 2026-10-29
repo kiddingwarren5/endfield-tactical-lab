@@ -6489,7 +6489,7 @@
    "trigger": "critHit",
    "mode": "user"
   },
-  "duration": null,
+  "duration": 60,
   "stacking": "stack",
   "exclusiveGroup": null,
   "teamUnique": false,
@@ -6500,7 +6500,7 @@
    "category": "official",
    "where": "dist/data/weapons.js wpn_sword_0022 skills[2].rankTexts (Rank1 原文；各 Rank 数值逐条抽取自 rankTexts[0..8])"
   },
-  "notes": "value 为每层数值，最多叠加16层；原文未给单层持续时间；16层效果结束后清空所有狼血层数。"
+  "notes": "value 为每层数值，最多叠加16层；原文未给单层持续时间；16层效果结束后清空所有狼血层数。 狼血层数持续时间官方未给，按 60 s（假设）；16 层触发后清空"
  },
  {
   "id": "wpn_sword_0022.p3",

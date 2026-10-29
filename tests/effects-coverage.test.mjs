@@ -36,11 +36,15 @@ test('管理员源石结晶：连携附着结晶；物理异常消耗它并击�
 
 test('洛茜：狼之珀只对已破防目标释放并施加爪印斫痕（每秒 30% 攻击力物理伤害、易伤）；连携两次，第二次消耗附着并按层数加伤、击飞、暴击增益、冷却从第二次起算',()=>{
   const r=run([mk('洛茜'),mk('黎风'),mk('汤汤')],[{t:0.5,member:1,kind:'skill'},{t:2,member:0,kind:'skill'},{t:4,member:2,kind:'skill'},{t:6,member:0,kind:'combo'},{t:8,member:0,kind:'combo'}],{duration:16});
-  assert.ok(r.events.some(e=>e.type==='targetState'&&e.id==='scar')); const dots=r.hits.filter(h=>h.name==='洛茜'&&h.segment==='dot'); assert.ok(dots.length>=10&&dots[0].damage>0); const cb=r.hits.filter(h=>h.name==='洛茜'&&h.kind==='combo'); assert.deepEqual(cb.map(h=>h.segment),['combo1','combo2','combo3']); assert.ok(r.events.some(e=>e.type==='consume'&&e.by==='洛茜'&&e.element==='cold'),'第二次消耗寒冷附着'); assert.ok(r.events.some(e=>e.type==='buffStart'&&/wulfa.combo.critRate/.test(e.id))); assert.ok(near(r.final.cooldowns[0].combo,8+14,0.01),'冷却从第二次连携起算');
+  assert.ok(r.events.some(e=>e.type==='targetState'&&e.id==='scar')); const dots=r.hits.filter(h=>h.name==='洛茜'&&h.segment==='dot'); assert.ok(dots.length>=10&&dots[0].damage>0); const cb=r.hits.filter(h=>h.name==='洛茜'&&h.kind==='combo'); assert.deepEqual(cb.map(h=>h.segment),['combo1','combo2','combo3']); assert.ok(r.events.some(e=>e.type==='consume'&&e.by==='洛茜'&&e.element==='cold'),'第二次消耗寒冷附着'); assert.ok(r.events.some(e=>e.type==='buffStart'&&/wulfa.combo.critRate/.test(e.id))); assert.ok(near(r.final.cooldowns[0].combo,6+14,0.01),'冷却从第一次连携起算，第二次不重置');
   const r0=run([mk('洛茜')],[{t:0.5,member:0,kind:'skill'}],{duration:4}); assert.deepEqual(segs(r0,'洛茜').filter(s=>s.startsWith('skill')),['skill1'],'无破防不放狼之珀'); });
 
-test('敌人攻击：立盾干员格挡与反击（昼雪反击段只在受击时打出并回能、噗切娜首次格挡回能）；主控受击触发以铁还铁',()=>{
-  const r=run([mk('昼雪'),mk('噗切娜'),mk('余烬')],[{t:0.5,member:0,kind:'skill'},{t:0.5,member:1,kind:'skill'}],{mc:2,duration:9}); const c=r.hits.filter(h=>h.name==='昼雪'&&h.segment==='skill1'); assert.equal(c.length,1); assert.ok(near(c[0].t,4),'4 s 敌人攻击时反击'); assert.ok(r.events.some(e=>e.type==='energyGain'&&/救援专家/.test(e.why)&&e.amount===10)); assert.ok(r.events.some(e=>e.type==='energyGain'&&/道歉也来不及/.test(e.why)&&e.amount===10)); assert.ok(r.events.some(e=>e.type==='buffStart'&&/ironForIron/.test(e.id)));
+test('敌人攻击只打主控：主控立盾才格挡与反击（昼雪每次立盾只反击一次并回能、噗切娜首次格挡回能并返还 20 技力）；主控受击触发以铁还铁',()=>{
+  const team=[mk('昼雪'),mk('噗切娜'),mk('余烬')];
+  const a=run(team,[{t:0.5,member:0,kind:'skill'}],{mc:0,duration:9}); const c=a.hits.filter(h=>h.name==='昼雪'&&h.segment==='skill1'); assert.equal(c.length,1,'立盾 5 s 内挨两次打也只反击一次'); assert.ok(near(c[0].t,4),'4 s 敌人攻击时反击'); assert.equal(a.events.filter(e=>e.type==='energyGain'&&/救援专家/.test(e.why)&&e.amount===10).length,1);
+  const b=run(team,[{t:1.5,member:1,kind:'skill'}],{mc:1,duration:9}); /* 噗切娜立盾只有 3 s（官方），敌人 4 s 攻击要落在窗口内 */ assert.ok(b.events.some(e=>e.type==='energyGain'&&/道歉也来不及/.test(e.why)&&e.amount===10)); assert.ok(b.events.some(e=>e.type==='spGain'&&/首次格挡/.test(e.why)&&e.amount===20),'首次格挡额外返还 20');
+  const c2=run(team,[],{mc:2,duration:9}); assert.ok(c2.events.some(e=>e.type==='buffStart'&&/ironForIron/.test(e.id)));
+  const d=run(team,[{t:0.5,member:0,kind:'skill'}],{mc:2,duration:9}); assert.equal(d.hits.filter(h=>h.name==='昼雪'&&h.segment==='skill1').length,0,'不是主控不会被攻击，也就不反击');
   const r0=run([mk('昼雪')],[{t:0.5,member:0,kind:'skill'}],{duration:3}); assert.equal(segs(r0,'昼雪').length,0,'未受击不反击'); });
 
 test('护盾：余烬终结技给全队护盾，卡契尔潜能 5 有护盾时战技命中返还 10 技力',()=>{ const r=run([mk('卡契尔',5),mk('余烬')],[{t:0.5,member:1,kind:'ultimate'},{t:4,member:0,kind:'skill'}],{energy:[0,100],duration:12}); assert.ok(r.events.some(e=>e.type==='shield'&&e.by==='余烬')); assert.equal(sp(r,/无悔抉择/)[0].amount,10); });
@@ -51,8 +55,8 @@ test('计数与修饰：弧光第三次消耗导电才触发荒野游人；佩�
   const burn=p=>{ const r=run([mk('莱万汀',p)],[0.5,13,26,39,52].map(t=>({t,member:0,kind:'skill'})),{duration:60}); return r.hits.find(h=>h.name==='莱万汀'&&h.segment==='burnTick'); }; assert.equal(burn(0).factor,1); assert.equal(burn(3).factor,1.5);
   const refund=p=>sp(run([mk('管理员 (男)'),mk('黎风'),mk('骏卫',p)],[{t:0.5,member:1,kind:'skill'},{t:2,member:1,kind:'skill'},{t:4,member:2,kind:'skill'},{t:6,member:2,kind:'combo'}],{duration:10}),/骏卫 连携/)[0].amount; assert.equal(refund(0),12); assert.ok(near(refund(5),14.4,1e-9)); });
 
-test('暴击口径：保底（critMode never）不触发暴击类效果；必暴击时洛茜对斫痕目标的沸血每次技能命中追加灼热伤害',()=>{
-  const tl=[{t:0.5,member:1,kind:'skill'},{t:2,member:0,kind:'skill'}]; const a=run([mk('洛茜'),mk('黎风')],tl,{duration:8}); const b=run([mk('洛茜'),mk('黎风')],tl,{duration:8,critMode:'always'}); const bb=r=>r.events.filter(e=>e.type==='extraHit'&&e.who==='洛茜'&&/boilingBlood/.test(e.effect)); assert.equal(bb(a).length,0); assert.ok(bb(b).length>=5); });
+test('暴击口径：保底（critMode never）不触发暴击类效果；必暴击时洛茜对斫痕目标的技能命中触发沸血（普攻不算），追加的灼热伤害走正常结算',()=>{
+  const tl=[{t:0.5,member:1,kind:'skill'},{t:2,member:0,kind:'skill'},{t:5,member:0,kind:'skill'}]; /* 第一次战技上斫痕，第二次战技的暴击命中才触发沸血 */ const a=run([mk('洛茜'),mk('黎风')],tl,{duration:8}); const b=run([mk('洛茜'),mk('黎风')],tl,{duration:8,critMode:'always'}); const bb=r=>r.events.filter(e=>e.type==='extraHit'&&e.who==='洛茜'&&/boilingBlood/.test(e.effect)); assert.equal(bb(a).length,0); const n=bb(b).length; assert.ok(n>=1&&n<=4,`技能命中次数内：${n}`); const hit=b.hits.find(h=>h.name==='洛茜'&&h.segment==='extraHit'); assert.ok(hit&&hit.factors&&hit.factors.defence<1,'额外一击吃防御'); });
 
 test('连击状态：秋栗终结技给全队连击，队友下一次战技 +30% 并消耗',()=>{ const r=run([mk('秋栗'),mk('黎风')],[{t:0.5,member:0,kind:'ultimate'},{t:4,member:1,kind:'skill'},{t:6,member:1,kind:'skill'}],{energy:[120,0],duration:12}); const h=r.hits.filter(x=>x.name==='黎风'&&x.kind==='skill'); assert.ok(near(h.find(x=>x.t>4&&x.t<5).factors.combo,1.3,1e-9)); assert.equal(h.find(x=>x.t>6).factors.combo,1); assert.ok(r.events.some(e=>e.type==='comboConsumed'&&e.who==='黎风')); });
 

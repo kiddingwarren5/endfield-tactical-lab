@@ -14,7 +14,7 @@
     "hits": 127
    },
    "祀": {
-    "damage": 1620210.384,
+    "damage": 2022853.584,
     "hits": 74
    }
   },
@@ -49,7 +49,7 @@
  "preset:cold-ult-asap": {
   "per": {
    "诀": {
-    "damage": 255020.982,
+    "damage": 255510.92,
     "hits": 101
    },
    "别礼": {
@@ -61,7 +61,7 @@
     "hits": 121
    },
    "祀": {
-    "damage": 1744926.143,
+    "damage": 2020193.652,
     "hits": 70
    }
   },
@@ -72,7 +72,7 @@
    "buffStart": 41,
    "energyGain": 80,
    "energyBlocked": 20,
-   "spGain": 403,
+   "spGain": 405,
    "inkStart": 4,
    "attach": 16,
    "comboReady": 22,
@@ -109,7 +109,7 @@
     "hits": 208
    },
    "祀": {
-    "damage": 1363656.55,
+    "damage": 1551028.203,
     "hits": 122
    }
   },
@@ -241,8 +241,8 @@
  "solo:洛茜": {
   "per": {
    "洛茜": {
-    "damage": 29399.949,
-    "hits": 63
+    "damage": 26663.821,
+    "hits": 56
    }
   },
   "events": {
@@ -440,15 +440,15 @@
    "spSpend": 3,
    "cast": 5,
    "energyOverflow": 2,
-   "energyGain": 6,
+   "energyGain": 7,
    "enemyAttack": 5,
    "error": 1,
    "pause": 1,
    "resourceGain": 2,
+   "instant": 3,
    "buffStart": 1,
    "resourceSpend": 1,
    "resourceExhausted": 1,
-   "instant": 2,
    "attach": 1,
    "comboReady": 2
   },
@@ -527,19 +527,20 @@
  "solo:萤石": {
   "per": {
    "萤石": {
-    "damage": 20150.422,
+    "damage": 24075.967,
     "hits": 48
    }
   },
   "events": {
    "normalHit": 41,
-   "spOverflow": 63,
-   "spGain": 63,
+   "spOverflow": 66,
+   "spGain": 66,
    "spSpend": 3,
    "cast": 4,
    "resourceGain": 3,
    "energyOverflow": 3,
    "energyGain": 3,
+   "targetState": 3,
    "resourceSpend": 3,
    "resourceExhausted": 3,
    "attach": 4,
@@ -624,7 +625,7 @@
  "solo:黎风": {
   "per": {
    "黎风": {
-    "damage": 27678.777,
+    "damage": 26808.721,
     "hits": 46
    }
   },
@@ -644,7 +645,6 @@
    "instant": 3,
    "comboReady": 2,
    "enemyAttack": 5,
-   "resourceGain": 1,
    "comboState": 1,
    "error": 2,
    "comboConsumed": 1
@@ -729,8 +729,8 @@
  "solo:伊冯": {
   "per": {
    "伊冯": {
-    "damage": 12972.02,
-    "hits": 46
+    "damage": 11214.77,
+    "hits": 43
    }
   },
   "events": {
@@ -745,7 +745,8 @@
    "error": 2,
    "pause": 1,
    "buffStart": 2,
-   "buffRefresh": 17
+   "buffRefresh": 17,
+   "buffEnd": 1
   },
   "errors": 2
  },
@@ -769,9 +770,9 @@
    "error": 2,
    "pause": 1,
    "buffStart": 1,
-   "targetState": 1,
+   "targetState": 2,
    "buffEnd": 1,
-   "targetStateEnd": 1
+   "targetStateEnd": 2
   },
   "errors": 2
  },
@@ -830,30 +831,33 @@
  "solo:卡缪": {
   "per": {
    "卡缪": {
-    "damage": 15360.462,
-    "hits": 34
+    "damage": 15523.573,
+    "hits": 31
    }
   },
   "events": {
    "normalHit": 24,
    "spOverflow": 39,
    "spGain": 39,
-   "spSpend": 3,
+   "spSpend": 2,
    "cast": 4,
    "energyOverflow": 2,
-   "energyGain": 3,
-   "targetState": 3,
-   "attach": 4,
+   "energyGain": 2,
+   "targetState": 2,
+   "attach": 3,
    "enemyAttack": 5,
    "error": 2,
-   "pause": 1
+   "pause": 1,
+   "comboState": 1,
+   "buffStart": 3,
+   "buffRefresh": 2
   },
   "errors": 2
  },
  "solo:弭弗": {
   "per": {
    "弭弗": {
-    "damage": 15206.184,
+    "damage": 14093.352,
     "hits": 24
    }
   },
@@ -861,15 +865,16 @@
    "normalHit": 20,
    "spOverflow": 35,
    "spGain": 35,
-   "spSpend": 3,
+   "spSpend": 2,
    "cast": 4,
    "energyOverflow": 2,
-   "energyGain": 3,
+   "energyGain": 2,
    "enemyAttack": 5,
    "error": 2,
    "pause": 1,
    "breach": 1,
-   "abnormal": 1
+   "abnormal": 1,
+   "buffStart": 1
   },
   "errors": 2
  },
@@ -902,7 +907,7 @@
  "solo:梨诺": {
   "per": {
    "梨诺": {
-    "damage": 17390.818,
+    "damage": 17997.039,
     "hits": 35
    }
   },
@@ -910,11 +915,11 @@
    "normalHit": 23,
    "spOverflow": 43,
    "spGain": 43,
-   "spSpend": 3,
+   "spSpend": 2,
    "cast": 5,
    "energyOverflow": 1,
-   "energyGain": 4,
-   "buffStart": 2,
+   "energyGain": 3,
+   "buffStart": 1,
    "enemyAttack": 5,
    "note": 1,
    "buffEnd": 1,
@@ -922,14 +927,14 @@
    "pause": 1,
    "abnormal": 1,
    "comboReady": 1,
-   "instant": 1
+   "instant": 2
   },
   "errors": 1
  },
  "solo:提弗洛斯": {
   "per": {
    "提弗洛斯": {
-    "damage": 30779.674,
+    "damage": 29157.514,
     "hits": 74
    }
   },
@@ -967,14 +972,10 @@
    "spGain": 63,
    "spSpend": 3,
    "cast": 4,
-   "energyOverflow": 7,
-   "energyGain": 7,
+   "energyOverflow": 4,
+   "energyGain": 4,
    "enemyAttack": 5,
-   "block": 3,
-   "instant": 3,
-   "buffStart": 1,
    "comboReady": 2,
-   "buffRefresh": 2,
    "error": 2
   },
   "errors": 2
@@ -1009,7 +1010,7 @@
  "team:诀别汤祀": {
   "per": {
    "诀": {
-    "damage": 16592.165,
+    "damage": 16619.673,
     "hits": 35
    },
    "别礼": {
@@ -1021,14 +1022,14 @@
     "hits": 41
    },
    "祀": {
-    "damage": 16602.307,
+    "damage": 18080.533,
     "hits": 23
    }
   },
   "events": {
    "normalHit": 108,
-   "spOverflow": 77,
-   "spGain": 137,
+   "spOverflow": 78,
+   "spGain": 138,
    "spSpend": 8,
    "cast": 13,
    "energyOverflow": 24,
@@ -1045,8 +1046,8 @@
    "vortex": 1,
    "pause": 1,
    "error": 3,
-   "targetStateEnd": 1,
    "ultTriggered": 2,
+   "targetStateEnd": 1,
    "buffEnd": 2,
    "ultFollowUpReady": 1,
    "buffRefresh": 1,
@@ -1086,7 +1087,7 @@
  "team:提弗洛斯诀": {
   "per": {
    "提弗洛斯": {
-    "damage": 24989.911,
+    "damage": 24178.831,
     "hits": 64
    },
    "诀": {
@@ -1096,8 +1097,8 @@
   },
   "events": {
    "normalHit": 67,
-   "spOverflow": 80,
-   "spGain": 80,
+   "spOverflow": 81,
+   "spGain": 81,
    "spSpend": 4,
    "cast": 6,
    "energyOverflow": 7,
@@ -1110,11 +1111,11 @@
    "error": 2,
    "targetState": 1,
    "pause": 1,
-   "targetStateEnd": 1,
    "consume": 1,
    "resourceSpend": 2,
    "buffRefresh": 6,
    "resourceExhausted": 1,
+   "targetStateEnd": 1,
    "buffEnd": 2
   },
   "errors": 2
@@ -1155,46 +1156,44 @@
  "team:陈千语卡契尔弭弗": {
   "per": {
    "陈千语": {
-    "damage": 21594.747,
+    "damage": 20824.898,
     "hits": 45
    },
    "卡契尔": {
-    "damage": 10471.651,
-    "hits": 25
+    "damage": 7302.735,
+    "hits": 23
    },
    "弭弗": {
-    "damage": 9502.448,
-    "hits": 24
+    "damage": 8265.348,
+    "hits": 23
    }
   },
   "events": {
    "normalHit": 80,
-   "spOverflow": 89,
-   "spGain": 105,
+   "spOverflow": 88,
+   "spGain": 104,
    "spSpend": 6,
-   "cast": 10,
-   "energyOverflow": 17,
-   "energyGain": 20,
-   "buffStart": 2,
-   "breach": 5,
+   "cast": 9,
+   "energyOverflow": 16,
+   "energyGain": 19,
+   "buffStart": 1,
+   "breach": 3,
    "abnormal": 3,
-   "comboReady": 6,
+   "comboReady": 5,
    "enemyAttack": 6,
-   "block": 2,
-   "counter": 2,
-   "shield": 2,
+   "shield": 1,
    "buffRefresh": 4,
+   "error": 3,
    "pause": 1,
-   "error": 2,
    "buffEnd": 1
   },
-  "errors": 2
+  "errors": 3
  },
  "team:伊冯佩丽卡汤汤": {
   "per": {
    "伊冯": {
-    "damage": 17779.973,
-    "hits": 54
+    "damage": 17194.223,
+    "hits": 53
    },
    "佩丽卡": {
     "damage": 10644.424,

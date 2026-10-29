@@ -1974,12 +1974,9 @@
   "zone": "dot",
   "stat": null,
   "value": {
-   "formula": "atk*0.30",
-   "vars": [
-    "atk"
-   ]
+   "fixed": 30
   },
-  "unit": "flat",
+  "unit": "%atk",
   "beneficiary": "target",
   "applies": {
    "elements": [
@@ -2004,7 +2001,7 @@
    "category": "official",
    "where": "operators.js chr_0028_wulfa talents[0].stages[1]"
   },
-  "notes": "额外伤害源（每秒一次的持续伤害，倍率=攻击力×v%），不是增益；需作为独立伤害段建模。",
+  "notes": "额外伤害源（每秒一次的持续伤害，倍率=攻击力×v%），不是增益；需作为独立伤害段建模。 按攻击力 30% 的物理伤害走正常结算（防御、抗性、增益），重新施加不叠加（审核意见）",
   "stages": [
    {
     "stage": "·一",
@@ -2032,12 +2029,9 @@
   "zone": "extraHit",
   "stat": null,
   "value": {
-   "formula": "atk*0.24",
-   "vars": [
-    "atk"
-   ]
+   "fixed": 24
   },
-  "unit": "flat",
+  "unit": "%atk",
   "beneficiary": "self",
   "applies": {
    "elements": [
