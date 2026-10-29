@@ -71,7 +71,7 @@
 - 敌人只做两件事：每 4 s 攻击主控、挨打。不蓄力、不移动、无限血、单目标；触发表里 scenario 类效果因此不发生（docs/trigger-coverage.md）。
 - 暴击口径：保底（critMode never）下暴击类效果不触发；期望 / 必暴击口径下按每次命中都暴击触发，是上界。
 - 概率口径：保底下概率段与概率效果不发生；options.procMode=expected 按概率折算段伤害，但概率效果（珍鳞攻击力、特殊赠礼脆弱）一旦发生按全额算，是上界。
-- 连击状态的乘区（战技 +30% / 终结技 +20% 每层，施放时消耗）按研究值，消费规则没有实测（verification-needed 60）。
+- 连击状态的乘区（战技 30/45/60/75%、终结技 20/30/40/50% 按 1–4 层，施放时消耗；乘区随该次施放的命中事件走）按研究值，消费规则没有实测（verification-needed 60）。
 - 替换型战技各阶段共用基础伤害段（祀起墨/收笔、弭弗三段）。
 - 异常状态的后续效果（导电/碎甲易伤、腐蚀减抗、燃烧跳伤、碎冰）未完整进入伤害流程。
 - 终结技演出暂停只作用于技力回复与非主控普攻，增益到期与冷却未暂停。
@@ -107,5 +107,7 @@
 目标状态（mechanics.<kind>.targetStates=[{id,duration,onSegment?,cond?,endSegment?,earlyEnd?}]）：命中时施加；endSegment 在到期时打出（囹圄爆炸）；earlyEnd.by=ownSkillHit 时自身战技命中提前结束并打出 segments、返还技力、刷新脆弱（诀智）。源石结晶是 id=crystal 的目标状态：物理异常 / 破防 / 终结技消耗它，施加者打出 crystal.breakSegment。
 
 资源事件（resources[].spend[].on=physicalAbnormal | comboHit，带 segment / finaleSegment / sp / finaleSp / event）：铁誓按事件逐点消耗，最后一点打决胜段。备料：gains.on=ultimateHit（按段）、spend.on=comboHit，冷却效果走效果目录的 resourceSpend 触发。
+
+审核后补充（2026-10-30，docs/reviews/coverage-review-2026-10-30.md）：heal 事件（mechanics.<kind>.heals）；%atk 单位的额外一击 / 跳伤走正常结算，跳伤与燃烧带序号不叠串；期望口径的暴击 / 概率事件带权重；规格字段 requiresStacks / clearStacks / refresh / perByPotential / benefitTriggerer / resetOn / hunt；资源 potentialMods、段计划 timesByPotential、目标状态 durationByPotential；卡缪追猎（ultimate.replaces.skill → castHunt）；立盾只有主控、每次一反击。
 
 其他：nextNormalHeavy（战技条件成立后下一次普攻直接重击）、combo.casts=2 + castWindow（两段连携，冷却从最后一次起算，段 / 消耗 / 异常按 stage 条件）、ultimate.triggered + followUp（领域内主控重击 / 处决触发段，达次数后终结技切换为后续技，不耗能量）、skill.counterSegment + blocks（立盾反击段只在受击时打出）、shield{self|team|other,duration,cooldown}、procs{name:{base,perInt,stacksEffect,perStack,mul}}、airborneSeconds / resetsAirAttacks（浮空与重置空中普攻）、effect.grants=comboState（授予连击状态）。
