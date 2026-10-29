@@ -69,13 +69,13 @@ export function localSearchPlan(input,{horizon=60,objective='guaranteed',budgetM
   };
   const names=Object.keys(ops); const weight=Object.fromEntries(names.map(n=>[n,1])); const stats=Object.fromEntries(names.map(n=>[n,{tries:0,better:0,global:0,accepted:0,gain:0,ms:0}]));
   const EXPLORE=0.15; const pickOp=()=>{ if(rnd()<EXPLORE) return pick(names); const tot=names.reduce((a,n)=>a+weight[n],0); let r=rnd()*tot; for(const n of names){ r-=weight[n]; if(r<=0) return n; } return names.at(-1); };
-  /* 自适应权重：按批更新，权重 = 单位耗时带来的相对改善（有下限，保证探索） */
-  const batch={}; const flush=()=>{ for(const n of names){ const b=batch[n]; if(!b||!b.ms) continue; weight[n]=0.7*weight[n]+0.3*Math.max(0.1,1+100*b.gain/b.ms); } for(const n of names) batch[n]={gain:0,ms:0}; };
-  for(const n of names) batch[n]={gain:0,ms:0};
+  /* 自适应权重：按批更新，权重 = 每次评估带来的相对改善（有下限，保证探索）。不用墙钟耗时：耗时随机器与 JIT 变化，会让同一随机种子的两次搜索走不同路径 */
+  const batch={}; const flush=()=>{ for(const n of names){ const b=batch[n]; if(!b||!b.n) continue; weight[n]=0.7*weight[n]+0.3*Math.max(0.1,1+20*b.gain/b.n); } for(const n of names) batch[n]={gain:0,n:0}; };
+  for(const n of names) batch[n]={gain:0,n:0};
   // ---- 主循环：扰动 + 接受规则；停滞时从档案重启 ----
   let cur=inc; let curPlan=cur.plan, curE=cur.e; let since=0, loops=0; const searchEnd=t0+(end-t0)*(1-refineShare), searchEvals=Math.round(maxEvals*(1-refineShare));
   while(Date.now()<searchEnd&&evals<searchEvals){
-    const n=pickOp(); const cand=ops[n](curPlan,curE); proposals++; if(!cand) continue; const k=keyOf(cand); const isFresh=!cache.has(k); if(isFresh) fresh++; const tS=Date.now(); const before=inc.e.score; const e=ev(cand); const dt=Date.now()-tS; stats[n].tries++; stats[n].ms+=dt; batch[n].ms+=dt;
+    const n=pickOp(); const cand=ops[n](curPlan,curE); proposals++; if(!cand) continue; const k=keyOf(cand); const isFresh=!cache.has(k); if(isFresh) fresh++; const tS=Date.now(); const before=inc.e.score; const e=ev(cand); const dt=Date.now()-tS; stats[n].tries++; stats[n].ms+=dt; batch[n].n++;
     if(e.score>curE.score*(1+1e-6)){ const rel=(e.score-curE.score)/Math.max(1,curE.score); curPlan=canon(cand); curE=e; since=0; stats[n].better++; stats[n].gain+=rel; batch[n].gain+=rel; if(inc.e.score>before*(1+1e-6)) stats[n].global++; offer(cand,e); }
     else if(isFresh&&e.score>=curE.score*(1-0.01)&&rnd()<0.3){ curPlan=canon(cand); curE=e; since++; stats[n].accepted++; }
     else since++;
