@@ -1,0 +1,14 @@
+// zmdlogs 战斗日志的公共读取：roster → 引擎 member、敌人表 → enemy、增益表合并。供 log_replay / log_sim_replay 共用。
+import fs from 'node:fs'; import path from 'node:path'; import {fileURLToPath} from 'node:url';
+export const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'); export const DIR=path.join(ROOT,'sources/raw/zmdlogs');
+export const ELEM={cryst:'cold',fire:'heat',pulse:'electric',natural:'nature',physical:'physical'};
+export async function loadData(){ const [operators,weapons,gear,sets,effects,mechanics,timing]=await Promise.all(['operators','weapons','gear','sets','effects','mechanics','timing'].map(n=>import(`${ROOT}/dist/data/${n}.js`).then(m=>m.default))); return {operators,weapons,gear,sets,effects,mechanics,timing}; }
+export function loadLogs(){ return JSON.parse(fs.readFileSync(path.join(DIR,'zmd_all.json'))); }
+export async function enemyOf(bossKey){ const {loadWf}=await import(ROOT+'/tools/wf.mjs'); let t; try{ t=loadWf(path.join(DIR,`${bossKey}.data`)).data.enemyAttributeTemplateTable; }catch{} const custom=t?{cold:t.crystResistance||0,heat:t.fireResistance||0,electric:t.pulseResistance||0,nature:t.naturalResistance||0,physical:t.physicalResistance||0}:{cold:0,heat:0,electric:0,nature:0,physical:0}; const def=t?(t.levelDependentAttributes.at(-1).attrs.find(a=>a.attrType===3)?.attrValue??100):100; return {defence:def,resistances:Object.fromEntries(Object.keys(custom).map(k=>[k,'custom'])),custom,assumed:!t}; }
+// roster 里的配装、精炼、技能等级、潜能 → 引擎 member（装备词条按项目数据表的精锻值，已核对与日志一致）
+export function memberOf(r,data){ const op=data.operators.find(o=>o.id===r.characterKey); if(!op) return null; const w=data.weapons.find(x=>x.id===r.weapon?.weaponTemplate); const sk3=r.weapon?.skills?.find(s=>s.skillKey.startsWith('sk_'))?.level??4; const atkS=r.weapon?.skills?.filter(s=>!s.skillKey.startsWith('sk_')).map(s=>s.level)||[9,9];
+  const g={armor:null,gloves:null,kit1:null,kit2:null}; let kits=0; for(const e of r.equips||[]){ const item=data.gear.find(x=>x.id===e.itemId); const refine=[3,3,3]; for(const l of e.enhanceLevels||[]) refine[l.index-1]=l.level; const slot=e.partName==='护甲'?'armor':e.partName==='护手'?'gloves':(kits++===0?'kit1':'kit2'); g[slot]=item?{id:item.id,refine}:null; }
+  const skillRanks={normal:12,skill:12,combo:12,ultimate:12}; for(const s of r.skills||[]){ if(/attack1$/.test(s.skillKey)) skillRanks.normal=s.level; if(/normal_skill$/.test(s.skillKey)) skillRanks.skill=s.level; if(/combo_skill$/.test(s.skillKey)) skillRanks.combo=s.level; if(/ultimate_skill$/.test(s.skillKey)) skillRanks.ultimate=s.level; }
+  const member={operatorId:op.id,potential:r.characterPotential||0,skillRanks,mode:'auto',weapon:w?{id:w.id,potential:(r.weapon.weaponRefine||1)-1,ranks:[atkS[0]??9,atkS[1]??9,sk3]}:{id:null},gear:g,consumables:[],buffs:{}};
+  return {name:r.characterName,op,member}; }
+export const norm=e=>e.hitContext?.critical?.isCritical?e.value/(1+(e.hitContext.critical.critDamageBonus??0.5)):e.value;
