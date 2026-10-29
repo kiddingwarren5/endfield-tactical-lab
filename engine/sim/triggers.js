@@ -36,7 +36,7 @@ export const TRIGGERS={
   skillFinalHitNoBreach:hit('skill'), skillFinalHitBreachLe2:hit('skill'),
   duringUltimateNormalHit:hit('normal',{state:'duringUltimate'}),
   afterUltimateCast:cast('ultimate'), ultCast:cast('ultimate'), afterUltimate:cast('ultimate'),
-  comboCast:cast('combo'), afterComboCast:cast('combo'), onComboCast:cast('combo'), comboCastNextSkill:cast('combo',{consumeOn:cast('skill')}), comboHitLayers:hit('combo'), afterComboCastCd45:cast('combo',{cooldown:45}), afterComboNextSkill:cast('combo',{consumeOn:cast('skill'),duration:30}),
+  comboCast:cast('combo'), afterComboCast:cast('combo'), onComboCast:cast('combo'), comboCastNextSkill:cast('combo',{consumeOn:cast('skill')}), comboCastLayers:{on:'castLayers',kind:'combo'}, layersAddByPotential:{handled:'“视为额外 N 层”由 mechanics.combo.layersAddByPotential 结算'}, afterComboCastCd45:cast('combo',{cooldown:45}), afterComboNextSkill:cast('combo',{consumeOn:cast('skill'),duration:30}),
   onSkillCast:cast('skill'), skillCast:cast('skill'), firstSkillInBattle:cast('skill',{once:true}),
   skillOrComboCast:cast(['skill','combo']), teamSkillCast:cast('skill',{anyone:true}),
   afterUltimateEnd:{on:'ultimateEnd'}, battleStart:{on:'battleStart'},
