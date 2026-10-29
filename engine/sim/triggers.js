@@ -87,7 +87,7 @@ export const TRIGGERS={
   // ---- 失衡 ----
   targetStaggered:{state:'targetStaggered'}, targetPhysFragileOrStagger:[{state:'targetStaggered'},{state:'targetFragile',element:'physical'}],
   // ---- 未建模机制（逐条注明原因）----
-  afterSelfSkillHeal:hit('combo',{stacks:2}), selfSkillHeal:HEAL, selfSkillHealOthers:HEAL, comboHeal:HEAL, comboHealOthers:HEAL, crystalHealAtFullHp:{on:'heavy',anyone:true,ownerRecent:{kind:'skill',within:20},maxPerCast:2},
+  afterSelfSkillHeal:hit('combo',{stacks:2}), selfSkillHeal:HEAL, selfSkillHealOthers:HEAL, comboHeal:HEAL, comboHealOthers:HEAL, crystalHealAtFullHp:{on:'resourceSpend',resource:'crystal',maxPerCast:2},
   afterCrit:CRIT, critAtkStacksFull:CRIT, critHit:CRIT, wolfBlood16:CRIT, skillOrComboCrit:CRIT, critOnScarredTarget:CRIT, artsImmuneProc:U('免疫法术概率触发未建模'),
   crystalConsumed:CRYSTAL, skillConsumeCrystal:CRYSTAL, ultimateConsumeCrystal:CRYSTAL, afterCrystalConsumed:CRYSTAL, targetCrystal:CRYSTAL, targetHasCrystal:CRYSTAL,
   onKnockdown:{on:'abnormal',which:'knockdown'}, comboKnockUp:{on:'abnormal',which:'knockup',by:'combo'}, onSmashOrArmorBreak:{on:'abnormal',whichIn:['crush','armorBreak']}, slamConsumeBreach:{on:'consume',element:'breach'}, consumeBreachLayers:{on:'consume',element:'breach'}, afterApplyBreach:{on:'breach'}, targetBreach4:{state:'targetBreach4'},
@@ -98,12 +98,12 @@ export const TRIGGERS={
   skillCounter:U('格挡反击未建模（对照靶不攻击）'), skillFirstBlock:U('格挡未建模（对照靶不攻击）'), takeDamage:U('承伤未建模（对照靶不攻击）'), hasUltimateShield:cast('ultimate'), onSkillHitWithShield:U('护盾未建模'),
   targetFocused:hit('skill'), focused20s:hit('skill',{delay:20,duration:40}), focusedKilled:U('击败事件未建模（对照靶无限血）'),
   ultimateKill:U('击败事件未建模（对照靶无限血）'), killDuringUltimate:U('击败事件未建模（对照靶无限血）'),
-  moltenStacks4:U('熔火层数未建模'), skillFollowupHit:U('焚灭追加攻击未建模'), skillBurn:U('战技燃烧伤害倍率单独加成未建模'),
+  moltenStacks4:{state:'resourceAtLeast',resource:'molten',min:4,duration:20}, skillFollowupHit:{on:'resourceSpend',resource:'molten'}, skillBurn:U('战技燃烧伤害倍率单独加成未建模'),
   comboConduct:U('导电来源区分未建模'), comboHitWithPrep:U('备料层数未建模'), afterUltimateFollowup:U('盾卫旗队后续效果未建模（物理异常分支）'),
   ultimateMaxStacks:U('模拟按不暴击计算，暴击率层数不影响伤害'), nextHeavyAfterSkillFreeze:U('下一次普攻改重击未建模'),
   inGravityField:cast('ultimate'), inGravityFieldBreach:U('重力场（终结技领域内）未建模'),
   wingHovering:hit('skill'), comboHitWingTarget:U('“连击”乘区未建模'),
-  inArrowField:U('箭阵持续时间官方未给出'), enhancedShot:U('猎矢强化射击未建模'), enhancedShotConsumeAttach:U('猎矢强化射击未建模'), airborne:cast('skill',{duration:1.5}),
+  inArrowField:U('箭阵持续时间官方未给出'), enhancedShot:{on:'resourceSpend',resource:'arrow'}, enhancedShotConsumeAttach:{on:'resourceSpend',resource:'arrow',consumedAttach:true}, airborne:cast('skill',{duration:1.5}),
   specialGiftHit:U('代言人特殊赠礼概率未建模'), inkMarked:{handled:'笔意：河山共影命中后按参数表比例记录目标所受伤害，笔意时长结束或收笔时以固定伤害爆发（simulate inkBurst）'},
   ultimateDetonateBomb:U('自制炸弹未建模'), targetSlowed:U('缓速持续时间官方未给出'), skillLastStrike:U('雷击逐次命中未建模'), skillFirstTarget:{state:'always'},
   targetColdFragile:{handled:'别礼二天赋：终结技享受的脆弱 ×1.5，由 fragileMultiplier 结算'},
