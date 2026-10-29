@@ -1,0 +1,441 @@
+{
+  "teleportValidationDatas": {
+    "TpForGd_guide_group_blue_print1_50b153cd": {
+      "id": "TpForGd_guide_group_blue_print1_50b153cd",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -380.0,
+        "y": 118.0,
+        "z": -172.0
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 18.8,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_blue_print1_762fcb2f": {
+      "id": "TpForGd_guide_group_blue_print1_762fcb2f",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -380.0,
+        "y": 118.0,
+        "z": -172.0
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 18.8,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_blue_print1_d38f3c9c": {
+      "id": "TpForGd_guide_group_blue_print1_d38f3c9c",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -380.0,
+        "y": 118.0,
+        "z": -172.0
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 18.8,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_build_furnance_55f7180f": {
+      "id": "TpForGd_guide_group_build_furnance_55f7180f",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -383.47,
+        "y": 118.33,
+        "z": -196.61
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 10.0,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_build_furnance_8a5c1e23": {
+      "id": "TpForGd_guide_group_build_furnance_8a5c1e23",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -383.47,
+        "y": 118.33,
+        "z": -196.61
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 10.0,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_build_furnance_dd79b9e7": {
+      "id": "TpForGd_guide_group_build_furnance_dd79b9e7",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -383.47,
+        "y": 118.33,
+        "z": -196.61
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 10.0,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_camp_44e5a7bb": {
+      "id": "TpForGd_guide_group_camp_44e5a7bb",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -119.88,
+        "y": 98.14,
+        "z": -384.2
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 3.3,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_camp_55dec030": {
+      "id": "TpForGd_guide_group_camp_55dec030",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -119.88,
+        "y": 98.14,
+        "z": -384.2
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 3.3,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_camp_9dfea705": {
+      "id": "TpForGd_guide_group_camp_9dfea705",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -119.88,
+        "y": 98.14,
+        "z": -384.2
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 3.3,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_crop_farm_1_49a677bf": {
+      "id": "TpForGd_guide_group_crop_farm_1_49a677bf",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map02_lv010",
+      "position": {
+        "x": 813.9115,
+        "y": 269.3332,
+        "z": 1254.563
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 12.0,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_crop_farm_1_f5449afa": {
+      "id": "TpForGd_guide_group_crop_farm_1_f5449afa",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map02_lv010",
+      "position": {
+        "x": 813.9115,
+        "y": 269.3332,
+        "z": 1254.563
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 12.0,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_hub_power_hint_1_08eec02d": {
+      "id": "TpForGd_guide_group_hub_power_hint_1_08eec02d",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -379.5,
+        "y": 118.0,
+        "z": -172.5
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 7.5,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_hub_power_hint_1_1f16dcda": {
+      "id": "TpForGd_guide_group_hub_power_hint_1_1f16dcda",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -379.5,
+        "y": 118.0,
+        "z": -172.5
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 7.5,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_hub_power_hint_1_411e3205": {
+      "id": "TpForGd_guide_group_hub_power_hint_1_411e3205",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -379.5,
+        "y": 118.0,
+        "z": -172.5
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 7.5,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_hub_power_hint_2_35c70cad": {
+      "id": "TpForGd_guide_group_hub_power_hint_2_35c70cad",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -404.5,
+        "y": 118.3,
+        "z": -196.5
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 3.2,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_hub_power_hint_2_4a66f1dc": {
+      "id": "TpForGd_guide_group_hub_power_hint_2_4a66f1dc",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -404.5,
+        "y": 118.3,
+        "z": -196.5
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 3.2,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_hub_power_hint_2_8e9b909f": {
+      "id": "TpForGd_guide_group_hub_power_hint_2_8e9b909f",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -404.5,
+        "y": 118.3,
+        "z": -196.5
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 3.2,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_open_shared_building_17dfc373": {
+      "id": "TpForGd_guide_group_open_shared_building_17dfc373",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -384.5,
+        "y": 120.21,
+        "z": -215.5
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 3.3,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_open_shared_building_1f7fe839": {
+      "id": "TpForGd_guide_group_open_shared_building_1f7fe839",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -384.5,
+        "y": 120.21,
+        "z": -215.5
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 3.3,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_open_shared_building_933d08ec": {
+      "id": "TpForGd_guide_group_open_shared_building_933d08ec",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -384.5,
+        "y": 120.21,
+        "z": -215.5
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 3.3,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_ppole_place_aba51aa1": {
+      "id": "TpForGd_guide_group_ppole_place_aba51aa1",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -371.17,
+        "y": 118.32,
+        "z": -181.68
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 5.0,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_ppole_place_e06950d7": {
+      "id": "TpForGd_guide_group_ppole_place_e06950d7",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -371.17,
+        "y": 118.32,
+        "z": -181.68
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 5.0,
+      "keepAnim": false,
+      "keepCam": true
+    },
+    "TpForGd_guide_group_ppole_place_e68a30f3": {
+      "id": "TpForGd_guide_group_ppole_place_e68a30f3",
+      "teleportReason": "ClientGuideTp",
+      "sceneId": "map01_lv001",
+      "position": {
+        "x": -371.17,
+        "y": 118.32,
+        "z": -181.68
+      },
+      "rotationEuler": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+      },
+      "uiTypeOut": "NoLoading",
+      "deviation": 5.0,
+      "keepAnim": false,
+      "keepCam": true
+    }
+  }
+}

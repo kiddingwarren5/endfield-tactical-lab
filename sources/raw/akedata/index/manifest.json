@@ -1,0 +1,148 @@
+{
+ "schemaVersion": 1,
+ "latest": "1.6.4@11343132-9",
+ "sharedRevision": "2026-09-02T12:36:22.209625+00:00",
+ "updatedAt": "2026-10-27T10:04:23+08:00",
+ "versions": [
+  {
+   "id": "1.6.4@11343132-9",
+   "gameVersion": "1.6.4",
+   "hotfixVersion": "11343132-9",
+   "tableCfgPath": "public/1.6.4/11343132-9/TableCfg",
+   "publishedAt": "2026-10-27T10:04:23+08:00"
+  },
+  {
+   "id": "1.6.4@11262943-8",
+   "gameVersion": "1.6.4",
+   "hotfixVersion": "11262943-8",
+   "tableCfgPath": "public/1.6.4/11262943-8/TableCfg",
+   "publishedAt": "2026-10-22T19:31:55+08:00"
+  },
+  {
+   "id": "1.6.4@11188787-7",
+   "gameVersion": "1.6.4",
+   "hotfixVersion": "11188787-7",
+   "tableCfgPath": "public/1.6.4/11188787-7/TableCfg",
+   "publishedAt": "2026-10-21T10:03:49+08:00"
+  },
+  {
+   "id": "1.6.4@11123848-6",
+   "gameVersion": "1.6.4",
+   "hotfixVersion": "11123848-6",
+   "tableCfgPath": "public/1.6.4/11123848-6/TableCfg",
+   "publishedAt": "2026-10-17T10:08:10+08:00"
+  },
+  {
+   "id": "1.6.4@11095949-5",
+   "gameVersion": "1.6.4",
+   "hotfixVersion": "11095949-5",
+   "tableCfgPath": "public/1.6.4/11095949-5/TableCfg",
+   "publishedAt": "2026-10-17T01:27:07+08:00"
+  },
+  {
+   "id": "1.6.3@11095949-5",
+   "gameVersion": "1.6.3",
+   "hotfixVersion": "11095949-5",
+   "tableCfgPath": "public/1.6.3/11095949-5/TableCfg",
+   "publishedAt": "2026-10-16T04:09:54.411584+00:00"
+  },
+  {
+   "id": "1.6.3@11010254-4",
+   "gameVersion": "1.6.3",
+   "hotfixVersion": "11010254-4",
+   "tableCfgPath": "public/1.6.3/11010254-4/TableCfg",
+   "publishedAt": "2026-10-14T22:23:12.731348+00:00"
+  },
+  {
+   "id": "1.5.3@10731330-8",
+   "gameVersion": "1.5.3",
+   "hotfixVersion": "10731330-8",
+   "tableCfgPath": "public/1.5.3/10731330-8/TableCfg",
+   "publishedAt": "2026-10-08T03:03:53.456295+00:00"
+  },
+  {
+   "id": "1.5.3@10506507-7",
+   "gameVersion": "1.5.3",
+   "hotfixVersion": "10506507-7",
+   "tableCfgPath": "public/1.5.3/10506507-7/TableCfg",
+   "publishedAt": "2026-10-08T00:26:43+08:00"
+  },
+  {
+   "id": "1.5.3@10024360-6",
+   "gameVersion": "1.5.3",
+   "hotfixVersion": "10024360-6",
+   "tableCfgPath": "public/1.5.3/10024360-6/TableCfg",
+   "publishedAt": "2026-09-08T05:34:51.667413+00:00"
+  },
+  {
+   "id": "1.5.3@9913107-5",
+   "gameVersion": "1.5.3",
+   "hotfixVersion": "9913107-5",
+   "tableCfgPath": "public/1.5.3/9913107-5/TableCfg",
+   "publishedAt": "2026-09-04T14:31:50.963743+00:00"
+  },
+  {
+   "id": "1.5.3@9885010-4",
+   "gameVersion": "1.5.3",
+   "hotfixVersion": "9885010-4",
+   "tableCfgPath": "public/1.5.3/9885010-4/TableCfg",
+   "publishedAt": "2026-09-03T02:05:26.765636+00:00"
+  },
+  {
+   "id": "1.5.3@9764758-3",
+   "gameVersion": "1.5.3",
+   "hotfixVersion": "9764758-3",
+   "tableCfgPath": "public/1.5.3/9764758-3/TableCfg",
+   "publishedAt": "2026-09-01T22:16:30.752260+00:00"
+  },
+  {
+   "id": "1.4.4@9599201-14",
+   "gameVersion": "1.4.4",
+   "hotfixVersion": "9599201-14",
+   "tableCfgPath": "public/1.4.4/9599201-14/TableCfg",
+   "publishedAt": "2026-08-26T02:04:02.148141+00:00"
+  },
+  {
+   "id": "1.4.4@9433094-12",
+   "gameVersion": "1.4.4",
+   "hotfixVersion": "9433094-12",
+   "tableCfgPath": "public/1.4.4/9433094-12/TableCfg",
+   "publishedAt": "2026-08-16T07:04:11.991594+08:00"
+  },
+  {
+   "id": "1.4.4@8764515-7",
+   "gameVersion": "1.4.4",
+   "hotfixVersion": "8764515-7",
+   "tableCfgPath": "public/1.4.4/8764515-7/TableCfg",
+   "publishedAt": "2026-07-23T14:03:44.833756+08:00"
+  },
+  {
+   "id": "1.3.3@8190425-29",
+   "gameVersion": "1.3.3",
+   "hotfixVersion": "8190425-29",
+   "tableCfgPath": "public/1.3.3/8190425-29/TableCfg",
+   "publishedAt": "2026-08-20T19:19:32.947563+08:00"
+  },
+  {
+   "id": "1.2.5@7215718-17",
+   "gameVersion": "1.2.5",
+   "hotfixVersion": "7215718-17",
+   "tableCfgPath": "public/1.2.5/7215718-17/TableCfg",
+   "publishedAt": "2026-07-19T17:06:18.386399+08:00"
+  },
+  {
+   "id": "1.1.9@6478171-19",
+   "gameVersion": "1.1.9",
+   "hotfixVersion": "6478171-19",
+   "tableCfgPath": "public/1.1.9/6478171-19/TableCfg",
+   "publishedAt": "2026-07-19T17:09:26.511385+08:00"
+  },
+  {
+   "id": "1.0.14@5793042-32",
+   "gameVersion": "1.0.14",
+   "hotfixVersion": "5793042-32",
+   "tableCfgPath": "public/1.0.14/5793042-32/TableCfg",
+   "publishedAt": "2026-07-19T17:14:42.759609+08:00"
+  }
+ ]
+}
