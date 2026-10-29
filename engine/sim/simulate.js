@@ -181,7 +181,7 @@ export function simulate(input){
       case 'allyCombo': return ev?.type==='allyCombo';
       case 'resource': { const r=S.res?.[tr._owner]?.[tr.id]; if(!r) return false; if(tr.exhausted) return ev?.type==='resourceExhausted'&&ev.id===tr.id&&ev.who===tr._owner; return r.value>=(tr.min??r.max); }
       case 'skillState': return ev?.type==='ownSkillCast'&&ev.who===tr._owner; /* 近似：自身战技施放后进入可连携状态（支援晶体 / 启示状态机见 verification-needed 35） */
-      case 'custom': { if(tr.event==='stagger') return ev?.type==='stagger'; if(tr.event==='abnormalConsumed') return (ev?.type==='abnormalConsumed'||ev?.type==='iceShatter')&&(!anomalies||!ev.which||anomalies.includes(ev.which)); if(tr.event==='crystalConsumed') return ev?.type==='crystalConsumed'; if(tr.requires){ if(ev?.type!=='attachApplied'&&ev?.type!=='breach') return false; return (!tr.requires.includes('breach')||(S.breach||0)>0)&&(!tr.requires.includes('anyArtsAttach')||ARTS_SET.some(k=>(S.attach[k]?.layers||0)>0)); } return false; /* controlledHit / enemyCharging：对照靶不攻击、不蓄力 */ }
+      case 'custom': { if(tr.event==='stagger') return ev?.type==='stagger'; if(tr.event==='abnormalConsumed') return (ev?.type==='abnormalConsumed'||ev?.type==='iceShatter')&&(!anomalies||!ev.which||anomalies.includes(ev.which)); if(tr.event==='crystalConsumed') return ev?.type==='crystalConsumed'; if(tr.requires){ if(ev?.type!=='attachApplied'&&ev?.type!=='breach') return false; return (!tr.requires.includes('breach')||(S.breach||0)>0)&&(!tr.requires.includes('anyArtsAttach')||ARTS_SET.some(k=>(S.attach[k]?.layers||0)>0)); } if(tr.event==='controlledHit') return ev?.type==='controlledHit'; if(tr.event==='enemyCharging') return ev?.type==='enemyCharging'; return false; }
       default: return false; } }
   // 物理异常：击飞 / 倒地 +1 层破防、10 失衡、120% 物理机制伤害（首次物理异常只上破防不造成伤害）；猛击 / 碎甲消耗全部破防，150%(1+n) / 50%(1+n)，碎甲附带物理易伤（rules §C 112）
   function applyPhysicalAnomaly(mb,type,viaKind){ const idx=mb.idx; const before=S.breach||0;
@@ -217,7 +217,7 @@ export function simulate(input){
     // hits at cast end
     let segs=filterConditionalSegs(mb,skillSegments(mb.op,'skill',mb.member.mode).filter(s=>!s.per));
     if(chain){ const idx=chain.indexOf(stage); const laterIds=chain.slice(1).map(c=>c.segment).filter(Boolean); /* 阶段链：每段只打自己声明的伤害段；基础段不打后续阶段的段（噗切娜“我没有睡着！”立盾无伤害，头槌在替换段） */ if(idx>0){ segs=stage.segment?segs.filter(sg=>sg.id===stage.segment):[]; } else { segs=segs.filter(sg=>!laterIds.includes(sg.id)); } }
-    const attSrc=stage?.attach!==undefined?stage.attach:mech.attach; const atts=Array.isArray(attSrc)?attSrc:(attSrc?[attSrc]:[]); const slot1El=members[0]?.op.element; const alt=atts.find(a=>a.bind==='slot1Element'&&a.ifSlot1Element===slot1El); const primary=alt||atts.find(a=>a.bind!=='slot1Element')||atts[0]; const heavyBound=primary?.bind==='controlHeavy';
+    const attSrc=stage?.attach!==undefined?stage.attach:mech.attach; const atts=Array.isArray(attSrc)?attSrc:(attSrc?[attSrc]:[]); const slot1El=members[0]?.op.element; const alt=atts.find(a=>a.bind==='slot1Element'&&a.ifSlot1Element===slot1El); const primary=alt||atts.find(a=>a.bind!=='slot1Element'&&a.bind!=='counter')||null; const heavyBound=primary?.bind==='controlHeavy';
     if(mech.extraSegmentPerConsumed&&tornadoes>1){ const s2=segs.find(x=>x.id===mech.extraSegmentPerConsumed); if(s2){ const extra=[]; for(let i=1;i<tornadoes;i++) extra.push(s2); push(S.t+T.castSeconds.skill*0.6+0.02,'skillHit',{who:mb.idx,kind:'skill',segs:extra,mech}); } }
     const inkStart=mech.ink&&chain&&chain.indexOf(stage)===0?{owner:mb.idx,duration:num(mech.ink.duration?.value??mech.ink.duration,rankOf(mb,'skill'))||20,ratio:(num(mech.ink.recordRatio,rankOf(mb,'skill'))||0)/100}:null;
     if(mech.ink&&stage?.name===mech.ink.burstStage&&S.ink&&S.ink.owner===mb.idx) push(S.t+T.castSeconds.skill*0.6,'inkBurst',{who:mb.idx});
@@ -268,7 +268,7 @@ export function simulate(input){
     if(heavy&&isControl){ const hr=mb.mech?.normal?.heavySpRefund; const tbl=T.heavySpRefundByName?.values?.[mb.op.name]; const refund=hr?.value??tbl??P.defaultHeavySpRefund; if(refund) gainSp(refund,`${mb.op.name} 重击回技力`,'real',{who:mb.idx,source:'heavy'}); checkCombos({type:'heavyHit',who:mb.idx}); for(const o of alive) if(o.pendingHeavyAttach){ const a=o.pendingHeavyAttach; o.pendingHeavyAttach=null; if(a.until!=null&&a.until<S.t-EPS){ addLog('note',{message:`${o.op.name} 战技灌注已过期（${round(a.until)}s），本次重击未触发追击`}); continue; } for(const sg of a.segs||[]){ doHit(o,{...sg,skillKey:'skill'},rankOf(o,'skill'),{},'skill'); fireTrigger({on:'hit',kind:'skill',who:o.idx}); } applyAttach(a.element,a.layers||1,o.idx,'skill'); } } // “主控下次重击”: any main controller's heavy hit; credited to the skill's caster
     const durs=T.normalSegmentSeconds[mb.op.weaponType]||T.normalSegmentSeconds.sword; const d=(durs[i]??0.6)/(isControl?1:P.rhythmFactor); mb.normalIdx=(i+1)%segs.length; mb.nextNormalAt=S.t+d; }
   // ---------- main loop ----------
-  S.vortex={}; S.lastCast={}; S.perCast={}; S.lastFire={}; S.accum={}; S.breach=0; resInit(); permanentBuffs(); fireTrigger({on:'battleStart',anyone:true});
+  S.vortex={}; S.lastCast={}; S.perCast={}; S.lastFire={}; S.accum={}; S.breach=0; resInit(); { const iv=enemy?.attackInterval??T.enemyAttackInterval??0; if(iv>0) for(let t=iv;t<=P.duration+1e-9;t+=iv) push(t,'enemyAttack',{}); } permanentBuffs(); fireTrigger({on:'battleStart',anyone:true});
   const plan=[...timeline].sort((a,b)=>a.t-b.t); for(const a of plan) push(a.t,'planned',{action:a});
   // 顺序轴模式（input.sequence）：按顺序在“最早可行时刻”执行；支持 waitFor.attachLayers / minT / optional；等待超过 seqMaxWait 的步骤跳过（可选步静默，否则记 seqSkip）
   const SEQ=Array.isArray(input.sequence)?input.sequence:null; let seqIdx=0, seqWaitFrom=0; const scheduled=[]; const seqMaxWait=P.seqMaxWait??30;
@@ -293,6 +293,7 @@ export function simulate(input){
       case 'tornado': { if(e.who!=null) fireTrigger({on:'tornado',who:e.who,count:e.count,by:e.by}); break; }
       case 'delayedBuff': { startBuff(e.cand,e.ben,e.ev,{...e.spec,delay:0}); break; }
       case 'ultimateEnd': { fireTrigger({on:'ultimateEnd',who:e.who}); break; }
+      case 'enemyAttack': { /* 敌人攻击主控：主控受击 / 敌人蓄力类连携条件；立盾类战技在反击窗口内被打则反击上附着（卡契尔破防、昼雪寒冷）。血量条件默认视为满足（verification-needed 38） */ addLog('enemyAttack',{}); for(const o of alive){ const win=num(o.mech?.skill?.counterWindow)??T.counterWindowSeconds; const last=S.lastCast[o.idx]?.skill; if(last==null||S.t>last+win+EPS) continue; for(const a of (Array.isArray(o.mech?.skill?.attach)?o.mech.skill.attach:[])) if(a.bind==='counter') applyAttach(a.element,a.layers||1,o.idx,'counter'); } checkCombos({type:'controlledHit'}); checkCombos({type:'enemyCharging'}); break; }
       case 'inkEnd': { if(S.ink&&S.ink.id===e.id) inkBurst(mb); break; }
       case 'inkBurst': { if(S.ink&&S.ink.owner===mb.idx) inkBurst(mb); break; }
       case 'attach': applyAttach(e.element,e.layers,e.who,e.via); break;

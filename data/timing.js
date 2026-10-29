@@ -14,5 +14,7 @@ export default {
   nonControl:{damageFactor:[0.5,1.0],rhythmFactor:[0.6,1.0],default:{damageFactor:0.75,rhythmFactor:0.8},
     measured:{origin:'zmdlogs 白刃穿水 74.8s（docs/cases/README.md 末节）',rhythm:{'诀(非主控)':'24 次重击/67.8s，攻击串周期≈2.8s，与主控祀(25/71.8s)相当 → φ≈0.98','别礼(非主控)':'38s 内 1 次重击，长时间不普攻（施法/AI 停顿）','汤汤(非主控)':'仅记录第3/4段，节奏不可判'},damage:'日志跨账号/跨副本的绝对校准不一致（含未知副本加成），衰减 δ 未能测得，保持区间'}}, // 节奏已有一例日志测量；衰减未知
   staggerMultiplier:1.3,          // research（默认对照靶不失衡，不启用）
-  burstDelaySeconds:0.3           // 法术爆发短暂延迟（研究：“短暂延迟后造成伤害”）
+  burstDelaySeconds:0.3,          // 法术爆发短暂延迟（研究：“短暂延迟后造成伤害”）
+  enemyAttackInterval:4,          // 敌人攻击主控的默认间隔（秒）：假设值，场景 enemy.attackInterval 可改，0 = 不攻击（纯木桩）
+  counterWindowSeconds:5          // 立盾类战技的反击窗口（秒）：假设值，mechanics 可用 counterWindow 覆盖
 };

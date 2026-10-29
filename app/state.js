@@ -6,7 +6,7 @@ export function newMember(operatorId){ const op=operators.find(o=>o.id===operato
 export function regressionMember(){ // 别礼样例（交接 Demo）
   const m=newMember(byName(operators,'别礼').id); m.weapon.id=byName(weapons,'赫拉芬格').id;
   applyDefaultBuild(m); return m; }
-export const ENEMY_DEFAULT={defence:100,resistances:{physical:'D',cold:'D',heat:'D',electric:'D',nature:'D'},custom:{}}; // 对照靶默认值
+export const ENEMY_DEFAULT={defence:100,resistances:{physical:'D',cold:'D',heat:'D',electric:'D',nature:'D'},custom:{},attackInterval:4}; // 对照靶默认值；attackInterval 敌人每隔几秒攻击主控（0 = 不攻击）
 export function defaultRot(){ return {scenario:'target',enemy:clone(ENEMY_DEFAULT),auto:{beam:6,horizon:60},advanced:false}; }
 export function ensureRot(s){ if(!s.rot) s.rot=defaultRot(); if(!s.rot.enemy) s.rot.enemy=clone(ENEMY_DEFAULT); if(!s.rot.auto) s.rot.auto={beam:6,horizon:60}; if(!s.rot.scenario) s.rot.scenario='target'; return s.rot; }
 export function hasDefaultBuild(member){ const op=operators.find(o=>o.id===member?.operatorId); return Boolean(op&&DEFAULT_BUILDS[op.name]); }
