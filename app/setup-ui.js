@@ -103,7 +103,6 @@ function targetPanel(state,update,rot){
     h('div',{class:'preset-tabs'},...scTabs),h('ul',{class:'facts'},...scenario.facts.map(t=>h('li',{},t))),
     h('div',{class:'target-fields'},
       field('总计战斗时间',scenario.timeLimit?h('output',{class:'fixed-value'},`限时 ${scenario.timeLimit} 秒`):num(rot.auto.horizon,'秒',{min:20,max:180,step:5,onchange:ev=>update(s=>{s.rot.auto.horizon=Number(ev.target.value);})})),
-      field('敌人防御力',num(enemy.defence,'',{min:0,max:99999,onchange:ev=>update(s=>{s.rot.enemy.defence=Number(ev.target.value);})})),
-      field('敌人攻击间隔',num(enemy.attackInterval??ENEMY_DEFAULT.attackInterval,'秒',{min:0,max:60,step:1,onchange:ev=>update(s=>{s.rot.enemy.attackInterval=Number(ev.target.value);})}),'0 = 不攻击')),
+      field('敌人防御力',num(enemy.defence,'',{min:0,max:99999,onchange:ev=>update(s=>{s.rot.enemy.defence=Number(ev.target.value);})}))),
     h('div',{class:'subheading'},'敌人抗性'),resCards,h('button',{type:'button',class:'mini-btn target-reset',onclick:()=>update(s=>{s.rot.enemy=clone(ENEMY_DEFAULT);})},'抗性和防御恢复默认'));
 }
